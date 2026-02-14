@@ -3,15 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Integral Computación | Tóners, Papelería y Accesorios</title>
-    <meta name="description" content="Especialistas en Tóners, Cartuchos, Papelería y Accesorios de Cómputo. Cotiza al instante por WhatsApp. Entrega a domicilio o recolección.">
+    <title>Integral Computación | Tóners y Suministros en Guadalajara</title>
+    <meta name="description" content="Especialistas en Tóners, Papelería y Accesorios en Guadalajara. Cotiza por WhatsApp, entrega a domicilio.">
+    
+    <!-- CSS -->
     <link rel="stylesheet" href="assets/css/style.css">
-    <!-- FontAwesome for Icons -->
+    
+    <!-- FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
 
-    <!-- Header / Navbar -->
+    <!-- Header -->
     <header>
         <div class="container nav-container">
             <a href="#" class="logo">
@@ -20,10 +23,10 @@
             </a>
             <nav class="nav-links">
                 <a href="#inicio">Inicio</a>
+                <a href="#como-trabajamos">Cómo trabajamos</a>
                 <a href="#productos">Productos</a>
-                <a href="#contacto">Contacto</a>
             </nav>
-            <a href="https://wa.me/5211234567890" target="_blank" class="cta-btn-header">
+            <a href="https://wa.me/5211234567890" target="_blank" class="btn-primary" style="padding: 0.6rem 1.2rem; font-size: 0.9rem;">
                 <i class="fa-brands fa-whatsapp"></i> Cotizar
             </a>
         </div>
@@ -31,18 +34,42 @@
 
     <!-- Hero Section -->
     <section class="hero" id="inicio">
-        <div class="container hero-content">
-            <h1>Todo en Consumibles y <span>Tecnología para tu Oficina</span></h1>
-            <p>Especialistas en Tóners, Papelería y Accesorios. Sin complicaciones: cotiza por WhatsApp y recibe en tu domicilio.</p>
-            <a href="https://wa.me/5211234567890?text=Hola,%20me%20interesa%20cotizar%20productos" target="_blank" class="hero-btn">
-                Cotizar Ahora por WhatsApp <i class="fa-regular fa-comment-dots"></i>
-            </a>
+        <div class="container hero-grid">
+            
+            <!-- Left: Text -->
+            <div class="hero-text">
+                <div class="pill-tag">SUMINISTROS EN GUADALAJARA</div>
+                <h1>Todo en <span class="magenta">Consumibles</span> y Tecnología para tu Oficina</h1>
+                <p>Olvídate de buscar en mil lugares. Somos especialistas en Tóners, Papelería y Accesorios con el inventario más confiable de la ciudad.</p>
+                
+                <div class="hero-buttons">
+                    <a href="https://wa.me/5211234567890" class="btn-primary">
+                        Cotizar Ahora por WhatsApp <i class="fa-solid fa-message"></i>
+                    </a>
+                    <a href="#productos" class="btn-secondary">
+                        Ver Productos
+                    </a>
+                </div>
+
+                <div class="hero-features">
+                    <div><i class="fa-solid fa-truck-fast"></i> Entrega a Domicilio</div>
+                    <div><i class="fa-solid fa-store"></i> Punto de Recolección</div>
+                </div>
+            </div>
+
+            <!-- Right: Organic Image -->
+            <div class="hero-image-container">
+                <div class="organic-shape">
+                    <!-- Placeholder image of modern office supplies/printer -->
+                    <img src="https://images.unsplash.com/photo-1563968743333-044cef8004c3?q=80&w=1200&auto=format&fit=crop" alt="Oficina y Suministros">
+                </div>
+            </div>
+
         </div>
     </section>
 
-    <!-- Marquee Section (Marcas) -->
+    <!-- Marquee (Marcas) -->
     <div class="marquee-container">
-        <!-- Track that moves -->
         <div class="marquee-track">
             <!-- Set 1 -->
             <div class="brand-pill cyan">HP</div>
@@ -53,8 +80,7 @@
             <div class="brand-pill magenta">Logitech</div>
             <div class="brand-pill yellow">Kingston</div>
             <div class="brand-pill black">Adata</div>
-            
-            <!-- Set 2 (Duplicate for infinite scroll illusion) -->
+            <!-- Set 2 -->
             <div class="brand-pill cyan">HP</div>
             <div class="brand-pill magenta">Brother</div>
             <div class="brand-pill yellow">Canon</div>
@@ -63,102 +89,130 @@
             <div class="brand-pill magenta">Logitech</div>
             <div class="brand-pill yellow">Kingston</div>
             <div class="brand-pill black">Adata</div>
-
-             <!-- Set 3 (Extra buffer) -->
-             <div class="brand-pill cyan">HP</div>
-             <div class="brand-pill magenta">Brother</div>
-             <div class="brand-pill yellow">Canon</div>
-             <div class="brand-pill black">Epson</div>
-             <div class="brand-pill cyan">Xerox</div>
-             <div class="brand-pill magenta">Logitech</div>
-             <div class="brand-pill yellow">Kingston</div>
-             <div class="brand-pill black">Adata</div>
         </div>
     </div>
 
-    <!-- Products Section (Pilares) -->
-    <section class="products-section" id="productos">
-        <div class="container">
-            <h2 class="section-title">Nuestros Productos</h2>
-            <div class="products-grid">
-                
-                <!-- Card 1: Toners (Cyan) -->
-                <article class="product-card card-cyan">
-                    <div class="card-header">
-                        <div class="card-icon"><i class="fa-solid fa-print"></i></div>
-                        <h3 class="card-title">Tóners y Cartuchos</h3>
+    <!-- How We Work Section -->
+    <section class="how-section" id="como-trabajamos">
+        <div class="container how-grid">
+            
+            <!-- Steps -->
+            <div class="steps-content">
+                <h2 class="section-label">¿Cómo trabajamos?</h2>
+                <div class="steps-list">
+                    
+                    <div class="step-item">
+                        <div class="step-number step-1">1</div>
+                        <div class="step-content">
+                            <h3>Escríbenos</h3>
+                            <p>Contáctanos por WhatsApp con tu lista de productos o el modelo de tóner que necesitas. Te respondemos al instante.</p>
+                        </div>
                     </div>
-                    <div class="card-body">
-                        <p class="card-desc">Amplio surtido en originales y genéricos de alta calidad. HP, Brother, Canon y más.</p>
-                        <a href="#" class="download-btn" onclick="alert('Aquí se descargaría el PDF de Tóners'); return false;">
-                            <i class="fa-solid fa-file-pdf"></i> Descargar Catálogo
-                        </a>
-                    </div>
-                </article>
 
-                <!-- Card 2: Papelería (Yellow) -->
-                <article class="product-card card-yellow">
-                    <div class="card-header">
-                        <div class="card-icon"><i class="fa-solid fa-stapler"></i></div>
-                        <h3 class="card-title">Papelería de Oficina</h3>
+                    <div class="step-item">
+                        <div class="step-number step-2">2</div>
+                        <div class="step-content">
+                            <h3>Cotizamos</h3>
+                            <p>Te enviamos una cotización formal con precios competitivos y confirmación inmediata de disponibilidad.</p>
+                        </div>
                     </div>
-                    <div class="card-body">
-                        <p class="card-desc">Todo para el día a día: hojas, plumas, carpetas, clips y suministros escolares.</p>
-                        <a href="#" class="download-btn" onclick="alert('Aquí se descargaría el PDF de Papelería'); return false;">
-                            <i class="fa-solid fa-file-pdf"></i> Descargar Catálogo
-                        </a>
-                    </div>
-                </article>
 
-                <!-- Card 3: Accesorios (Magenta) -->
-                <article class="product-card card-magenta">
-                    <div class="card-header">
-                        <div class="card-icon"><i class="fa-solid fa-keyboard"></i></div>
-                        <h3 class="card-title">Accesorios de Cómputo</h3>
+                    <div class="step-item">
+                        <div class="step-number step-3">3</div>
+                        <div class="step-content">
+                            <h3>Entregamos</h3>
+                            <p>Elige <strong>Entrega a Domicilio</strong> en Guadalajara o recoge personalmente en nuestro <strong>Punto de Recolección</strong>.</p>
+                        </div>
                     </div>
-                    <div class="card-body">
-                        <p class="card-desc">Teclados, mouse, cables, memorias USB, diademas y periféricos esenciales.</p>
-                        <a href="#" class="download-btn" onclick="alert('Aquí se descargaría el PDF de Accesorios'); return false;">
-                            <i class="fa-solid fa-file-pdf"></i> Descargar Catálogo
-                        </a>
-                    </div>
-                </article>
 
+                </div>
             </div>
+
+            <!-- Logistic Card -->
+            <div class="logistic-card-wrapper">
+                <div class="dotted-outline"></div>
+                <div class="logistic-card">
+                    <i class="fa-solid fa-truck-moving logistic-icon"></i>
+                    <h3 class="logistic-title">Logística Local</h3>
+                    <p style="color:#666; max-width:300px;">Entregamos el mismo día en pedidos confirmados antes de mediodía dentro de la ZMG. Tu oficina nunca se detiene.</p>
+                    <div class="city-tags">
+                        <span class="city-tag">Zapopan</span>
+                        <span class="city-tag">Guadalajara</span>
+                        <span class="city-tag">Tlaquepaque</span>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </section>
 
-    <!-- Info Bar / Delivery -->
-    <section class="info-bar">
-        <div class="container info-grid">
-            <div class="info-item">
-                <i class="fa-solid fa-truck-fast" style="font-size: 2rem; margin-bottom: 1rem; color: var(--ic-cyan);"></i>
-                <h3>Entrega a Domicilio</h3>
-                <p>Llevamos tu pedido hasta la puerta de tu oficina u hogar.</p>
-            </div>
-            <div class="info-item">
-                <i class="fa-solid fa-store" style="font-size: 2rem; margin-bottom: 1rem; color: var(--ic-yellow);"></i>
-                <h3>Punto de Recolección</h3>
-                <p>Recoge tu pedido en nuestras instalaciones (Previa cita).</p>
-            </div>
-            <div class="info-item">
-                <i class="fa-brands fa-whatsapp" style="font-size: 2rem; margin-bottom: 1rem; color: #25d366;"></i>
-                <h3>Cotización Rápida</h3>
-                <p>Atención personalizada y precios al momento.</p>
+    <!-- Products Section -->
+    <section class="products-section" id="productos">
+        <div class="container">
+            <h2 class="section-label" style="text-align: center; font-size: 2rem;">Nuestros Productos</h2>
+            <div class="products-grid">
+                
+                <!-- Card 1 -->
+                <article class="product-card">
+                    <div class="card-header" style="background:#e0f2fe; padding:2rem; text-align:center;">
+                        <i class="fa-solid fa-print" style="font-size:3rem; color:var(--ic-cyan); background:white; padding:15px; border-radius:50%;"></i>
+                    </div>
+                    <div style="padding:2rem;">
+                        <h3 style="font-size:1.5rem; font-weight:800; margin-bottom:0.5rem;">Tóners y Cartuchos</h3>
+                        <p style="color:#666; margin-bottom:1.5rem;">Originales y genéricos con garantía total.</p>
+                        <a href="#" style="color:var(--ic-cyan); font-weight:700; display:flex; align-items:center; gap:0.5rem;">
+                            Descargar Catálogo <i class="fa-solid fa-download"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Card 2 -->
+                <article class="product-card">
+                    <div class="card-header" style="background:#fefce8; padding:2rem; text-align:center;">
+                        <i class="fa-solid fa-stapler" style="font-size:3rem; color:var(--ic-yellow); background:white; padding:15px; border-radius:50%;"></i>
+                    </div>
+                    <div style="padding:2rem;">
+                        <h3 style="font-size:1.5rem; font-weight:800; margin-bottom:0.5rem;">Papelería</h3>
+                        <p style="color:#666; margin-bottom:1.5rem;">Todo para mantener tu oficina operando.</p>
+                        <a href="#" style="color:var(--ic-yellow); filter:brightness(0.9); font-weight:700; display:flex; align-items:center; gap:0.5rem;">
+                            Descargar Catálogo <i class="fa-solid fa-download"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Card 3 -->
+                <article class="product-card">
+                    <div class="card-header" style="background:#fce7f3; padding:2rem; text-align:center;">
+                        <i class="fa-solid fa-keyboard" style="font-size:3rem; color:var(--ic-magenta); background:white; padding:15px; border-radius:50%;"></i>
+                    </div>
+                    <div style="padding:2rem;">
+                        <h3 style="font-size:1.5rem; font-weight:800; margin-bottom:0.5rem;">Accesorios</h3>
+                        <p style="color:#666; margin-bottom:1.5rem;">Periféricos y cables esenciales.</p>
+                        <a href="#" style="color:var(--ic-magenta); font-weight:700; display:flex; align-items:center; gap:0.5rem;">
+                            Descargar Catálogo <i class="fa-solid fa-download"></i>
+                        </a>
+                    </div>
+                </article>
+
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer id="contacto">
+    <footer style="background:#111; color:#888; padding:2rem 0; text-align:center; font-size:0.9rem;">
         <div class="container">
-            <p>&copy; 2026 Integral Computación. Todos los derechos reservados.</p>
+            <p>&copy; 2026 Integral Computación | Guadalajara, Jal.</p>
         </div>
-        
     </footer>
 
-    <!-- Floating WhatsApp Button -->
-    <a href="https://wa.me/5211234567890?text=Hola,%20quisiera%20más%20información" class="whatsapp-float" target="_blank">
+    <!-- WhatsApp Float -->
+    <a href="https://wa.me/5211234567890" target="_blank" style="
+        position:fixed; bottom:30px; right:30px;
+        background:#25d366; color:white;
+        width:60px; height:60px; border-radius:50%;
+        display:flex; align-items:center; justify-content:center;
+        font-size:30px; box-shadow:0 4px 15px rgba(0,0,0,0.2);
+        z-index:999;">
         <i class="fa-brands fa-whatsapp"></i>
     </a>
 
