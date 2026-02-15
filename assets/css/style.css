@@ -1701,14 +1701,14 @@ details[open] summary {
   }
 
   /* --- HOW WE WORK: OPTIMIZED MOBILE LAYOUT --- */
-  .how-we-work-section {
+  .how-section {
     padding-top: 0 !important;
-    margin-top: -2rem !important;
-    /* Pull up to close gap */
+    margin-top: -3rem !important;
+    /* Aggressive pull up */
     padding-bottom: 2rem !important;
   }
 
-  .how-we-work-section h2 {
+  .how-section h2 {
     margin-top: 0 !important;
     font-size: 1.8rem !important;
     margin-bottom: 1.5rem !important;
@@ -1830,4 +1830,8 @@ details[open] summary {
   }
 
 
+  .products-section {
+    padding: 2rem 0 0 !important;
+    /* Kill the 12rem desktop padding */
+  }
 }
