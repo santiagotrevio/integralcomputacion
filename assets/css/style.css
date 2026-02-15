@@ -1831,10 +1831,6 @@ details[open] summary {
     width: 100%;
   }
 
-  /* Video in the Middle - FULL BLEED */
-  /* Video in the Middle - FULL BLEED & FULL VIEW */
-  /* Video in the Middle - FULL BLEED & CUSTOM CROP */
-  /* Video in the Middle - ULTIMATE FULL BLEED & TRUCK VISIBLE */
   /* Video in the Middle - SAFE FULL BLEED & TRUCK VISIBLE */
   .logistic-video-bg {
     order: 2;
@@ -1871,6 +1867,73 @@ details[open] summary {
     text-align: center;
     padding: 0 1.5rem;
     width: 100%;
+  }
+
+  /* --- FOOTER: SMART MOBILE LAYOUT (GitHub Style) --- */
+  .footer {
+    padding: 3rem 1.5rem 2rem !important;
+    text-align: center;
+  }
+
+  .footer-grid {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 2rem !important;
+    margin-bottom: 2rem !important;
+  }
+
+  /* Col 1: Brand - Simplify */
+  .footer-col:first-child {
+    order: 1;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 2rem;
+    margin-bottom: 0;
+    width: 100%;
+  }
+
+  .footer-col:first-child p {
+    font-size: 0.9rem !important;
+    color: #64748b !important;
+    margin-bottom: 0.5rem !important;
+    display: none;
+    /* Hide descriptive paragraphs */
+  }
+
+  .logo-wrapper {
+    margin-bottom: 0.5rem !important;
+  }
+
+  /* Cols 2 & 3: Links - Cloud Layout */
+  .footer-col h4 {
+    display: none !important;
+    /* Hide headers */
+  }
+
+  .footer-links {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+    gap: 1rem 1.5rem !important;
+    padding: 0 !important;
+  }
+
+  .footer-links li {
+    margin: 0 !important;
+  }
+
+  .footer-links a {
+    font-size: 0.95rem !important;
+    color: #cbd5e1 !important;
+    text-decoration: none !important;
+    white-space: nowrap;
+    padding: 5px;
+    /* Touch target */
+  }
+
+  .footer-col:nth-child(2),
+  .footer-col:nth-child(3) {
+    width: 100%;
+    margin: 0;
   }
 
   .scene-desc span {
