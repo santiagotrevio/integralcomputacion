@@ -1935,7 +1935,7 @@ details[open] summary {
     white-space: nowrap;
   }
 
-  /* 2. SOCIAL ACTION (Full Width Below) */
+  /* 2. SOCIAL ACTION & CONTACT (Full Width Below) */
   .footer-col:nth-child(4) {
     order: 3;
     grid-column: 1 / -1;
@@ -1950,15 +1950,68 @@ details[open] summary {
     width: 100% !important;
   }
 
-  .footer-col:nth-child(4) h4,
+  .footer-col:nth-child(4) h4 {
+    display: none !important;
+  }
+
   .footer-col:nth-child(4) p {
     display: none !important;
+    /* Hide standard paragraphs (hours) */
+  }
+
+  /* REVEAL EMAIL AS BUTTON */
+  .footer-col:nth-child(4) p:first-of-type {
+    display: block !important;
+    order: 2;
+    /* Below social icons */
+    margin-top: 1.5rem !important;
+    margin-bottom: 0 !important;
+  }
+
+  .footer-col:nth-child(4) p:first-of-type br {
+    display: none;
+  }
+
+  .footer-col:nth-child(4) p:first-of-type i {
+    display: none;
+    /* Hide original icon */
+  }
+
+  .footer-col:nth-child(4) p:first-of-type a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 0.6rem 1.2rem;
+    border-radius: 50px;
+    color: #94a3b8 !important;
+    font-size: 0.85rem !important;
+    text-decoration: none !important;
+    transition: all 0.2s ease;
+  }
+
+  /* Add Icon via CSS to link */
+  .footer-col:nth-child(4) p:first-of-type a::before {
+    content: '\f0e0';
+    /* FontAwesome Envelope */
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    color: var(--ic-magenta);
+  }
+
+  .footer-col:nth-child(4) p:first-of-type a:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: white;
+    color: white !important;
   }
 
   .footer-social {
     display: flex !important;
     gap: 1.5rem !important;
     margin-top: 0 !important;
+    order: 1;
+    /* Above email */
   }
 
   .social-link {
