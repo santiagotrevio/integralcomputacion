@@ -1829,22 +1829,5 @@ details[open] summary {
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05) !important;
   }
 
-  .product-card:first-child {
-    margin-left: 0;
-  }
 
-  .product-card::before {
-    display: none !important;
-  }
-
-  .product-card:nth-child(n) {
-    border-radius: 20px !important;
-    /* Specificity override */
-    animation: none !important;
-  }
-
-  .products-section {
-    padding: 2rem 0 4rem;
-    /* Tighter vertical spacing */
-  }
 }
