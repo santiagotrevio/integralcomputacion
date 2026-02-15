@@ -424,6 +424,8 @@ header.scrolled {
 }
 
 .hero h1 {
+  font-family: var(--ic-font) !important;
+  font-style: normal !important;
   font-size: 2.75rem;
   /* Reduced from 3.5rem */
   font-weight: 800;
