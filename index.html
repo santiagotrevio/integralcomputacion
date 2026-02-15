@@ -10,6 +10,9 @@
     <meta name="description"
         content="Especialistas en Tóners, Papelería y Accesorios en Guadalajara. Cotiza por WhatsApp, entrega a domicilio.">
 
+    <!-- Performance: Preload Critical Assets -->
+    <link rel="preload" as="image" href="assets/images/hero-image.jpg">
+
     <!-- Performance: Preconnect -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -101,6 +104,7 @@
                     <div class="hero-image-container">
                         <div class="organic-shape">
                             <img src="assets/images/hero-image.jpg" alt="Oficina y Suministros" width="600" height="400"
+                                fetchpriority="high" decoding="sync"
                                 onerror="this.src='https://images.unsplash.com/photo-1497215728101-856f4ea42174?q=80&w=1200'">
                         </div>
                     </div>
