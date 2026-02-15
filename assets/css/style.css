@@ -1590,16 +1590,38 @@ details[open] summary {
     margin-top: 0.5rem;
   }
 
-  /* --- HIDE EXTRA HERO ELEMENTS ON MOBILE --- */
-  .hero-buttons .btn-secondary,
+  /* --- HERO BUTTONS: HORIZONTAL & COMPACT --- */
+  .hero-buttons {
+    display: flex !important;
+    flex-direction: row !important;
+    gap: 0.75rem !important;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .hero-buttons .btn-primary,
+  .hero-buttons .btn-secondary {
+    display: inline-flex !important;
+    width: auto !important;
+    flex: 1;
+    /* Split space evenly */
+    padding: 0.75rem 0.5rem !important;
+    font-size: 0.9rem !important;
+    justify-content: center;
+    align-items: center;
+    white-space: nowrap;
+  }
+
+  .hero-buttons .btn-secondary {
+    background: transparent;
+    border: 2px solid var(--ic-magenta);
+    color: var(--ic-magenta);
+  }
+
+  /* Hide other extra hero elements */
   .hero-microcopy,
   .hero-features {
     display: none !important;
-  }
-
-  /* Ensure primary button is centered */
-  .hero-buttons {
-    justify-content: center;
   }
 
   /* --- CATEGORIES: CLEAN LIST (Small Icons) --- */
@@ -1673,17 +1695,16 @@ details[open] summary {
     display: none !important;
   }
 
-  /* Optional: Add chevron to imply clickable/expandable */
+  /* Remove chevron */
   .product-card::after {
-    content: '\f054';
-    /* Font Awesome Chevron Right */
-    font-family: "Font Awesome 6 Free";
-    font-weight: 900;
-    color: #ccc;
-    font-size: 1rem;
+    content: none !important;
   }
 
   /* --- HOW WE WORK: VISIBLE CARDS --- */
+  .how-we-work-section {
+    padding-top: 0 !important;
+  }
+
   .step-item {
     background: #ffffff !important;
     /* Force white */
