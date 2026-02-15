@@ -1834,29 +1834,32 @@ details[open] summary {
   /* Video in the Middle - FULL BLEED */
   /* Video in the Middle - FULL BLEED & FULL VIEW */
   /* Video in the Middle - FULL BLEED & CUSTOM CROP */
+  /* Video in the Middle - ULTIMATE FULL BLEED & TRUCK VISIBLE */
   .logistic-video-bg {
     order: 2;
     position: relative !important;
     display: block !important;
 
-    /* Full width bleed */
-    width: calc(100% + 3rem) !important;
-    margin-left: -1.5rem !important;
-    margin-right: -1.5rem !important;
+    /* Force 100% Viewport Width Breakout */
+    width: 100vw !important;
+    left: 50% !important;
+    margin-left: -50vw !important;
+    margin-right: -50vw !important;
     max-width: none !important;
 
-    /* Custom Height = ~70-75% of natural 16:9 mobile height */
-    height: 160px !important;
-    /* Removed aspect-ratio to force crop */
+    /* Height to fit Truck + Buildings */
+    height: 180px !important;
 
     object-fit: cover !important;
-    /* Position 35% vertical = Cut more bottom (pavement) than top (sky) */
-    object-position: center 35% !important;
+    /* Focus closer to bottom (75%) to see Truck, but crop extreme bottom pavement */
+    object-position: center 75% !important;
 
     z-index: 1;
     border-radius: 0 !important;
-    margin-bottom: 1rem;
+    margin-bottom: 2rem;
     margin-top: 1rem;
+    background: #e0f7fa;
+    /* Fallback sky color */
   }
 
   .scene-desc {
