@@ -501,45 +501,89 @@
 
 <script>
     // Hero Slider Logic
-    let slideIndex = 1;
+    // Hero Slider Logic (Animated)
+    let slideIndex = 1; /* 1-based index to match dots onclick */
     let slideTimer;
+    let isAnimating = false;
 
-    showSlides(slideIndex);
+    // Initialize first slide
+    showSlides(slideIndex, 'init');
 
+    // Dot Navigation
     function currentSlide(n) {
+        if (isAnimating || n === slideIndex) return;
+
+        // Determine natural direction
+        let direction = 'next';
+        if (n < slideIndex) direction = 'prev';
+
         clearTimeout(slideTimer);
-        showSlides(slideIndex = n);
+        changeSlide(n, direction);
     }
 
-    function showSlides(n) {
-        let i;
-        let slides = document.getElementsByClassName("hero-slide");
-        let dots = document.getElementsByClassName("dot");
+    // Main Function to Switch Slides with Animation
+    function changeSlide(nextIndex, direction) {
+        if (isAnimating) return;
+        isAnimating = true;
 
-        if (n > slides.length) { slideIndex = 1 }
-        if (n < 1) { slideIndex = slides.length }
+        const slides = document.getElementsByClassName("hero-slide");
+        const dots = document.getElementsByClassName("dot");
+        const totalSlides = slides.length;
 
-        // Remove active class from all slides
-        for (i = 0; i < slides.length; i++) {
-            slides[i].classList.remove("active");
-            // Removed style.display = "none" to allow CSS grid stacking
-        }
+        // Wrap around logic
+        if (nextIndex > totalSlides) nextIndex = 1;
+        if (nextIndex < 1) nextIndex = totalSlides;
 
-        for (i = 0; i < dots.length; i++) {
-            dots[i].classList.remove("active");
-        }
+        const currentSlideEl = slides[slideIndex - 1];
+        const nextSlideEl = slides[nextIndex - 1];
 
-        // Handle edge case where elements might not exist immediately
-        if (slides[slideIndex - 1] && dots[slideIndex - 1]) {
-            // Removed style.display = "block"
+        // Apply proper animation classes
+        if (direction === 'next') {
+            nextSlideEl.classList.add('slide-next-enter');
+            currentSlideEl.classList.add('slide-next-leave');
+        } else if (direction === 'prev') {
+            nextSlideEl.classList.add('slide-prev-enter');
+            currentSlideEl.classList.add('slide-prev-leave');
+        } else if (direction === 'init') {
+            // Initial load - no animation
             slides[slideIndex - 1].classList.add("active");
             dots[slideIndex - 1].classList.add("active");
-
-            // Auto advance
-            slideTimer = setTimeout(function () {
-                showSlides(slideIndex += 1);
-            }, 6000); // Changed to 6s for better UX testing
+            startTimer();
+            isAnimating = false;
+            return;
         }
+
+        // Update Dots immediately
+        for (let i = 0; i < dots.length; i++) dots[i].classList.remove("active");
+        dots[nextIndex - 1].classList.add("active");
+
+        // Wait for Animation End (500ms match CSS)
+        setTimeout(() => {
+            // Cleanup Classes
+            currentSlideEl.classList.remove('active', 'slide-next-leave', 'slide-prev-leave');
+            nextSlideEl.classList.remove('slide-next-enter', 'slide-prev-enter');
+
+            // Set new Active
+            nextSlideEl.classList.add('active');
+
+            // Update State
+            slideIndex = nextIndex;
+            isAnimating = false;
+
+            startTimer();
+        }, 500); // 500ms transition time
+    }
+
+    function showSlides(n, dir) {
+        // Wrapper for initial load mainly
+        changeSlide(n, dir || 'init');
+    }
+
+    function startTimer() {
+        clearTimeout(slideTimer);
+        slideTimer = setTimeout(function () {
+            changeSlide(slideIndex + 1, 'next');
+        }, 6000);
     }
 
     // --- SWIPE SUPPORT (Touch Events) ---
@@ -557,16 +601,16 @@
     }, { passive: true });
 
     function handleSwipe() {
-        const threshold = 50; // Minimum distance to trigger swipe
+        const threshold = 50;
         if (touchEndX < touchStartX - threshold) {
             // Swipe Left -> Next Slide
             clearTimeout(slideTimer);
-            showSlides(slideIndex += 1);
+            changeSlide(slideIndex + 1, 'next');
         }
         if (touchEndX > touchStartX + threshold) {
             // Swipe Right -> Previous Slide
             clearTimeout(slideTimer);
-            showSlides(slideIndex -= 1);
+            changeSlide(slideIndex - 1, 'prev');
         }
     }
 

@@ -1585,30 +1585,108 @@ details[open] summary {
   }
 
   .hero-slider {
-    height: auto !important;
+    position: relative !important;
+    height: 85vh !important;
+    /* Match hero height to prevent collapse */
+    overflow: hidden !important;
+    width: 100%;
   }
 
   /* Use Flex Column for Slide Layout */
-  /* Use Flex Column for Slide Layout */
   .hero-slide {
-    position: relative !important;
-    display: none;
+    position: absolute !important;
+    /* Stack slides */
+    top: 0;
+    left: 0;
+    display: none !important;
+    /* Hidden by default */
     width: 100%;
     height: 100% !important;
     /* Fill container */
 
     padding: 0 !important;
-    /* NO PADDING - CENTERING ONLY */
     margin: 0 !important;
 
     flex-direction: column;
     justify-content: center !important;
-    /* Center content vertically */
     align-items: center;
+    background: white;
+    /* Ensure opaque background for sliding */
+    z-index: 1;
   }
 
   .hero-slide.active {
     display: flex !important;
+    z-index: 2;
+  }
+
+  /* --- SLIDE ANIMATIONS --- */
+
+  /* Next Slide (Swipe Left) */
+  @keyframes slideInRight {
+    from {
+      transform: translateX(100%);
+    }
+
+    to {
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes slideOutLeft {
+    from {
+      transform: translateX(0);
+    }
+
+    to {
+      transform: translateX(-100%);
+    }
+  }
+
+  /* Prev Slide (Swipe Right) */
+  @keyframes slideInLeft {
+    from {
+      transform: translateX(-100%);
+    }
+
+    to {
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes slideOutRight {
+    from {
+      transform: translateX(0);
+    }
+
+    to {
+      transform: translateX(100%);
+    }
+  }
+
+  /* Animation Classes controlled by JS */
+  .hero-slide.slide-next-enter {
+    display: flex !important;
+    animation: slideInRight 0.5s ease-out forwards;
+    z-index: 3;
+  }
+
+  .hero-slide.slide-next-leave {
+    display: flex !important;
+    animation: slideOutLeft 0.5s ease-out forwards;
+    z-index: 2;
+  }
+
+  .hero-slide.slide-prev-enter {
+    display: flex !important;
+    animation: slideInLeft 0.5s ease-out forwards;
+    z-index: 3;
+  }
+
+  .hero-slide.slide-prev-leave {
+    display: flex !important;
+    animation: slideOutRight 0.5s ease-out forwards;
+    z-index: 2;
   }
 
   .hero-text {
