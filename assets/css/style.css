@@ -69,12 +69,7 @@ img {
   margin-bottom: 1.5rem;
 }
 
-.text-gradient {
-  background: -webkit-linear-gradient(45deg, var(--ic-cyan), var(--ic-magenta));
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
+/* .text-gradient removed for consistency */
 
 /* --- HEADER --- */
 header {
