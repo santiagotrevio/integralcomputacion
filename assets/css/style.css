@@ -1548,14 +1548,6 @@ details[open] summary {
     line-height: 1.5;
   }
 
-  /* Grids & Flex Stacking */
-  .hero-grid,
-  .how-grid,
-  .footer-grid,
-  .story-container {
-    grid-template-columns: 1fr;
-    text-align: center;
-  }
 
   .story-text {
     text-align: center;
@@ -1566,38 +1558,6 @@ details[open] summary {
     border-top: 4px solid var(--ic-magenta);
     padding-left: 0;
     padding-top: 1rem;
-  }
-
-  /* Hero Specifics - Compact Mobile */
-  .hero {
-    padding-bottom: 1rem;
-    /* Reduced from 4rem to remove dead space near dots */
-    min-height: auto;
-    /* Ensure it doesn't force height */
-  }
-
-  .hero-image-container {
-    margin-top: 0;
-    margin-bottom: 1rem;
-    /* Tighter spacing */
-  }
-
-  .organic-shape {
-    height: 250px;
-    /* Much smaller on phone */
-    max-width: 100%;
-  }
-
-  /* Products Grid */
-  .products-grid {
-    grid-template-columns: 1fr;
-    /* 1 card per row */
-    gap: 1.5rem;
-  }
-
-  /* Footer */
-  .footer {
-    text-align: center;
   }
 
   .footer-social {
@@ -1645,36 +1605,9 @@ details[open] summary {
     padding: 1rem;
   }
 
-  /* Fix for Logística Card Shape on Mobile */
+  /* Logística Card Mobile */
   .logistic-card-wrapper,
   .logistic-scene {
-    height: auto !important;
-    /* Allow content to dictate height, but capped */
-    min-height: 300px;
-    border-radius: 20px !important;
-    /* Force standard rounded corners */
-    animation: none !important;
-    /* Force stop morphing */
-    width: 100% !important;
-    /* Ensure full width usage */
-    margin: 0 auto;
-  }
-
-  .logistic-card-wrapper::before {
-    display: none !important;
-  }
-
-  /* Scene content padding fix */
-  .scene-content {
-    padding-top: 2rem !important;
-  }
-
-  /* Products Carousel on Mobile */
-  .products-grid {
-    display: flex;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    gap: 1rem;
     padding: 0.5rem 1.5rem 2rem;
     /* Side padding inside scroll */
     margin: 0 -1.5rem;
