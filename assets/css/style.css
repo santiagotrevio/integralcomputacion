@@ -1150,11 +1150,17 @@ header.scrolled {
   margin-top: 2rem;
 }
 
+/* Social Links */
+.social-links {
+  display: flex;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
 .social-link {
   width: 42px;
   height: 42px;
   border-radius: 12px;
-  /* Soft square modern look */
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.1);
   color: white;
@@ -1168,10 +1174,24 @@ header.scrolled {
 
 .social-link:hover {
   background: white;
-  color: var(--ic-dark);
   transform: translateY(-4px) rotate(3deg);
-  /* Playful hover */
   box-shadow: 0 4px 12px rgba(255, 255, 255, 0.2);
+}
+
+/* Brand Colors on Hover */
+.social-link:nth-child(1):hover {
+  /* Facebook */
+  color: #1877F2;
+}
+
+.social-link:nth-child(2):hover {
+  /* Instagram */
+  color: #E1306C;
+}
+
+.social-link:nth-child(3):hover {
+  /* WhatsApp */
+  color: #25D366;
 }
 
 /* Bottom Bar */
