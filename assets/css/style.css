@@ -1597,13 +1597,17 @@ details[open] summary {
     height: 100% !important;
     /* Fill container */
 
-    padding: 0 !important;
-    /* NO PADDING - CENTERING ONLY */
-    margin: 0 !important;
+    padding-left: 1.5rem !important;
+    /* Side padding */
+    padding-right: 1.5rem !important;
+    padding-top: 2rem !important;
+    /* Top breathing room */
+    padding-bottom: 3rem !important;
+    /* Bottom anchor room */
 
     flex-direction: column;
-    justify-content: center !important;
-    /* Center content vertically */
+    justify-content: flex-start !important;
+    /* Elements stack from top */
     align-items: center;
   }
 
@@ -1617,13 +1621,15 @@ details[open] summary {
     margin-top: 0.5rem;
   }
 
-  /* --- HERO BUTTONS: HORIZONTAL & COMPACT --- */
+  /* --- HERO BUTTONS: ANCHORED BOTTOM --- */
   .hero-buttons {
     display: flex !important;
     flex-direction: row !important;
     gap: 0.75rem !important;
     justify-content: center;
     width: 100%;
+    margin-top: auto !important;
+    /* PUSH TO BOTTOM */
   }
 
   .hero-buttons .btn-primary,
