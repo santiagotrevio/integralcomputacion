@@ -1568,14 +1568,18 @@ details[open] summary {
     padding-top: 1rem;
   }
 
-  /* Hero Specifics */
+  /* Hero Specifics - Compact Mobile */
   .hero {
-    padding-bottom: 4rem;
+    padding-bottom: 1rem;
+    /* Reduced from 4rem to remove dead space near dots */
+    min-height: auto;
+    /* Ensure it doesn't force height */
   }
 
   .hero-image-container {
     margin-top: 0;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
+    /* Tighter spacing */
   }
 
   .organic-shape {
@@ -1686,14 +1690,15 @@ details[open] summary {
   }
 
   .product-card {
-    flex: 0 0 85%;
-    /* 85% width to show partial next card */
-    width: 85%;
-    max-width: 350px;
+    flex: 0 0 75%;
+    /* 75% width to clearly show next card peeking */
+    width: 75%;
+    max-width: 300px;
     scroll-snap-align: center;
     border-radius: 20px !important;
     animation: none !important;
-    padding: 2rem 1.5rem !important;
+    padding: 1.5rem 1rem !important;
+    /* Compact padding */
     margin: 0 !important;
     /* Remove auto margins */
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05) !important;
