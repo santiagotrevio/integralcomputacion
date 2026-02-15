@@ -1795,54 +1795,55 @@ details[open] summary {
     display: flex !important;
     flex-direction: column !important;
     background: #f9f9f9 !important;
-    /* Light gray card bg */
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05) !important;
+    padding-bottom: 1.5rem;
+    /* Space at bottom */
   }
 
-  /* Content (Title & Text) - Move to Top */
+  /* UNWRAP content to re-order children */
   .scene-content {
-    position: relative !important;
-    top: auto !important;
-    left: auto !important;
-    transform: none !important;
-    text-align: center;
-    padding: 2rem 1rem 1rem !important;
-    background: transparent !important;
-    width: 100%;
-    z-index: 2;
+    display: contents !important;
   }
 
   .scene-title {
+    order: 1;
     color: var(--ic-magenta) !important;
-    /* Red/Magenta Title */
-    font-size: 2rem !important;
-    margin-bottom: 0.5rem;
-    text-shadow: none !important;
+    font-size: 1.8rem !important;
+    margin: 1.5rem 0 1rem !important;
+    text-align: center;
+    width: 100%;
+  }
+
+  /* Video in the Middle */
+  .logistic-video-bg {
+    order: 2;
+    position: relative !important;
+    width: 100% !important;
+    height: 120px !important;
+    /* Thin strip */
+    object-fit: cover !important;
+    object-position: center bottom !important;
+    z-index: 1;
+    border-radius: 0 !important;
+    /* Full width strip */
+    margin-bottom: 1rem;
   }
 
   .scene-desc {
+    order: 3;
     color: var(--ic-dark) !important;
-    font-weight: 600;
+    font-weight: 500;
     text-shadow: none !important;
-    font-size: 1rem !important;
+    font-size: 0.95rem !important;
+    text-align: center;
+    padding: 0 1.5rem;
+    width: 100%;
   }
 
   .scene-desc span {
-    color: #666 !important;
-  }
-
-  /* Video - Crop to Bottom Strip */
-  .logistic-video-bg {
-    position: relative !important;
-    width: 100% !important;
-    height: 140px !important;
-    /* Cropped strip height */
-    object-fit: cover !important;
-    object-position: center bottom !important;
-    /* Focus on road/truck */
-    z-index: 1;
-    border-radius: 0 0 20px 20px !important;
-    /* Round only bottom */
+    color: #777 !important;
+    display: block;
+    margin-top: 0.5rem;
   }
 
   /* --- FOOTER & MISC --- */
