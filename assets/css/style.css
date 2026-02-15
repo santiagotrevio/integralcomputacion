@@ -1552,12 +1552,14 @@ details[open] summary {
   }
 
   .hero-image-container {
+    order: -1;
+    /* Image Always Top */
     height: 180px;
-    /* Reserve space */
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
+    /* Reduced margin */
     width: 100%;
   }
 
@@ -1583,8 +1585,21 @@ details[open] summary {
   }
 
   .hero-text {
-    order: 1;
-    margin-top: 1rem;
+    order: 2;
+    /* Text Always Bottom */
+    margin-top: 0.5rem;
+  }
+
+  /* --- HIDE EXTRA HERO ELEMENTS ON MOBILE --- */
+  .hero-buttons .btn-secondary,
+  .hero-microcopy,
+  .hero-features {
+    display: none !important;
+  }
+
+  /* Ensure primary button is centered */
+  .hero-buttons {
+    justify-content: center;
   }
 
   /* --- CATEGORIES: CLEAN LIST (Small Icons) --- */
