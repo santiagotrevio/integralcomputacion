@@ -2296,6 +2296,17 @@ details[open] summary {
     height: 180px;
   }
 
+  /* --- Stretched Link Utility --- */
+  .stretched-link::after {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1;
+    content: "";
+  }
+
   .legal-page-header {
     /* Compact padding */
     margin: 0 !important;
