@@ -1620,73 +1620,77 @@ details[open] summary {
     z-index: 2;
   }
 
-  /* --- SLIDE ANIMATIONS --- */
+  /* --- SLIDE ANIMATIONS (FILMSTRIP FEEL) --- */
 
   /* Next Slide (Swipe Left) */
   @keyframes slideInRight {
-    from {
-      transform: translateX(100%);
+    0% {
+      transform: translate3d(100%, 0, 0);
     }
 
-    to {
-      transform: translateX(0);
+    100% {
+      transform: translate3d(0, 0, 0);
     }
   }
 
   @keyframes slideOutLeft {
-    from {
-      transform: translateX(0);
+    0% {
+      transform: translate3d(0, 0, 0);
     }
 
-    to {
-      transform: translateX(-100%);
+    100% {
+      transform: translate3d(-100%, 0, 0);
     }
   }
 
   /* Prev Slide (Swipe Right) */
   @keyframes slideInLeft {
-    from {
-      transform: translateX(-100%);
+    0% {
+      transform: translate3d(-100%, 0, 0);
     }
 
-    to {
-      transform: translateX(0);
+    100% {
+      transform: translate3d(0, 0, 0);
     }
   }
 
   @keyframes slideOutRight {
-    from {
-      transform: translateX(0);
+    0% {
+      transform: translate3d(0, 0, 0);
     }
 
-    to {
-      transform: translateX(100%);
+    100% {
+      transform: translate3d(100%, 0, 0);
     }
   }
 
-  /* Animation Classes controlled by JS */
+  /* Animation Classes */
   .hero-slide.slide-next-enter {
     display: flex !important;
-    animation: slideInRight 0.5s ease-out forwards;
-    z-index: 3;
+    animation: slideInRight 0.5s cubic-bezier(0.4, 0.0, 0.2, 1) forwards;
+    z-index: 30;
+    will-change: transform;
   }
 
   .hero-slide.slide-next-leave {
     display: flex !important;
-    animation: slideOutLeft 0.5s ease-out forwards;
-    z-index: 2;
+    animation: slideOutLeft 0.5s cubic-bezier(0.4, 0.0, 0.2, 1) forwards;
+    z-index: 20;
+    will-change: transform;
   }
 
   .hero-slide.slide-prev-enter {
     display: flex !important;
-    animation: slideInLeft 0.5s ease-out forwards;
-    z-index: 3;
+    animation: slideInLeft 0.5s cubic-bezier(0.4, 0.0, 0.2, 1) forwards;
+    z-index: 30;
+    will-change: transform;
   }
 
   .hero-slide.slide-prev-leave {
     display: flex !important;
-    animation: slideOutRight 0.5s ease-out forwards;
-    z-index: 2;
+    animation: slideOutRight 0.5s cubic-bezier(0.4, 0.0, 0.2, 1) forwards;
+    z-index: 20;
+    will-change: transform;
   }
 
   .hero-text {
