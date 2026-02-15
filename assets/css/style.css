@@ -1702,9 +1702,9 @@ details[open] summary {
 
   /* --- HOW WE WORK: OPTIMIZED MOBILE LAYOUT --- */
   .how-section {
-    padding-top: 0 !important;
-    margin-top: -3rem !important;
-    /* Aggressive pull up */
+    padding-top: 1rem !important;
+    margin-top: 0 !important;
+    /* Reset negative margin */
     padding-bottom: 2rem !important;
   }
 
