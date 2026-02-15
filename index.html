@@ -416,8 +416,9 @@
                                 style="font-size: 0.7em; opacity: 0.8;">*Aplican condiciones.</span></p>
                     </div>
 
-                    <video class="logistic-video-bg" autoplay loop muted playsinline>
-                        <source src="assets/images/logistica.mp4" type="video/mp4">
+                    <video class="logistic-video-bg lazy-video" loop muted playsinline
+                        poster="assets/images/hero-image.jpg">
+                        <source data-src="assets/images/logistica.mp4" type="video/mp4">
                     </video>
                 </div>
             </div>
@@ -628,6 +629,35 @@
             changeSlide(slideIndex - 1, 'prev');
         }
     }
+
+    // --- LAZY LOAD VIDEO (Performance Fix) ---
+    document.addEventListener("DOMContentLoaded", function () {
+        var lazyVideos = [].slice.call(document.querySelectorAll("video.lazy-video"));
+
+        if ("IntersectionObserver" in window) {
+            var lazyVideoObserver = new IntersectionObserver(function (entries, observer) {
+                entries.forEach(function (video) {
+                    if (video.isIntersecting) {
+                        for (var source in video.target.children) {
+                            var videoSource = video.target.children[source];
+                            if (typeof videoSource.tagName === "string" && videoSource.tagName === "SOURCE") {
+                                videoSource.src = videoSource.dataset.src;
+                            }
+                        }
+
+                        video.target.load();
+                        video.target.play();
+                        video.target.classList.remove("lazy-video");
+                        lazyVideoObserver.unobserve(video.target);
+                    }
+                });
+            });
+
+            lazyVideos.forEach(function (lazyVideo) {
+                lazyVideoObserver.observe(lazyVideo);
+            });
+        }
+    });
 
     // Mobile Menu Toggle
     function toggleMenu() {
