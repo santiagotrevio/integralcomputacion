@@ -1597,568 +1597,560 @@ details[open] summary {
     height: 100% !important;
     /* Fill container */
 
-    /* Use Flex Column for Slide Layout */
-    .hero-slide {
-      position: relative !important;
-      display: none;
-      width: 100%;
-      height: 100% !important;
-      /* Fill container */
-
-      padding: 0 !important;
-      /* NO PADDING - CENTERING ONLY */
-      margin: 0 !important;
-
-      flex-direction: column;
-      justify-content: center !important;
-      /* Center content vertically */
-      align-items: center;
-    }
-
-    .hero-slide.active {
-      display: flex !important;
-    }
-
-    .hero-text {
-      order: 2;
-      /* Text Always Bottom */
-      margin-top: 0.5rem;
-    }
-
-    /* --- HERO BUTTONS: HORIZONTAL & COMPACT --- */
-    .hero-buttons {
-      display: flex !important;
-      flex-direction: row !important;
-      gap: 0.75rem !important;
-      justify-content: center;
-      width: 100%;
-    }
-
-    .hero-buttons .btn-primary,
-    .hero-buttons .btn-secondary {
-      display: inline-flex !important;
-      width: auto !important;
-      flex: 1;
-      /* Split space evenly */
-      padding: 0.75rem 0.5rem !important;
-      font-size: 0.9rem !important;
-      justify-content: center;
-      align-items: center;
-      white-space: nowrap;
-    }
-
-    .hero-buttons .btn-secondary {
-      background: transparent;
-      border: 2px solid var(--ic-magenta);
-      color: var(--ic-magenta);
-    }
-
-    /* Hide other extra hero elements */
-    .hero-microcopy,
-    .hero-features {
-      display: none !important;
-    }
-
-    /* --- CATEGORIES: CLEAN LIST (Small Icons) --- */
-    .products-grid {
-      display: flex;
-      flex-direction: column;
-      gap: 0.75rem;
-      /* Tight spacing */
-      padding: 0;
-    }
-
-    .product-card {
-      /* Row layout like a menu item */
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      /* Vertically center */
-      text-align: left;
-      gap: 1rem;
-
-      width: 100%;
-      max-width: 100%;
-      padding: 1rem 1.25rem !important;
-      margin: 0 !important;
-
-      border-radius: 12px !important;
-      background: white;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05) !important;
-      animation: none !important;
-    }
-
-    /* Tiny Icon */
-    .product-card i,
-    .product-card img,
-    .product-card svg,
-    .product-card .icon-wrapper {
-      font-size: 1.5rem;
-      /* Small icon */
-      width: 40px;
-      height: 40px;
-      margin: 0 !important;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-    }
-
-    .product-card .product-icon-container {
-      margin: 0 !important;
-      width: auto !important;
-      height: auto !important;
-    }
-
-    .product-card h3 {
-      font-size: 1.1rem;
-      margin: 0;
-      flex-grow: 1;
-      /* Title takes space */
-    }
-
-    /* Hide description on mobile for "Clean List" look requested */
-    .product-card p {
-      display: none;
-    }
-
-    .product-card .btn-link {
-      display: none;
-    }
-
-    .product-card::before {
-      display: none !important;
-    }
-
-    /* Remove chevron */
-    .product-card::after {
-      content: none !important;
-    }
-
-    /* --- HOW WE WORK: OPTIMIZED MOBILE LAYOUT --- */
-    .how-section {
-      padding-top: 1rem !important;
-      margin-top: 0 !important;
-      /* Reset negative margin */
-      padding-bottom: 2rem !important;
-    }
-
-    .how-section h2 {
-      margin-top: 0 !important;
-      font-size: 1.8rem !important;
-      margin-bottom: 1.5rem !important;
-    }
-
-    .step-item {
-      background: rgba(255, 255, 255, 0.7) !important;
-      /* Semi-transparent white */
-      border: 1px solid rgba(0, 0, 0, 0.05) !important;
-      /* Subtle border */
-      box-shadow: none !important;
-      /* NO SHADOW = "Not a button" */
-
-      padding: 1rem !important;
-      border-radius: 12px;
-      margin-bottom: 0.75rem;
-
-      /* Grid Layout: Number | Content */
-      display: grid !important;
-      grid-template-columns: 40px 1fr !important;
-      gap: 0.75rem;
-      align-items: start;
-      text-align: left !important;
-    }
-
-    .step-number {
-      width: 32px !important;
-      height: 32px !important;
-      font-size: 0.9rem !important;
-      margin: 0 !important;
-      place-self: start center;
-      /* Align top-center in its grid cell */
-      margin-top: 0.25rem !important;
-      /* Slight push to align with Title text baseline */
-    }
-
-    .step-content {
-      text-align: left !important;
-      padding: 0 !important;
-    }
-
-    .step-content h3 {
-      font-size: 1.1rem !important;
-      margin: 0 0 0.5rem 0 !important;
-      line-height: 1.2;
-      color: var(--ic-dark);
-      text-align: left !important;
-    }
-
-    .step-content p {
-      font-size: 0.9rem !important;
-      margin: 0 !important;
-      line-height: 1.4;
-      text-align: left !important;
-    }
-
-    .steps-list {
-      display: flex;
-      flex-direction: column;
-      width: 100%;
-      margin-top: 0;
-    }
-
-
-
-    /* --- LOGISTICS: CENTERED & FIX --- */
-    /* --- LOGISTICS: SPLIT LAYOUT (Title Top, Video Bottom) --- */
-    .logistic-card-wrapper,
-    .logistic-scene {
-      height: auto !important;
-      min-height: 0 !important;
-      border-radius: 20px !important;
-      width: 100% !important;
-      max-width: 100% !important;
-      box-shadow: none !important;
-      background: transparent !important;
-      /* Let container bg show if needed */
-      overflow: hidden;
-      margin: 0 auto;
-    }
-
-    /* Flex Container Redefinition */
-    /* Flex Container Redefinition */
-    /* Kill Organic Shapes */
-    .logistic-card-wrapper::before,
-    .logistic-card-wrapper::after,
-    .logistic-scene::before,
-    .logistic-scene::after {
-      display: none !important;
-      content: none !important;
-      border: none !important;
-      animation: none !important;
-      background: none !important;
-    }
-
-    /* Flex Container Redefinition */
-    .logistic-scene {
-      display: flex !important;
-      flex-direction: column !important;
-      background: transparent !important;
-      box-shadow: none !important;
-      padding-bottom: 0;
-      overflow: visible !important;
-      border-radius: 0 !important;
-      transform: none !important;
-      animation: none !important;
-    }
-
-    /* UNWRAP content to re-order children */
-    .scene-content {
-      display: contents !important;
-    }
-
-    .scene-title {
-      order: 1;
-      color: var(--ic-magenta) !important;
-      font-size: 1.8rem !important;
-      margin: 1rem 0 0.5rem !important;
-      text-align: center;
-      width: 100%;
-    }
-
-    /* Video in the Middle - SAFE FULL BLEED & TRUCK VISIBLE */
-    .logistic-video-bg {
-      order: 2;
-      position: relative !important;
-      display: block !important;
-
-      /* Safe Breakout: Width = parent + extra overlap */
-      width: calc(100% + 4rem) !important;
-      margin-left: -2rem !important;
-      margin-right: -2rem !important;
-      left: auto !important;
-      max-width: none !important;
-
-      /* Height to fit Truck + Buildings */
-      height: 180px !important;
-
-      object-fit: cover !important;
-      /* Focus closer to bottom to see Truck */
-      object-position: center 80% !important;
-
-      z-index: 1;
-      border-radius: 0 !important;
-      margin-bottom: 2rem;
-      margin-top: 1rem;
-      background: #e0f7fa;
-    }
-
-    .scene-desc {
-      order: 3;
-      color: var(--ic-dark) !important;
-      font-weight: 500;
-      text-shadow: none !important;
-      font-size: 0.95rem !important;
-      text-align: center;
-      padding: 0 1.5rem;
-      width: 100%;
-    }
-
-    /* --- FOOTER: SMART MOBILE LAYOUT (Compact 2-Col) --- */
-    .footer {
-      padding: 3rem 1.5rem 2rem !important;
-      text-align: center;
-    }
-
-    .footer-grid {
-      display: grid !important;
-      grid-template-columns: 1fr 1fr !important;
-      /* Two equal columns */
-      gap: 1rem !important;
-      margin-bottom: 2rem !important;
-      text-align: left;
-      /* Align content inside columns */
-    }
-
-    /* 1. SECTIONS: Navigation (Left) & Legal (Right) */
-    .footer-col:nth-child(2) {
-      order: 1;
-      border-right: 1px solid rgba(255, 255, 255, 0.1);
-      /* Fine separator line */
-      padding-right: 1rem;
-      width: auto !important;
-      margin: 0 !important;
-    }
-
-    .footer-col:nth-child(3) {
-      order: 2;
-      padding-left: 1rem;
-      width: auto !important;
-      margin: 0 !important;
-    }
-
-    /* Titles - "Navegación" & "Políticas" */
-    .footer-col h4 {
-      display: block !important;
-      font-size: 0.7rem !important;
-      text-transform: uppercase;
-      letter-spacing: 1.5px;
-      color: #64748b !important;
-      margin-bottom: 1rem !important;
-      font-weight: 700;
-    }
-
-    .footer-links {
-      display: flex !important;
-      flex-direction: column !important;
-      /* Vertical lists inside cols */
-      gap: 0.8rem !important;
-      padding: 0 !important;
-      align-items: flex-start !important;
-    }
-
-    .footer-links li {
-      margin: 0 !important;
-    }
-
-    .footer-links a {
-      font-size: 0.85rem !important;
-      color: #cbd5e1 !important;
-      text-decoration: none !important;
-      font-weight: 500;
-      padding: 0;
-      white-space: nowrap;
-    }
-
-    /* 2. SOCIAL ACTION & CONTACT (Full Width Below) */
-    .footer-col:nth-child(4) {
-      order: 3;
-      grid-column: 1 / -1;
-      /* Span both columns */
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      margin-top: 1.5rem;
-      padding-top: 1.5rem;
-      border-top: 1px solid rgba(255, 255, 255, 0.05);
-      /* Separator from links */
-      width: 100% !important;
-    }
-
-    .footer-col:nth-child(4) h4 {
-      display: none !important;
-    }
-
-    .footer-col:nth-child(4) p {
-      display: none !important;
-      /* Hide standard paragraphs (hours) */
-    }
-
-    /* REVEAL EMAIL AS BUTTON */
-    .footer-col:nth-child(4) p:first-of-type {
-      display: block !important;
-      order: 2;
-      /* Below social icons */
-      margin-top: 1.5rem !important;
-      margin-bottom: 0 !important;
-    }
-
-    .footer-col:nth-child(4) p:first-of-type br {
-      display: none;
-    }
-
-    .footer-col:nth-child(4) p:first-of-type i {
-      display: none;
-      /* Hide original icon */
-    }
-
-    .footer-col:nth-child(4) p:first-of-type a {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      padding: 0.6rem 1.2rem;
-      border-radius: 50px;
-      color: #94a3b8 !important;
-      font-size: 0.85rem !important;
-      text-decoration: none !important;
-      transition: all 0.2s ease;
-    }
-
-    /* Add Icon via CSS to link */
-    .footer-col:nth-child(4) p:first-of-type a::before {
-      content: '\f0e0';
-      /* FontAwesome Envelope */
-      font-family: "Font Awesome 6 Free";
-      font-weight: 900;
-      color: var(--ic-magenta);
-    }
-
-    .footer-col:nth-child(4) p:first-of-type a:hover {
-      background: rgba(255, 255, 255, 0.1);
-      border-color: white;
-      color: white !important;
-    }
-
-    .footer-social {
-      display: flex !important;
-      gap: 1.5rem !important;
-      margin-top: 0 !important;
-      order: 1;
-      /* Above email */
-    }
-
-    .social-link {
-      width: 50px !important;
-      height: 50px !important;
-      background: rgba(255, 255, 255, 0.05) !important;
-      border: 1px solid rgba(255, 255, 255, 0.1) !important;
-      border-radius: 50%;
-      font-size: 1.5rem !important;
-      color: white !important;
-      transition: all 0.2s ease;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .social-link:hover,
-    .social-link:active {
-      background: var(--ic-magenta) !important;
-      transform: scale(1.1);
-      border-color: var(--ic-magenta) !important;
-      box-shadow: 0 0 15px rgba(216, 27, 96, 0.4);
-    }
-
-    /* 3. LOGO (Bottom) */
-    .footer-col:first-child {
-      order: 4;
-      grid-column: 1 / -1;
-      border-bottom: none !important;
-      padding-bottom: 0;
-      margin-top: 1rem;
-      width: 100%;
-      display: flex;
-      justify-content: center;
-      opacity: 1 !important;
-      /* Full visibility */
-      filter: brightness(0) invert(1) !important;
-      /* Pure White Logo */
-    }
-
-    .footer-col:first-child p {
-      display: none !important;
-    }
-
-    .logo-wrapper {
-      margin-bottom: 0 !important;
-    }
-
-    .logo-wrapper img {
-      height: 32px !important;
-    }
-
-    .footer-bottom {
-      order: 5;
-      border-top: none !important;
-      /* Layout handles spacing */
-      padding-top: 0.5rem;
-      font-size: 0.75rem;
-      color: #64748b;
-    }
-
-    .scene-desc span {
-      color: #777 !important;
-      display: block;
-      margin-top: 0.5rem;
-    }
-
-    /* --- FOOTER & MISC --- */
-    .footer-bottom {
-      flex-direction: column;
-    }
-
-    .footer-legal-links {
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-
-    /* Text Sizes */
-    h1 {
-      font-size: 2rem !important;
-    }
-
-    h2 {
-      font-size: 1.75rem !important;
-    }
-
-    /* About Page */
-    .about-logo-large {
-      max-width: 250px;
-    }
-
-    .story-image {
-      height: 180px;
-    }
-
-    .legal-page-header {
-      /* Compact padding */
-      margin: 0 !important;
-      /* Remove auto margins */
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05) !important;
-    }
-
-
-    .products-section {
-      padding: 2rem 0 4rem !important;
-      /* More bottom breathing room */
-
-      /* Stronger Gradient for Mobile */
-      background-image:
-        radial-gradient(at 0% 0%, rgba(216, 27, 96, 0.25) 0px, transparent 50%),
-        radial-gradient(at 100% 0%, rgba(0, 153, 204, 0.25) 0px, transparent 50%),
-        radial-gradient(at 100% 100%, rgba(255, 213, 79, 0.25) 0px, transparent 50%),
-        radial-gradient(at 0% 100%, rgba(0, 153, 204, 0.20) 0px, transparent 50%) !important;
-    }
+    padding: 0 !important;
+    /* NO PADDING - CENTERING ONLY */
+    margin: 0 !important;
+
+    flex-direction: column;
+    justify-content: center !important;
+    /* Center content vertically */
+    align-items: center;
   }
+
+  .hero-slide.active {
+    display: flex !important;
+  }
+
+  .hero-text {
+    order: 2;
+    /* Text Always Bottom */
+    margin-top: 0.5rem;
+  }
+
+  /* --- HERO BUTTONS: HORIZONTAL & COMPACT --- */
+  .hero-buttons {
+    display: flex !important;
+    flex-direction: row !important;
+    gap: 0.75rem !important;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .hero-buttons .btn-primary,
+  .hero-buttons .btn-secondary {
+    display: inline-flex !important;
+    width: auto !important;
+    flex: 1;
+    /* Split space evenly */
+    padding: 0.75rem 0.5rem !important;
+    font-size: 0.9rem !important;
+    justify-content: center;
+    align-items: center;
+    white-space: nowrap;
+  }
+
+  .hero-buttons .btn-secondary {
+    background: transparent;
+    border: 2px solid var(--ic-magenta);
+    color: var(--ic-magenta);
+  }
+
+  /* Hide other extra hero elements */
+  .hero-microcopy,
+  .hero-features {
+    display: none !important;
+  }
+
+  /* --- CATEGORIES: CLEAN LIST (Small Icons) --- */
+  .products-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    /* Tight spacing */
+    padding: 0;
+  }
+
+  .product-card {
+    /* Row layout like a menu item */
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    /* Vertically center */
+    text-align: left;
+    gap: 1rem;
+
+    width: 100%;
+    max-width: 100%;
+    padding: 1rem 1.25rem !important;
+    margin: 0 !important;
+
+    border-radius: 12px !important;
+    background: white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05) !important;
+    animation: none !important;
+  }
+
+  /* Tiny Icon */
+  .product-card i,
+  .product-card img,
+  .product-card svg,
+  .product-card .icon-wrapper {
+    font-size: 1.5rem;
+    /* Small icon */
+    width: 40px;
+    height: 40px;
+    margin: 0 !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .product-card .product-icon-container {
+    margin: 0 !important;
+    width: auto !important;
+    height: auto !important;
+  }
+
+  .product-card h3 {
+    font-size: 1.1rem;
+    margin: 0;
+    flex-grow: 1;
+    /* Title takes space */
+  }
+
+  /* Hide description on mobile for "Clean List" look requested */
+  .product-card p {
+    display: none;
+  }
+
+  .product-card .btn-link {
+    display: none;
+  }
+
+  .product-card::before {
+    display: none !important;
+  }
+
+  /* Remove chevron */
+  .product-card::after {
+    content: none !important;
+  }
+
+  /* --- HOW WE WORK: OPTIMIZED MOBILE LAYOUT --- */
+  .how-section {
+    padding-top: 1rem !important;
+    margin-top: 0 !important;
+    /* Reset negative margin */
+    padding-bottom: 2rem !important;
+  }
+
+  .how-section h2 {
+    margin-top: 0 !important;
+    font-size: 1.8rem !important;
+    margin-bottom: 1.5rem !important;
+  }
+
+  .step-item {
+    background: rgba(255, 255, 255, 0.7) !important;
+    /* Semi-transparent white */
+    border: 1px solid rgba(0, 0, 0, 0.05) !important;
+    /* Subtle border */
+    box-shadow: none !important;
+    /* NO SHADOW = "Not a button" */
+
+    padding: 1rem !important;
+    border-radius: 12px;
+    margin-bottom: 0.75rem;
+
+    /* Grid Layout: Number | Content */
+    display: grid !important;
+    grid-template-columns: 40px 1fr !important;
+    gap: 0.75rem;
+    align-items: start;
+    text-align: left !important;
+  }
+
+  .step-number {
+    width: 32px !important;
+    height: 32px !important;
+    font-size: 0.9rem !important;
+    margin: 0 !important;
+    place-self: start center;
+    /* Align top-center in its grid cell */
+    margin-top: 0.25rem !important;
+    /* Slight push to align with Title text baseline */
+  }
+
+  .step-content {
+    text-align: left !important;
+    padding: 0 !important;
+  }
+
+  .step-content h3 {
+    font-size: 1.1rem !important;
+    margin: 0 0 0.5rem 0 !important;
+    line-height: 1.2;
+    color: var(--ic-dark);
+    text-align: left !important;
+  }
+
+  .step-content p {
+    font-size: 0.9rem !important;
+    margin: 0 !important;
+    line-height: 1.4;
+    text-align: left !important;
+  }
+
+  .steps-list {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 0;
+  }
+
+
+
+  /* --- LOGISTICS: CENTERED & FIX --- */
+  /* --- LOGISTICS: SPLIT LAYOUT (Title Top, Video Bottom) --- */
+  .logistic-card-wrapper,
+  .logistic-scene {
+    height: auto !important;
+    min-height: 0 !important;
+    border-radius: 20px !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-shadow: none !important;
+    background: transparent !important;
+    /* Let container bg show if needed */
+    overflow: hidden;
+    margin: 0 auto;
+  }
+
+  /* Flex Container Redefinition */
+  /* Flex Container Redefinition */
+  /* Kill Organic Shapes */
+  .logistic-card-wrapper::before,
+  .logistic-card-wrapper::after,
+  .logistic-scene::before,
+  .logistic-scene::after {
+    display: none !important;
+    content: none !important;
+    border: none !important;
+    animation: none !important;
+    background: none !important;
+  }
+
+  /* Flex Container Redefinition */
+  .logistic-scene {
+    display: flex !important;
+    flex-direction: column !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    padding-bottom: 0;
+    overflow: visible !important;
+    border-radius: 0 !important;
+    transform: none !important;
+    animation: none !important;
+  }
+
+  /* UNWRAP content to re-order children */
+  .scene-content {
+    display: contents !important;
+  }
+
+  .scene-title {
+    order: 1;
+    color: var(--ic-magenta) !important;
+    font-size: 1.8rem !important;
+    margin: 1rem 0 0.5rem !important;
+    text-align: center;
+    width: 100%;
+  }
+
+  /* Video in the Middle - SAFE FULL BLEED & TRUCK VISIBLE */
+  .logistic-video-bg {
+    order: 2;
+    position: relative !important;
+    display: block !important;
+
+    /* Safe Breakout: Width = parent + extra overlap */
+    width: calc(100% + 4rem) !important;
+    margin-left: -2rem !important;
+    margin-right: -2rem !important;
+    left: auto !important;
+    max-width: none !important;
+
+    /* Height to fit Truck + Buildings */
+    height: 180px !important;
+
+    object-fit: cover !important;
+    /* Focus closer to bottom to see Truck */
+    object-position: center 80% !important;
+
+    z-index: 1;
+    border-radius: 0 !important;
+    margin-bottom: 2rem;
+    margin-top: 1rem;
+    background: #e0f7fa;
+  }
+
+  .scene-desc {
+    order: 3;
+    color: var(--ic-dark) !important;
+    font-weight: 500;
+    text-shadow: none !important;
+    font-size: 0.95rem !important;
+    text-align: center;
+    padding: 0 1.5rem;
+    width: 100%;
+  }
+
+  /* --- FOOTER: SMART MOBILE LAYOUT (Compact 2-Col) --- */
+  .footer {
+    padding: 3rem 1.5rem 2rem !important;
+    text-align: center;
+  }
+
+  .footer-grid {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    /* Two equal columns */
+    gap: 1rem !important;
+    margin-bottom: 2rem !important;
+    text-align: left;
+    /* Align content inside columns */
+  }
+
+  /* 1. SECTIONS: Navigation (Left) & Legal (Right) */
+  .footer-col:nth-child(2) {
+    order: 1;
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+    /* Fine separator line */
+    padding-right: 1rem;
+    width: auto !important;
+    margin: 0 !important;
+  }
+
+  .footer-col:nth-child(3) {
+    order: 2;
+    padding-left: 1rem;
+    width: auto !important;
+    margin: 0 !important;
+  }
+
+  /* Titles - "Navegación" & "Políticas" */
+  .footer-col h4 {
+    display: block !important;
+    font-size: 0.7rem !important;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: #64748b !important;
+    margin-bottom: 1rem !important;
+    font-weight: 700;
+  }
+
+  .footer-links {
+    display: flex !important;
+    flex-direction: column !important;
+    /* Vertical lists inside cols */
+    gap: 0.8rem !important;
+    padding: 0 !important;
+    align-items: flex-start !important;
+  }
+
+  .footer-links li {
+    margin: 0 !important;
+  }
+
+  .footer-links a {
+    font-size: 0.85rem !important;
+    color: #cbd5e1 !important;
+    text-decoration: none !important;
+    font-weight: 500;
+    padding: 0;
+    white-space: nowrap;
+  }
+
+  /* 2. SOCIAL ACTION & CONTACT (Full Width Below) */
+  .footer-col:nth-child(4) {
+    order: 3;
+    grid-column: 1 / -1;
+    /* Span both columns */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    /* Separator from links */
+    width: 100% !important;
+  }
+
+  .footer-col:nth-child(4) h4 {
+    display: none !important;
+  }
+
+  .footer-col:nth-child(4) p {
+    display: none !important;
+    /* Hide standard paragraphs (hours) */
+  }
+
+  /* REVEAL EMAIL AS BUTTON */
+  .footer-col:nth-child(4) p:first-of-type {
+    display: block !important;
+    order: 2;
+    /* Below social icons */
+    margin-top: 1.5rem !important;
+    margin-bottom: 0 !important;
+  }
+
+  .footer-col:nth-child(4) p:first-of-type br {
+    display: none;
+  }
+
+  .footer-col:nth-child(4) p:first-of-type i {
+    display: none;
+    /* Hide original icon */
+  }
+
+  .footer-col:nth-child(4) p:first-of-type a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 0.6rem 1.2rem;
+    border-radius: 50px;
+    color: #94a3b8 !important;
+    font-size: 0.85rem !important;
+    text-decoration: none !important;
+    transition: all 0.2s ease;
+  }
+
+  /* Add Icon via CSS to link */
+  .footer-col:nth-child(4) p:first-of-type a::before {
+    content: '\f0e0';
+    /* FontAwesome Envelope */
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    color: var(--ic-magenta);
+  }
+
+  .footer-col:nth-child(4) p:first-of-type a:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: white;
+    color: white !important;
+  }
+
+  .footer-social {
+    display: flex !important;
+    gap: 1.5rem !important;
+    margin-top: 0 !important;
+    order: 1;
+    /* Above email */
+  }
+
+  .social-link {
+    width: 50px !important;
+    height: 50px !important;
+    background: rgba(255, 255, 255, 0.05) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    border-radius: 50%;
+    font-size: 1.5rem !important;
+    color: white !important;
+    transition: all 0.2s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .social-link:hover,
+  .social-link:active {
+    background: var(--ic-magenta) !important;
+    transform: scale(1.1);
+    border-color: var(--ic-magenta) !important;
+    box-shadow: 0 0 15px rgba(216, 27, 96, 0.4);
+  }
+
+  /* 3. LOGO (Bottom) */
+  .footer-col:first-child {
+    order: 4;
+    grid-column: 1 / -1;
+    border-bottom: none !important;
+    padding-bottom: 0;
+    margin-top: 1rem;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    opacity: 1 !important;
+    /* Full visibility */
+    filter: brightness(0) invert(1) !important;
+    /* Pure White Logo */
+  }
+
+  .footer-col:first-child p {
+    display: none !important;
+  }
+
+  .logo-wrapper {
+    margin-bottom: 0 !important;
+  }
+
+  .logo-wrapper img {
+    height: 32px !important;
+  }
+
+  .footer-bottom {
+    order: 5;
+    border-top: none !important;
+    /* Layout handles spacing */
+    padding-top: 0.5rem;
+    font-size: 0.75rem;
+    color: #64748b;
+  }
+
+  .scene-desc span {
+    color: #777 !important;
+    display: block;
+    margin-top: 0.5rem;
+  }
+
+  /* --- FOOTER & MISC --- */
+  .footer-bottom {
+    flex-direction: column;
+  }
+
+  .footer-legal-links {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  /* Text Sizes */
+  h1 {
+    font-size: 2rem !important;
+  }
+
+  h2 {
+    font-size: 1.75rem !important;
+  }
+
+  /* About Page */
+  .about-logo-large {
+    max-width: 250px;
+  }
+
+  .story-image {
+    height: 180px;
+  }
+
+  .legal-page-header {
+    /* Compact padding */
+    margin: 0 !important;
+    /* Remove auto margins */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05) !important;
+  }
+
+
+  .products-section {
+    padding: 2rem 0 4rem !important;
+    /* More bottom breathing room */
+
+    /* Stronger Gradient for Mobile */
+    background-image:
+      radial-gradient(at 0% 0%, rgba(216, 27, 96, 0.25) 0px, transparent 50%),
+      radial-gradient(at 100% 0%, rgba(0, 153, 204, 0.25) 0px, transparent 50%),
+      radial-gradient(at 100% 100%, rgba(255, 213, 79, 0.25) 0px, transparent 50%),
+      radial-gradient(at 0% 100%, rgba(0, 153, 204, 0.20) 0px, transparent 50%) !important;
+  }
+}
