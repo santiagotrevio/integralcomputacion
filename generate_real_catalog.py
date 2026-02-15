@@ -167,7 +167,7 @@ products_data = [
     "name": "Bobina de Cable UTP Cat5e DAHUA 305m",
     "sku": "PFM920I-5EUN",
     "description": "Bobina de cable de red 100% Cobre para instalación de video y datos. Color Blanco.",
-    "image_url": "assets/images/products/paper-ream.png" # Placeholder/Generic
+    "image_url": "GENERATED_CABLE" # New generated image
   },
   {
     "name": "Fuente de Poder Centralizada 12V 10A",
@@ -179,7 +179,7 @@ products_data = [
     "name": "Transceptor Pasivo de Video HDCVI (Balun)",
     "sku": "PFM800-4K",
     "description": "Par de transceptores pasivos para transmisión de video hasta 4K. Conector push-pin.",
-    "image_url": "assets/images/products/mouse-generic.png" # Placeholder
+    "image_url": "GENERATED_BALUN" # New generated image
   },
   {
     "name": "Cámara PTZ DAHUA 25x Starlight 2MP",
@@ -192,12 +192,6 @@ products_data = [
     "sku": "NVR4108HS-8P-4KS2",
     "description": "Grabador de red para 8 cámaras IP, puertos PoE integrados, grabación hasta 8MP.",
     "image_url": "GENERATED_DVR"
-  },
-  {
-    "name": "Montaje de Pared para Cámara Domo",
-    "sku": "PFB203W",
-    "description": "Brazo de montaje para pared compatible con cámaras domo Dahua. Material aluminio, resistente al agua.",
-    "image_url": "assets/images/products/video/camera-dome.png"
   }
 ]
 
@@ -228,6 +222,10 @@ for p in products_data:
         local_path = "assets/images/products/video/monitor-screen.png"
     elif p['image_url'] == "GENERATED_CONF":
         local_path = "assets/images/products/video/video-conference.png"
+    elif p['image_url'] == "GENERATED_CABLE":
+        local_path = "assets/images/products/video/cable-utp.png"
+    elif p['image_url'] == "GENERATED_BALUN":
+        local_path = "assets/images/products/video/video-balun.png"
     elif 'assets/' in p['image_url']:
         local_path = p['image_url'] # Already local path
     else:

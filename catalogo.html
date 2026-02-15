@@ -404,16 +404,20 @@
 
         // Filtering Logic
         function filterProducts() {
-            const searchTerm = searchInput.value.toLowerCase();
+            const searchTerm = searchInput.value.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
             const categoryValue = categoryFilter.value;
 
             const filtered = productsDB.filter(prod => {
                 // Guard clause for empty rows
                 if (!prod.name) return false;
 
-                const matchesSearch = prod.name.toLowerCase().includes(searchTerm) ||
-                    prod.id.toLowerCase().includes(searchTerm) ||
-                    (prod.description && prod.description.toLowerCase().includes(searchTerm));
+                const prodName = prod.name.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+                const prodId = prod.id.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+                const prodDesc = prod.description ? prod.description.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "") : "";
+
+                const matchesSearch = prodName.includes(searchTerm) ||
+                    prodId.includes(searchTerm) ||
+                    prodDesc.includes(searchTerm);
 
                 const matchesCategory = categoryValue === 'all' || prod.category === categoryValue;
 
