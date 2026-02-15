@@ -1144,10 +1144,321 @@ header.scrolled {
   color: var(--ic-yellow);
 }
 
-@media (max-width: 768px) {
-  .footer-bottom {
-    flex-direction: column;
-    text-align: center;
-    align-items: center;
-  }
+/* --- INTERNAL LEGAL PAGES --- */
+.legal-page-header {
+  background-color: #f8fafc;
+  padding: 8rem 0 4rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Subtle background accent for header */
+.legal-page-header::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -20%;
+  width: 140%;
+  height: 200%;
+  background: radial-gradient(circle at 50% 50%, rgba(0, 153, 204, 0.05), transparent 60%);
+  z-index: 0;
+  pointer-events: none;
+}
+
+.legal-title {
+  position: relative;
+  z-index: 1;
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: var(--ic-black);
+  margin-bottom: 1rem;
+}
+
+.legal-subtitle {
+  position: relative;
+  z-index: 1;
+  color: var(--ic-text-gray);
+  font-size: 1.1rem;
+}
+
+.legal-content {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 4rem 1.5rem 8rem;
+  font-size: 1.05rem;
+  color: #334155;
+}
+
+.legal-content h2 {
+  font-size: 1.5rem;
+  color: var(--ic-black);
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid #f1f5f9;
+}
+
+.legal-content h3 {
+  font-size: 1.2rem;
+  color: var(--ic-dark-gray);
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.legal-content p {
+  margin-bottom: 1rem;
+  line-height: 1.7;
+}
+
+.legal-content ul {
+  list-style: disc;
+  padding-left: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.legal-content li {
+  margin-bottom: 0.5rem;
+}
+
+/* Navigation adjustment for internal pages */
+.internal-nav .nav-links a {
+  color: var(--ic-black) !important;
+  /* Force black on light bg */
+}
+
+/* --- ABOUT PAGE (Nosotros) --- */
+.about-hero {
+  position: relative;
+  background: white;
+  padding: 0.5rem 0 0.5rem;
+  /* Minimal padding */
+  overflow: hidden;
+  text-align: center;
+}
+
+/* Background decoration similar to Legal but bigger */
+.about-hero::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -20%;
+  width: 140%;
+  height: 200%;
+  background: radial-gradient(circle at 50% 50%, rgba(216, 27, 96, 0.12), transparent 60%);
+  /* Stronger Magenta tint */
+  z-index: 0;
+  pointer-events: none;
+}
+
+.about-logo-large {
+  max-width: 500px;
+  margin: 0 auto 0.5rem;
+  position: relative;
+  z-index: 1;
+  filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.05));
+}
+
+.about-title {
+  font-size: 3.5rem;
+  /* Significant increase */
+  font-weight: 800;
+  color: var(--ic-black);
+  margin-bottom: 1rem;
+  position: relative;
+  z-index: 1;
+  line-height: 1.1;
+}
+
+.about-intro-text {
+  font-size: 1.5rem;
+  /* Larger, more readable */
+  color: var(--ic-text-gray);
+  max-width: 800px;
+  /* Wider to accommodate larger text */
+  margin: 0 auto 2rem;
+  position: relative;
+  z-index: 1;
+  line-height: 1.6;
+}
+
+
+
+.about-image-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto 4rem;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+.about-image {
+  width: 100%;
+  display: block;
+  transition: transform 0.5s ease;
+}
+
+.about-image:hover {
+  transform: scale(1.02);
+}
+
+/* Story Section - Humanized */
+.our-story-section {
+  padding: 4rem 0 8rem;
+  background: white;
+  position: relative;
+}
+
+.story-container {
+  max-width: 900px;
+  margin: 0 auto;
+  display: grid;
+  gap: 3rem;
+  align-items: center;
+}
+
+.story-text {
+  font-size: 1.2rem;
+  line-height: 1.8;
+  color: var(--ic-text-gray);
+  text-align: left;
+}
+
+.story-text p {
+  margin-bottom: 1.5rem;
+}
+
+.story-highlight {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: var(--ic-black);
+  margin: 2rem 0;
+  line-height: 1.2;
+  position: relative;
+  padding-left: 1.5rem;
+  border-left: 4px solid var(--ic-magenta);
+}
+
+.highlight-cyan {
+  color: var(--ic-cyan);
+}
+
+.highlight-magenta {
+  color: var(--ic-magenta);
+}
+
+.family-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: #fff9c4;
+  /* Soft yellow bg */
+  padding: 0.5rem 1rem;
+  border-radius: 50px;
+  font-weight: 700;
+  color: #f57f17;
+  margin-bottom: 2rem;
+  font-size: 0.9rem;
+}
+
+/* Image styling for story */
+.story-image {
+  width: 100%;
+  height: 350px;
+  /* fixed height constraint */
+  object-fit: cover;
+  /* to crop without stretching */
+  object-position: center;
+  /* to keep focus */
+  border-radius: 20px;
+  box-shadow: 0 20px 50px -10px rgba(0, 0, 0, 0.1);
+  transform: rotate(-1deg);
+  /* Slight organic tilt */
+  transition: transform 0.3s ease;
+}
+
+.story-image:hover {
+  transform: rotate(0deg) scale(1.01);
+}
+
+/* --- FAQ PAGE --- */
+.faq-section {
+  padding: 2rem 0 6rem;
+}
+
+.faq-item {
+  background: white;
+  margin-bottom: 1rem;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+  overflow: hidden;
+}
+
+.faq-question {
+  padding: 1.5rem;
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: var(--ic-black);
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background 0.2s ease;
+}
+
+.faq-question:hover {
+  background: #f8fafc;
+}
+
+/* Simple visible state using details/summary */
+details {
+  margin-bottom: 1rem;
+  background: white;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+  overflow: hidden;
+}
+
+details summary {
+  padding: 1.5rem;
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: var(--ic-black);
+  cursor: pointer;
+  list-style: none;
+  /* Hide default marker */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+details summary::-webkit-details-marker {
+  display: none;
+}
+
+details summary::after {
+  content: '+';
+  font-size: 1.5rem;
+  color: var(--ic-cyan);
+  font-weight: 400;
+  transition: transform 0.2s ease;
+}
+
+details[open] summary::after {
+  transform: rotate(45deg);
+  /* Turns to X */
+  color: var(--ic-magenta);
+}
+
+details[open] summary {
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.faq-answer {
+  padding: 1.5rem;
+  line-height: 1.6;
+  color: var(--ic-text-gray);
+  background: #fff;
 }
