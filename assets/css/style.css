@@ -1572,12 +1572,20 @@ details[open] summary {
     position: relative !important;
     display: none;
     width: 100%;
-    padding-top: 2rem;
-    padding-bottom: 1rem;
-    /* Ensure text area has minimum height for unity */
-    min-height: 450px;
+
+    /* FORCE CONSISTENT HEIGHT */
+    min-height: 85vh !important;
+    /* Occupy most of the screen */
+
+    padding-top: 6rem !important;
+    /* Header clearance */
+    padding-bottom: 4rem !important;
+    /* Bottom clearance */
+
     flex-direction: column;
-    justify-content: flex-start;
+    justify-content: center !important;
+    /* Center content vertically */
+    align-items: center;
   }
 
   .hero-slide.active {
