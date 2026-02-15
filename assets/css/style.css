@@ -1563,8 +1563,8 @@ details[open] summary {
   /* Fix the "jumping" height by constraining images */
   .organic-shape,
   .hero-image-container img {
-    height: 180px !important;
-    /* Fixed manageable height */
+    height: 220px !important;
+    /* Increased from 180px */
     width: auto !important;
     max-width: 100%;
     margin: 0 auto;
@@ -1574,7 +1574,8 @@ details[open] summary {
   .hero-image-container {
     order: -1;
     /* Image Always Top */
-    height: 180px;
+    height: 220px;
+    /* Match image height */
     display: flex;
     align-items: center;
     justify-content: center;
