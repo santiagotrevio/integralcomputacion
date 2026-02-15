@@ -1792,14 +1792,29 @@ details[open] summary {
 
   /* Flex Container Redefinition */
   /* Flex Container Redefinition */
+  /* Kill Organic Shapes */
+  .logistic-card-wrapper::before,
+  .logistic-card-wrapper::after,
+  .logistic-scene::before,
+  .logistic-scene::after {
+    display: none !important;
+    content: none !important;
+    border: none !important;
+    animation: none !important;
+    background: none !important;
+  }
+
+  /* Flex Container Redefinition */
   .logistic-scene {
     display: flex !important;
     flex-direction: column !important;
     background: transparent !important;
-    /* No Gray Background */
     box-shadow: none !important;
     padding-bottom: 0;
     overflow: visible !important;
+    border-radius: 0 !important;
+    transform: none !important;
+    animation: none !important;
   }
 
   /* UNWRAP content to re-order children */
@@ -1817,23 +1832,31 @@ details[open] summary {
   }
 
   /* Video in the Middle - FULL BLEED */
+  /* Video in the Middle - FULL BLEED & FULL VIEW */
   .logistic-video-bg {
     order: 2;
     position: relative !important;
+    display: block !important;
 
-    /* Full Bleed Magic */
+    /* Full width, compensate for container padding */
     width: calc(100% + 3rem) !important;
     margin-left: -1.5rem !important;
     margin-right: -1.5rem !important;
     max-width: none !important;
 
-    height: 120px !important;
-    /* Thin strip */
+    /* Auto height to show full content (buildings) */
+    height: auto !important;
+    aspect-ratio: 16/9;
+    /* Maintain ratio */
+    min-height: 200px;
+
     object-fit: cover !important;
+    /* Cover, but with 16:9 ratio it should fit most width */
     object-position: center bottom !important;
     z-index: 1;
     border-radius: 0 !important;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
   }
 
   .scene-desc {
