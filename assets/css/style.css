@@ -1869,37 +1869,57 @@ details[open] summary {
     width: 100%;
   }
 
-  /* --- FOOTER: SMART MOBILE LAYOUT (GitHub Style) --- */
+  /* --- FOOTER: SMART MOBILE LAYOUT (Compact 2-Col) --- */
   .footer {
     padding: 3rem 1.5rem 2rem !important;
     text-align: center;
   }
 
   .footer-grid {
-    display: flex !important;
-    flex-direction: column !important;
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    /* Two equal columns */
     gap: 1rem !important;
     margin-bottom: 2rem !important;
+    text-align: left;
+    /* Align content inside columns */
   }
 
-  /* 1. LINKS (Top Cloud) */
-  .footer-col:nth-child(2),
-  .footer-col:nth-child(3) {
+  /* 1. SECTIONS: Navigation (Left) & Legal (Right) */
+  .footer-col:nth-child(2) {
     order: 1;
-    width: 100%;
-    margin: 0;
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+    /* Fine separator line */
+    padding-right: 1rem;
+    width: auto !important;
+    margin: 0 !important;
   }
 
+  .footer-col:nth-child(3) {
+    order: 2;
+    padding-left: 1rem;
+    width: auto !important;
+    margin: 0 !important;
+  }
+
+  /* Titles - "Navegación" & "Políticas" */
   .footer-col h4 {
-    display: none !important;
+    display: block !important;
+    font-size: 0.7rem !important;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: #64748b !important;
+    margin-bottom: 1rem !important;
+    font-weight: 700;
   }
 
   .footer-links {
     display: flex !important;
-    flex-wrap: wrap !important;
-    justify-content: center !important;
-    gap: 0.8rem 1.2rem !important;
+    flex-direction: column !important;
+    /* Vertical lists inside cols */
+    gap: 0.8rem !important;
     padding: 0 !important;
+    align-items: flex-start !important;
   }
 
   .footer-links li {
@@ -1907,28 +1927,32 @@ details[open] summary {
   }
 
   .footer-links a {
-    font-size: 0.9rem !important;
-    color: #94a3b8 !important;
+    font-size: 0.85rem !important;
+    color: #cbd5e1 !important;
     text-decoration: none !important;
     font-weight: 500;
-    padding: 4px 8px;
-    /* Touch target */
+    padding: 0;
+    white-space: nowrap;
   }
 
-  /* 2. SOCIAL ACTION (Middle) */
+  /* 2. SOCIAL ACTION (Full Width Below) */
   .footer-col:nth-child(4) {
-    order: 2;
+    order: 3;
+    grid-column: 1 / -1;
+    /* Span both columns */
     display: flex;
-    justify-content: center;
-    width: 100%;
-    margin-top: 1rem;
-    margin-bottom: 1rem;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    /* Separator from links */
+    width: 100% !important;
   }
 
   .footer-col:nth-child(4) h4,
   .footer-col:nth-child(4) p {
     display: none !important;
-    /* Hide contact text, show only social */
   }
 
   .footer-social {
@@ -1941,7 +1965,6 @@ details[open] summary {
     width: 50px !important;
     height: 50px !important;
     background: rgba(255, 255, 255, 0.05) !important;
-    /* Dark glass */
     border: 1px solid rgba(255, 255, 255, 0.1) !important;
     border-radius: 50%;
     font-size: 1.5rem !important;
@@ -1962,17 +1985,18 @@ details[open] summary {
 
   /* 3. LOGO (Bottom) */
   .footer-col:first-child {
-    order: 3;
+    order: 4;
+    grid-column: 1 / -1;
     border-bottom: none !important;
     padding-bottom: 0;
-    margin-top: 0.5rem;
+    margin-top: 1rem;
     width: 100%;
     display: flex;
     justify-content: center;
-    opacity: 0.6;
-    /* Subtle branding */
-    filter: grayscale(100%);
-    /* GitHub style subtle logo */
+    opacity: 1 !important;
+    /* Full visibility */
+    filter: brightness(0) invert(1) !important;
+    /* Pure White Logo */
   }
 
   .footer-col:first-child p {
@@ -1984,15 +2008,15 @@ details[open] summary {
   }
 
   .logo-wrapper img {
-    height: 28px !important;
-    /* Smaller subtle logo */
+    height: 32px !important;
   }
 
   .footer-bottom {
-    order: 4;
-    border-top: 1px solid rgba(255, 255, 255, 0.05) !important;
-    padding-top: 1.5rem;
-    font-size: 0.8rem;
+    order: 5;
+    border-top: none !important;
+    /* Layout handles spacing */
+    padding-top: 0.5rem;
+    font-size: 0.75rem;
     color: #64748b;
   }
 
