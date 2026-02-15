@@ -1791,13 +1791,15 @@ details[open] summary {
   }
 
   /* Flex Container Redefinition */
+  /* Flex Container Redefinition */
   .logistic-scene {
     display: flex !important;
     flex-direction: column !important;
-    background: #f9f9f9 !important;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05) !important;
-    padding-bottom: 1.5rem;
-    /* Space at bottom */
+    background: transparent !important;
+    /* No Gray Background */
+    box-shadow: none !important;
+    padding-bottom: 0;
+    overflow: visible !important;
   }
 
   /* UNWRAP content to re-order children */
@@ -1809,24 +1811,29 @@ details[open] summary {
     order: 1;
     color: var(--ic-magenta) !important;
     font-size: 1.8rem !important;
-    margin: 1.5rem 0 1rem !important;
+    margin: 1rem 0 0.5rem !important;
     text-align: center;
     width: 100%;
   }
 
-  /* Video in the Middle */
+  /* Video in the Middle - FULL BLEED */
   .logistic-video-bg {
     order: 2;
     position: relative !important;
-    width: 100% !important;
+
+    /* Full Bleed Magic */
+    width: calc(100% + 3rem) !important;
+    margin-left: -1.5rem !important;
+    margin-right: -1.5rem !important;
+    max-width: none !important;
+
     height: 120px !important;
     /* Thin strip */
     object-fit: cover !important;
     object-position: center bottom !important;
     z-index: 1;
     border-radius: 0 !important;
-    /* Full width strip */
-    margin-bottom: 1rem;
+    margin-bottom: 2rem;
   }
 
   .scene-desc {
