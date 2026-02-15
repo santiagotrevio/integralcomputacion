@@ -1715,11 +1715,16 @@ details[open] summary {
   }
 
   .step-item {
-    background: #ffffff !important;
+    background: rgba(255, 255, 255, 0.7) !important;
+    /* Semi-transparent white */
+    border: 1px solid rgba(0, 0, 0, 0.05) !important;
+    /* Subtle border */
+    box-shadow: none !important;
+    /* NO SHADOW = "Not a button" */
+
     padding: 1rem !important;
     border-radius: 12px;
     margin-bottom: 0.75rem;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08) !important;
 
     /* Grid Layout: Number | Content */
     display: grid !important;
