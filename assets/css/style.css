@@ -1775,28 +1775,74 @@ details[open] summary {
 
 
   /* --- LOGISTICS: CENTERED & FIX --- */
+  /* --- LOGISTICS: SPLIT LAYOUT (Title Top, Video Bottom) --- */
   .logistic-card-wrapper,
   .logistic-scene {
     height: auto !important;
-    min-height: 250px;
+    min-height: 0 !important;
     border-radius: 20px !important;
     width: 100% !important;
     max-width: 100% !important;
-    display: block;
-    animation: none !important;
-
-    /* Centering Fix */
-    margin-left: auto !important;
-    margin-right: auto !important;
+    box-shadow: none !important;
+    background: transparent !important;
+    /* Let container bg show if needed */
+    overflow: hidden;
+    margin: 0 auto;
   }
 
-  .logistic-card-wrapper::before {
-    display: none !important;
+  /* Flex Container Redefinition */
+  .logistic-scene {
+    display: flex !important;
+    flex-direction: column !important;
+    background: #f9f9f9 !important;
+    /* Light gray card bg */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05) !important;
   }
 
+  /* Content (Title & Text) - Move to Top */
   .scene-content {
-    padding: 2rem 1rem !important;
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    transform: none !important;
     text-align: center;
+    padding: 2rem 1rem 1rem !important;
+    background: transparent !important;
+    width: 100%;
+    z-index: 2;
+  }
+
+  .scene-title {
+    color: var(--ic-magenta) !important;
+    /* Red/Magenta Title */
+    font-size: 2rem !important;
+    margin-bottom: 0.5rem;
+    text-shadow: none !important;
+  }
+
+  .scene-desc {
+    color: var(--ic-dark) !important;
+    font-weight: 600;
+    text-shadow: none !important;
+    font-size: 1rem !important;
+  }
+
+  .scene-desc span {
+    color: #666 !important;
+  }
+
+  /* Video - Crop to Bottom Strip */
+  .logistic-video-bg {
+    position: relative !important;
+    width: 100% !important;
+    height: 140px !important;
+    /* Cropped strip height */
+    object-fit: cover !important;
+    object-position: center bottom !important;
+    /* Focus on road/truck */
+    z-index: 1;
+    border-radius: 0 0 20px 20px !important;
+    /* Round only bottom */
   }
 
   /* --- FOOTER & MISC --- */
