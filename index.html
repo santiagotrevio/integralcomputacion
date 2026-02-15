@@ -538,7 +538,35 @@
             // Auto advance
             slideTimer = setTimeout(function () {
                 showSlides(slideIndex += 1);
-            }, 12000); // Change image every 12 seconds
+            }, 6000); // Changed to 6s for better UX testing
+        }
+    }
+
+    // --- SWIPE SUPPORT (Touch Events) ---
+    const sliderContainer = document.querySelector('.hero-slider');
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    sliderContainer.addEventListener('touchstart', e => {
+        touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+
+    sliderContainer.addEventListener('touchend', e => {
+        touchEndX = e.changedTouches[0].screenX;
+        handleSwipe();
+    }, { passive: true });
+
+    function handleSwipe() {
+        const threshold = 50; // Minimum distance to trigger swipe
+        if (touchEndX < touchStartX - threshold) {
+            // Swipe Left -> Next Slide
+            clearTimeout(slideTimer);
+            showSlides(slideIndex += 1);
+        }
+        if (touchEndX > touchStartX + threshold) {
+            // Swipe Right -> Previous Slide
+            clearTimeout(slideTimer);
+            showSlides(slideIndex -= 1);
         }
     }
 
