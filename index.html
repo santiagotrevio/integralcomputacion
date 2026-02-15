@@ -11,7 +11,9 @@
         content="Especialistas en Tóners, Papelería y Accesorios en Guadalajara. Cotiza por WhatsApp, entrega a domicilio.">
 
     <!-- Performance: Preload Critical Assets -->
-    <link rel="preload" as="image" href="assets/images/hero-image.jpg">
+    <link rel="preload" as="image" href="assets/images/hero-image.jpg"
+        imagesrcset="assets/images/hero-image-small-400.jpg 400w, assets/images/hero-image-small.jpg 600w, assets/images/hero-image.jpg 1200w"
+        imagesizes="(max-width: 600px) 100vw, 600px">
 
     <!-- Performance: Preconnect -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -103,8 +105,10 @@
                     <!-- Right: Organic Image -->
                     <div class="hero-image-container">
                         <div class="organic-shape">
-                            <img src="assets/images/hero-image.jpg" alt="Oficina y Suministros" width="600" height="400"
-                                fetchpriority="high" decoding="sync"
+                            <img src="assets/images/hero-image.jpg"
+                                srcset="assets/images/hero-image-small-400.jpg 400w, assets/images/hero-image-small.jpg 600w, assets/images/hero-image.jpg 1200w"
+                                sizes="(max-width: 600px) 100vw, 600px" alt="Oficina y Suministros" width="600"
+                                height="400" fetchpriority="high" decoding="sync"
                                 onerror="this.src='https://images.unsplash.com/photo-1497215728101-856f4ea42174?q=80&w=1200'">
                         </div>
                     </div>
@@ -417,7 +421,7 @@
                     </div>
 
                     <video class="logistic-video-bg lazy-video" loop muted playsinline
-                        poster="assets/images/hero-image.jpg">
+                        poster="assets/images/hero-image-small.jpg">
                         <source data-src="assets/images/logistica.mp4" type="video/mp4">
                     </video>
                 </div>
