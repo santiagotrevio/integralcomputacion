@@ -10,13 +10,6 @@
     <meta name="description"
         content="Especialistas en Tóners, Papelería y Accesorios en Guadalajara. Cotiza por WhatsApp, entrega a domicilio.">
 
-    <!-- Performance: Preload Critical Assets -->
-    <link rel="preload" as="image" href="assets/images/hero-image.jpg" imagesrcset="assets/images/hero-image-small-400.jpg 400w, 
-                       assets/images/hero-image-small.jpg 600w, 
-                       assets/images/hero-image-medium.jpg 800w, 
-                       assets/images/hero-image-large.jpg 1000w, 
-                       assets/images/hero-image.jpg 1200w" imagesizes="(max-width: 600px) 100vw, 50vw">
-
     <!-- Performance: Preconnect -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -107,13 +100,7 @@
                     <!-- Right: Organic Image -->
                     <div class="hero-image-container">
                         <div class="organic-shape">
-                            <img src="assets/images/hero-image.jpg" srcset="assets/images/hero-image-small-400.jpg 400w, 
-                                         assets/images/hero-image-small.jpg 600w, 
-                                         assets/images/hero-image-medium.jpg 800w, 
-                                         assets/images/hero-image-large.jpg 1000w, 
-                                         assets/images/hero-image.jpg 1200w" sizes="(max-width: 600px) 100vw, 50vw"
-                                alt="Oficina y Suministros" width="600" height="400" fetchpriority="high"
-                                decoding="async"
+                            <img src="assets/images/hero-image.jpg" alt="Oficina y Suministros" width="600" height="400"
                                 onerror="this.src='https://images.unsplash.com/photo-1497215728101-856f4ea42174?q=80&w=1200'">
                         </div>
                     </div>
@@ -425,9 +412,8 @@
                                 style="font-size: 0.7em; opacity: 0.8;">*Aplican condiciones.</span></p>
                     </div>
 
-                    <video class="logistic-video-bg lazy-video" loop muted playsinline
-                        poster="assets/images/hero-image-small.jpg">
-                        <source data-src="assets/images/logistica.mp4" type="video/mp4">
+                    <video class="logistic-video-bg" autoplay loop muted playsinline>
+                        <source src="assets/images/logistica.mp4" type="video/mp4">
                     </video>
                 </div>
             </div>
@@ -638,35 +624,6 @@
             changeSlide(slideIndex - 1, 'prev');
         }
     }
-
-    // --- LAZY LOAD VIDEO (Performance Fix) ---
-    document.addEventListener("DOMContentLoaded", function () {
-        var lazyVideos = [].slice.call(document.querySelectorAll("video.lazy-video"));
-
-        if ("IntersectionObserver" in window) {
-            var lazyVideoObserver = new IntersectionObserver(function (entries, observer) {
-                entries.forEach(function (video) {
-                    if (video.isIntersecting) {
-                        for (var source in video.target.children) {
-                            var videoSource = video.target.children[source];
-                            if (typeof videoSource.tagName === "string" && videoSource.tagName === "SOURCE") {
-                                videoSource.src = videoSource.dataset.src;
-                            }
-                        }
-
-                        video.target.load();
-                        video.target.play();
-                        video.target.classList.remove("lazy-video");
-                        lazyVideoObserver.unobserve(video.target);
-                    }
-                });
-            });
-
-            lazyVideos.forEach(function (lazyVideo) {
-                lazyVideoObserver.observe(lazyVideo);
-            });
-        }
-    });
 
     // Mobile Menu Toggle
     function toggleMenu() {

@@ -1980,15 +1980,11 @@ details[open] summary {
     background: none !important;
   }
 
-  /* Show static fallback image instead */
   /* Flex Container Redefinition */
   .logistic-scene {
-    background-image: url('../images/hero-image-small.jpg');
-    /* Optimized for mobile */
-    background-size: cover;
-    background-position: center;
     display: flex !important;
     flex-direction: column !important;
+    background: transparent !important;
     box-shadow: none !important;
     padding-bottom: 0;
     overflow: visible !important;
@@ -2037,9 +2033,6 @@ details[open] summary {
     margin-top: 1rem;
     background: #e0f7fa;
   }
-
-  /* --- PERFORMANCE: VIDEO LAZY LOADED INSTEAD OF HIDDEN --- */
-  /* Video is now handled by JS IntersectionObserver */
 
   .scene-desc {
     order: 3;
