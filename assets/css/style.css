@@ -1534,10 +1534,30 @@ details[open] summary {
   }
 
   /* --- HERO: UNIFIED HEIGHT & CENTERED --- */
+  /* --- HERO: UNIFIED HEIGHT & CENTERED --- */
   .hero {
-    padding-bottom: 2rem;
-    height: auto !important;
-    min-height: auto !important;
+    position: relative;
+    padding: 0 !important;
+    /* No internal padding */
+    margin-top: 0 !important;
+    /* No top gap */
+    height: 85vh !important;
+    /* Fixed viewport height */
+    min-height: 600px !important;
+    /* Minimum px height for safety */
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    /* Crop overflow */
+  }
+
+  .hero .container {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
 
   /* Fix the "jumping" height by constraining images */
@@ -1568,19 +1588,17 @@ details[open] summary {
   }
 
   /* Use Flex Column for Slide Layout */
+  /* Use Flex Column for Slide Layout */
   .hero-slide {
     position: relative !important;
     display: none;
     width: 100%;
+    height: 100% !important;
+    /* Fill container */
 
-    /* FORCE CONSISTENT HEIGHT */
-    min-height: 85vh !important;
-    /* Occupy most of the screen */
-
-    padding-top: 6rem !important;
-    /* Header clearance */
-    padding-bottom: 4rem !important;
-    /* Bottom clearance */
+    padding: 0 !important;
+    /* NO PADDING - CENTERING ONLY */
+    margin: 0 !important;
 
     flex-direction: column;
     justify-content: center !important;
