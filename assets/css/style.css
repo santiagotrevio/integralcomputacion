@@ -1462,3 +1462,218 @@ details[open] summary {
   color: var(--ic-text-gray);
   background: #fff;
 }
+
+/* --- RESPONSIVE DESIGN (MOBILE FIXES) --- */
+@media (max-width: 992px) {
+
+  /* Tablet / Smaller Desktop */
+  .hero-grid,
+  .how-grid,
+  .products-grid,
+  .footer-grid,
+  .story-container {
+    grid-template-columns: 1fr;
+    /* Stack columns */
+    gap: 2rem;
+    text-align: center;
+  }
+
+  .hero-text {
+    text-align: center;
+    margin-bottom: 2rem;
+    order: 1;
+    /* Text first */
+  }
+
+  .hero-image-container {
+    order: 2;
+    /* Image second */
+    margin-bottom: 2rem;
+  }
+
+  .hero-buttons {
+    justify-content: center;
+  }
+
+  .hero-features {
+    justify-content: center;
+  }
+
+  .steps-list {
+    flex-direction: column;
+  }
+
+  .organic-shape {
+    height: 350px;
+    /* Reduce image height */
+    margin: 0 auto;
+  }
+
+  .about-title {
+    font-size: 2.5rem;
+    /* Smaller title */
+  }
+}
+
+@media (max-width: 768px) {
+  /* Mobile Phones */
+
+  /* Navigation Fixes (Already overlay but ensure padding) */
+  .nav-links {
+    padding-top: 2rem;
+  }
+
+  /* Container Padding */
+  .container {
+    padding: 0 1.5rem;
+  }
+
+  /* Typography */
+  h1 {
+    font-size: 2.2rem;
+    /* Smaller Hero H1 */
+  }
+
+  h2 {
+    font-size: 1.8rem;
+  }
+
+  .about-title {
+    font-size: 2rem;
+    line-height: 1.2;
+  }
+
+  .about-intro-text {
+    font-size: 1.1rem;
+    line-height: 1.5;
+  }
+
+  /* Grids & Flex Stacking */
+  .hero-grid,
+  .how-grid,
+  .footer-grid,
+  .story-container {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .story-text {
+    text-align: center;
+  }
+
+  .story-highlight {
+    border-left: none;
+    border-top: 4px solid var(--ic-magenta);
+    padding-left: 0;
+    padding-top: 1rem;
+  }
+
+  /* Hero Specifics */
+  .hero {
+    padding-bottom: 4rem;
+  }
+
+  .hero-image-container {
+    margin-top: 0;
+    margin-bottom: 2rem;
+  }
+
+  .organic-shape {
+    height: 250px;
+    /* Much smaller on phone */
+    max-width: 100%;
+  }
+
+  /* Products Grid */
+  .products-grid {
+    grid-template-columns: 1fr;
+    /* 1 card per row */
+    gap: 1.5rem;
+  }
+
+  /* Footer */
+  .footer {
+    text-align: center;
+  }
+
+  .footer-social {
+    justify-content: center;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    gap: 1.5rem;
+    text-align: center;
+  }
+
+  .footer-legal-links {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  /* About Page */
+  .about-logo-large {
+    max-width: 280px;
+    /* Smaller logo */
+  }
+
+  .story-image {
+    height: 200px;
+    /* Smaller horizontal strip */
+  }
+
+  /* Legal Pages */
+  .legal-page-header {
+    padding: 6rem 0 3rem;
+  }
+
+  .legal-title {
+    font-size: 2rem;
+  }
+
+  .legal-content {
+    padding: 2rem 1rem 4rem;
+  }
+
+  /* FAQ */
+  .faq-question {
+    font-size: 1rem;
+    padding: 1rem;
+  }
+
+  /* Fix for Logística Card Shape on Mobile */
+  .logistic-card-wrapper,
+  .logistic-scene {
+    height: 300px;
+    /* Reduced height */
+    border-radius: 20px;
+    /* Standard rounded corners instead of blob */
+    animation: none;
+    /* Stop morphing on mobile to save space/layout */
+  }
+
+  .logistic-card-wrapper::before {
+    display: none;
+    /* Hide the floating border on mobile */
+  }
+
+  /* Fix for Product Cards on Mobile */
+  .product-card {
+    border-radius: 20px;
+    /* Standard rounded corners */
+    animation: none;
+    /* Stop morphing */
+    padding: 2rem 1.5rem;
+    /* Reduce padding */
+  }
+
+  .product-card::before {
+    display: none;
+    /* Hide the floating border */
+  }
+
+  .products-section {
+    padding: 4rem 0;
+    /* Reduce section padding */
+  }
+}
