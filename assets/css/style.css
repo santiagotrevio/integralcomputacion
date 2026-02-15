@@ -1665,19 +1665,42 @@ details[open] summary {
     padding-top: 2rem !important;
   }
 
-  /* Fix for Product Cards on Mobile */
+  /* Products Carousel on Mobile */
+  .products-grid {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: 1rem;
+    padding: 0.5rem 1.5rem 2rem;
+    /* Side padding inside scroll */
+    margin: 0 -1.5rem;
+    /* Negative margin to reach screen edges */
+    scrollbar-width: none;
+    /* Hide scrollbar Firefox */
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .products-grid::-webkit-scrollbar {
+    display: none;
+    /* Hide scrollbar Chrome/Safari */
+  }
+
   .product-card {
+    flex: 0 0 85%;
+    /* 85% width to show partial next card */
+    width: 85%;
+    max-width: 350px;
+    scroll-snap-align: center;
     border-radius: 20px !important;
-    /* Force standard rounded corners */
     animation: none !important;
-    /* Force stop morphing */
     padding: 2rem 1.5rem !important;
-    margin: 0 auto;
-    width: 100%;
-    /* Use full container width */
-    max-width: 400px;
-    /* But not too wide on tablets */
+    margin: 0 !important;
+    /* Remove auto margins */
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05) !important;
+  }
+
+  .product-card:first-child {
+    margin-left: 0;
   }
 
   .product-card::before {
@@ -1691,7 +1714,7 @@ details[open] summary {
   }
 
   .products-section {
-    padding: 3rem 0;
-    /* Reduce section padding further */
+    padding: 2rem 0 4rem;
+    /* Tighter vertical spacing */
   }
 }
