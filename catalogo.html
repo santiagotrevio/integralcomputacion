@@ -235,9 +235,17 @@
             <nav class="nav-links">
                 <a href="index.html">← Volver al Inicio</a>
             </nav>
-            <a href="https://wa.me/523312680092" target="_blank" class="header-btn">
-                Cotizar <i class="fa-brands fa-whatsapp"></i>
-            </a>
+
+            <div style="display: flex; gap: 1rem; align-items: center;">
+                <a href="carrito.html" class="header-btn"
+                    style="background: white; color: var(--ic-cyan); border: 2px solid var(--ic-cyan); position: relative;">
+                    <i class="fa-solid fa-cart-shopping"></i> Mi Lista
+                    <span id="cartCount" class="cart-count">0</span>
+                </a>
+                <a href="https://wa.me/523312680092" target="_blank" class="header-btn">
+                    Cotizar <i class="fa-brands fa-whatsapp"></i>
+                </a>
+            </div>
         </div>
     </header>
 
@@ -297,6 +305,85 @@
         <i class="fa-brands fa-whatsapp"></i>
     </a>
 
+    <!-- CUSTOM STYLES FOR CART -->
+    <style>
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: var(--ic-magenta);
+            color: white;
+            font-size: 0.75rem;
+            font-weight: 800;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .prod-action {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            width: 100%;
+        }
+
+        .btn-card,
+        .btn-add-cart {
+            display: block;
+            text-align: center;
+            padding: 0.6rem 1rem;
+            border-radius: 8px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            cursor: pointer;
+            border: none;
+            font-family: var(--ic-font);
+        }
+
+        /* Direct Quote Button */
+        .btn-card {
+            background: var(--ic-light-gray);
+            color: var(--ic-dark-gray);
+            font-size: 0.85rem;
+        }
+
+        .btn-card:hover {
+            background: var(--ic-dark-gray);
+            color: white;
+        }
+
+        /* Add to Cart Button */
+        .btn-add-cart {
+            background: transparent;
+            border: 2px solid var(--ic-cyan);
+            color: var(--ic-cyan);
+            font-size: 0.85rem;
+        }
+
+        .btn-add-cart:hover {
+            background: var(--ic-cyan);
+            color: white;
+        }
+
+        .btn-add-cart.added {
+            background: var(--ic-magenta);
+            border-color: var(--ic-magenta);
+            color: white;
+            cursor: default;
+        }
+
+        @media (min-width: 768px) {
+            .prod-action {
+                flex-direction: row;
+                justify-content: flex-end;
+            }
+        }
+    </style>
+
     <!-- SCRIPTS -->
     <!-- PapaParse for CSV -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
@@ -307,8 +394,32 @@
         const searchInput = document.getElementById('searchInput');
         const categoryFilter = document.getElementById('categoryFilter');
         const pageTitle = document.getElementById('pageTitle');
+        const cartCountEl = document.getElementById('cartCount');
 
         let productsDB = []; // Will be populated from CSV
+        let cart = JSON.parse(localStorage.getItem('quoteCart')) || [];
+
+        function updateCartCount() {
+            cartCountEl.innerText = cart.length;
+        }
+
+        function addToCart(prodId) {
+            const product = productsDB.find(p => p.id === prodId);
+            if (!product) return;
+
+            // Check if already in cart
+            if (!cart.some(item => item.id === prodId)) {
+                cart.push(product);
+                localStorage.setItem('quoteCart', JSON.stringify(cart));
+                updateCartCount();
+                // Re-render specifically this button or all (simpler to re-render filtered list or toggle class)
+                const btn = document.getElementById(`add-btn-${prodId}`);
+                if (btn) {
+                    btn.classList.add('added');
+                    btn.innerHTML = '<i class="fa-solid fa-check"></i> Agregado';
+                }
+            }
+        }
 
         // Function to Load CSV
         function loadProducts() {
@@ -323,37 +434,22 @@
                 },
                 error: function (err) {
                     console.error("Error loading CSV:", err);
-                    // Check if protocol is file:
                     if (window.location.protocol === 'file:') {
                         productGrid.innerHTML = `
                             <div style="text-align:center; padding: 2rem; color: #dc2626; background: #fef2f2; border-radius: 12px;">
                                 <i class="fa-solid fa-triangle-exclamation" style="font-size: 2.5rem; margin-bottom: 1rem;"></i>
                                 <h3 style="margin-bottom: 0.5rem; font-weight: 800;">Bloqueo de Seguridad del Navegador</h3>
-                                <p>No te preocupes, esto es normal.</p>
-                                <p style="font-size: 0.9rem; margin-top: 0.5rem;">
-                                    Los navegadores bloquean la lectura de archivos CSV locales por seguridad. 
-                                    <strong>El catálogo funcionará perfectamente cuando publiques la web.</strong>
-                                </p>
-                                <p style="font-size: 0.85rem; color: #64748b; margin-top: 1rem;">
-                                    Para probarlo ahora, necesitas usar un "Servidor Local" (ej. VS Code Live Server).
-                                </p>
+                                <p>Este error ocurre al abrir el archivo localmente. Publica la web o usa un servidor local.</p>
                             </div>
                         `;
-                    } else {
-                        productGrid.innerHTML = '<p style="text-align:center; color:red;">No se pudo cargar el catálogo de productos. Verifica que el archivo existe.</p>';
                     }
                 }
             });
         }
 
-        // Render Logic (Same as before but adapted for CSV structure)
+        // Render Logic
         function renderProducts(products) {
             productGrid.innerHTML = '';
-
-            // Pagination Logic (Simulation for 100 items - simple show all for now, maybe slice first 20?)
-            // For 100 items, lazy rendering or pagination is better, but simple list is fine for "simulation".
-            // Let's limit display to first 50 to avoid massive DOM if not needed, or just all.
-            // All is fine for 100.
 
             if (products.length === 0) {
                 productGrid.innerHTML = `
@@ -366,16 +462,20 @@
             }
 
             products.forEach(prod => {
-                // Determine icon fallback
                 let icon = 'fa-box';
                 if (prod.category === 'toner') icon = 'fa-print';
                 if (prod.category === 'papeleria') icon = 'fa-pen-ruler';
                 if (prod.category.includes('accesorios')) icon = 'fa-keyboard';
 
+                // Check if in cart for button state
+                const isInCart = cart.some(item => item.id === prod.id);
+                const btnClass = isInCart ? 'btn-add-cart added' : 'btn-add-cart';
+                const btnText = isInCart ? '<i class="fa-solid fa-check"></i> Agregado' : '<i class="fa-solid fa-plus"></i> Agregar';
+
                 const card = document.createElement('div');
                 card.className = 'product-list-card';
 
-                // Image Handling: If CSV has explicit path, use it. If placeholder, use icon.
+                // Image Handling
                 let imgHtml = `<i class="fa-solid ${icon}"></i>`;
                 if (prod.image && prod.image.trim() !== '') {
                     imgHtml = `<img src="${prod.image}" alt="${prod.name}" loading="lazy" onerror="this.onerror=null;this.parentNode.innerHTML='<i class=\\'fa-solid ${icon}\\'></i>'">`;
@@ -391,10 +491,13 @@
                         <p class="prod-desc">${prod.description}</p>
                     </div>
                     <div class="prod-action">
+                         <button id="add-btn-${prod.id}" onclick="addToCart('${prod.id}')" class="${btnClass}">
+                            ${btnText}
+                        </button>
                         <a href="https://wa.me/523312680092?text=Hola,%20me%20interesa%20el%20producto%20con%20código:%20${prod.id}" 
                            target="_blank" 
                            class="btn-card">
-                           Cotizar
+                           Cotizar 1
                         </a>
                     </div>
                 `;
@@ -408,7 +511,6 @@
             const categoryValue = categoryFilter.value;
 
             const filtered = productsDB.filter(prod => {
-                // Guard clause for empty rows
                 if (!prod.name) return false;
 
                 const prodName = prod.name.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
@@ -448,7 +550,8 @@
             else if (val === 'accesorios') pageTitle.innerText = 'Accesorios de Cómputo';
         });
 
-        // Load Data
+        // Initialize
+        updateCartCount();
         loadProducts();
 
     </script>

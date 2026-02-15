@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="assets/images/LOGO SIN TEXTO.png">
+    <title>Mi Lista de Cotización | Integral Computación</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="assets/css/style.css">
+
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        .page-header {
+            background-color: #f8fafc;
+            padding: 3rem 1rem;
+            text-align: center;
+        }
+
+        .page-header h1 {
+            color: var(--ic-dark-gray);
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .cart-grid {
+            margin: 2rem auto;
+            max-width: 900px;
+        }
+
+        .cart-item {
+            display: grid;
+            grid-template-columns: 80px 1fr auto;
+            gap: 1.5rem;
+            align-items: center;
+            background: white;
+            padding: 1.5rem;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .cart-item:first-child {
+            border-top-left-radius: 12px;
+            border-top-right-radius: 12px;
+        }
+
+        .cart-item:last-child {
+            border-bottom: none;
+            border-bottom-left-radius: 12px;
+            border-bottom-right-radius: 12px;
+        }
+
+        .item-image {
+            width: 80px;
+            height: 80px;
+            background: #f1f5f9;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .item-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .item-info h3 {
+            font-size: 1.1rem;
+            margin-bottom: 0.25rem;
+            color: var(--ic-dark-gray);
+        }
+
+        .item-code {
+            font-size: 0.85rem;
+            font-weight: 800;
+            color: var(--ic-magenta);
+            background: rgba(216, 27, 96, 0.1);
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+        }
+
+        .btn-remove {
+            color: #ef4444;
+            background: rgba(239, 68, 68, 0.1);
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn-remove:hover {
+            background: #ef4444;
+            color: white;
+        }
+
+        .cart-actions {
+            margin-top: 2rem;
+            text-align: right;
+            display: flex;
+            justify-content: flex-end;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn-whatsapp-cart {
+            background-color: #25d366;
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: background 0.3s;
+        }
+
+        .btn-whatsapp-cart:hover {
+            background-color: #1ebc57;
+        }
+
+        .btn-clear {
+            padding: 1rem 2rem;
+            border: 2px solid #cbd5e1;
+            background: white;
+            color: #64748b;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        /* Mobile Adjustments */
+        @media (max-width: 600px) {
+            .cart-item {
+                grid-template-columns: 60px 1fr auto;
+                gap: 1rem;
+                padding: 1rem;
+            }
+
+            .item-image {
+                width: 60px;
+                height: 60px;
+            }
+
+            .cart-actions {
+                flex-direction: column-reverse;
+            }
+
+            .btn-whatsapp-cart,
+            .btn-clear {
+                width: 100%;
+                text-align: center;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="header-top-line"></div>
+        <div class="nav-container">
+            <div class="logo-wrapper">
+                <a href="index.html" class="logo">
+                    <img src="assets/images/logo.svg" alt="Integral Computación" width="180" height="50">
+                </a>
+            </div>
+            <nav class="nav-links">
+                <a href="catalogo.html">← Volver al Catálogo</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="page-header">
+        <h1>Tu Lista de Cotización</h1>
+        <p>Revisa los productos seleccionados antes de enviar.</p>
+    </div>
+
+    <!-- Empty State -->
+    <div class="container" id="emptyState" style="text-align: center; padding: 4rem; display: none;">
+        <i class="fa-solid fa-cart-arrow-down" style="font-size: 4rem; color: #cbd5e1; margin-bottom: 1.5rem;"></i>
+        <h2 style="color: #64748b; margin-bottom: 1rem;">Tu lista está vacía</h2>
+        <a href="catalogo.html" class="btn-primary"
+            style="background: var(--ic-cyan); color: white; padding: 0.8rem 1.5rem; border-radius: 8px; text-decoration: none; font-weight: 600;">
+            Ir al Catálogo
+        </a>
+    </div>
+
+    <!-- Cart Items -->
+    <div class="container cart-grid" id="cartContainer">
+        <!-- JS Injected items -->
+    </div>
+
+    <!-- Actions -->
+    <div class="container cart-actions" id="cartActions">
+        <button onclick="clearCart()" class="btn-clear">Vaciar Lista</button>
+        <a href="#" id="whatsappBtn" class="btn-whatsapp-cart">
+            <i class="fa-brands fa-whatsapp"></i> Solicitar Cotización
+        </a>
+    </div>
+
+    <script>
+        // Load cart from Storage
+        let cart = JSON.parse(localStorage.getItem('quoteCart')) || [];
+        const container = document.getElementById('cartContainer');
+        const emptyState = document.getElementById('emptyState');
+        const actions = document.getElementById('cartActions');
+        const whatsappBtn = document.getElementById('whatsappBtn');
+
+        function renderCart() {
+            container.innerHTML = '';
+
+            if (cart.length === 0) {
+                emptyState.style.display = 'block';
+                actions.style.display = 'none';
+                return;
+            } else {
+                emptyState.style.display = 'none';
+                actions.style.display = 'flex';
+            }
+
+            cart.forEach((item, index) => {
+                const div = document.createElement('div');
+                div.className = 'cart-item';
+
+                // Image check
+                let imgContent = '<i class="fa-solid fa-box" style="font-size:1.5rem; color:#cbd5e1;"></i>';
+                if (item.image && item.image.trim()) {
+                    imgContent = `<img src="${item.image}" alt="${item.name}">`;
+                }
+
+                div.innerHTML = `
+                    <div class="item-image">${imgContent}</div>
+                    <div class="item-info">
+                        <h3>${item.name}</h3>
+                        <span class="item-code">${item.id}</span>
+                    </div>
+                    <button onclick="removeItem(${index})" class="btn-remove" title="Eliminar">
+                        <i class="fa-solid fa-trash"></i>
+                    </button>
+                `;
+                container.appendChild(div);
+            });
+
+            updateWhatsAppLink();
+        }
+
+        function removeItem(index) {
+            cart.splice(index, 1);
+            localStorage.setItem('quoteCart', JSON.stringify(cart));
+            renderCart();
+        }
+
+        function clearCart() {
+            if (confirm('¿Estás seguro de vaciar tu lista?')) {
+                cart = [];
+                localStorage.removeItem('quoteCart');
+                renderCart();
+            }
+        }
+
+        function updateWhatsAppLink() {
+            let text = "Hola Integral Computación, me interesa cotizar esta lista de productos:\n\n";
+            cart.forEach(item => {
+                text += `- ${item.name} (Código: ${item.id})\n`;
+            });
+            text += "\nQuedo atento a su respuesta, gracias.";
+
+            whatsappBtn.href = `https://wa.me/523312680092?text=${encodeURIComponent(text)}`;
+        }
+
+        // Init
+        renderCart();
+
+    </script>
+
+</body>
+
+</html>
