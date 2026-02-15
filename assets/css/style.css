@@ -1833,26 +1833,26 @@ details[open] summary {
 
   /* Video in the Middle - FULL BLEED */
   /* Video in the Middle - FULL BLEED & FULL VIEW */
+  /* Video in the Middle - FULL BLEED & CUSTOM CROP */
   .logistic-video-bg {
     order: 2;
     position: relative !important;
     display: block !important;
 
-    /* Full width, compensate for container padding */
+    /* Full width bleed */
     width: calc(100% + 3rem) !important;
     margin-left: -1.5rem !important;
     margin-right: -1.5rem !important;
     max-width: none !important;
 
-    /* Auto height to show full content (buildings) */
-    height: auto !important;
-    aspect-ratio: 16/9;
-    /* Maintain ratio */
-    min-height: 200px;
+    /* Custom Height = ~70-75% of natural 16:9 mobile height */
+    height: 160px !important;
+    /* Removed aspect-ratio to force crop */
 
     object-fit: cover !important;
-    /* Cover, but with 16:9 ratio it should fit most width */
-    object-position: center bottom !important;
+    /* Position 35% vertical = Cut more bottom (pavement) than top (sky) */
+    object-position: center 35% !important;
+
     z-index: 1;
     border-radius: 0 !important;
     margin-bottom: 1rem;
