@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="assets/images/LOGO SIN TEXTO.png">
+    <title>Catálogo de Productos | Integral Computación</title>
+    <meta name="description"
+        content="Consulta nuestro catálogo de tóners, papelería y accesorios. Encuentra el código que necesitas.">
+
+    <!-- Performance: Preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="assets/css/style.css">
+
+    <!-- FontAwesome (Defer Render Blocking) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        media="print" onload="this.media='all'">
+    <noscript>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    </noscript>
+
+    <style>
+        /* Specific Styles for Catalog Page */
+        .catalog-hero {
+            position: relative;
+            height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            overflow: hidden;
+            border-radius: 0 0 50px 50px;
+            /* Optional fancy border */
+        }
+
+        .catalog-hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 0;
+            filter: brightness(0.4);
+            /* Darken for text readability */
+        }
+
+        .catalog-title-wrapper {
+            position: relative;
+            z-index: 10;
+            padding: 2rem;
+        }
+
+        .catalog-title-wrapper h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: -1px;
+        }
+
+        .search-container {
+            margin-top: -30px;
+            /* Overlap hero */
+            margin-bottom: 3rem;
+            position: relative;
+            z-index: 20;
+            padding: 0 1rem;
+        }
+
+        .search-box {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            display: flex;
+            gap: 1rem;
+            max-width: 800px;
+            margin: 0 auto;
+            align-items: center;
+        }
+
+        .search-input {
+            flex: 1;
+            padding: 1rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-family: var(--ic-font);
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+
+        .search-input:focus {
+            border-color: var(--ic-cyan);
+        }
+
+        .filter-select {
+            padding: 1rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-family: var(--ic-font);
+            outline: none;
+            cursor: pointer;
+        }
+
+        /* PRODUCT TABLE LISTING */
+        .catalog-grid {
+            margin-bottom: 6rem;
+        }
+
+        .product-list-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            display: grid;
+            grid-template-columns: 80px 1fr auto;
+            gap: 1.5rem;
+            align-items: center;
+            border: 1px solid #f1f5f9;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .product-list-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+            border-color: var(--ic-cyan);
+        }
+
+        .prod-image {
+            width: 80px;
+            height: 80px;
+            background: #f8fafc;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #cbd5e1;
+            font-size: 1.5rem;
+        }
+
+        .prod-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .prod-info h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--ic-dark-gray);
+            margin-bottom: 0.25rem;
+        }
+
+        .prod-code {
+            font-size: 0.85rem;
+            font-weight: 800;
+            color: var(--ic-magenta);
+            background: rgba(216, 27, 96, 0.1);
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            display: inline-block;
+            margin-bottom: 0.5rem;
+        }
+
+        .prod-desc {
+            font-size: 0.9rem;
+            color: var(--ic-text-gray);
+        }
+
+        .prod-action .btn-card {
+            background: var(--ic-light-gray);
+            color: var(--ic-dark-gray);
+            font-size: 0.85rem;
+        }
+
+        .prod-action .btn-card:hover {
+            background: var(--ic-cyan);
+            color: white;
+        }
+
+        /* Mobile Adjustments */
+        @media (max-width: 768px) {
+            .product-list-card {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 1rem;
+            }
+
+            .prod-image {
+                margin: 0 auto;
+            }
+
+            .search-box {
+                flex-direction: column;
+            }
+
+            .filter-select {
+                width: 100%;
+            }
+
+            .catalog-hero {
+                height: 300px;
+            }
+
+            .catalog-title-wrapper h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header (Same as index) -->
+    <header>
+        <div class="header-top-line"></div>
+        <div class="nav-container">
+            <div class="logo-wrapper">
+                <a href="index.html" class="logo" aria-label="Integral Computación Inicio">
+                    <img src="assets/images/logo.svg" alt="Integral Computación" width="180" height="50">
+                </a>
+            </div>
+            <!-- Simple Back Link/Menu -->
+            <nav class="nav-links">
+                <a href="index.html">← Volver al Inicio</a>
+            </nav>
+            <a href="https://wa.me/523312680092" target="_blank" class="header-btn">
+                Cotizar <i class="fa-brands fa-whatsapp"></i>
+            </a>
+        </div>
+    </header>
+
+    <!-- Catalog Hero -->
+    <section class="catalog-hero">
+        <img src="assets/images/hero-products-bg.jpg" class="catalog-hero-bg" alt="Fondo Catálogo"
+            onerror="this.src='https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=1200'">
+
+        <div class="catalog-title-wrapper">
+            <h1 id="pageTitle">Catálogo de Productos</h1>
+            <p>Encuentra el código exacto de lo que necesitas para tu oficina.</p>
+        </div>
+    </section>
+
+    <!-- Search & Filter -->
+    <div class="container search-container">
+        <div class="search-box">
+            <div style="font-size: 1.2rem; color: #94a3b8;"><i class="fa-solid fa-search"></i></div>
+            <input type="text" id="searchInput" class="search-input"
+                placeholder="Buscar por código, modelo o nombre (ej. Toner 85A)...">
+
+            <select id="categoryFilter" class="filter-select">
+                <option value="all">Todas las Categorías</option>
+                <option value="toner">Tóners</option>
+                <option value="papeleria">Papelería</option>
+                <option value="accesorios">Accesorios</option>
+            </select>
+        </div>
+    </div>
+
+    <!-- Product Grid -->
+    <div class="container catalog-grid" id="productGrid">
+        <!-- JS will inject cards here -->
+        <p style="text-align: center; color: #94a3b8;">Cargando productos...</p>
+    </div>
+
+    <!-- Footer (Simplified) -->
+    <footer class="footer" style="padding-top: 2rem;">
+        <div class="container">
+            <div class="footer-bottom" style="border: none;">
+                <p>&copy; 2026 Integral Computación. Guadalajara.</p>
+                <div class="footer-legal-links">
+                    <a href="aviso-de-privacidad.html">Aviso de Privacidad</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Float -->
+    <a href="https://wa.me/523312680092" target="_blank" aria-label="Chatear por WhatsApp" style="
+        position:fixed; bottom:30px; right:30px;
+        background:#25d366; color:white;
+        width:60px; height:60px; border-radius:50%;
+        display:flex; align-items:center; justify-content:center;
+        font-size:30px; box-shadow:0 4px 15px rgba(0,0,0,0.2);
+        z-index:999;">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
+
+    <!-- SCRIPTS -->
+    <!-- PapaParse for CSV -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+
+    <script>
+        // DOM Elements
+        const productGrid = document.getElementById('productGrid');
+        const searchInput = document.getElementById('searchInput');
+        const categoryFilter = document.getElementById('categoryFilter');
+        const pageTitle = document.getElementById('pageTitle');
+
+        let productsDB = []; // Will be populated from CSV
+
+        // Function to Load CSV
+        function loadProducts() {
+            Papa.parse('assets/data/productos.csv', {
+                download: true,
+                header: true,
+                skipEmptyLines: true,
+                complete: function (results) {
+                    console.log("CSV Loaded:", results.data);
+                    productsDB = results.data;
+                    filterProducts(); // Initial render
+                },
+                error: function (err) {
+                    console.error("Error loading CSV:", err);
+                    // Check if protocol is file:
+                    if (window.location.protocol === 'file:') {
+                        productGrid.innerHTML = `
+                            <div style="text-align:center; padding: 2rem; color: #dc2626; background: #fef2f2; border-radius: 12px;">
+                                <i class="fa-solid fa-triangle-exclamation" style="font-size: 2.5rem; margin-bottom: 1rem;"></i>
+                                <h3 style="margin-bottom: 0.5rem; font-weight: 800;">Bloqueo de Seguridad del Navegador</h3>
+                                <p>No te preocupes, esto es normal.</p>
+                                <p style="font-size: 0.9rem; margin-top: 0.5rem;">
+                                    Los navegadores bloquean la lectura de archivos CSV locales por seguridad. 
+                                    <strong>El catálogo funcionará perfectamente cuando publiques la web.</strong>
+                                </p>
+                                <p style="font-size: 0.85rem; color: #64748b; margin-top: 1rem;">
+                                    Para probarlo ahora, necesitas usar un "Servidor Local" (ej. VS Code Live Server).
+                                </p>
+                            </div>
+                        `;
+                    } else {
+                        productGrid.innerHTML = '<p style="text-align:center; color:red;">No se pudo cargar el catálogo de productos. Verifica que el archivo existe.</p>';
+                    }
+                }
+            });
+        }
+
+        // Render Logic (Same as before but adapted for CSV structure)
+        function renderProducts(products) {
+            productGrid.innerHTML = '';
+
+            // Pagination Logic (Simulation for 100 items - simple show all for now, maybe slice first 20?)
+            // For 100 items, lazy rendering or pagination is better, but simple list is fine for "simulation".
+            // Let's limit display to first 50 to avoid massive DOM if not needed, or just all.
+            // All is fine for 100.
+
+            if (products.length === 0) {
+                productGrid.innerHTML = `
+                    <div style="text-align:center; padding: 4rem; color: #94a3b8;">
+                        <i class="fa-regular fa-folder-open" style="font-size: 3rem; margin-bottom: 1rem;"></i>
+                        <p>No encontramos productos con esa búsqueda.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            products.forEach(prod => {
+                // Determine icon fallback
+                let icon = 'fa-box';
+                if (prod.category === 'toner') icon = 'fa-print';
+                if (prod.category === 'papeleria') icon = 'fa-pen-ruler';
+                if (prod.category.includes('accesorios')) icon = 'fa-keyboard';
+
+                const card = document.createElement('div');
+                card.className = 'product-list-card';
+
+                // Image Handling: If CSV has explicit path, use it. If placeholder, use icon.
+                let imgHtml = `<i class="fa-solid ${icon}"></i>`;
+                if (prod.image && prod.image.trim() !== '') {
+                    imgHtml = `<img src="${prod.image}" alt="${prod.name}" loading="lazy" onerror="this.onerror=null;this.parentNode.innerHTML='<i class=\\'fa-solid ${icon}\\'></i>'">`;
+                }
+
+                card.innerHTML = `
+                    <div class="prod-image">
+                        ${imgHtml}
+                    </div>
+                    <div class="prod-info">
+                        <span class="prod-code">${prod.id}</span>
+                        <h3>${prod.name}</h3>
+                        <p class="prod-desc">${prod.description}</p>
+                    </div>
+                    <div class="prod-action">
+                        <a href="https://wa.me/523312680092?text=Hola,%20me%20interesa%20el%20producto%20con%20código:%20${prod.id}" 
+                           target="_blank" 
+                           class="btn-card">
+                           Cotizar
+                        </a>
+                    </div>
+                `;
+                productGrid.appendChild(card);
+            });
+        }
+
+        // Filtering Logic
+        function filterProducts() {
+            const searchTerm = searchInput.value.toLowerCase();
+            const categoryValue = categoryFilter.value;
+
+            const filtered = productsDB.filter(prod => {
+                // Guard clause for empty rows
+                if (!prod.name) return false;
+
+                const matchesSearch = prod.name.toLowerCase().includes(searchTerm) ||
+                    prod.id.toLowerCase().includes(searchTerm) ||
+                    (prod.description && prod.description.toLowerCase().includes(searchTerm));
+
+                const matchesCategory = categoryValue === 'all' || prod.category === categoryValue;
+
+                return matchesSearch && matchesCategory;
+            });
+
+            renderProducts(filtered);
+        }
+
+        // URL Params
+        const urlParams = new URLSearchParams(window.location.search);
+        const codeParam = urlParams.get('cat');
+        if (codeParam) {
+            categoryFilter.value = codeParam;
+            if (codeParam === 'toner') pageTitle.innerText = 'Catálogo de Tóners';
+            if (codeParam === 'papeleria') pageTitle.innerText = 'Catálogo de Papelería';
+            if (codeParam === 'accesorios') pageTitle.innerText = 'Accesorios de Cómputo';
+        }
+
+        // Event Listeners
+        searchInput.addEventListener('input', filterProducts);
+        categoryFilter.addEventListener('change', () => {
+            filterProducts();
+            const val = categoryFilter.value;
+            if (val === 'all') pageTitle.innerText = 'Catálogo de Productos';
+            else if (val === 'toner') pageTitle.innerText = 'Catálogo de Tóners';
+            else if (val === 'papeleria') pageTitle.innerText = 'Catálogo de Papelería';
+            else if (val === 'accesorios') pageTitle.innerText = 'Accesorios de Cómputo';
+        });
+
+        // Load Data
+        loadProducts();
+
+    </script>
+
+</body>
