@@ -888,20 +888,57 @@ header.scrolled {
 
 .product-card {
   background: white;
-  /* More uniform, less distorted organic shape */
   border-radius: 48% 52% 49% 51% / 49% 51% 51% 49%;
   padding: 3.5rem 2.5rem;
-  /* More "aire" internally */
   text-align: center;
   position: relative;
   z-index: 2;
-  /* Much lighter shadow and slightly larger spread for "aire" */
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.03);
   border: none;
-  /* Single, gentle animation */
   animation: gentleMorph 8s ease-in-out infinite alternate;
   transform: translateZ(0);
   transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.6s ease;
+
+  /* Flexbox for button alignment */
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.card-body {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+/* Push button to bottom */
+.download-btn-solid {
+  margin-top: auto;
+  font-weight: 700;
+  color: var(--ic-dark-gray);
+  text-decoration: none;
+  display: inline-block;
+  transition: color 0.3s ease;
+}
+
+/* Arrow Colors per Card */
+.product-card:nth-child(1) .download-btn-solid i {
+  color: #0099cc;
+  /* Cyan/Blue */
+}
+
+.product-card:nth-child(2) .download-btn-solid i {
+  color: #f5c400;
+  /* Yellow */
+}
+
+.product-card:nth-child(3) .download-btn-solid i {
+  color: #d81b60;
+  /* Magenta */
+}
+
+.download-btn-solid:hover {
+  color: var(--ic-black);
 }
 
 @keyframes gentleMorph {
