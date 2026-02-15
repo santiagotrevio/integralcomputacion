@@ -403,22 +403,37 @@
             cartCountEl.innerText = cart.length;
         }
 
-        function addToCart(prodId) {
+        function toggleCart(prodId) {
             const product = productsDB.find(p => p.id === prodId);
             if (!product) return;
 
-            // Check if already in cart
-            if (!cart.some(item => item.id === prodId)) {
+            const index = cart.findIndex(item => item.id === prodId);
+            const btn = document.getElementById(`add-btn-${prodId}`);
+
+            if (index === -1) {
+                // Add to cart
                 cart.push(product);
-                localStorage.setItem('quoteCart', JSON.stringify(cart));
-                updateCartCount();
-                // Re-render specifically this button or all (simpler to re-render filtered list or toggle class)
-                const btn = document.getElementById(`add-btn-${prodId}`);
                 if (btn) {
                     btn.classList.add('added');
-                    btn.innerHTML = '<i class="fa-solid fa-check"></i> Agregado';
+                    btn.innerHTML = '<i class="fa-solid fa-check"></i> Quitar';
+                    btn.style.backgroundColor = 'var(--ic-magenta)';
+                    btn.style.color = 'white';
+                    btn.style.borderColor = 'var(--ic-magenta)';
+                }
+            } else {
+                // Remove from cart
+                cart.splice(index, 1);
+                if (btn) {
+                    btn.classList.remove('added');
+                    btn.innerHTML = '<i class="fa-solid fa-plus"></i> Agregar';
+                    btn.style.backgroundColor = 'transparent';
+                    btn.style.color = 'var(--ic-cyan)';
+                    btn.style.borderColor = 'var(--ic-cyan)';
                 }
             }
+
+            localStorage.setItem('quoteCart', JSON.stringify(cart));
+            updateCartCount();
         }
 
         // Function to Load CSV
@@ -470,7 +485,8 @@
                 // Check if in cart for button state
                 const isInCart = cart.some(item => item.id === prod.id);
                 const btnClass = isInCart ? 'btn-add-cart added' : 'btn-add-cart';
-                const btnText = isInCart ? '<i class="fa-solid fa-check"></i> Agregado' : '<i class="fa-solid fa-plus"></i> Agregar';
+                const btnText = isInCart ? '<i class="fa-solid fa-check"></i> Quitar' : '<i class="fa-solid fa-plus"></i> Agregar';
+                const btnStyle = isInCart ? 'background-color: var(--ic-magenta); color: white; border-color: var(--ic-magenta);' : '';
 
                 const card = document.createElement('div');
                 card.className = 'product-list-card';
@@ -491,7 +507,7 @@
                         <p class="prod-desc">${prod.description}</p>
                     </div>
                     <div class="prod-action">
-                         <button id="add-btn-${prod.id}" onclick="addToCart('${prod.id}')" class="${btnClass}">
+                         <button id="add-btn-${prod.id}" onclick="toggleCart('${prod.id}')" class="${btnClass}" style="${btnStyle}">
                             ${btnText}
                         </button>
                          <a href="https://wa.me/523312680092?text=Hola,%20me%20interesa%20el%20producto%20con%20código:%20${prod.id}" 
