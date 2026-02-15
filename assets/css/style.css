@@ -1644,36 +1644,54 @@ details[open] summary {
   /* Fix for Logística Card Shape on Mobile */
   .logistic-card-wrapper,
   .logistic-scene {
-    height: 300px;
-    /* Reduced height */
-    border-radius: 20px;
-    /* Standard rounded corners instead of blob */
-    animation: none;
-    /* Stop morphing on mobile to save space/layout */
+    height: auto !important;
+    /* Allow content to dictate height, but capped */
+    min-height: 300px;
+    border-radius: 20px !important;
+    /* Force standard rounded corners */
+    animation: none !important;
+    /* Force stop morphing */
+    width: 100% !important;
+    /* Ensure full width usage */
+    margin: 0 auto;
   }
 
   .logistic-card-wrapper::before {
-    display: none;
-    /* Hide the floating border on mobile */
+    display: none !important;
+  }
+
+  /* Scene content padding fix */
+  .scene-content {
+    padding-top: 2rem !important;
   }
 
   /* Fix for Product Cards on Mobile */
   .product-card {
-    border-radius: 20px;
-    /* Standard rounded corners */
-    animation: none;
-    /* Stop morphing */
-    padding: 2rem 1.5rem;
-    /* Reduce padding */
+    border-radius: 20px !important;
+    /* Force standard rounded corners */
+    animation: none !important;
+    /* Force stop morphing */
+    padding: 2rem 1.5rem !important;
+    margin: 0 auto;
+    width: 100%;
+    /* Use full container width */
+    max-width: 400px;
+    /* But not too wide on tablets */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05) !important;
   }
 
   .product-card::before {
-    display: none;
-    /* Hide the floating border */
+    display: none !important;
+  }
+
+  .product-card:nth-child(n) {
+    border-radius: 20px !important;
+    /* Specificity override */
+    animation: none !important;
   }
 
   .products-section {
-    padding: 4rem 0;
-    /* Reduce section padding */
+    padding: 3rem 0;
+    /* Reduce section padding further */
   }
 }
