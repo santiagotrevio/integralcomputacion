@@ -1149,7 +1149,7 @@
         // DOM Elements
         const productGrid = document.getElementById('productGrid');
         const searchInput = document.getElementById('searchInput');
-        const categoryFilter = document.getElementById('categoryFilter');
+        // categoryFilter removed (now radios)
         const sortFilter = document.getElementById('sortFilter');
         const pageTitle = document.getElementById('pageTitle');
         const cartCountEl = document.getElementById('cartCount');
@@ -1484,13 +1484,16 @@
 
         // Event Listeners
         searchInput.addEventListener('input', filterProducts);
-        categoryFilter.addEventListener('change', () => {
-            filterProducts();
-            const val = categoryFilter.value;
-            if (val === 'all') pageTitle.innerText = 'Catálogo de Productos';
-            else if (val === 'toner') pageTitle.innerText = 'Catálogo de Tóners';
-            else if (val === 'papeleria') pageTitle.innerText = 'Catálogo de Papelería';
-            else if (val === 'accesorios') pageTitle.innerText = 'Accesorios de Cómputo';
+        // Radio Button Listener
+        document.querySelectorAll('input[name="category"]').forEach(radio => {
+            radio.addEventListener('change', () => {
+                filterProducts();
+                const val = radio.value;
+                if (val === 'all') pageTitle.innerText = 'Catálogo de Productos';
+                else if (val === 'toner') pageTitle.innerText = 'Catálogo de Tóners';
+                else if (val === 'papeleria') pageTitle.innerText = 'Catálogo de Papelería';
+                else if (val === 'accesorios') pageTitle.innerText = 'Accesorios de Cómputo';
+            });
         });
         sortFilter.addEventListener('change', filterProducts);
 
