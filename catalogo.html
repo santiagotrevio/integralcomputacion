@@ -1386,9 +1386,8 @@
                 const btnStyle = isInCart ? 'background-color: var(--ic-magenta); color: white; border-color: var(--ic-magenta);' : '';
 
                 const card = document.createElement('div');
-                // Brand Class for left-border color
-                const brandClass = getBrandClass(prod.name);
-                card.className = `product-list-card ${brandClass}`;
+                // Removed brandClass dependency for cleaner look, now using logos
+                card.className = `product-list-card`;
 
                 // Add staggered animation delay
                 card.style.animationDelay = `${index * 0.05}s`;
@@ -1401,11 +1400,19 @@
                     imgClick = `onclick="openLightbox('${prod.image}')" style="cursor: zoom-in;"`;
                 }
 
+                // Brand Logo Logic
+                const brandLogoUrl = getBrandLogo(prod.name);
+                const badgeHtml = brandLogoUrl ?
+                    `<div class="brand-badge" title="${getBrand(prod.name)}">
+                        <img src="${brandLogoUrl}" alt="Logo">
+                     </div>` : '';
+
                 // Highlight Text Logic
                 const nameHighlighted = highlightText(prod.name, searchTerm);
 
                 card.innerHTML = `
                     <div class="prod-image" ${imgClick}>
+                        ${badgeHtml}
                         ${imgHtml}
                     </div>
                     <div class="prod-info">
@@ -1431,6 +1438,24 @@
                 `;
                 productGrid.appendChild(card);
             });
+        }
+
+        // Helper for Logos
+        function getBrandLogo(prodName) {
+            const lowerName = prodName.toLowerCase();
+            // Official Brand Logo URLs (Wikimedia/Commons - Reliable & High Quality)
+            if (lowerName.includes('brother')) return 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/Brother_Logo_%282024%29.svg/1024px-Brother_Logo_%282024%29.svg.png';
+            if (lowerName.includes('canon')) return 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/Canon_wordmark.svg/1024px-Canon_wordmark.svg.png';
+            if (lowerName.includes('hp')) return 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/HP_New_Logo_2D.svg/1024px-HP_New_Logo_2D.svg.png';
+            if (lowerName.includes('lexmark') || lowerName.includes('lx-')) return 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/Lexmark_logo.svg/1024px-Lexmark_logo.svg.png';
+            if (lowerName.includes('xerox')) return 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Xerox_logo.svg/1024px-Xerox_logo.svg.png';
+            if (lowerName.includes('samsung')) return 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Samsung_Logo.svg/1024px-Samsung_Logo.svg.png';
+            if (lowerName.includes('epson')) return 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/1d/Epson_logo.svg/1024px-Epson_logo.svg.png';
+            if (lowerName.includes('logitech')) return 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Logitech_logo.svg/1024px-Logitech_logo.svg.png';
+            if (lowerName.includes('kingston')) return 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Kingston_Technology_logo.svg/1024px-Kingston_Technology_logo.svg.png';
+            if (lowerName.includes('adata')) return 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/ADATA_Logo.svg/1024px-ADATA_Logo.svg.png';
+            if (lowerName.includes('dell')) return 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/Dell_Logo.svg/1024px-Dell_Logo.svg.png';
+            return null;
         }
 
         // Filtering Logic
