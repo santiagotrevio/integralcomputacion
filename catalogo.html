@@ -1507,17 +1507,46 @@
             if (overlay) overlay.classList.toggle('active');
         }
 
-        // URL Params
+        // URL Params Logic with Focus Mode
         const urlParams = new URLSearchParams(window.location.search);
         const codeParam = urlParams.get('cat');
+
         if (codeParam) {
-            // Check the radio button corresponding to the URL param
+            // Check the proper radio
             const radio = document.querySelector(`input[name="category"][value="${codeParam}"]`);
             if (radio) {
                 radio.checked = true;
+
+                // Update Title
                 if (codeParam === 'toner') pageTitle.innerText = 'Catálogo de Tóners';
                 if (codeParam === 'papeleria') pageTitle.innerText = 'Catálogo de Papelería';
                 if (codeParam === 'accesorios') pageTitle.innerText = 'Accesorios de Cómputo';
+
+                // FOCUS MODE: Hide other categories and show navigation back
+                const catGroup = document.querySelector('.filter-group h4'); // "Categorías" label
+                const catOptions = document.querySelector('.filter-options'); // Container of radios
+
+                if (catGroup && catOptions) {
+                    // Hide the standard list
+                    catOptions.style.display = 'none';
+                    catGroup.style.display = 'none';
+
+                    // Create "Back" button container
+                    const backContainer = document.createElement('div');
+                    backContainer.innerHTML = `
+                        <a href="catalogo.html" style="display:flex; align-items:center; gap:8px; color:var(--ic-text-gray); text-decoration:none; margin-bottom:1rem; font-size:0.9rem;">
+                            <i class="fa-solid fa-arrow-left"></i> Ver todas las categorías
+                        </a>
+                        <h4 style="margin-bottom:0.5rem; color:var(--ic-magenta);">${pageTitle.innerText}</h4>
+                        <div style="height:2px; width:40px; background:var(--ic-magenta); margin-bottom:1.5rem;"></div>
+                    `;
+
+                    // Insert before the Marcas group
+                    const marcasGroup = document.querySelectorAll('.filter-group')[1]; // Assume Marcas is second
+                    if (marcasGroup) {
+                        marcasGroup.parentNode.insertBefore(backContainer, marcasGroup);
+                    }
+                }
             }
         }
 
