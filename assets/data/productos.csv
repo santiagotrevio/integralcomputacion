@@ -29,38 +29,45 @@ PSU-12V10A-9CH,accesorios,Fuente de Poder Centralizada 12V 10A,"Fuente de alimen
 PFM800-4K,accesorios,Transceptor Pasivo de Video HDCVI (Balun),Par de transceptores pasivos para transmisión de video hasta 4K. Conector push-pin.,assets/images/products/video/video-balun.png
 SD49225XA-HNR,accesorios,Cámara PTZ DAHUA 25x Starlight 2MP,"Cámara PTZ con zoom óptico 25x, tecnología Starlight, autotracking y protección perimetral.",assets/images/products/video/camera-dome.png
 NVR4108HS-8P-4KS2,accesorios,NVR DAHUA 8 Canales 4K PoE,"Grabador de red para 8 cámaras IP, puertos PoE integrados, grabación hasta 8MP.",assets/images/products/video/dvr-recorder.png
-CE285A,toner,Tóner Compatible HP 85A,"Cartucho de tóner negro compatible para impresoras HP LaserJet P1102, M1132, M1212. Alto rendimiento.",assets/images/products/toner/hp-box.png
-CF248A,toner,Tóner Compatible HP 48A,"Tóner negro compatible para series HP LaserJet Pro M15, M15w, MFP M28. Rendimiento estándar.",assets/images/products/toner/hp-box.png
-CF217A,toner,Tóner Compatible HP 17A,"Cartucho compatible con chip para HP LaserJet Pro M102, MFP M130 series.",assets/images/products/toner/hp-box.png
-Q2612A,toner,Tóner Compatible HP 12A,"El clásico 12A compatible. Para impresoras HP 1010, 1012, 1020, 3015. Alta durabilidad.",assets/images/products/toner/hp-box.png
-CF283A,toner,Tóner Compatible HP 83A,"Compatible para HP LaserJet Pro M127, M125, M201, M225. Calidad de impresión nítida.",assets/images/products/toner/hp-box.png
-W1105A,toner,Tóner Compatible HP 105A,"Cartucho sin chip (o con chip según stock) para HP Laser 107, 135, 137 series.",assets/images/products/toner/hp-box.png
-CF400A,toner,Tóner Compatible HP 201A Negro,"Tóner negro para impresoras color M252, MFP M277. Colores vivos y precisos.",assets/images/products/toner/hp-box.png
-TN-1060,toner,Tóner Compatible Brother TN-1060,"Cartucho negro compatible para Brother HL-1110, 1112, DCP-1512, MFC-1810.",assets/images/products/toner/brother-box.png
-TN-660,toner,Tóner Compatible Brother TN-660,"Tóner de alto rendimiento para series HL-L2300, L2340, L2360, L2380. Hasta 2600 páginas.",assets/images/products/toner/brother-box.png
-TN-760,toner,Tóner Compatible Brother TN-760,"Cartucho para impresoras HL-L2350DW, L2390DW, L2395DW, L2370DW. Con chip.",assets/images/products/toner/brother-box.png
-DR-1060,toner,Tambor (Drum) Compatible Brother DR-1060,"Unidad de tambor compatible con TN-1060. Vida útil aproximada de 10,000 páginas.",assets/images/products/toner/brother-box.png
-GI-190-BK,toner,Botella de Tinta Canon GI-190 Negra,"Tinta original para sistema continuo Canon Pixma G2100, G3100, G4100. Contenido 135ml.",assets/images/products/toner/canon-ink.png
-GI-190-C,toner,Botella de Tinta Canon GI-190 Cian,Tinta azul (Cyan) original para Canon serie G. Colores vibrantes y duraderos.,assets/images/products/toner/canon-ink.png
-GI-190-M,toner,Botella de Tinta Canon GI-190 Magenta,Tinta rosa (Magenta) original para Canon serie G. Calidad fotográfica.,assets/images/products/toner/canon-ink.png
-GI-190-Y,toner,Botella de Tinta Canon GI-190 Amarilla,Tinta amarilla (Yellow) original para Canon serie G. Secado rápido.,assets/images/products/toner/canon-ink.png
-T544,toner,Tinta Epson 544 Negra Original,"Botella EcoTank original Epson T544 para L3110, L3150. Impresiones nítidas.",assets/images/products/toner/canon-ink.png
-CF540A,toner,Tóner Compatible HP 203A Negro,"Compatible premium para Color LaserJet Pro M254, MFP M281.",assets/images/products/toner/generic-box.png
-CF541A,toner,Tóner Compatible HP 203A Cian,Tóner color cian de alta calidad para serie M254/M281.,assets/images/products/toner/generic-box.png
-W700,toner,Tóner Xerox 3020 Generico,Cartucho genérico compatible con Xerox Phaser 3020 y WorkCentre 3025.,assets/images/products/toner/generic-box.png
-106R02773,toner,Tóner Xerox 3020 Original,Tóner original Xerox de capacidad estándar. Garantía de fábrica.,assets/images/products/toner/generic-box.png
-TN221,toner,TONER BROTHER ORIGINAL TN221 NEGRO,Sobre pedido,assets/images/products/toner/brother-box.png
-TN330,toner,TONER BROTHER ORIGINAL TN330 NEGRO,Sobre pedido,assets/images/products/toner/brother-box.png
-TN336-Y,toner,TONER BROTHER ORIGINAL TN336 AMARILLO,Sobre pedido,assets/images/products/toner/brother-box.png
-TN336-C,toner,TONER BROTHER ORIGINAL TN336 CYAN,Sobre pedido,assets/images/products/toner/brother-box.png
-TN336-BK,toner,TONER BROTHER ORIGINAL TN336 NEGRO,Sobre pedido,assets/images/products/toner/brother-box.png
-TN339-Y,toner,TONER BROTHER ORIGINAL TN339 AMARILLO,Sobre pedido,assets/images/products/toner/brother-box.png
-TN339-M,toner,TONER BROTHER ORIGINAL TN339 MAGENTA,Sobre pedido,assets/images/products/toner/brother-box.png
-TN339-BK,toner,TONER BROTHER ORIGINAL TN339 NEGRO,Sobre pedido,assets/images/products/toner/brother-box.png
-658A,toner,TONER ORIGINAL HP LASERJET 658A AMARILLO,Sobre pedido,assets/images/products/toner/hp-box.png
-B1025,toner,TONER XEROX WORKCENTRE B1025 NEGRO,Sobre pedido,assets/images/products/toner/generic-box.png
-B220Z00,toner,UNIDAD DE IMAGEN LEXMARK B220Z00,Sobre pedido,assets/images/products/toner/generic-box.png
-108R01416,toner,Xerox Contenedor de Residuos 108R01416,Sobre pedido,assets/images/products/toner/generic-box.png
-DR229CL,toner,Tambor Brother DR229CL Negro,Sobre pedido,assets/images/products/toner/brother-box.png
-C50,toner,TONER XEROX CYAN EXTRA ALTA CAPACIDAD 9K VERSALINK C50,Sobre pedido,assets/images/products/toner/generic-box.png
-B205,toner,TONER XEROX DUAL NEGRO 6K PAG B205,Sobre pedido,assets/images/products/toner/generic-box.png
+55B4000,toner,TONER LEXMARK 55B4000 NEGRO,TONER LEXMARK 55B4000 NEGRO,assets/images/products/toner/lexmark-55b4000.png
+56F4000,toner,Lexmark 56F4000 cartucho de tóner,Lexmark 56F4000 cartucho de tóner,assets/images/products/toner/lexmark-56f4000.png
+58D4000,toner,"Tóner Lexmark 58D4000 Super Alto Rendimiento Negro, 7.500 Páginas","Tóner Lexmark 58D4000 Super Alto Rendimiento Negro, 7.500 Páginas",assets/images/products/toner/lexmark-58d4000.png
+40X8443,toner,Tambor de imagen Lexmark Láser - Original - Negro - 60000 Páginas,Tambor de imagen Lexmark Láser - Original - Negro - 60000 Páginas,assets/images/products/toner/lexmark-40x8443.png
+B224H00,toner,TONER LEXMARK B224H00 NEGRO,TONER LEXMARK B224H00 NEGRO,assets/images/products/toner/lexmark-b224h00.png
+B224,toner,Cartucho de impresion Lexmark negro del programa de retorno,Cartucho de impresion Lexmark negro del programa de retorno,assets/images/products/toner/generic-box.png
+50F0Z00,toner,"Lexmark Unidad de Imagen 50F0Z00, 60.000 Páginas","Lexmark Unidad de Imagen 50F0Z00, 60.000 Páginas",assets/images/products/toner/lexmark-50f0z00.png
+20N40C0,toner,"Tóner Lexmark 20N40C0 Cian, 1.500 Páginas","Tóner Lexmark 20N40C0 Cian, 1.500 Páginas",assets/images/products/toner/generic-box.png
+20N40M0,toner,"Tóner Lexmark 20N40M0 Magenta, 1.500 Páginas","Tóner Lexmark 20N40M0 Magenta, 1.500 Páginas",assets/images/products/toner/generic-box.png
+20N40Y0,toner,"Tóner Lexmark 20N40Y0 Amarillo, 1.500 Páginas","Tóner Lexmark 20N40Y0 Amarillo, 1.500 Páginas",assets/images/products/toner/generic-box.png
+20N4XC0,toner,Tóner Lexmark 20N4XC0 Rendimiento Extra Alto Color Cian,Tóner Lexmark 20N4XC0 Rendimiento Extra Alto Color Cian,assets/images/products/toner/lexmark-20n4xc0.png
+20N4XK0,toner,Tóner Lexmark 20N4XK0 Rendimiento Extra Alto Color Negro,Tóner Lexmark 20N4XK0 Rendimiento Extra Alto Color Negro,assets/images/products/toner/lexmark-20n4xk0.png
+20N4XM0,toner,Tóner Lexmark 20N4XM0 Rendimiento Extra Alto Color Magenta,Tóner Lexmark 20N4XM0 Rendimiento Extra Alto Color Magenta,assets/images/products/toner/generic-box.png
+20N4XY0,toner,Tóner Lexmark 20N4XY0 Rendimiento Extra Alto Color Amarillo,Tóner Lexmark 20N4XY0 Rendimiento Extra Alto Color Amarillo,assets/images/products/toner/generic-box.png
+58D4H00,toner,"Tóner Lexmark 58D4H00 Super Alto Rendimiento Negro, 15.000 Páginas","Tóner Lexmark 58D4H00 Super Alto Rendimiento Negro, 15.000 Páginas",assets/images/products/toner/lexmark-58d4h00.png
+60F4000,toner,TONER LEXMARK 60F4000 NEGRO,TONER LEXMARK 60F4000 NEGRO,assets/images/products/toner/lexmark-60f4000.png
+78C40K0,toner,TONER LEXMARK 78C40K0 NEGRO,TONER LEXMARK 78C40K0 NEGRO,assets/images/products/toner/lexmark-78c40k0.png
+78C40C0,toner,TONER LEXMARK 78C40M0 CYAN,TONER LEXMARK 78C40M0 CYAN,assets/images/products/toner/lexmark-78c40c0.png
+78C40M0,toner,TONER LEXMARK 78C40M0 MAGENTA,TONER LEXMARK 78C40M0 MAGENTA,assets/images/products/toner/lexmark-78c40m0.png
+78C40Y0,toner,TONER LEXMARK 78C40Y0 AMARILLO,TONER LEXMARK 78C40Y0 AMARILLO,assets/images/products/toner/lexmark-78c40y0.png
+80C8SY0,toner,TONER LEXMARK 80C8SY0 AMARILLO,TONER LEXMARK 80C8SY0 AMARILLO,assets/images/products/toner/lexmark-80c8sy0.png
+B234000,toner,TONER LEXMARK B234000 NEGRO,TONER LEXMARK B234000 NEGRO,assets/images/products/toner/lexmark-b234000.png
+B244H00,toner,TONER LEXMARK B244H00 NEGRO,TONER LEXMARK B244H00 NEGRO,assets/images/products/toner/lexmark-b244h00.png
+B344H00,toner,TONER LEXMARK B344H00 NEGRO,TONER LEXMARK B344H00 NEGRO,assets/images/products/toner/lexmark-b344h00.png
+C234HC0,toner,TONER LEXMARK C234HCO CYAN,TONER LEXMARK C234HCO CYAN,assets/images/products/toner/lexmark-c234hc0.png
+C234HK0,toner,TONER LEXMARK C234HK0 NEGRO,TONER LEXMARK C234HK0 NEGRO,assets/images/products/toner/lexmark-c234hk0.png
+C234HM0,toner,TONER LEXMARK C234HM0 MAGENTA,TONER LEXMARK C234HM0 MAGENTA,assets/images/products/toner/lexmark-c234hm0.png
+C234YC0,toner,TONER LEXMARK C234YCO AMARILLO,TONER LEXMARK C234YCO AMARILLO,assets/images/products/toner/generic-box.png
+C3240C0,toner,TONER LEXMARK C3240C0 CYAN,TONER LEXMARK C3240C0 CYAN,assets/images/products/toner/lexmark-c3240c0.png
+C3240K0,toner,TONER LEXMARK C3240K0 NEGRO,TONER LEXMARK C3240K0 NEGRO,assets/images/products/toner/lexmark-c3240k0.png
+C3240M0,toner,TONER LEXMARK C3240M0 MAGENTA,TONER LEXMARK C3240M0 MAGENTA,assets/images/products/toner/lexmark-c3240m0.png
+C3240Y0,toner,TONER LEXMARK C3240Y0 AMARILLO,TONER LEXMARK C3240Y0 AMARILLO,assets/images/products/toner/lexmark-c3240y0.png
+B254X00,toner,TONER LEXMARK NEGRO EXTRA ALTO RENDIMIENTO B254X00,TONER LEXMARK NEGRO EXTRA ALTO RENDIMIENTO B254X00,assets/images/products/toner/lexmark-b254x00.png
+B224X00,toner,TONER LEXMARK NEGRO EXTRA ALTO RENDIMIENTO PROG DEVOLUCION B224X00,TONER LEXMARK NEGRO EXTRA ALTO RENDIMIENTO PROG DEVOLUCION B224X00,assets/images/products/toner/lexmark-b224x00.png
+52D4X00,toner,TONER LEXMARK NEGRO ULTRA ALTO RENDIMIENTO 25K,TONER LEXMARK NEGRO ULTRA ALTO RENDIMIENTO 25K,assets/images/products/toner/lexmark-52d4x00.png
+B344000,toner,Tóner Lexmark Programa de Devolución para B344000 Color Negro,Tóner Lexmark Programa de Devolución para B344000 Color Negro,assets/images/products/toner/lexmark-b344000.png
+B344,toner,Tóner Lexmark Programa Retorno 15mil Páginas Color Negro,Tóner Lexmark Programa Retorno 15mil Páginas Color Negro,assets/images/products/toner/generic-box.png
+51B4000,toner,TONER LEXMARK RENDIMIENTO ESTANDAR MS/MX 317 417 517 617,TONER LEXMARK RENDIMIENTO ESTANDAR MS/MX 317 417 517 617,assets/images/products/toner/lexmark-51b4000.png
+B344X00,toner,Tóner Lexmark Rendimiento Extra Alto Programa Devolución para B344X00 Color Negro,Tóner Lexmark Rendimiento Extra Alto Programa Devolución para B344X00 Color Negro,assets/images/products/toner/lexmark-b344x00.png
+X264A11G,toner,TONER LEXMARK X264A11G NEGRO,TONER LEXMARK X264A11G NEGRO,assets/images/products/toner/lexmark-x264a11g.png
+25KMS,toner,TONER NEGRO HASTA 25K PAGINAS LASER MONOCROMATICO,TONER NEGRO HASTA 25K PAGINAS LASER MONOCROMATICO,assets/images/products/toner/generic-box.png
+B220Z00,toner,UNIDAD DE IMAGEN LEXMARK B220Z00,UNIDAD DE IMAGEN LEXMARK B220Z00,assets/images/products/toner/lexmark-b220z00.png
