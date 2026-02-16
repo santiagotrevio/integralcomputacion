@@ -1434,34 +1434,61 @@
         }
 
         // Filtering Logic
+        // Filtering Logic
         function filterProducts() {
             const searchTerm = searchInput.value.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-            const categoryValue = categoryFilter.value;
-            const sortValue = sortFilter.value;
 
-            // Scroll to top if filtering changes to avoid confusion
-            // window.scrollTo({top: 0, behavior: 'smooth'}); 
+            // Get selected Category (Radio)
+            const catRadio = document.querySelector('input[name="category"]:checked');
+            const categoryValue = catRadio ? catRadio.value : 'all';
+
+            // Get selected Brands (Checkboxes)
+            const checkedBrands = Array.from(document.querySelectorAll('input[name="brand"]:checked')).map(cb => cb.value.toLowerCase());
+
+            const sortValue = sortFilter.value;
 
             let filtered = productsDB.filter(prod => {
                 if (!prod.name) return false;
 
+                // 1. Text Search
                 const prodName = prod.name.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
                 const prodId = prod.id.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
                 const prodDesc = prod.description ? prod.description.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "") : "";
+                const matchesSearch = prodName.includes(searchTerm) || prodId.includes(searchTerm) || prodDesc.includes(searchTerm);
 
-                const matchesSearch = prodName.includes(searchTerm) ||
-                    prodId.includes(searchTerm) ||
-                    prodDesc.includes(searchTerm);
-
+                // 2. Category
                 const matchesCategory = categoryValue === 'all' || prod.category === categoryValue;
 
-                return matchesSearch && matchesCategory;
+                // 3. Brand (Multi-select)
+                let matchesBrand = true;
+                if (checkedBrands.length > 0) {
+                    const prodBrand = getBrand(prod.name).toLowerCase();
+                    matchesBrand = checkedBrands.includes(prodBrand);
+                    // Handle "otros" if needed broadly or specific brand matching logic
+                    if (checkedBrands.includes('otros') && !['brother', 'canon', 'hp', 'lexmark'].includes(prodBrand)) {
+                        matchesBrand = true;
+                    }
+                }
+
+                return matchesSearch && matchesCategory && matchesBrand;
             });
+
+            // Update Filter Count UI for Mobile
+            const filterCountEl = document.getElementById('filterCount');
+            const totalFilters = (categoryValue !== 'all' ? 1 : 0) + checkedBrands.length;
+            if (filterCountEl) {
+                filterCountEl.innerText = totalFilters;
+                filterCountEl.style.display = totalFilters > 0 ? 'inline-flex' : 'none';
+            }
 
             // Sorting Logic
             if (sortValue === 'az') {
                 filtered.sort((a, b) => a.name.localeCompare(b.name, 'es', { sensitivity: 'base' }));
-            } else if (sortValue === 'brand') {
+            } else if (sortValue === 'za') {
+                filtered.sort((a, b) => b.name.localeCompare(a.name, 'es', { sensitivity: 'base' }));
+            }
+            // Brand sort is less relevant with checkbox filters but can keep if desired
+            else if (sortValue === 'brand') {
                 filtered.sort((a, b) => {
                     const brandA = getBrand(a.name);
                     const brandB = getBrand(b.name);
@@ -1472,14 +1499,26 @@
             renderProducts(filtered);
         }
 
+        function toggleMobileFilters() {
+            const sidebar = document.getElementById('filterSidebar');
+            // Check if overlay exists, if not create/select it properly
+            let overlay = document.querySelector('.filter-overlay');
+            if (sidebar) sidebar.classList.toggle('active');
+            if (overlay) overlay.classList.toggle('active');
+        }
+
         // URL Params
         const urlParams = new URLSearchParams(window.location.search);
         const codeParam = urlParams.get('cat');
         if (codeParam) {
-            categoryFilter.value = codeParam;
-            if (codeParam === 'toner') pageTitle.innerText = 'Catálogo de Tóners';
-            if (codeParam === 'papeleria') pageTitle.innerText = 'Catálogo de Papelería';
-            if (codeParam === 'accesorios') pageTitle.innerText = 'Accesorios de Cómputo';
+            // Check the radio button corresponding to the URL param
+            const radio = document.querySelector(`input[name="category"][value="${codeParam}"]`);
+            if (radio) {
+                radio.checked = true;
+                if (codeParam === 'toner') pageTitle.innerText = 'Catálogo de Tóners';
+                if (codeParam === 'papeleria') pageTitle.innerText = 'Catálogo de Papelería';
+                if (codeParam === 'accesorios') pageTitle.innerText = 'Accesorios de Cómputo';
+            }
         }
 
         // Event Listeners
