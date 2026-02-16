@@ -2442,3 +2442,46 @@ details[open] summary {
     width: auto;
     max-width: 80px;
 }
+
+/* --- ULTIMATE Brand Badge Styling (Top-Left Corner of Card) --- */
+.product-list-card {
+    position: relative;
+    overflow: hidden; /* Contains the badge if it spills, but here it fits perfectly */
+}
+
+/* Override previous styles */
+.brand-badge {
+    position: absolute;
+    top: 0 !important;
+    left: 0 !important;
+    right: auto !important;
+    
+    background: #ffffff !important;
+    /* Soft shadow internal and external */
+    box-shadow: 1px 1px 4px rgba(0,0,0,0.08) !important;
+    
+    /* Rounded bottom-right corner for smooth integration */
+    border-radius: 0 0 12px 0 !important; 
+    
+    z-index: 50 !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    height: 40px !important; /* Good height for logos */
+    padding: 4px 12px !important;
+    min-width: 70px;
+    
+    border-right: 1px solid #f1f5f9;
+    border-bottom: 1px solid #f1f5f9;
+
+    opacity: 1 !important;
+}
+
+.brand-badge img {
+    height: 100% !important;
+    width: auto;
+    max-width: 90px;
+    object-fit: contain;
+    display: block;
+}
