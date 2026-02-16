@@ -31,28 +31,55 @@ def download_image(url, filename):
 with open('assets/data/scraped_toners_lexmark.json', 'r') as f:
     products_data = json.load(f)
 
-# Load Image Map (Real Photos from Google)
+# Load Image Map (Lexmark)
 try:
     with open('assets/data/lexmark_images_map.json', 'r') as f:
         image_map = json.load(f)
 except FileNotFoundError:
     image_map = {}
 
-# Process products
+# Process Lexmark products
 formatted_products = []
 for p in products_data:
-    # Generate filename from SKU
     img_filename = f"lexmark-{p['sku'].lower()}.png"
-    
-    # Check if we have a real photo URL in our map
     if p['sku'] in image_map:
-        # Download from our curated list of real photos
         local_img_path = download_image(image_map[p['sku']], img_filename)
     else:
-        # Fallback to generic box if we haven't found a real photo yet
-        # (For this batch, only 10 are mapped, the rest will be generic for now)
         local_img_path = "assets/images/products/toner/generic-box.png"
     
+    formatted_products.append({
+        "sku": p['sku'],
+        "name": p['name'],
+        "desc": p['description'] if p['description'] else "Disponible bajo pedido.",
+        "img": local_img_path
+    })
+
+# Load scraped data (Canon)
+try:
+    with open('assets/data/scraped_toners_canon.json', 'r') as f:
+        canon_data = json.load(f)
+except FileNotFoundError:
+    canon_data = []
+
+# Load Image Map (Canon)
+try:
+    with open('assets/data/canon_images_map.json', 'r') as f:
+        canon_image_map_list = json.load(f)
+        # Convert list to dict for easier lookup if needed, or if it's already a dict use it processing
+        # The file I wrote was a list of dicts [{"sku": "...", "img": "..."}]
+        canon_image_map = {item['sku']: item['img'] for item in canon_image_map_list}
+except FileNotFoundError:
+    canon_image_map = {}
+
+# Process Canon products
+for p in canon_data:
+    img_filename = f"canon-{p['sku'].lower()}.png"
+    if p['sku'] in canon_image_map:
+        local_img_path = download_image(canon_image_map[p['sku']], img_filename)
+    else:
+        # Fallback to generic, or we can try a direct search later
+        local_img_path = "assets/images/products/toner/generic-box.png"
+        
     formatted_products.append({
         "sku": p['sku'],
         "name": p['name'],
