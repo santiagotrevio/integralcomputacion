@@ -476,8 +476,13 @@
         });
     </script>
 
-    <!-- CUSTOM STYLES FOR CART -->
+    <!-- Toast Notification Container -->
+    <div id="toast-container"
+        style="position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); z-index: 1000;"></div>
+
+    <!-- CUSTOM STYLES FOR CART & ANIMATIONS -->
     <style>
+        /* Cart Count Style */
         .cart-count {
             position: absolute;
             top: -8px;
@@ -492,6 +497,57 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        /* Cart Pop Animation */
+        @keyframes cart-pop {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.5);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .cart-bump {
+            animation: cart-pop 0.3s ease-out;
+        }
+
+        /* Toast Notification Styles */
+        .toast {
+            background: rgba(15, 23, 42, 0.9);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 50px;
+            margin-top: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            font-family: var(--ic-font);
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            animation: slideUpFade 0.3s ease-out forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        @keyframes slideUpFade {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .toast.hiding {
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
         }
 
         .prod-action {
@@ -567,9 +623,48 @@
         const pageTitle = document.getElementById('pageTitle');
         const cartCountEl = document.getElementById('cartCount');
         const resultCount = document.getElementById('resultCount');
+        const toastContainer = document.getElementById('toast-container');
 
         let productsDB = []; // Will be populated from CSV
         let cart = JSON.parse(localStorage.getItem('quoteCart')) || [];
+
+        // --- SOUND & UX UTILS ---
+        function playSuccessSound() {
+            try {
+                const AudioContext = window.AudioContext || window.webkitAudioContext;
+                if (!AudioContext) return;
+                const ctx = new AudioContext();
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+
+                osc.type = 'sine'; // Clean beep
+                osc.frequency.setValueAtTime(500, ctx.currentTime);
+                osc.frequency.exponentialRampToValueAtTime(1000, ctx.currentTime + 0.1); // Pitch up "bling"
+
+                gain.gain.setValueAtTime(0.05, ctx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.1);
+
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+                osc.start();
+                osc.stop(ctx.currentTime + 0.15);
+            } catch (e) { console.warn("Audio error", e); }
+        }
+
+        function showToast(message, icon = 'fa-check-circle') {
+            const toast = document.createElement('div');
+            toast.className = 'toast';
+            toast.innerHTML = `<i class="fa-solid ${icon}" style="color: #22c55e;"></i> <span>${message}</span>`;
+
+            toastContainer.appendChild(toast);
+
+            // Hide after 3 seconds
+            setTimeout(() => {
+                toast.classList.add('hiding');
+                toast.addEventListener('transitionend', () => toast.remove());
+            }, 3000);
+        }
+        // ------------------------
 
         function updateCartCount() {
             cartCountEl.innerText = cart.length;
@@ -592,6 +687,15 @@
                     btn.style.color = 'white';
                     btn.style.borderColor = 'var(--ic-magenta)';
                 }
+
+                // UX: Play Sound & Animate Cart
+                playSuccessSound();
+                cartCountEl.classList.add('cart-bump');
+                setTimeout(() => cartCountEl.classList.remove('cart-bump'), 300);
+
+                // UX: Show notification
+                showToast(`Agregado: ${product.name.substring(0, 30)}...`);
+
             } else {
                 // Remove from cart
                 cart.splice(index, 1);
@@ -602,6 +706,8 @@
                     btn.style.color = 'var(--ic-cyan)';
                     btn.style.borderColor = 'var(--ic-cyan)';
                 }
+                updateCartCount(); // Just update count silently on remove
+                return; // Exit early to avoid re-triggering animation for removal if not desired
             }
 
             localStorage.setItem('quoteCart', JSON.stringify(cart));
