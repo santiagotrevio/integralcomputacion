@@ -1443,18 +1443,24 @@
         // Helper for Logos
         function getBrandLogo(prodName) {
             const lowerName = prodName.toLowerCase();
-            // Local SVG Logos (High Quality)
-            if (lowerName.includes('brother')) return 'assets/images/brands/brother.svg';
-            if (lowerName.includes('canon')) return 'assets/images/brands/canon.svg';
+
+            // User Provided Local PNGs (Highest Priority)
+            if (lowerName.includes('brother')) return 'assets/images/brands/brother.png';
+            if (lowerName.includes('canon')) return 'assets/images/brands/canon.png';
+            if (lowerName.includes('lexmark') || lowerName.includes('lx-')) return 'assets/images/brands/lexmark.png';
+
+            // Other Local SVGs/PNGs (If available)
             if (lowerName.includes('hp') || lowerName.includes('hewlett')) return 'assets/images/brands/hp.svg';
-            if (lowerName.includes('lexmark') || lowerName.includes('lx-')) return 'assets/images/brands/lexmark.svg';
             if (lowerName.includes('xerox')) return 'assets/images/brands/xerox.svg';
-            if (lowerName.includes('samsung')) return 'assets/images/brands/samsung.svg';
             if (lowerName.includes('epson')) return 'assets/images/brands/epson.svg';
-            if (lowerName.includes('logitech')) return 'assets/images/brands/logitech.svg';
-            if (lowerName.includes('kingston')) return 'assets/images/brands/kingston.svg';
-            if (lowerName.includes('adata')) return 'assets/images/brands/adata.svg';
-            if (lowerName.includes('dell')) return 'assets/images/brands/dell.svg';
+
+            // Remote PNGs (Reliable fallback for problematic brands)
+            if (lowerName.includes('samsung')) return 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Samsung_Logo.svg/320px-Samsung_Logo.svg.png';
+            if (lowerName.includes('logitech')) return 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Logitech_logo.svg/320px-Logitech_logo.svg.png';
+            if (lowerName.includes('kingston')) return 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Kingston_Technology_logo.svg/320px-Kingston_Technology_logo.svg.png';
+            if (lowerName.includes('adata')) return 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/ADATA_Logo.svg/320px-ADATA_Logo.svg.png';
+            if (lowerName.includes('dell')) return 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/Dell_Logo.svg/320px-Dell_Logo.svg.png';
+
             return null;
         }
 

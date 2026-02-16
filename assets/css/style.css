@@ -2401,3 +2401,44 @@ details[open] summary {
     max-width: 80px;
     display: block;
 }
+
+/* --- FINAL Brand Badge Styling (Left Pill) --- */
+.product-list-card .prod-image {
+    position: relative;
+    overflow: hidden; /* Ensure badge doesn't spill if moved outside, but allowing it to touch edge */
+}
+
+.brand-badge {
+    position: absolute;
+    top: 12px;
+    left: 0 !important; /* Force left */
+    right: auto !important;
+    
+    background: #ffffff !important;
+    padding: 4px 12px 4px 8px !important;
+    
+    border-radius: 0 20px 20px 0 !important; /* Left-anchored Pill */
+    box-shadow: 2px 2px 10px rgba(0,0,0,0.1) !important;
+    
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 32px !important;
+    min-width: 60px;
+    border: 1px solid rgba(0,0,0,0.05);
+    border-left: none; 
+    
+    opacity: 0.98;
+}
+
+.product-list-card:hover .brand-badge {
+    padding-right: 16px !important; /* Slight expand on hover */
+    box-shadow: 4px 4px 15px rgba(0,0,0,0.15) !important;
+}
+
+.brand-badge img {
+    height: 85% !important; /* Slight padding inside */
+    width: auto;
+    max-width: 80px;
+}
