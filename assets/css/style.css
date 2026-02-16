@@ -2495,71 +2495,85 @@ details[open] summary {
   object-fit: contain;
   display: block;
 }
+
 /* --- REVERT TO RIGHT FLOATING BADGE (Fix Cut-off) --- */
 .product-list-card .prod-image {
-    overflow: visible !important; /* Allow badge to float freely if needed, but usually inside */
+  overflow: visible !important;
+  /* Allow badge to float freely if needed, but usually inside */
 }
 
 .brand-badge {
-    top: 10px !important;
-    right: 10px !important;
-    left: auto !important; /* Cancel left positioning */
-    
-    border-radius: 8px !important; /* Standard rounded corners */
-    padding: 4px 8px !important;
-    
-    box-shadow: 0 4px 10px rgba(0,0,0,0.12) !important;
-    border: 1px solid rgba(0,0,0,0.05);
-    
-    height: 34px !important; /* Slightly taller for breathing room */
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  top: 10px !important;
+  right: 10px !important;
+  left: auto !important;
+  /* Cancel left positioning */
+
+  border-radius: 8px !important;
+  /* Standard rounded corners */
+  padding: 4px 8px !important;
+
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12) !important;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+
+  height: 34px !important;
+  /* Slightly taller for breathing room */
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .product-list-card:hover .brand-badge {
-    padding-right: 8px !important; /* Reset hover expansion */
-    transform: translateY(-2px);
+  padding-right: 8px !important;
+  /* Reset hover expansion */
+  transform: translateY(-2px);
 }
 
 .brand-badge img {
-    max-width: 80px;
-    height: 85% !important;
-    object-fit: contain;
+  max-width: 80px;
+  height: 85% !important;
+  object-fit: contain;
 }
 
 /* --- RESTORED ELEGANT CAPSULE DESIGN (Left Top) --- */
 .brand-badge {
-    position: absolute;
-    top: 10px !important;
-    left: 10px !important;
-    right: auto !important;
-    
-    background: #ffffff !important;
-    padding: 6px 16px !important; /* Generous padding for capsule look */
-    border-radius: 50px !important; /* Full Capsule shape */
-    
-    box-shadow: 0 4px 12px rgba(0,0,0,0.08) !important; /* Soft premium shadow */
-    border: 1px solid rgba(0,0,0,0.03);
-    
-    height: 38px !important; /* Slightly taller for elegance */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    
-    z-index: 20;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: absolute;
+  top: 10px !important;
+  left: 10px !important;
+  right: auto !important;
+
+  background: #ffffff !important;
+  padding: 3px 10px !important;
+  border-radius: 50px !important;
+
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06) !important;
+  /* Subtle static shadow */
+  border: 1px solid rgba(0, 0, 0, 0.04);
+
+  height: 28px !important;
+  /* Compact height */
+  width: auto !important;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  z-index: 20;
+  pointer-events: none;
+  /* Not a button */
 }
 
+/* Disabled hover animation */
 .product-list-card:hover .brand-badge {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 15px rgba(0,0,0,0.12) !important;
+  transform: none !important;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06) !important;
 }
 
 .brand-badge img {
-    height: 20px !important; /* Fixed height for consistency */
-    width: auto;
-    max-width: 90px;
-    object-fit: contain;
-    display: block;
+  height: 18px !important;
+  /* Small, elegant logo size */
+  width: auto !important;
+  max-width: none !important;
+  /* Allow full width - NO CUTS */
+  object-fit: contain;
+  display: block;
 }
