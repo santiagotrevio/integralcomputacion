@@ -274,6 +274,9 @@
                 <option value="accesorios">Accesorios</option>
             </select>
         </div>
+        <!-- Result Count Display -->
+        <p id="resultCount"
+            style="text-align: center; margin-top: 1rem; color: #64748b; font-weight: 600; font-size: 0.95rem;"></p>
     </div>
 
     <!-- Product Grid -->
@@ -395,6 +398,7 @@
         const categoryFilter = document.getElementById('categoryFilter');
         const pageTitle = document.getElementById('pageTitle');
         const cartCountEl = document.getElementById('cartCount');
+        const resultCount = document.getElementById('resultCount');
 
         let productsDB = []; // Will be populated from CSV
         let cart = JSON.parse(localStorage.getItem('quoteCart')) || [];
@@ -465,6 +469,11 @@
         // Render Logic
         function renderProducts(products) {
             productGrid.innerHTML = '';
+
+            // Update Result Count
+            if (resultCount) {
+                resultCount.innerText = `${products.length} producto${products.length !== 1 ? 's' : ''} encontrado${products.length !== 1 ? 's' : ''}`;
+            }
 
             if (products.length === 0) {
                 productGrid.innerHTML = `
