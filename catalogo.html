@@ -1133,12 +1133,12 @@
 
             // Sorting Logic
             if (sortValue === 'az') {
-                filtered.sort((a, b) => a.name.localeCompare(b.name));
+                filtered.sort((a, b) => a.name.localeCompare(b.name, 'es', { sensitivity: 'base' }));
             } else if (sortValue === 'brand') {
                 filtered.sort((a, b) => {
                     const brandA = getBrand(a.name);
                     const brandB = getBrand(b.name);
-                    return brandA.localeCompare(brandB) || a.name.localeCompare(b.name);
+                    return brandA.localeCompare(brandB) || a.name.localeCompare(b.name, 'es', { sensitivity: 'base' });
                 });
             }
 
