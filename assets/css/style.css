@@ -497,8 +497,9 @@ header.scrolled {
 }
 
 .product-list-card:hover {
-  transform: translateY(-3px);
-  background-color: #0088b5;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  /* No background color change - keeping it clean */
 }
 
 .btn-secondary {
