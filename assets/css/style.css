@@ -2364,124 +2364,137 @@ details[open] summary {
       radial-gradient(at 0% 100%, rgba(0, 153, 204, 0.20) 0px, transparent 50%) !important;
   }
 }
+
 /* --- Brand Badge Styling (Amazon/Cyberpuerta Style) --- */
 .product-list-card .prod-image {
-    position: relative;
+  position: relative;
 }
 
 .brand-badge {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background: rgba(255, 255, 255, 0.95);
-    padding: 6px 10px;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08); /* Sombra sutil y elegante */
-    z-index: 5;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 32px; /* Altura controlada */
-    min-width: 60px;
-    border: 1px solid rgba(0,0,0,0.05);
-    opacity: 0.9;
-    transition: all 0.3s ease;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 6px 10px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  /* Sombra sutil y elegante */
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 32px;
+  /* Altura controlada */
+  min-width: 60px;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  opacity: 0.9;
+  transition: all 0.3s ease;
 }
 
 .product-list-card:hover .brand-badge {
-    opacity: 1;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+  opacity: 1;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
 }
 
 .brand-badge img {
-    height: 100%;
-    width: auto;
-    object-fit: contain;
-    max-width: 80px;
-    display: block;
+  height: 100%;
+  width: auto;
+  object-fit: contain;
+  max-width: 80px;
+  display: block;
 }
 
 /* --- FINAL Brand Badge Styling (Left Pill) --- */
 .product-list-card .prod-image {
-    position: relative;
-    overflow: hidden; /* Ensure badge doesn't spill if moved outside, but allowing it to touch edge */
+  position: relative;
+  overflow: hidden;
+  /* Ensure badge doesn't spill if moved outside, but allowing it to touch edge */
 }
 
 .brand-badge {
-    position: absolute;
-    top: 12px;
-    left: 0 !important; /* Force left */
-    right: auto !important;
-    
-    background: #ffffff !important;
-    padding: 4px 12px 4px 8px !important;
-    
-    border-radius: 0 20px 20px 0 !important; /* Left-anchored Pill */
-    box-shadow: 2px 2px 10px rgba(0,0,0,0.1) !important;
-    
-    z-index: 10;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 32px !important;
-    min-width: 60px;
-    border: 1px solid rgba(0,0,0,0.05);
-    border-left: none; 
-    
-    opacity: 0.98;
+  position: absolute;
+  top: 12px;
+  left: 0 !important;
+  /* Force left */
+  right: auto !important;
+
+  background: #ffffff !important;
+  padding: 4px 12px 4px 8px !important;
+
+  border-radius: 0 20px 20px 0 !important;
+  /* Left-anchored Pill */
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1) !important;
+
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 32px !important;
+  min-width: 60px;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  border-left: none;
+
+  opacity: 0.98;
 }
 
 .product-list-card:hover .brand-badge {
-    padding-right: 16px !important; /* Slight expand on hover */
-    box-shadow: 4px 4px 15px rgba(0,0,0,0.15) !important;
+  padding-right: 16px !important;
+  /* Slight expand on hover */
+  box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.15) !important;
 }
 
 .brand-badge img {
-    height: 85% !important; /* Slight padding inside */
-    width: auto;
-    max-width: 80px;
+  height: 85% !important;
+  /* Slight padding inside */
+  width: auto;
+  max-width: 80px;
 }
 
 /* --- ULTIMATE Brand Badge Styling (Top-Left Corner of Card) --- */
 .product-list-card {
-    position: relative;
-    overflow: hidden; /* Contains the badge if it spills, but here it fits perfectly */
+  position: relative;
+  overflow: hidden;
+  /* Contains the badge if it spills, but here it fits perfectly */
 }
 
 /* Override previous styles */
 .brand-badge {
-    position: absolute;
-    top: 0 !important;
-    left: 0 !important;
-    right: auto !important;
-    
-    background: #ffffff !important;
-    /* Soft shadow internal and external */
-    box-shadow: 1px 1px 4px rgba(0,0,0,0.08) !important;
-    
-    /* Rounded bottom-right corner for smooth integration */
-    border-radius: 0 0 12px 0 !important; 
-    
-    z-index: 50 !important;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    
-    height: 40px !important; /* Good height for logos */
-    padding: 4px 12px !important;
-    min-width: 70px;
-    
-    border-right: 1px solid #f1f5f9;
-    border-bottom: 1px solid #f1f5f9;
+  position: absolute;
+  top: 0 !important;
+  left: 0 !important;
+  right: auto !important;
 
-    opacity: 1 !important;
+  background: #ffffff !important;
+  /* Soft shadow internal and external */
+  box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.08) !important;
+
+  /* Rounded bottom-right corner for smooth integration */
+  border-radius: 0 0 12px 0 !important;
+
+  z-index: 50 !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  height: 45px !important;
+  /* Taller for better visibility */
+  padding: 2px 12px !important;
+  /* Less vertical padding to maximize logo size */
+  min-width: 80px;
+
+  border-right: 1px solid #f8fafc;
+  border-bottom: 1px solid #f8fafc;
+
+  opacity: 1 !important;
 }
 
 .brand-badge img {
-    height: 100% !important;
-    width: auto;
-    max-width: 90px;
-    object-fit: contain;
-    display: block;
+  height: 95% !important;
+  /* Fill almost all height */
+  width: auto;
+  max-width: 140px;
+  /* ALLOW WIDER LOGOS (Fix for Brother/Lexmark) */
+  object-fit: contain;
+  display: block;
 }
