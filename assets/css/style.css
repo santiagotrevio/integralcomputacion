@@ -2527,3 +2527,39 @@ details[open] summary {
     height: 85% !important;
     object-fit: contain;
 }
+
+/* --- RESTORED ELEGANT CAPSULE DESIGN (Left Top) --- */
+.brand-badge {
+    position: absolute;
+    top: 10px !important;
+    left: 10px !important;
+    right: auto !important;
+    
+    background: #ffffff !important;
+    padding: 6px 16px !important; /* Generous padding for capsule look */
+    border-radius: 50px !important; /* Full Capsule shape */
+    
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08) !important; /* Soft premium shadow */
+    border: 1px solid rgba(0,0,0,0.03);
+    
+    height: 38px !important; /* Slightly taller for elegance */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    z-index: 20;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.product-list-card:hover .brand-badge {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.12) !important;
+}
+
+.brand-badge img {
+    height: 20px !important; /* Fixed height for consistency */
+    width: auto;
+    max-width: 90px;
+    object-fit: contain;
+    display: block;
+}
