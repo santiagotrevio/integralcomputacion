@@ -1443,18 +1443,18 @@
         // Helper for Logos
         function getBrandLogo(prodName) {
             const lowerName = prodName.toLowerCase();
-            // Official Brand Logo URLs (Wikimedia/Commons - Reliable & High Quality)
-            if (lowerName.includes('brother')) return 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/Brother_Logo_%282024%29.svg/1024px-Brother_Logo_%282024%29.svg.png';
-            if (lowerName.includes('canon')) return 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/Canon_wordmark.svg/1024px-Canon_wordmark.svg.png';
-            if (lowerName.includes('hp')) return 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/HP_New_Logo_2D.svg/1024px-HP_New_Logo_2D.svg.png';
-            if (lowerName.includes('lexmark') || lowerName.includes('lx-')) return 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/Lexmark_logo.svg/1024px-Lexmark_logo.svg.png';
-            if (lowerName.includes('xerox')) return 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Xerox_logo.svg/1024px-Xerox_logo.svg.png';
-            if (lowerName.includes('samsung')) return 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Samsung_Logo.svg/1024px-Samsung_Logo.svg.png';
-            if (lowerName.includes('epson')) return 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/1d/Epson_logo.svg/1024px-Epson_logo.svg.png';
-            if (lowerName.includes('logitech')) return 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Logitech_logo.svg/1024px-Logitech_logo.svg.png';
-            if (lowerName.includes('kingston')) return 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Kingston_Technology_logo.svg/1024px-Kingston_Technology_logo.svg.png';
-            if (lowerName.includes('adata')) return 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/ADATA_Logo.svg/1024px-ADATA_Logo.svg.png';
-            if (lowerName.includes('dell')) return 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/Dell_Logo.svg/1024px-Dell_Logo.svg.png';
+            // Local SVG Logos (High Quality)
+            if (lowerName.includes('brother')) return 'assets/images/brands/brother.svg';
+            if (lowerName.includes('canon')) return 'assets/images/brands/canon.svg';
+            if (lowerName.includes('hp') || lowerName.includes('hewlett')) return 'assets/images/brands/hp.svg';
+            if (lowerName.includes('lexmark') || lowerName.includes('lx-')) return 'assets/images/brands/lexmark.svg';
+            if (lowerName.includes('xerox')) return 'assets/images/brands/xerox.svg';
+            if (lowerName.includes('samsung')) return 'assets/images/brands/samsung.svg';
+            if (lowerName.includes('epson')) return 'assets/images/brands/epson.svg';
+            if (lowerName.includes('logitech')) return 'assets/images/brands/logitech.svg';
+            if (lowerName.includes('kingston')) return 'assets/images/brands/kingston.svg';
+            if (lowerName.includes('adata')) return 'assets/images/brands/adata.svg';
+            if (lowerName.includes('dell')) return 'assets/images/brands/dell.svg';
             return null;
         }
 
