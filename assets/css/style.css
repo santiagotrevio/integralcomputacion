@@ -2477,24 +2477,21 @@ details[open] summary {
   align-items: center;
   justify-content: center;
 
-  height: 45px !important;
-  /* Taller for better visibility */
-  padding: 2px 12px !important;
-  /* Less vertical padding to maximize logo size */
-  min-width: 80px;
+  height: 40px !important;
+  /* Good height for logos */
+  padding: 4px 12px !important;
+  min-width: 70px;
 
-  border-right: 1px solid #f8fafc;
-  border-bottom: 1px solid #f8fafc;
+  border-right: 1px solid #f1f5f9;
+  border-bottom: 1px solid #f1f5f9;
 
   opacity: 1 !important;
 }
 
 .brand-badge img {
-  height: 95% !important;
-  /* Fill almost all height */
+  height: 100% !important;
   width: auto;
-  max-width: 140px;
-  /* ALLOW WIDER LOGOS (Fix for Brother/Lexmark) */
+  max-width: 90px;
   object-fit: contain;
   display: block;
 }

@@ -1411,8 +1411,8 @@
                 const nameHighlighted = highlightText(prod.name, searchTerm);
 
                 card.innerHTML = `
-                    ${badgeHtml}
                     <div class="prod-image" ${imgClick}>
+                        ${badgeHtml}
                         ${imgHtml}
                     </div>
                     <div class="prod-info">
@@ -1445,9 +1445,9 @@
             const lowerName = prodName.toLowerCase();
 
             // User Provided Local PNGs (Highest Priority)
-            if (lowerName.includes('brother')) return 'assets/images/brands/brother.png';
-            if (lowerName.includes('canon')) return 'assets/images/brands/canon.png';
-            if (lowerName.includes('lexmark') || lowerName.includes('lx-')) return 'assets/images/brands/lexmark.png';
+            if (lowerName.includes('brother')) return 'assets/images/brands/brother.png?v=2';
+            if (lowerName.includes('canon')) return 'assets/images/brands/canon.png?v=2';
+            if (lowerName.includes('lexmark') || lowerName.includes('lx-')) return 'assets/images/brands/lexmark.png?v=2';
 
             // Other Local SVGs/PNGs (If available)
             if (lowerName.includes('hp') || lowerName.includes('hewlett')) return 'assets/images/brands/hp.svg';
