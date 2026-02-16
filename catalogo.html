@@ -1064,9 +1064,10 @@
         }
 
         .toast.hiding {
-            opacity: 0;
-            transform: translateY(-10px);
-            transition: all 0.3s ease;
+            opacity: 0 !important;
+            transform: translateY(-20px) !important;
+            transition: all 0.5s ease !important;
+            animation: none !important;
         }
 
         .prod-action {
@@ -1222,8 +1223,13 @@
             toastContainer.appendChild(toast);
 
             setTimeout(() => {
-                toast.classList.add('hiding');
-                toast.addEventListener('transitionend', () => toast.remove());
+                if (toast && toast.parentElement) {
+                    toast.classList.add('hiding');
+                    // Fallback to ensure removal if transition fails
+                    setTimeout(() => {
+                        if (toast.parentElement) toast.remove();
+                    }, 600);
+                }
             }, 2000);
         }
 
