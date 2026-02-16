@@ -273,6 +273,12 @@
                 <option value="papeleria">Papelería</option>
                 <option value="accesorios">Accesorios</option>
             </select>
+
+            <select id="sortFilter" class="filter-select" style="min-width: 140px; margin-left: 10px;">
+                <option value="relevance">Relevancia</option>
+                <option value="az">Nombre (A-Z)</option>
+                <option value="brand">Por Marca</option>
+            </select>
         </div>
         <!-- Result Count Display -->
         <p id="resultCount"
@@ -817,6 +823,7 @@
         const productGrid = document.getElementById('productGrid');
         const searchInput = document.getElementById('searchInput');
         const categoryFilter = document.getElementById('categoryFilter');
+        const sortFilter = document.getElementById('sortFilter');
         const pageTitle = document.getElementById('pageTitle');
         const cartCountEl = document.getElementById('cartCount');
         const resultCount = document.getElementById('resultCount');
@@ -827,6 +834,15 @@
 
         let productsDB = []; // Will be populated from CSV
         let cart = JSON.parse(localStorage.getItem('quoteCart')) || [];
+
+        function getBrand(name) {
+            const n = name.toLowerCase();
+            if (n.includes('brother') || n.includes('br-')) return 'Brother';
+            if (n.includes('canon')) return 'Canon';
+            if (n.includes('lexmark') || n.includes('lx-')) return 'Lexmark';
+            if (n.includes('hp')) return 'HP';
+            return 'Otros';
+        }
 
         // --- SOUND & UX UTILS ---
         function playSuccessSound() {
@@ -1094,11 +1110,12 @@
         function filterProducts() {
             const searchTerm = searchInput.value.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
             const categoryValue = categoryFilter.value;
+            const sortValue = sortFilter.value;
 
             // Scroll to top if filtering changes to avoid confusion
             // window.scrollTo({top: 0, behavior: 'smooth'}); 
 
-            const filtered = productsDB.filter(prod => {
+            let filtered = productsDB.filter(prod => {
                 if (!prod.name) return false;
 
                 const prodName = prod.name.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
@@ -1114,6 +1131,17 @@
                 return matchesSearch && matchesCategory;
             });
 
+            // Sorting Logic
+            if (sortValue === 'az') {
+                filtered.sort((a, b) => a.name.localeCompare(b.name));
+            } else if (sortValue === 'brand') {
+                filtered.sort((a, b) => {
+                    const brandA = getBrand(a.name);
+                    const brandB = getBrand(b.name);
+                    return brandA.localeCompare(brandB) || a.name.localeCompare(b.name);
+                });
+            }
+
             renderProducts(filtered);
         }
 
@@ -1126,6 +1154,18 @@
             if (codeParam === 'papeleria') pageTitle.innerText = 'Catálogo de Papelería';
             if (codeParam === 'accesorios') pageTitle.innerText = 'Accesorios de Cómputo';
         }
+
+        // Event Listeners
+        searchInput.addEventListener('input', filterProducts);
+        categoryFilter.addEventListener('change', () => {
+            filterProducts();
+            const val = categoryFilter.value;
+            if (val === 'all') pageTitle.innerText = 'Catálogo de Productos';
+            else if (val === 'toner') pageTitle.innerText = 'Catálogo de Tóners';
+            else if (val === 'papeleria') pageTitle.innerText = 'Catálogo de Papelería';
+            else if (val === 'accesorios') pageTitle.innerText = 'Accesorios de Cómputo';
+        });
+        sortFilter.addEventListener('change', filterProducts);
 
         // Sticky Search Bar Scroll Logic
         window.addEventListener('scroll', () => {
