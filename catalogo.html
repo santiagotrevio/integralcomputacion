@@ -476,12 +476,197 @@
         });
     </script>
 
+    <!-- Lightbox Modal -->
+    <div id="lightbox" class="lightbox" onclick="closeLightbox()">
+        <img id="lightbox-img" src="" alt="Zoom Producto">
+    </div>
+
+    <!-- Scroll to Top Button -->
+    <button id="scrollToTop" class="scroll-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+        <i class="fa-solid fa-arrow-up"></i>
+    </button>
+
     <!-- Toast Notification Container -->
     <div id="toast-container"
-        style="position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); z-index: 1000;"></div>
+        style="position: fixed; bottom: 80px; left: 50%; transform: translateX(-50%); z-index: 1000; display: flex; flex-direction: column; gap: 10px; align-items: center; pointer-events: none;">
+    </div>
 
-    <!-- CUSTOM STYLES FOR CART & ANIMATIONS -->
+    <!-- CUSTOM STYLES FOR UX IMPROVEMENTS -->
     <style>
+        /* Sticky Search Bar */
+        .search-container.sticky {
+            position: sticky;
+            top: 10px;
+            z-index: 100;
+            margin-top: 10px;
+            margin-bottom: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .search-container.sticky .search-box {
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(226, 232, 240, 0.8);
+        }
+
+        /* Skeleton Loading */
+        .skeleton-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            display: grid;
+            grid-template-columns: 80px 1fr auto;
+            gap: 1.5rem;
+            align-items: center;
+            border: 1px solid #f1f5f9;
+        }
+
+        .skeleton-box {
+            background: linear-gradient(90deg, #f0f9ff 25%, #e0f2fe 50%, #f0f9ff 75%);
+            background-size: 200% 100%;
+            animation: shimmer 1.5s infinite;
+            border-radius: 6px;
+        }
+
+        /* Brand Colors (Subtle border accent) */
+        .brand-brother {
+            border-left: 4px solid #007bc0 !important;
+        }
+
+        .brand-canon {
+            border-left: 4px solid #cc0000 !important;
+        }
+
+        .brand-lexmark {
+            border-left: 4px solid #009639 !important;
+        }
+
+        .brand-hp {
+            border-left: 4px solid #0096d6 !important;
+        }
+
+        @keyframes shimmer {
+            0% {
+                background-position: 200% 0;
+            }
+
+            100% {
+                background-position: -200% 0;
+            }
+        }
+
+        /* Staggered Fade-in Animation */
+        .product-list-card {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.4s ease forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Search Highlight */
+        .highlight {
+            background-color: var(--ic-yellow);
+            color: var(--ic-dark-gray);
+            padding: 0 2px;
+            border-radius: 2px;
+            font-weight: bold;
+        }
+
+        /* Copy Button */
+        .copy-btn {
+            background: transparent;
+            border: none;
+            color: #94a3b8;
+            cursor: pointer;
+            margin-left: 8px;
+            transition: color 0.2s;
+        }
+
+        .copy-btn:hover {
+            color: var(--ic-cyan);
+        }
+
+        /* Lightbox */
+        .lightbox {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .lightbox.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .lightbox img {
+            max-width: 90%;
+            max-height: 80vh;
+            border-radius: 8px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+        }
+
+        .lightbox.active img {
+            transform: scale(1);
+        }
+
+        /* Scroll to Top */
+        .scroll-to-top {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            /* Left side to balance WA button */
+            width: 50px;
+            height: 50px;
+            background: white;
+            color: var(--ic-dark-gray);
+            border: none;
+            border-radius: 50%;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            font-size: 1.2rem;
+            cursor: pointer;
+            z-index: 990;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.3s ease;
+            pointer-events: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .scroll-to-top.show {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+
+        .scroll-to-top:hover {
+            background: var(--ic-cyan);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
         /* Cart Count Style */
         .cart-count {
             position: absolute;
@@ -521,20 +706,21 @@
 
         /* Toast Notification Styles */
         .toast {
-            background: rgba(15, 23, 42, 0.9);
+            background: rgba(15, 23, 42, 0.95);
             color: white;
-            padding: 12px 24px;
+            padding: 10px 20px;
             border-radius: 50px;
-            margin-top: 10px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
             font-family: var(--ic-font);
-            font-size: 0.95rem;
+            font-size: 0.9rem;
+            font-weight: 600;
             display: flex;
             align-items: center;
             gap: 10px;
             animation: slideUpFade 0.3s ease-out forwards;
             opacity: 0;
             transform: translateY(20px);
+            pointer-events: auto;
         }
 
         @keyframes slideUpFade {
@@ -608,6 +794,17 @@
                 flex-direction: row;
                 justify-content: flex-end;
             }
+
+            .skeleton-card {
+                grid-template-columns: 80px 1fr auto;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .skeleton-card {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
         }
     </style>
 
@@ -624,6 +821,9 @@
         const cartCountEl = document.getElementById('cartCount');
         const resultCount = document.getElementById('resultCount');
         const toastContainer = document.getElementById('toast-container');
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        const scrollToTopBtn = document.getElementById('scrollToTop');
 
         let productsDB = []; // Will be populated from CSV
         let cart = JSON.parse(localStorage.getItem('quoteCart')) || [];
@@ -651,22 +851,55 @@
             } catch (e) { console.warn("Audio error", e); }
         }
 
+        function playCopySound() {
+            try {
+                const AudioContext = window.AudioContext || window.webkitAudioContext;
+                if (!AudioContext) return;
+                const ctx = new AudioContext();
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+                osc.type = 'triangle';
+                osc.frequency.setValueAtTime(800, ctx.currentTime);
+                gain.gain.setValueAtTime(0.05, ctx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.05);
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+                osc.start();
+                osc.stop(ctx.currentTime + 0.1);
+            } catch (e) { }
+        }
+
         function showToast(message, icon = 'fa-check-circle') {
-            // Remove ANY existing toasts immediately to prevent stacking
             toastContainer.innerHTML = '';
 
             const toast = document.createElement('div');
             toast.className = 'toast';
-            toast.innerHTML = `<i class="fa-solid ${icon}" style="color: #22c55e;"></i> <span>${message}</span>`;
+            toast.innerHTML = `<i class="fa-solid ${icon}" style="color: #4ade80;"></i> <span>${message}</span>`;
 
             toastContainer.appendChild(toast);
 
-            // Hide after 2 seconds
             setTimeout(() => {
                 toast.classList.add('hiding');
                 toast.addEventListener('transitionend', () => toast.remove());
             }, 2000);
         }
+
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                showToast(`Código copiado: ${text}`, 'fa-clipboard-check');
+                playCopySound();
+            });
+        }
+
+        function openLightbox(src) {
+            lightboxImg.src = src;
+            lightbox.classList.add('active');
+        }
+
+        function closeLightbox() {
+            lightbox.classList.remove('active');
+        }
+
         // ------------------------
 
         function updateCartCount() {
@@ -691,13 +924,10 @@
                     btn.style.borderColor = 'var(--ic-magenta)';
                 }
 
-                // UX: Play Sound & Animate Cart
                 playSuccessSound();
                 cartCountEl.classList.add('cart-bump');
                 setTimeout(() => cartCountEl.classList.remove('cart-bump'), 300);
-
-                // UX: Show notification
-                showToast(`Agregado: ${product.name.substring(0, 30)}...`);
+                showToast(`Agregado: ${product.name.substring(0, 25)}...`);
 
             } else {
                 // Remove from cart
@@ -709,42 +939,80 @@
                     btn.style.color = 'var(--ic-cyan)';
                     btn.style.borderColor = 'var(--ic-cyan)';
                 }
-                updateCartCount(); // Just update count silently on remove
-                return; // Exit early to avoid re-triggering animation for removal if not desired
             }
 
             localStorage.setItem('quoteCart', JSON.stringify(cart));
             updateCartCount();
         }
 
+        function highlightText(text, query) {
+            if (!query) return text;
+            const regex = new RegExp(`(${query})`, 'gi');
+            return text.replace(regex, '<span class="highlight">$1</span>');
+        }
+
+        function getBrandClass(name) {
+            const n = name.toLowerCase();
+            if (n.includes('brother') || n.includes('br-')) return 'brand-brother'; // Blue
+            if (n.includes('canon')) return 'brand-canon'; // Red
+            if (n.includes('lexmark') || n.includes('lx-')) return 'brand-lexmark'; // Green
+            if (n.includes('hp')) return 'brand-hp'; // Blue HP
+            return '';
+        }
+
+        // Show Skeleton Loader
+        function showSkeleton() {
+            let html = '';
+            for (let i = 0; i < 6; i++) {
+                html += `
+                    <div class="skeleton-card">
+                        <div class="skeleton-box" style="width:80px; height:80px;"></div>
+                        <div style="width:100%">
+                            <div class="skeleton-box" style="width:80px; height:20px; margin-bottom:10px;"></div>
+                            <div class="skeleton-box" style="width:60%; height:24px; margin-bottom:10px;"></div>
+                            <div class="skeleton-box" style="width:90%; height:16px;"></div>
+                        </div>
+                        <div class="skeleton-box" style="width:100px; height:40px;"></div>
+                    </div>
+                `;
+            }
+            productGrid.innerHTML = html;
+        }
+
         // Function to Load CSV
         function loadProducts() {
-            Papa.parse('assets/data/productos.csv', {
-                download: true,
-                header: true,
-                skipEmptyLines: true,
-                complete: function (results) {
-                    console.log("CSV Loaded:", results.data);
-                    productsDB = results.data;
-                    filterProducts(); // Initial render
-                },
-                error: function (err) {
-                    console.error("Error loading CSV:", err);
-                    if (window.location.protocol === 'file:') {
-                        productGrid.innerHTML = `
-                            <div style="text-align:center; padding: 2rem; color: #dc2626; background: #fef2f2; border-radius: 12px;">
-                                <i class="fa-solid fa-triangle-exclamation" style="font-size: 2.5rem; margin-bottom: 1rem;"></i>
-                                <h3 style="margin-bottom: 0.5rem; font-weight: 800;">Bloqueo de Seguridad del Navegador</h3>
-                                <p>Este error ocurre al abrir el archivo localmente. Publica la web o usa un servidor local.</p>
-                            </div>
-                        `;
+            showSkeleton(); // Show loading state
+
+            // Simulate slight delay to see animations for demo
+            setTimeout(() => {
+                Papa.parse('assets/data/productos.csv', {
+                    download: true,
+                    header: true,
+                    skipEmptyLines: true,
+                    complete: function (results) {
+                        console.log("CSV Loaded:", results.data);
+                        productsDB = results.data;
+                        filterProducts();
+                    },
+                    error: function (err) {
+                        console.error("Error loading CSV:", err);
+                        if (window.location.protocol === 'file:') {
+                            productGrid.innerHTML = `
+                                <div style="text-align:center; padding: 2rem; color: #dc2626; background: #fef2f2; border-radius: 12px;">
+                                    <i class="fa-solid fa-triangle-exclamation" style="font-size: 2.5rem; margin-bottom: 1rem;"></i>
+                                    <h3>Error de Archivo Local</h3>
+                                    <p>Este error ocurre al abrir archivos locales por seguridad. Usa un servidor local.</p>
+                                </div>
+                            `;
+                        }
                     }
-                }
-            });
+                });
+            }, 600); // 600ms artificial delay for skeleton feel
         }
 
         // Render Logic
         function renderProducts(products) {
+            const searchTerm = searchInput.value.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
             productGrid.innerHTML = '';
 
             // Update Result Count
@@ -762,7 +1030,7 @@
                 return;
             }
 
-            products.forEach(prod => {
+            products.forEach((prod, index) => {
                 let icon = 'fa-box';
                 if (prod.category === 'toner') icon = 'fa-print';
                 if (prod.category === 'papeleria') icon = 'fa-pen-ruler';
@@ -775,21 +1043,36 @@
                 const btnStyle = isInCart ? 'background-color: var(--ic-magenta); color: white; border-color: var(--ic-magenta);' : '';
 
                 const card = document.createElement('div');
-                card.className = 'product-list-card';
+                // Brand Class for left-border color
+                const brandClass = getBrandClass(prod.name);
+                card.className = `product-list-card ${brandClass}`;
+
+                // Add staggered animation delay
+                card.style.animationDelay = `${index * 0.05}s`;
 
                 // Image Handling
                 let imgHtml = `<i class="fa-solid ${icon}"></i>`;
+                let imgClick = '';
                 if (prod.image && prod.image.trim() !== '') {
                     imgHtml = `<img src="${prod.image}" alt="${prod.name}" loading="lazy" onerror="this.onerror=null;this.parentNode.innerHTML='<i class=\\'fa-solid ${icon}\\'></i>'">`;
+                    imgClick = `onclick="openLightbox('${prod.image}')" style="cursor: zoom-in;"`;
                 }
 
+                // Highlight Text Logic
+                const nameHighlighted = highlightText(prod.name, searchTerm);
+
                 card.innerHTML = `
-                    <div class="prod-image">
+                    <div class="prod-image" ${imgClick}>
                         ${imgHtml}
                     </div>
                     <div class="prod-info">
-                        <span class="prod-code">${prod.id}</span>
-                        <h3>${prod.name}</h3>
+                        <span class="prod-code">
+                            ${prod.id}
+                            <button class="copy-btn" onclick="copyToClipboard('${prod.id}')" title="Copiar código">
+                                <i class="fa-regular fa-copy"></i>
+                            </button>
+                        </span>
+                        <h3>${nameHighlighted}</h3>
                         <p class="prod-desc">${prod.description}</p>
                     </div>
                     <div class="prod-action">
@@ -811,6 +1094,9 @@
         function filterProducts() {
             const searchTerm = searchInput.value.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
             const categoryValue = categoryFilter.value;
+
+            // Scroll to top if filtering changes to avoid confusion
+            // window.scrollTo({top: 0, behavior: 'smooth'}); 
 
             const filtered = productsDB.filter(prod => {
                 if (!prod.name) return false;
@@ -840,6 +1126,26 @@
             if (codeParam === 'papeleria') pageTitle.innerText = 'Catálogo de Papelería';
             if (codeParam === 'accesorios') pageTitle.innerText = 'Accesorios de Cómputo';
         }
+
+        // Sticky Search Bar Scroll Logic
+        window.addEventListener('scroll', () => {
+            const searchContainer = document.querySelector('.search-container');
+            const heroHeight = document.querySelector('.catalog-hero').offsetHeight;
+            const scrollPos = window.scrollY;
+
+            if (scrollPos > heroHeight - 100) {
+                searchContainer.classList.add('sticky');
+            } else {
+                searchContainer.classList.remove('sticky');
+            }
+
+            // Scroll to Top Button Visibility
+            if (scrollPos > 500) {
+                scrollToTopBtn.classList.add('show');
+            } else {
+                scrollToTopBtn.classList.remove('show');
+            }
+        });
 
         // Event Listeners
         searchInput.addEventListener('input', filterProducts);
