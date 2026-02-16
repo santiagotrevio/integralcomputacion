@@ -87,6 +87,39 @@ for p in canon_data:
         "img": local_img_path
     })
 
+# Load scraped data (Brother)
+try:
+    with open('assets/data/scraped_toners_brother.json', 'r') as f:
+        brother_data = json.load(f)
+except FileNotFoundError:
+    brother_data = []
+
+# Load Image Map (Brother)
+try:
+    with open('assets/data/brother_images_map.json', 'r') as f:
+        brother_image_map_list = json.load(f)
+        # Use lowercase keys for robust matching
+        brother_image_map = {item['sku'].lower(): item['img'] for item in brother_image_map_list}
+except FileNotFoundError:
+    brother_image_map = {}
+
+# Process Brother products
+for p in brother_data:
+    sku_key = p['sku'].lower()
+    img_filename = f"brother-{sku_key}.png"
+    
+    if sku_key in brother_image_map:
+        local_img_path = download_image(brother_image_map[sku_key], img_filename)
+    else:
+        local_img_path = "assets/images/products/toner/generic-box.png"
+        
+    formatted_products.append({
+        "sku": p['sku'],
+        "name": p.get('name', p.get('title', 'Unknown Product')),
+        "desc": p.get('description', p.get('title', 'Disponible bajo pedido.')),
+        "img": local_img_path
+    })
+
 products_data = formatted_products
 
 # Read existing products first to append (Videovigilancia items)
@@ -102,7 +135,7 @@ try:
 except FileNotFoundError:
     header = ['id', 'category', 'name', 'description', 'image']
 
-# Append new scraped Lexmark products
+# Append new scraped toner products (Lexmark + Canon + Brother)
 for p in products_data:
     existing_products.append([
         p['sku'],
@@ -118,4 +151,4 @@ with open('assets/data/productos.csv', 'w', newline='', encoding='utf-8') as f:
     writer.writerow(header)
     writer.writerows(existing_products)
 
-print(f"Replaced toner catalog with {len(products_data)} real Lexmark products. Total products: {len(existing_products)}")
+print(f"Replaced toner catalog with real products (Lexmark, Canon, Brother). Total products: {len(existing_products)}")
