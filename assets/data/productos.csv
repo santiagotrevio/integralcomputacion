@@ -34,15 +34,15 @@ LX56F4000,toner,Lexmark 56F4000 cartucho de tóner,Lexmark 56F4000 cartucho de t
 LX58D4000,toner,"Tóner Lexmark 58D4000 Super Alto Rendimiento Negro, 7.500 Páginas","Tóner Lexmark 58D4000 Super Alto Rendimiento Negro, 7.500 Páginas",assets/images/products/toner/lexmark-lx58d4000.png
 LX56F0Z00,toner,Tambor de imagen Lexmark Láser - Original - Negro - 60000 Páginas,Tambor de imagen Lexmark Láser - Original - Negro - 60000 Páginas,assets/images/products/toner/lexmark-lx56f0z00.png
 LXB224H00,toner,TONER LEXMARK B224H00 NEGRO,TONER LEXMARK B224H00 NEGRO,assets/images/products/toner/lexmark-lxb224h00.png
-LXB224,toner,Cartucho de impresion Lexmark negro del programa de retorno,Cartucho de impresion Lexmark negro del programa de retorno,assets/images/products/toner/generic-box.png
+LX20N40K0,toner,Cartucho de impresion Lexmark negro del programa de retorno (20N40K0),Cartucho de impresion Lexmark negro del programa de retorno (20N40K0),assets/images/products/toner/lexmark-lx20n40k0.png
 LX50F0Z00,toner,"Lexmark Unidad de Imagen 50F0Z00, 60.000 Páginas","Lexmark Unidad de Imagen 50F0Z00, 60.000 Páginas",assets/images/products/toner/lexmark-lx50f0z00.png
-LX20N40C0,toner,"Tóner Lexmark 20N40C0 Cian, 1.500 Páginas","Tóner Lexmark 20N40C0 Cian, 1.500 Páginas",assets/images/products/toner/generic-box.png
-LX20N40M0,toner,"Tóner Lexmark 20N40M0 Magenta, 1.500 Páginas","Tóner Lexmark 20N40M0 Magenta, 1.500 Páginas",assets/images/products/toner/generic-box.png
-LX20N40Y0,toner,"Tóner Lexmark 20N40Y0 Amarillo, 1.500 Páginas","Tóner Lexmark 20N40Y0 Amarillo, 1.500 Páginas",assets/images/products/toner/generic-box.png
+LX20N40C0,toner,"Tóner Lexmark 20N40C0 Cian, 1.500 Páginas","Tóner Lexmark 20N40C0 Cian, 1.500 Páginas",assets/images/products/toner/lexmark-lx20n40c0.png
+LX20N40M0,toner,"Tóner Lexmark 20N40M0 Magenta, 1.500 Páginas","Tóner Lexmark 20N40M0 Magenta, 1.500 Páginas",assets/images/products/toner/lexmark-lx20n40m0.png
+LX20N40Y0,toner,"Tóner Lexmark 20N40Y0 Amarillo, 1.500 Páginas","Tóner Lexmark 20N40Y0 Amarillo, 1.500 Páginas",assets/images/products/toner/lexmark-lx20n40y0.png
 LX20N4XC0,toner,Tóner Lexmark 20N4XC0 Rendimiento Extra Alto Color Cian,Tóner Lexmark 20N4XC0 Rendimiento Extra Alto Color Cian,assets/images/products/toner/lexmark-lx20n4xc0.png
 LX20N4XK0,toner,Tóner Lexmark 20N4XK0 Rendimiento Extra Alto Color Negro,Tóner Lexmark 20N4XK0 Rendimiento Extra Alto Color Negro,assets/images/products/toner/lexmark-lx20n4xk0.png
-LX20N4XM0,toner,Tóner Lexmark 20N4XM0 Rendimiento Extra Alto Color Magenta,Tóner Lexmark 20N4XM0 Rendimiento Extra Alto Color Magenta,assets/images/products/toner/generic-box.png
-LX20N4XY0,toner,Tóner Lexmark 20N4XY0 Rendimiento Extra Alto Color Amarillo,Tóner Lexmark 20N4XY0 Rendimiento Extra Alto Color Amarillo,assets/images/products/toner/generic-box.png
+LX20N4XM0,toner,Tóner Lexmark 20N4XM0 Rendimiento Extra Alto Color Magenta,Tóner Lexmark 20N4XM0 Rendimiento Extra Alto Color Magenta,assets/images/products/toner/lexmark-lx20n4xm0.png
+LX20N4XY0,toner,Tóner Lexmark 20N4XY0 Rendimiento Extra Alto Color Amarillo,Tóner Lexmark 20N4XY0 Rendimiento Extra Alto Color Amarillo,assets/images/products/toner/lexmark-lx20n4xy0.png
 LX58D4H00,toner,"Tóner Lexmark 58D4H00 Super Alto Rendimiento Negro, 15.000 Páginas","Tóner Lexmark 58D4H00 Super Alto Rendimiento Negro, 15.000 Páginas",assets/images/products/toner/lexmark-lx58d4h00.png
 LX60F4000,toner,TONER LEXMARK 60F4000 NEGRO,TONER LEXMARK 60F4000 NEGRO,assets/images/products/toner/lexmark-lx60f4000.png
 LX78C40K0,toner,TONER LEXMARK 78C40K0 NEGRO,TONER LEXMARK 78C40K0 NEGRO,assets/images/products/toner/lexmark-lx78c40k0.png
@@ -71,6 +71,8 @@ LXB344X00,toner,Tóner Lexmark Rendimiento Extra Alto Programa Devolución para 
 LXX264A11G,toner,TONER LEXMARK X264A11G NEGRO,TONER LEXMARK X264A11G NEGRO,assets/images/products/toner/lexmark-lxx264a11g.png
 LX25KMS,toner,TONER NEGRO HASTA 25K PAGINAS LASER MONOCROMATICO,TONER NEGRO HASTA 25K PAGINAS LASER MONOCROMATICO,assets/images/products/toner/generic-box.png
 LXB220Z00,toner,UNIDAD DE IMAGEN LEXMARK B220Z00,UNIDAD DE IMAGEN LEXMARK B220Z00,assets/images/products/toner/lexmark-lxb220z00.png
+LX55B0ZA0,toner,"Lexmark Fotoconductor 55B0ZA0, 40.000 Páginas","Lexmark Fotoconductor 55B0ZA0, 40.000 Páginas",assets/images/products/toner/lexmark-lx55b0za0.png
+LX3070166,toner,CINTA LEXMARK #24XX,CINTA LEXMARK #24XX,assets/images/products/toner/lexmark-lx3070166.png
 CA057,toner,TONER ORIGINAL CANON 057 NEGRO,"Cartucho de Tóner 057 Negro, con rendimiento hasta de 3,100 páginas. Compatible con los modelos: LBP226DW y MF445DW",assets/images/products/toner/canon-ca057.png
 CA121,toner,CARTUCHO CANON PARA TONER 121 NEGRO .,Cartucho de tóner original Canon 121 Negro para impresoras seleccionadas.,assets/images/products/toner/canon-ca121.png
 CA137,toner,TONER ORIGINAL CANON 137 NEGRO,Cartucho de tóner original Canon 137 Negro.,assets/images/products/toner/canon-ca137.png

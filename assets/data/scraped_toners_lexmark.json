@@ -30,9 +30,9 @@
         "image_url": "https://memomedia.com.mx/storage/images/products/toner-lexmark-b224h00-negro.jpg"
     },
     {
-        "sku": "LXB224",
-        "name": "Cartucho de impresion Lexmark negro del programa de retorno",
-        "description": "Cartucho de impresion Lexmark negro del programa de retorno",
+        "sku": "LX20N40K0",
+        "name": "Cartucho de impresion Lexmark negro del programa de retorno (20N40K0)",
+        "description": "Cartucho de impresion Lexmark negro del programa de retorno (20N40K0)",
         "image_url": "https://memomedia.com.mx/storage/images/products/cartucho-de-impresion-lexmark-negro-del-programa-de-retorno.jpg"
     },
     {
@@ -250,5 +250,17 @@
         "name": "UNIDAD DE IMAGEN LEXMARK B220Z00",
         "description": "UNIDAD DE IMAGEN LEXMARK B220Z00",
         "image_url": "https://memomedia.com.mx/storage/images/products/unidad-de-imagen-lexmark-b220z00.jpg"
+    },
+    {
+        "sku": "LX55B0ZA0",
+        "name": "Lexmark Fotoconductor 55B0ZA0, 40.000 P\u00e1ginas",
+        "description": "Lexmark Fotoconductor 55B0ZA0, 40.000 P\u00e1ginas",
+        "image_url": ""
+    },
+    {
+        "sku": "LX3070166",
+        "name": "CINTA LEXMARK #24XX",
+        "description": "CINTA LEXMARK #24XX",
+        "image_url": ""
     }
 ]

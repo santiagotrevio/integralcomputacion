@@ -652,17 +652,20 @@
         }
 
         function showToast(message, icon = 'fa-check-circle') {
+            // Remove ANY existing toasts immediately to prevent stacking
+            toastContainer.innerHTML = '';
+
             const toast = document.createElement('div');
             toast.className = 'toast';
             toast.innerHTML = `<i class="fa-solid ${icon}" style="color: #22c55e;"></i> <span>${message}</span>`;
 
             toastContainer.appendChild(toast);
 
-            // Hide after 3 seconds
+            // Hide after 2 seconds
             setTimeout(() => {
                 toast.classList.add('hiding');
                 toast.addEventListener('transitionend', () => toast.remove());
-            }, 3000);
+            }, 2000);
         }
         // ------------------------
 
