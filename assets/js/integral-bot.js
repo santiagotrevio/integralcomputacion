@@ -11,7 +11,7 @@
         name: "Asistente Integral",
         color: "var(--ic-cyan)", // Default to cyan if var exists
         whatsapp: "523312680092",
-        welcomeMsg: "Hola 👋, bienvenido a Integral Computación. Soy tu asesor virtual experto en suministros de impresión. ¿Qué estás buscando hoy?",
+        welcomeMsg: "Hola 👋, bienvenido a Integral Computación. Soy tu asesor experto en suministros de impresión. ¿Qué estás buscando hoy?",
         fallbackMsg: "Entendido. Para darte el mejor precio, ¿te gustaría que un asesor humano revise tu solicitud en WhatsApp?",
         soundEnabled: true
     };
@@ -407,76 +407,77 @@
         const lower = text.toLowerCase();
 
         // --- 0. SOCIAL & CHIT-CHAT (Make it human) ---
-        const greetings = ['hola', 'buenos', 'buenas', 'que tal', 'hey', 'saludos'];
+        const greetings = ['hola', 'buenos', 'buenas', 'que tal', 'hey', 'saludos', 'hi'];
         if (greetings.some(g => lower.includes(g)) && lower.length < 20) {
-            addMessage(`¡Hola! 👋 Es un gusto saludarte. Soy el Asistente Virtual de Integral. <br>Puedo ayudarte a buscar tóners, cartuchos y papelería para tu oficina. ¿Qué necesitas hoy?`, 'bot');
+            addMessage(`¡Hola! 👋 Soy el Asistente Virtual de Integral. Te puedo ayudar a encontrar tóners, tambores y cartuchos para tus equipos.<br>¿Qué necesitas?`, 'bot');
+            showSuggestions(); // Show quick options
             return;
         }
 
         if (lower.includes('gracias')) {
-            addMessage(`¡Con todo gusto! 😊 Aquí sigo si necesitas algo más.`, 'bot');
+            addMessage(`¡Con todo gusto! 😊 Aquí sigo pendiente.`, 'bot');
             return;
         }
 
-        if (lower.includes('quien eres') || lower.includes('eres un robot')) {
-            addMessage(`Soy el asistente virtual inteligente de Integral Computación 🤖. Mi trabajo es ayudarte a encontrar productos y cotizar rapidísimo.`, 'bot');
+        // --- 1. INTENT DETECTION (Specific Needs) ---
+
+        // TECHNICAL SUPPORT -> CONSUMABLE SALES RE-DIRECTION
+        if (lower.includes('descompuso') || lower.includes('falla') || lower.includes('no imprime') || lower.includes('error') || lower.includes('mancha') || lower.includes('raya') || lower.includes('sucia') || lower.includes('reparar') || lower.includes('servicio')) {
+            addMessage(`Entiendo. 😟 Te comento que **no contamos con servicio técnico de reparación**, somos especialistas en venta de suministros.<br><br>Muchas veces estos problemas de calidad se resuelven cambiando el **Tóner** o el **Tambor de Imagen**.<br>¿Te gustaría buscar el repuesto para tu modelo?`, 'bot');
+            setTimeout(() => {
+                const chipsHtml = `
+                    <div style="display:flex; flex-wrap:wrap; gap:5px; margin-top:5px;">
+                        <button onclick="document.getElementById('ic-input').value='Buscar Tóner'; document.getElementById('ic-send').click();" style="border:1px solid #0096d6; color:#0096d6; background:white; padding:5px 10px; border-radius:15px; cursor:pointer; font-size:12px;">🔍 Buscar Consumibles</button>
+                        <button onclick="window.open('https://wa.me/${CONFIG.whatsapp}?text=Ayuda,%20tengo%20problemas%20con%20mi%20impresora', '_blank')" style="border:1px solid #25d366; color:#25d366; background:white; padding:5px 10px; border-radius:15px; cursor:pointer; font-size:12px;"><i class="fa-brands fa-whatsapp"></i> Preguntar en WhatsApp</button>
+                    </div>
+                `;
+                addMessage(chipsHtml, 'bot');
+            }, 600);
             return;
         }
-
-        if (lower.includes('ayuda') || lower === '?') {
-            addMessage(`Claro, es fácil. Solo escribe el **modelo de tu impresora** (ej. "HP 1102") o el **código del cartucho** (ej. "85A") y yo lo buscaré por ti.`, 'bot');
-            return;
-        }
-
-        // --- 1. FAQs & SERVICE INFO ---
 
         // Quote Intent
         if (lower.includes('cotiza') || lower.includes('precio') || lower.includes('costo')) {
-            addMessage(`Para darte el precio exacto, necesito saber el modelo. Escribe por ejemplo "Tóner 85A" o "Brother 1060" y te mostraré las opciones.`, 'bot');
+            addMessage(`Para darte precio, necesito saber el modelo exacto. Por ejemplo escribe: **"Tóner 85A"** o **"Cartucho Brother"**.`, 'bot');
             return;
         }
 
-        // Location
-        if (lower.includes('ubicacion') || lower.includes('donde estan') || lower.includes('direccion') || lower.includes('local')) {
-            addMessage(`Nos encontramos en Guadalajara, Jalisco. 📍 <a href="https://maps.google.com/?q=Integral+Computacion" target="_blank" style="color:#0096d6;text-decoration:underline;">Ver Ubicación en Mapa</a>.`, 'bot');
-            return;
+        // Location/Hours/Contact
+        if (lower.includes('ubicacion') || lower.includes('donde estan') || lower.includes('direccion')) {
+            addMessage(`Estamos en Guadalajara, Jalisco. 📍 <a href="https://maps.google.com/?q=Integral+Computacion" target="_blank" style="color:#0096d6;text-decoration:underline;">Ver Ubicación en Mapa</a>.`, 'bot'); showSuggestions(); return;
         }
-
-        // Invoice
+        if (lower.includes('horario') || lower.includes('abierto')) {
+            addMessage(`🕒 **Lunes a Viernes:** 9:00 AM - 6:30 PM<br>🕒 **Sábados:** 10:00 AM - 2:00 PM`, 'bot'); showSuggestions(); return;
+        }
+        if (lower.includes('telefono') || lower.includes('correo') || lower.includes('llamar')) {
+            addMessage(`📞 Tel: (33) 3126 8009<br>📱 WhatsApp: 33 1268 0092<br>✉️ ventas@integralcomputacion.com`, 'bot'); showSuggestions(); return;
+        }
         if (lower.includes('factura')) {
-            addMessage(`¡Sí facturamos! ✍️ Todos nuestros precios ya incluyen IVA. Solo envíanos tu constancia fiscal al confirmar tu pedido.`, 'bot');
-            return;
-        }
-
-        // Hours (New)
-        if (lower.includes('horario') || lower.includes('a que hora') || lower.includes('abierto')) {
-            addMessage(`Nuestros horarios de atención son:<br>🕒 **Lunes a Viernes:** 9:00 AM - 6:30 PM<br>🕒 **Sábados:** 10:00 AM - 2:00 PM`, 'bot');
-            return;
-        }
-
-        // Contact (New)
-        if (lower.includes('telefono') || lower.includes('celular') || lower.includes('correo') || lower.includes('llamar')) {
-            addMessage(`Puedes contactarnos directamente aquí:<br>📞 Tel: (33) 3126 8009<br>📱 WhatsApp: <a href="https://wa.me/523312680092" target="_blank">33 1268 0092</a><br>✉️ Correo: ventas@integralcomputacion.com`, 'bot');
-            return;
+            addMessage(`¡Sí facturamos! ✍️ Precios netos. Envíanos tu constancia al pedir.`, 'bot'); showSuggestions(); return;
         }
 
         // --- 2. PRODUCT SEARCH (The Core) ---
         if (typeof productsDB !== 'undefined') {
-            // Tokenize: Remove stop words and split by spaces
-            const stopWords = ['el', 'la', 'los', 'las', 'un', 'una', 'unos', 'unas', 'de', 'del', 'para', 'por', 'con', 'en', 'y', 'o', 'que', 'quiero', 'necesito', 'busco', 'me', 'interesa', 'tienes', 'hay', 'hola', 'buenos', 'dias', 'tardes', 'noches', 'cotizar', 'precio', 'costo', 'cuanto', 'cuesta', 'vale', 'mi', 'mis', 'tu', 'tus', 'su', 'sus', 'soy', 'esta', 'estoy', 'tengo', 'falla', 'fallando', 'impresora', 'impresion', 'vendes'];
-
+            const stopWords = ['el', 'la', 'los', 'las', 'un', 'una', 'unos', 'unas', 'de', 'del', 'para', 'por', 'con', 'en', 'y', 'o', 'que', 'quiero', 'necesito', 'busco', 'me', 'interesa', 'tienes', 'hay', 'hola', 'soy', 'esta', 'estoy', 'tengo', 'impresora', 'impresion', 'vendes'];
             const tokens = lower.split(/[\s,.;:!?]+/).filter(t => t.length > 1 && !stopWords.includes(t));
 
             if (tokens.length > 0) {
-                const results = productsDB.filter(p => {
-                    // Include Category in search text
+                let results = productsDB.filter(p => {
                     const pText = (p.name + " " + p.id + " " + (p.category || "") + " " + (p.description || "")).toLowerCase();
-                    // Strict: ALL tokens must be present
                     return tokens.every(token => pText.includes(token));
                 });
 
+                // --- SMART SORTING (Sales Logic) ---
+                // If user wants high yield, boost items with "X", "H", or "Alto Rendimiento"
+                if (lower.includes('rendimiento') || lower.includes('dure') || lower.includes('durar') || lower.includes('muchas') || lower.includes('alto')) {
+                    results.sort((a, b) => {
+                        const scoreA = (a.name.includes('Alto Rendimiento') ? 2 : 0) + (a.id.endsWith('X') || a.id.endsWith('H') ? 1 : 0);
+                        const scoreB = (b.name.includes('Alto Rendimiento') ? 2 : 0) + (b.id.endsWith('X') || b.id.endsWith('H') ? 1 : 0);
+                        return scoreB - scoreA;
+                    });
+                }
+
                 if (results.length > 0) {
-                    // Show top 3 results
                     const topResults = results.slice(0, 3);
                     let cardsHtml = topResults.map(p => `
                         <div class="ic-prod-card">
@@ -489,7 +490,16 @@
                         </div>
                     `).join('');
 
-                    const msg = `¡Encontré ${results.length > 3 ? 'varias' : results.length} opciones! Aquí las mejores:<br>${cardsHtml}`;
+                    // --- CROSS-SELLING TIP ---
+                    let tip = "";
+                    if (lower.includes('tambor') || lower.includes('drum') || lower.includes('imagen')) {
+                        tip = `<br><br>💡 <em>Tip Pro: Si cambias el tambor, revisa si tu <strong>Tóner</strong> también necesita cambio para asegurar la mejor calidad.</em>`;
+                    }
+
+                    // --- SAFETY DISCLAIMER ---
+                    const disclaimer = `<br><span style="font-size:10px; color:#64748b; margin-top:8px; display:block; opacity:0.8;">⚠️ <em>Por favor verifica que el modelo sea compatible con tu equipo.</em></span>`;
+
+                    const msg = `¡Encontré ${results.length > 3 ? 'varias' : results.length} opciones! Aquí tienes:${cardsHtml}${tip}${disclaimer}`;
                     addMessage(msg, 'bot');
                     return;
                 }
@@ -497,12 +507,23 @@
         }
 
         // --- 3. FALLBACK (Friendly Handoff) ---
-        addMessage(`Mmm... no encontré exactamente "${text}" en mi base de datos rápida. 🤔<br><br>Pero seguro lo conseguimos. ¿Te gustaría preguntar a un asesor humano por WhatsApp?`, 'bot');
-        // Add a button message for cleaner look
+        addMessage(`Mmm... no encontré exactamente "${text}". 😅<br>Recuerda que solo vendemos suministros (tóners, tambores, cintas).<br>Intenta con el modelo de tu cartucho o elige:`, 'bot');
+        showSuggestions();
+    }
+
+    // Helper: Show Suggestion Chips
+    function showSuggestions() {
         setTimeout(() => {
-            const btnMsg = `<a href="https://wa.me/${CONFIG.whatsapp}?text=Hola,%20busco:%20${encodeURIComponent(text)}" target="_blank" class="ic-msg-btn" style="display:inline-block; background:#25d366; color:white; padding:8px 15px; text-decoration:none; border-radius:20px; font-weight:bold; box-shadow:0 2px 5px rgba(0,0,0,0.1);"><i class="fa-brands fa-whatsapp"></i> Preguntar disponibilidad</a>`;
-            addMessage(btnMsg, 'bot');
-        }, 400); // Small delay for effect
+            const chipsHtml = `
+                <div style="display:flex; flex-wrap:wrap; gap:5px; margin-top:5px;">
+                    <button onclick="document.getElementById('ic-input').value='Buscar Tóner HP'; document.getElementById('ic-send').click();" style="border:1px solid #0096d6; color:#0096d6; background:white; padding:5px 10px; border-radius:15px; cursor:pointer; font-size:12px;">🔍 Buscar Tóner</button>
+                    <button onclick="document.getElementById('ic-input').value='Buscar Tambor'; document.getElementById('ic-send').click();" style="border:1px solid #0096d6; color:#0096d6; background:white; padding:5px 10px; border-radius:15px; cursor:pointer; font-size:12px;">🥁 Buscar Tambor</button>
+                    <button onclick="document.getElementById('ic-input').value='Horario'; document.getElementById('ic-send').click();" style="border:1px solid #0096d6; color:#0096d6; background:white; padding:5px 10px; border-radius:15px; cursor:pointer; font-size:12px;">🕒 Horarios</button>
+                    <button onclick="document.getElementById('ic-input').value='Ubicación'; document.getElementById('ic-send').click();" style="border:1px solid #0096d6; color:#0096d6; background:white; padding:5px 10px; border-radius:15px; cursor:pointer; font-size:12px;">📍 Ubicación</button>
+                </div>
+            `;
+            addMessage(chipsHtml, 'bot');
+        }, 500);
     }
 
     // Global helper for the button inside chat
