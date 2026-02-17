@@ -2503,7 +2503,7 @@ details[open] summary {
 /* --- ULTIMATE MOBILE FIXES --- */
 @media (max-width: 768px) {
 
-  /* [DEBUG] Force header clean and hide potential overlays */
+  /* [ULTIMATE] Restored clean header and fixed menu visibility */
   header {
     padding-top: 5px !important;
     padding-bottom: 5px !important;
@@ -2512,8 +2512,8 @@ details[open] summary {
     margin-top: 0 !important;
     z-index: 2000 !important;
     box-shadow: none !important;
-    background: red !important;
-    /* RED DEBUG COLOR - IF BAR IS WHITE, IT IS NOT HEADER */
+    background: white !important;
+    /* Reverted to white */
     top: 0 !important;
   }
 
@@ -2521,11 +2521,26 @@ details[open] summary {
   header::before,
   header::after,
   body::before,
-  body::after,
-  .nav-links {
+  body::after {
     display: none !important;
     content: none !important;
   }
+
+  /* Fix nav-links to not overlay when hidden */
+  .nav-links {
+    visibility: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+    transition: visibility 0.3s, opacity 0.3s;
+  }
+
+  .nav-links.active {
+    visibility: visible !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+  }
+
+
 
   .nav-container {
     height: auto;
