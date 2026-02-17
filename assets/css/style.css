@@ -2522,19 +2522,26 @@ details[open] summary {
   /* 2. Maximize Product Image Size */
   .prod-image {
     height: auto !important;
-    min-height: 300px;
+    min-height: 200px;
+    /* Reduced from 300px to avoid empty space */
+    background: transparent !important;
+    /* Remove grey stripe */
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 1rem;
-    padding: 1rem;
+    margin-bottom: 0.5rem;
+    padding: 0 !important;
+    /* Remove padding */
   }
 
   .prod-image img {
     width: 100% !important;
-    height: 100% !important;
+    height: auto !important;
+    /* Let width dictate height (aspect ratio) */
     max-width: 100% !important;
     object-fit: contain;
+    transform: scale(1.1);
+    /* Slight zoom to maximize content */
   }
 
   /* 3. Larger Brand Badge */
