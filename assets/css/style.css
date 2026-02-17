@@ -2544,9 +2544,31 @@ details[open] summary {
 
   .nav-container {
     height: auto;
-    min-height: 70px;
+    min-height: 60px;
     padding-top: 10px;
     padding-bottom: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    gap: 0.5rem;
+    /* Tighter gap */
+  }
+
+  /* Compact Header Buttons for Small Screens */
+  .header-btn {
+    padding: 0.4rem 0.6rem !important;
+    font-size: 0.8rem !important;
+    white-space: nowrap;
+    /* Prevent text wrapping */
+  }
+
+  .header-btn i {
+    margin-right: 4px;
+    /* Icon spacing */
+  }
+
+  .logo img {
+    height: 32px !important;
+    /* Slightly smaller logo for fit */
   }
 
   /* 2. Maximize Product Image Size */
