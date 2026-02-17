@@ -2634,23 +2634,24 @@ details[open] summary {
   }
 
   .organic-shape {
-    /* Simplify shape for mobile to avoid cropping issues */
-    width: 95% !important;
+    /* Restore Organic Blob look */
+    width: 90% !important;
     margin: 0 auto 1.5rem auto !important;
     height: auto !important;
-    aspect-ratio: auto !important;
-    max-height: none !important;
-    border-radius: 24px !important;
+    /* Square ratio for blob */
+    aspect-ratio: 1 / 1 !important;
+    max-height: 400px;
+    /* Force blob shape */
+    border-radius: 54% 46% 42% 58% / 60% 41% 59% 40% !important;
     overflow: hidden;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.08);
-    /* Soft shadow */
+    box-shadow: none !important;
   }
 
   .organic-shape img {
     width: 100% !important;
-    height: auto !important;
-    object-fit: contain !important;
-    /* Show full image */
+    height: 100% !important;
+    /* Crop to fill shape */
+    object-fit: cover !important;
     border-radius: 0 !important;
   }
 
