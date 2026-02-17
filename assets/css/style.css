@@ -2634,13 +2634,24 @@ details[open] summary {
   }
 
   .organic-shape {
-    /* Ensure image isn't cut off or too huge */
-    width: 90% !important;
+    /* Simplify shape for mobile to avoid cropping issues */
+    width: 95% !important;
     margin: 0 auto 1.5rem auto !important;
     height: auto !important;
-    aspect-ratio: 1 / 1 !important;
-    /* Square shape to prevent vertical cropping */
-    max-height: 350px;
+    aspect-ratio: auto !important;
+    max-height: none !important;
+    border-radius: 24px !important;
+    overflow: hidden;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.08);
+    /* Soft shadow */
+  }
+
+  .organic-shape img {
+    width: 100% !important;
+    height: auto !important;
+    object-fit: contain !important;
+    /* Show full image */
+    border-radius: 0 !important;
   }
 
   .hero-buttons {
