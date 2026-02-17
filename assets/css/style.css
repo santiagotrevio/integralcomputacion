@@ -2538,8 +2538,8 @@ details[open] summary {
     height: auto !important;
     max-width: 100% !important;
     object-fit: contain;
-    transform: scale(1.8);
-    /* Maximum impact (80% larger) */
+    transform: scale(2.5);
+    /* Ultra Zoom (250%) */
   }
 
   /* 3. Larger Brand Badge */
