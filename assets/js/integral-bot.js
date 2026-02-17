@@ -426,26 +426,35 @@
 
         // 4. Product Search (The Intelligent Part)
         if (typeof productsDB !== 'undefined') {
-            const results = productsDB.filter(p =>
-                p.name.toLowerCase().includes(lower) ||
-                p.id.toLowerCase().includes(lower) ||
-                (p.description && p.description.toLowerCase().includes(lower))
-            );
+            // Tokenize: Remove stop words and split by spaces
+            const stopWords = ['el', 'la', 'los', 'las', 'un', 'una', 'unos', 'unas', 'de', 'del', 'para', 'por', 'con', 'en', 'y', 'o', 'que', 'quiero', 'necesito', 'busco', 'me', 'interesa', 'tienes', 'hay', 'hola', 'buenos', 'dias', 'tardes', 'noches', 'cotizar', 'precio', 'costo', 'cuanto', 'cuesta', 'vale', 'mi', 'mis', 'tu', 'tus', 'su', 'sus', 'soy', 'esta', 'estoy', 'tengo', 'falla', 'fallando', 'impresora', 'impresion'];
+
+            const tokens = lower.split(/[\s,.;:!?]+/).filter(t => t.length > 1 && !stopWords.includes(t));
+            let results = [];
+
+            if (tokens.length > 0) {
+                results = productsDB.filter(p => {
+                    const pText = (p.name + " " + p.id + " " + (p.description || "")).toLowerCase();
+                    // Strict: ALL tokens must be present
+                    return tokens.every(token => pText.includes(token));
+                });
+            }
 
             if (results.length > 0) {
-                const bestMatch = results[0];
-                const msg = `
-                    ¡Lo encontré! Mira:
+                // Show top 3 results
+                const topResults = results.slice(0, 3);
+                let cardsHtml = topResults.map(p => `
                     <div class="ic-prod-card">
-                        <img src="${bestMatch.image || 'assets/images/logo.svg'}" alt="Product">
+                        <img src="${p.image || 'assets/images/logo.svg'}" onerror="this.src='assets/images/logo.svg'" alt="Product">
                         <div class="ic-prod-card-info">
-                            <h5>${bestMatch.name}</h5>
-                            <small>Código: ${bestMatch.id}</small> <br>
-                            <button class="ic-prod-btn" onclick="window.addToCartFromBot('${bestMatch.id}')">Agregar a Cotización</button>
+                            <h5>${p.name}</h5>
+                            <small>ID: ${p.id}</small> <br>
+                            <button class="ic-prod-btn" onclick="window.addToCartFromBot('${p.id}')">Agregar</button>
                         </div>
                     </div>
-                    ¿Te gustaría saber algo más?
-                `;
+                `).join('');
+
+                const msg = `¡Encontré ${results.length > 3 ? 'varias' : results.length} opciones! Aquí las mejores:<br>${cardsHtml}`;
                 addMessage(msg, 'bot');
                 return;
             }
