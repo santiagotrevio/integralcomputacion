@@ -2503,17 +2503,28 @@ details[open] summary {
 /* --- ULTIMATE MOBILE FIXES --- */
 @media (max-width: 768px) {
 
-  /* 1. Safe Area Header Fix - Adjusted */
+  /* [DEBUG] Force header clean and hide potential overlays */
   header {
-    padding-top: 10px;
-    /* Minimal padding for spacing, no safe-area forcing */
-    padding-left: 0;
-    padding-right: 0;
-    z-index: 2000;
-    /* Ensure above everything */
-    box-shadow: none;
-    /* Remove shadow on mobile header to be safe */
-    margin-top: 0;
+    padding-top: 5px !important;
+    padding-bottom: 5px !important;
+    height: auto !important;
+    min-height: 0 !important;
+    margin-top: 0 !important;
+    z-index: 2000 !important;
+    box-shadow: none !important;
+    background: red !important;
+    /* RED DEBUG COLOR - IF BAR IS WHITE, IT IS NOT HEADER */
+    top: 0 !important;
+  }
+
+  /* Hide potential overlay sources */
+  header::before,
+  header::after,
+  body::before,
+  body::after,
+  .nav-links {
+    display: none !important;
+    content: none !important;
   }
 
   .nav-container {
