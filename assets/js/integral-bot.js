@@ -475,13 +475,22 @@
 
             const tokens = lower.split(/[\s,.;:!?]+/).filter(t => t.length > 1 && !stopWords.includes(t));
 
-            // A. GENERIC QUERY GUARD (e.g. "Toner", "Cartucho")
+            // A. QUERY REFINEMENT (Guides the user to specific products)
             const hasBrand = tokens.some(t => brands.includes(t));
             const isGeneric = tokens.length > 0 && tokens.every(t => genericTerms.includes(t));
+            const isBrandOnly = tokens.length > 0 && tokens.every(t => brands.includes(t) || genericTerms.includes(t));
 
+            // 1. Generic Only ("Toner", "Cartucho") -> Ask Brand
             if (tokens.length > 0 && isGeneric && !hasBrand) {
                 addMessage(`Veo que buscas consumibles. Para mostrarte las opciones compatibles, ¿podrías indicarme la **marca** de tu impresora?`, 'bot');
                 showBrandSuggestions();
+                return;
+            }
+
+            // 2. Brand Only ("Toner HP", "Brother") -> Ask Model
+            if (tokens.length > 0 && isBrandOnly && hasBrand) {
+                const brand = tokens.find(t => brands.includes(t)).toUpperCase();
+                addMessage(`Entendido, buscas para **${brand}**. 📄<br>Para darte el precio exacto, ¿podrías decirme el modelo de tu cartucho o impresora? (Ej. "85A", "1060", "D111")`, 'bot');
                 return;
             }
 
@@ -494,7 +503,6 @@
                 });
 
                 // --- SMART SORTING (Sales Logic) ---
-                // If user wants high yield, boost items with "X", "H", or "Alto Rendimiento"
                 if (lower.includes('rendimiento') || lower.includes('dure') || lower.includes('durar') || lower.includes('muchas') || lower.includes('alto')) {
                     results.sort((a, b) => {
                         const scoreA = (a.name.includes('Alto Rendimiento') ? 2 : 0) + (a.id.endsWith('X') || a.id.endsWith('H') ? 1 : 0);
