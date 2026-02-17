@@ -206,6 +206,24 @@
                 margin-top: 0 !important;
                 top: 0 !important;
                 height: auto !important;
+                box-shadow: none !important;
+                /* Remove shadow */
+                z-index: 2000 !important;
+                /* Ensure on top */
+                background: white !important;
+            }
+
+            /* Hide potential overlay sources */
+            header::before,
+            header::after,
+            body::before,
+            body::after,
+            .header-top-line::before,
+            .header-top-line::after {
+                display: none !important;
+                content: none !important;
+                height: 0 !important;
+                width: 0 !important;
             }
 
             body,
