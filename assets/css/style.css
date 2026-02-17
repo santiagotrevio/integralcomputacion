@@ -2540,8 +2540,8 @@ details[open] summary {
     /* Let width dictate height (aspect ratio) */
     max-width: 100% !important;
     object-fit: contain;
-    transform: scale(1.35);
-    /* Significant zoom to counter internal padding */
+    transform: scale(1.55);
+    /* Massive zoom per user request (55% larger) */
   }
 
   /* 3. Larger Brand Badge */
