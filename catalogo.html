@@ -321,6 +321,10 @@
                         <span>Lexmark</span>
                     </label>
                     <label class="filter-check">
+                        <input type="checkbox" name="brand" value="Xerox" onchange="filterProducts()">
+                        <span>Xerox</span>
+                    </label>
+                    <label class="filter-check">
                         <input type="checkbox" name="brand" value="Otros" onchange="filterProducts()">
                         <span>Otros</span>
                     </label>
@@ -1456,8 +1460,8 @@
             if (lowerName.includes('lexmark') || lowerName.includes('lx-')) return 'assets/images/brands/lexmark.png?v=2';
 
             // Other Local SVGs/PNGs (If available)
-            if (lowerName.includes('hp') || lowerName.includes('hewlett')) return 'assets/images/brands/hp.svg';
-            if (lowerName.includes('xerox')) return 'assets/images/brands/xerox.svg';
+            if (lowerName.includes('hp') || lowerName.includes('hewlett')) return 'assets/images/brands/hp.png?v=2';
+            if (lowerName.includes('xerox')) return 'assets/images/brands/xerox.png?v=2';
             if (lowerName.includes('epson')) return 'assets/images/brands/epson.svg';
 
             // Remote PNGs (Reliable fallback for problematic brands)
