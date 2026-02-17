@@ -459,8 +459,22 @@
         // --- 2. PRODUCT SEARCH (The Core) ---
         if (typeof productsDB !== 'undefined') {
             const stopWords = ['el', 'la', 'los', 'las', 'un', 'una', 'unos', 'unas', 'de', 'del', 'para', 'por', 'con', 'en', 'y', 'o', 'que', 'quiero', 'necesito', 'busco', 'me', 'interesa', 'tienes', 'hay', 'hola', 'soy', 'esta', 'estoy', 'tengo', 'impresora', 'impresion', 'vendes'];
+            const genericTerms = ['toner', 'cartucho', 'tinta', 'tambor', 'cilindro', 'chip', 'fusor', 'unidad', 'consumible', 'consumibles'];
+            const brands = ['hp', 'brother', 'canon', 'xerox', 'lexmark', 'samsung', 'kyocera', 'epson', 'ricoh'];
+
             const tokens = lower.split(/[\s,.;:!?]+/).filter(t => t.length > 1 && !stopWords.includes(t));
 
+            // A. GENERIC QUERY GUARD (e.g. "Toner", "Cartucho")
+            const hasBrand = tokens.some(t => brands.includes(t));
+            const isGeneric = tokens.length > 0 && tokens.every(t => genericTerms.includes(t));
+
+            if (tokens.length > 0 && isGeneric && !hasBrand) {
+                addMessage(`Veo que buscas consumibles. Para mostrarte las opciones compatibles, ¿podrías indicarme la **marca** de tu impresora?`, 'bot');
+                showBrandSuggestions();
+                return;
+            }
+
+            // B. SPECIFIC SEARCH
             if (tokens.length > 0) {
                 let results = productsDB.filter(p => {
                     const pText = (p.name + " " + p.id + " " + (p.category || "") + " " + (p.description || "")).toLowerCase();
@@ -523,6 +537,17 @@
                 </div>
             `;
             addMessage(chipsHtml, 'bot');
+        }, 500);
+    }
+
+    function showBrandSuggestions() {
+        setTimeout(() => {
+            const brands = ['HP', 'Brother', 'Canon', 'Lexmark', 'Xerox'];
+            const html = brands.map(b =>
+                `<button onclick="document.getElementById('ic-input').value='${b}'; document.getElementById('ic-send').click();" style="border:1px solid #0096d6; color:#0096d6; background:white; padding:5px 10px; border-radius:15px; cursor:pointer; font-size:12px; margin-right:5px; margin-bottom:5px;">${b}</button>`
+            ).join('');
+
+            addMessage(`<div style="display:flex; flex-wrap:wrap; margin-top:5px;">${html}</div>`, 'bot');
         }, 500);
     }
 
