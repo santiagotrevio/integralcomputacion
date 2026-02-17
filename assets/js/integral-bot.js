@@ -404,7 +404,8 @@
 
     function processBotResponse(text) {
         showTyping(false);
-        const lower = text.toLowerCase();
+        // Normalize: Lowercase + Remove Accents (Fixes "Ubicación" vs "ubicacion")
+        const lower = text.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 
         // --- 0. SOCIAL & CHIT-CHAT (Make it human) ---
         const greetings = ['hola', 'buenos', 'buenas', 'que tal', 'hey', 'saludos', 'hi'];
@@ -456,9 +457,19 @@
             addMessage(`¡Sí facturamos! ✍️ Precios netos. Envíanos tu constancia al pedir.`, 'bot'); showSuggestions(); return;
         }
 
+        // Human Handoff Intent
+        if (lower.includes('humano') || lower.includes('persona') || lower.includes('asesor') || lower.includes('gente')) {
+            addMessage(`¡Claro! 🙋‍♂️ A veces es mejor hablar con una persona real.`, 'bot');
+            setTimeout(() => {
+                addMessage(`<a href="https://wa.me/${CONFIG.whatsapp}" target="_blank" class="ic-msg-btn" style="display:inline-block; background:#25d366; color:white; padding:8px 15px; text-decoration:none; border-radius:20px; font-weight:bold;"><i class="fa-brands fa-whatsapp"></i> Hablar por WhatsApp</a>`, 'bot');
+            }, 500);
+            return;
+        }
+
         // --- 2. PRODUCT SEARCH (The Core) ---
         if (typeof productsDB !== 'undefined') {
-            const stopWords = ['el', 'la', 'los', 'las', 'un', 'una', 'unos', 'unas', 'de', 'del', 'para', 'por', 'con', 'en', 'y', 'o', 'que', 'quiero', 'necesito', 'busco', 'me', 'interesa', 'tienes', 'hay', 'hola', 'soy', 'esta', 'estoy', 'tengo', 'impresora', 'impresion', 'vendes'];
+            // Updated Stop Words including "buscar", "encontrar"
+            const stopWords = ['el', 'la', 'los', 'las', 'un', 'una', 'unos', 'unas', 'de', 'del', 'para', 'por', 'con', 'en', 'y', 'o', 'que', 'quiero', 'necesito', 'busco', 'me', 'interesa', 'tienes', 'hay', 'hola', 'soy', 'esta', 'estoy', 'tengo', 'impresora', 'impresion', 'vendes', 'buscar', 'encontrar', 'comprar', 'cotizar', 'modelo'];
             const genericTerms = ['toner', 'cartucho', 'tinta', 'tambor', 'cilindro', 'chip', 'fusor', 'unidad', 'consumible', 'consumibles'];
             const brands = ['hp', 'brother', 'canon', 'xerox', 'lexmark', 'samsung', 'kyocera', 'epson', 'ricoh'];
 
@@ -477,7 +488,8 @@
             // B. SPECIFIC SEARCH
             if (tokens.length > 0) {
                 let results = productsDB.filter(p => {
-                    const pText = (p.name + " " + p.id + " " + (p.category || "") + " " + (p.description || "")).toLowerCase();
+                    // Use normalized strings for comparison too
+                    const pText = (p.name + " " + p.id + " " + (p.category || "") + " " + (p.description || "")).toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
                     return tokens.every(token => pText.includes(token));
                 });
 
@@ -521,7 +533,7 @@
         }
 
         // --- 3. FALLBACK (Friendly Handoff) ---
-        addMessage(`Mmm... no encontré exactamente "${text}". 😅<br>Recuerda que solo vendemos suministros (tóners, tambores, cintas).<br>Intenta con el modelo de tu cartucho o elige:`, 'bot');
+        addMessage(`Mmm... no encontré exactamente "${text}". 😅<br>Pero no te preocupes, un experto humano te puede ayudar en segundos:`, 'bot');
         showSuggestions();
     }
 
@@ -531,9 +543,8 @@
             const chipsHtml = `
                 <div style="display:flex; flex-wrap:wrap; gap:5px; margin-top:5px;">
                     <button onclick="document.getElementById('ic-input').value='Buscar Tóner HP'; document.getElementById('ic-send').click();" style="border:1px solid #0096d6; color:#0096d6; background:white; padding:5px 10px; border-radius:15px; cursor:pointer; font-size:12px;">🔍 Buscar Tóner</button>
-                    <button onclick="document.getElementById('ic-input').value='Buscar Tambor'; document.getElementById('ic-send').click();" style="border:1px solid #0096d6; color:#0096d6; background:white; padding:5px 10px; border-radius:15px; cursor:pointer; font-size:12px;">🥁 Buscar Tambor</button>
-                    <button onclick="document.getElementById('ic-input').value='Horario'; document.getElementById('ic-send').click();" style="border:1px solid #0096d6; color:#0096d6; background:white; padding:5px 10px; border-radius:15px; cursor:pointer; font-size:12px;">🕒 Horarios</button>
                     <button onclick="document.getElementById('ic-input').value='Ubicación'; document.getElementById('ic-send').click();" style="border:1px solid #0096d6; color:#0096d6; background:white; padding:5px 10px; border-radius:15px; cursor:pointer; font-size:12px;">📍 Ubicación</button>
+                    <button onclick="window.open('https://wa.me/${CONFIG.whatsapp}', '_blank')" style="border:1px solid #25d366; color:#25d366; background:white; padding:5px 10px; border-radius:15px; cursor:pointer; font-size:12px; font-weight:bold;"><i class="fa-brands fa-whatsapp"></i> Hablar con Humano</button>
                 </div>
             `;
             addMessage(chipsHtml, 'bot');
