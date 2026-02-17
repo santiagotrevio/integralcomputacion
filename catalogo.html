@@ -673,183 +673,331 @@
         </div>
     </footer>
 
-    <!-- Smart WhatsApp Widget -->
-    <div id="wa-widget" class="wa-widget">
-        <div class="wa-message" id="waMessage">
-            <span>👋 ¿Tienes dudas? ¡Cotiza aquí!</span>
-            <button class="wa-close" onclick="closeWaMsg()" aria-label="Cerrar mensaje">×</button>
+    <!-- Smart Assistant Widget (Agent 2) -->
+    <div id="smart-agent" class="smart-agent">
+        <!-- Chat Window -->
+        <div class="agent-window" id="agentWindow">
+            <div class="agent-header">
+                <div class="agent-avatar">
+                    <i class="fa-solid fa-robot"></i>
+                </div>
+                <div class="agent-info">
+                    <h4>Asistente Integral</h4>
+                    <span class="status-dot"></span> En línea
+                </div>
+                <button class="agent-close" onclick="toggleAgent()">×</button>
+            </div>
+
+            <div class="agent-body">
+                <div class="msg-bot">
+                    <p>Hola 👋, soy tu asistente virtual. ¿En qué puedo ayudarte hoy?</p>
+                </div>
+
+                <div class="agent-options">
+                    <button onclick="agentAction('search')">
+                        <i class="fa-solid fa-magnifying-glass"></i> Buscar un producto
+                    </button>
+                    <button onclick="agentAction('quote')">
+                        <i class="fa-solid fa-file-invoice"></i> Cotizar mi lista
+                    </button>
+                    <button onclick="agentAction('human')">
+                        <i class="fa-brands fa-whatsapp"></i> Hablar con un asesor
+                    </button>
+                </div>
+            </div>
+
+            <div class="agent-footer">
+                <small>Respondemos en minutos</small>
+            </div>
         </div>
-        <a href="https://wa.me/523312680092" target="_blank" class="wa-button" aria-label="Chatear por WhatsApp">
-            <i class="fa-brands fa-whatsapp"></i>
-        </a>
+
+        <!-- Trigger Button -->
+        <button class="agent-trigger" onclick="toggleAgent()" aria-label="Abrir asistente">
+            <span class="agent-badge" id="agentBadge" style="display:none">1</span>
+            <i class="fa-solid fa-comment-dots" id="agentIcon"></i>
+        </button>
     </div>
 
-    <!-- Widget Styles -->
+    <!-- Agent Styles -->
     <style>
-        .wa-widget {
+        .smart-agent {
             position: fixed;
             bottom: 30px;
             right: 30px;
-            z-index: 999;
-            display: flex;
-            align-items: flex-end;
-            flex-direction: column;
-            gap: 10px;
+            z-index: 1000;
+            font-family: var(--ic-font, sans-serif);
         }
 
-        .wa-button {
-            background: #25d366;
-            color: white;
+        .agent-trigger {
             width: 60px;
             height: 60px;
+            background: var(--ic-cyan);
+            color: white;
+            border-radius: 50%;
+            border: none;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            font-size: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+        }
+
+        .agent-trigger:hover {
+            transform: scale(1.1);
+        }
+
+        .agent-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: #ef4444;
+            color: white;
+            font-size: 12px;
+            font-weight: bold;
+            width: 20px;
+            height: 20px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 30px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            text-decoration: none;
-            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 2px solid white;
+            animation: bounce 2s infinite;
         }
 
-        .wa-button:hover {
-            transform: scale(1.1);
-        }
-
-        .wa-message {
-            background: white;
-            color: #334155;
-            padding: 12px 16px;
-            border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-            font-family: var(--ic-font, sans-serif);
-            font-size: 0.95rem;
-            font-weight: 600;
+        .agent-window {
             position: absolute;
-            right: 75px;
-            /* Position to the left of the button */
-            bottom: 8px;
-            /* Align with button */
-            white-space: nowrap;
+            bottom: 80px;
+            /* Above button */
+            right: 0;
+            width: 320px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
             opacity: 0;
-            transform: translateX(10px) scale(0.95);
-            transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+            transform: translateY(20px) scale(0.95);
             pointer-events: none;
+            transition: all 0.3s ease;
+            transform-origin: bottom right;
+        }
+
+        .agent-window.active {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+            pointer-events: auto;
+        }
+
+        .agent-header {
+            background: linear-gradient(135deg, var(--ic-blue), var(--ic-cyan));
+            color: white;
+            padding: 1rem;
             display: flex;
             align-items: center;
-            gap: 8px;
-            visibility: hidden;
+            gap: 12px;
         }
 
-        .wa-message.show {
-            opacity: 1;
-            transform: translateX(0) scale(1);
-            pointer-events: auto;
-            visibility: visible;
+        .agent-avatar {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
         }
 
-        /* Triangle Arrow */
-        .wa-message::after {
+        .agent-info h4 {
+            font-size: 1rem;
+            margin: 0;
+            font-weight: 700;
+        }
+
+        .agent-info {
+            flex: 1;
+        }
+
+        .status-dot {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background: #4ade80;
+            border-radius: 50%;
+            margin-right: 4px;
+        }
+
+        .agent-close {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            opacity: 0.8;
+        }
+
+        .agent-body {
+            padding: 1.5rem;
+            background: #f8fafc;
+        }
+
+        .msg-bot {
+            background: white;
+            padding: 12px;
+            border-radius: 12px 12px 12px 0;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            color: #334155;
+            position: relative;
+        }
+
+        .msg-bot::after {
             content: '';
             position: absolute;
-            right: -6px;
-            top: 50%;
-            transform: translateY(-50%);
-            border-width: 6px 0 6px 6px;
-            border-style: solid;
-            border-color: transparent transparent transparent white;
+            bottom: 0;
+            left: -8px;
+            width: 0;
+            height: 0;
+            border: 8px solid transparent;
+            border-right-color: white;
+            border-bottom: 0;
         }
 
-        .wa-close {
-            background: transparent;
-            border: none;
-            color: #94a3b8;
+        .agent-options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .agent-options button {
+            background: white;
+            border: 1px solid #e2e8f0;
+            padding: 12px;
+            border-radius: 10px;
+            text-align: left;
             cursor: pointer;
-            font-size: 1.2rem;
-            line-height: 1;
-            padding: 0 0 0 8px;
+            font-family: inherit;
+            color: var(--ic-dark-gray);
+            font-weight: 600;
+            transition: all 0.2s;
             display: flex;
             align-items: center;
-            transition: color 0.2s;
+            gap: 10px;
         }
 
-        .wa-close:hover {
-            color: #ef4444;
+        .agent-options button:hover {
+            background: var(--ic-cyan);
+            color: white;
+            border-color: var(--ic-cyan);
+            transform: translateX(5px);
         }
 
-        /* Mobile Optimization: Hide message on small screens */
-        @media (max-width: 768px) {
-            .wa-message {
-                display: none !important;
+        .agent-options button i {
+            color: var(--ic-cyan);
+            font-size: 1.1rem;
+        }
+
+        .agent-options button:hover i {
+            color: white;
+        }
+
+        .agent-footer {
+            padding: 10px;
+            text-align: center;
+            background: white;
+            border-top: 1px solid #f1f5f9;
+            color: #94a3b8;
+            font-size: 0.8rem;
+        }
+
+        @keyframes bounce {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-5px);
+            }
+        }
+
+        /* Mobile Adjustments */
+        @media (max-width: 480px) {
+            .agent-window {
+                width: calc(100vw - 40px);
+                right: -10px;
+                bottom: 90px;
             }
         }
     </style>
 
-    <!-- Widget Logic -->
+    <!-- Agent Logic -->
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const waMessage = document.getElementById('waMessage');
-            // Check session storage to ensure it only happens once per visit
-            let waShown = sessionStorage.getItem('waPopupShown');
+        function toggleAgent() {
+            const window = document.getElementById('agentWindow');
+            const badge = document.getElementById('agentBadge');
+            const icon = document.getElementById('agentIcon');
 
-            // Sound Effect Function (Synthesized "Pop")
-            function playPopSound() {
-                try {
-                    const AudioContext = window.AudioContext || window.webkitAudioContext;
-                    if (!AudioContext) return;
+            window.classList.toggle('active');
 
-                    const ctx = new AudioContext();
-                    const osc = ctx.createOscillator();
-                    const gain = ctx.createGain();
+            if (window.classList.contains('active')) {
+                badge.style.display = 'none'; // Hide notification dot
+                icon.className = 'fa-solid fa-xmark'; // Change to X
+            } else {
+                icon.className = 'fa-solid fa-comment-dots';
+            }
+        }
 
-                    osc.type = 'sine'; // Smooth tone
-                    // Frequency sweep for a "bubble pop" effect
-                    osc.frequency.setValueAtTime(800, ctx.currentTime);
-                    osc.frequency.exponentialRampToValueAtTime(100, ctx.currentTime + 0.1);
+        function agentAction(action) {
+            if (action === 'search') {
+                const searchInput = document.getElementById('searchInput'); // Main search bar
+                if (searchInput) {
+                    toggleAgent(); // Close agent
+                    // Scroll to search
+                    const headerHeight = document.querySelector('header').offsetHeight || 80;
+                    const searchRect = searchInput.getBoundingClientRect();
+                    const absoluteElementTop = searchRect.top + window.pageYOffset;
+                    const middle = absoluteElementTop - (window.innerHeight / 2) + (searchRect.height / 2);
+                    window.scrollTo({ top: middle, behavior: 'smooth' });
 
-                    // Volume envelope
-                    gain.gain.setValueAtTime(0.05, ctx.currentTime); // Very low volume (0.05)
-                    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.1);
-
-                    osc.connect(gain);
-                    gain.connect(ctx.destination);
-
-                    osc.start();
-                    osc.stop(ctx.currentTime + 0.15);
-                } catch (e) {
-                    console.warn("Audio play failed (autoplay policy or not supported):", e);
+                    // Focus
+                    setTimeout(() => searchInput.focus(), 600);
                 }
-            }
-
-            function closeWaMsg() {
-                if (waMessage) waMessage.classList.remove('show');
-            }
-            window.closeWaMsg = closeWaMsg; // Expose to global scope for onclick
-
-            if (!waShown) {
-                const scrollHandler = () => {
-                    // Trigger after scrolling 200px
-                    if (window.scrollY > 200) {
-                        // Mark as shown immediately so it doesn't trigger again
-                        sessionStorage.setItem('waPopupShown', 'true');
-                        window.removeEventListener('scroll', scrollHandler);
-
-                        // Visual Reveal
-                        if (window.innerWidth > 768) { // Only desktop
-                            waMessage.classList.add('show');
-                            playPopSound();
-
-                            // Optional: Auto-hide after 15 seconds if ignored
-                            setTimeout(() => {
-                                closeWaMsg();
-                            }, 15000);
-                        }
+            } else if (action === 'quote') {
+                // Check cart
+                const localCart = JSON.parse(localStorage.getItem('quoteCart')) || [];
+                if (localCart.length === 0) {
+                    // Show toast instead of alert if showToast exists
+                    if (typeof showToast === 'function') {
+                        showToast('Tu lista está vacía. Agrega productos.', 'fa-triangle-exclamation');
+                    } else {
+                        alert('Tu lista de cotización está vacía. Agrega productos primero.');
                     }
-                };
-
-                window.addEventListener('scroll', scrollHandler, { passive: true });
+                    toggleAgent();
+                } else {
+                    // Redirect to cart or WA
+                    window.location.href = 'carrito.html';
+                }
+            } else if (action === 'human') {
+                window.open('https://wa.me/523312680092?text=Hola,%20quisiera%20hablar%20con%20un%20asesor.', '_blank');
             }
-        });
+        }
+
+        // Auto-show badge after delay
+        setTimeout(() => {
+            if (!sessionStorage.getItem('agentgreeted')) {
+                const badge = document.getElementById('agentBadge');
+                if (badge) badge.style.display = 'flex';
+                sessionStorage.setItem('agentgreeted', 'true');
+            }
+        }, 5000);
     </script>
 
     <!-- Lightbox Modal -->
@@ -1186,8 +1334,8 @@
     </style>
 
     <!-- SCRIPTS -->
-    <!-- PapaParse for CSV -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+    <!-- Load Products Database (JSON format) -->
+    <script src="assets/js/productos.js"></script>
 
     <script>
         // DOM Elements
@@ -1203,7 +1351,7 @@
         const lightboxImg = document.getElementById('lightbox-img');
         const scrollToTopBtn = document.getElementById('scrollToTop');
 
-        let productsDB = []; // Will be populated from CSV
+
         let cart = JSON.parse(localStorage.getItem('quoteCart')) || [];
 
         function getBrand(name) {
@@ -1372,35 +1520,26 @@
             productGrid.innerHTML = html;
         }
 
-        // Function to Load CSV
+        // Function to Load Products (from JS file)
         function loadProducts() {
             showSkeleton(); // Show loading state
 
             // Simulate slight delay to see animations for demo
             setTimeout(() => {
-                Papa.parse('assets/data/productos.csv', {
-                    download: true,
-                    header: true,
-                    skipEmptyLines: true,
-                    complete: function (results) {
-                        console.log("CSV Loaded:", results.data);
-                        productsDB = results.data;
-                        filterProducts();
-                    },
-                    error: function (err) {
-                        console.error("Error loading CSV:", err);
-                        if (window.location.protocol === 'file:') {
-                            productGrid.innerHTML = `
-                                <div style="text-align:center; padding: 2rem; color: #dc2626; background: #fef2f2; border-radius: 12px;">
-                                    <i class="fa-solid fa-triangle-exclamation" style="font-size: 2.5rem; margin-bottom: 1rem;"></i>
-                                    <h3>Error de Archivo Local</h3>
-                                    <p>Este error ocurre al abrir archivos locales por seguridad. Usa un servidor local.</p>
-                                </div>
-                            `;
-                        }
-                    }
-                });
-            }, 600); // 600ms artificial delay for skeleton feel
+                if (typeof productsDB !== 'undefined' && Array.isArray(productsDB)) {
+                    console.log("Products Loaded from JS:", productsDB.length);
+                    filterProducts();
+                } else {
+                    console.error("Error: productsDB not found.");
+                    productGrid.innerHTML = `
+                        <div style="text-align:center; padding: 2rem; color: #dc2626; background: #fef2f2; border-radius: 12px;">
+                            <i class="fa-solid fa-triangle-exclamation" style="font-size: 2.5rem; margin-bottom: 1rem;"></i>
+                            <h3>Error de Datos</h3>
+                            <p>No se pudo cargar la base de datos de productos.</p>
+                        </div>
+                    `;
+                }
+            }, 300);
         }
 
         // Render Logic
