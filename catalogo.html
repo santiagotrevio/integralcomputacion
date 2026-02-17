@@ -673,8 +673,10 @@
         </div>
     </footer>
 
-    <!-- Smart Assistant Widget (Agent 2) -->
-    <div id="smart-agent" class="smart-agent">
+    <!-- Chatbot Intelligent Module -->
+    <!-- Note: productos.js must be loaded before -->
+    <script src="assets/js/integral-bot.js"></script>
+    <div id="smart-agent" class="smart-agent" style="display:none !important">
         <!-- Chat Window -->
         <div class="agent-window" id="agentWindow">
             <div class="agent-header">
@@ -938,67 +940,9 @@
         }
     </style>
 
-    <!-- Agent Logic -->
-    <script>
-        function toggleAgent() {
-            const window = document.getElementById('agentWindow');
-            const badge = document.getElementById('agentBadge');
-            const icon = document.getElementById('agentIcon');
 
-            window.classList.toggle('active');
-
-            if (window.classList.contains('active')) {
-                badge.style.display = 'none'; // Hide notification dot
-                icon.className = 'fa-solid fa-xmark'; // Change to X
-            } else {
-                icon.className = 'fa-solid fa-comment-dots';
-            }
-        }
-
-        function agentAction(action) {
-            if (action === 'search') {
-                const searchInput = document.getElementById('searchInput'); // Main search bar
-                if (searchInput) {
-                    toggleAgent(); // Close agent
-                    // Scroll to search
-                    const headerHeight = document.querySelector('header').offsetHeight || 80;
-                    const searchRect = searchInput.getBoundingClientRect();
-                    const absoluteElementTop = searchRect.top + window.pageYOffset;
-                    const middle = absoluteElementTop - (window.innerHeight / 2) + (searchRect.height / 2);
-                    window.scrollTo({ top: middle, behavior: 'smooth' });
-
-                    // Focus
-                    setTimeout(() => searchInput.focus(), 600);
-                }
-            } else if (action === 'quote') {
-                // Check cart
-                const localCart = JSON.parse(localStorage.getItem('quoteCart')) || [];
-                if (localCart.length === 0) {
-                    // Show toast instead of alert if showToast exists
-                    if (typeof showToast === 'function') {
-                        showToast('Tu lista está vacía. Agrega productos.', 'fa-triangle-exclamation');
-                    } else {
-                        alert('Tu lista de cotización está vacía. Agrega productos primero.');
-                    }
-                    toggleAgent();
-                } else {
-                    // Redirect to cart or WA
-                    window.location.href = 'carrito.html';
-                }
-            } else if (action === 'human') {
-                window.open('https://wa.me/523312680092?text=Hola,%20quisiera%20hablar%20con%20un%20asesor.', '_blank');
-            }
-        }
-
-        // Auto-show badge after delay
-        setTimeout(() => {
-            if (!sessionStorage.getItem('agentgreeted')) {
-                const badge = document.getElementById('agentBadge');
-                if (badge) badge.style.display = 'flex';
-                sessionStorage.setItem('agentgreeted', 'true');
-            }
-        }, 5000);
-    </script>
+    const badge = document.getElementById('agentBadge');
+    const icon = document.getElementById('agentIcon');
 
     <!-- Lightbox Modal -->
     <div id="lightbox" class="lightbox" onclick="closeLightbox()">
@@ -1528,6 +1472,25 @@
             setTimeout(() => {
                 if (typeof productsDB !== 'undefined' && Array.isArray(productsDB)) {
                     console.log("Products Loaded from JS:", productsDB.length);
+
+                    // Check for Add Action from Bot
+                    const urlParams = new URLSearchParams(window.location.search);
+                    const addId = urlParams.get('add');
+                    if (addId) {
+                        const product = productsDB.find(p => p.id === addId);
+                        if (product) {
+                            // Check if already in cart to avoid toggling off
+                            const inCart = cart.some(item => item.id === addId);
+                            if (!inCart) {
+                                toggleCart(addId);
+                                showToast(`¡${product.name} agregado a tu lista!`, 'fa-cart-plus');
+                            }
+                            // Clean URL
+                            const newUrl = window.location.pathname + window.location.search.replace(/[\?&]add=[^&]+/, '').replace(/^&/, '?');
+                            window.history.replaceState({}, '', newUrl);
+                        }
+                    }
+
                     filterProducts();
                 } else {
                     console.error("Error: productsDB not found.");
