@@ -1507,7 +1507,7 @@
                     const prodBrand = getBrand(prod.name).toLowerCase();
                     matchesBrand = checkedBrands.includes(prodBrand);
                     // Handle "otros" if needed broadly or specific brand matching logic
-                    if (checkedBrands.includes('otros') && !['brother', 'canon', 'hp', 'lexmark'].includes(prodBrand)) {
+                    if (checkedBrands.includes('otros') && !['brother', 'canon', 'hp', 'lexmark', 'xerox'].includes(prodBrand)) {
                         matchesBrand = true;
                     }
                 }
