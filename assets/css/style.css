@@ -2638,8 +2638,9 @@ details[open] summary {
     width: 90% !important;
     margin: 0 auto 1.5rem auto !important;
     height: auto !important;
-    aspect-ratio: 1 / 0.8 !important;
-    /* Maintain reasonable shape */
+    aspect-ratio: 1 / 1 !important;
+    /* Square shape to prevent vertical cropping */
+    max-height: 350px;
   }
 
   .hero-buttons {
