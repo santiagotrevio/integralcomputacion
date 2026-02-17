@@ -2505,7 +2505,7 @@ details[open] summary {
 
   /* [ULTIMATE] Restored clean header and fixed menu visibility */
   header {
-    padding-top: 5px !important;
+    padding-top: 0 !important;
     padding-bottom: 5px !important;
     height: auto !important;
     min-height: 0 !important;
@@ -2580,11 +2580,17 @@ details[open] summary {
   }
 
   /* Ensure Header Elements don't overlap */
-  .logo-wrapper {
-    z-index: 1003;
+  /* Ensure Header Elements don't overlap and Logo links work */
+  .logo-wrapper,
+  .logo {
+    z-index: 2001;
+    position: relative;
+    pointer-events: auto !important;
   }
 
   .header-actions {
-    z-index: 1003;
+    z-index: 2001;
+    /* Match logo z-index */
+    pointer-events: auto !important;
   }
 }
