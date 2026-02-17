@@ -63,9 +63,9 @@ LXC3240M0,toner,TONER LEXMARK C3240M0 MAGENTA,TONER LEXMARK C3240M0 MAGENTA,asse
 LXC3240Y0,toner,TONER LEXMARK C3240Y0 AMARILLO,TONER LEXMARK C3240Y0 AMARILLO,assets/images/products/toner/lexmark-lxc3240y0.png
 LXB254X00,toner,TONER LEXMARK NEGRO EXTRA ALTO RENDIMIENTO B254X00,TONER LEXMARK NEGRO EXTRA ALTO RENDIMIENTO B254X00,assets/images/products/toner/lexmark-lxb254x00.png
 LXB224X00,toner,TONER LEXMARK NEGRO EXTRA ALTO RENDIMIENTO PROG DEVOLUCION B224X00,TONER LEXMARK NEGRO EXTRA ALTO RENDIMIENTO PROG DEVOLUCION B224X00,assets/images/products/toner/lexmark-lxb224x00.png
-LX52D4X00,toner,TONER LEXMARK NEGRO ULTRA ALTO RENDIMIENTO 25K,TONER LEXMARK NEGRO ULTRA ALTO RENDIMIENTO 25K,assets/images/products/toner/lexmark-lx52d4x00.png
+LX56F4U00,toner,TONER LEXMARK NEGRO ULTRA ALTO RENDIMIENTO 25K,TONER LEXMARK NEGRO ULTRA ALTO RENDIMIENTO 25K,assets/images/products/toner/LX56F4U00.png
 LXB344000,toner,Tóner Lexmark Programa de Devolución para B344000 Color Negro,Tóner Lexmark Programa de Devolución para B344000 Color Negro,assets/images/products/toner/lexmark-lxb344000.png
-LXB344,toner,Tóner Lexmark Programa Retorno 15mil Páginas Color Negro,Tóner Lexmark Programa Retorno 15mil Páginas Color Negro,assets/images/products/toner/generic-box.png
+LX56F4H00,toner,Tóner Lexmark Programa Retorno 15mil Páginas Color Negro,Tóner Lexmark Programa Retorno 15mil Páginas Color Negro,assets/images/products/toner/LX56F4H00.png
 LX51B4000,toner,TONER LEXMARK RENDIMIENTO ESTANDAR MS/MX 317 417 517 617,TONER LEXMARK RENDIMIENTO ESTANDAR MS/MX 317 417 517 617,assets/images/products/toner/lexmark-lx51b4000.png
 LXB344X00,toner,Tóner Lexmark Rendimiento Extra Alto Programa Devolución para B344X00 Color Negro,Tóner Lexmark Rendimiento Extra Alto Programa Devolución para B344X00 Color Negro,assets/images/products/toner/lexmark-lxb344x00.png
 LXX264A11G,toner,TONER LEXMARK X264A11G NEGRO,TONER LEXMARK X264A11G NEGRO,assets/images/products/toner/lexmark-lxx264a11g.png
@@ -77,30 +77,30 @@ CA057,toner,TONER ORIGINAL CANON 057 NEGRO,"Cartucho de Tóner 057 Negro, con re
 CA121,toner,CARTUCHO CANON PARA TONER 121 NEGRO .,Cartucho de tóner original Canon 121 Negro para impresoras seleccionadas.,assets/images/products/toner/canon-ca121.png
 CA137,toner,TONER ORIGINAL CANON 137 NEGRO,Cartucho de tóner original Canon 137 Negro.,assets/images/products/toner/canon-ca137.png
 CA120,toner,TONER ORIGINAL CANON 120 NEGRO,Cartucho de tóner original Canon 120 Negro.,assets/images/products/toner/canon-ca120.png
-CA051,toner,TONER CANON 051 NEGRO,Cartucho de tóner original Canon 051 Negro.,assets/images/products/toner/generic-box.png
+CA051BK,toner,TONER CANON 051 NEGRO,Cartucho de tóner original Canon 051 Negro.,assets/images/products/toner/CA051BK.png
 CA054C,toner,TONER ORIGINAL CANON 054 CYAN,Cartucho de tóner original Canon 054 Cyan.,assets/images/products/toner/canon-ca054c.png
 CAT06,toner,TONER CANON T06 NEGRO,Tóner original Canon T06 para equipos de copiado.,assets/images/products/toner/canon-cat06.png
 CA052H,toner,TONER ORIGINAL CANON 052H NEGRO,Cartucho de tóner de alto rendimiento Canon 052H Negro.,assets/images/products/toner/CA052H.png
-CA054H-BK,toner,Cartucho Canon para toner 054 H negro .,Cartucho de tóner de alto rendimiento Canon 054H Negro.,assets/images/products/toner/canon-ca054h-bk.png
+CA3028C001AA,toner,Cartucho Canon para toner 054 H negro .,Cartucho de tóner de alto rendimiento Canon 054H Negro.,assets/images/products/toner/CA3028C001AA.png
 CA057H,toner,Cartucho Canon para toner 057H negro,Cartucho de tóner de alto rendimiento Canon 057H Negro.,assets/images/products/toner/canon-ca057h.png
-CA045H-BK,toner,CARTUCHO DE TONER NEGRO CANON 045 H,Cartucho de tóner de alto rendimiento Canon 045H Negro.,assets/images/products/toner/canon-ca045h-bk.png
+CA045HBK,toner,CARTUCHO DE TONER NEGRO CANON 045 H,Cartucho de tóner de alto rendimiento Canon 045H Negro.,assets/images/products/toner/CA045HBK.png
 CA131C,toner,CARTUCHO PARA TONER CANON CYAN 131 C,Cartucho de tóner Canon 131 Cyan.,assets/images/products/toner/canon-ca131c.png
 CA131BK,toner,CARTUCHO PARA TONER CANON NEGRO 131 BK,Cartucho de tóner Canon 131 Negro.,assets/images/products/toner/canon-ca131bk.png
 CA119,toner,DESCONTINUADO TONER ORIGINAL CANON 119 NEGRO,Cartucho de tóner original Canon 119 Negro (Descontinuado).,assets/images/products/toner/canon-ca119.png
 CAGPR58HY,toner,Tambor Canon GPR-58 H amarillo,Unidad de tambor GPR-58 H Amarillo.,assets/images/products/toner/CAGPR58HY.png
 CAGPR58HC,toner,Tambor Canon GPR-58 H cyan,Unidad de tambor GPR-58 H Cyan.,assets/images/products/toner/CAGPR58HC.png
 CAGPR58HM,toner,Tambor Canon GPR-58 H magenta,Unidad de tambor GPR-58 H Magenta.,assets/images/products/toner/CAGPR58HM.png
-CA116Y,toner,Tóner Canon 116 Amarillo,Cartucho de tóner original Canon 116 Amarillo.,assets/images/products/toner/canon-ca116y.png
-CA118BK,toner,"Tóner Canon 118 Negro, 3400 Páginas",Cartucho de tóner original Canon 118 Negro con rendimiento de 3400 páginas.,assets/images/products/toner/canon-ca118bk.png
+CA1977B001AA,toner,Tóner Canon 116 Amarillo,Cartucho de tóner original Canon 116 Amarillo.,assets/images/products/toner/CA1977B001AA.png
+CA2662B001AA,toner,"Tóner Canon 118 Negro, 3400 Páginas",Cartucho de tóner original Canon 118 Negro con rendimiento de 3400 páginas.,assets/images/products/toner/CA2662B001AA.png
 CA051H,toner,Tóner Canon Cartridge 051H Alto Rendimiento 4000 Páginas Color Negro,Cartucho de tóner de alto rendimiento Canon 051H Negro.,assets/images/products/toner/CA051H.png
 CA045Y,toner,TONER ORIGINAL CANON 045 AMARILLO,Cartucho de tóner original Canon 045 Amarillo.,assets/images/products/toner/CA045Y.png
 CA045C,toner,TONER ORIGINAL CANON 045 CYAN,Cartucho de tóner original Canon 045 Cyan.,assets/images/products/toner/CA045C.png
 CA045M,toner,TONER ORIGINAL CANON 045 MAGENTA,Cartucho de tóner original Canon 045 Magenta.,assets/images/products/toner/CA045M.png
 CA045BK,toner,TONER ORIGINAL CANON 045 NEGRO,Cartucho de tóner original Canon 045 Negro.,assets/images/products/toner/CA045BK.png
-CA047,toner,TONER ORIGINAL CANON 047 NEGRO,Cartucho de tóner original Canon 047 Negro.,assets/images/products/toner/generic-box.png
+CA047BK,toner,TONER ORIGINAL CANON 047 NEGRO,Cartucho de tóner original Canon 047 Negro.,assets/images/products/toner/CA047BK.png
 CA054Y,toner,TONER ORIGINAL CANON 054 AMARILLO,Cartucho de tóner original Canon 054 Amarillo.,assets/images/products/toner/CA054Y.png
 CA054M,toner,TONER ORIGINAL CANON 054 MAGENTA,Cartucho de tóner original Canon 054 Magenta.,assets/images/products/toner/CA054M.png
-CA054BK,toner,TONER ORIGINAL CANON 054 NEGRO,Cartucho de tóner original Canon 054 Negro.,assets/images/products/toner/generic-box.png
+CA054,toner,TONER ORIGINAL CANON 054 NEGRO,Cartucho de tóner original Canon 054 Negro.,assets/images/products/toner/CA054.png
 CA104,toner,TONER ORIGINAL CANON 104 NEGRO,Cartucho de tóner original Canon 104 Negro.,assets/images/products/toner/CA104.png
 CA125,toner,TONER ORIGINAL CANON 125 NEGRO,Cartucho de tóner original Canon 125 Negro.,assets/images/products/toner/CA125.png
 CA128,toner,TONER ORIGINAL CANON 128 NEGRO,Cartucho de tóner original Canon 128 Negro.,assets/images/products/toner/CA128.png
