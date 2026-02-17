@@ -406,62 +406,103 @@
         showTyping(false);
         const lower = text.toLowerCase();
 
-        // 1. Check for Quote Intent
+        // --- 0. SOCIAL & CHIT-CHAT (Make it human) ---
+        const greetings = ['hola', 'buenos', 'buenas', 'que tal', 'hey', 'saludos'];
+        if (greetings.some(g => lower.includes(g)) && lower.length < 20) {
+            addMessage(`¡Hola! 👋 Es un gusto saludarte. Soy el Asistente Virtual de Integral. <br>Puedo ayudarte a buscar tóners, cartuchos y papelería para tu oficina. ¿Qué necesitas hoy?`, 'bot');
+            return;
+        }
+
+        if (lower.includes('gracias')) {
+            addMessage(`¡Con todo gusto! 😊 Aquí sigo si necesitas algo más.`, 'bot');
+            return;
+        }
+
+        if (lower.includes('quien eres') || lower.includes('eres un robot')) {
+            addMessage(`Soy el asistente virtual inteligente de Integral Computación 🤖. Mi trabajo es ayudarte a encontrar productos y cotizar rapidísimo.`, 'bot');
+            return;
+        }
+
+        if (lower.includes('ayuda') || lower === '?') {
+            addMessage(`Claro, es fácil. Solo escribe el **modelo de tu impresora** (ej. "HP 1102") o el **código del cartucho** (ej. "85A") y yo lo buscaré por ti.`, 'bot');
+            return;
+        }
+
+        // --- 1. FAQs & SERVICE INFO ---
+
+        // Quote Intent
         if (lower.includes('cotiza') || lower.includes('precio') || lower.includes('costo')) {
-            addMessage(`Para darte el mejor precio, necesito saber qué producto buscas. ¿Me puedes decir el modelo de tu impresora o el código del cartucho?`, 'bot');
+            addMessage(`Para darte el precio exacto, necesito saber el modelo. Escribe por ejemplo "Tóner 85A" o "Brother 1060" y te mostraré las opciones.`, 'bot');
             return;
         }
 
-        // 2. Check for Location/Hours
-        if (lower.includes('ubicacion') || lower.includes('donde estan') || lower.includes('direccion')) {
-            addMessage(`Estamos en Guadalajara. <a href="https://maps.google.com" target="_blank" style="color:#0096d6;text-decoration:underline;">Ver en Mapa</a>.`, 'bot');
+        // Location
+        if (lower.includes('ubicacion') || lower.includes('donde estan') || lower.includes('direccion') || lower.includes('local')) {
+            addMessage(`Nos encontramos en Guadalajara, Jalisco. 📍 <a href="https://maps.google.com/?q=Integral+Computacion" target="_blank" style="color:#0096d6;text-decoration:underline;">Ver Ubicación en Mapa</a>.`, 'bot');
             return;
         }
 
-        // 3. Check for Invoice
+        // Invoice
         if (lower.includes('factura')) {
-            addMessage(`¡Sí facturamos! Envíanos tu constancia fiscal al confirmar tu pedido. Todos nuestros precios incluyen IVA.`, 'bot');
+            addMessage(`¡Sí facturamos! ✍️ Todos nuestros precios ya incluyen IVA. Solo envíanos tu constancia fiscal al confirmar tu pedido.`, 'bot');
             return;
         }
 
-        // 4. Product Search (The Intelligent Part)
+        // Hours (New)
+        if (lower.includes('horario') || lower.includes('a que hora') || lower.includes('abierto')) {
+            addMessage(`Nuestros horarios de atención son:<br>🕒 **Lunes a Viernes:** 9:00 AM - 6:30 PM<br>🕒 **Sábados:** 10:00 AM - 2:00 PM`, 'bot');
+            return;
+        }
+
+        // Contact (New)
+        if (lower.includes('telefono') || lower.includes('celular') || lower.includes('correo') || lower.includes('llamar')) {
+            addMessage(`Puedes contactarnos directamente aquí:<br>📞 Tel: (33) 3126 8009<br>📱 WhatsApp: <a href="https://wa.me/523312680092" target="_blank">33 1268 0092</a><br>✉️ Correo: ventas@integralcomputacion.com`, 'bot');
+            return;
+        }
+
+        // --- 2. PRODUCT SEARCH (The Core) ---
         if (typeof productsDB !== 'undefined') {
             // Tokenize: Remove stop words and split by spaces
-            const stopWords = ['el', 'la', 'los', 'las', 'un', 'una', 'unos', 'unas', 'de', 'del', 'para', 'por', 'con', 'en', 'y', 'o', 'que', 'quiero', 'necesito', 'busco', 'me', 'interesa', 'tienes', 'hay', 'hola', 'buenos', 'dias', 'tardes', 'noches', 'cotizar', 'precio', 'costo', 'cuanto', 'cuesta', 'vale', 'mi', 'mis', 'tu', 'tus', 'su', 'sus', 'soy', 'esta', 'estoy', 'tengo', 'falla', 'fallando', 'impresora', 'impresion'];
+            const stopWords = ['el', 'la', 'los', 'las', 'un', 'una', 'unos', 'unas', 'de', 'del', 'para', 'por', 'con', 'en', 'y', 'o', 'que', 'quiero', 'necesito', 'busco', 'me', 'interesa', 'tienes', 'hay', 'hola', 'buenos', 'dias', 'tardes', 'noches', 'cotizar', 'precio', 'costo', 'cuanto', 'cuesta', 'vale', 'mi', 'mis', 'tu', 'tus', 'su', 'sus', 'soy', 'esta', 'estoy', 'tengo', 'falla', 'fallando', 'impresora', 'impresion', 'vendes'];
 
             const tokens = lower.split(/[\s,.;:!?]+/).filter(t => t.length > 1 && !stopWords.includes(t));
-            let results = [];
 
             if (tokens.length > 0) {
-                results = productsDB.filter(p => {
-                    const pText = (p.name + " " + p.id + " " + (p.description || "")).toLowerCase();
+                const results = productsDB.filter(p => {
+                    // Include Category in search text
+                    const pText = (p.name + " " + p.id + " " + (p.category || "") + " " + (p.description || "")).toLowerCase();
                     // Strict: ALL tokens must be present
                     return tokens.every(token => pText.includes(token));
                 });
-            }
 
-            if (results.length > 0) {
-                // Show top 3 results
-                const topResults = results.slice(0, 3);
-                let cardsHtml = topResults.map(p => `
-                    <div class="ic-prod-card">
-                        <img src="${p.image || 'assets/images/logo.svg'}" onerror="this.src='assets/images/logo.svg'" alt="Product">
-                        <div class="ic-prod-card-info">
-                            <h5>${p.name}</h5>
-                            <small>ID: ${p.id}</small> <br>
-                            <button class="ic-prod-btn" onclick="window.addToCartFromBot('${p.id}')">Agregar</button>
+                if (results.length > 0) {
+                    // Show top 3 results
+                    const topResults = results.slice(0, 3);
+                    let cardsHtml = topResults.map(p => `
+                        <div class="ic-prod-card">
+                            <img src="${p.image || 'assets/images/logo.svg'}" onerror="this.src='assets/images/logo.svg'" alt="Product">
+                            <div class="ic-prod-card-info">
+                                <h5>${p.name}</h5>
+                                <small>ID: ${p.id}</small> <br>
+                                <button class="ic-prod-btn" onclick="window.addToCartFromBot('${p.id}')">Agregar</button>
+                            </div>
                         </div>
-                    </div>
-                `).join('');
+                    `).join('');
 
-                const msg = `¡Encontré ${results.length > 3 ? 'varias' : results.length} opciones! Aquí las mejores:<br>${cardsHtml}`;
-                addMessage(msg, 'bot');
-                return;
+                    const msg = `¡Encontré ${results.length > 3 ? 'varias' : results.length} opciones! Aquí las mejores:<br>${cardsHtml}`;
+                    addMessage(msg, 'bot');
+                    return;
+                }
             }
         }
 
-        // 5. Fallback
-        addMessage(`No estoy seguro de tener eso en el catálogo automático, pero un humano seguro sabe. <br><br> <a href="https://wa.me/${CONFIG.whatsapp}?text=Hola,%20busco:%20${encodeURIComponent(text)}" target="_blank" class="ic-msg-btn" style="background:#25d366;color:white;padding:5px 10px;text-decoration:none;border-radius:4px;">Preguntar en WhatsApp</a>`, 'bot');
+        // --- 3. FALLBACK (Friendly Handoff) ---
+        addMessage(`Mmm... no encontré exactamente "${text}" en mi base de datos rápida. 🤔<br><br>Pero seguro lo conseguimos. ¿Te gustaría preguntar a un asesor humano por WhatsApp?`, 'bot');
+        // Add a button message for cleaner look
+        setTimeout(() => {
+            const btnMsg = `<a href="https://wa.me/${CONFIG.whatsapp}?text=Hola,%20busco:%20${encodeURIComponent(text)}" target="_blank" class="ic-msg-btn" style="display:inline-block; background:#25d366; color:white; padding:8px 15px; text-decoration:none; border-radius:20px; font-weight:bold; box-shadow:0 2px 5px rgba(0,0,0,0.1);"><i class="fa-brands fa-whatsapp"></i> Preguntar disponibilidad</a>`;
+            addMessage(btnMsg, 'bot');
+        }, 400); // Small delay for effect
     }
 
     // Global helper for the button inside chat
