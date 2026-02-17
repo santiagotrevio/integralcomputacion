@@ -540,8 +540,8 @@
             }
         }
 
-        // --- 3. FALLBACK (Friendly Handoff) ---
-        addMessage(`Mmm... no encontré exactamente "${text}". 😅<br>Pero no te preocupes, un experto humano te puede ayudar en segundos:`, 'bot');
+        // --- 3. FALLBACK (Friendly Handoff -> Sales Opportunity) ---
+        addMessage(`Mmm... no lo veo en mi catálogo inmediato. 🤔<br><strong>¡Pero espera!</strong> Manejamos miles de productos más bajo pedido.<br><br>Si no está aquí, seguro te lo conseguimos. Pregunta a un asesor real ahora mismo:`, 'bot');
         showSuggestions();
     }
 
