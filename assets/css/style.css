@@ -2503,13 +2503,17 @@ details[open] summary {
 /* --- ULTIMATE MOBILE FIXES --- */
 @media (max-width: 768px) {
 
-  /* 1. Safe Area Header Fix */
+  /* 1. Safe Area Header Fix - Adjusted */
   header {
-    padding-top: env(safe-area-inset-top);
-    padding-left: env(safe-area-inset-left);
-    padding-right: env(safe-area-inset-right);
-    z-index: 1002;
+    padding-top: 10px;
+    /* Minimal padding for spacing, no safe-area forcing */
+    padding-left: 0;
+    padding-right: 0;
+    z-index: 2000;
     /* Ensure above everything */
+    box-shadow: none;
+    /* Remove shadow on mobile header to be safe */
+    margin-top: 0;
   }
 
   .nav-container {
