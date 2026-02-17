@@ -353,6 +353,7 @@
                     </select>
                 </div>
             </div>
+            <div id="activeFilters" class="active-filters"></div>
 
             <p id="resultCount" style="color: #64748b; font-weight: 600; font-size: 0.95rem; margin-bottom: 1rem;">
                 Cargando...</p>
@@ -1539,6 +1540,99 @@
             }
 
             renderProducts(filtered);
+            renderActiveFilters();
+        }
+
+        // Active Filters Chip Logic
+        function renderActiveFilters() {
+            const container = document.getElementById('activeFilters');
+            if (!container) return;
+            container.innerHTML = '';
+
+            const searchTerm = searchInput.value.trim();
+            const catRadio = document.querySelector('input[name="category"]:checked');
+            const checkedBrands = Array.from(document.querySelectorAll('input[name="brand"]:checked'));
+            let hasFilters = false;
+
+            // Search Filter
+            if (searchTerm) {
+                hasFilters = true;
+                container.appendChild(createChip(`"${searchTerm}"`, () => {
+                    searchInput.value = '';
+                    filterProducts();
+                }));
+            }
+
+            // Category Filter (only show if not 'all')
+            if (catRadio && catRadio.value !== 'all') {
+                hasFilters = true;
+                // Map values to readable labels if needed
+                const catLabels = {
+                    'toner': 'Tóners',
+                    'papeleria': 'Papelería',
+                    'accesorios': 'Accesorios'
+                };
+                const label = catLabels[catRadio.value] || catRadio.value;
+
+                container.appendChild(createChip(label, () => {
+                    // Reset to 'all'
+                    const allRadio = document.querySelector('input[name="category"][value="all"]');
+                    if (allRadio) allRadio.checked = true;
+                    // Reset UI (show full list if hidden by Focus Mode)
+                    const catOptions = document.querySelector('.filter-options');
+                    const catGroup = document.querySelector('.filter-group h4');
+                    if (catOptions) catOptions.style.display = 'block';
+                    if (catGroup) catGroup.style.display = 'block';
+                    // Check if back link exists and remove?
+                    // Not strictly necessary as filterProducts re-runs logic but focus mode logic is separate.
+                    // Ideally we refresh page title too.
+                    pageTitle.innerText = 'Catálogo de Productos';
+                    filterProducts();
+                }));
+            }
+
+            // Brand Filters
+            checkedBrands.forEach(cb => {
+                hasFilters = true;
+                container.appendChild(createChip(cb.value, () => {
+                    cb.checked = false;
+                    filterProducts();
+                }));
+            });
+
+            // Clear All Button
+            if (hasFilters) {
+                const clearBtn = document.createElement('button');
+                clearBtn.className = 'clear-all-filters';
+                clearBtn.innerText = 'Limpiar filtros';
+                clearBtn.onclick = () => {
+                    searchInput.value = '';
+                    const allRadio = document.querySelector('input[name="category"][value="all"]');
+                    if (allRadio) allRadio.checked = true;
+                    document.querySelectorAll('input[name="brand"]').forEach(cb => cb.checked = false);
+
+                    // Reset UI for Focus Mode
+                    const catOptions = document.querySelector('.filter-options');
+                    const catGroup = document.querySelector('.filter-group h4');
+                    if (catOptions) catOptions.style.display = 'block';
+                    if (catGroup) catGroup.style.display = 'block';
+                    pageTitle.innerText = 'Catálogo de Productos';
+
+                    filterProducts();
+                };
+                container.appendChild(clearBtn);
+            }
+        }
+
+        function createChip(text, onClose) {
+            const chip = document.createElement('div');
+            chip.className = 'filter-chip';
+            chip.innerHTML = `<span>${text}</span> <i class="fa-solid fa-times"></i>`;
+            chip.querySelector('i').onclick = (e) => {
+                e.stopPropagation();
+                onClose();
+            };
+            return chip;
         }
 
         function toggleMobileFilters() {
