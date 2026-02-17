@@ -2523,25 +2523,23 @@ details[open] summary {
   .prod-image {
     height: auto !important;
     min-height: 200px;
-    /* Reduced from 300px to avoid empty space */
     background: transparent !important;
-    /* Remove grey stripe */
     display: flex;
     align-items: center;
     justify-content: center;
     margin-bottom: 0.5rem;
     padding: 0 !important;
-    /* Remove padding */
+    overflow: hidden !important;
+    /* Clip zoomed images to stay in box */
   }
 
   .prod-image img {
     width: 100% !important;
     height: auto !important;
-    /* Let width dictate height (aspect ratio) */
     max-width: 100% !important;
     object-fit: contain;
-    transform: scale(1.55);
-    /* Massive zoom per user request (55% larger) */
+    transform: scale(1.8);
+    /* Maximum impact (80% larger) */
   }
 
   /* 3. Larger Brand Badge */
