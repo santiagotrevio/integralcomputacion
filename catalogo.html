@@ -1531,14 +1531,17 @@
                 // Image Handling
                 let imgHtml = `<i class="fa-solid ${icon}"></i>`;
                 let imgClick = '';
+                const v = Date.now();
                 if (prod.image && prod.image.trim() !== '') {
-                    imgHtml = `<img src="${prod.image}" alt="${prod.name}" loading="lazy" onerror="this.onerror=null;this.parentNode.innerHTML='<i class=\\'fa-solid ${icon}\\'></i>'">`;
-                    imgClick = `onclick="openLightbox('${prod.image}')" style="cursor: zoom-in;"`;
+                    const imgSrc = `${prod.image}?v=${v}`;
+                    imgHtml = `<img src="${imgSrc}" alt="${prod.name}" loading="lazy" onerror="this.onerror=null;this.parentNode.innerHTML='<i class=\\'fa-solid ${icon}\\'></i>'">`;
+                    imgClick = `onclick="openLightbox('${imgSrc}')" style="cursor: zoom-in;"`;
                 }
 
                 // Brand Logo Logic
                 const brandName = prod.brand || "Otros";
-                const brandLogoUrl = getBrandLogo(brandName);
+                let brandLogoUrl = getBrandLogo(brandName);
+                if (brandLogoUrl) brandLogoUrl += `?v=${v}`;
                 const badgeHtml = (brandLogoUrl && brandName !== 'Otros') ?
                     `<div class="brand-badge" title="${brandName}">
                         <img src="${brandLogoUrl}" alt="${brandName}" onerror="this.parentNode.style.display='none'">

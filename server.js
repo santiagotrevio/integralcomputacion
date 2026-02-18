@@ -137,6 +137,8 @@ app.post('/api/import-image-url', async (req, res) => {
     const { productId, imageUrl } = req.body;
     if (!productId || !imageUrl) return res.status(400).json({ error: 'Faltan datos' });
 
+    console.log(`[WIZARD] Importando imagen para ${productId} desde ${imageUrl}`);
+
     const fileName = `${productId.replace(/[^a-zA-Z0-9]/g, '_')}.webp`;
     const outputPath = path.join(__dirname, 'assets/images/products/toner', fileName);
 
@@ -152,14 +154,19 @@ app.post('/api/import-image-url', async (req, res) => {
             .toFile(outputPath);
 
         const relativePath = `assets/images/products/toner/${fileName}`;
+        console.log(`[WIZARD] Imagen guardada en ${outputPath}`);
 
-        db.run(`UPDATE products SET image = ? WHERE id = ?`, [relativePath, productId], (err) => {
-            if (err) return res.status(500).json({ error: err.message });
-            res.json({ success: true, url: relativePath });
+        db.run(`UPDATE products SET image = ? WHERE id = ?`, [relativePath, productId], function (err) {
+            if (err) {
+                console.error(`[WIZARD] Error DB: ${err.message}`);
+                return res.status(500).json({ error: err.message });
+            }
+            console.log(`[WIZARD] DB actualizada para ${productId}. Filas afectadas: ${this.changes}`);
+            res.json({ success: true, url: relativePath, changes: this.changes });
         });
     } catch (err) {
-        console.error('Import Error:', err);
-        res.status(500).json({ error: 'Fallo al descargar o procesar la imagen. Verifica que el enlace sea directo a una imagen.' });
+        console.error('[WIZARD] Catch Error:', err);
+        res.status(500).json({ error: 'Fallo al procesar la imagen: ' + err.message });
     }
 });
 

@@ -864,7 +864,7 @@ const productsDB = [
     "brand": "Lexmark",
     "name": "TONER LEXMARK B224H00 NEGRO",
     "description": "TONER LEXMARK B224H00 NEGRO",
-    "image": "assets/images/products/toner/lexmark-lxb224h00.webp"
+    "image": "assets/images/products/toner/LXB224H00.webp"
   },
   {
     "id": "LXB234000",
