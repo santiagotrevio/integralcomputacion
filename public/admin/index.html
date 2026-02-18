@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventario Pro 2026</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            padding: 20px;
+            background: #f0f2f5;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #333;
+            margin: 0;
+        }
+
+        .toolbar {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .sort-chips {
+            display: flex;
+            gap: 5px;
+            background: #e9ecef;
+            padding: 5px;
+            border-radius: 20px;
+            margin-left: 10px;
+        }
+
+        .chip {
+            padding: 5px 12px;
+            font-size: 13px;
+            border-radius: 15px;
+            cursor: pointer;
+            border: none;
+            background: transparent;
+            color: #666;
+        }
+
+        .chip.active {
+            background: #007bff;
+            color: white;
+        }
+
+        input,
+        select {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+        }
+
+        button {
+            padding: 10px 18px;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 500;
+        }
+
+        button.secondary {
+            background: #6c757d;
+        }
+
+        button.success {
+            background: #28a745;
+        }
+
+        button.danger {
+            background: #dc3545;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        th,
+        td {
+            padding: 12px;
+            border-bottom: 1px solid #eee;
+            text-align: left;
+            vertical-align: middle;
+        }
+
+        th {
+            background: #f8f9fa;
+            font-size: 14px;
+            color: #666;
+        }
+
+        tr.pending {
+            background-color: #fff9c4 !important;
+        }
+
+        .pending-tag {
+            font-size: 10px;
+            background: #fbc02d;
+            color: #fff;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: bold;
+            margin-left: 5px;
+        }
+
+        .thumb {
+            width: 45px;
+            height: 45px;
+            object-fit: contain;
+            border-radius: 6px;
+            border: 1px solid #ddd;
+            background: white;
+            cursor: zoom-in;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            width: 480px;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .drop-zone {
+            border: 2px dashed #007bff;
+            padding: 25px;
+            text-align: center;
+            border-radius: 10px;
+            color: #007bff;
+            margin-bottom: 15px;
+            cursor: pointer;
+            background: #f8fbff;
+        }
+
+        #zoomOverlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            cursor: zoom-out;
+        }
+
+        #zoomOverlay img {
+            max-width: 90%;
+            max-height: 90%;
+        }
+    </style>
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Librerías de Exportación -->
+    <script src="https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.31/jspdf.plugin.autotable.min.js"></script>
+</head>
+
+<body>
+
+    <div class="container">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
+            <div style="display:flex; align-items:center; gap:10px;">
+                <h1>📦 Catálogo Integral</h1>
+                <span id="pendingCount"
+                    style="background:#dc3545; color:white; padding:2px 8px; border-radius:10px; font-size:12px; display:none;">0
+                    pendientes</span>
+            </div>
+            <button class="success" id="btnPublish" onclick="publishChanges()">🚀 ENVIAR A LA WEB</button>
+        </div>
+
+        <div class="toolbar">
+            <input type="text" id="search" placeholder="Buscar por nombre, ID o marca..." onkeyup="filterAndSort()"
+                style="width:300px">
+
+            <div class="sort-chips">
+                <span class="chip active" onclick="setSort('recent', this)">Últimos cargados</span>
+                <span class="chip" onclick="setSort('alpha', this)">Alfabético</span>
+                <span class="chip" onclick="setSort('category', this)">Por Categoría</span>
+            </div>
+
+            <select id="filterBrand" onchange="filterAndSort()" style="margin-left: 10px; max-width: 150px;">
+                <option value="">Todas las marcas</option>
+            </select>
+
+            <span id="totalCount"
+                style="margin-left: 15px; font-weight: bold; color: #444; background: #eee; padding: 4px 10px; border-radius: 4px; font-size: 13px;">
+                0 productos
+            </span>
+
+            <div style="margin-left: 10px; display: flex; gap: 5px;">
+                <button onclick="exportToExcel()" class="secondary" style="padding: 10px; background: #1d6f42;"
+                    title="Exportar a Excel">
+                    <i class="fa-solid fa-file-excel"></i>
+                </button>
+                <button onclick="exportToPDF()" class="secondary" style="padding: 10px; background: #a30000;"
+                    title="Exportar a PDF">
+                    <i class="fa-solid fa-file-pdf"></i>
+                </button>
+            </div>
+
+            <button onclick="newProduct()" style="margin-left:auto">+ Nuevo Producto</button>
+        </div>
+
+        <table id="productTable">
+            <thead>
+                <tr>
+                    <th>Foto</th>
+                    <th>ID</th>
+                    <th>Marca</th>
+                    <th>Nombre</th>
+                    <th>Categoría</th>
+                    <th>Fecha Alta</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+
+    <!-- Modal Form -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <h2 id="modalTitle">Nuevo Producto</h2>
+
+            <div id="dropZone" class="drop-zone" onclick="document.getElementById('fileInput').click()">
+                <p id="dropText">📁 Arrastra o selecciona la foto</p>
+            </div>
+            <input type="file" id="fileInput" style="display:none" onchange="handleFileUpload(this.files[0])">
+            <input type="hidden" id="p_image">
+
+            <div style="display:grid; grid-template-columns: 1fr 1fr; gap:15px;">
+                <div>
+                    <label>ID / Modelo</label><br>
+                    <input type="text" id="p_id" style="width:100%">
+                </div>
+                <div>
+                    <label>Categoría Web</label><br>
+                    <select id="p_category" style="width:100%">
+                        <option value="toner">TONERS</option>
+                        <option value="papeleria">PAPELERÍA</option>
+                        <option value="accesorios">ACCESORIOS</option>
+                    </select>
+                </div>
+            </div>
+
+            <br>
+            <div style="display:grid; grid-template-columns: 1fr 1fr; gap:15px;">
+                <div>
+                    <label>Marca</label><br>
+                    <div style="display:flex; gap:5px;">
+                        <select id="p_brand" style="flex-grow:1"></select>
+                        <button type="button" onclick="addNewBrand()"
+                            style="padding:5px 10px; background:#6c757d;">+</button>
+                    </div>
+                </div>
+                <div>
+                    <label>Precio</label><br>
+                    <input type="number" id="p_price" style="width:100%">
+                </div>
+            </div>
+
+            <br>
+            <label>Nombre del Producto (Sin Marca)</label><br>
+            <input type="text" id="p_name" placeholder="Ej. Cartucho 12A Negro" style="width:100%"><br><br>
+
+            <div style="display:grid; grid-template-columns: 1fr 1fr; gap:15px;">
+                <div>
+                    <label>Stock</label><br>
+                    <input type="number" id="p_stock" style="width:100%">
+                </div>
+                <div>
+                    <label>Compatibilidad</label><br>
+                    <input type="text" id="p_compatibility" placeholder="Ej. M15w, P1102" style="width:100%">
+                </div>
+            </div>
+
+            <div style="display:flex; justify-content:space-between; margin-top:20px;">
+                <button class="secondary" onclick="closeModal()">Cancelar</button>
+                <button onclick="saveProduct()">💾 Guardar Producto</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="zoomOverlay" onclick="this.style.display='none'"><img id="zoomedImg"></div>
+
+    <script>
+        let products = [];
+        let currentSort = 'recent';
+
+        let filteredList = [];
+
+        async function loadProducts() {
+            const res = await fetch('/api/products');
+            const data = await res.json();
+            products = data.data;
+            updateBrandSelector();
+            filterAndSort();
+        }
+
+        function updateBrandSelector() {
+            let brands = [...new Set(products.map(p => p.brand).filter(b => b && b !== 'Otros'))].sort();
+            brands.push('Otros');
+
+            // Selector del Modal
+            const sel = document.getElementById('p_brand');
+            const currentVal = sel.value;
+            sel.innerHTML = '<option value="">Seleccione marca...</option>';
+
+            // Selector de Filtro en Tabla
+            const filterSel = document.getElementById('filterBrand');
+            const currentFilter = filterSel.value;
+            filterSel.innerHTML = '<option value="">Todas las marcas</option>';
+
+            brands.forEach(b => {
+                const opt = document.createElement('option');
+                opt.value = b; opt.textContent = b;
+                sel.appendChild(opt.cloneNode(true));
+                filterSel.appendChild(opt);
+            });
+
+            if (currentVal) sel.value = currentVal;
+            if (currentFilter) filterSel.value = currentFilter;
+        }
+
+        function addNewBrand() {
+            const newB = prompt("Nombre de la nueva marca:");
+            if (newB) {
+                const sel = document.getElementById('p_brand');
+                const opt = document.createElement('option');
+                opt.value = newB;
+                opt.textContent = newB;
+                sel.appendChild(opt);
+                sel.value = newB;
+            }
+        }
+
+        function setSort(type, el) {
+            document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+            el.classList.add('active');
+            currentSort = type;
+            filterAndSort();
+        }
+
+        function filterAndSort() {
+            const term = document.getElementById('search').value.toLowerCase();
+            const brandFilter = document.getElementById('filterBrand').value;
+
+            let list = products.filter(p => {
+                const matchesSearch = (p.id && p.id.toLowerCase().includes(term)) ||
+                    (p.name && p.name.toLowerCase().includes(term)) ||
+                    (p.brand && p.brand.toLowerCase().includes(term));
+
+                const matchesBrand = !brandFilter || p.brand === brandFilter;
+
+                return matchesSearch && matchesBrand;
+            });
+
+            if (currentSort === 'alpha') list.sort((a, b) => (a.brand || "").localeCompare(b.brand || "") || a.name.localeCompare(b.name));
+            if (currentSort === 'recent') list.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+            if (currentSort === 'category') list.sort((a, b) => a.category.localeCompare(b.category));
+
+            document.getElementById('totalCount').innerText = `${list.length} productos`;
+            filteredList = list;
+            renderTable(list);
+        }
+
+        // --- FUNCIONES DE EXPORTACIÓN ---
+        function exportToExcel() {
+            if (filteredList.length === 0) return alert("No hay datos para exportar");
+
+            const data = filteredList.map(p => ({
+                'ID': p.id,
+                'Marca': p.brand,
+                'Nombre': p.name,
+                'Categoría': catMap[p.category] || p.category,
+                'Fecha Alta': p.created_at ? new Date(p.created_at).toLocaleDateString('es-MX') : '-',
+                'Compatibilidad': p.compatibility
+            }));
+
+            const ws = XLSX.utils.json_to_sheet(data);
+            const wb = XLSX.utils.book_new();
+            XLSX.utils.book_append_sheet(wb, ws, "Inventario");
+            XLSX.utils.writeFile(wb, `Inventario_Integral_${new Date().toISOString().split('T')[0]}.xlsx`);
+        }
+
+        function exportToPDF() {
+            if (filteredList.length === 0) return alert("No hay datos para exportar");
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+
+            doc.text("Reporte de Inventario - Integral Computación", 14, 15);
+
+            const rows = filteredList.map(p => [
+                p.id,
+                p.brand,
+                p.name,
+                catMap[p.category] || p.category,
+                p.created_at ? new Date(p.created_at).toLocaleDateString('es-MX') : '-',
+                p.compatibility || '-'
+            ]);
+
+            doc.autoTable({
+                head: [['ID', 'Marca', 'Nombre', 'Cat', 'Fecha', 'Compatibilidad']],
+                body: rows,
+                startY: 25,
+            });
+
+            doc.save(`Inventario_Integral_${new Date().toISOString().split('T')[0]}.pdf`);
+        }
+
+        const catMap = { toner: 'TONERS', papeleria: 'PAPELERÍA', accesorios: 'ACCESORIOS' };
+
+        function renderTable(list) {
+            const tbody = document.querySelector('#productTable tbody');
+            tbody.innerHTML = '';
+            let pending = 0;
+
+            list.forEach(p => {
+                const tr = document.createElement('tr');
+                if (p.published === 0) { tr.classList.add('pending'); pending++; }
+
+                let imgName = p.image ? p.image.split('/').pop() : 'logo.svg';
+                const imgSrc = `/assets/${imgName}`;
+
+                tr.innerHTML = `
+                <td><img src="${imgSrc}" class="thumb" onclick="zoom('${imgSrc}')" onerror="this.src='https://placehold.co/40x40?text=Error'"></td>
+                <td><b>${p.id}</b></td>
+                <td>
+                    <div style="display:flex; align-items:center; justify-content: center; background:#f8f9fa; padding:4px; border-radius:6px; border:1px solid #eee; width: 60px; height: 30px;">
+                        <img src="/assets/${(p.brand || '').toLowerCase()}.png" 
+                             style="max-width: 100%; max-height: 100%; object-fit: contain;" 
+                             onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
+                        <span style="display:none; font-size:10px; font-weight:600; color:#999; text-transform:uppercase;">${p.brand || 'S/M'}</span>
+                    </div>
+                </td>
+                <td>${p.name} ${p.published === 0 ? '<span class="pending-tag">NUEVO</span>' : ''}</td>
+                <td>${catMap[p.category] || p.category}</td>
+                <td style="font-size: 11px; color: #666;">${p.created_at ? new Date(p.created_at).toLocaleDateString('es-MX') : '-'}</td>
+                <td>
+                    <button class="secondary" style="padding:5px 10px" onclick='editProduct(${JSON.stringify(p)})'>✏️</button>
+                    <button class="danger" style="padding:5px 10px" onclick="deleteProduct('${p.id}')">🗑️</button>
+                </td>
+            `;
+                tbody.appendChild(tr);
+            });
+
+            const badge = document.getElementById('pendingCount');
+            if (pending > 0) { badge.innerText = `${pending} pendientes`; badge.style.display = 'block'; }
+            else { badge.style.display = 'none'; }
+        }
+
+        async function handleFileUpload(file) {
+            if (!file) return;
+            const dropZone = document.getElementById('dropZone');
+            dropZone.innerHTML = "⏳ Subiendo...";
+            const formData = new FormData();
+            formData.append('image', file);
+            const res = await fetch('/api/upload', { method: 'POST', body: formData });
+            const data = await res.json();
+            document.getElementById('p_image').value = data.url;
+            dropZone.innerHTML = `<img src="/${data.url}" style="height:60px; border-radius:4px;">`;
+        }
+
+        async function saveProduct() {
+            const id = document.getElementById('p_id').value.trim();
+            const body = {
+                id,
+                name: document.getElementById('p_name').value,
+                category: document.getElementById('p_category').value,
+                brand: document.getElementById('p_brand').value,
+                price: document.getElementById('p_price').value,
+                stock: document.getElementById('p_stock').value,
+                compatibility: document.getElementById('p_compatibility').value,
+                image: document.getElementById('p_image').value
+            };
+
+            const isEdit = products.find(p => p.id === id);
+            const method = isEdit ? 'PUT' : 'POST';
+            const url = isEdit ? `/api/products/${id}` : '/api/products';
+
+            const res = await fetch(url, { method, headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
+            if (!res.ok) {
+                const errData = await res.json();
+                alert("Error al guardar: " + (errData.error || "Desconocido"));
+                return;
+            }
+            closeModal();
+            loadProducts();
+        }
+
+        async function publishChanges() {
+            const btn = document.getElementById('btnPublish');
+            btn.innerText = "⏳ PROCESANDO...";
+            btn.disabled = true;
+            await fetch('/api/publish', { method: 'POST' });
+            btn.innerText = "✅ ¡WEB ACTUALIZADA!";
+            setTimeout(() => { btn.innerText = "🚀 ENVIAR A LA WEB"; btn.disabled = false; loadProducts(); }, 3000);
+        }
+
+        function newProduct() {
+            document.getElementById('modalTitle').innerText = "Nuevo Producto";
+            document.getElementById('p_id').value = ""; document.getElementById('p_id').disabled = false;
+            document.getElementById('p_name').value = ""; document.getElementById('p_brand').value = "";
+            document.getElementById('p_price').value = ""; document.getElementById('p_stock').value = "";
+            document.getElementById('p_compatibility').value = ""; document.getElementById('p_image').value = "";
+            document.getElementById('dropZone').innerHTML = "📁 Arrastra o selecciona la foto";
+            document.getElementById('modal').style.display = 'flex';
+        }
+
+        function editProduct(p) {
+            document.getElementById('modalTitle').innerText = "Editar Producto";
+            document.getElementById('p_id').value = p.id; document.getElementById('p_id').disabled = true;
+            document.getElementById('p_name').value = p.name;
+            document.getElementById('p_brand').value = p.brand || "";
+            document.getElementById('p_category').value = p.category;
+            document.getElementById('p_image').value = p.image || "";
+            document.getElementById('p_price').value = p.price;
+            document.getElementById('p_stock').value = p.stock;
+            document.getElementById('p_compatibility').value = p.compatibility || "";
+            let imgName = p.image ? p.image.split('/').pop() : 'logo.svg';
+            document.getElementById('dropZone').innerHTML = `<img src="/assets/${imgName}" style="height:60px; border-radius:4px;">`;
+            document.getElementById('modal').style.display = 'flex';
+        }
+
+        async function deleteProduct(id) { if (confirm('¿Borrar?')) { await fetch(`/api/products/${id}`, { method: 'DELETE' }); loadProducts(); } }
+        function closeModal() { document.getElementById('modal').style.display = 'none'; }
+        function zoom(src) { document.getElementById('zoomedImg').src = src; document.getElementById('zoomOverlay').style.display = 'flex'; }
+        window.addEventListener('keydown', (e) => { if (e.key === "Escape") closeModal(); });
+
+        loadProducts();
+    </script>
+</body>
+
+</html>

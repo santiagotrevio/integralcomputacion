@@ -1298,8 +1298,9 @@
 
         let cart = JSON.parse(localStorage.getItem('quoteCart')) || [];
 
-        function getBrand(name) {
-            const n = name.toLowerCase();
+        function getBrand(p) {
+            if (p.brand) return p.brand;
+            const n = p.name ? p.name.toLowerCase() : '';
             if (n.includes('brother') || n.includes('br-')) return 'Brother';
             if (n.includes('canon')) return 'Canon';
             if (n.includes('lexmark') || n.includes('lx-')) return 'Lexmark';
@@ -1552,11 +1553,12 @@
                     imgClick = `onclick="openLightbox('${prod.image}')" style="cursor: zoom-in;"`;
                 }
 
-                // Brand Logo Logic
-                const brandLogoUrl = getBrandLogo(prod.name);
-                const badgeHtml = brandLogoUrl ?
-                    `<div class="brand-badge" title="${getBrand(prod.name)}">
-                        <img src="${brandLogoUrl}" alt="Logo">
+                // Brand Logo Logic (Using database property primarily)
+                const brandName = prod.brand || getBrand(prod);
+                const brandLogoUrl = `assets/images/brands/${brandName.toLowerCase()}.png`;
+                const badgeHtml = brandName !== 'Otros' ?
+                    `<div class="brand-badge" title="${brandName}">
+                        <img src="${brandLogoUrl}" alt="${brandName}" onerror="this.parentNode.style.display='none'">
                      </div>` : '';
 
                 // Highlight Text Logic
@@ -1576,6 +1578,7 @@
                         </span>
                         <h3>${nameHighlighted}</h3>
                         <p class="prod-desc">${prod.description}</p>
+                        ${prod.compatibility ? `<p style="font-size:0.8rem; color:var(--ic-magenta); margin-top:5px;"><b>Compatible con:</b> ${prod.compatibility}</p>` : ''}
                     </div>
                     <div class="prod-action">
                          <button id="add-btn-${prod.id}" onclick="toggleCart('${prod.id}')" class="${btnClass}" style="${btnStyle}">
@@ -1645,7 +1648,7 @@
                 // 3. Brand (Multi-select)
                 let matchesBrand = true;
                 if (checkedBrands.length > 0) {
-                    const prodBrand = getBrand(prod.name).toLowerCase();
+                    const prodBrand = getBrand(prod).toLowerCase();
                     matchesBrand = checkedBrands.includes(prodBrand);
                     // Handle "otros" if needed broadly or specific brand matching logic
                     if (checkedBrands.includes('otros') && !['brother', 'canon', 'hp', 'lexmark', 'xerox'].includes(prodBrand)) {
@@ -1673,8 +1676,8 @@
             // Brand sort is less relevant with checkbox filters but can keep if desired
             else if (sortValue === 'brand') {
                 filtered.sort((a, b) => {
-                    const brandA = getBrand(a.name);
-                    const brandB = getBrand(b.name);
+                    const brandA = getBrand(a);
+                    const brandB = getBrand(b);
                     return brandA.localeCompare(brandB) || a.name.localeCompare(b.name, 'es', { sensitivity: 'base' });
                 });
             }
@@ -1865,7 +1868,15 @@
 
         // Initialize
         updateCartCount();
-        loadProducts();
+
+        // Cargar productos con cache-buster para evitar versiones viejas
+        const script = document.createElement('script');
+        script.src = `assets/js/productos.js?v=${Date.now()}`;
+        script.onload = () => {
+            console.log("Database loaded!");
+            loadProducts();
+        };
+        document.body.appendChild(script);
 
     </script>
 

@@ -498,7 +498,7 @@
             if (tokens.length > 0) {
                 let results = productsDB.filter(p => {
                     // Use normalized strings for comparison too
-                    const pText = (p.name + " " + p.id + " " + (p.category || "") + " " + (p.description || "")).toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+                    const pText = (p.name + " " + p.id + " " + (p.brand || "") + " " + (p.category || "") + " " + (p.description || "") + " " + (p.compatibility || "")).toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
                     return tokens.every(token => pText.includes(token));
                 });
 
