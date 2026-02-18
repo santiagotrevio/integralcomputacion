@@ -2085,7 +2085,7 @@ const productsDB = [
     "category": "toner",
     "brand": "RICOH",
     "name": "Tóner Ricoh SP 3710X Negro, 7.000 Páginas",
-    "description": "Tóner Ricoh SP 3710X Negro, 7.000 Páginas",
+    "description": "Tóner Ricoh SP 3710X Negro, 7000 Páginas",
     "image": "assets/images/products/toner/RI408284.webp"
   },
   {

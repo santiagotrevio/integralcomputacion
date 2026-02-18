@@ -5,6 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestor de Catálogo Pro | Integral</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Inter:wght@400;500;600;700&family=Cinzel+Decorative:wght@400;700;900&display=swap"
+        rel="stylesheet">
     <style>
         :root {
             --apple-bg: #f5f5f7;
@@ -117,6 +121,586 @@
             border: 1px solid #18ff62 !important;
             background: #001100 !important;
             color: #18ff62 !important;
+        }
+
+        /* --- TEMA CYBERPUNK 2077 --- */
+        [data-theme="cyberpunk"] {
+            --apple-bg: #050510;
+            --apple-card: rgba(10, 10, 25, 0.9);
+            --apple-text: #f3e600;
+            --apple-subtext: #00f0ff;
+            --apple-blue: #00f0ff;
+            --apple-red: #ff003c;
+            --apple-green: #39ff14;
+            --apple-border: rgba(243, 230, 0, 0.3);
+            --glass-blur: blur(10px);
+            --modal-bg: #050510;
+            --input-bg: #000000;
+            --card-shadow: 0 0 15px rgba(243, 230, 0, 0.2);
+            font-family: 'Share Tech Mono', monospace !important;
+        }
+
+        [data-theme="cyberpunk"] *:not(i):not([class*="fa-"]) {
+            font-family: 'Share Tech Mono', monospace !important;
+        }
+
+        [data-theme="cyberpunk"] body {
+            background-image:
+                radial-gradient(circle at 50% 50%, rgba(255, 0, 60, 0.1) 0%, transparent 50%),
+                linear-gradient(rgba(5, 5, 16, 0.95), rgba(5, 5, 16, 0.95)),
+                repeating-linear-gradient(0deg, rgba(0, 240, 255, 0.05) 0px, rgba(0, 240, 255, 0.05) 1px, transparent 1px, transparent 2px);
+            background-size: 100% 100%, 100% 100%, 100% 3px;
+            overflow-x: hidden;
+        }
+
+        [data-theme="cyberpunk"] .container {
+            border: 2px solid #f3e600;
+            box-shadow: 0 0 20px #f3e60044, inset 0 0 20px #f3e60022;
+        }
+
+        [data-theme="cyberpunk"] img {
+            border: 1px solid rgba(0, 240, 255, 0.3);
+            filter: saturate(1.2) brightness(1.1) !important;
+        }
+
+        [data-theme="cyberpunk"] .main-logo {
+            filter: brightness(0) saturate(100%) invert(88%) sepia(21%) saturate(7406%) hue-rotate(3deg) brightness(105%) contrast(105%) drop-shadow(0 0 10px #f3e600) !important;
+            animation: cyber-glitch-img 5s infinite;
+        }
+
+        [data-theme="cyberpunk"] .brand-container img,
+        [data-theme="cyberpunk"] .card-brand img {
+            display: none !important;
+        }
+
+        [data-theme="cyberpunk"] .brand-container,
+        [data-theme="cyberpunk"] .card-brand {
+            background: transparent !important;
+            border: none !important;
+            box-shadow: none !important;
+        }
+
+        [data-theme="cyberpunk"] .brand-container::after,
+        [data-theme="cyberpunk"] .card-brand::after {
+            content: "[" attr(data-brand) "]";
+            color: #00f0ff;
+            font-size: 11px;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-shadow: 0 0 8px #00f0ff88;
+        }
+
+        [data-theme="cyberpunk"]::before {
+            content: " ";
+            display: block;
+            position: fixed;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.2) 50%),
+                linear-gradient(90deg, rgba(255, 0, 0, 0.05), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.05));
+            z-index: 10001;
+            background-size: 100% 2px, 3px 100%;
+            pointer-events: none;
+            opacity: 0.4;
+            animation: cyber-flicker 0.15s infinite;
+        }
+
+        [data-theme="cyberpunk"]::after {
+            content: " ";
+            display: block;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 100%;
+            background: linear-gradient(0deg, transparent 0%, rgba(0, 240, 255, 0.1) 50%, transparent 100%);
+            z-index: 10002;
+            pointer-events: none;
+            animation: cyber-scanline 8s linear infinite;
+        }
+
+        @keyframes cyber-scanline {
+            0% {
+                transform: translateY(-100%);
+            }
+
+            100% {
+                transform: translateY(100%);
+            }
+        }
+
+        @keyframes cyber-flicker {
+            0% {
+                opacity: 0.35;
+            }
+
+            50% {
+                opacity: 0.4;
+            }
+
+            100% {
+                opacity: 0.37;
+            }
+        }
+
+        @keyframes glitch-text {
+            0% {
+                text-shadow: 2px 0 #f3e600, -2px 0 #00f0ff;
+                transform: translate(0);
+            }
+
+            20% {
+                text-shadow: -2px 0 #f3e600, 2px 0 #00f0ff;
+                transform: translate(-2px, 1px);
+            }
+
+            40% {
+                text-shadow: 2px 0 #f3e600, -2px 0 #00f0ff;
+                transform: translate(2px, -1px);
+            }
+
+            60% {
+                text-shadow: -2px 0 #f3e600, 2px 0 #00f0ff;
+                transform: translate(-1px, 2px);
+            }
+
+            80% {
+                text-shadow: 2px 0 #f3e600, -2px 0 #00f0ff;
+                transform: translate(1px, -2px);
+            }
+
+            100% {
+                text-shadow: -2px 0 #f3e600, 2px 0 #00f0ff;
+                transform: translate(0);
+            }
+        }
+
+        [data-theme="cyberpunk"] .stat-card {
+            border-left: 4px solid #ff003c;
+            background: rgba(255, 0, 60, 0.08) !important;
+            clip-path: polygon(0 0, 100% 0, 100% 85%, 92% 100%, 0 100%);
+            transition: transform 0.1s;
+        }
+
+        [data-theme="cyberpunk"] .stat-card:hover {
+            transform: skewX(-2deg);
+            background: rgba(255, 0, 60, 0.15) !important;
+        }
+
+        [data-theme="cyberpunk"] .stat-value {
+            color: #f3e600;
+            text-shadow: 0 0 10px #f3e600aa;
+            animation: glitch-text 3s infinite;
+        }
+
+        [data-theme="cyberpunk"] th {
+            color: #00f0ff;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            background: rgba(0, 240, 255, 0.05);
+            border-bottom: 2px solid #ff003c;
+        }
+
+        [data-theme="cyberpunk"] td {
+            border-bottom: 1px solid rgba(0, 240, 255, 0.1) !important;
+        }
+
+        [data-theme="cyberpunk"] .secondary {
+            background: rgba(0, 240, 255, 0.05) !important;
+            border: 1px solid #00f0ff !important;
+            color: #00f0ff !important;
+        }
+
+        /* Botón Enviar a la Web - Estilo Transparente Amarillo */
+        [data-theme="cyberpunk"] #btnPublish {
+            background: transparent !important;
+            border: 2px solid #f3e600 !important;
+            color: #f3e600 !important;
+            text-shadow: 0 0 8px #f3e600aa;
+            box-shadow: 0 0 10px rgba(243, 230, 0, 0.2);
+            clip-path: polygon(10% 0, 100% 0, 100% 70%, 90% 100%, 0 100%, 0 30%);
+            font-weight: 900;
+            letter-spacing: 1px;
+        }
+
+        [data-theme="cyberpunk"] button:not(#btnPublish) {
+            clip-path: polygon(5% 0, 100% 0, 100% 80%, 95% 100%, 0 100%, 0 20%);
+        }
+
+        [data-theme="cyberpunk"] button i {
+            color: #00f0ff;
+            filter: drop-shadow(0 0 3px #00f0ff);
+        }
+
+        @keyframes cyber-glitch-img {
+
+            0%,
+            90%,
+            100% {
+                transform: none;
+                filter: brightness(0) saturate(100%) invert(88%) sepia(21%) saturate(7406%) hue-rotate(3deg) brightness(105%) contrast(105%) drop-shadow(0 0 8px #f3e600);
+            }
+
+            92% {
+                transform: skew(10deg);
+                filter: hue-rotate(90deg) saturate(2) brightness(1.5);
+            }
+
+            94% {
+                transform: translate(-5px, 2px);
+                filter: invert(1) drop-shadow(0 0 5px #f3e600);
+            }
+
+            96% {
+                transform: scale(1.1);
+                filter: drop-shadow(5px 0 #ff003c) drop-shadow(-5px 0 #00f0ff);
+            }
+        }
+
+        [data-theme="cyberpunk"] input,
+        [data-theme="cyberpunk"] select {
+            border: 1px solid #00f0ff !important;
+            background: #000 !important;
+            color: #f3e600 !important;
+            clip-path: polygon(0 0, 95% 0, 100% 20%, 100% 100%, 5% 100%, 0 80%);
+            border-radius: 0;
+        }
+
+        .no-image-placeholder {
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.05);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: var(--apple-subtext);
+            font-size: 8px;
+            font-weight: 700;
+            border-radius: 8px;
+            gap: 4px;
+            border: 1px dashed var(--apple-border);
+        }
+
+        .no-image-placeholder i {
+            font-size: 16px;
+            margin-bottom: 2px;
+        }
+
+        [data-theme="cyberpunk"] .no-image-placeholder {
+            background: rgba(255, 0, 0, 0.1);
+            color: #ff0000;
+            border: 1px dashed #ff0000;
+            text-shadow: 0 0 5px #ff0000;
+        }
+
+        [data-theme="fallout"] .no-image-placeholder {
+            background: rgba(24, 255, 98, 0.1);
+            color: #18ff62;
+            border: 1px dashed #18ff62;
+        }
+
+        /* --- TEMAS HARRY POTTER (VISUAL REFINED) --- */
+        [data-theme^="hp-"] .main-logo {
+            filter: brightness(0) invert(1) opacity(0.9) drop-shadow(0 0 5px rgba(255, 255, 255, 0.2)) !important;
+        }
+
+        /* Logo Amarillo específico para Gryffindor */
+        [data-theme="hp-gryffindor"] .main-logo {
+            filter: brightness(0) saturate(100%) invert(88%) sepia(21%) saturate(7406%) hue-rotate(3deg) brightness(105%) contrast(105%) drop-shadow(0 0 8px rgba(255, 223, 0, 0.4)) !important;
+        }
+
+        [data-theme^="hp-"] *:not(i) {
+            font-family: 'Cinzel Decorative', cursive !important;
+        }
+
+        /* Gryffindor - León (Escarlata y Oro Profundo) */
+        [data-theme="hp-gryffindor"] {
+            --apple-bg: #1a0202;
+            --apple-card: rgba(122, 2, 2, 0.2);
+            --apple-text: #ffdf00;
+            --apple-subtext: #c5a000;
+            --apple-border: #5e0505;
+            --apple-blue: #ffdf00;
+            --apple-red: #ff4d4d;
+            background-image: url('https://www.transparenttextures.com/patterns/velvet.png');
+        }
+
+        [data-theme="hp-gryffindor"] .stat-card {
+            background: rgba(80, 2, 2, 0.5) !important;
+            border: 1px solid #ffdf0066;
+            box-shadow: 0 0 20px rgba(255, 223, 0, 0.1);
+        }
+
+        [data-theme="hp-gryffindor"] .stat-icon {
+            color: #ffdf00 !important;
+        }
+
+        [data-theme="hp-gryffindor"] #btnDeletePending,
+        [data-theme="hp-gryffindor"] .fa-trash-can {
+            color: #ffdf00 !important;
+            border-color: #ffdf00 !important;
+        }
+
+        /* Botones y chips estilo "Carga Masiva" para Gryffindor */
+        [data-theme="hp-gryffindor"] button,
+        [data-theme="hp-gryffindor"] .chip.active {
+            background: rgba(42, 5, 5, 0.7) !important;
+            border: 1px solid #ffdf0088 !important;
+            color: #ffdf00 !important;
+            box-shadow: 0 0 10px rgba(255, 223, 0, 0.1) !important;
+            text-shadow: 0 0 5px rgba(255, 223, 0, 0.3);
+            transition: 0.3s;
+        }
+
+        [data-theme="hp-gryffindor"] button:hover,
+        [data-theme="hp-gryffindor"] .chip.active:hover {
+            background: rgba(116, 0, 1, 0.4) !important;
+            box-shadow: 0 0 15px rgba(255, 223, 0, 0.2) !important;
+        }
+
+        /* Slytherin - Serpiente (Esmeralda y Plata) */
+        [data-theme="hp-slytherin"] {
+            --apple-bg: #020a05;
+            --apple-card: rgba(2, 48, 20, 0.25);
+            --apple-text: #cfd8dc;
+            --apple-subtext: #2e7d32;
+            --apple-border: #1b5e20;
+            --apple-blue: #4caf50;
+            --apple-red: #81c784;
+            background-image: url('https://www.transparenttextures.com/patterns/stone-wall.png');
+        }
+
+        [data-theme="hp-slytherin"] .stat-card {
+            background: rgba(2, 40, 15, 0.5) !important;
+            border: 1px solid #4caf5044;
+            box-shadow: 0 0 20px rgba(76, 175, 80, 0.1);
+        }
+
+        [data-theme="hp-slytherin"] .stat-icon {
+            color: #81c784 !important;
+        }
+
+        [data-theme="hp-slytherin"] #btnDeletePending,
+        [data-theme="hp-slytherin"] .fa-trash-can {
+            color: #81c784 !important;
+            border-color: #81c784 !important;
+        }
+
+        /* Ravenclaw - Águila (Zafiro y Bronce) */
+        [data-theme="hp-ravenclaw"] {
+            --apple-bg: #020512;
+            --apple-card: rgba(14, 26, 64, 0.3);
+            --apple-text: #e3f2fd;
+            --apple-subtext: #64b5f6;
+            --apple-border: #1a237e;
+            --apple-blue: #42a5f5;
+            --apple-red: #90caf9;
+            background-image: url('https://www.transparenttextures.com/patterns/stardust.png');
+        }
+
+        [data-theme="hp-ravenclaw"] .stat-card {
+            background: rgba(14, 26, 64, 0.5) !important;
+            border: 1px solid #42a5f544;
+            box-shadow: 0 0 20px rgba(66, 165, 245, 0.1);
+        }
+
+        [data-theme="hp-ravenclaw"] .stat-icon {
+            color: #94abff !important;
+        }
+
+        [data-theme="hp-ravenclaw"] #btnDeletePending,
+        [data-theme="hp-ravenclaw"] .fa-trash-can {
+            color: #94abff !important;
+            border-color: #94abff !important;
+        }
+
+        /* Hufflepuff - Tejón (Carbono y Ámbar) */
+        [data-theme="hp-hufflepuff"] {
+            --apple-bg: #0a0905;
+            --apple-card: rgba(43, 38, 15, 0.4);
+            --apple-text: #ffc107;
+            --apple-subtext: #ffa000;
+            --apple-border: #3d350f;
+            --apple-blue: #ffc107;
+            --apple-red: #ffd54f;
+            background-image: url('https://www.transparenttextures.com/patterns/wood-grain.png');
+        }
+
+        [data-theme="hp-hufflepuff"] .stat-card {
+            background: rgba(38, 34, 15, 0.6) !important;
+            border: 1px solid #ffc10755;
+            box-shadow: 0 0 20px rgba(255, 193, 7, 0.1);
+        }
+
+        [data-theme="hp-hufflepuff"] .stat-icon,
+        [data-theme="hp-hufflepuff"] .stat-value {
+            color: #ffc107 !important;
+            text-shadow: 0 0 10px rgba(255, 193, 7, 0.3);
+        }
+
+        [data-theme="hp-hufflepuff"] #btnDeletePending,
+        [data-theme="hp-hufflepuff"] .fa-trash-can {
+            color: #ffa000 !important;
+            border-color: #ffa000 !important;
+        }
+
+        /* Botones y chips estilo "Carga Masiva" para Hufflepuff */
+        [data-theme="hp-hufflepuff"] button,
+        [data-theme="hp-hufflepuff"] .chip.active {
+            background: rgba(20, 18, 10, 0.7) !important;
+            border: 1px solid #ffc10766 !important;
+            color: #ffc107 !important;
+            box-shadow: 0 0 10px rgba(255, 193, 7, 0.1) !important;
+            text-shadow: 0 0 5px rgba(255, 193, 7, 0.3);
+        }
+
+        [data-theme="hp-hufflepuff"] button:hover,
+        [data-theme="hp-hufflepuff"] .chip.active:hover {
+            background: rgba(61, 53, 15, 0.4) !important;
+            box-shadow: 0 0 15px rgba(255, 193, 7, 0.2) !important;
+        }
+
+        /* Estilos Generales HP */
+        [data-theme^="hp-"] .container {
+            border: 3px double var(--apple-border);
+            background: var(--apple-card);
+        }
+
+        [data-theme^="hp-"] button:not(.success) {
+            background: rgba(0, 0, 0, 0.3) !important;
+            border: 1px solid var(--apple-border) !important;
+            color: var(--apple-text) !important;
+            backdrop-filter: blur(5px);
+        }
+
+        [data-theme^="hp-"] .success {
+            background: rgba(0, 0, 0, 0.4) !important;
+            border: 1px solid var(--apple-text) !important;
+            color: var(--apple-text) !important;
+            backdrop-filter: blur(5px);
+        }
+
+        /* Buscador y selectores amigables a la vista */
+        [data-theme^="hp-"] input,
+        [data-theme^="hp-"] select {
+            background: rgba(0, 0, 0, 0.4) !important;
+            border: 1px solid var(--apple-border) !important;
+            color: var(--apple-text) !important;
+            opacity: 0.9;
+        }
+
+        [data-theme^="hp-"] input::placeholder {
+            color: var(--apple-subtext);
+            opacity: 0.6;
+        }
+
+        [data-theme^="hp-"] ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        [data-theme^="hp-"] ::-webkit-scrollbar-track {
+            background: var(--apple-bg);
+        }
+
+        [data-theme^="hp-"] ::-webkit-scrollbar-thumb {
+            background: var(--apple-border);
+            border-radius: 5px;
+        }
+
+        [data-theme^="hp-"] .no-image-placeholder {
+            border-color: var(--apple-text);
+            color: var(--apple-text);
+        }
+
+        /* Efectos Mágicos */
+        .magic-sparks {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 10000;
+            background-image: radial-gradient(circle, #fff 1px, transparent 1px);
+            background-size: 50px 50px;
+            opacity: 0.1;
+            animation: magic-float 20s infinite linear;
+        }
+
+        @keyframes magic-float {
+            from {
+                transform: translateY(0);
+            }
+
+            to {
+                transform: translateY(-500px);
+            }
+        }
+
+        #hpSecretBtn {
+            font-family: 'Cinzel Decorative', cursive;
+            font-weight: 900;
+            font-size: 18px;
+            background: linear-gradient(45deg, #d3a625, #740001);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            border: 1px solid rgba(211, 166, 37, 0.3);
+            border-radius: 50%;
+            width: 44px;
+            height: 44px;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        #hpSecretBtn:hover {
+            transform: scale(1.1) rotate(10deg);
+            border-color: #d3a625;
+            text-shadow: 0 0 10px #d3a625;
+        }
+
+        .hp-menu {
+            position: absolute;
+            top: 60px;
+            right: 0;
+            background: #1a0a0a;
+            border: 1px solid #d3a625;
+            border-radius: 12px;
+            padding: 10px;
+            z-index: 1000;
+            display: none;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            font-family: 'Cinzel Decorative', cursive;
+            min-width: 180px;
+        }
+
+        .hp-item {
+            padding: 8px 12px;
+            cursor: pointer;
+            color: #d3a625;
+            border-radius: 6px;
+            transition: 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 13px;
+        }
+
+        .hp-item:hover {
+            background: rgba(211, 166, 37, 0.1);
+            transform: translateX(5px);
+        }
+
+        .hp-item i {
+            width: 20px;
+            text-align: center;
         }
 
         * {
@@ -458,6 +1042,92 @@
             color: #000 !important;
         }
 
+        /* Dashboard Cards */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: var(--apple-bg);
+            border: 1px solid var(--apple-border);
+            border-radius: 20px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.05);
+            border-color: var(--apple-blue);
+        }
+
+        .stat-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            background: rgba(0, 113, 227, 0.1);
+            color: var(--apple-blue);
+        }
+
+        .stat-value {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--apple-text);
+        }
+
+        .stat-label {
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--apple-subtext);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .stat-progress-bg {
+            height: 6px;
+            background: rgba(0, 0, 0, 0.05);
+            border-radius: 3px;
+            overflow: hidden;
+            margin-top: 5px;
+        }
+
+        .stat-progress-bar {
+            height: 100%;
+            background: var(--apple-blue);
+            border-radius: 3px;
+            transition: width 1s ease-in-out;
+        }
+
+        [data-theme="dark"] .stat-progress-bg {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        [data-theme="fallout"] .stat-card {
+            border-color: #18ff62;
+            box-shadow: 0 0 10px rgba(24, 255, 98, 0.1);
+        }
+
+        [data-theme="fallout"] .stat-icon {
+            background: rgba(24, 255, 98, 0.1);
+            color: #18ff62;
+        }
+
+        [data-theme="fallout"] .stat-progress-bar {
+            background: #18ff62;
+        }
+
         /* Grid View / Audit Mode */
         .grid-container {
             display: grid;
@@ -520,6 +1190,132 @@
             font-weight: 800;
             color: var(--apple-subtext);
             margin-bottom: 4px;
+        }
+
+        /* Spotlight CSS */
+        #spotlightOverlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(8px);
+            z-index: 20000;
+            display: none;
+            justify-content: center;
+            padding-top: 15vh;
+        }
+
+        .spotlight-box {
+            width: 600px;
+            background: var(--apple-bg);
+            border-radius: 20px;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--apple-border);
+            overflow: hidden;
+            animation: spotlight-in 0.2s ease-out;
+        }
+
+        @keyframes spotlight-in {
+            from {
+                transform: scale(0.95);
+                opacity: 0;
+            }
+
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .spotlight-input-container {
+            padding: 20px;
+            border-bottom: 1px solid var(--apple-border);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        #spotlightInput {
+            flex: 1;
+            background: none;
+            border: none;
+            font-size: 20px;
+            color: var(--apple-text);
+            outline: none;
+            font-weight: 500;
+        }
+
+        .spotlight-results {
+            max-height: 400px;
+            overflow-y: auto;
+            padding: 10px;
+        }
+
+        .spotlight-item {
+            padding: 12px 15px;
+            border-radius: 12px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: all 0.1s;
+            color: var(--apple-text);
+        }
+
+        .spotlight-item.active {
+            background: var(--apple-blue) !important;
+            color: white !important;
+        }
+
+        .spotlight-item i {
+            width: 20px;
+            text-align: center;
+            opacity: 0.7;
+        }
+
+        .spotlight-item .shortcut {
+            margin-left: auto;
+            font-size: 10px;
+            font-weight: 700;
+            background: rgba(128, 128, 128, 0.2);
+            padding: 2px 4px;
+            border-radius: 4px;
+            text-transform: uppercase;
+        }
+
+        .spotlight-item.active .shortcut {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .spotlight-section {
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--apple-subtext);
+            padding: 15px 15px 5px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .spotlight-hint {
+            padding: 12px;
+            background: rgba(0, 0, 0, 0.02);
+            font-size: 12px;
+            color: var(--apple-subtext);
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            border-top: 1px solid var(--apple-border);
+        }
+
+        .spotlight-hint kbd {
+            background: var(--apple-border);
+            padding: 2px 4px;
+            border-radius: 4px;
+            font-size: 10px;
+            color: var(--apple-text);
+            font-family: inherit;
         }
 
         .audit-card .card-title {
@@ -603,6 +1399,127 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.31/jspdf.plugin.autotable.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
+    <style>
+        /* --- SIDEBAR PANEL (HISTORIAL & PAPELERA) --- */
+        .sidebar-panel {
+            position: fixed;
+            top: 0;
+            right: -450px;
+            width: 400px;
+            height: 100vh;
+            background: var(--apple-card);
+            backdrop-filter: blur(30px) saturate(150%);
+            box-shadow: -10px 0 30px rgba(0, 0, 0, 0.2);
+            z-index: 2000;
+            transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            flex-direction: column;
+            border-left: 1px solid var(--apple-border);
+        }
+
+        .sidebar-panel.open {
+            right: 0;
+        }
+
+        .sidebar-header {
+            padding: 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--apple-border);
+        }
+
+        .sidebar-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+        }
+
+        .log-entry {
+            padding: 12px;
+            border-radius: 12px;
+            background: rgba(0, 0, 0, 0.03);
+            margin-bottom: 12px;
+            font-size: 12px;
+            border-left: 4px solid var(--apple-blue);
+            animation: slideIn 0.3s ease-out;
+        }
+
+        [data-theme="dark"] .log-entry {
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .log-entry.delete {
+            border-left-color: var(--apple-red);
+        }
+
+        .log-entry.create {
+            border-left-color: var(--apple-green);
+        }
+
+        .log-entry .time {
+            opacity: 0.5;
+            font-size: 10px;
+            display: block;
+            margin-top: 4px;
+        }
+
+        .trash-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px;
+            background: rgba(255, 59, 48, 0.05);
+            border: 1px solid rgba(255, 59, 48, 0.1);
+            border-radius: 10px;
+            margin-bottom: 8px;
+        }
+
+        .trash-item img {
+            width: 40px;
+            height: 40px;
+            border-radius: 6px;
+            object-fit: cover;
+        }
+
+        .btn-restore {
+            margin-left: auto;
+            background: var(--apple-blue);
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 6px;
+            font-size: 10px;
+            cursor: pointer;
+        }
+
+        [data-theme^="hp-"] .sidebar-panel {
+            font-family: 'Cinzel Decorative', cursive !important;
+            border-left: 3px double var(--apple-border);
+        }
+
+        [data-theme="hp-gryffindor"] .log-entry {
+            border-left-color: #ffdf00;
+            background: rgba(116, 0, 1, 0.1);
+        }
+
+        [data-theme="hp-slytherin"] .log-entry {
+            border-left-color: #4caf50;
+            background: rgba(26, 71, 42, 0.1);
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(20px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+    </style>
 </head>
 
 <body>
@@ -619,14 +1536,115 @@
                 </div>
             </div>
             <div style="display:flex; align-items:center; gap:12px;">
+                <button id="cyberToggle" onclick="toggleTheme('cyberpunk')" title="Modo Cyberpunk"
+                    style="background: transparent; border: 1px solid var(--apple-border); color: var(--apple-text); border-radius: 50%; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; padding: 0;">
+                    <i class="fa-solid fa-bolt-lightning"></i>
+                </button>
                 <button id="falloutToggle" onclick="toggleTheme('fallout')" title="Modo Fallout"
-                    style="background: transparent; border: 1px solid var(--apple-border); color: var(--apple-text); border-radius: 50%; width: 44px; height: 44px; justify-content: center;">
+                    style="background: transparent; border: 1px solid var(--apple-border); color: var(--apple-text); border-radius: 50%; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; padding: 0;">
                     <i class="fa-solid fa-radiation"></i>
                 </button>
                 <button id="themeToggle" onclick="toggleTheme()" title="Cambiar Tema">
                     <i class="fa-solid fa-moon"></i>
                 </button>
+                <button id="historyToggle" onclick="toggleHistory()" title="Historial y Papelera"
+                    style="background: transparent; border: 1px solid var(--apple-border); color: var(--apple-text); border-radius: 50%; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; padding: 0;">
+                    <i class="fa-solid fa-clock-rotate-left"></i>
+                </button>
+                <div style="position:relative">
+                    <button id="hpSecretBtn" onclick="toggleHPMenu()" title="Magia de Hogwarts">HP</button>
+                    <div id="hpMenu" class="hp-menu">
+                        <div class="hp-item" onclick="setHPTheme('gryffindor')"><i class="fa-solid fa-fire"></i>
+                            Gryffindor</div>
+                        <div class="hp-item" onclick="setHPTheme('slytherin')"><i class="fa-solid fa-staff-snake"></i>
+                            Slytherin</div>
+                        <div class="hp-item" onclick="setHPTheme('ravenclaw')"><i
+                                class="fa-solid fa-feather-pointed"></i> Ravenclaw</div>
+                        <div class="hp-item" onclick="setHPTheme('hufflepuff')"><i class="fa-solid fa-leaf"></i>
+                            Hufflepuff</div>
+                        <div class="hp-item" onclick="setHPTheme('clear')"
+                            style="border-top:1px solid rgba(211,166,37,0.2); margin-top:5px; color:#aaa;"><i
+                                class="fa-solid fa-wand-sparkles"></i> Limpiar Hechizo</div>
+                    </div>
+                </div>
                 <button class="success" id="btnPublish" onclick="publishChanges()">🚀 ENVIAR A LA WEB</button>
+            </div>
+        </div>
+
+        <!-- Sidebar Historial -->
+        <div id="historySidebar" class="sidebar-panel">
+            <div class="sidebar-header">
+                <h2 style="font-size: 18px; margin:0"><i class="fa-solid fa-bolt-lightning"></i> Magia Reciente</h2>
+                <button onclick="toggleHistory()"
+                    style="background:transparent; color:var(--apple-text); border:none; padding:10px; cursor:pointer"><i
+                        class="fa-solid fa-xmark"></i></button>
+            </div>
+
+            <div style="padding: 10px 24px; display: flex; gap: 10px; border-bottom: 1px solid var(--apple-border)">
+                <button id="tabLog" class="secondary" onclick="showHistoryTab('log')"
+                    style="flex:1; padding: 6px; font-size:11px">ACTIVIDAD</button>
+                <button id="tabTrash" class="secondary" onclick="showHistoryTab('trash')"
+                    style="flex:1; padding: 6px; font-size:11px">PAPELERA</button>
+            </div>
+
+            <div id="logContent" class="sidebar-content">
+                <!-- Se llena dinámicamente -->
+                <div style="text-align:center; padding-top:40px; opacity:0.5">Sin actividad reciente</div>
+            </div>
+
+            <div id="trashContent" class="sidebar-content" style="display:none">
+                <!-- Se llena dinámicamente -->
+                <div style="text-align:center; padding-top:40px; opacity:0.5">La papelera está vacía</div>
+            </div>
+        </div>
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon" style="background: rgba(0, 113, 227, 0.1); color: var(--apple-blue);">
+                    <i class="fa-solid fa-boxes-stacked"></i>
+                </div>
+                <div>
+                    <div class="stat-value" id="statTotal">0</div>
+                    <div class="stat-label">Total Productos</div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon" style="background: rgba(52, 199, 89, 0.1); color: #34c759;">
+                    <i class="fa-solid fa-camera-retro"></i>
+                </div>
+                <div>
+                    <div class="stat-value" id="statPhotos">0%</div>
+                    <div class="stat-label">Calidad Visual</div>
+                    <div class="stat-progress-bg">
+                        <div class="stat-progress-bar" id="photoProgress" style="width: 0%; background: #34c759;"></div>
+                    </div>
+                </div>
+                <button onclick="fixNextPhoto()" class="secondary"
+                    style="position:absolute; top:15px; right:15px; padding:4px 8px; font-size:10px; border-radius:10px;">Arreglar
+                    Siguiente</button>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon" style="background: rgba(255, 59, 48, 0.1); color: #ff3b30;">
+                    <i class="fa-solid fa-cloud-arrow-up"></i>
+                </div>
+                <div>
+                    <div class="stat-value" id="statPending">0</div>
+                    <div class="stat-label">Por Publicar</div>
+                </div>
+                <div id="publishAlert" style="font-size:10px; color:#ff3b30; font-weight:700; display:none;">⚠️ Requiere
+                    actualización</div>
+                <button id="btnDeletePending" onclick="deletePendingProducts()"
+                    style="display:none; margin-top:8px; background:rgba(255, 59, 48, 0.1); color:#ff3b30; border:1px solid rgba(255, 59, 48, 0.2); padding:4px 8px; border-radius:6px; font-size:9px; cursor:pointer; font-weight:700; width:100%;">
+                    <i class="fa-solid fa-trash-can"></i> BORRAR PENDIENTES
+                </button>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon" style="background: rgba(255, 159, 10, 0.1); color: #ff9f0a;">
+                    <i class="fa-solid fa-tags"></i>
+                </div>
+                <div>
+                    <div class="stat-value" id="statBrands">0</div>
+                    <div class="stat-label">Marcas Activas</div>
+                </div>
             </div>
         </div>
 
@@ -707,7 +1725,7 @@
                     <p id="dropText">📁 Arrastra o selecciona la foto</p>
                 </div>
                 <button type="button" onclick="openWizardFromEditor()"
-                    style="position:absolute; top:10px; right:10px; background:var(--apple-blue); color:white; width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center; cursor:pointer; border:2px solid white; box-shadow:0 4px 12px rgba(0,0,0,0.2); z-index: 10;"
+                    style="position:absolute; top:10px; right:10px; background:var(--apple-blue); color:white; width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center; cursor:pointer; border:2px solid white; box-shadow:0 4px 12px rgba(0,0,0,0.2); z-index: 1;"
                     title="Buscar mejor imagen en Google">
                     <i class="fa-solid fa-wand-magic-sparkles"></i>
                 </button>
@@ -796,6 +1814,45 @@
             </div>
         </div>
     </div>
+
+    <!-- Modal de Conflictos en Carga Masiva -->
+    <div id="bulkConflictModal" class="modal">
+        <div class="modal-content" style="max-width: 600px;">
+            <h2 style="margin-top:0">Conflictos Detectados </h2>
+            <p style="color:var(--apple-subtext); font-size:14px">
+                Se han encontrado productos que ya existen en el catálogo. ¿Cómo deseas proceder?
+            </p>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 20px 0;">
+                <div
+                    style="background: rgba(52, 199, 89, 0.05); padding: 15px; border-radius: 12px; border: 1px solid rgba(52, 199, 89, 0.1);">
+                    <h3 style="margin:0; font-size:14px; color:#34c759;"><i class="fa-solid fa-plus-circle"></i> NUEVOS
+                    </h3>
+                    <p id="newItemsCount" style="font-size:24px; font-weight:700; margin:5px 0;">0</p>
+                    <div id="newItemsList"
+                        style="font-size:11px; max-height:100px; overflow-y:auto; color:var(--apple-subtext);"></div>
+                </div>
+                <div
+                    style="background: rgba(255, 59, 48, 0.05); padding: 15px; border-radius: 12px; border: 1px solid rgba(255, 59, 48, 0.1);">
+                    <h3 style="margin:0; font-size:14px; color:#ff3b30;"><i
+                            class="fa-solid fa-triangle-exclamation"></i> EXISTENTES</h3>
+                    <p id="conflictItemsCount" style="font-size:24px; font-weight:700; margin:5px 0;">0</p>
+                    <div id="conflictItemsList"
+                        style="font-size:11px; max-height:100px; overflow-y:auto; color:var(--apple-subtext);"></div>
+                </div>
+            </div>
+
+            <div style="display:flex; flex-direction:column; gap:10px; margin-top:30px;">
+                <button onclick="executeBulkImport(true)" style="width:100%; justify-content:center;">🚀 SOBRESCRIBIR
+                    TODO (Incluir Existentes)</button>
+                <button onclick="executeBulkImport(false)" class="secondary"
+                    style="width:100%; justify-content:center;">✅ SOLO CARGAR NUEVOS</button>
+                <button class="secondary" onclick="document.getElementById('bulkConflictModal').style.display='none'"
+                    style="width:100%; justify-content:center; border:none;">Cancelar</button>
+            </div>
+        </div>
+    </div>
+
     <!-- Price Scout Modal -->
     <div id="scoutModal" class="modal">
         <div class="modal-content" style="max-width: 550px;">
@@ -890,11 +1947,166 @@
             style="max-width:90%; max-height:90%; border-radius:12px; box-shadow:0 0 50px rgba(0,0,0,0.5);">
     </div>
 
+    <!-- Spotlight Search Overlay -->
+    <div id="spotlightOverlay" onclick="if(event.target === this) closeSpotlight()">
+        <div class="spotlight-box">
+            <div class="spotlight-input-container">
+                <i class="fa-solid fa-magnifying-glass" style="color: var(--apple-blue); font-size: 18px;"></i>
+                <input type="text" id="spotlightInput" placeholder="¿Qué quieres hacer?" autocomplete="off"
+                    onkeydown="handleSpotlightKey(event)" oninput="searchSpotlight()">
+            </div>
+            <div id="spotlightResults" class="spotlight-results">
+                <!-- Results populated by JS -->
+            </div>
+            <div class="spotlight-hint">
+                <span><kbd>↑↓</kbd> Navegar</span>
+                <span><kbd>Enter</kbd> Seleccionar</span>
+                <span><kbd>Esc</kbd> Cerrar</span>
+            </div>
+        </div>
+    </div>
+
     <script>
         let products = [];
         let currentSort = 'recent';
         let filteredList = [];
         let cacheBuster = Date.now();
+
+        const normalize = (str) => {
+            if (!str) return '';
+            return str.toString().toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+        };
+
+        // Spotlight Logic
+        let spotlightIndex = 0;
+        let spotlightActions = [
+            { id: 'view_table', title: 'Ver modo Tabla', icon: 'fa-table-list', type: 'action', run: () => setView('table') },
+            { id: 'view_grid', title: 'Ver modo Galería (Auditoría)', icon: 'fa-grip', type: 'action', run: () => setView('grid') },
+            { id: 'theme_dark', title: 'Cambiar a Modo Oscuro/Claro', icon: 'fa-moon', type: 'action', run: () => toggleTheme() },
+            { id: 'theme_fallout', title: 'Modo Fallout ☢️', icon: 'fa-radiation', type: 'action', run: () => toggleTheme('fallout') },
+            { id: 'theme_cyberpunk', title: 'Modo Cyberpunk 🦾', icon: 'fa-bolt-lightning', type: 'action', run: () => toggleTheme('cyberpunk') },
+            { id: 'new_prod', title: 'Crear Nuevo Producto', icon: 'fa-plus', type: 'action', run: () => newProduct() },
+            { id: 'publish', title: 'Publicar cambios en la Web', icon: 'fa-paper-plane', type: 'action', run: () => publishChanges() },
+            { id: 'cat_toner', title: 'Filtrar por: Tóners', icon: 'fa-print', type: 'filter', run: () => applySpotlightFilter('toner') },
+            { id: 'cat_papeleria', title: 'Filtrar por: Papelería', icon: 'fa-pen-ruler', type: 'filter', run: () => applySpotlightFilter('papeleria') },
+            { id: 'cat_accesorios', title: 'Filtrar por: Accesorios', icon: 'fa-keyboard', type: 'filter', run: () => applySpotlightFilter('accesorios') }
+        ];
+
+        window.addEventListener('keydown', (e) => {
+            if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+                e.preventDefault();
+                openSpotlight();
+            }
+            if (e.key === 'Escape') closeSpotlight();
+        });
+
+        function openSpotlight() {
+            document.getElementById('spotlightOverlay').style.display = 'flex';
+            const input = document.getElementById('spotlightInput');
+            input.value = '';
+            input.focus();
+            searchSpotlight();
+        }
+
+        function closeSpotlight() {
+            document.getElementById('spotlightOverlay').style.display = 'none';
+        }
+
+        function handleSpotlightKey(e) {
+            const items = document.querySelectorAll('.spotlight-item');
+            if (items.length === 0) return;
+
+            if (e.key === 'ArrowDown') {
+                e.preventDefault();
+                spotlightIndex = (spotlightIndex + 1) % items.length;
+                updateSpotlightActive();
+            } else if (e.key === 'ArrowUp') {
+                e.preventDefault();
+                spotlightIndex = (spotlightIndex - 1 + items.length) % items.length;
+                updateSpotlightActive();
+            } else if (e.key === 'Enter') {
+                e.preventDefault();
+                const active = items[spotlightIndex];
+                if (active) active.click();
+            }
+        }
+
+        function updateSpotlightActive() {
+            const items = document.querySelectorAll('.spotlight-item');
+            items.forEach((it, i) => {
+                it.classList.toggle('active', i === spotlightIndex);
+                if (i === spotlightIndex) it.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+            });
+        }
+
+        function searchSpotlight() {
+            const query = document.getElementById('spotlightInput').value;
+            const results = document.getElementById('spotlightResults');
+            results.innerHTML = '';
+            spotlightIndex = 0;
+
+            // 1. Actions & Filters
+            const filteredActions = spotlightActions.filter(a => normalize(a.title).includes(normalize(query)));
+            if (filteredActions.length > 0) {
+                const head = document.createElement('div');
+                head.className = 'spotlight-section';
+                head.innerText = 'Acciones y Comandos';
+                results.appendChild(head);
+
+                filteredActions.forEach((a, idx) => {
+                    const div = document.createElement('div');
+                    div.className = 'spotlight-item';
+                    div.innerHTML = `<i class="fa-solid ${a.icon}"></i> ${a.title} <span class="shortcut">Cmd</span>`;
+                    div.onclick = () => { a.run(); closeSpotlight(); };
+                    div.onmouseenter = () => {
+                        const allItems = Array.from(document.querySelectorAll('.spotlight-item'));
+                        spotlightIndex = allItems.indexOf(div);
+                        updateSpotlightActive();
+                    };
+                    results.appendChild(div);
+                });
+            }
+
+            // 2. Products
+            const filteredProducts = products.filter(p =>
+                normalize(p.id).includes(normalize(query)) ||
+                normalize(p.name).includes(normalize(query))
+            ).slice(0, 8);
+
+            if (filteredProducts.length > 0) {
+                const head = document.createElement('div');
+                head.className = 'spotlight-section';
+                head.innerText = `Productos (${filteredProducts.length})`;
+                results.appendChild(head);
+
+                filteredProducts.forEach(p => {
+                    const div = document.createElement('div');
+                    div.className = 'spotlight-item';
+                    div.innerHTML = `<i class="fa-solid fa-box"></i> <div><b>${p.id}</b> <span style="opacity:0.6; font-size:0.9em;">- ${p.name}</span></div>`;
+                    div.onclick = () => {
+                        document.getElementById('search').value = p.id;
+                        filterAndSort();
+                        closeSpotlight();
+                    };
+                    div.onmouseenter = () => {
+                        const allItems = Array.from(document.querySelectorAll('.spotlight-item'));
+                        spotlightIndex = allItems.indexOf(div);
+                        updateSpotlightActive();
+                    };
+                    results.appendChild(div);
+                });
+            }
+
+            updateSpotlightActive();
+        }
+
+        function applySpotlightFilter(cat) {
+            document.getElementById('search').value = '';
+            // For simplicity in this demo, we'll just show the category products if we had a category filter element
+            // Since we use global filterAndSort, we'll just simulate a search for the category name for now
+            document.getElementById('search').value = catMap[cat] || cat;
+            filterAndSort();
+        }
 
         async function loadProducts() {
             const res = await fetch('/api/products');
@@ -952,13 +2164,13 @@
         }
 
         function filterAndSort() {
-            const term = document.getElementById('search').value.toLowerCase();
+            const term = normalize(document.getElementById('search').value);
             const brandFilter = document.getElementById('filterBrand').value;
 
             let list = products.filter(p => {
-                const matchesSearch = (p.id && p.id.toLowerCase().includes(term)) ||
-                    (p.name && p.name.toLowerCase().includes(term)) ||
-                    (p.brand && p.brand.toLowerCase().includes(term));
+                const matchesSearch = normalize(p.id).includes(term) ||
+                    normalize(p.name).includes(term) ||
+                    normalize(p.brand).includes(term);
 
                 const matchesBrand = !brandFilter || p.brand === brandFilter;
 
@@ -1096,6 +2308,7 @@
         }
 
         function renderTable(list) {
+            updateDashboard(list);
             const tbody = document.querySelector('#productTable tbody');
             const grid = document.getElementById('productGrid');
             tbody.innerHTML = '';
@@ -1119,10 +2332,17 @@
                 tr.innerHTML = `
                 <td>
                     <div style="position:relative; width: 40px; height: 40px;">
-                        <img src="${imgSrc}" class="thumb" onclick='zoom("${imgSrc}")' onerror="this.src='/assets/logo.svg'">
+                        ${hasNoImage ? `
+                            <div class="no-image-placeholder" onclick='zoom("/assets/logo.svg")'>
+                                <i class="fa-solid fa-face-dizzy"></i>
+                                <span>SIN ASIGNAR</span>
+                            </div>
+                        ` : `
+                            <img src="${imgSrc}" class="thumb" onclick='zoom("${imgSrc}")' onerror="this.src='/assets/logo.svg'">
+                        `}
                         ${hasNoImage ? `
                             <div onclick='event.stopPropagation(); openImageWizard(${JSON.stringify(p.id)}, ${JSON.stringify(p.name)}, "product")' 
-                                 style="position:absolute; bottom:-5px; right:-5px; background:var(--apple-blue); color:white; width:22px; height:22px; border-radius:50%; display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:10px; border:2px solid white; box-shadow:0 2px 8px rgba(0,0,0,0.3); z-index: 1;" 
+                                 style="position:absolute; bottom:-5px; right:-5px; background:var(--apple-blue); color:white; width:22px; height:22px; border-radius:50%; display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:10px; border:2px solid white; box-shadow:0 4px 12px rgba(0,0,0,0.3); z-index: 1;" 
                                  title="Agregar imagen inteligente">
                                 <i class="fa-solid fa-wand-magic-sparkles"></i>
                             </div>
@@ -1131,7 +2351,7 @@
                 </td>
                 <td><b>${p.id}</b></td>
                 <td>
-                    <div class="brand-container" style="position:relative; display:flex; align-items:center; justify-content: center; background:#f8f9fa; padding:4px; border-radius:6px; border:1px solid #eee; width: 60px; height: 30px;">
+                    <div class="brand-container" data-brand="${p.brand || 'UNK'}" style="position:relative; display:flex; align-items:center; justify-content: center; background:#f8f9fa; padding:4px; border-radius:6px; border:1px solid #eee; width: 60px; height: 30px;">
                         <img src="${brandLogosrc}" 
                              style="max-width: 100%; max-height: 100%; object-fit: contain;" 
                              onerror="this.style.display='none'; this.nextElementSibling.style.display='block'; const wand = this.parentNode.querySelector('.brand-magic'); if(wand && ${p.brand && p.brand !== 'Otros' ? 'true' : 'false'}) wand.style.display='flex';">
@@ -1175,8 +2395,19 @@
                 if (p.published === 0) card.style.borderColor = 'var(--apple-blue)';
 
                 card.innerHTML = `
-                    <div style="position:relative;">
-                        <img src="${imgSrc}" class="card-img" onclick='zoom("${imgSrc}")' onerror="this.src='/assets/logo.svg'">
+                    <div style="position:relative; height: 180px; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.02); border-radius: 12px 12px 0 0;">
+                        ${hasNoImage ? `
+                            <div class="no-image-placeholder" style="font-size: 12px; gap: 8px;">
+                                <i class="fa-solid fa-face-dizzy" style="font-size: 32px;"></i>
+                                <span>MULTIMEDIA NO ASIGNADA</span>
+                            </div>
+                        ` : `
+                            <img src="${imgSrc}" class="card-img" onclick='zoom("${imgSrc}")' onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="no-image-placeholder" style="display:none; font-size: 12px; gap: 8px;">
+                                <i class="fa-solid fa-face-dizzy" style="font-size: 32px;"></i>
+                                <span>ERROR DE CARGA</span>
+                            </div>
+                        `}
                          ${hasNoImage ? `
                             <div onclick='event.stopPropagation(); openImageWizard(${JSON.stringify(p.id)}, ${JSON.stringify(p.name)}, "product")' 
                                  style="position:absolute; top:10px; right:10px; background:var(--apple-blue); color:white; width:28px; height:28px; border-radius:50%; display:flex; align-items:center; justify-content:center; cursor:pointer; border:2px solid white; box-shadow:0 4px 12px rgba(0,0,0,0.2); z-index: 1;" 
@@ -1185,10 +2416,11 @@
                             </div>
                         ` : ''}
 
-                        <div class="card-brand">
-                            <img src="${brandLogosrc}" style="max-height: 16px; object-fit: contain;" onerror="this.outerHTML='<span>${p.brand}</span>'; const wand = this.parentNode ? this.parentNode.querySelector('.brand-magic') : null; if(wand && ${p.brand && p.brand !== 'Otros' ? 'true' : 'false'}) wand.style.display='flex';">
+                        <div class="card-brand" data-brand="${p.brand || 'UNK'}" style="position:relative;">
+                            <img src="${brandLogosrc}" style="max-height: 16px; object-fit: contain;" 
+                                 onerror="this.outerHTML='<span>${p.brand}</span>'; const wand = this.parentNode ? this.parentNode.querySelector('.brand-magic') : null; if(wand && ${p.brand && p.brand !== 'Otros' ? 'true' : 'false'}) wand.style.display='flex';">
                             <div class="brand-magic" onclick='event.stopPropagation(); openImageWizard(${JSON.stringify(p.brand)}, "", "brand")' 
-                                 style="display:none; position:absolute; bottom:-5px; right:-5px; background:#ff2d55; color:white; width:16px; height:16px; border-radius:50%; align-items:center; justify-content:center; cursor:pointer; font-size:8px; border:1px solid white; z-index: 2;">
+                                 style="display:none; position:absolute; bottom:-5px; right:-5px; background:#ff2d55; color:white; width:16px; height:16px; border-radius:50%; display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:8px; border:1px solid white; z-index: 2;">
                                 <i class="fa-solid fa-wand-magic-sparkles"></i>
                             </div>
                         </div>
@@ -1269,11 +2501,32 @@
 
         async function publishChanges() {
             const btn = document.getElementById('btnPublish');
-            btn.innerText = "⏳ PROCESANDO...";
+            const isCyber = document.body.getAttribute('data-theme') === 'cyberpunk';
+
+            btn.innerText = isCyber ? "CARGANDO..." : "⏳ PROCESANDO...";
             btn.disabled = true;
             await fetch('/api/publish', { method: 'POST' });
-            btn.innerText = "✅ ¡WEB ACTUALIZADA!";
-            setTimeout(() => { btn.innerText = "🚀 ENVIAR A LA WEB"; btn.disabled = false; loadProducts(); }, 3000);
+            btn.innerText = isCyber ? "SISTEMA ACTUALIZADO" : "✅ ¡WEB ACTUALIZADA!";
+            setTimeout(() => {
+                btn.innerText = isCyber ? "ENVIAR A LA WEB" : "🚀 ENVIAR A LA WEB";
+                btn.disabled = false;
+                loadProducts();
+            }, 3000);
+        }
+
+        async function deletePendingProducts() {
+            if (!confirm("⚠️ ¿Estás seguro de que deseas borrar TODOS los productos pendientes?\n\nEsto eliminará los productos que acabas de subir y que aún no has enviado a la web. Esta acción no se puede deshacer.")) return;
+
+            try {
+                const res = await fetch('/api/products/pending', { method: 'DELETE' });
+                const data = await res.json();
+                if (data.message === "OK") {
+                    alert(`✅ Se borraron ${data.changes} productos pendientes.`);
+                    loadProducts();
+                }
+            } catch (err) {
+                alert("Error al borrar pendientes: " + err.message);
+            }
         }
 
         function newProduct() {
@@ -1303,91 +2556,137 @@
         function openBulkModal() { document.getElementById('bulkModal').style.display = 'flex'; }
         function closeBulkModal() { document.getElementById('bulkModal').style.display = 'none'; }
 
+        let pendingBulkData = { newItems: [], conflicts: [], images: null };
+
         async function processBulk() {
             const csvFile = document.getElementById('bulkCSV').files[0];
-            const images = document.getElementById('bulkImages').files;
+            const imagesArr = document.getElementById('bulkImages').files;
             if (!csvFile) return alert("Selecciona un CSV");
 
             const btn = document.getElementById('btnProcessBulk');
-            const progress = document.getElementById('bulkProgress');
-            const bar = document.getElementById('progressBar');
-            const text = document.getElementById('progressText');
-
             btn.disabled = true;
-            progress.style.display = 'block';
 
             Papa.parse(csvFile, {
                 header: true,
                 skipEmptyLines: true,
                 complete: async (results) => {
                     const data = results.data;
-                    const total = data.length;
-                    let count = 0;
+                    const newItems = [];
+                    const conflicts = [];
 
-                    for (const row of data) {
-                        try {
-                            const id = row.id || row.ID || row.Id;
-                            if (!id) continue;
-
-                            // Buscar imagen
-                            let imageUrl = '';
-                            const matchingImage = Array.from(images).find(f => {
-                                const nameNoExt = f.name.split('.').slice(0, -1).join('.');
-                                return nameNoExt.toLowerCase() === id.toString().toLowerCase();
-                            });
-
-                            if (matchingImage) {
-                                const formData = new FormData();
-                                formData.append('image', matchingImage);
-                                const uploadRes = await fetch('/api/upload', { method: 'POST', body: formData });
-                                const uploadData = await uploadRes.json();
-                                imageUrl = uploadData.url;
-                            }
-
-                            const name = row.name || row.Nombre || '';
-                            let description = row.description || row.descripcion || row.Descripción || '';
-                            if (!description || !description.trim() || description.toLowerCase() === 'null') description = name;
-
-                            const productData = {
-                                id: id,
-                                name: name,
-                                category: row.category || row.Categoria || 'toner',
-                                brand: row.brand || row.Marca || 'Otros',
-                                price: 0,
-                                stock: 0,
-                                compatibility: row.compatibility || row.Compatibilidad || '',
-                                image: imageUrl,
-                                description: description
-                            };
-
-                            // Guardar (POST o PUT si existe)
-                            const exists = products.find(p => p.id == id);
-                            const method = exists ? 'PUT' : 'POST';
-                            const url = exists ? `/api/products/${id}` : '/api/products';
-
-                            await fetch(url, {
-                                method: method,
-                                headers: { 'Content-Type': 'application/json' },
-                                body: JSON.stringify(productData)
-                            });
-
-                        } catch (err) {
-                            console.error("Bulk Item Error:", err);
+                    data.forEach(row => {
+                        const id = row.id || row.ID || row.Id;
+                        if (!id) return;
+                        if (products.some(p => p.id == id)) {
+                            conflicts.push(row);
+                        } else {
+                            newItems.push(row);
                         }
+                    });
 
-                        count++;
-                        const pct = Math.round((count / total) * 100);
-                        bar.style.width = pct + '%';
-                        text.innerText = `Procesando ${count} de ${total}...`;
-                    }
-
-                    alert("Carga masiva completada");
                     btn.disabled = false;
-                    progress.style.display = 'none';
-                    closeBulkModal();
-                    loadProducts();
+                    pendingBulkData = { newItems, conflicts, images: imagesArr };
+
+                    if (conflicts.length > 0) {
+                        document.getElementById('newItemsCount').innerText = newItems.length;
+                        document.getElementById('conflictItemsCount').innerText = conflicts.length;
+                        document.getElementById('newItemsList').innerHTML = newItems.map(i => `• ${i.id || i.ID || i.Id}`).join('<br>');
+                        document.getElementById('conflictItemsList').innerHTML = conflicts.map(i => `• ${i.id || i.ID || i.Id}`).join('<br>');
+                        document.getElementById('bulkConflictModal').style.display = 'flex';
+                    } else {
+                        executeBulkImport(true);
+                    }
                 }
             });
+        }
+
+        async function executeBulkImport(overwriteExisting) {
+            document.getElementById('bulkConflictModal').style.display = 'none';
+            const progress = document.getElementById('bulkProgress');
+            const bar = document.getElementById('progressBar');
+            const text = document.getElementById('progressText');
+
+            const toProcess = overwriteExisting
+                ? [...pendingBulkData.newItems, ...pendingBulkData.conflicts]
+                : pendingBulkData.newItems;
+
+            if (toProcess.length === 0) {
+                alert("No hay productos nuevos para cargar.");
+                return;
+            }
+
+            progress.style.display = 'block';
+            const total = toProcess.length;
+            let count = 0;
+            const images = pendingBulkData.images;
+
+            for (const row of toProcess) {
+                try {
+                    const id = row.id || row.ID || row.Id;
+                    if (!id) continue;
+
+                    // Buscar imagen
+                    let imageUrl = '';
+                    if (images && images.length > 0) {
+                        const matchingImage = Array.from(images).find(f => {
+                            const nameNoExt = f.name.split('.').slice(0, -1).join('.');
+                            return nameNoExt.toLowerCase() === id.toString().toLowerCase();
+                        });
+
+                        if (matchingImage) {
+                            const formData = new FormData();
+                            formData.append('image', matchingImage);
+                            const uploadRes = await fetch('/api/upload', { method: 'POST', body: formData });
+                            const uploadData = await uploadRes.json();
+                            imageUrl = uploadData.url;
+                        }
+                    }
+
+                    const name = row.name || row.Nombre || '';
+                    let description = row.description || row.descripcion || row.Descripción || '';
+                    if (!description || !description.trim() || description.toLowerCase() === 'null') description = name;
+
+                    let brand = row.brand || row.Marca || 'Otros';
+                    const standardBrands = ['HP', 'Brother', 'Canon', 'Lexmark', 'Xerox'];
+                    const standardMatch = standardBrands.find(b => b.toLowerCase() === brand.trim().toLowerCase());
+                    if (standardMatch) brand = standardMatch;
+
+                    const productData = {
+                        id: id,
+                        name: name,
+                        category: row.category || row.Categoria || 'toner',
+                        brand: brand,
+                        price: 0,
+                        stock: 0,
+                        compatibility: row.compatibility || row.Compatibilidad || '',
+                        image: imageUrl,
+                        description: description
+                    };
+
+                    const exists = products.find(p => p.id == id);
+                    const method = exists ? 'PUT' : 'POST';
+                    const url = exists ? `/api/products/${id}` : '/api/products';
+
+                    await fetch(url, {
+                        method: method,
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(productData)
+                    });
+
+                } catch (err) {
+                    console.error("Bulk Item Error:", err);
+                }
+
+                count++;
+                const pct = Math.round((count / total) * 100);
+                bar.style.width = pct + '%';
+                text.innerText = `Procesando ${count} de ${total}...`;
+            }
+
+            alert("Carga masiva completada");
+            progress.style.display = 'none';
+            closeBulkModal();
+            loadProducts();
         }
 
         async function scoutMarket(model, name = "", image = "") {
@@ -1437,6 +2736,41 @@
 
         let wizardMode = 'product'; // 'product' or 'brand'
         let currentWizardTarget = null;
+        function updateDashboard(list) {
+            const total = list.length;
+            const pending = list.filter(p => p.published === 0).length;
+            const withPhoto = list.filter(p => p.image && !p.image.includes('logo.svg') && !p.image.includes('default')).length;
+            const photoPct = total > 0 ? Math.round((withPhoto / total) * 100) : 0;
+            const brands = new Set(list.map(p => p.brand).filter(b => b)).size;
+
+            document.getElementById('statTotal').innerText = total;
+            document.getElementById('statPhotos').innerText = `${photoPct}%`;
+            document.getElementById('photoProgress').style.width = `${photoPct}%`;
+            document.getElementById('statPending').innerText = pending;
+            document.getElementById('statBrands').innerText = brands;
+
+            const publishAlert = document.getElementById('publishAlert');
+            publishAlert.style.display = pending > 0 ? 'block' : 'none';
+
+            const btnDel = document.getElementById('btnDeletePending');
+            if (btnDel) btnDel.style.display = pending > 0 ? 'block' : 'none';
+        }
+
+        function fixNextPhoto() {
+            const next = products.find(p => !p.image || p.image.includes('logo.svg') || p.image.includes('default'));
+            if (next) {
+                // Focus search and highlight next item
+                document.getElementById('search').value = next.id;
+                filterAndSort();
+                if (currentView === 'table') {
+                    const row = document.querySelector(`tr:has(td:contains('${next.id}'))`);
+                    if (row) row.classList.add('highlight-fix'); // Add a brief highlight class
+                }
+                openImageWizard(next.id, next.name, 'product');
+            } else {
+                alert("🎉 ¡Felicidades! Todos los productos tienen imagen.");
+            }
+        }
 
         function openWizardFromEditor() {
             const id = document.getElementById('p_id').value.trim();
@@ -1512,6 +2846,7 @@
         }
 
         async function deleteProduct(id) {
+            const productToDelete = products.find(p => p.id === id);
             if (!confirm(`¿Estás seguro de que deseas eliminar el producto "${id}"?`)) return;
             try {
                 const res = await fetch(`/api/products/${encodeURIComponent(id)}`, { method: 'DELETE' });
@@ -1521,6 +2856,8 @@
                 if (data.changes === 0) {
                     alert("No se encontró el producto para eliminar.");
                 } else {
+                    // Guardar en la papelera antes de recargar
+                    auditManager.logDeletion(productToDelete);
                     loadProducts();
                 }
             } catch (err) {
@@ -1537,6 +2874,8 @@
 
             if (specific === 'fallout') {
                 target = current === 'fallout' ? 'light' : 'fallout';
+            } else if (specific === 'cyberpunk') {
+                target = current === 'cyberpunk' ? 'light' : 'cyberpunk';
             } else {
                 target = current === 'dark' ? 'light' : 'dark';
             }
@@ -1550,17 +2889,74 @@
             const current = document.body.getAttribute('data-theme');
             const icon = document.querySelector('#themeToggle i');
             const falloutBtn = document.getElementById('falloutToggle');
+            const cyberBtn = document.getElementById('cyberToggle');
+
+            // Reset
+            falloutBtn.style.color = ''; falloutBtn.style.borderColor = '';
+            cyberBtn.style.color = ''; cyberBtn.style.borderColor = '';
 
             if (current === 'fallout') {
                 icon.className = 'fa-solid fa-terminal';
                 falloutBtn.style.color = '#18ff62';
                 falloutBtn.style.borderColor = '#18ff62';
+            } else if (current === 'cyberpunk') {
+                icon.className = 'fa-solid fa-bolt-lightning';
+                cyberBtn.style.color = '#f3e600';
+                cyberBtn.style.borderColor = '#f3e600';
+            } else if (current === 'dark') {
+                icon.className = 'fa-solid fa-sun';
             } else {
-                icon.className = current === 'dark' ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
-                falloutBtn.style.color = '';
-                falloutBtn.style.borderColor = '';
+                icon.className = 'fa-solid fa-moon';
+            }
+
+            // --- HP Secret Button Logic ---
+            const hpBtn = document.getElementById('hpSecretBtn');
+            const hpMenu = document.getElementById('hpMenu');
+            if (current === 'dark' || current.startsWith('hp-')) {
+                hpBtn.style.display = 'flex';
+            } else {
+                hpBtn.style.display = 'none';
+                if (hpMenu) hpMenu.style.display = 'none';
+            }
+
+            // Fix botón publicar en modo Cyberpunk
+            const btnPublish = document.getElementById('btnPublish');
+            if (current === 'cyberpunk') {
+                btnPublish.innerText = "ENVIAR A LA WEB";
+            } else {
+                btnPublish.innerText = "🚀 ENVIAR A LA WEB";
             }
         }
+
+        function toggleHPMenu() {
+            const menu = document.getElementById('hpMenu');
+            menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+        }
+
+        function setHPTheme(house) {
+            if (house === 'clear') {
+                document.body.removeAttribute('data-theme');
+                document.body.setAttribute('data-theme', 'dark');
+                const sparks = document.querySelector('.magic-sparks');
+                if (sparks) sparks.remove();
+            } else {
+                document.body.setAttribute('data-theme', 'hp-' + house);
+                if (!document.querySelector('.magic-sparks')) {
+                    const sparks = document.createElement('div');
+                    sparks.className = 'magic-sparks';
+                    document.body.appendChild(sparks);
+                }
+            }
+            document.getElementById('hpMenu').style.display = 'none';
+            updateThemeIcon();
+        }
+
+        document.addEventListener('click', (e) => {
+            const menu = document.getElementById('hpMenu');
+            if (menu && !e.target.closest('#hpSecretBtn') && !e.target.closest('#hpMenu')) {
+                menu.style.display = 'none';
+            }
+        });
 
         // Init Theme
         const savedTheme = localStorage.getItem('integral-theme') || 'light';
@@ -1568,6 +2964,120 @@
         updateThemeIcon();
 
         window.addEventListener('keydown', (e) => { if (e.key === "Escape") closeModal(); });
+
+        // --- SISTEMA DE AUDITORÍA Y PAPELERA ---
+        const auditManager = {
+            logs: JSON.parse(localStorage.getItem('auditLogs') || '[]'),
+            trash: JSON.parse(localStorage.getItem('trashInventory') || '[]'),
+
+            save() {
+                localStorage.setItem('auditLogs', JSON.stringify(this.logs.slice(0, 50)));
+                localStorage.setItem('trashInventory', JSON.stringify(this.trash.slice(0, 20)));
+                this.render();
+            },
+
+            logAction(type, message, details = "") {
+                this.logs.unshift({
+                    type,
+                    message,
+                    details,
+                    time: new Date().toLocaleTimeString()
+                });
+                this.save();
+            },
+
+            logDeletion(product) {
+                if (!product) return;
+                this.trash.unshift({ ...product, deletedAt: new Date().getTime() });
+                this.logAction('delete', `Eliminado: ${product.id}`, product.name);
+                this.save();
+            },
+
+            async restoreProduct(id) {
+                const index = this.trash.findIndex(p => p.id === id);
+                if (index === -1) return;
+                const product = this.trash[index];
+
+                try {
+                    const res = await fetch('/api/products', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(product)
+                    });
+                    if (res.ok) {
+                        this.trash.splice(index, 1);
+                        this.logAction('create', `Restaurado: ${product.id}`);
+                        this.save();
+                        loadProducts();
+                    } else {
+                        alert("Error al restaurar. Puede que el ID ya exista.");
+                    }
+                } catch (err) {
+                    alert("Error mágico al restaurar");
+                }
+            },
+
+            render() {
+                const logEl = document.getElementById('logContent');
+                const trashEl = document.getElementById('trashContent');
+                if (!logEl || !trashEl) return;
+
+                if (this.logs.length === 0) {
+                    logEl.innerHTML = '<div style="text-align:center; padding-top:40px; opacity:0.5">Sin actividad reciente</div>';
+                } else {
+                    logEl.innerHTML = this.logs.map(l => `
+                        <div class="log-entry ${l.type}">
+                            <strong>${l.message}</strong>
+                            <div style="opacity:0.8">${l.details || ''}</div>
+                            <span class="time">${l.time}</span>
+                        </div>
+                    `).join('');
+                }
+
+                if (this.trash.length === 0) {
+                    trashEl.innerHTML = '<div style="text-align:center; padding-top:40px; opacity:0.5">La papelera está vacía</div>';
+                } else {
+                    trashEl.innerHTML = this.trash.map(p => `
+                        <div class="trash-item">
+                            <img src="${p.image || 'https://via.placeholder.com/40'}" onerror="this.src='https://via.placeholder.com/40'">
+                            <div style="flex:1">
+                                <div style="font-size:11px; font-weight:bold">${p.id}</div>
+                                <div style="font-size:9px; opacity:0.7">${p.name.substring(0, 25)}...</div>
+                            </div>
+                            <button class="btn-restore" onclick="auditManager.restoreProduct('${p.id}')">RESTAURAR</button>
+                        </div>
+                    `).join('');
+                }
+            }
+        };
+
+        function toggleHistory() {
+            const side = document.getElementById('historySidebar');
+            side.classList.toggle('open');
+            if (side.classList.contains('open')) auditManager.render();
+        }
+
+        function showHistoryTab(tab) {
+            document.getElementById('logContent').style.display = tab === 'log' ? 'block' : 'none';
+            document.getElementById('trashContent').style.display = tab === 'trash' ? 'block' : 'none';
+            document.getElementById('tabLog').classList.toggle('active', tab === 'log');
+            document.getElementById('tabTrash').classList.toggle('active', tab === 'trash');
+        }
+
+        // Interceptar saveProduct para loggear cambios
+        const originalSave = saveProduct;
+        saveProduct = async function () {
+            const id = document.getElementById('p_id').value;
+            const isEdit = products.find(p => p.id === id);
+            await originalSave();
+            auditManager.logAction(isEdit ? 'update' : 'create',
+                `${isEdit ? 'Actualizado' : 'Creado'}: ${id}`,
+                document.getElementById('p_name').value
+            );
+        };
+
+        // Inicializar auditoría
+        auditManager.render();
 
         loadProducts();
     </script>

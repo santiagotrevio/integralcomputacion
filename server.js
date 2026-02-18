@@ -195,6 +195,13 @@ app.post('/api/import-brand-logo', async (req, res) => {
     }
 });
 
+app.delete('/api/products/pending', (req, res) => {
+    db.run(`DELETE FROM products WHERE published = 0`, function (err) {
+        if (err) return res.status(500).json({ error: err.message });
+        res.json({ message: "OK", changes: this.changes });
+    });
+});
+
 app.delete('/api/products/:id', (req, res) => {
     db.run(`DELETE FROM products WHERE id = ?`, [req.params.id], function (err) {
         if (err) return res.status(500).json({ error: err.message });
