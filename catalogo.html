@@ -1513,7 +1513,7 @@
 
         // Render Logic
         function renderProducts(products) {
-            const searchTermRaw = searchInput.value.trim().toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+            const searchTerm = searchInput.value.trim().toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
             productGrid.innerHTML = '';
 
             // Update Result Count
@@ -1625,8 +1625,8 @@
         }
 
         function filterProducts() {
-            const searchTermRaw = searchInput.value.trim().toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-            const searchWords = searchTermRaw.split(/\s+/).filter(w => w.length > 0);
+            const searchTerm = searchInput.value.trim().toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+            const searchWords = searchTerm.split(/\s+/).filter(w => w.length > 0);
 
             // Get selected Category (Radio)
             const catRadio = document.querySelector('input[name="category"]:checked');
