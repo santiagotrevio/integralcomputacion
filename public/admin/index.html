@@ -457,6 +457,145 @@
             background: #18ff62 !important;
             color: #000 !important;
         }
+
+        /* Grid View / Audit Mode */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, min-content);
+            gap: 20px;
+            padding: 20px 0;
+            display: none;
+            /* Hidden by default */
+            justify-content: center;
+        }
+
+        .audit-card {
+            background: var(--apple-bg);
+            border: 1px solid var(--apple-border);
+            border-radius: 16px;
+            width: 240px;
+            overflow: hidden;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .audit-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border-color: var(--apple-blue);
+        }
+
+        .audit-card .card-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            background: #f9f9f9;
+            cursor: zoom-in;
+        }
+
+        .audit-card .card-content {
+            padding: 15px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .audit-card .card-brand {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: white;
+            padding: 4px 8px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            height: 24px;
+            display: flex;
+            align-items: center;
+            border: 1px solid #eee;
+        }
+
+        .audit-card .card-id {
+            font-size: 11px;
+            font-weight: 800;
+            color: var(--apple-subtext);
+            margin-bottom: 4px;
+        }
+
+        .audit-card .card-title {
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            line-height: 1.3;
+            height: 36px;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            line-clamp: 2;
+            -webkit-box-orient: vertical;
+        }
+
+        .audit-card .card-actions {
+            display: flex;
+            gap: 6px;
+            margin-top: auto;
+            padding-top: 10px;
+            border-top: 1px solid var(--apple-border);
+        }
+
+        .view-toggle {
+            display: flex;
+            background: var(--apple-border);
+            padding: 3px;
+            border-radius: 10px;
+            gap: 2px;
+            margin-left: 10px;
+        }
+
+        .view-toggle button {
+            background: transparent;
+            color: var(--apple-text);
+            border: none;
+            padding: 6px 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 13px;
+            transition: all 0.2s;
+        }
+
+        .view-toggle button.active {
+            background: var(--apple-bg);
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+            color: var(--apple-blue);
+        }
+
+        [data-theme="dark"] .audit-card .card-brand {
+            background: rgba(45, 45, 48, 0.8);
+            backdrop-filter: blur(10px);
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        [data-theme="dark"] .audit-card .card-actions button.secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        [data-theme="dark"] .audit-card .card-actions button.secondary:hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        [data-theme="fallout"] .audit-card {
+            background: #000;
+            border-color: #18ff62;
+            box-shadow: 0 0 15px rgba(24, 255, 98, 0.1);
+        }
+
+        [data-theme="fallout"] .audit-card .card-actions button.secondary {
+            border-color: #18ff62;
+            color: #18ff62;
+        }
     </style>
     <!-- FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -524,6 +663,15 @@
                 </button>
             </div>
 
+            <div class="view-toggle">
+                <button id="viewTable" class="active" onclick="setView('table')">
+                    <i class="fa-solid fa-table-list"></i>
+                </button>
+                <button id="viewGrid" onclick="setView('grid')">
+                    <i class="fa-solid fa-grip-vertical"></i>
+                </button>
+            </div>
+
             <div style="margin-left:auto; display:flex; gap:10px;">
                 <button class="secondary" onclick="openBulkModal()" title="Carga Masiva">
                     <i class="fa-solid fa-file-import"></i> Carga Masiva
@@ -546,6 +694,8 @@
             </thead>
             <tbody></tbody>
         </table>
+
+        <div id="productGrid" class="grid-container"></div>
     </div>
 
     <!-- Modal Form -->
@@ -924,21 +1074,36 @@
 
         const catMap = { toner: 'TONERS', papeleria: 'PAPELERÍA', accesorios: 'ACCESORIOS' };
 
+        let currentView = 'table';
+        function setView(v) {
+            currentView = v;
+            document.getElementById('viewTable').classList.toggle('active', v === 'table');
+            document.getElementById('viewGrid').classList.toggle('active', v === 'grid');
+            document.getElementById('productTable').style.display = v === 'table' ? 'table' : 'none';
+            document.getElementById('productGrid').style.display = v === 'grid' ? 'grid' : 'none';
+            filterAndSort();
+        }
+
         function renderTable(list) {
             const tbody = document.querySelector('#productTable tbody');
+            const grid = document.getElementById('productGrid');
             tbody.innerHTML = '';
+            grid.innerHTML = '';
+
             let pending = 0;
 
             list.forEach(p => {
-                const tr = document.createElement('tr');
-                if (p.published === 0) { tr.classList.add('pending'); pending++; }
-
-                // Lógica de Imagen: Si p.image es null o logo.svg, marcar como vacío
+                // Common Logic
                 const hasNoImage = !p.image || p.image.includes('logo.svg') || p.image.includes('default');
-
-                // Determinar ruta de imagen
-                let imgName = p.image ? p.image.split('/').pop() : 'logo.svg';
+                const imgName = p.image ? p.image.split('/').pop() : 'logo.svg';
                 const imgSrc = `/assets/${imgName}`;
+                const brandLogosrc = `/assets/${(p.brand || '').toLowerCase().replace(/[^a-z0-9]/g, '')}.png`;
+
+                if (p.published === 0) pending++;
+
+                // 1. TABLE ROW
+                const tr = document.createElement('tr');
+                if (p.published === 0) tr.classList.add('pending');
 
                 tr.innerHTML = `
                 <td>
@@ -956,7 +1121,7 @@
                 <td><b>${p.id}</b></td>
                 <td>
                     <div class="brand-container" style="position:relative; display:flex; align-items:center; justify-content: center; background:#f8f9fa; padding:4px; border-radius:6px; border:1px solid #eee; width: 60px; height: 30px;">
-                        <img src="/assets/${(p.brand || '').toLowerCase().replace(/[^a-z0-9]/g, '')}.png" 
+                        <img src="${brandLogosrc}" 
                              style="max-width: 100%; max-height: 100%; object-fit: contain;" 
                              onerror="this.style.display='none'; this.nextElementSibling.style.display='block'; const wand = this.parentNode.querySelector('.brand-magic'); if(wand && ${p.brand && p.brand !== 'Otros' ? 'true' : 'false'}) wand.style.display='flex';">
                         <span style="display:none; font-size:10px; font-weight:600; color:#999; text-transform:uppercase;">${p.brand || 'S/M'}</span>
@@ -990,8 +1155,52 @@
                         </button>
                     </div>
                 </td>
-            `;
+                `;
                 tbody.appendChild(tr);
+
+                // 2. GRID CARD (Audit Mode)
+                const card = document.createElement('div');
+                card.className = 'audit-card';
+                if (p.published === 0) card.style.borderColor = 'var(--apple-blue)';
+
+                card.innerHTML = `
+                    <div class="card-brand" style="position:relative;">
+                        <img src="${brandLogosrc}" style="max-height: 16px; object-fit: contain;" onerror="this.outerHTML='<span>${p.brand}</span>'; const wand = this.parentNode ? this.parentNode.querySelector('.brand-magic') : null; if(wand && ${p.brand && p.brand !== 'Otros' ? 'true' : 'false'}) wand.style.display='flex';">
+                        <div class="brand-magic" onclick='event.stopPropagation(); openImageWizard(${JSON.stringify(p.brand)}, "", "brand")' 
+                             style="display:none; position:absolute; bottom:-5px; right:-5px; background:#ff2d55; color:white; width:16px; height:16px; border-radius:50%; align-items:center; justify-content:center; cursor:pointer; font-size:8px; border:1px solid white; z-index: 2;">
+                            <i class="fa-solid fa-wand-magic-sparkles"></i>
+                        </div>
+                    </div>
+                    
+                    <div style="position:relative;">
+                        <img src="${imgSrc}" class="card-img" onclick='zoom("${imgSrc}")' onerror="this.src='/assets/logo.svg'">
+                         ${hasNoImage ? `
+                            <div onclick='event.stopPropagation(); openImageWizard(${JSON.stringify(p.id)}, ${JSON.stringify(p.name)}, "product")' 
+                                 style="position:absolute; top:10px; right:10px; background:var(--apple-blue); color:white; width:28px; height:28px; border-radius:50%; display:flex; align-items:center; justify-content:center; cursor:pointer; border:2px solid white; box-shadow:0 4px 12px rgba(0,0,0,0.2); z-index: 1;" 
+                                 title="Agregar imagen inteligente">
+                                <i class="fa-solid fa-wand-magic-sparkles"></i>
+                            </div>
+                        ` : ''}
+                    </div>
+
+                    <div class="card-content">
+                        <div class="card-id">${p.id}</div>
+                        <div class="card-title">${p.name}</div>
+                        
+                        <div class="card-actions">
+                            <button class="secondary" style="flex:1; padding:6px; justify-content:center;" onclick='editProduct(${JSON.stringify(p)})'>
+                                <i class="fa-solid fa-pen"></i>
+                            </button>
+                            <button class="secondary" style="flex:1; padding:6px; justify-content:center; color: var(--apple-blue);" onclick='scoutMarket(${JSON.stringify(p.id)}, ${JSON.stringify(p.name)}, "${imgSrc}")'>
+                                <i class="fa-solid fa-satellite-dish"></i>
+                            </button>
+                            <button class="danger" style="flex:1; padding:6px; background: #ea4335; color: white; border: none; justify-content:center;" onclick='deleteProduct(${JSON.stringify(p.id)})'>
+                                <i class="fa-solid fa-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+                `;
+                grid.appendChild(card);
             });
 
             const badge = document.getElementById('pendingCount');
