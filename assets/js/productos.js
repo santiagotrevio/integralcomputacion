@@ -1358,12 +1358,12 @@ const productsDB = [
     "image": "assets/images/products/toner/lexmark-lx56f0z00.png"
   },
   {
-    "id": "TEST-001",
+    "id": "HPCE390X",
     "category": "toner",
     "brand": "HP",
-    "name": "Test Name",
+    "name": "Toner Original HP LaserJet 90X Negro",
     "description": null,
-    "image": ""
+    "image": "assets/images/products/toner/1771376978358-HPCE390X.png"
   },
   {
     "id": "X106R03522",

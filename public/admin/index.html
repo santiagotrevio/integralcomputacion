@@ -187,7 +187,7 @@
     <!-- FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Librerías de Exportación -->
-    <script src="https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.31/jspdf.plugin.autotable.min.js"></script>
 </head>
@@ -339,8 +339,11 @@
         }
 
         function updateBrandSelector() {
-            let brands = [...new Set(products.map(p => p.brand).filter(b => b && b !== 'Otros'))].sort();
-            brands.push('Otros');
+            // Marcas base que siempre deben estar + las que existan en la DB
+            const standardBrands = ['HP', 'Brother', 'Canon', 'Lexmark', 'Xerox'];
+            let dbBrands = [...new Set(products.map(p => p.brand).filter(b => b && !standardBrands.includes(b) && b !== 'Otros'))];
+            let allBrands = [...standardBrands, ...dbBrands].sort();
+            allBrands.push('Otros');
 
             // Selector del Modal
             const sel = document.getElementById('p_brand');
@@ -352,7 +355,7 @@
             const currentFilter = filterSel.value;
             filterSel.innerHTML = '<option value="">Todas las marcas</option>';
 
-            brands.forEach(b => {
+            allBrands.forEach(b => {
                 const opt = document.createElement('option');
                 opt.value = b; opt.textContent = b;
                 sel.appendChild(opt.cloneNode(true));
@@ -407,21 +410,26 @@
 
         // --- FUNCIONES DE EXPORTACIÓN ---
         function exportToExcel() {
-            if (filteredList.length === 0) return alert("No hay datos para exportar");
+            try {
+                if (filteredList.length === 0) return alert("No hay datos para exportar");
 
-            const data = filteredList.map(p => ({
-                'ID': p.id,
-                'Marca': p.brand,
-                'Nombre': p.name,
-                'Categoría': catMap[p.category] || p.category,
-                'Fecha Alta': p.created_at ? new Date(p.created_at).toLocaleDateString('es-MX') : '-',
-                'Compatibilidad': p.compatibility
-            }));
+                const data = filteredList.map(p => ({
+                    'ID': p.id,
+                    'Marca': p.brand,
+                    'Nombre': p.name,
+                    'Categoría': catMap[p.category] || p.category,
+                    'Fecha Alta': p.created_at ? new Date(p.created_at).toLocaleDateString('es-MX') : '-',
+                    'Compatibilidad': p.compatibility
+                }));
 
-            const ws = XLSX.utils.json_to_sheet(data);
-            const wb = XLSX.utils.book_new();
-            XLSX.utils.book_append_sheet(wb, ws, "Inventario");
-            XLSX.utils.writeFile(wb, `Inventario_Integral_${new Date().toISOString().split('T')[0]}.xlsx`);
+                const ws = XLSX.utils.json_to_sheet(data);
+                const wb = XLSX.utils.book_new();
+                XLSX.utils.book_append_sheet(wb, ws, "Inventario");
+                XLSX.writeFile(wb, `Inventario_Integral_${new Date().toISOString().split('T')[0]}.xlsx`);
+            } catch (err) {
+                console.error(err);
+                alert("Error técnico al exportar Excel: " + err.message);
+            }
         }
 
         function exportToPDF() {
