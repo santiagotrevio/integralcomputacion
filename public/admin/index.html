@@ -35,6 +35,90 @@
             --card-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
         }
 
+        [data-theme="fallout"] {
+            --apple-bg: #030a03;
+            --apple-card: rgba(0, 20, 0, 0.85);
+            --apple-text: #18ff62;
+            --apple-subtext: #0b9e3b;
+            --apple-blue: #18ff62;
+            --apple-red: #ff3b30;
+            --apple-green: #18ff62;
+            --apple-border: rgba(24, 255, 98, 0.2);
+            --glass-blur: blur(8px) saturate(120%);
+            --modal-bg: #030a03;
+            --input-bg: #001100;
+            --card-shadow: 0 0 20px rgba(24, 255, 98, 0.2);
+            --brand-bg: rgba(0, 20, 0, 0.9);
+            --brand-border: rgba(24, 255, 98, 0.3);
+        }
+
+        [data-theme="fallout"] body,
+        [data-theme="fallout"] *:not(.fa):not(.fas):not(.far):not(.fab):not(.fa-solid):not(.fa-regular):not(.fa-thin):not(.fa-duotone):not(i) {
+            font-family: 'Courier New', Courier, monospace !important;
+            text-shadow: 0 0 8px rgba(24, 255, 98, 0.8);
+        }
+
+        [data-theme="fallout"] .container {
+            border: 2px solid var(--apple-blue);
+            box-shadow: 0 0 30px rgba(24, 255, 98, 0.15);
+        }
+
+        [data-theme="fallout"]::before {
+            content: " ";
+            display: block;
+            position: fixed;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%),
+                linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
+            z-index: 9999;
+            background-size: 100% 4px, 3px 100%;
+            pointer-events: none;
+            opacity: 0.3;
+        }
+
+        [data-theme="fallout"] .main-logo {
+            filter: brightness(0) invert(1) sepia(1) saturate(5000%) hue-rotate(100deg) brightness(1.2) drop-shadow(0 0 12px #18ff62) !important;
+        }
+
+        [data-theme="fallout"] .date-cell {
+            color: #18ff62 !important;
+            opacity: 0.8;
+            font-weight: bold;
+        }
+
+        [data-theme="fallout"] .brand-container {
+            background: var(--brand-bg) !important;
+            border-color: var(--brand-border) !important;
+        }
+
+        [data-theme="fallout"] .brand-container img {
+            filter: brightness(0) invert(1) sepia(1) saturate(3000%) hue-rotate(100deg) brightness(1.2);
+        }
+
+        [data-theme="fallout"] #totalCount {
+            background: rgba(24, 255, 98, 0.1) !important;
+            color: #18ff62 !important;
+            border: 1px solid rgba(24, 255, 98, 0.3) !important;
+            text-shadow: 0 0 5px #18ff62;
+        }
+
+        [data-theme="fallout"] th {
+            color: #18ff62;
+            border-bottom: 2px solid #18ff62;
+            text-transform: uppercase;
+            font-weight: 800;
+        }
+
+        [data-theme="fallout"] input,
+        [data-theme="fallout"] select {
+            border: 1px solid #18ff62 !important;
+            background: #001100 !important;
+            color: #18ff62 !important;
+        }
+
         * {
             box-sizing: border-box;
             transition: background 0.4s ease, color 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
@@ -312,6 +396,25 @@
             background: rgba(0, 113, 227, 0.02);
         }
 
+        .p-desc {
+            font-size: 11px;
+            color: var(--apple-subtext);
+            max-width: 380px;
+            display: -webkit-box;
+            -webkit-line-clamp: 1;
+            line-clamp: 1;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            line-height: 1.4;
+            margin-top: 3px;
+            font-weight: 400;
+        }
+
+        [data-theme="fallout"] .p-desc {
+            color: rgba(24, 255, 98, 0.7);
+            text-shadow: none;
+        }
+
         #zoomOverlay {
             display: none;
             position: fixed;
@@ -341,6 +444,19 @@
         [data-theme="dark"] .main-logo {
             filter: brightness(0) invert(1) drop-shadow(0 4px 12px rgba(255, 255, 255, 0.1));
         }
+
+        [data-theme="fallout"] button,
+        [data-theme="fallout"] .chip {
+            background: transparent !important;
+            color: #18ff62 !important;
+            border: 1px solid #18ff62 !important;
+        }
+
+        [data-theme="fallout"] button.success,
+        [data-theme="fallout"] .chip.active {
+            background: #18ff62 !important;
+            color: #000 !important;
+        }
     </style>
     <!-- FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -365,6 +481,10 @@
                 </div>
             </div>
             <div style="display:flex; align-items:center; gap:12px;">
+                <button id="falloutToggle" onclick="toggleTheme('fallout')" title="Modo Fallout"
+                    style="background: transparent; border: 1px solid var(--apple-border); color: var(--apple-text); border-radius: 50%; width: 44px; height: 44px; justify-content: center;">
+                    <i class="fa-solid fa-radiation"></i>
+                </button>
                 <button id="themeToggle" onclick="toggleTheme()" title="Cambiar Tema">
                     <i class="fa-solid fa-moon"></i>
                 </button>
@@ -387,7 +507,7 @@
             </select>
 
             <span id="totalCount"
-                style="margin-left: 15px; font-weight: bold; color: #444; background: #eee; padding: 4px 10px; border-radius: 4px; font-size: 13px;">
+                style="margin-left: 15px; font-weight: bold; padding: 4px 10px; border-radius: 4px; font-size: 13px;">
                 0 productos
             </span>
 
@@ -439,6 +559,9 @@
             <input type="file" id="fileInput" style="display:none" onchange="handleFileUpload(this.files[0])">
             <input type="hidden" id="p_image">
 
+            <label>Nombre del Producto (Sin Marca)</label><br>
+            <input type="text" id="p_name" placeholder="Ej. Cartucho 12A Negro" style="width:100%"><br><br>
+
             <div style="display:grid; grid-template-columns: 1fr 1fr; gap:15px;">
                 <div>
                     <label>ID / Modelo</label><br>
@@ -465,25 +588,15 @@
                     </div>
                 </div>
                 <div>
-                    <label>Precio</label><br>
-                    <input type="number" id="p_price" style="width:100%">
-                </div>
-            </div>
-
-            <br>
-            <label>Nombre del Producto (Sin Marca)</label><br>
-            <input type="text" id="p_name" placeholder="Ej. Cartucho 12A Negro" style="width:100%"><br><br>
-
-            <div style="display:grid; grid-template-columns: 1fr 1fr; gap:15px;">
-                <div>
-                    <label>Stock</label><br>
-                    <input type="number" id="p_stock" style="width:100%">
-                </div>
-                <div>
                     <label>Compatibilidad</label><br>
                     <input type="text" id="p_compatibility" placeholder="Ej. M15w, P1102" style="width:100%">
                 </div>
             </div>
+
+            <br>
+            <label>Descripción</label><br>
+            <textarea id="p_description" placeholder="Descripción detallada del producto..."
+                style="width:100%; height:80px; padding:10px; border-radius:12px; border:1px solid var(--apple-border); background:var(--input-bg); color:var(--apple-text); font-family:inherit; resize: none;"></textarea>
 
             <div style="display:flex; justify-content:space-between; margin-top:20px;">
                 <button class="secondary" onclick="closeModal()">Cancelar</button>
@@ -734,21 +847,28 @@
                 <td><img src="${imgSrc}" class="thumb" onclick="zoom('${imgSrc}')" onerror="this.src='https://placehold.co/40x40?text=Error'"></td>
                 <td><b>${p.id}</b></td>
                 <td>
-                    <div style="display:flex; align-items:center; justify-content: center; background:#f8f9fa; padding:4px; border-radius:6px; border:1px solid #eee; width: 60px; height: 30px;">
+                    <div class="brand-container" style="display:flex; align-items:center; justify-content: center; background:#f8f9fa; padding:4px; border-radius:6px; border:1px solid #eee; width: 60px; height: 30px;">
                         <img src="/assets/${(p.brand || '').toLowerCase()}.png" 
                              style="max-width: 100%; max-height: 100%; object-fit: contain;" 
                              onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
                         <span style="display:none; font-size:10px; font-weight:600; color:#999; text-transform:uppercase;">${p.brand || 'S/M'}</span>
                     </div>
                 </td>
-                <td>${p.name} ${p.published === 0 ? '<span class="pending-tag">NUEVO</span>' : ''}</td>
+                <td>
+                    <div style="font-weight:600; display:flex; align-items:center; gap:8px;">
+                        ${p.name} ${p.published === 0 ? '<span class="pending-tag">NUEVO</span>' : ''}
+                    </div>
+                    <div class="p-desc" title="${p.description && p.description !== 'null' ? p.description : p.name}">
+                        ${p.description && p.description !== 'null' ? p.description : p.name}
+                    </div>
+                </td>
                 <td>${catMap[p.category] || p.category}</td>
-                <td style="font-size: 11px; color: #666;">${p.created_at ? new Date(p.created_at).toLocaleDateString('es-MX') : '-'}</td>
+                <td class="date-cell" style="font-size: 11px; color: #666;">${p.created_at ? new Date(p.created_at).toLocaleDateString('es-MX') : '-'}</td>
                 <td>
                     <button class="secondary" style="padding:6px 12px; font-size: 14px; border-radius: 6px;" onclick='editProduct(${JSON.stringify(p)})'>
                         <i class="fa-solid fa-pen-to-square"></i>
                     </button>
-                    <button class="danger" style="padding:6px 14px; font-size: 14px; border-radius: 6px; background: #ea4335; color: white; border: none;" onclick="deleteProduct('${p.id}')">
+                    <button class="danger" style="padding:6px 14px; font-size: 14px; border-radius: 6px; background: #ea4335; color: white; border: none;" onclick="deleteProduct(${JSON.stringify(p.id)})">
                         <i class="fa-solid fa-trash-can"></i>
                     </button>
                 </td>
@@ -775,15 +895,24 @@
 
         async function saveProduct() {
             const id = document.getElementById('p_id').value.trim();
+            if (!id) return alert("❌ El ID/Modelo es obligatorio.");
+
+            const name = document.getElementById('p_name').value;
+            let description = document.getElementById('p_description').value;
+
+            // Lógica: Si no hay descripción o es "null", copiar el nombre
+            if (!description || !description.trim() || description.toLowerCase() === 'null') description = name;
+
             const body = {
                 id,
-                name: document.getElementById('p_name').value,
+                name,
                 category: document.getElementById('p_category').value,
                 brand: document.getElementById('p_brand').value,
-                price: document.getElementById('p_price').value,
-                stock: document.getElementById('p_stock').value,
+                price: 0,
+                stock: 0,
                 compatibility: document.getElementById('p_compatibility').value,
-                image: document.getElementById('p_image').value
+                image: document.getElementById('p_image').value,
+                description
             };
 
             const isEdit = products.find(p => p.id === id);
@@ -813,8 +942,8 @@
             document.getElementById('modalTitle').innerText = "Nuevo Producto";
             document.getElementById('p_id').value = ""; document.getElementById('p_id').disabled = false;
             document.getElementById('p_name').value = ""; document.getElementById('p_brand').value = "";
-            document.getElementById('p_price').value = ""; document.getElementById('p_stock').value = "";
             document.getElementById('p_compatibility').value = ""; document.getElementById('p_image').value = "";
+            document.getElementById('p_description').value = "";
             document.getElementById('dropZone').innerHTML = "📁 Arrastra o selecciona la foto";
             document.getElementById('modal').style.display = 'flex';
         }
@@ -826,9 +955,8 @@
             document.getElementById('p_brand').value = p.brand || "";
             document.getElementById('p_category').value = p.category;
             document.getElementById('p_image').value = p.image || "";
-            document.getElementById('p_price').value = p.price;
-            document.getElementById('p_stock').value = p.stock;
             document.getElementById('p_compatibility').value = p.compatibility || "";
+            document.getElementById('p_description').value = p.description || "";
             let imgName = p.image ? p.image.split('/').pop() : 'logo.svg';
             document.getElementById('dropZone').innerHTML = `<img src="/assets/${imgName}" style="height:60px; border-radius:4px;">`;
             document.getElementById('modal').style.display = 'flex';
@@ -878,15 +1006,20 @@
                                 imageUrl = uploadData.url;
                             }
 
+                            const name = row.name || row.Nombre || '';
+                            let description = row.description || row.descripcion || row.Descripción || '';
+                            if (!description || !description.trim() || description.toLowerCase() === 'null') description = name;
+
                             const productData = {
                                 id: id,
-                                name: row.name || row.Nombre || '',
+                                name: name,
                                 category: row.category || row.Categoria || 'toner',
                                 brand: row.brand || row.Marca || 'Otros',
-                                price: row.price || row.Precio || 0,
-                                stock: row.stock || row.Stock || 0,
+                                price: 0,
+                                stock: 0,
                                 compatibility: row.compatibility || row.Compatibilidad || '',
-                                image: imageUrl
+                                image: imageUrl,
+                                description: description
                             };
 
                             // Guardar (POST o PUT si existe)
@@ -919,22 +1052,55 @@
             });
         }
 
-        async function deleteProduct(id) { if (confirm('¿Borrar?')) { await fetch(`/api/products/${id}`, { method: 'DELETE' }); loadProducts(); } }
+        async function deleteProduct(id) {
+            if (!confirm(`¿Estás seguro de que deseas eliminar el producto "${id}"?`)) return;
+            try {
+                const res = await fetch(`/api/products/${encodeURIComponent(id)}`, { method: 'DELETE' });
+                const data = await res.json();
+                if (!res.ok) throw new Error(data.error || 'Error al eliminar');
+
+                if (data.changes === 0) {
+                    alert("No se encontró el producto para eliminar.");
+                } else {
+                    loadProducts();
+                }
+            } catch (err) {
+                console.error(err);
+                alert("Error: " + err.message);
+            }
+        }
         function closeModal() { document.getElementById('modal').style.display = 'none'; }
         function zoom(src) { document.getElementById('zoomedImg').src = src; document.getElementById('zoomOverlay').style.display = 'flex'; }
 
-        function toggleTheme() {
+        function toggleTheme(specific) {
             const current = document.body.getAttribute('data-theme');
-            const target = current === 'dark' ? 'light' : 'dark';
+            let target;
+
+            if (specific === 'fallout') {
+                target = current === 'fallout' ? 'light' : 'fallout';
+            } else {
+                target = current === 'dark' ? 'light' : 'dark';
+            }
+
             document.body.setAttribute('data-theme', target);
             localStorage.setItem('integral-theme', target);
             updateThemeIcon();
         }
 
         function updateThemeIcon() {
-            const isDark = document.body.getAttribute('data-theme') === 'dark';
+            const current = document.body.getAttribute('data-theme');
             const icon = document.querySelector('#themeToggle i');
-            icon.className = isDark ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
+            const falloutBtn = document.getElementById('falloutToggle');
+
+            if (current === 'fallout') {
+                icon.className = 'fa-solid fa-terminal';
+                falloutBtn.style.color = '#18ff62';
+                falloutBtn.style.borderColor = '#18ff62';
+            } else {
+                icon.className = current === 'dark' ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
+                falloutBtn.style.color = '';
+                falloutBtn.style.borderColor = '';
+            }
         }
 
         // Init Theme

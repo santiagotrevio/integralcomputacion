@@ -57,6 +57,7 @@ db.serialize(() => {
     db.run("ALTER TABLE products ADD COLUMN created_at DATETIME", (err) => { });
     db.run("ALTER TABLE products ADD COLUMN published INTEGER DEFAULT 1", (err) => { });
     db.run("ALTER TABLE products ADD COLUMN brand TEXT", (err) => { });
+    db.run("ALTER TABLE products ADD COLUMN description TEXT", (err) => { });
 });
 
 app.get('/api/products', (req, res) => {
@@ -67,19 +68,20 @@ app.get('/api/products', (req, res) => {
 });
 
 app.post('/api/products', (req, res) => {
-    const { id, name, category, brand, price, stock, compatibility, image } = req.body;
+    const { id, name, category, brand, price, stock, compatibility, image, description } = req.body;
+    if (!id || id.trim() === "") return res.status(400).json({ error: "ID/Modelo es requerido" });
     const now = new Date().toISOString();
-    const sql = `INSERT INTO products (id, name, category, brand, price, stock, compatibility, image, created_at, published) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 0)`;
-    db.run(sql, [id, name, category, brand, price, stock, compatibility, image, now], function (err) {
+    const sql = `INSERT INTO products (id, name, category, brand, price, stock, compatibility, image, description, created_at, published) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 0)`;
+    db.run(sql, [id, name, category, brand, price, stock, compatibility, image, description, now], function (err) {
         if (err) return res.status(400).json({ error: err.message });
         res.json({ message: "Created" });
     });
 });
 
 app.put('/api/products/:id', (req, res) => {
-    const { name, category, brand, price, stock, compatibility, image } = req.body;
-    const sql = `UPDATE products SET name = ?, category = ?, brand = ?, price = ?, stock = ?, compatibility = ?, image = ?, published = 0 WHERE id = ?`;
-    db.run(sql, [name, category, brand, price, stock, compatibility, image, req.params.id], function (err) {
+    const { name, category, brand, price, stock, compatibility, image, description } = req.body;
+    const sql = `UPDATE products SET name = ?, category = ?, brand = ?, price = ?, stock = ?, compatibility = ?, image = ?, description = ?, published = 0 WHERE id = ?`;
+    db.run(sql, [name, category, brand, price, stock, compatibility, image, description, req.params.id], function (err) {
         if (err) return res.status(400).json({ error: err.message });
         res.json({ message: "Updated" });
     });
@@ -101,7 +103,10 @@ app.post('/api/publish', (req, res) => {
 });
 
 app.delete('/api/products/:id', (req, res) => {
-    db.run(`DELETE FROM products WHERE id = ?`, [req.params.id], () => res.json({ message: "OK" }));
+    db.run(`DELETE FROM products WHERE id = ?`, [req.params.id], function (err) {
+        if (err) return res.status(500).json({ error: err.message });
+        res.json({ message: "OK", changes: this.changes });
+    });
 });
 
 app.listen(PORT, '0.0.0.0', () => console.log(`🚀 Listo en puerto ${PORT}`));
