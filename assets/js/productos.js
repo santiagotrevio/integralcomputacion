@@ -2045,7 +2045,7 @@ const productsDB = [
     "category": "toner",
     "brand": "Lexmark",
     "name": "Tóner Lexmark 58D4000 Super Alto Rendimiento Negro, 7.500 Páginas",
-    "description": "Tóner Lexmark 58D4000 Super Alto Rendimiento Negro, 7.500 Páginas",
+    "description": "Tóner Lexmark 58D4000 Super Alto Rendimiento Negro, 7500 Páginas",
     "image": "assets/images/products/toner/lexmark-lx58d4000.webp"
   },
   {
@@ -2084,7 +2084,7 @@ const productsDB = [
     "id": "RI408284",
     "category": "toner",
     "brand": "RICOH",
-    "name": "Tóner Ricoh SP 3710X Negro, 7.000 Páginas",
+    "name": "Tóner Ricoh SP 3710X Negro, 7000 Páginas",
     "description": "Tóner Ricoh SP 3710X Negro, 7000 Páginas",
     "image": "assets/images/products/toner/RI408284.webp"
   },

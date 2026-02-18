@@ -715,6 +715,7 @@
             color: var(--apple-text);
             -webkit-font-smoothing: antialiased;
             letter-spacing: -0.01em;
+            overflow-x: hidden;
         }
 
         .container {
@@ -1404,21 +1405,25 @@
         .sidebar-panel {
             position: fixed;
             top: 0;
-            right: -450px;
+            right: 0;
             width: 400px;
             height: 100vh;
             background: var(--apple-card);
             backdrop-filter: blur(30px) saturate(150%);
-            box-shadow: -10px 0 30px rgba(0, 0, 0, 0.2);
             z-index: 2000;
-            transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            transform: translateX(105%);
+            visibility: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             display: flex;
             flex-direction: column;
             border-left: 1px solid var(--apple-border);
+            box-shadow: none;
         }
 
         .sidebar-panel.open {
-            right: 0;
+            transform: translateX(0);
+            visibility: visible;
+            box-shadow: -10px 0 30px rgba(0, 0, 0, 0.3);
         }
 
         .sidebar-header {
@@ -1482,7 +1487,8 @@
             object-fit: cover;
         }
 
-        .btn-restore {
+        .btn-restore,
+        .btn-undo {
             margin-left: auto;
             background: var(--apple-blue);
             color: white;
@@ -1491,6 +1497,22 @@
             border-radius: 6px;
             font-size: 10px;
             cursor: pointer;
+            font-weight: 700;
+        }
+
+        .btn-undo {
+            background: rgba(0, 0, 0, 0.1);
+            color: var(--apple-text);
+            border: 1px solid var(--apple-border);
+        }
+
+        [data-theme="dark"] .btn-undo {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .btn-undo:hover {
+            background: var(--apple-blue);
+            color: white;
         }
 
         [data-theme^="hp-"] .sidebar-panel {
@@ -1632,10 +1654,16 @@
                 </div>
                 <div id="publishAlert" style="font-size:10px; color:#ff3b30; font-weight:700; display:none;">⚠️ Requiere
                     actualización</div>
-                <button id="btnDeletePending" onclick="deletePendingProducts()"
-                    style="display:none; margin-top:8px; background:rgba(255, 59, 48, 0.1); color:#ff3b30; border:1px solid rgba(255, 59, 48, 0.2); padding:4px 8px; border-radius:6px; font-size:9px; cursor:pointer; font-weight:700; width:100%;">
-                    <i class="fa-solid fa-trash-can"></i> BORRAR PENDIENTES
-                </button>
+                <div style="display: flex; gap: 8px; margin-top: 12px; flex-direction: column;">
+                    <button onclick="setSort('pending', document.getElementById('chipPending'))" class="secondary"
+                        style="background: rgba(0, 113, 227, 0.1); color: var(--apple-blue); border: 1px solid rgba(0, 113, 227, 0.2); padding: 4px 8px; border-radius: 6px; font-size: 10px; cursor: pointer; font-weight: 700;">
+                        <i class="fa-solid fa-eye"></i> VER PENDIENTES
+                    </button>
+                    <button id="btnDeletePending" onclick="deletePendingProducts()"
+                        style="display:none; background:rgba(255, 59, 48, 0.1); color:#ff3b30; border:1px solid rgba(255, 59, 48, 0.2); padding:4px 8px; border-radius:6px; font-size:9px; cursor:pointer; font-weight:700; width:100%;">
+                        <i class="fa-solid fa-trash-can"></i> BORRAR PENDIENTES
+                    </button>
+                </div>
             </div>
             <div class="stat-card">
                 <div class="stat-icon" style="background: rgba(255, 159, 10, 0.1); color: #ff9f0a;">
@@ -1654,6 +1682,7 @@
 
             <div class="sort-chips">
                 <span class="chip active" onclick="setSort('recent', this)">Últimos cargados</span>
+                <span id="chipPending" class="chip" onclick="setSort('pending', this)">Pendientes</span>
                 <span class="chip" onclick="setSort('alpha', this)">Alfabético</span>
                 <span class="chip" onclick="setSort('category', this)">Por Categoría</span>
             </div>
@@ -2174,12 +2203,16 @@
 
                 const matchesBrand = !brandFilter || p.brand === brandFilter;
 
-                return matchesSearch && matchesBrand;
+                const matchesPending = currentSort === 'pending' ? p.published === 0 : true;
+
+                return matchesSearch && matchesBrand && matchesPending;
             });
 
             if (currentSort === 'alpha') list.sort((a, b) => (a.brand || "").localeCompare(b.brand || "") || a.name.localeCompare(b.name));
             if (currentSort === 'recent') list.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
             if (currentSort === 'category') list.sort((a, b) => a.category.localeCompare(b.category));
+            // Si es 'pending', ya el filter hizo el trabajo, pero podemos ordenar por fecha
+            if (currentSort === 'pending') list.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
 
             document.getElementById('totalCount').innerText = `${list.length} productos`;
             filteredList = list;
@@ -2976,11 +3009,12 @@
                 this.render();
             },
 
-            logAction(type, message, details = "") {
+            logAction(type, message, details = "", backup = null) {
                 this.logs.unshift({
                     type,
                     message,
                     details,
+                    backup, // Guardamos el estado anterior para el "Undo"
                     time: new Date().toLocaleTimeString()
                 });
                 this.save();
@@ -2991,6 +3025,31 @@
                 this.trash.unshift({ ...product, deletedAt: new Date().getTime() });
                 this.logAction('delete', `Eliminado: ${product.id}`, product.name);
                 this.save();
+            },
+
+            async undoUpdate(logIndex) {
+                const log = this.logs[logIndex];
+                if (!log || !log.backup) return;
+
+                if (!confirm(`¿Deshacer cambios y volver al estado anterior de "${log.backup.id}"?`)) return;
+
+                try {
+                    const res = await fetch(`/api/products/${log.backup.id}`, {
+                        method: 'PUT',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(log.backup)
+                    });
+                    if (res.ok) {
+                        this.logs.splice(logIndex, 1);
+                        this.logAction('create', `↩️ Revertido: ${log.backup.id}`);
+                        this.save();
+                        loadProducts();
+                    } else {
+                        alert("Error al revertir los cambios.");
+                    }
+                } catch (err) {
+                    alert("Error mágico al deshacer");
+                }
             },
 
             async restoreProduct(id) {
@@ -3025,15 +3084,24 @@
                 if (this.logs.length === 0) {
                     logEl.innerHTML = '<div style="text-align:center; padding-top:40px; opacity:0.5">Sin actividad reciente</div>';
                 } else {
-                    logEl.innerHTML = this.logs.map(l => `
-                        <div class="log-entry ${l.type}">
-                            <strong>${l.message}</strong>
-                            <div style="opacity:0.8">${l.details || ''}</div>
+                    logEl.innerHTML = this.logs.map((l, index) => `
+                        <div class="log-entry ${l.type}" style="position:relative">
+                            <div style="display:flex; justify-content:space-between; align-items:center; width:100%">
+                                <div style="flex:1; padding-right:10px">
+                                    <strong style="display:block; margin-bottom:2px">${l.message}</strong>
+                                    <div style="opacity:0.75; font-size:11px; line-height:1.2">${l.details || ''}</div>
+                                </div>
+                                ${l.type === 'update' && l.backup ? `
+                                    <button class="btn-undo" onclick="auditManager.undoUpdate(${index})" 
+                                            style="padding: 6px 10px; flex-shrink:0; background: var(--apple-blue); color:white; border:none; box-shadow: 0 2px 8px rgba(0,113,227,0.3)">
+                                        ↩️ DESHACER
+                                    </button>` : ''}
+                            </div>
                             <span class="time">${l.time}</span>
                         </div>
                     `).join('');
                 }
-
+                // ... trash rendering stays the same ...
                 if (this.trash.length === 0) {
                     trashEl.innerHTML = '<div style="text-align:center; padding-top:40px; opacity:0.5">La papelera está vacía</div>';
                 } else {
@@ -3064,16 +3132,26 @@
             document.getElementById('tabTrash').classList.toggle('active', tab === 'trash');
         }
 
-        // Interceptar saveProduct para loggear cambios
+        // Interceptor robusto para cambios
         const originalSave = saveProduct;
         saveProduct = async function () {
             const id = document.getElementById('p_id').value;
-            const isEdit = products.find(p => p.id === id);
-            await originalSave();
-            auditManager.logAction(isEdit ? 'update' : 'create',
-                `${isEdit ? 'Actualizado' : 'Creado'}: ${id}`,
-                document.getElementById('p_name').value
-            );
+            // Capturar estado ANTES de que el original lo cambie
+            const existingProduct = products.find(p => p.id === id);
+            const backup = existingProduct ? JSON.parse(JSON.stringify(existingProduct)) : null;
+
+            try {
+                await originalSave(); // Ejecutar guardado real
+
+                // Si el originalSave terminó sin errores, procedemos al log
+                if (existingProduct) {
+                    auditManager.logAction('update', `Actualizado: ${id}`, document.getElementById('p_name').value, backup);
+                } else {
+                    auditManager.logAction('create', `Creado: ${id}`, document.getElementById('p_name').value);
+                }
+            } catch (err) {
+                console.error("Error en interceptor de guardado:", err);
+            }
         };
 
         // Inicializar auditoría
