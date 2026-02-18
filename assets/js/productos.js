@@ -2081,6 +2081,14 @@ const productsDB = [
     "image": "assets/images/products/toner/lexmark-lxb344x00.webp"
   },
   {
+    "id": "RI408284",
+    "category": "toner",
+    "brand": "RICOH",
+    "name": "Tóner Ricoh SP 3710X Negro, 7.000 Páginas",
+    "description": "Tóner Ricoh SP 3710X Negro, 7.000 Páginas",
+    "image": "assets/images/products/toner/RI408284.webp"
+  },
+  {
     "id": "LXB220Z00",
     "category": "toner",
     "brand": "Lexmark",
