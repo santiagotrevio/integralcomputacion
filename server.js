@@ -129,6 +129,61 @@ app.get('/api/scout-price/:model', async (req, res) => {
     }
 });
 
+app.post('/api/import-image-url', async (req, res) => {
+    const { productId, imageUrl } = req.body;
+    if (!productId || !imageUrl) return res.status(400).json({ error: 'Faltan datos' });
+
+    const fileName = `${productId.replace(/[^a-zA-Z0-9]/g, '_')}.webp`;
+    const outputPath = path.join(__dirname, 'assets/images/products/toner', fileName);
+
+    try {
+        const response = await fetch(imageUrl);
+        if (!response.ok) throw new Error(`Fallo al descargar: ${response.status}`);
+        const arrayBuffer = await response.arrayBuffer();
+        const buffer = Buffer.from(arrayBuffer);
+
+        await sharp(buffer)
+            .resize(1200, 1200, { fit: 'inside', withoutEnlargement: true })
+            .webp({ quality: 80 })
+            .toFile(outputPath);
+
+        const relativePath = `assets/images/products/toner/${fileName}`;
+
+        db.run(`UPDATE products SET image = ? WHERE id = ?`, [relativePath, productId], (err) => {
+            if (err) return res.status(500).json({ error: err.message });
+            res.json({ success: true, url: relativePath });
+        });
+    } catch (err) {
+        console.error('Import Error:', err);
+        res.status(500).json({ error: 'Fallo al descargar o procesar la imagen. Verifica que el enlace sea directo a una imagen.' });
+    }
+});
+
+app.post('/api/import-brand-logo', async (req, res) => {
+    const { brandName, imageUrl } = req.body;
+    if (!brandName || !imageUrl) return res.status(400).json({ error: 'Faltan datos' });
+
+    const fileName = `${brandName.toLowerCase().replace(/[^a-z0-9]/g, '')}.png`;
+    const outputPath = path.join(__dirname, 'assets/images/brands', fileName);
+
+    try {
+        const response = await fetch(imageUrl);
+        if (!response.ok) throw new Error(`Fallo al descargar: ${response.status}`);
+        const arrayBuffer = await response.arrayBuffer();
+        const buffer = Buffer.from(arrayBuffer);
+
+        await sharp(buffer)
+            .resize(400, 200, { fit: 'inside', withoutEnlargement: true })
+            .png()
+            .toFile(outputPath);
+
+        res.json({ success: true, url: `/assets/${fileName}` });
+    } catch (err) {
+        console.error('Brand Logo Import Error:', err);
+        res.status(500).json({ error: 'Fallo al descargar o procesar el logo.' });
+    }
+});
+
 app.delete('/api/products/:id', (req, res) => {
     db.run(`DELETE FROM products WHERE id = ?`, [req.params.id], function (err) {
         if (err) return res.status(500).json({ error: err.message });
