@@ -1927,14 +1927,13 @@
                 </div>
             </div>
 
-            <!-- NUEVO: REPORTE EXTENDIDO DE 100 PRODUCTOS -->
             <div
                 style="margin-top:40px; background:var(--apple-card); border:1px solid var(--apple-border); border-radius:24px; padding:30px; overflow:hidden;">
                 <div
                     style="display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:25px; border-bottom:1px solid var(--apple-border); padding-bottom:15px;">
                     <div>
                         <h3 style="margin:0; font-size:18px;"><i class="fa-solid fa-list-check"
-                                style="color:var(--apple-blue)"></i> Ranking: 100 Oportunidades de Mercado (México)</h3>
+                                style="color:var(--apple-blue)"></i> Ranking: Top 20 Oportunidades de Mercado</h3>
                         <p style="margin:5px 0 0 0; font-size:12px; opacity:0.6;">Basado en volumen de búsqueda y
                             competencia en Amazon MX y Mercado Libre.</p>
                     </div>
@@ -1944,8 +1943,21 @@
                     </div>
                 </div>
 
+                <div id="intelTabs"
+                    style="display:flex; gap:10px; margin-bottom:20px; padding-bottom:10px; border-bottom:1px solid var(--apple-border);">
+                    <div class="intel-tab active" onclick="switchIntelTab('computo')"
+                        style="padding:8px 16px; border-radius:10px; cursor:pointer; font-size:12px; font-weight:700; transition:0.3s; background:var(--apple-blue); color:white;">
+                        Tecnología</div>
+                    <div class="intel-tab" onclick="switchIntelTab('papeleria')"
+                        style="padding:8px 16px; border-radius:10px; cursor:pointer; font-size:12px; font-weight:700; transition:0.3s; background:rgba(0,0,0,0.05); color:var(--apple-text);">
+                        Papelería</div>
+                    <div class="intel-tab" onclick="switchIntelTab('toner')"
+                        style="padding:8px 16px; border-radius:10px; cursor:pointer; font-size:12px; font-weight:700; transition:0.3s; background:rgba(0,0,0,0.05); color:var(--apple-text);">
+                        Toners y Cartuchos</div>
+                </div>
+
                 <div id="marketHotlistContainer" style="max-height:600px; overflow-y:auto; padding-right:10px;">
-                    <!-- Se llena dinámicamente con 100 items -->
+                    <!-- Se llena dinámicamente con las categorías -->
                 </div>
 
                 <div
@@ -3500,83 +3512,130 @@
             addSuggestion("Imágenes Pendientes", issues.imageGap.length, "El 90% de las ventas entran por los ojos.", "fa-image", "255, 159, 10");
         }
 
-        // GENERAR LISTADO DE 100 PRODUCTOS HOT (REAL DESDE MEXICO)
+        let globalIntelData = null;
+        let currentIntelCat = 'computo';
+
+        function switchIntelTab(cat) {
+            currentIntelCat = cat;
+            document.querySelectorAll('.intel-tab').forEach(tab => {
+                const isActive = tab.getAttribute('onclick').includes(`'${cat}'`);
+                tab.style.background = isActive ? 'var(--apple-blue)' : 'rgba(0,0,0,0.05)';
+                tab.style.color = isActive ? 'white' : 'var(--apple-text)';
+            });
+            renderMarketHotlist();
+        }
+
         async function renderMarketHotlist(refresh = false) {
             const container = document.getElementById('marketHotlistContainer');
 
-            // Si no hay refresh y ya hay datos, no hacer nada
-            if (!refresh && container.getAttribute('data-loaded') === 'true') return;
+            // Si no hay refresh y ya tenemos data global, solo renderizar el tab activo
+            if (!refresh && globalIntelData) {
+                renderHotlistFromData(globalIntelData[currentIntelCat]);
+                return;
+            }
 
             // Estado de carga
             container.innerHTML = `
                 <div style="text-align:center; padding:50px; opacity:0.6;">
                     <i class="fa-solid fa-circle-notch fa-spin" style="font-size:30px; color:var(--apple-blue); margin-bottom:15px;"></i>
-                    <div>Consultando Mercado Libre y Amazon MX en tiempo real...</div>
-                    <div style="font-size:10px; margin-top:10px;">Esto puede tardar unos segundos...</div>
+                    <div>Consultando mercados de México en tiempo real...</div>
+                    <div style="font-size:10px; margin-top:10px;">Escaneando Computación, Papelería y Consumibles...</div>
                 </div>
             `;
 
             try {
-                const response = await fetch('/api/market-trends');
-                const data = await response.json();
+                const url = refresh ? '/api/market-trends?forceRefresh=true' : '/api/market-trends';
+                const response = await fetch(url);
+                globalIntelData = await response.json();
 
-                if (!data || data.length === 0) throw new Error("No hay datos");
-
-                let html = `
-                    <table style="width:100%; border-collapse:collapse; font-size:13px;">
-                        <thead>
-                            <tr style="text-align:left; border-bottom:1px solid var(--apple-border); opacity:0.7; font-size:11px;">
-                                <th style="padding:10px 5px;">#</th>
-                                <th style="padding:10px 5px;">PRODUCTO / MODELO</th>
-                                <th style="padding:10px 5px;">DEMANDA (MX)</th>
-                                <th style="padding:10px 5px;">PRECIO PROMEDIO (MXN)</th>
-                                <th style="padding:10px 5px;">OPORTUNIDAD</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                `;
-
-                data.forEach((p, i) => {
-                    const scoreColor = i < 15 ? "#34c759" : (i < 50 ? "#ff9f0a" : "var(--apple-blue)");
-                    const precioStr = p.p.toLocaleString('es-MX', { style: 'currency', currency: 'MXN' });
-
-                    html += `
-                        <tr style="border-bottom:1px solid rgba(0,0,0,0.03);">
-                            <td style="padding:12px 5px; font-weight:700; opacity:0.3;">${i + 1}</td>
-                            <td style="padding:12px 5px;">
-                                <div style="font-weight:600;">${p.b} ${p.n}</div>
-                                <div style="font-size:10px; opacity:0.5;">ID Mercado: ${p.id}</div>
-                            </td>
-                            <td style="padding:12px 5px;">
-                                <div style="display:flex; align-items:center; gap:8px;">
-                                    <div style="width:100px; height:4px; background:rgba(0,0,0,0.05); border-radius:2px;">
-                                        <div style="width:${p.demanda}; height:100%; background:${scoreColor}; border-radius:2px;"></div>
-                                    </div>
-                                    <span style="font-size:10px; width:35px;">${p.demanda}</span>
-                                </div>
-                            </td>
-                            <td style="padding:12px 5px; font-weight:700;">${precioStr}</td>
-                            <td style="padding:12px 5px;">
-                                <span style="background:rgba(0,0,0,0.05); padding:3px 8px; border-radius:12px; font-size:10px; font-weight:700;">${p.opti}</span>
-                            </td>
-                        </tr>
-                    `;
-                });
-
-                html += `</tbody></table>`;
-                container.innerHTML = html;
+                renderHotlistFromData(globalIntelData[currentIntelCat]);
                 container.setAttribute('data-loaded', 'true');
 
             } catch (err) {
-                console.error("Error al cargar tendencias:", err);
+                console.error("Error al cargar inteligencia:", err);
                 container.innerHTML = `
                     <div style="text-align:center; padding:30px; color:#ff3b30;">
                         <i class="fa-solid fa-circle-exclamation" style="font-size:30px; margin-bottom:10px;"></i>
-                        <div>No se pudieron cargar los datos reales.</div>
+                        <div>No se pudieron cargar los datos de tendencia.</div>
                         <button onclick="renderMarketHotlist(true)" style="margin-top:10px; font-size:11px;">REINTENTAR</button>
                     </div>
                 `;
             }
+        }
+
+        function renderHotlistFromData(data) {
+            const container = document.getElementById('marketHotlistContainer');
+            if (!data) return;
+
+            let html = `
+                <table style="width:100%; border-collapse:collapse; font-size:13px;">
+                    <thead>
+                        <tr style="text-align:left; border-bottom:1px solid var(--apple-border); opacity:0.7; font-size:11px;">
+                            <th style="padding:10px 5px;">#</th>
+                            <th style="padding:10px 5px;">PRODUCTO / MODELO</th>
+                            <th style="padding:10px 5px;">DEMANDA (MX)</th>
+                            <th style="padding:10px 5px;">PRECIO MIN. (MXN)</th>
+                            <th style="padding:10px 5px;">PRECIO MAX. (MXN)</th>
+                            <th style="padding:10px 5px;">RECOMENDACIÓN</th>
+                            <th style="padding:10px 5px;">ACCIONES</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+            `;
+
+            data.forEach((p, i) => {
+                const scoreColor = i < 5 ? "#34c759" : (i < 15 ? "#ff9f0a" : "var(--apple-blue)");
+                const minStr = p.minP.toLocaleString('es-MX', { style: 'currency', currency: 'MXN' });
+                const maxStr = p.maxP.toLocaleString('es-MX', { style: 'currency', currency: 'MXN' });
+
+                // Lógica de Sugerencia Inteligente
+                let sugerencia = "Monitorear";
+                let sugColor = "rgba(0,0,0,0.05)";
+                if (parseFloat(p.demanda) > 95) {
+                    sugerencia = "¡Alta Demanda! Comprar";
+                    sugColor = "rgba(52, 199, 89, 0.1)";
+                } else if (p.opti === "ALTO MARGEN") {
+                    sugerencia = "Revisar Precio Venta";
+                    sugColor = "rgba(255, 159, 10, 0.1)";
+                }
+
+                // Generar Link de Búsqueda Inteligente (Usa Marca + Nombre para asegurar resultados)
+                const searchQuery = `${p.b} ${p.n}`;
+                const verificationUrl = `https://listado.mercadolibre.com.mx/${encodeURIComponent(searchQuery)}`;
+
+                html += `
+                    <tr style="border-bottom:1px solid rgba(0,0,0,0.03);">
+                        <td style="padding:12px 5px; font-weight:700; opacity:0.3;">${i + 1}</td>
+                        <td style="padding:12px 5px;">
+                            <div style="font-weight:600;">${p.b} ${p.n}</div>
+                            <a href="${verificationUrl}" target="_blank" style="font-size:10px; color:var(--apple-blue); text-decoration:none; display:flex; align-items:center; gap:4px;">
+                                <i class="fa-solid fa-magnifying-glass" style="font-size:8px;"></i> ${p.id} (Buscar en Mercado Libre)
+                            </a>
+                        </td>
+                        <td style="padding:12px 5px;">
+                            <div style="display:flex; align-items:center; gap:8px;">
+                                <div style="width:60px; height:4px; background:rgba(0,0,0,0.05); border-radius:2px;">
+                                    <div style="width:${p.demanda}; height:100%; background:${scoreColor}; border-radius:2px;"></div>
+                                </div>
+                                <span style="font-size:10px; width:35px;">${p.demanda}</span>
+                            </div>
+                        </td>
+                        <td style="padding:12px 5px; font-weight:700; color:#34c759;">${minStr}</td>
+                        <td style="padding:12px 5px; font-weight:700; color:#ff3b30;">${maxStr}</td>
+                        <td style="padding:12px 5px;">
+                            <span style="background:${sugColor}; padding:3px 8px; border-radius:12px; font-size:10px; font-weight:700;">${sugerencia}</span>
+                        </td>
+                        <td style="padding:12px 5px;">
+                            <button onclick="window.open('${verificationUrl}', '_blank')" class="secondary" style="font-size:9px; padding:4px 8px; border-radius:8px;">
+                                <i class="fa-solid fa-eye"></i> ANALIZAR
+                            </button>
+                        </td>
+                    </tr>
+                `;
+            });
+
+            html += `</tbody></table>`;
+            container.innerHTML = html;
         }
 
         // Cambio de vistas
