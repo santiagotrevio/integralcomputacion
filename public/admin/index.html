@@ -1098,7 +1098,10 @@
                             <div style="font-weight:600; font-size:13px;">${item.store || 'Referencia'}</div>
                             <div style="font-size:11px; color:#666;">${item.title}</div>
                         </div>
-                        <div style="font-weight:700; color:var(--apple-blue); min-width:80px; text-align:right;">${item.priceText}</div>
+                        <div style="display:flex; flex-direction:column; align-items:flex-end;">
+                            <div style="font-weight:700; color:var(--apple-blue); min-width:80px; text-align:right;">${item.priceText}</div>
+                            ${item.url ? `<a href="${item.url}" target="_blank" style="font-size:10px; color:var(--apple-blue); text-decoration:none; margin-top:4px;"><i class="fa-solid fa-arrow-up-right-from-square"></i> Ver sitio</a>` : ''}
+                        </div>
                     `;
                     resultsDiv.appendChild(row);
                 });

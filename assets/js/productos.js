@@ -6,7 +6,7 @@ const productsDB = [
     "brand": "Canon",
     "name": "CARTUCHO CANON PARA TONER 121 NEGRO .",
     "description": "Cartucho de tóner original Canon 121 Negro para impresoras seleccionadas.",
-    "image": "assets/images/products/toner/canon-ca121.png"
+    "image": "assets/images/products/toner/canon-ca121.webp"
   },
   {
     "id": "CA045HBK",
@@ -14,7 +14,7 @@ const productsDB = [
     "brand": "Canon",
     "name": "CARTUCHO DE TONER NEGRO CANON 045 H",
     "description": "Cartucho de tóner de alto rendimiento Canon 045H Negro.",
-    "image": "assets/images/products/toner/CA045HBK.png"
+    "image": "assets/images/products/toner/CA045HBK.webp"
   },
   {
     "id": "CA131C",
@@ -22,7 +22,7 @@ const productsDB = [
     "brand": "Canon",
     "name": "CARTUCHO PARA TONER CANON CYAN 131 C",
     "description": "Cartucho de tóner Canon 131 Cyan.",
-    "image": "assets/images/products/toner/canon-ca131c.png"
+    "image": "assets/images/products/toner/canon-ca131c.webp"
   },
   {
     "id": "CA131BK",
@@ -30,7 +30,7 @@ const productsDB = [
     "brand": "Canon",
     "name": "CARTUCHO PARA TONER CANON NEGRO 131 BK",
     "description": "Cartucho de tóner Canon 131 Negro.",
-    "image": "assets/images/products/toner/canon-ca131bk.png"
+    "image": "assets/images/products/toner/canon-ca131bk.webp"
   },
   {
     "id": "LX3070166",
@@ -38,7 +38,7 @@ const productsDB = [
     "brand": "Lexmark",
     "name": "CINTA LEXMARK #24XX",
     "description": "CINTA LEXMARK #24XX",
-    "image": "assets/images/products/toner/lexmark-lx3070166.png"
+    "image": "assets/images/products/toner/lexmark-lx3070166.webp"
   },
   {
     "id": "CA3028C001AA",
@@ -46,7 +46,7 @@ const productsDB = [
     "brand": "Canon",
     "name": "Cartucho Canon para toner 054 H negro .",
     "description": "Cartucho de tóner de alto rendimiento Canon 054H Negro.",
-    "image": "assets/images/products/toner/CA3028C001AA.png",
+    "image": "assets/images/products/toner/CA3028C001AA.webp",
     "compatibility": "Canon"
   },
   {
@@ -55,7 +55,7 @@ const productsDB = [
     "brand": "Canon",
     "name": "Cartucho Canon para toner 057H negro",
     "description": "Cartucho de tóner de alto rendimiento Canon 057H Negro.",
-    "image": "assets/images/products/toner/canon-ca057h.png",
+    "image": "assets/images/products/toner/canon-ca057h.webp",
     "compatibility": "Canon"
   },
   {
@@ -64,7 +64,7 @@ const productsDB = [
     "brand": "Xerox",
     "name": "Cartucho Residual Xerox 108R01124",
     "description": "Cartucho Residual Xerox 108R01124",
-    "image": "assets/images/products/toner/X108R01124.png"
+    "image": "assets/images/products/toner/X108R01124.webp"
   },
   {
     "id": "X106R03521",
@@ -72,7 +72,7 @@ const productsDB = [
     "brand": "Xerox",
     "name": "Cartucho de Toner Xerox Alto Rendimiento Amarillo",
     "description": "Cartucho de Toner Xerox Alto Rendimiento Amarillo",
-    "image": "assets/images/products/toner/X106R03521.png"
+    "image": "assets/images/products/toner/X106R03521.webp"
   },
   {
     "id": "LX20N40K0",
@@ -80,7 +80,7 @@ const productsDB = [
     "brand": "Lexmark",
     "name": "Cartucho de impresion Lexmark negro del programa de retorno (20N40K0)",
     "description": "Cartucho de impresion Lexmark negro del programa de retorno (20N40K0)",
-    "image": "assets/images/products/toner/lexmark-lx20n40k0.png"
+    "image": "assets/images/products/toner/lexmark-lx20n40k0.webp"
   },
   {
     "id": "CA119",
@@ -88,7 +88,7 @@ const productsDB = [
     "brand": "Canon",
     "name": "DESCONTINUADO TONER ORIGINAL CANON 119 NEGRO",
     "description": "Cartucho de tóner original Canon 119 Negro (Descontinuado).",
-    "image": "assets/images/products/toner/canon-ca119.png"
+    "image": "assets/images/products/toner/canon-ca119.webp"
   },
   {
     "id": "LX56F4000",
@@ -96,7 +96,7 @@ const productsDB = [
     "brand": "Lexmark",
     "name": "Lexmark 56F4000 cartucho de tóner",
     "description": "Lexmark 56F4000 cartucho de tóner",
-    "image": "assets/images/products/toner/lexmark-lx56f4000.png"
+    "image": "assets/images/products/toner/lexmark-lx56f4000.webp"
   },
   {
     "id": "LX55B0ZA0",
@@ -104,7 +104,7 @@ const productsDB = [
     "brand": "Lexmark",
     "name": "Lexmark Fotoconductor 55B0ZA0, 40.000 Páginas",
     "description": "Lexmark Fotoconductor 55B0ZA0, 40.000 Páginas",
-    "image": "assets/images/products/toner/lexmark-lx55b0za0.png"
+    "image": "assets/images/products/toner/lexmark-lx55b0za0.webp"
   },
   {
     "id": "LX50F0Z00",
@@ -112,7 +112,7 @@ const productsDB = [
     "brand": "Lexmark",
     "name": "Lexmark Unidad de Imagen 50F0Z00, 60.000 Páginas",
     "description": "Lexmark Unidad de Imagen 50F0Z00, 60.000 Páginas",
-    "image": "assets/images/products/toner/lexmark-lx50f0z00.png"
+    "image": "assets/images/products/toner/lexmark-lx50f0z00.webp"
   },
   {
     "id": "HPCB436AD",
@@ -120,7 +120,7 @@ const productsDB = [
     "brand": "HP",
     "name": "Pack de 2 Toner Original HP LaserJet 36A Negro",
     "description": "Pack de 2 Toner Original HP LaserJet 36A Negro",
-    "image": "assets/images/products/toner/1771379950277-HPCB436AD.png"
+    "image": "assets/images/products/toner/1771379950277-HPCB436AD.webp"
   },
   {
     "id": "HPCE255XD",
@@ -128,7 +128,7 @@ const productsDB = [
     "brand": "HP",
     "name": "Pack de 2 Toner Original HP LaserJet 55X Negro",
     "description": "Pack de 2 Toner Original HP LaserJet 55X Negro",
-    "image": "assets/images/products/toner/1771379950868-HPCE255XD.png"
+    "image": "assets/images/products/toner/1771379950868-HPCE255XD.webp"
   },
   {
     "id": "HPCE278AD",
@@ -136,7 +136,7 @@ const productsDB = [
     "brand": "HP",
     "name": "Pack de 2 Toner Original HP LaserJet 78A Negro",
     "description": "Pack de 2 Toner Original HP LaserJet 78A Negro",
-    "image": "assets/images/products/toner/1771379951277-HPCE278AD.png"
+    "image": "assets/images/products/toner/1771379951277-HPCE278AD.webp"
   },
   {
     "id": "HPCE285AD",
@@ -144,7 +144,7 @@ const productsDB = [
     "brand": "HP",
     "name": "Pack de 2 Toner Original HP LaserJet 85A Negro",
     "description": "Pack de 2 Toner Original HP LaserJet 85A Negro",
-    "image": "assets/images/products/toner/1771379951328-HPCE285AD.png"
+    "image": "assets/images/products/toner/1771379951328-HPCE285AD.webp"
   },
   {
     "id": "HPCE390XD",
@@ -152,7 +152,7 @@ const productsDB = [
     "brand": "HP",
     "name": "Pack de 2 Toner Original HP LaserJet 90X Negro",
     "description": "Pack de 2 Toner Original HP LaserJet 90X Negro",
-    "image": "assets/images/products/toner/1771379951811-HPCE390XD.png"
+    "image": "assets/images/products/toner/1771379951811-HPCE390XD.webp"
   },
   {
     "id": "BRDR890",
@@ -160,7 +160,7 @@ const productsDB = [
     "brand": "Brother",
     "name": "TAMBOR BROTHER DR-890 NEGRO, 50.000 PAGINAS",
     "description": "TAMBOR BROTHER DR-890 NEGRO, 50.000 PAGINAS",
-    "image": "assets/images/products/toner/BRDR890.png"
+    "image": "assets/images/products/toner/BRDR890.webp"
   },
   {
     "id": "BRDR229CL",
@@ -168,7 +168,7 @@ const productsDB = [
     "brand": "Brother",
     "name": "TAMBOR BROTHER DR229CL NEGRO, 20.000 PAGINAS - 4 PIEZAS",
     "description": "TAMBOR BROTHER DR229CL NEGRO, 20.000 PAGINAS - 4 PIEZAS",
-    "image": "assets/images/products/toner/BRDR229CL.png"
+    "image": "assets/images/products/toner/BRDR229CL.webp"
   },
   {
     "id": "BRDR311CL",
@@ -176,7 +176,7 @@ const productsDB = [
     "brand": "Brother",
     "name": "TAMBOR BROTHER DR311CL NEGRO",
     "description": "TAMBOR BROTHER DR311CL NEGRO",
-    "image": "assets/images/products/toner/BRDR311CL.png"
+    "image": "assets/images/products/toner/BRDR311CL.webp"
   },
   {
     "id": "BRDR421CL",
@@ -184,7 +184,7 @@ const productsDB = [
     "brand": "Brother",
     "name": "TAMBOR BROTHER DR421CL NEGRO",
     "description": "TAMBOR BROTHER DR421CL NEGRO",
-    "image": "assets/images/products/toner/BRDR421CL.png"
+    "image": "assets/images/products/toner/BRDR421CL.webp"
   },
   {
     "id": "BRDR830",
@@ -192,7 +192,7 @@ const productsDB = [
     "brand": "Brother",
     "name": "TAMBOR BROTHER DR830, NEGRO, RENDIMIENTO 15,000 PAGS",
     "description": "TAMBOR BROTHER DR830, NEGRO, RENDIMIENTO 15,000 PAGS",
-    "image": "assets/images/products/toner/brother-brdr830.png"
+    "image": "assets/images/products/toner/brother-brdr830.webp"
   },
   {
     "id": "BRDR920",
@@ -200,7 +200,7 @@ const productsDB = [
     "brand": "Brother",
     "name": "TAMBOR BROTHER DR920 NEGRO, RENDIMIENTO 75,000 PAGINAS",
     "description": "TAMBOR BROTHER DR920 NEGRO, RENDIMIENTO 75,000 PAGINAS",
-    "image": "assets/images/products/toner/brother-brdr920.png"
+    "image": "assets/images/products/toner/brother-brdr920.webp"
   },
   {
     "id": "BRDR1060",
@@ -208,7 +208,7 @@ const productsDB = [
     "brand": "Brother",
     "name": "TAMBOR BROTHER ORIGINAL DR1060 NEGRO",
     "description": "TAMBOR BROTHER ORIGINAL DR1060 NEGRO",
-    "image": "assets/images/products/toner/BRDR1060.png"
+    "image": "assets/images/products/toner/BRDR1060.webp"
   },
   {
     "id": "BRDR331CL",
@@ -216,7 +216,7 @@ const productsDB = [
     "brand": "Brother",
     "name": "TAMBOR BROTHER ORIGINAL DR331CL NEGRO",
     "description": "TAMBOR BROTHER ORIGINAL DR331CL NEGRO",
-    "image": "assets/images/products/toner/BRDR331CL.png"
+    "image": "assets/images/products/toner/BRDR331CL.webp"
   },
   {
     "id": "BRDR350",
@@ -224,7 +224,7 @@ const productsDB = [
     "brand": "Brother",
     "name": "TAMBOR BROTHER ORIGINAL DR350 NEGRO",
     "description": "TAMBOR BROTHER ORIGINAL DR350 NEGRO",
-    "image": "assets/images/products/toner/BRDR350.png"
+    "image": "assets/images/products/toner/BRDR350.webp"
   },
   {
     "id": "BRDR360",
@@ -232,7 +232,7 @@ const productsDB = [
     "brand": "Brother",
     "name": "TAMBOR BROTHER ORIGINAL DR360 NEGRO",
     "description": "TAMBOR BROTHER ORIGINAL DR360 NEGRO",
-    "image": "assets/images/products/toner/BRDR360.png"
+    "image": "assets/images/products/toner/BRDR360.webp"
   },
   {
     "id": "BRDR620",
@@ -240,7 +240,7 @@ const productsDB = [
     "brand": "Brother",
     "name": "TAMBOR BROTHER ORIGINAL DR620 NEGRO",
     "description": "TAMBOR BROTHER ORIGINAL DR620 NEGRO",
-    "image": "assets/images/products/toner/BRDR620.png"
+    "image": "assets/images/products/toner/BRDR620.webp"
   },
   {
     "id": "BRDR630",
@@ -248,7 +248,7 @@ const productsDB = [
     "brand": "Brother",
     "name": "TAMBOR BROTHER ORIGINAL DR630 NEGRO",
     "description": "TAMBOR BROTHER ORIGINAL DR630 NEGRO",
-    "image": "assets/images/products/toner/brother-brdr630.png"
+    "image": "assets/images/products/toner/brother-brdr630.webp"
   },
   {
     "id": "BRDR720",
@@ -256,7 +256,7 @@ const productsDB = [
     "brand": "Brother",
     "name": "TAMBOR BROTHER ORIGINAL DR720 NEGRO",
     "description": "TAMBOR BROTHER ORIGINAL DR720 NEGRO",
-    "image": "assets/images/products/toner/BRDR720.png"
+    "image": "assets/images/products/toner/BRDR720.webp"
   },
   {
     "id": "BRDR730",
@@ -264,7 +264,7 @@ const productsDB = [
     "brand": "Brother",
     "name": "TAMBOR BROTHER ORIGINAL DR730 NEGRO",
     "description": "TAMBOR BROTHER ORIGINAL DR730 NEGRO",
-    "image": "assets/images/products/toner/brother-brdr730.png"
+    "image": "assets/images/products/toner/brother-brdr730.webp"
   },
   {
     "id": "BRDRB022",
@@ -272,7 +272,7 @@ const productsDB = [
     "brand": "Brother",
     "name": "TAMBOR BROTHER ORIGINAL DRB022 NEGRO",
     "description": "TAMBOR BROTHER ORIGINAL DRB022 NEGRO",
-    "image": "assets/images/products/toner/BRDRB022.png"
+    "image": "assets/images/products/toner/BRDRB022.webp"
   },
   {
     "id": "BRDR223CL",
@@ -280,7 +280,7 @@ const productsDB = [
     "brand": "Brother",
     "name": "TAMBOR LASER BROTHER DR223CL",
     "description": "TAMBOR LASER BROTHER DR223CL",
-    "image": "assets/images/products/toner/BRDR223CL.png"
+    "image": "assets/images/products/toner/BRDR223CL.webp"
   },
   {
     "id": "BRTN229XLM",
@@ -288,7 +288,7 @@ const productsDB = [
     "brand": "Brother",
     "name": "TONER BROTHER DE ALTO RENDIMIENTO, MAGENTA 2300 PAGINAS, TN229XLM",
     "description": "TONER BROTHER DE ALTO RENDIMIENTO, MAGENTA 2300 PAGINAS, TN229XLM",
-    "image": "assets/images/products/toner/BRTN229XLM.png"
+    "image": "assets/images/products/toner/BRTN229XLM.webp"
   },
   {
     "id": "BRTN229XLBK",
@@ -296,7 +296,7 @@ const productsDB = [
     "brand": "Brother",
     "name": "TONER BROTHER DE ALTO RENDIMIENTO, NEGRO, 3000 PAGINAS, TN229XLBK",
     "description": "TONER BROTHER DE ALTO RENDIMIENTO, NEGRO, 3000 PAGINAS, TN229XLBK",
-    "image": "assets/images/products/toner/brother-brtn229xlbk.png"
+    "image": "assets/images/products/toner/brother-brtn229xlbk.webp"
   },
   {
     "id": "BRTN229M",
@@ -304,7 +304,7 @@ const productsDB = [
     "brand": "Brother",
     "name": "TONER BROTHER DE RENDIMIENTO ESTANDAR, MAGENTA, 1500 PAGINAS, TN229M",
     "description": "TONER BROTHER DE RENDIMIENTO ESTANDAR, MAGENTA, 1500 PAGINAS, TN229M",
-    "image": "assets/images/products/toner/BRTN229M.png"
+    "image": "assets/images/products/toner/BRTN229M.webp"
   },
   {
     "id": "BRTN17",
@@ -312,7 +312,7 @@ const productsDB = [
     "brand": "Brother",
     "name": "TONER BROTHER DE SUPER ALTO RENDIMIENTO, NEGRO, TN17",
     "description": "TONER BROTHER DE SUPER ALTO RENDIMIENTO, NEGRO, TN17",
-    "image": "assets/images/products/toner/BRTN17.png"
+    "image": "assets/images/products/toner/BRTN17.webp"
   },
   {
     "id": "BRTN1060",
@@ -320,7 +320,7 @@ const productsDB = [
     "brand": "Brother",
     "name": "TONER BROTHER ORIGINAL TN1060 NEGRO",
     "description": "TONER BROTHER ORIGINAL TN1060 NEGRO",
-    "image": "assets/images/products/toner/brother-brtn1060.png"
+    "image": "assets/images/products/toner/brother-brtn1060.webp"
   },
   {
     "id": "BRTN115M",
@@ -328,7 +328,7 @@ const productsDB = [
     "brand": "Brother",
     "name": "TONER BROTHER ORIGINAL TN115 MAGENTA",
     "description": "TONER BROTHER ORIGINAL TN115 MAGENTA",
-    "image": "assets/images/products/toner/brother-brtn115m.png"
+    "image": "assets/images/products/toner/brother-brtn115m.webp"
   },
   {
     "id": "BRTN15",
@@ -336,7 +336,7 @@ const productsDB = [
     "brand": "Brother",
     "name": "TONER BROTHER ORIGINAL TN15 NEGRO",
     "description": "TONER BROTHER ORIGINAL TN15 NEGRO",
-    "image": "assets/images/products/toner/BRTN15.png"
+    "image": "assets/images/products/toner/BRTN15.webp"
   },
   {
     "id": "BRTN221Y",
@@ -344,7 +344,7 @@ const productsDB = [
     "brand": "Brother",
     "name": "TONER BROTHER ORIGINAL TN221 AMARILLO",
     "description": "TONER BROTHER ORIGINAL TN221 AMARILLO",
-    "image": "assets/images/products/toner/BRTN221Y.png"
+    "image": "assets/images/products/toner/BRTN221Y.webp"
   },
   {
     "id": "BRTN221C",
@@ -352,7 +352,7 @@ const productsDB = [
     "brand": "Brother",
     "name": "TONER BROTHER ORIGINAL TN221 CYAN",
     "description": "TONER BROTHER ORIGINAL TN221 CYAN",
-    "image": "assets/images/products/toner/BRTN221C.png"
+    "image": "assets/images/products/toner/BRTN221C.webp"
   },
   {
     "id": "BRTN221M",
@@ -360,7 +360,7 @@ const productsDB = [
     "brand": "Brother",
     "name": "TONER BROTHER ORIGINAL TN221 MAGENTA",
     "description": "TONER BROTHER ORIGINAL TN221 MAGENTA",
-    "image": "assets/images/products/toner/BRTN221M.png"
+    "image": "assets/images/products/toner/BRTN221M.webp"
   },
   {
     "id": "BRTN221BK",
@@ -368,7 +368,7 @@ const productsDB = [
     "brand": "Brother",
     "name": "TONER BROTHER ORIGINAL TN221 NEGRO",
     "description": "TONER BROTHER ORIGINAL TN221 NEGRO",
-    "image": "assets/images/products/toner/BRTN221BK.png"
+    "image": "assets/images/products/toner/BRTN221BK.webp"
   },
   {
     "id": "BRTN223Y",
@@ -376,7 +376,7 @@ const productsDB = [
     "brand": "Brother",
     "name": "TONER BROTHER ORIGINAL TN223 AMARILLO",
     "description": "TONER BROTHER ORIGINAL TN223 AMARILLO",
-    "image": "assets/images/products/toner/brother-brtn223y.png"
+    "image": "assets/images/products/toner/brother-brtn223y.webp"
   },
   {
     "id": "BRTN223C",
@@ -384,7 +384,7 @@ const productsDB = [
     "brand": "Brother",
     "name": "TONER BROTHER ORIGINAL TN223 CYAN",
     "description": "TONER BROTHER ORIGINAL TN223 CYAN",
-    "image": "assets/images/products/toner/brother-brtn223c.png"
+    "image": "assets/images/products/toner/brother-brtn223c.webp"
   },
   {
     "id": "BRTN223M",
@@ -392,7 +392,7 @@ const productsDB = [
     "brand": "Brother",
     "name": "TONER BROTHER ORIGINAL TN223 MAGENTA",
     "description": "TONER BROTHER ORIGINAL TN223 MAGENTA",
-    "image": "assets/images/products/toner/BRTN223M.png"
+    "image": "assets/images/products/toner/BRTN223M.webp"
   },
   {
     "id": "BRTN223BK",
@@ -400,7 +400,7 @@ const productsDB = [
     "brand": "Brother",
     "name": "TONER BROTHER ORIGINAL TN223 NEGRO",
     "description": "TONER BROTHER ORIGINAL TN223 NEGRO",
-    "image": "assets/images/products/toner/brother-brtn223bk.png"
+    "image": "assets/images/products/toner/brother-brtn223bk.webp"
   },
   {
     "id": "BRTN227Y",
@@ -408,7 +408,7 @@ const productsDB = [
     "brand": "Brother",
     "name": "TONER BROTHER ORIGINAL TN227 AMARILLO",
     "description": "TONER BROTHER ORIGINAL TN227 AMARILLO",
-    "image": "assets/images/products/toner/brother-brtn227y.png"
+    "image": "assets/images/products/toner/brother-brtn227y.webp"
   },
   {
     "id": "BRTN227C",
@@ -416,7 +416,7 @@ const productsDB = [
     "brand": "Brother",
     "name": "TONER BROTHER ORIGINAL TN227 CYAN",
     "description": "TONER BROTHER ORIGINAL TN227 CYAN",
-    "image": "assets/images/products/toner/brother-brtn227c.png"
+    "image": "assets/images/products/toner/brother-brtn227c.webp"
   },
   {
     "id": "BRTN227M",
@@ -424,7 +424,7 @@ const productsDB = [
     "brand": "Brother",
     "name": "TONER BROTHER ORIGINAL TN227 MAGENTA",
     "description": "TONER BROTHER ORIGINAL TN227 MAGENTA",
-    "image": "assets/images/products/toner/brother-brtn227m.png"
+    "image": "assets/images/products/toner/brother-brtn227m.webp"
   },
   {
     "id": "BRTN227BK",
@@ -432,7 +432,7 @@ const productsDB = [
     "brand": "Brother",
     "name": "TONER BROTHER ORIGINAL TN227 NEGRO",
     "description": "TONER BROTHER ORIGINAL TN227 NEGRO",
-    "image": "assets/images/products/toner/brother-brtn227bk.png"
+    "image": "assets/images/products/toner/brother-brtn227bk.webp"
   },
   {
     "id": "BRTN250",
@@ -440,7 +440,7 @@ const productsDB = [
     "brand": "Brother",
     "name": "TONER BROTHER ORIGINAL TN250 NEGRO",
     "description": "TONER BROTHER ORIGINAL TN250 NEGRO",
-    "image": "assets/images/products/toner/brother-brtn250.png"
+    "image": "assets/images/products/toner/brother-brtn250.webp"
   },
   {
     "id": "BRTN330",
@@ -448,7 +448,7 @@ const productsDB = [
     "brand": "Brother",
     "name": "TONER BROTHER ORIGINAL TN330 NEGRO",
     "description": "TONER BROTHER ORIGINAL TN330 NEGRO",
-    "image": "assets/images/products/toner/BRTN330.png"
+    "image": "assets/images/products/toner/BRTN330.webp"
   },
   {
     "id": "BRTN336Y",
@@ -456,7 +456,7 @@ const productsDB = [
     "brand": "Brother",
     "name": "TONER BROTHER ORIGINAL TN336 AMARILLO",
     "description": "TONER BROTHER ORIGINAL TN336 AMARILLO",
-    "image": "assets/images/products/toner/BRTN336Y.png"
+    "image": "assets/images/products/toner/BRTN336Y.webp"
   },
   {
     "id": "BRTN336C",
@@ -464,7 +464,7 @@ const productsDB = [
     "brand": "Brother",
     "name": "TONER BROTHER ORIGINAL TN336 CYAN",
     "description": "TONER BROTHER ORIGINAL TN336 CYAN",
-    "image": "assets/images/products/toner/BRTN336C.png"
+    "image": "assets/images/products/toner/BRTN336C.webp"
   },
   {
     "id": "BRTN336M",
@@ -472,7 +472,7 @@ const productsDB = [
     "brand": "Brother",
     "name": "TONER BROTHER ORIGINAL TN336 MAGENTA",
     "description": "TONER BROTHER ORIGINAL TN336 MAGENTA",
-    "image": "assets/images/products/toner/BRTN336M.png"
+    "image": "assets/images/products/toner/BRTN336M.webp"
   },
   {
     "id": "BRTN336BK",
@@ -480,7 +480,7 @@ const productsDB = [
     "brand": "Brother",
     "name": "TONER BROTHER ORIGINAL TN336 NEGRO",
     "description": "TONER BROTHER ORIGINAL TN336 NEGRO",
-    "image": "assets/images/products/toner/BRTN336BK.png"
+    "image": "assets/images/products/toner/BRTN336BK.webp"
   },
   {
     "id": "BRTN339Y",
@@ -488,7 +488,7 @@ const productsDB = [
     "brand": "Brother",
     "name": "TONER BROTHER ORIGINAL TN339 AMARILLO",
     "description": "TONER BROTHER ORIGINAL TN339 AMARILLO",
-    "image": "assets/images/products/toner/BRTN339Y.png"
+    "image": "assets/images/products/toner/BRTN339Y.webp"
   },
   {
     "id": "BRTN339C",
@@ -496,7 +496,7 @@ const productsDB = [
     "brand": "Brother",
     "name": "TONER BROTHER ORIGINAL TN339 CYAN",
     "description": "TONER BROTHER ORIGINAL TN339 CYAN",
-    "image": "assets/images/products/toner/BRTN339C.png"
+    "image": "assets/images/products/toner/BRTN339C.webp"
   },
   {
     "id": "BRTN339M",
@@ -504,7 +504,7 @@ const productsDB = [
     "brand": "Brother",
     "name": "TONER BROTHER ORIGINAL TN339 MAGENTA",
     "description": "TONER BROTHER ORIGINAL TN339 MAGENTA",
-    "image": "assets/images/products/toner/BRTN339M.png"
+    "image": "assets/images/products/toner/BRTN339M.webp"
   },
   {
     "id": "BRTN339BK",
@@ -512,7 +512,7 @@ const productsDB = [
     "brand": "Brother",
     "name": "TONER BROTHER ORIGINAL TN339 NEGRO",
     "description": "TONER BROTHER ORIGINAL TN339 NEGRO",
-    "image": "assets/images/products/toner/BRTN339BK.png"
+    "image": "assets/images/products/toner/BRTN339BK.webp"
   },
   {
     "id": "BRTN360",
@@ -520,7 +520,7 @@ const productsDB = [
     "brand": "Brother",
     "name": "TONER BROTHER ORIGINAL TN360 NEGRO",
     "description": "TONER BROTHER ORIGINAL TN360 NEGRO",
-    "image": "assets/images/products/toner/brother-brtn360.png"
+    "image": "assets/images/products/toner/brother-brtn360.webp"
   },
   {
     "id": "BRTN420",
@@ -528,7 +528,7 @@ const productsDB = [
     "brand": "Brother",
     "name": "TONER BROTHER ORIGINAL TN420 NEGRO",
     "description": "TONER BROTHER ORIGINAL TN420 NEGRO",
-    "image": "assets/images/products/toner/BRTN420.png"
+    "image": "assets/images/products/toner/BRTN420.webp"
   },
   {
     "id": "BRTN431Y",
@@ -536,7 +536,7 @@ const productsDB = [
     "brand": "Brother",
     "name": "TONER BROTHER ORIGINAL TN431 AMARILLO",
     "description": "TONER BROTHER ORIGINAL TN431 AMARILLO",
-    "image": "assets/images/products/toner/BRTN431Y.png"
+    "image": "assets/images/products/toner/BRTN431Y.webp"
   },
   {
     "id": "BRTN431C",
@@ -544,7 +544,7 @@ const productsDB = [
     "brand": "Brother",
     "name": "TONER BROTHER ORIGINAL TN431 CYAN",
     "description": "TONER BROTHER ORIGINAL TN431 CYAN",
-    "image": "assets/images/products/toner/BRTN431C.png"
+    "image": "assets/images/products/toner/BRTN431C.webp"
   },
   {
     "id": "BRTN431M",
@@ -552,7 +552,7 @@ const productsDB = [
     "brand": "Brother",
     "name": "TONER BROTHER ORIGINAL TN431 MAGENTA",
     "description": "TONER BROTHER ORIGINAL TN431 MAGENTA",
-    "image": "assets/images/products/toner/BRTN431M.png"
+    "image": "assets/images/products/toner/BRTN431M.webp"
   },
   {
     "id": "BRTN431BK",
@@ -560,7 +560,7 @@ const productsDB = [
     "brand": "Brother",
     "name": "TONER BROTHER ORIGINAL TN431 NEGRO",
     "description": "TONER BROTHER ORIGINAL TN431 NEGRO",
-    "image": "assets/images/products/toner/BRTN431BK.png"
+    "image": "assets/images/products/toner/BRTN431BK.webp"
   },
   {
     "id": "BRTN433Y",
@@ -568,7 +568,7 @@ const productsDB = [
     "brand": "Brother",
     "name": "TONER BROTHER ORIGINAL TN433 AMARILLO",
     "description": "TONER BROTHER ORIGINAL TN433 AMARILLO",
-    "image": "assets/images/products/toner/BRTN433Y.png"
+    "image": "assets/images/products/toner/BRTN433Y.webp"
   },
   {
     "id": "BRTN433C",
@@ -576,7 +576,7 @@ const productsDB = [
     "brand": "Brother",
     "name": "TONER BROTHER ORIGINAL TN433 CYAN",
     "description": "TONER BROTHER ORIGINAL TN433 CYAN",
-    "image": "assets/images/products/toner/BRTN433C.png"
+    "image": "assets/images/products/toner/BRTN433C.webp"
   },
   {
     "id": "BRTN433M",
@@ -584,7 +584,7 @@ const productsDB = [
     "brand": "Brother",
     "name": "TONER BROTHER ORIGINAL TN433 MAGENTA",
     "description": "TONER BROTHER ORIGINAL TN433 MAGENTA",
-    "image": "assets/images/products/toner/BRTN433M.png"
+    "image": "assets/images/products/toner/BRTN433M.webp"
   },
   {
     "id": "BRTN433BK",
@@ -592,7 +592,7 @@ const productsDB = [
     "brand": "Brother",
     "name": "TONER BROTHER ORIGINAL TN433 NEGRO",
     "description": "TONER BROTHER ORIGINAL TN433 NEGRO",
-    "image": "assets/images/products/toner/BRTN433BK.png"
+    "image": "assets/images/products/toner/BRTN433BK.webp"
   },
   {
     "id": "BRTN436Y",
@@ -600,7 +600,7 @@ const productsDB = [
     "brand": "Brother",
     "name": "TONER BROTHER ORIGINAL TN436 AMARILLO",
     "description": "TONER BROTHER ORIGINAL TN436 AMARILLO",
-    "image": "assets/images/products/toner/BRTN436Y.png"
+    "image": "assets/images/products/toner/BRTN436Y.webp"
   },
   {
     "id": "BRTN436C",
@@ -608,7 +608,7 @@ const productsDB = [
     "brand": "Brother",
     "name": "TONER BROTHER ORIGINAL TN436 CYAN",
     "description": "TONER BROTHER ORIGINAL TN436 CYAN",
-    "image": "assets/images/products/toner/BRTN436C.png"
+    "image": "assets/images/products/toner/BRTN436C.webp"
   },
   {
     "id": "BRTN436BK",
@@ -616,7 +616,7 @@ const productsDB = [
     "brand": "Brother",
     "name": "TONER BROTHER ORIGINAL TN436 NEGRO",
     "description": "TONER BROTHER ORIGINAL TN436 NEGRO",
-    "image": "assets/images/products/toner/BRTN436BK.png"
+    "image": "assets/images/products/toner/BRTN436BK.webp"
   },
   {
     "id": "BRTN439Y",
@@ -624,7 +624,7 @@ const productsDB = [
     "brand": "Brother",
     "name": "TONER BROTHER ORIGINAL TN439 AMARILLO",
     "description": "TONER BROTHER ORIGINAL TN439 AMARILLO",
-    "image": "assets/images/products/toner/BRTN439Y.png"
+    "image": "assets/images/products/toner/BRTN439Y.webp"
   },
   {
     "id": "BRTN439C",
@@ -632,7 +632,7 @@ const productsDB = [
     "brand": "Brother",
     "name": "TONER BROTHER ORIGINAL TN439 CYAN",
     "description": "TONER BROTHER ORIGINAL TN439 CYAN",
-    "image": "assets/images/products/toner/BRTN439C.png"
+    "image": "assets/images/products/toner/BRTN439C.webp"
   },
   {
     "id": "BRTN439M",
@@ -640,7 +640,7 @@ const productsDB = [
     "brand": "Brother",
     "name": "TONER BROTHER ORIGINAL TN439 MAGENTA",
     "description": "TONER BROTHER ORIGINAL TN439 MAGENTA",
-    "image": "assets/images/products/toner/BRTN439M.png"
+    "image": "assets/images/products/toner/BRTN439M.webp"
   },
   {
     "id": "BRTN439BK",
@@ -648,7 +648,7 @@ const productsDB = [
     "brand": "Brother",
     "name": "TONER BROTHER ORIGINAL TN439 NEGRO",
     "description": "TONER BROTHER ORIGINAL TN439 NEGRO",
-    "image": "assets/images/products/toner/brother-brtn439bk.png"
+    "image": "assets/images/products/toner/brother-brtn439bk.webp"
   },
   {
     "id": "BRTN450",
@@ -656,7 +656,7 @@ const productsDB = [
     "brand": "Brother",
     "name": "TONER BROTHER ORIGINAL TN450 NEGRO",
     "description": "TONER BROTHER ORIGINAL TN450 NEGRO",
-    "image": "assets/images/products/toner/brother-brtn450.png"
+    "image": "assets/images/products/toner/brother-brtn450.webp"
   },
   {
     "id": "BRTN580",
@@ -664,7 +664,7 @@ const productsDB = [
     "brand": "Brother",
     "name": "TONER BROTHER ORIGINAL TN580 NEGRO",
     "description": "TONER BROTHER ORIGINAL TN580 NEGRO",
-    "image": "assets/images/products/toner/BRTN580.png"
+    "image": "assets/images/products/toner/BRTN580.webp"
   },
   {
     "id": "BRTN620",
@@ -672,7 +672,7 @@ const productsDB = [
     "brand": "Brother",
     "name": "TONER BROTHER ORIGINAL TN620 NEGRO",
     "description": "TONER BROTHER ORIGINAL TN620 NEGRO",
-    "image": "assets/images/products/toner/BRTN620.png"
+    "image": "assets/images/products/toner/BRTN620.webp"
   },
   {
     "id": "BRTN630",
@@ -680,7 +680,7 @@ const productsDB = [
     "brand": "Brother",
     "name": "TONER BROTHER ORIGINAL TN630 NEGRO",
     "description": "TONER BROTHER ORIGINAL TN630 NEGRO",
-    "image": "assets/images/products/toner/brother-brtn630.png"
+    "image": "assets/images/products/toner/brother-brtn630.webp"
   },
   {
     "id": "BRTN650",
@@ -688,7 +688,7 @@ const productsDB = [
     "brand": "Brother",
     "name": "TONER BROTHER ORIGINAL TN650 NEGRO",
     "description": "TONER BROTHER ORIGINAL TN650 NEGRO",
-    "image": "assets/images/products/toner/BRTN650.png"
+    "image": "assets/images/products/toner/BRTN650.webp"
   },
   {
     "id": "BRTN660",
@@ -696,7 +696,7 @@ const productsDB = [
     "brand": "Brother",
     "name": "TONER BROTHER ORIGINAL TN660 NEGRO",
     "description": "TONER BROTHER ORIGINAL TN660 NEGRO",
-    "image": "assets/images/products/toner/brother-brtn660.png"
+    "image": "assets/images/products/toner/brother-brtn660.webp"
   },
   {
     "id": "BRTN720",
@@ -704,7 +704,7 @@ const productsDB = [
     "brand": "Brother",
     "name": "TONER BROTHER ORIGINAL TN720 NEGRO",
     "description": "TONER BROTHER ORIGINAL TN720 NEGRO",
-    "image": "assets/images/products/toner/BRTN720.png"
+    "image": "assets/images/products/toner/BRTN720.webp"
   },
   {
     "id": "BRTN730",
@@ -712,7 +712,7 @@ const productsDB = [
     "brand": "Brother",
     "name": "TONER BROTHER ORIGINAL TN730 NEGRO",
     "description": "TONER BROTHER ORIGINAL TN730 NEGRO",
-    "image": "assets/images/products/toner/BRTN730.png"
+    "image": "assets/images/products/toner/BRTN730.webp"
   },
   {
     "id": "BRTN750",
@@ -720,7 +720,7 @@ const productsDB = [
     "brand": "Brother",
     "name": "TONER BROTHER ORIGINAL TN750 NEGRO",
     "description": "TONER BROTHER ORIGINAL TN750 NEGRO",
-    "image": "assets/images/products/toner/brother-brtn750.png"
+    "image": "assets/images/products/toner/brother-brtn750.webp"
   },
   {
     "id": "BRTN760",
@@ -728,7 +728,7 @@ const productsDB = [
     "brand": "Brother",
     "name": "TONER BROTHER ORIGINAL TN760 NEGRO",
     "description": "TONER BROTHER ORIGINAL TN760 NEGRO",
-    "image": "assets/images/products/toner/BRTN760.png"
+    "image": "assets/images/products/toner/BRTN760.webp"
   },
   {
     "id": "BRTN820",
@@ -736,7 +736,7 @@ const productsDB = [
     "brand": "Brother",
     "name": "TONER BROTHER ORIGINAL TN820 NEGRO",
     "description": "TONER BROTHER ORIGINAL TN820 NEGRO",
-    "image": "assets/images/products/toner/brother-brtn820.png"
+    "image": "assets/images/products/toner/brother-brtn820.webp"
   },
   {
     "id": "BRTN850",
@@ -744,7 +744,7 @@ const productsDB = [
     "brand": "Brother",
     "name": "TONER BROTHER ORIGINAL TN850 NEGRO",
     "description": "TONER BROTHER ORIGINAL TN850 NEGRO",
-    "image": "assets/images/products/toner/brother-brtn850.png"
+    "image": "assets/images/products/toner/brother-brtn850.webp"
   },
   {
     "id": "BRTN880",
@@ -752,7 +752,7 @@ const productsDB = [
     "brand": "Brother",
     "name": "TONER BROTHER ORIGINAL TN880 NEGRO",
     "description": "TONER BROTHER ORIGINAL TN880 NEGRO",
-    "image": "assets/images/products/toner/BRTN880.png"
+    "image": "assets/images/products/toner/BRTN880.webp"
   },
   {
     "id": "BRTN920XL",
@@ -760,7 +760,7 @@ const productsDB = [
     "brand": "Brother",
     "name": "TONER BROTHER TN920XL NEGRO, RENDIMIENTO 6,000 PAGINAS",
     "description": "TONER BROTHER TN920XL NEGRO, RENDIMIENTO 6,000 PAGINAS",
-    "image": "assets/images/products/toner/BRTN920XL.png"
+    "image": "assets/images/products/toner/BRTN920XL.webp"
   },
   {
     "id": "BRTN920XXL",
@@ -768,7 +768,7 @@ const productsDB = [
     "brand": "Brother",
     "name": "TONER BROTHER TN920XXL NEGRO, RENDIMIENTO 11,000 PAGINAS",
     "description": "TONER BROTHER TN920XXL NEGRO, RENDIMIENTO 11,000 PAGINAS",
-    "image": "assets/images/products/toner/BRTN920XXL.png"
+    "image": "assets/images/products/toner/BRTN920XXL.webp"
   },
   {
     "id": "BRTN925",
@@ -776,7 +776,7 @@ const productsDB = [
     "brand": "Brother",
     "name": "TONER BROTHER VALOR TN925 NEGRO, RENDIMIENTO 25,000 PAGINAS",
     "description": "TONER BROTHER VALOR TN925 NEGRO, RENDIMIENTO 25,000 PAGINAS",
-    "image": "assets/images/products/toner/BRTN925.png"
+    "image": "assets/images/products/toner/BRTN925.webp"
   },
   {
     "id": "CA051BK",
@@ -784,7 +784,7 @@ const productsDB = [
     "brand": "Canon",
     "name": "TONER CANON 051 NEGRO",
     "description": "Cartucho de tóner original Canon 051 Negro.",
-    "image": "assets/images/products/toner/CA051BK.png"
+    "image": "assets/images/products/toner/CA051BK.webp"
   },
   {
     "id": "CAT06",
@@ -792,7 +792,7 @@ const productsDB = [
     "brand": "Canon",
     "name": "TONER CANON T06 NEGRO",
     "description": "Tóner original Canon T06 para equipos de copiado.",
-    "image": "assets/images/products/toner/canon-cat06.png"
+    "image": "assets/images/products/toner/canon-cat06.webp"
   },
   {
     "id": "LX52D4H00",
@@ -800,7 +800,7 @@ const productsDB = [
     "brand": "Lexmark",
     "name": "TONER LEXMARK 52D4H00 NEGRO ALTO RENDIMIENTO (25K)",
     "description": "Cartucho de Tóner Negro Lexmark 52D4H00 Alto Rendimiento 25,000 Páginas para MS810, MS811, MS812.",
-    "image": "assets/images/products/toner/LX52D4H00.png"
+    "image": "assets/images/products/toner/LX52D4H00.webp"
   },
   {
     "id": "LX55B4000",
@@ -808,7 +808,7 @@ const productsDB = [
     "brand": "Lexmark",
     "name": "TONER LEXMARK 55B4000 NEGRO",
     "description": "TONER LEXMARK 55B4000 NEGRO",
-    "image": "assets/images/products/toner/lexmark-lx55b4000.png"
+    "image": "assets/images/products/toner/lexmark-lx55b4000.webp"
   },
   {
     "id": "LX60F4000",
@@ -816,7 +816,7 @@ const productsDB = [
     "brand": "Lexmark",
     "name": "TONER LEXMARK 60F4000 NEGRO",
     "description": "TONER LEXMARK 60F4000 NEGRO",
-    "image": "assets/images/products/toner/lexmark-lx60f4000.png"
+    "image": "assets/images/products/toner/lexmark-lx60f4000.webp"
   },
   {
     "id": "LX78C40C0",
@@ -824,7 +824,7 @@ const productsDB = [
     "brand": "Lexmark",
     "name": "TONER LEXMARK 78C40C0 CYAN",
     "description": "TONER LEXMARK 78C40C0 CYAN",
-    "image": "assets/images/products/toner/lexmark-lx78c40c0.png"
+    "image": "assets/images/products/toner/lexmark-lx78c40c0.webp"
   },
   {
     "id": "LX78C40K0",
@@ -832,7 +832,7 @@ const productsDB = [
     "brand": "Lexmark",
     "name": "TONER LEXMARK 78C40K0 NEGRO",
     "description": "TONER LEXMARK 78C40K0 NEGRO",
-    "image": "assets/images/products/toner/lexmark-lx78c40k0.png"
+    "image": "assets/images/products/toner/lexmark-lx78c40k0.webp"
   },
   {
     "id": "LX78C40M0",
@@ -840,7 +840,7 @@ const productsDB = [
     "brand": "Lexmark",
     "name": "TONER LEXMARK 78C40M0 MAGENTA",
     "description": "TONER LEXMARK 78C40M0 MAGENTA",
-    "image": "assets/images/products/toner/lexmark-lx78c40m0.png"
+    "image": "assets/images/products/toner/lexmark-lx78c40m0.webp"
   },
   {
     "id": "LX78C40Y0",
@@ -848,7 +848,7 @@ const productsDB = [
     "brand": "Lexmark",
     "name": "TONER LEXMARK 78C40Y0 AMARILLO",
     "description": "TONER LEXMARK 78C40Y0 AMARILLO",
-    "image": "assets/images/products/toner/lexmark-lx78c40y0.png"
+    "image": "assets/images/products/toner/lexmark-lx78c40y0.webp"
   },
   {
     "id": "LX80C8SY0",
@@ -856,7 +856,7 @@ const productsDB = [
     "brand": "Lexmark",
     "name": "TONER LEXMARK 80C8SY0 AMARILLO",
     "description": "TONER LEXMARK 80C8SY0 AMARILLO",
-    "image": "assets/images/products/toner/lexmark-lx80c8sy0.png"
+    "image": "assets/images/products/toner/lexmark-lx80c8sy0.webp"
   },
   {
     "id": "LXB224H00",
@@ -864,7 +864,7 @@ const productsDB = [
     "brand": "Lexmark",
     "name": "TONER LEXMARK B224H00 NEGRO",
     "description": "TONER LEXMARK B224H00 NEGRO",
-    "image": "assets/images/products/toner/lexmark-lxb224h00.png"
+    "image": "assets/images/products/toner/lexmark-lxb224h00.webp"
   },
   {
     "id": "LXB234000",
@@ -872,7 +872,7 @@ const productsDB = [
     "brand": "Lexmark",
     "name": "TONER LEXMARK B234000 NEGRO",
     "description": "TONER LEXMARK B234000 NEGRO",
-    "image": "assets/images/products/toner/lexmark-lxb234000.png"
+    "image": "assets/images/products/toner/lexmark-lxb234000.webp"
   },
   {
     "id": "LXB244H00",
@@ -880,7 +880,7 @@ const productsDB = [
     "brand": "Lexmark",
     "name": "TONER LEXMARK B244H00 NEGRO",
     "description": "TONER LEXMARK B244H00 NEGRO",
-    "image": "assets/images/products/toner/lexmark-lxb244h00.png"
+    "image": "assets/images/products/toner/lexmark-lxb244h00.webp"
   },
   {
     "id": "LXB344H00",
@@ -888,7 +888,7 @@ const productsDB = [
     "brand": "Lexmark",
     "name": "TONER LEXMARK B344H00 NEGRO",
     "description": "TONER LEXMARK B344H00 NEGRO",
-    "image": "assets/images/products/toner/lexmark-lxb344h00.png"
+    "image": "assets/images/products/toner/lexmark-lxb344h00.webp"
   },
   {
     "id": "LXC234HC0",
@@ -896,7 +896,7 @@ const productsDB = [
     "brand": "Lexmark",
     "name": "TONER LEXMARK C234HCO CYAN",
     "description": "TONER LEXMARK C234HCO CYAN",
-    "image": "assets/images/products/toner/lexmark-lxc234hc0.png"
+    "image": "assets/images/products/toner/lexmark-lxc234hc0.webp"
   },
   {
     "id": "LXC234HK0",
@@ -904,7 +904,7 @@ const productsDB = [
     "brand": "Lexmark",
     "name": "TONER LEXMARK C234HK0 NEGRO",
     "description": "TONER LEXMARK C234HK0 NEGRO",
-    "image": "assets/images/products/toner/lexmark-lxc234hk0.png"
+    "image": "assets/images/products/toner/lexmark-lxc234hk0.webp"
   },
   {
     "id": "LXC234HM0",
@@ -912,7 +912,7 @@ const productsDB = [
     "brand": "Lexmark",
     "name": "TONER LEXMARK C234HM0 MAGENTA",
     "description": "TONER LEXMARK C234HM0 MAGENTA",
-    "image": "assets/images/products/toner/lexmark-lxc234hm0.png"
+    "image": "assets/images/products/toner/lexmark-lxc234hm0.webp"
   },
   {
     "id": "LXC234YC0",
@@ -920,7 +920,7 @@ const productsDB = [
     "brand": "Lexmark",
     "name": "TONER LEXMARK C234YCO AMARILLO",
     "description": "TONER LEXMARK C234YCO AMARILLO",
-    "image": "assets/images/products/toner/LXC234YC0.png"
+    "image": "assets/images/products/toner/LXC234YC0.webp"
   },
   {
     "id": "LXC3240C0",
@@ -928,7 +928,7 @@ const productsDB = [
     "brand": "Lexmark",
     "name": "TONER LEXMARK C3240C0 CYAN",
     "description": "TONER LEXMARK C3240C0 CYAN",
-    "image": "assets/images/products/toner/lexmark-lxc3240c0.png"
+    "image": "assets/images/products/toner/lexmark-lxc3240c0.webp"
   },
   {
     "id": "LXC3240K0",
@@ -936,7 +936,7 @@ const productsDB = [
     "brand": "Lexmark",
     "name": "TONER LEXMARK C3240K0 NEGRO",
     "description": "TONER LEXMARK C3240K0 NEGRO",
-    "image": "assets/images/products/toner/lexmark-lxc3240k0.png"
+    "image": "assets/images/products/toner/lexmark-lxc3240k0.webp"
   },
   {
     "id": "LXC3240M0",
@@ -944,7 +944,7 @@ const productsDB = [
     "brand": "Lexmark",
     "name": "TONER LEXMARK C3240M0 MAGENTA",
     "description": "TONER LEXMARK C3240M0 MAGENTA",
-    "image": "assets/images/products/toner/lexmark-lxc3240m0.png"
+    "image": "assets/images/products/toner/lexmark-lxc3240m0.webp"
   },
   {
     "id": "LXC3240Y0",
@@ -952,7 +952,7 @@ const productsDB = [
     "brand": "Lexmark",
     "name": "TONER LEXMARK C3240Y0 AMARILLO",
     "description": "TONER LEXMARK C3240Y0 AMARILLO",
-    "image": "assets/images/products/toner/lexmark-lxc3240y0.png"
+    "image": "assets/images/products/toner/lexmark-lxc3240y0.webp"
   },
   {
     "id": "LXB254X00",
@@ -960,7 +960,7 @@ const productsDB = [
     "brand": "Lexmark",
     "name": "TONER LEXMARK NEGRO EXTRA ALTO RENDIMIENTO B254X00",
     "description": "TONER LEXMARK NEGRO EXTRA ALTO RENDIMIENTO B254X00",
-    "image": "assets/images/products/toner/lexmark-lxb254x00.png"
+    "image": "assets/images/products/toner/lexmark-lxb254x00.webp"
   },
   {
     "id": "LXB224X00",
@@ -968,7 +968,7 @@ const productsDB = [
     "brand": "Lexmark",
     "name": "TONER LEXMARK NEGRO EXTRA ALTO RENDIMIENTO PROG DEVOLUCION B224X00",
     "description": "TONER LEXMARK NEGRO EXTRA ALTO RENDIMIENTO PROG DEVOLUCION B224X00",
-    "image": "assets/images/products/toner/lexmark-lxb224x00.png"
+    "image": "assets/images/products/toner/lexmark-lxb224x00.webp"
   },
   {
     "id": "LX56F4U00",
@@ -976,7 +976,7 @@ const productsDB = [
     "brand": "Lexmark",
     "name": "TONER LEXMARK NEGRO ULTRA ALTO RENDIMIENTO 25K",
     "description": "TONER LEXMARK NEGRO ULTRA ALTO RENDIMIENTO 25K",
-    "image": "assets/images/products/toner/LX56F4U00.png"
+    "image": "assets/images/products/toner/LX56F4U00.webp"
   },
   {
     "id": "LX51B4000",
@@ -984,7 +984,7 @@ const productsDB = [
     "brand": "Lexmark",
     "name": "TONER LEXMARK RENDIMIENTO ESTANDAR MS/MX 317 417 517 617",
     "description": "TONER LEXMARK RENDIMIENTO ESTANDAR MS/MX 317 417 517 617",
-    "image": "assets/images/products/toner/lexmark-lx51b4000.png"
+    "image": "assets/images/products/toner/lexmark-lx51b4000.webp"
   },
   {
     "id": "LXX264A11G",
@@ -992,7 +992,7 @@ const productsDB = [
     "brand": "Lexmark",
     "name": "TONER LEXMARK X264A11G NEGRO",
     "description": "TONER LEXMARK X264A11G NEGRO",
-    "image": "assets/images/products/toner/lexmark-lxx264a11g.png"
+    "image": "assets/images/products/toner/lexmark-lxx264a11g.webp"
   },
   {
     "id": "CA045Y",
@@ -1000,7 +1000,7 @@ const productsDB = [
     "brand": "Canon",
     "name": "TONER ORIGINAL CANON 045 AMARILLO",
     "description": "Cartucho de tóner original Canon 045 Amarillo.",
-    "image": "assets/images/products/toner/CA045Y.png"
+    "image": "assets/images/products/toner/CA045Y.webp"
   },
   {
     "id": "CA045C",
@@ -1008,7 +1008,7 @@ const productsDB = [
     "brand": "Canon",
     "name": "TONER ORIGINAL CANON 045 CYAN",
     "description": "Cartucho de tóner original Canon 045 Cyan.",
-    "image": "assets/images/products/toner/CA045C.png"
+    "image": "assets/images/products/toner/CA045C.webp"
   },
   {
     "id": "CA045M",
@@ -1016,7 +1016,7 @@ const productsDB = [
     "brand": "Canon",
     "name": "TONER ORIGINAL CANON 045 MAGENTA",
     "description": "Cartucho de tóner original Canon 045 Magenta.",
-    "image": "assets/images/products/toner/CA045M.png"
+    "image": "assets/images/products/toner/CA045M.webp"
   },
   {
     "id": "CA045BK",
@@ -1024,7 +1024,7 @@ const productsDB = [
     "brand": "Canon",
     "name": "TONER ORIGINAL CANON 045 NEGRO",
     "description": "Cartucho de tóner original Canon 045 Negro.",
-    "image": "assets/images/products/toner/CA045BK.png"
+    "image": "assets/images/products/toner/CA045BK.webp"
   },
   {
     "id": "CA047BK",
@@ -1032,7 +1032,7 @@ const productsDB = [
     "brand": "Canon",
     "name": "TONER ORIGINAL CANON 047 NEGRO",
     "description": "Cartucho de tóner original Canon 047 Negro.",
-    "image": "assets/images/products/toner/CA047BK.png"
+    "image": "assets/images/products/toner/CA047BK.webp"
   },
   {
     "id": "CA052H",
@@ -1040,7 +1040,7 @@ const productsDB = [
     "brand": "Canon",
     "name": "TONER ORIGINAL CANON 052H NEGRO",
     "description": "Cartucho de tóner de alto rendimiento Canon 052H Negro.",
-    "image": "assets/images/products/toner/CA052H.png"
+    "image": "assets/images/products/toner/CA052H.webp"
   },
   {
     "id": "CA054Y",
@@ -1048,7 +1048,7 @@ const productsDB = [
     "brand": "Canon",
     "name": "TONER ORIGINAL CANON 054 AMARILLO",
     "description": "Cartucho de tóner original Canon 054 Amarillo.",
-    "image": "assets/images/products/toner/CA054Y.png"
+    "image": "assets/images/products/toner/CA054Y.webp"
   },
   {
     "id": "CA054C",
@@ -1056,7 +1056,7 @@ const productsDB = [
     "brand": "Canon",
     "name": "TONER ORIGINAL CANON 054 CYAN",
     "description": "Cartucho de tóner original Canon 054 Cyan.",
-    "image": "assets/images/products/toner/canon-ca054c.png"
+    "image": "assets/images/products/toner/canon-ca054c.webp"
   },
   {
     "id": "CA054M",
@@ -1064,7 +1064,7 @@ const productsDB = [
     "brand": "Canon",
     "name": "TONER ORIGINAL CANON 054 MAGENTA",
     "description": "Cartucho de tóner original Canon 054 Magenta.",
-    "image": "assets/images/products/toner/CA054M.png"
+    "image": "assets/images/products/toner/CA054M.webp"
   },
   {
     "id": "CA054",
@@ -1072,7 +1072,7 @@ const productsDB = [
     "brand": "Canon",
     "name": "TONER ORIGINAL CANON 054 NEGRO",
     "description": "Cartucho de tóner original Canon 054 Negro.",
-    "image": "assets/images/products/toner/CA054.png"
+    "image": "assets/images/products/toner/CA054.webp"
   },
   {
     "id": "CA057",
@@ -1080,7 +1080,7 @@ const productsDB = [
     "brand": "Canon",
     "name": "TONER ORIGINAL CANON 057 NEGRO",
     "description": "Cartucho de Tóner 057 Negro, con rendimiento hasta de 3,100 páginas. Compatible con los modelos: LBP226DW y MF445DW",
-    "image": "assets/images/products/toner/canon-ca057.png"
+    "image": "assets/images/products/toner/canon-ca057.webp"
   },
   {
     "id": "CA104",
@@ -1088,7 +1088,7 @@ const productsDB = [
     "brand": "Canon",
     "name": "TONER ORIGINAL CANON 104 NEGRO",
     "description": "Cartucho de tóner original Canon 104 Negro.",
-    "image": "assets/images/products/toner/CA104.png"
+    "image": "assets/images/products/toner/CA104.webp"
   },
   {
     "id": "CA120",
@@ -1096,7 +1096,7 @@ const productsDB = [
     "brand": "Canon",
     "name": "TONER ORIGINAL CANON 120 NEGRO",
     "description": "Cartucho de tóner original Canon 120 Negro.",
-    "image": "assets/images/products/toner/canon-ca120.png"
+    "image": "assets/images/products/toner/canon-ca120.webp"
   },
   {
     "id": "CA125",
@@ -1104,7 +1104,7 @@ const productsDB = [
     "brand": "Canon",
     "name": "TONER ORIGINAL CANON 125 NEGRO",
     "description": "Cartucho de tóner original Canon 125 Negro.",
-    "image": "assets/images/products/toner/CA125.png"
+    "image": "assets/images/products/toner/CA125.webp"
   },
   {
     "id": "CA128",
@@ -1112,7 +1112,7 @@ const productsDB = [
     "brand": "Canon",
     "name": "TONER ORIGINAL CANON 128 NEGRO",
     "description": "Cartucho de tóner original Canon 128 Negro.",
-    "image": "assets/images/products/toner/CA128.png"
+    "image": "assets/images/products/toner/CA128.webp"
   },
   {
     "id": "CA137",
@@ -1120,7 +1120,7 @@ const productsDB = [
     "brand": "Canon",
     "name": "TONER ORIGINAL CANON 137 NEGRO",
     "description": "Cartucho de tóner original Canon 137 Negro.",
-    "image": "assets/images/products/toner/canon-ca137.png"
+    "image": "assets/images/products/toner/canon-ca137.webp"
   },
   {
     "id": "CAGPR15",
@@ -1128,7 +1128,7 @@ const productsDB = [
     "brand": "Canon",
     "name": "TONER ORIGINAL CANON GPR15 NEGRO",
     "description": "Tóner original Canon GPR-15 Negro.",
-    "image": "assets/images/products/toner/CAGPR15.png"
+    "image": "assets/images/products/toner/CAGPR15.webp"
   },
   {
     "id": "CAGPR16",
@@ -1136,7 +1136,7 @@ const productsDB = [
     "brand": "Canon",
     "name": "TONER ORIGINAL CANON GPR16 NEGRO",
     "description": "Tóner original Canon GPR-16 Negro.",
-    "image": "assets/images/products/toner/CAGPR16.png"
+    "image": "assets/images/products/toner/CAGPR16.webp"
   },
   {
     "id": "CAGPR22",
@@ -1144,7 +1144,7 @@ const productsDB = [
     "brand": "Canon",
     "name": "TONER ORIGINAL CANON GPR22 NEGRO",
     "description": "Tóner original Canon GPR-22 Negro.",
-    "image": "assets/images/products/toner/CAGPR22.png"
+    "image": "assets/images/products/toner/CAGPR22.webp"
   },
   {
     "id": "CAGPR35",
@@ -1152,7 +1152,7 @@ const productsDB = [
     "brand": "Canon",
     "name": "TONER ORIGINAL CANON GPR35 NEGRO",
     "description": "Tóner original Canon GPR-35 Negro.",
-    "image": "assets/images/products/toner/CAGPR35.png"
+    "image": "assets/images/products/toner/CAGPR35.webp"
   },
   {
     "id": "CAGPR36Y",
@@ -1160,7 +1160,7 @@ const productsDB = [
     "brand": "Canon",
     "name": "TONER ORIGINAL CANON GPR36 AMARILLO",
     "description": "Tóner original Canon GPR-36 Amarillo.",
-    "image": "assets/images/products/toner/CAGPR36Y.png"
+    "image": "assets/images/products/toner/CAGPR36Y.webp"
   },
   {
     "id": "CAGPR36C",
@@ -1168,7 +1168,7 @@ const productsDB = [
     "brand": "Canon",
     "name": "TONER ORIGINAL CANON GPR36 CYAN",
     "description": "Tóner original Canon GPR-36 Cyan.",
-    "image": "assets/images/products/toner/CAGPR36C.png"
+    "image": "assets/images/products/toner/CAGPR36C.webp"
   },
   {
     "id": "CAGPR36M",
@@ -1176,7 +1176,7 @@ const productsDB = [
     "brand": "Canon",
     "name": "TONER ORIGINAL CANON GPR36 MAGENTA",
     "description": "Tóner original Canon GPR-36 Magenta.",
-    "image": "assets/images/products/toner/CAGPR36M.png"
+    "image": "assets/images/products/toner/CAGPR36M.webp"
   },
   {
     "id": "CAGPR36BK",
@@ -1184,7 +1184,7 @@ const productsDB = [
     "brand": "Canon",
     "name": "TONER ORIGINAL CANON GPR36 NEGRO",
     "description": "Tóner original Canon GPR-36 Negro.",
-    "image": "assets/images/products/toner/CAGPR36BK.png"
+    "image": "assets/images/products/toner/CAGPR36BK.webp"
   },
   {
     "id": "CAGPR38",
@@ -1192,7 +1192,7 @@ const productsDB = [
     "brand": "Canon",
     "name": "TONER ORIGINAL CANON GPR38 NEGRO",
     "description": "Tóner original Canon GPR-38 Negro.",
-    "image": "assets/images/products/toner/CAGPR38.png"
+    "image": "assets/images/products/toner/CAGPR38.webp"
   },
   {
     "id": "CAGPR43",
@@ -1200,7 +1200,7 @@ const productsDB = [
     "brand": "Canon",
     "name": "TONER ORIGINAL CANON GPR43 NEGRO",
     "description": "Tóner original Canon GPR-43 Negro.",
-    "image": "assets/images/products/toner/CAGPR43.png"
+    "image": "assets/images/products/toner/CAGPR43.webp"
   },
   {
     "id": "CAGPR48",
@@ -1208,7 +1208,7 @@ const productsDB = [
     "brand": "Canon",
     "name": "TONER ORIGINAL CANON GPR48 NEGRO",
     "description": "Tóner original Canon GPR-48 Negro.",
-    "image": "assets/images/products/toner/CAGPR48.png"
+    "image": "assets/images/products/toner/CAGPR48.webp"
   },
   {
     "id": "CAGPR52Y",
@@ -1216,7 +1216,7 @@ const productsDB = [
     "brand": "Canon",
     "name": "TONER ORIGINAL CANON GPR52 AMARILLO",
     "description": "Tóner original Canon GPR-52 Amarillo.",
-    "image": "assets/images/products/toner/CAGPR52Y.png"
+    "image": "assets/images/products/toner/CAGPR52Y.webp"
   },
   {
     "id": "CAGPR52C",
@@ -1224,7 +1224,7 @@ const productsDB = [
     "brand": "Canon",
     "name": "TONER ORIGINAL CANON GPR52 CYAN",
     "description": "Tóner original Canon GPR-52 Cyan.",
-    "image": "assets/images/products/toner/CAGPR52C.png"
+    "image": "assets/images/products/toner/CAGPR52C.webp"
   },
   {
     "id": "CAGPR52M",
@@ -1232,7 +1232,7 @@ const productsDB = [
     "brand": "Canon",
     "name": "TONER ORIGINAL CANON GPR52 MAGENTA",
     "description": "Tóner original Canon GPR-52 Magenta.",
-    "image": "assets/images/products/toner/CAGPR52M.png"
+    "image": "assets/images/products/toner/CAGPR52M.webp"
   },
   {
     "id": "CAGPR52BK",
@@ -1240,7 +1240,7 @@ const productsDB = [
     "brand": "Canon",
     "name": "TONER ORIGINAL CANON GPR52 NEGRO",
     "description": "Tóner original Canon GPR-52 Negro.",
-    "image": "assets/images/products/toner/CAGPR52BK.png"
+    "image": "assets/images/products/toner/CAGPR52BK.webp"
   },
   {
     "id": "CAGPR53Y",
@@ -1248,7 +1248,7 @@ const productsDB = [
     "brand": "Canon",
     "name": "TONER ORIGINAL CANON GPR53 AMARILLO",
     "description": "Tóner original Canon GPR-53 Amarillo.",
-    "image": "assets/images/products/toner/CAGPR53Y.png"
+    "image": "assets/images/products/toner/CAGPR53Y.webp"
   },
   {
     "id": "CAGPR53C",
@@ -1256,7 +1256,7 @@ const productsDB = [
     "brand": "Canon",
     "name": "TONER ORIGINAL CANON GPR53 CYAN",
     "description": "Tóner original Canon GPR-53 Cyan.",
-    "image": "assets/images/products/toner/CAGPR53C.png"
+    "image": "assets/images/products/toner/CAGPR53C.webp"
   },
   {
     "id": "CAGPR53M",
@@ -1264,7 +1264,7 @@ const productsDB = [
     "brand": "Canon",
     "name": "TONER ORIGINAL CANON GPR53 MAGENTA",
     "description": "Tóner original Canon GPR-53 Magenta.",
-    "image": "assets/images/products/toner/CAGPR53M.png"
+    "image": "assets/images/products/toner/CAGPR53M.webp"
   },
   {
     "id": "CAGPR53BK",
@@ -1272,7 +1272,7 @@ const productsDB = [
     "brand": "Canon",
     "name": "TONER ORIGINAL CANON GPR53 NEGRO",
     "description": "Tóner original Canon GPR-53 Negro.",
-    "image": "assets/images/products/toner/CAGPR53BK.png"
+    "image": "assets/images/products/toner/CAGPR53BK.webp"
   },
   {
     "id": "CAGPR54",
@@ -1280,7 +1280,7 @@ const productsDB = [
     "brand": "Canon",
     "name": "TONER ORIGINAL CANON GPR54 NEGRO",
     "description": "Tóner original Canon GPR-54 Negro.",
-    "image": "assets/images/products/toner/CAGPR54.png"
+    "image": "assets/images/products/toner/CAGPR54.webp"
   },
   {
     "id": "CAGPR58Y",
@@ -1288,7 +1288,7 @@ const productsDB = [
     "brand": "Canon",
     "name": "TONER ORIGINAL CANON GPR58 AMARILLO",
     "description": "Tóner original Canon GPR-58 Amarillo.",
-    "image": "assets/images/products/toner/CAGPR58Y.png"
+    "image": "assets/images/products/toner/CAGPR58Y.webp"
   },
   {
     "id": "CAGPR58C",
@@ -1296,7 +1296,7 @@ const productsDB = [
     "brand": "Canon",
     "name": "TONER ORIGINAL CANON GPR58 CYAN",
     "description": "Tóner original Canon GPR-58 Cyan.",
-    "image": "assets/images/products/toner/CAGPR58C.png"
+    "image": "assets/images/products/toner/CAGPR58C.webp"
   },
   {
     "id": "CAGPR58M",
@@ -1304,7 +1304,7 @@ const productsDB = [
     "brand": "Canon",
     "name": "TONER ORIGINAL CANON GPR58 MAGENTA",
     "description": "Tóner original Canon GPR-58 Magenta.",
-    "image": "assets/images/products/toner/CAGPR58M.png"
+    "image": "assets/images/products/toner/CAGPR58M.webp"
   },
   {
     "id": "CAGPR58BK",
@@ -1312,7 +1312,7 @@ const productsDB = [
     "brand": "Canon",
     "name": "TONER ORIGINAL CANON GPR58 NEGRO",
     "description": "Tóner original Canon GPR-58 Negro.",
-    "image": "assets/images/products/toner/CAGPR58BK.png"
+    "image": "assets/images/products/toner/CAGPR58BK.webp"
   },
   {
     "id": "CAL50",
@@ -1320,7 +1320,7 @@ const productsDB = [
     "brand": "Canon",
     "name": "TONER ORIGINAL CANON L50 NEGRO",
     "description": "Cartucho de tóner original Canon L50 Negro.",
-    "image": "assets/images/products/toner/CAL50.png"
+    "image": "assets/images/products/toner/CAL50.webp"
   },
   {
     "id": "CAGPR58HY",
@@ -1328,7 +1328,7 @@ const productsDB = [
     "brand": "Canon",
     "name": "Tambor Canon GPR-58 H amarillo",
     "description": "Unidad de tambor GPR-58 H Amarillo.",
-    "image": "assets/images/products/toner/CAGPR58HY.png",
+    "image": "assets/images/products/toner/CAGPR58HY.webp",
     "compatibility": "Canon"
   },
   {
@@ -1337,7 +1337,7 @@ const productsDB = [
     "brand": "Canon",
     "name": "Tambor Canon GPR-58 H cyan",
     "description": "Unidad de tambor GPR-58 H Cyan.",
-    "image": "assets/images/products/toner/CAGPR58HC.png",
+    "image": "assets/images/products/toner/CAGPR58HC.webp",
     "compatibility": "Canon"
   },
   {
@@ -1346,7 +1346,7 @@ const productsDB = [
     "brand": "Canon",
     "name": "Tambor Canon GPR-58 H magenta",
     "description": "Unidad de tambor GPR-58 H Magenta.",
-    "image": "assets/images/products/toner/CAGPR58HM.png",
+    "image": "assets/images/products/toner/CAGPR58HM.webp",
     "compatibility": "Canon"
   },
   {
@@ -1355,7 +1355,7 @@ const productsDB = [
     "brand": "HP",
     "name": "Tambor Original HP 126A LaserJet Negro",
     "description": "Tambor Original HP 126A LaserJet Negro",
-    "image": "assets/images/products/toner/1771379951472-HPCE314A.png"
+    "image": "assets/images/products/toner/1771379951472-HPCE314A.webp"
   },
   {
     "id": "X101R00432",
@@ -1363,7 +1363,7 @@ const productsDB = [
     "brand": "Xerox",
     "name": "Tambor Xerox CRU22K WC5020",
     "description": "Tambor Xerox CRU22K WC5020",
-    "image": "assets/images/products/toner/X101R00432.png"
+    "image": "assets/images/products/toner/X101R00432.webp"
   },
   {
     "id": "X101R00554",
@@ -1371,7 +1371,7 @@ const productsDB = [
     "brand": "Xerox",
     "name": "Tambor Xerox Negro 65,000 PAGS",
     "description": "Tambor Xerox Negro 65,000 PAGS",
-    "image": "assets/images/products/toner/X101R00554.png"
+    "image": "assets/images/products/toner/X101R00554.webp"
   },
   {
     "id": "X013R00670",
@@ -1379,7 +1379,7 @@ const productsDB = [
     "brand": "Xerox",
     "name": "Tambor Xerox Negro WC5021/5024",
     "description": "Tambor Xerox Negro WC5021/5024",
-    "image": "assets/images/products/toner/X013R00670.png"
+    "image": "assets/images/products/toner/X013R00670.webp"
   },
   {
     "id": "X101R00555",
@@ -1387,7 +1387,7 @@ const productsDB = [
     "brand": "Xerox",
     "name": "Tambor Xerox P/3330/3335/3345 30K",
     "description": "Tambor Xerox P/3330/3335/3345 30K",
-    "image": "assets/images/products/toner/X101R00555.png"
+    "image": "assets/images/products/toner/X101R00555.webp"
   },
   {
     "id": "X101R00474",
@@ -1395,7 +1395,7 @@ const productsDB = [
     "brand": "Xerox",
     "name": "Tambor Xerox P/WC3215/Phaser 3260",
     "description": "Tambor Xerox P/WC3215/Phaser 3260",
-    "image": "assets/images/products/toner/X101R00474.png"
+    "image": "assets/images/products/toner/X101R00474.webp"
   },
   {
     "id": "LX56F0Z00",
@@ -1403,7 +1403,7 @@ const productsDB = [
     "brand": "Lexmark",
     "name": "Tambor de imagen Lexmark Láser - Original - Negro - 60000 Páginas",
     "description": "Tambor de imagen Lexmark Láser - Original - Negro - 60000 Páginas",
-    "image": "assets/images/products/toner/lexmark-lx56f0z00.png"
+    "image": "assets/images/products/toner/lexmark-lx56f0z00.webp"
   },
   {
     "id": "HPW1105A",
@@ -1411,7 +1411,7 @@ const productsDB = [
     "brand": "HP",
     "name": "Toner Original HP LaserJet 105A Negro",
     "description": "Toner Original HP LaserJet 105A Negro",
-    "image": "assets/images/products/toner/1771379950011-HPW1105A.png"
+    "image": "assets/images/products/toner/1771379950011-HPW1105A.webp"
   },
   {
     "id": "HPCB542A",
@@ -1419,7 +1419,7 @@ const productsDB = [
     "brand": "HP",
     "name": "Toner Original HP LaserJet 125A Amarillo",
     "description": "Toner Original HP LaserJet 125A Amarillo",
-    "image": "assets/images/products/toner/1771379950353-HPCB542A.png"
+    "image": "assets/images/products/toner/1771379950353-HPCB542A.webp"
   },
   {
     "id": "HPCB541A",
@@ -1427,7 +1427,7 @@ const productsDB = [
     "brand": "HP",
     "name": "Toner Original HP LaserJet 125A Cian",
     "description": "Toner Original HP LaserJet 125A Cian",
-    "image": "assets/images/products/toner/1771379950331-HPCB541A.png"
+    "image": "assets/images/products/toner/1771379950331-HPCB541A.webp"
   },
   {
     "id": "HPCB543A",
@@ -1435,7 +1435,7 @@ const productsDB = [
     "brand": "HP",
     "name": "Toner Original HP LaserJet 125A Magenta",
     "description": "Toner Original HP LaserJet 125A Magenta",
-    "image": "assets/images/products/toner/1771379950379-HPCB543A.png"
+    "image": "assets/images/products/toner/1771379950379-HPCB543A.webp"
   },
   {
     "id": "HPCB540A",
@@ -1443,7 +1443,7 @@ const productsDB = [
     "brand": "HP",
     "name": "Toner Original HP LaserJet 125A Negro",
     "description": "Toner Original HP LaserJet 125A Negro",
-    "image": "assets/images/products/toner/1771379950307-HPCB540A.png"
+    "image": "assets/images/products/toner/1771379950307-HPCB540A.webp"
   },
   {
     "id": "HPCE312A",
@@ -1451,7 +1451,7 @@ const productsDB = [
     "brand": "HP",
     "name": "Toner Original HP LaserJet 126A Amarillo",
     "description": "Toner Original HP LaserJet 126A Amarillo",
-    "image": "assets/images/products/toner/1771379951418-HPCE312A.png"
+    "image": "assets/images/products/toner/1771379951418-HPCE312A.webp"
   },
   {
     "id": "HPCE311A",
@@ -1459,7 +1459,7 @@ const productsDB = [
     "brand": "HP",
     "name": "Toner Original HP LaserJet 126A Cian",
     "description": "Toner Original HP LaserJet 126A Cian",
-    "image": "assets/images/products/toner/1771379951392-HPCE311A.png"
+    "image": "assets/images/products/toner/1771379951392-HPCE311A.webp"
   },
   {
     "id": "HPCE313A",
@@ -1467,7 +1467,7 @@ const productsDB = [
     "brand": "HP",
     "name": "Toner Original HP LaserJet 126A Magenta",
     "description": "Toner Original HP LaserJet 126A Magenta",
-    "image": "assets/images/products/toner/1771379951446-HPCE313A.png"
+    "image": "assets/images/products/toner/1771379951446-HPCE313A.webp"
   },
   {
     "id": "HPCE310A",
@@ -1475,7 +1475,7 @@ const productsDB = [
     "brand": "HP",
     "name": "Toner Original HP LaserJet 126A Negro",
     "description": "Toner Original HP LaserJet 126A Negro",
-    "image": "assets/images/products/toner/1771379951363-HPCE310A.png"
+    "image": "assets/images/products/toner/1771379951363-HPCE310A.webp"
   },
   {
     "id": "HPCE322A",
@@ -1483,7 +1483,7 @@ const productsDB = [
     "brand": "HP",
     "name": "Toner Original HP LaserJet 128A Amarillo",
     "description": "Toner Original HP LaserJet 128A Amarillo",
-    "image": "assets/images/products/toner/1771379951562-HPCE322A.png"
+    "image": "assets/images/products/toner/1771379951562-HPCE322A.webp"
   },
   {
     "id": "HPCE321A",
@@ -1491,7 +1491,7 @@ const productsDB = [
     "brand": "HP",
     "name": "Toner Original HP LaserJet 128A Cian",
     "description": "Toner Original HP LaserJet 128A Cian",
-    "image": "assets/images/products/toner/1771379951533-HPCE321A.png"
+    "image": "assets/images/products/toner/1771379951533-HPCE321A.webp"
   },
   {
     "id": "HPCE323A",
@@ -1499,7 +1499,7 @@ const productsDB = [
     "brand": "HP",
     "name": "Toner Original HP LaserJet 128A Magenta",
     "description": "Toner Original HP LaserJet 128A Magenta",
-    "image": "assets/images/products/toner/1771379951673-HPCE323A.png"
+    "image": "assets/images/products/toner/1771379951673-HPCE323A.webp"
   },
   {
     "id": "HPCE320A",
@@ -1507,7 +1507,7 @@ const productsDB = [
     "brand": "HP",
     "name": "Toner Original HP LaserJet 128A Negro",
     "description": "Toner Original HP LaserJet 128A Negro",
-    "image": "assets/images/products/toner/1771379951502-HPCE320A.png"
+    "image": "assets/images/products/toner/1771379951502-HPCE320A.webp"
   },
   {
     "id": "HPC7115X",
@@ -1515,7 +1515,7 @@ const productsDB = [
     "brand": "HP",
     "name": "Toner Original HP LaserJet 15X Negro",
     "description": "Toner Original HP LaserJet 15X Negro",
-    "image": "assets/images/products/toner/1771379950140-HPC7115X.png"
+    "image": "assets/images/products/toner/1771379950140-HPC7115X.webp"
   },
   {
     "id": "HPCC532A",
@@ -1523,7 +1523,7 @@ const productsDB = [
     "brand": "HP",
     "name": "Toner Original HP LaserJet 304A Amarillo",
     "description": "Toner Original HP LaserJet 304A Amarillo",
-    "image": "assets/images/products/toner/1771379950625-HPCC532A.png"
+    "image": "assets/images/products/toner/1771379950625-HPCC532A.webp"
   },
   {
     "id": "HPCC531A",
@@ -1531,7 +1531,7 @@ const productsDB = [
     "brand": "HP",
     "name": "Toner Original HP LaserJet 304A Cian",
     "description": "Toner Original HP LaserJet 304A Cian",
-    "image": "assets/images/products/toner/1771379950499-HPCC531A.png"
+    "image": "assets/images/products/toner/1771379950499-HPCC531A.webp"
   },
   {
     "id": "HPCC533A",
@@ -1539,7 +1539,7 @@ const productsDB = [
     "brand": "HP",
     "name": "Toner Original HP LaserJet 304A Magenta",
     "description": "Toner Original HP LaserJet 304A Magenta",
-    "image": "assets/images/products/toner/1771379950656-HPCC533A.png"
+    "image": "assets/images/products/toner/1771379950656-HPCC533A.webp"
   },
   {
     "id": "HPCC530A",
@@ -1547,7 +1547,7 @@ const productsDB = [
     "brand": "HP",
     "name": "Toner Original HP LaserJet 304A Negro",
     "description": "Toner Original HP LaserJet 304A Negro",
-    "image": "assets/images/products/toner/1771379950474-HPCC530A.png"
+    "image": "assets/images/products/toner/1771379950474-HPCC530A.webp"
   },
   {
     "id": "HPCB435A",
@@ -1555,7 +1555,7 @@ const productsDB = [
     "brand": "HP",
     "name": "Toner Original HP LaserJet 35A Negro",
     "description": "Toner Original HP LaserJet 35A Negro",
-    "image": "assets/images/products/toner/1771379950223-HPCB435A.png"
+    "image": "assets/images/products/toner/1771379950223-HPCB435A.webp"
   },
   {
     "id": "HPCB436A",
@@ -1563,7 +1563,7 @@ const productsDB = [
     "brand": "HP",
     "name": "Toner Original HP LaserJet 36A Negro",
     "description": "Toner Original HP LaserJet 36A Negro",
-    "image": "assets/images/products/toner/1771379950251-HPCB436A.png"
+    "image": "assets/images/products/toner/1771379950251-HPCB436A.webp"
   },
   {
     "id": "HPC8543X",
@@ -1571,7 +1571,7 @@ const productsDB = [
     "brand": "HP",
     "name": "Toner Original HP LaserJet 43X Negro",
     "description": "Toner Original HP LaserJet 43X Negro",
-    "image": "assets/images/products/toner/1771379950192-HPC8543X.png"
+    "image": "assets/images/products/toner/1771379950192-HPC8543X.webp"
   },
   {
     "id": "HPCE252A",
@@ -1579,7 +1579,7 @@ const productsDB = [
     "brand": "HP",
     "name": "Toner Original HP LaserJet 504A Amarillo",
     "description": "Toner Original HP LaserJet 504A Amarillo",
-    "image": "assets/images/products/toner/1771379950741-HPCE252A.png"
+    "image": "assets/images/products/toner/1771379950741-HPCE252A.webp"
   },
   {
     "id": "HPCE251A",
@@ -1587,7 +1587,7 @@ const productsDB = [
     "brand": "HP",
     "name": "Toner Original HP LaserJet 504A Cian",
     "description": "Toner Original HP LaserJet 504A Cian",
-    "image": "assets/images/products/toner/1771379950712-HPCE251A.png"
+    "image": "assets/images/products/toner/1771379950712-HPCE251A.webp"
   },
   {
     "id": "HPCE253A",
@@ -1595,7 +1595,7 @@ const productsDB = [
     "brand": "HP",
     "name": "Toner Original HP LaserJet 504A Magenta",
     "description": "Toner Original HP LaserJet 504A Magenta",
-    "image": "assets/images/products/toner/1771379950778-HPCE253A.png"
+    "image": "assets/images/products/toner/1771379950778-HPCE253A.webp"
   },
   {
     "id": "HPCE250A",
@@ -1603,7 +1603,7 @@ const productsDB = [
     "brand": "HP",
     "name": "Toner Original HP LaserJet 504A Negro",
     "description": "Toner Original HP LaserJet 504A Negro",
-    "image": "assets/images/products/toner/1771379950684-HPCE250A.png"
+    "image": "assets/images/products/toner/1771379950684-HPCE250A.webp"
   },
   {
     "id": "HPCE402A",
@@ -1611,7 +1611,7 @@ const productsDB = [
     "brand": "HP",
     "name": "Toner Original HP LaserJet 507A Amarillo",
     "description": "Toner Original HP LaserJet 507A Amarillo",
-    "image": "assets/images/products/toner/1771379951889-HPCE402A.png"
+    "image": "assets/images/products/toner/1771379951889-HPCE402A.webp"
   },
   {
     "id": "HPCE401A",
@@ -1619,7 +1619,7 @@ const productsDB = [
     "brand": "HP",
     "name": "Toner Original HP LaserJet 507A Cian",
     "description": "Toner Original HP LaserJet 507A Cian",
-    "image": "assets/images/products/toner/1771379951867-HPCE401A.png"
+    "image": "assets/images/products/toner/1771379951867-HPCE401A.webp"
   },
   {
     "id": "HPCE403A",
@@ -1627,7 +1627,7 @@ const productsDB = [
     "brand": "HP",
     "name": "Toner Original HP LaserJet 507A Magenta",
     "description": "Toner Original HP LaserJet 507A Magenta",
-    "image": "assets/images/products/toner/1771379951920-HPCE403A.png"
+    "image": "assets/images/products/toner/1771379951920-HPCE403A.webp"
   },
   {
     "id": "HPCE400A",
@@ -1635,7 +1635,7 @@ const productsDB = [
     "brand": "HP",
     "name": "Toner Original HP LaserJet 507A Negro",
     "description": "Toner Original HP LaserJet 507A Negro",
-    "image": "assets/images/products/toner/1771379951841-HPCE400A.png"
+    "image": "assets/images/products/toner/1771379951841-HPCE400A.webp"
   },
   {
     "id": "HPCE400X",
@@ -1643,7 +1643,7 @@ const productsDB = [
     "brand": "HP",
     "name": "Toner Original HP LaserJet 507X Negro",
     "description": "Toner Original HP LaserJet 507X Negro",
-    "image": "assets/images/products/toner/1771379951952-HPCE400X.png"
+    "image": "assets/images/products/toner/1771379951952-HPCE400X.webp"
   },
   {
     "id": "HPCE255A",
@@ -1651,7 +1651,7 @@ const productsDB = [
     "brand": "HP",
     "name": "Toner Original HP LaserJet 55A Negro",
     "description": "Toner Original HP LaserJet 55A Negro",
-    "image": "assets/images/products/toner/1771379950809-HPCE255A.png"
+    "image": "assets/images/products/toner/1771379950809-HPCE255A.webp"
   },
   {
     "id": "HPCE255X",
@@ -1659,7 +1659,7 @@ const productsDB = [
     "brand": "HP",
     "name": "Toner Original HP LaserJet 55X Negro",
     "description": "Toner Original HP LaserJet 55X Negro",
-    "image": "assets/images/products/toner/1771379950836-HPCE255X.png"
+    "image": "assets/images/products/toner/1771379950836-HPCE255X.webp"
   },
   {
     "id": "HPCE260A",
@@ -1667,7 +1667,7 @@ const productsDB = [
     "brand": "HP",
     "name": "Toner Original HP LaserJet 647A Negro",
     "description": "Toner Original HP LaserJet 647A Negro",
-    "image": "assets/images/products/toner/1771379950894-HPCE260A.png"
+    "image": "assets/images/products/toner/1771379950894-HPCE260A.webp"
   },
   {
     "id": "HPCE262A",
@@ -1675,7 +1675,7 @@ const productsDB = [
     "brand": "HP",
     "name": "Toner Original HP LaserJet 648A Amarillo",
     "description": "Toner Original HP LaserJet 648A Amarillo",
-    "image": "assets/images/products/toner/1771379950980-HPCE262A.png"
+    "image": "assets/images/products/toner/1771379950980-HPCE262A.webp"
   },
   {
     "id": "HPCE261A",
@@ -1683,7 +1683,7 @@ const productsDB = [
     "brand": "HP",
     "name": "Toner Original HP LaserJet 648A Cian",
     "description": "Toner Original HP LaserJet 648A Cian",
-    "image": "assets/images/products/toner/1771379950940-HPCE261A.png"
+    "image": "assets/images/products/toner/1771379950940-HPCE261A.webp"
   },
   {
     "id": "HPCE263A",
@@ -1691,7 +1691,7 @@ const productsDB = [
     "brand": "HP",
     "name": "Toner Original HP LaserJet 648A Magenta",
     "description": "Toner Original HP LaserJet 648A Magenta",
-    "image": "assets/images/products/toner/1771379951025-HPCE263A.png"
+    "image": "assets/images/products/toner/1771379951025-HPCE263A.webp"
   },
   {
     "id": "HPCC364A",
@@ -1699,7 +1699,7 @@ const productsDB = [
     "brand": "HP",
     "name": "Toner Original HP LaserJet 64A Negro",
     "description": "Toner Original HP LaserJet 64A Negro",
-    "image": "assets/images/products/toner/1771379950412-HPCC364A.png"
+    "image": "assets/images/products/toner/1771379950412-HPCC364A.webp"
   },
   {
     "id": "HPCC364X",
@@ -1707,7 +1707,7 @@ const productsDB = [
     "brand": "HP",
     "name": "Toner Original HP LaserJet 64X Negro",
     "description": "Toner Original HP LaserJet 64X Negro",
-    "image": "assets/images/products/toner/1771379950446-HPCC364X.png"
+    "image": "assets/images/products/toner/1771379950446-HPCC364X.webp"
   },
   {
     "id": "HPCE272A",
@@ -1715,7 +1715,7 @@ const productsDB = [
     "brand": "HP",
     "name": "Toner Original HP LaserJet 650A Amarillo",
     "description": "Toner Original HP LaserJet 650A Amarillo",
-    "image": "assets/images/products/toner/1771379951200-HPCE272A.png"
+    "image": "assets/images/products/toner/1771379951200-HPCE272A.webp"
   },
   {
     "id": "HPCE271A",
@@ -1723,7 +1723,7 @@ const productsDB = [
     "brand": "HP",
     "name": "Toner Original HP LaserJet 650A Cian",
     "description": "Toner Original HP LaserJet 650A Cian",
-    "image": "assets/images/products/toner/1771379951175-HPCE271A.png"
+    "image": "assets/images/products/toner/1771379951175-HPCE271A.webp"
   },
   {
     "id": "HPCE273A",
@@ -1731,7 +1731,7 @@ const productsDB = [
     "brand": "HP",
     "name": "Toner Original HP LaserJet 650A Magenta",
     "description": "Toner Original HP LaserJet 650A Magenta",
-    "image": "assets/images/products/toner/1771379951228-HPCE273A.png"
+    "image": "assets/images/products/toner/1771379951228-HPCE273A.webp"
   },
   {
     "id": "HPCE270A",
@@ -1739,7 +1739,7 @@ const productsDB = [
     "brand": "HP",
     "name": "Toner Original HP LaserJet 650A Negro",
     "description": "Toner Original HP LaserJet 650A Negro",
-    "image": "assets/images/products/toner/1771379951147-HPCE270A.png"
+    "image": "assets/images/products/toner/1771379951147-HPCE270A.webp"
   },
   {
     "id": "HPCE278A",
@@ -1747,7 +1747,7 @@ const productsDB = [
     "brand": "HP",
     "name": "Toner Original HP LaserJet 78A Negro",
     "description": "Toner Original HP LaserJet 78A Negro",
-    "image": "assets/images/products/toner/1771379951252-HPCE278A.png"
+    "image": "assets/images/products/toner/1771379951252-HPCE278A.webp"
   },
   {
     "id": "HPCE285A",
@@ -1755,7 +1755,7 @@ const productsDB = [
     "brand": "HP",
     "name": "Toner Original HP LaserJet 85A Negro",
     "description": "Toner Original HP LaserJet 85A Negro",
-    "image": "assets/images/products/toner/1771379951302-HPCE285A.png"
+    "image": "assets/images/products/toner/1771379951302-HPCE285A.webp"
   },
   {
     "id": "HPCE390A",
@@ -1763,7 +1763,7 @@ const productsDB = [
     "brand": "HP",
     "name": "Toner Original HP LaserJet 90A Negro",
     "description": "Toner Original HP LaserJet 90A Negro",
-    "image": "assets/images/products/toner/1771379951698-HPCE390A.png"
+    "image": "assets/images/products/toner/1771379951698-HPCE390A.webp"
   },
   {
     "id": "HPCE390X",
@@ -1771,7 +1771,7 @@ const productsDB = [
     "brand": "HP",
     "name": "Toner Original HP LaserJet 90X Negro",
     "description": "Toner Original HP LaserJet 90X Negro",
-    "image": "assets/images/products/toner/1771379951750-HPCE390X.png"
+    "image": "assets/images/products/toner/1771379951750-HPCE390X.webp"
   },
   {
     "id": "X106R03522",
@@ -1779,7 +1779,7 @@ const productsDB = [
     "brand": "Xerox",
     "name": "Toner Xerox 106R03522 Alto Rendimiento Cian",
     "description": "Toner Xerox 106R03522 Alto Rendimiento Cian",
-    "image": "assets/images/products/toner/X106R03522.png"
+    "image": "assets/images/products/toner/X106R03522.webp"
   },
   {
     "id": "X106R02773",
@@ -1787,7 +1787,7 @@ const productsDB = [
     "brand": "Xerox",
     "name": "Toner Xerox 3020/3025 Negro",
     "description": "Toner Xerox 3020/3025 Negro",
-    "image": "assets/images/products/toner/X106R02773.png"
+    "image": "assets/images/products/toner/X106R02773.webp"
   },
   {
     "id": "X106R03585",
@@ -1795,7 +1795,7 @@ const productsDB = [
     "brand": "Xerox",
     "name": "Toner Xerox A/R B400 B405 Negro",
     "description": "Toner Xerox A/R B400 B405 Negro",
-    "image": "assets/images/products/toner/X106R03585.png"
+    "image": "assets/images/products/toner/X106R03585.webp"
   },
   {
     "id": "X106R03768",
@@ -1803,7 +1803,7 @@ const productsDB = [
     "brand": "Xerox",
     "name": "Toner Xerox Alta Capacidad 10.1K VersaLink C7000 SFP Cian",
     "description": "Toner Xerox Alta Capacidad 10.1K VersaLink C7000 SFP Cian",
-    "image": "assets/images/products/toner/X106R03768.png"
+    "image": "assets/images/products/toner/X106R03768.webp"
   },
   {
     "id": "X006R04729",
@@ -1811,7 +1811,7 @@ const productsDB = [
     "brand": "Xerox",
     "name": "Toner Xerox Alta Capacidad 14K B410/B415 Negro",
     "description": "Toner Xerox Alta Capacidad 14K B410/B415 Negro",
-    "image": "assets/images/products/toner/X006R04729.png"
+    "image": "assets/images/products/toner/X006R04729.webp"
   },
   {
     "id": "X106R03943",
@@ -1819,7 +1819,7 @@ const productsDB = [
     "brand": "Xerox",
     "name": "Toner Xerox Alta Capacidad 25.9K Versalink B600 Negro",
     "description": "Toner Xerox Alta Capacidad 25.9K Versalink B600 Negro",
-    "image": "assets/images/products/toner/X106R03943.png"
+    "image": "assets/images/products/toner/X106R03943.webp"
   },
   {
     "id": "X006R04403",
@@ -1827,7 +1827,7 @@ const productsDB = [
     "brand": "Xerox",
     "name": "Toner Xerox Alta Capacidad 3000 Páginas Negro",
     "description": "Toner Xerox Alta Capacidad 3000 Páginas Negro",
-    "image": "assets/images/products/toner/X006R04403.png"
+    "image": "assets/images/products/toner/X006R04403.webp"
   },
   {
     "id": "X106R03623",
@@ -1835,7 +1835,7 @@ const productsDB = [
     "brand": "Xerox",
     "name": "Toner Xerox Capacidad 15K P/Phaser 3330",
     "description": "Toner Xerox Capacidad 15K P/Phaser 3330",
-    "image": "assets/images/products/toner/X106R03623.png"
+    "image": "assets/images/products/toner/X106R03623.webp"
   },
   {
     "id": "X106R04349",
@@ -1843,7 +1843,7 @@ const productsDB = [
     "brand": "Xerox",
     "name": "Toner Xerox Dual Negro 6K Pag B205",
     "description": "Toner Xerox Dual Negro 6K Pag B205",
-    "image": "assets/images/products/toner/X106R04349.png"
+    "image": "assets/images/products/toner/X106R04349.webp"
   },
   {
     "id": "X006R01160",
@@ -1851,7 +1851,7 @@ const productsDB = [
     "brand": "Xerox",
     "name": "Toner Xerox Negro 30,000 PAGS",
     "description": "Toner Xerox Negro 30,000 PAGS",
-    "image": "assets/images/products/toner/X006R01160.png"
+    "image": "assets/images/products/toner/X006R01160.webp"
   },
   {
     "id": "X106R03396",
@@ -1859,7 +1859,7 @@ const productsDB = [
     "brand": "Xerox",
     "name": "Toner Xerox Negro 31K Versalink B70XX",
     "description": "Toner Xerox Negro 31K Versalink B70XX",
-    "image": "assets/images/products/toner/X106R03396.png"
+    "image": "assets/images/products/toner/X106R03396.webp"
   },
   {
     "id": "X113R00722",
@@ -1867,7 +1867,7 @@ const productsDB = [
     "brand": "Xerox",
     "name": "Toner Xerox Negro 3K Phaser 6180",
     "description": "Toner Xerox Negro 3K Phaser 6180",
-    "image": "assets/images/products/toner/X113R00722.png"
+    "image": "assets/images/products/toner/X113R00722.webp"
   },
   {
     "id": "X106R03621",
@@ -1875,7 +1875,7 @@ const productsDB = [
     "brand": "Xerox",
     "name": "Toner Xerox Negro A/R 8500 Pags 3330/35",
     "description": "Toner Xerox Negro A/R 8500 Pags 3330/35",
-    "image": "assets/images/products/toner/X106R03621.png"
+    "image": "assets/images/products/toner/X106R03621.webp"
   },
   {
     "id": "X106R04348",
@@ -1883,7 +1883,7 @@ const productsDB = [
     "brand": "Xerox",
     "name": "Toner Xerox Negro Estándar 3K Pag B205",
     "description": "Toner Xerox Negro Estándar 3K Pag B205",
-    "image": "assets/images/products/toner/X106R04348.png"
+    "image": "assets/images/products/toner/X106R04348.webp"
   },
   {
     "id": "X106R03532",
@@ -1891,7 +1891,7 @@ const productsDB = [
     "brand": "Xerox",
     "name": "Toner Xerox Negro Extra Alta Capacidad Versalink C400/405",
     "description": "Toner Xerox Negro Extra Alta Capacidad Versalink C400/405",
-    "image": "assets/images/products/toner/X106R03532.png"
+    "image": "assets/images/products/toner/X106R03532.webp"
   },
   {
     "id": "X106R02778",
@@ -1899,7 +1899,7 @@ const productsDB = [
     "brand": "Xerox",
     "name": "Toner Xerox Negro WC3215/3225 3000 Pags",
     "description": "Toner Xerox Negro WC3215/3225 3000 Pags",
-    "image": "assets/images/products/toner/X106R02778.png"
+    "image": "assets/images/products/toner/X106R02778.webp"
   },
   {
     "id": "X106R02723",
@@ -1907,7 +1907,7 @@ const productsDB = [
     "brand": "Xerox",
     "name": "Toner Xerox P/P3610W/WC3615 A/R",
     "description": "Toner Xerox P/P3610W/WC3615 A/R",
-    "image": "assets/images/products/toner/X106R02723.png"
+    "image": "assets/images/products/toner/X106R02723.webp"
   },
   {
     "id": "X106R02310",
@@ -1915,7 +1915,7 @@ const productsDB = [
     "brand": "Xerox",
     "name": "Toner Xerox P/WorkCentre 3315/3325",
     "description": "Toner Xerox P/WorkCentre 3315/3325",
-    "image": "assets/images/products/toner/X106R02310.png"
+    "image": "assets/images/products/toner/X106R02310.webp"
   },
   {
     "id": "X106R02732",
@@ -1923,7 +1923,7 @@ const productsDB = [
     "brand": "Xerox",
     "name": "Toner Xerox P3610/WC3615 25300 Pag",
     "description": "Toner Xerox P3610/WC3615 25300 Pag",
-    "image": "assets/images/products/toner/X106R02732.png"
+    "image": "assets/images/products/toner/X106R02732.webp"
   },
   {
     "id": "X106R03487",
@@ -1931,7 +1931,7 @@ const productsDB = [
     "brand": "Xerox",
     "name": "Toner Xerox WC Amarillo 6510 A/C",
     "description": "Toner Xerox WC Amarillo 6510 A/C",
-    "image": "assets/images/products/toner/X106R03487.png"
+    "image": "assets/images/products/toner/X106R03487.webp"
   },
   {
     "id": "X106R01277",
@@ -1939,7 +1939,7 @@ const productsDB = [
     "brand": "Xerox",
     "name": "Toner Xerox WorkCentre 5020 6300 Pag",
     "description": "Toner Xerox WorkCentre 5020 6300 Pag",
-    "image": "assets/images/products/toner/X106R01277.png"
+    "image": "assets/images/products/toner/X106R01277.webp"
   },
   {
     "id": "X006R01731",
@@ -1947,7 +1947,7 @@ const productsDB = [
     "brand": "Xerox",
     "name": "Toner Xerox WorkCentre B1025 Negro",
     "description": "Toner Xerox WorkCentre B1025 Negro",
-    "image": "assets/images/products/toner/X006R01731.png"
+    "image": "assets/images/products/toner/X006R01731.webp"
   },
   {
     "id": "X006R01573",
@@ -1955,7 +1955,7 @@ const productsDB = [
     "brand": "Xerox",
     "name": "Toner Xerox para la WC 5021/5024 Negro",
     "description": "Toner Xerox para la WC 5021/5024 Negro",
-    "image": "assets/images/products/toner/X006R01573.png"
+    "image": "assets/images/products/toner/X006R01573.webp"
   },
   {
     "id": "CA1977B001AA",
@@ -1963,7 +1963,7 @@ const productsDB = [
     "brand": "Canon",
     "name": "Tóner Canon 116 Amarillo",
     "description": "Cartucho de tóner original Canon 116 Amarillo.",
-    "image": "assets/images/products/toner/CA1977B001AA.png",
+    "image": "assets/images/products/toner/CA1977B001AA.webp",
     "compatibility": "Canon"
   },
   {
@@ -1972,7 +1972,7 @@ const productsDB = [
     "brand": "Canon",
     "name": "Tóner Canon 118 Negro, 3400 Páginas",
     "description": "Cartucho de tóner original Canon 118 Negro con rendimiento de 3400 páginas.",
-    "image": "assets/images/products/toner/CA2662B001AA.png",
+    "image": "assets/images/products/toner/CA2662B001AA.webp",
     "compatibility": "Canon"
   },
   {
@@ -1981,7 +1981,7 @@ const productsDB = [
     "brand": "Canon",
     "name": "Tóner Canon Cartridge 051H Alto Rendimiento 4000 Páginas Color Negro",
     "description": "Cartucho de tóner de alto rendimiento Canon 051H Negro.",
-    "image": "assets/images/products/toner/CA051H.png",
+    "image": "assets/images/products/toner/CA051H.webp",
     "compatibility": "Canon"
   },
   {
@@ -1990,7 +1990,7 @@ const productsDB = [
     "brand": "Lexmark",
     "name": "Tóner Lexmark 20N40C0 Cian, 1.500 Páginas",
     "description": "Tóner Lexmark 20N40C0 Cian, 1.500 Páginas",
-    "image": "assets/images/products/toner/lexmark-lx20n40c0.png"
+    "image": "assets/images/products/toner/lexmark-lx20n40c0.webp"
   },
   {
     "id": "LX20N40M0",
@@ -1998,7 +1998,7 @@ const productsDB = [
     "brand": "Lexmark",
     "name": "Tóner Lexmark 20N40M0 Magenta, 1.500 Páginas",
     "description": "Tóner Lexmark 20N40M0 Magenta, 1.500 Páginas",
-    "image": "assets/images/products/toner/lexmark-lx20n40m0.png"
+    "image": "assets/images/products/toner/lexmark-lx20n40m0.webp"
   },
   {
     "id": "LX20N40Y0",
@@ -2006,7 +2006,7 @@ const productsDB = [
     "brand": "Lexmark",
     "name": "Tóner Lexmark 20N40Y0 Amarillo, 1.500 Páginas",
     "description": "Tóner Lexmark 20N40Y0 Amarillo, 1.500 Páginas",
-    "image": "assets/images/products/toner/lexmark-lx20n40y0.png"
+    "image": "assets/images/products/toner/lexmark-lx20n40y0.webp"
   },
   {
     "id": "LX20N4XC0",
@@ -2014,7 +2014,7 @@ const productsDB = [
     "brand": "Lexmark",
     "name": "Tóner Lexmark 20N4XC0 Rendimiento Extra Alto Color Cian",
     "description": "Tóner Lexmark 20N4XC0 Rendimiento Extra Alto Color Cian",
-    "image": "assets/images/products/toner/lexmark-lx20n4xc0.png"
+    "image": "assets/images/products/toner/lexmark-lx20n4xc0.webp"
   },
   {
     "id": "LX20N4XK0",
@@ -2022,7 +2022,7 @@ const productsDB = [
     "brand": "Lexmark",
     "name": "Tóner Lexmark 20N4XK0 Rendimiento Extra Alto Color Negro",
     "description": "Tóner Lexmark 20N4XK0 Rendimiento Extra Alto Color Negro",
-    "image": "assets/images/products/toner/lexmark-lx20n4xk0.png"
+    "image": "assets/images/products/toner/lexmark-lx20n4xk0.webp"
   },
   {
     "id": "LX20N4XM0",
@@ -2030,7 +2030,7 @@ const productsDB = [
     "brand": "Lexmark",
     "name": "Tóner Lexmark 20N4XM0 Rendimiento Extra Alto Color Magenta",
     "description": "Tóner Lexmark 20N4XM0 Rendimiento Extra Alto Color Magenta",
-    "image": "assets/images/products/toner/lexmark-lx20n4xm0.png"
+    "image": "assets/images/products/toner/lexmark-lx20n4xm0.webp"
   },
   {
     "id": "LX20N4XY0",
@@ -2038,7 +2038,7 @@ const productsDB = [
     "brand": "Lexmark",
     "name": "Tóner Lexmark 20N4XY0 Rendimiento Extra Alto Color Amarillo",
     "description": "Tóner Lexmark 20N4XY0 Rendimiento Extra Alto Color Amarillo",
-    "image": "assets/images/products/toner/lexmark-lx20n4xy0.png"
+    "image": "assets/images/products/toner/lexmark-lx20n4xy0.webp"
   },
   {
     "id": "LX58D4000",
@@ -2046,7 +2046,7 @@ const productsDB = [
     "brand": "Lexmark",
     "name": "Tóner Lexmark 58D4000 Super Alto Rendimiento Negro, 7.500 Páginas",
     "description": "Tóner Lexmark 58D4000 Super Alto Rendimiento Negro, 7.500 Páginas",
-    "image": "assets/images/products/toner/lexmark-lx58d4000.png"
+    "image": "assets/images/products/toner/lexmark-lx58d4000.webp"
   },
   {
     "id": "LX58D4H00",
@@ -2054,7 +2054,7 @@ const productsDB = [
     "brand": "Lexmark",
     "name": "Tóner Lexmark 58D4H00 Super Alto Rendimiento Negro, 15.000 Páginas",
     "description": "Tóner Lexmark 58D4H00 Super Alto Rendimiento Negro, 15.000 Páginas",
-    "image": "assets/images/products/toner/lexmark-lx58d4h00.png"
+    "image": "assets/images/products/toner/lexmark-lx58d4h00.webp"
   },
   {
     "id": "LX56F4H00",
@@ -2062,7 +2062,7 @@ const productsDB = [
     "brand": "Lexmark",
     "name": "Tóner Lexmark Programa Retorno 15mil Páginas Color Negro",
     "description": "Tóner Lexmark Programa Retorno 15mil Páginas Color Negro",
-    "image": "assets/images/products/toner/LX56F4H00.png"
+    "image": "assets/images/products/toner/LX56F4H00.webp"
   },
   {
     "id": "LXB344000",
@@ -2070,7 +2070,7 @@ const productsDB = [
     "brand": "Lexmark",
     "name": "Tóner Lexmark Programa de Devolución para B344000 Color Negro",
     "description": "Tóner Lexmark Programa de Devolución para B344000 Color Negro",
-    "image": "assets/images/products/toner/lexmark-lxb344000.png"
+    "image": "assets/images/products/toner/lexmark-lxb344000.webp"
   },
   {
     "id": "LXB344X00",
@@ -2078,7 +2078,7 @@ const productsDB = [
     "brand": "Lexmark",
     "name": "Tóner Lexmark Rendimiento Extra Alto Programa Devolución para B344X00 Color Negro",
     "description": "Tóner Lexmark Rendimiento Extra Alto Programa Devolución para B344X00 Color Negro",
-    "image": "assets/images/products/toner/lexmark-lxb344x00.png"
+    "image": "assets/images/products/toner/lexmark-lxb344x00.webp"
   },
   {
     "id": "LXB220Z00",
@@ -2086,6 +2086,6 @@ const productsDB = [
     "brand": "Lexmark",
     "name": "UNIDAD DE IMAGEN LEXMARK B220Z00",
     "description": "UNIDAD DE IMAGEN LEXMARK B220Z00",
-    "image": "assets/images/products/toner/LXB220Z00.png"
+    "image": "assets/images/products/toner/LXB220Z00.webp"
   }
 ];

@@ -15,6 +15,8 @@ const PORT = 3000;
 app.use(cors());
 app.use(bodyParser.json({ limit: '50mb' }));
 app.use(express.static('public'));
+app.use(express.static(__dirname)); // Servir archivos de la raíz (index.html, catalogo.html, etc.)
+app.use('/assets', express.static(path.join(__dirname, 'assets'))); // Servir assets directamente
 
 // Configuración de almacenamiento en memoria para procesamiento
 const upload = multer({ storage: multer.memoryStorage() });
@@ -40,6 +42,13 @@ app.post('/api/upload', upload.single('image'), async (req, res) => {
 });
 
 app.use('/assets', (req, res, next) => {
+    // 1. Intentar la ruta exacta primero (ej. /assets/images/products/toner/archivo.webp)
+    const exactPath = path.join(__dirname, 'assets', decodeURIComponent(req.url));
+    if (fs.existsSync(exactPath) && fs.lstatSync(exactPath).isFile()) {
+        return res.sendFile(exactPath);
+    }
+
+    // 2. Si falla, buscar por nombre de archivo en carpetas conocidas (Fallback para el Admin Panel)
     const fileName = path.basename(decodeURIComponent(req.url));
     const searchFolders = [
         path.join(__dirname, 'assets/images/products/toner'),
