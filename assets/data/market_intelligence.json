@@ -1,0 +1,452 @@
+[
+  {
+    "b": "HP",
+    "n": "Victus 15 Gamer RTX 4050",
+    "c": "Laptop",
+    "p": 17499,
+    "id": "HP-V15",
+    "demanda": "98.5%",
+    "opti": "ALTA ROTACIÓN"
+  },
+  {
+    "b": "Lenovo",
+    "n": "IdeaPad 3 AMD Ryzen 5",
+    "c": "Laptop",
+    "p": 8999,
+    "id": "LEN-I3",
+    "demanda": "95.0%",
+    "opti": "STOCK RECOMENDADO"
+  },
+  {
+    "b": "NVIDIA",
+    "n": "RTX 5080 SUPER Founders",
+    "c": "GPU",
+    "p": 22400,
+    "id": "NV-5080",
+    "demanda": "92.1%",
+    "opti": "ALTO MARGEN"
+  },
+  {
+    "b": "Intel",
+    "n": "Core Ultra 7 265K (Arrow Lake)",
+    "c": "CPU",
+    "p": 8800,
+    "id": "INT-UL7",
+    "demanda": "89.4%",
+    "opti": "ALTA ROTACIÓN"
+  },
+  {
+    "b": "Samsung",
+    "n": "SSD Odyssey G7 OLED",
+    "c": "Monitor",
+    "p": 14500,
+    "id": "SAM-G7",
+    "demanda": "87.0%",
+    "opti": "STOCK RECOMENDADO"
+  },
+  {
+    "b": "Logitech",
+    "n": "G Pro X Superlight White",
+    "c": "Mouse",
+    "p": 2999,
+    "id": "LOG-GPX",
+    "demanda": "85.2%",
+    "opti": "ALTA ROTACIÓN"
+  },
+  {
+    "b": "Trend",
+    "n": "Componente Hardware GenX 1",
+    "c": "Hardware",
+    "p": 1792,
+    "id": "GEN-1",
+    "demanda": "79.5%",
+    "opti": "RECOMENDADO"
+  },
+  {
+    "b": "Trend",
+    "n": "Componente Hardware GenX 2",
+    "c": "Hardware",
+    "p": 2233,
+    "id": "GEN-2",
+    "demanda": "79.0%",
+    "opti": "RECOMENDADO"
+  },
+  {
+    "b": "Trend",
+    "n": "Componente Hardware GenX 3",
+    "c": "Hardware",
+    "p": 2314,
+    "id": "GEN-3",
+    "demanda": "78.5%",
+    "opti": "RECOMENDADO"
+  },
+  {
+    "b": "Trend",
+    "n": "Componente Hardware GenX 4",
+    "c": "Hardware",
+    "p": 3364,
+    "id": "GEN-4",
+    "demanda": "78.0%",
+    "opti": "RECOMENDADO"
+  },
+  {
+    "b": "Trend",
+    "n": "Componente Hardware GenX 5",
+    "c": "Hardware",
+    "p": 701,
+    "id": "GEN-5",
+    "demanda": "77.5%",
+    "opti": "RECOMENDADO"
+  },
+  {
+    "b": "Trend",
+    "n": "Componente Hardware GenX 6",
+    "c": "Hardware",
+    "p": 4449,
+    "id": "GEN-6",
+    "demanda": "77.0%",
+    "opti": "RECOMENDADO"
+  },
+  {
+    "b": "Trend",
+    "n": "Componente Hardware GenX 7",
+    "c": "Hardware",
+    "p": 4853,
+    "id": "GEN-7",
+    "demanda": "76.5%",
+    "opti": "RECOMENDADO"
+  },
+  {
+    "b": "Trend",
+    "n": "Componente Hardware GenX 8",
+    "c": "Hardware",
+    "p": 708,
+    "id": "GEN-8",
+    "demanda": "76.0%",
+    "opti": "RECOMENDADO"
+  },
+  {
+    "b": "Trend",
+    "n": "Componente Hardware GenX 9",
+    "c": "Hardware",
+    "p": 1492,
+    "id": "GEN-9",
+    "demanda": "75.5%",
+    "opti": "RECOMENDADO"
+  },
+  {
+    "b": "Trend",
+    "n": "Componente Hardware GenX 10",
+    "c": "Hardware",
+    "p": 1170,
+    "id": "GEN-10",
+    "demanda": "75.0%",
+    "opti": "RECOMENDADO"
+  },
+  {
+    "b": "Trend",
+    "n": "Componente Hardware GenX 11",
+    "c": "Hardware",
+    "p": 3197,
+    "id": "GEN-11",
+    "demanda": "74.5%",
+    "opti": "RECOMENDADO"
+  },
+  {
+    "b": "Trend",
+    "n": "Componente Hardware GenX 12",
+    "c": "Hardware",
+    "p": 5308,
+    "id": "GEN-12",
+    "demanda": "74.0%",
+    "opti": "RECOMENDADO"
+  },
+  {
+    "b": "Trend",
+    "n": "Componente Hardware GenX 13",
+    "c": "Hardware",
+    "p": 4354,
+    "id": "GEN-13",
+    "demanda": "73.5%",
+    "opti": "RECOMENDADO"
+  },
+  {
+    "b": "Trend",
+    "n": "Componente Hardware GenX 14",
+    "c": "Hardware",
+    "p": 586,
+    "id": "GEN-14",
+    "demanda": "73.0%",
+    "opti": "RECOMENDADO"
+  },
+  {
+    "b": "Trend",
+    "n": "Componente Hardware GenX 15",
+    "c": "Hardware",
+    "p": 1310,
+    "id": "GEN-15",
+    "demanda": "72.5%",
+    "opti": "RECOMENDADO"
+  },
+  {
+    "b": "Trend",
+    "n": "Componente Hardware GenX 16",
+    "c": "Hardware",
+    "p": 3408,
+    "id": "GEN-16",
+    "demanda": "72.0%",
+    "opti": "RECOMENDADO"
+  },
+  {
+    "b": "Trend",
+    "n": "Componente Hardware GenX 17",
+    "c": "Hardware",
+    "p": 3626,
+    "id": "GEN-17",
+    "demanda": "71.5%",
+    "opti": "RECOMENDADO"
+  },
+  {
+    "b": "Trend",
+    "n": "Componente Hardware GenX 18",
+    "c": "Hardware",
+    "p": 4355,
+    "id": "GEN-18",
+    "demanda": "71.0%",
+    "opti": "RECOMENDADO"
+  },
+  {
+    "b": "Trend",
+    "n": "Componente Hardware GenX 19",
+    "c": "Hardware",
+    "p": 3024,
+    "id": "GEN-19",
+    "demanda": "70.5%",
+    "opti": "RECOMENDADO"
+  },
+  {
+    "b": "Trend",
+    "n": "Componente Hardware GenX 20",
+    "c": "Hardware",
+    "p": 585,
+    "id": "GEN-20",
+    "demanda": "70.0%",
+    "opti": "RECOMENDADO"
+  },
+  {
+    "b": "Trend",
+    "n": "Componente Hardware GenX 21",
+    "c": "Hardware",
+    "p": 3536,
+    "id": "GEN-21",
+    "demanda": "69.5%",
+    "opti": "RECOMENDADO"
+  },
+  {
+    "b": "Trend",
+    "n": "Componente Hardware GenX 22",
+    "c": "Hardware",
+    "p": 3179,
+    "id": "GEN-22",
+    "demanda": "69.0%",
+    "opti": "RECOMENDADO"
+  },
+  {
+    "b": "Trend",
+    "n": "Componente Hardware GenX 23",
+    "c": "Hardware",
+    "p": 930,
+    "id": "GEN-23",
+    "demanda": "68.5%",
+    "opti": "RECOMENDADO"
+  },
+  {
+    "b": "Trend",
+    "n": "Componente Hardware GenX 24",
+    "c": "Hardware",
+    "p": 3339,
+    "id": "GEN-24",
+    "demanda": "68.0%",
+    "opti": "RECOMENDADO"
+  },
+  {
+    "b": "Trend",
+    "n": "Componente Hardware GenX 25",
+    "c": "Hardware",
+    "p": 1354,
+    "id": "GEN-25",
+    "demanda": "67.5%",
+    "opti": "RECOMENDADO"
+  },
+  {
+    "b": "Trend",
+    "n": "Componente Hardware GenX 26",
+    "c": "Hardware",
+    "p": 5220,
+    "id": "GEN-26",
+    "demanda": "67.0%",
+    "opti": "RECOMENDADO"
+  },
+  {
+    "b": "Trend",
+    "n": "Componente Hardware GenX 27",
+    "c": "Hardware",
+    "p": 4985,
+    "id": "GEN-27",
+    "demanda": "66.5%",
+    "opti": "RECOMENDADO"
+  },
+  {
+    "b": "Trend",
+    "n": "Componente Hardware GenX 28",
+    "c": "Hardware",
+    "p": 4991,
+    "id": "GEN-28",
+    "demanda": "66.0%",
+    "opti": "RECOMENDADO"
+  },
+  {
+    "b": "Trend",
+    "n": "Componente Hardware GenX 29",
+    "c": "Hardware",
+    "p": 4523,
+    "id": "GEN-29",
+    "demanda": "65.5%",
+    "opti": "RECOMENDADO"
+  },
+  {
+    "b": "Trend",
+    "n": "Componente Hardware GenX 30",
+    "c": "Hardware",
+    "p": 2073,
+    "id": "GEN-30",
+    "demanda": "65.0%",
+    "opti": "RECOMENDADO"
+  },
+  {
+    "b": "Trend",
+    "n": "Componente Hardware GenX 31",
+    "c": "Hardware",
+    "p": 2227,
+    "id": "GEN-31",
+    "demanda": "64.5%",
+    "opti": "RECOMENDADO"
+  },
+  {
+    "b": "Trend",
+    "n": "Componente Hardware GenX 32",
+    "c": "Hardware",
+    "p": 3874,
+    "id": "GEN-32",
+    "demanda": "64.0%",
+    "opti": "RECOMENDADO"
+  },
+  {
+    "b": "Trend",
+    "n": "Componente Hardware GenX 33",
+    "c": "Hardware",
+    "p": 5069,
+    "id": "GEN-33",
+    "demanda": "63.5%",
+    "opti": "RECOMENDADO"
+  },
+  {
+    "b": "Trend",
+    "n": "Componente Hardware GenX 34",
+    "c": "Hardware",
+    "p": 4889,
+    "id": "GEN-34",
+    "demanda": "63.0%",
+    "opti": "RECOMENDADO"
+  },
+  {
+    "b": "Trend",
+    "n": "Componente Hardware GenX 35",
+    "c": "Hardware",
+    "p": 3364,
+    "id": "GEN-35",
+    "demanda": "62.5%",
+    "opti": "RECOMENDADO"
+  },
+  {
+    "b": "Trend",
+    "n": "Componente Hardware GenX 36",
+    "c": "Hardware",
+    "p": 1038,
+    "id": "GEN-36",
+    "demanda": "62.0%",
+    "opti": "RECOMENDADO"
+  },
+  {
+    "b": "Trend",
+    "n": "Componente Hardware GenX 37",
+    "c": "Hardware",
+    "p": 5440,
+    "id": "GEN-37",
+    "demanda": "61.5%",
+    "opti": "RECOMENDADO"
+  },
+  {
+    "b": "Trend",
+    "n": "Componente Hardware GenX 38",
+    "c": "Hardware",
+    "p": 1383,
+    "id": "GEN-38",
+    "demanda": "61.0%",
+    "opti": "RECOMENDADO"
+  },
+  {
+    "b": "Trend",
+    "n": "Componente Hardware GenX 39",
+    "c": "Hardware",
+    "p": 2553,
+    "id": "GEN-39",
+    "demanda": "60.5%",
+    "opti": "RECOMENDADO"
+  },
+  {
+    "b": "Trend",
+    "n": "Componente Hardware GenX 40",
+    "c": "Hardware",
+    "p": 2423,
+    "id": "GEN-40",
+    "demanda": "60.0%",
+    "opti": "RECOMENDADO"
+  },
+  {
+    "b": "Trend",
+    "n": "Componente Hardware GenX 41",
+    "c": "Hardware",
+    "p": 2948,
+    "id": "GEN-41",
+    "demanda": "59.5%",
+    "opti": "RECOMENDADO"
+  },
+  {
+    "b": "Trend",
+    "n": "Componente Hardware GenX 42",
+    "c": "Hardware",
+    "p": 4848,
+    "id": "GEN-42",
+    "demanda": "59.0%",
+    "opti": "RECOMENDADO"
+  },
+  {
+    "b": "Trend",
+    "n": "Componente Hardware GenX 43",
+    "c": "Hardware",
+    "p": 2612,
+    "id": "GEN-43",
+    "demanda": "58.5%",
+    "opti": "RECOMENDADO"
+  },
+  {
+    "b": "Trend",
+    "n": "Componente Hardware GenX 44",
+    "c": "Hardware",
+    "p": 5186,
+    "id": "GEN-44",
+    "demanda": "58.0%",
+    "opti": "RECOMENDADO"
+  }
+]

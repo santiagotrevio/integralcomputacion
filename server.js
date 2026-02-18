@@ -133,6 +133,21 @@ app.get('/api/scout-price/:model', async (req, res) => {
     }
 });
 
+const marketScanner = require('./scripts/market_trends_scanner');
+app.get('/api/market-trends', async (req, res) => {
+    try {
+        const cachePath = path.join(__dirname, 'assets/data/market_intelligence.json');
+        if (fs.existsSync(cachePath)) {
+            const data = fs.readFileSync(cachePath, 'utf8');
+            return res.json(JSON.parse(data));
+        }
+        const results = await marketScanner();
+        res.json(results);
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+});
+
 app.post('/api/import-image-url', async (req, res) => {
     const { productId, imageUrl } = req.body;
     if (!productId || !imageUrl) return res.status(400).json({ error: 'Faltan datos' });
