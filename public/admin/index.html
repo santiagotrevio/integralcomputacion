@@ -196,11 +196,15 @@
 
     <div class="container">
         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
-            <div style="display:flex; align-items:center; gap:10px;">
-                <h1>📦 Catálogo Integral</h1>
-                <span id="pendingCount"
-                    style="background:#dc3545; color:white; padding:2px 8px; border-radius:10px; font-size:12px; display:none;">0
-                    pendientes</span>
+            <div style="display:flex; align-items:center; gap:20px;">
+                <img src="/assets/logo.svg" alt="Integral"
+                    style="height: 40px; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));">
+                <div style="display:flex; align-items:center; gap:10px;">
+                    <h1 style="margin:0; font-size: 1.5rem; color: #333;">Control de Inventario</h1>
+                    <span id="pendingCount"
+                        style="background:#dc3545; color:white; padding:2px 10px; border-radius:12px; font-size:12px; font-weight:bold; display:none;">0
+                        pendientes</span>
+                </div>
             </div>
             <button class="success" id="btnPublish" onclick="publishChanges()">🚀 ENVIAR A LA WEB</button>
         </div>
@@ -474,8 +478,12 @@
                 <td>${catMap[p.category] || p.category}</td>
                 <td style="font-size: 11px; color: #666;">${p.created_at ? new Date(p.created_at).toLocaleDateString('es-MX') : '-'}</td>
                 <td>
-                    <button class="secondary" style="padding:5px 10px" onclick='editProduct(${JSON.stringify(p)})'>✏️</button>
-                    <button class="danger" style="padding:5px 10px" onclick="deleteProduct('${p.id}')">🗑️</button>
+                    <button class="secondary" style="padding:6px 12px; font-size: 14px; border-radius: 6px;" onclick='editProduct(${JSON.stringify(p)})'>
+                        <i class="fa-solid fa-pen-to-square"></i>
+                    </button>
+                    <button class="danger" style="padding:6px 14px; font-size: 14px; border-radius: 6px; background: #ea4335; color: white; border: none;" onclick="deleteProduct('${p.id}')">
+                        <i class="fa-solid fa-trash-can"></i>
+                    </button>
                 </td>
             `;
                 tbody.appendChild(tr);
