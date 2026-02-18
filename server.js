@@ -6,6 +6,7 @@ const sqlite3 = require('sqlite3').verbose();
 const path = require('path');
 const fs = require('fs');
 const multer = require('multer');
+const sharp = require('sharp');
 const { exec } = require('child_process');
 
 const app = express();
@@ -15,21 +16,27 @@ app.use(cors());
 app.use(bodyParser.json({ limit: '50mb' }));
 app.use(express.static('public'));
 
-// Configuración de almacenamiento
-const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-        cb(null, path.join(__dirname, 'assets/images/products/toner'));
-    },
-    filename: function (req, file, cb) {
-        cb(null, Date.now() + '-' + file.originalname);
-    }
-});
-const upload = multer({ storage: storage });
+// Configuración de almacenamiento en memoria para procesamiento
+const upload = multer({ storage: multer.memoryStorage() });
 
-app.post('/api/upload', upload.single('image'), (req, res) => {
+app.post('/api/upload', upload.single('image'), async (req, res) => {
     if (!req.file) return res.status(400).send('Error');
-    const relativePath = `assets/images/products/toner/${req.file.filename}`;
-    res.json({ url: relativePath });
+
+    const fileName = `${Date.now()}-${req.file.originalname.split('.')[0]}.webp`;
+    const outputPath = path.join(__dirname, 'assets/images/products/toner', fileName);
+
+    try {
+        await sharp(req.file.buffer)
+            .resize(1200, 1200, { fit: 'inside', withoutEnlargement: true })
+            .webp({ quality: 80 })
+            .toFile(outputPath);
+
+        const relativePath = `assets/images/products/toner/${fileName}`;
+        res.json({ url: relativePath });
+    } catch (err) {
+        console.error('Sharp Error:', err);
+        res.status(500).send('Error al procesar imagen');
+    }
 });
 
 app.use('/assets', (req, res, next) => {
