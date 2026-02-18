@@ -119,7 +119,7 @@ const productsDB = [
     "category": "toner",
     "brand": "HP",
     "name": "Pack de 2 Toner Original HP LaserJet 36A Negro",
-    "description": null,
+    "description": "Pack de 2 Toner Original HP LaserJet 36A Negro",
     "image": "assets/images/products/toner/1771379950277-HPCB436AD.png"
   },
   {
@@ -127,7 +127,7 @@ const productsDB = [
     "category": "toner",
     "brand": "HP",
     "name": "Pack de 2 Toner Original HP LaserJet 55X Negro",
-    "description": null,
+    "description": "Pack de 2 Toner Original HP LaserJet 55X Negro",
     "image": "assets/images/products/toner/1771379950868-HPCE255XD.png"
   },
   {
@@ -135,7 +135,7 @@ const productsDB = [
     "category": "toner",
     "brand": "HP",
     "name": "Pack de 2 Toner Original HP LaserJet 78A Negro",
-    "description": null,
+    "description": "Pack de 2 Toner Original HP LaserJet 78A Negro",
     "image": "assets/images/products/toner/1771379951277-HPCE278AD.png"
   },
   {
@@ -143,7 +143,7 @@ const productsDB = [
     "category": "toner",
     "brand": "HP",
     "name": "Pack de 2 Toner Original HP LaserJet 85A Negro",
-    "description": null,
+    "description": "Pack de 2 Toner Original HP LaserJet 85A Negro",
     "image": "assets/images/products/toner/1771379951328-HPCE285AD.png"
   },
   {
@@ -151,7 +151,7 @@ const productsDB = [
     "category": "toner",
     "brand": "HP",
     "name": "Pack de 2 Toner Original HP LaserJet 90X Negro",
-    "description": null,
+    "description": "Pack de 2 Toner Original HP LaserJet 90X Negro",
     "image": "assets/images/products/toner/1771379951811-HPCE390XD.png"
   },
   {
@@ -1354,7 +1354,7 @@ const productsDB = [
     "category": "toner",
     "brand": "HP",
     "name": "Tambor Original HP 126A LaserJet Negro",
-    "description": null,
+    "description": "Tambor Original HP 126A LaserJet Negro",
     "image": "assets/images/products/toner/1771379951472-HPCE314A.png"
   },
   {
@@ -1410,7 +1410,7 @@ const productsDB = [
     "category": "toner",
     "brand": "HP",
     "name": "Toner Original HP LaserJet 105A Negro",
-    "description": null,
+    "description": "Toner Original HP LaserJet 105A Negro",
     "image": "assets/images/products/toner/1771379950011-HPW1105A.png"
   },
   {
@@ -1418,7 +1418,7 @@ const productsDB = [
     "category": "toner",
     "brand": "HP",
     "name": "Toner Original HP LaserJet 125A Amarillo",
-    "description": null,
+    "description": "Toner Original HP LaserJet 125A Amarillo",
     "image": "assets/images/products/toner/1771379950353-HPCB542A.png"
   },
   {
@@ -1426,7 +1426,7 @@ const productsDB = [
     "category": "toner",
     "brand": "HP",
     "name": "Toner Original HP LaserJet 125A Cian",
-    "description": null,
+    "description": "Toner Original HP LaserJet 125A Cian",
     "image": "assets/images/products/toner/1771379950331-HPCB541A.png"
   },
   {
@@ -1434,7 +1434,7 @@ const productsDB = [
     "category": "toner",
     "brand": "HP",
     "name": "Toner Original HP LaserJet 125A Magenta",
-    "description": null,
+    "description": "Toner Original HP LaserJet 125A Magenta",
     "image": "assets/images/products/toner/1771379950379-HPCB543A.png"
   },
   {
@@ -1442,7 +1442,7 @@ const productsDB = [
     "category": "toner",
     "brand": "HP",
     "name": "Toner Original HP LaserJet 125A Negro",
-    "description": null,
+    "description": "Toner Original HP LaserJet 125A Negro",
     "image": "assets/images/products/toner/1771379950307-HPCB540A.png"
   },
   {
@@ -1450,7 +1450,7 @@ const productsDB = [
     "category": "toner",
     "brand": "HP",
     "name": "Toner Original HP LaserJet 126A Amarillo",
-    "description": null,
+    "description": "Toner Original HP LaserJet 126A Amarillo",
     "image": "assets/images/products/toner/1771379951418-HPCE312A.png"
   },
   {
@@ -1458,7 +1458,7 @@ const productsDB = [
     "category": "toner",
     "brand": "HP",
     "name": "Toner Original HP LaserJet 126A Cian",
-    "description": null,
+    "description": "Toner Original HP LaserJet 126A Cian",
     "image": "assets/images/products/toner/1771379951392-HPCE311A.png"
   },
   {
@@ -1466,7 +1466,7 @@ const productsDB = [
     "category": "toner",
     "brand": "HP",
     "name": "Toner Original HP LaserJet 126A Magenta",
-    "description": null,
+    "description": "Toner Original HP LaserJet 126A Magenta",
     "image": "assets/images/products/toner/1771379951446-HPCE313A.png"
   },
   {
@@ -1474,7 +1474,7 @@ const productsDB = [
     "category": "toner",
     "brand": "HP",
     "name": "Toner Original HP LaserJet 126A Negro",
-    "description": null,
+    "description": "Toner Original HP LaserJet 126A Negro",
     "image": "assets/images/products/toner/1771379951363-HPCE310A.png"
   },
   {
@@ -1482,7 +1482,7 @@ const productsDB = [
     "category": "toner",
     "brand": "HP",
     "name": "Toner Original HP LaserJet 128A Amarillo",
-    "description": null,
+    "description": "Toner Original HP LaserJet 128A Amarillo",
     "image": "assets/images/products/toner/1771379951562-HPCE322A.png"
   },
   {
@@ -1490,7 +1490,7 @@ const productsDB = [
     "category": "toner",
     "brand": "HP",
     "name": "Toner Original HP LaserJet 128A Cian",
-    "description": null,
+    "description": "Toner Original HP LaserJet 128A Cian",
     "image": "assets/images/products/toner/1771379951533-HPCE321A.png"
   },
   {
@@ -1498,7 +1498,7 @@ const productsDB = [
     "category": "toner",
     "brand": "HP",
     "name": "Toner Original HP LaserJet 128A Magenta",
-    "description": null,
+    "description": "Toner Original HP LaserJet 128A Magenta",
     "image": "assets/images/products/toner/1771379951673-HPCE323A.png"
   },
   {
@@ -1506,7 +1506,7 @@ const productsDB = [
     "category": "toner",
     "brand": "HP",
     "name": "Toner Original HP LaserJet 128A Negro",
-    "description": null,
+    "description": "Toner Original HP LaserJet 128A Negro",
     "image": "assets/images/products/toner/1771379951502-HPCE320A.png"
   },
   {
@@ -1514,7 +1514,7 @@ const productsDB = [
     "category": "toner",
     "brand": "HP",
     "name": "Toner Original HP LaserJet 15X Negro",
-    "description": null,
+    "description": "Toner Original HP LaserJet 15X Negro",
     "image": "assets/images/products/toner/1771379950140-HPC7115X.png"
   },
   {
@@ -1522,7 +1522,7 @@ const productsDB = [
     "category": "toner",
     "brand": "HP",
     "name": "Toner Original HP LaserJet 304A Amarillo",
-    "description": null,
+    "description": "Toner Original HP LaserJet 304A Amarillo",
     "image": "assets/images/products/toner/1771379950625-HPCC532A.png"
   },
   {
@@ -1530,7 +1530,7 @@ const productsDB = [
     "category": "toner",
     "brand": "HP",
     "name": "Toner Original HP LaserJet 304A Cian",
-    "description": null,
+    "description": "Toner Original HP LaserJet 304A Cian",
     "image": "assets/images/products/toner/1771379950499-HPCC531A.png"
   },
   {
@@ -1538,7 +1538,7 @@ const productsDB = [
     "category": "toner",
     "brand": "HP",
     "name": "Toner Original HP LaserJet 304A Magenta",
-    "description": null,
+    "description": "Toner Original HP LaserJet 304A Magenta",
     "image": "assets/images/products/toner/1771379950656-HPCC533A.png"
   },
   {
@@ -1546,7 +1546,7 @@ const productsDB = [
     "category": "toner",
     "brand": "HP",
     "name": "Toner Original HP LaserJet 304A Negro",
-    "description": null,
+    "description": "Toner Original HP LaserJet 304A Negro",
     "image": "assets/images/products/toner/1771379950474-HPCC530A.png"
   },
   {
@@ -1554,7 +1554,7 @@ const productsDB = [
     "category": "toner",
     "brand": "HP",
     "name": "Toner Original HP LaserJet 35A Negro",
-    "description": null,
+    "description": "Toner Original HP LaserJet 35A Negro",
     "image": "assets/images/products/toner/1771379950223-HPCB435A.png"
   },
   {
@@ -1562,7 +1562,7 @@ const productsDB = [
     "category": "toner",
     "brand": "HP",
     "name": "Toner Original HP LaserJet 36A Negro",
-    "description": null,
+    "description": "Toner Original HP LaserJet 36A Negro",
     "image": "assets/images/products/toner/1771379950251-HPCB436A.png"
   },
   {
@@ -1570,7 +1570,7 @@ const productsDB = [
     "category": "toner",
     "brand": "HP",
     "name": "Toner Original HP LaserJet 43X Negro",
-    "description": null,
+    "description": "Toner Original HP LaserJet 43X Negro",
     "image": "assets/images/products/toner/1771379950192-HPC8543X.png"
   },
   {
@@ -1578,7 +1578,7 @@ const productsDB = [
     "category": "toner",
     "brand": "HP",
     "name": "Toner Original HP LaserJet 504A Amarillo",
-    "description": null,
+    "description": "Toner Original HP LaserJet 504A Amarillo",
     "image": "assets/images/products/toner/1771379950741-HPCE252A.png"
   },
   {
@@ -1586,7 +1586,7 @@ const productsDB = [
     "category": "toner",
     "brand": "HP",
     "name": "Toner Original HP LaserJet 504A Cian",
-    "description": null,
+    "description": "Toner Original HP LaserJet 504A Cian",
     "image": "assets/images/products/toner/1771379950712-HPCE251A.png"
   },
   {
@@ -1594,7 +1594,7 @@ const productsDB = [
     "category": "toner",
     "brand": "HP",
     "name": "Toner Original HP LaserJet 504A Magenta",
-    "description": null,
+    "description": "Toner Original HP LaserJet 504A Magenta",
     "image": "assets/images/products/toner/1771379950778-HPCE253A.png"
   },
   {
@@ -1602,7 +1602,7 @@ const productsDB = [
     "category": "toner",
     "brand": "HP",
     "name": "Toner Original HP LaserJet 504A Negro",
-    "description": null,
+    "description": "Toner Original HP LaserJet 504A Negro",
     "image": "assets/images/products/toner/1771379950684-HPCE250A.png"
   },
   {
@@ -1610,7 +1610,7 @@ const productsDB = [
     "category": "toner",
     "brand": "HP",
     "name": "Toner Original HP LaserJet 507A Amarillo",
-    "description": null,
+    "description": "Toner Original HP LaserJet 507A Amarillo",
     "image": "assets/images/products/toner/1771379951889-HPCE402A.png"
   },
   {
@@ -1618,7 +1618,7 @@ const productsDB = [
     "category": "toner",
     "brand": "HP",
     "name": "Toner Original HP LaserJet 507A Cian",
-    "description": null,
+    "description": "Toner Original HP LaserJet 507A Cian",
     "image": "assets/images/products/toner/1771379951867-HPCE401A.png"
   },
   {
@@ -1626,7 +1626,7 @@ const productsDB = [
     "category": "toner",
     "brand": "HP",
     "name": "Toner Original HP LaserJet 507A Magenta",
-    "description": null,
+    "description": "Toner Original HP LaserJet 507A Magenta",
     "image": "assets/images/products/toner/1771379951920-HPCE403A.png"
   },
   {
@@ -1634,7 +1634,7 @@ const productsDB = [
     "category": "toner",
     "brand": "HP",
     "name": "Toner Original HP LaserJet 507A Negro",
-    "description": null,
+    "description": "Toner Original HP LaserJet 507A Negro",
     "image": "assets/images/products/toner/1771379951841-HPCE400A.png"
   },
   {
@@ -1642,7 +1642,7 @@ const productsDB = [
     "category": "toner",
     "brand": "HP",
     "name": "Toner Original HP LaserJet 507X Negro",
-    "description": null,
+    "description": "Toner Original HP LaserJet 507X Negro",
     "image": "assets/images/products/toner/1771379951952-HPCE400X.png"
   },
   {
@@ -1650,7 +1650,7 @@ const productsDB = [
     "category": "toner",
     "brand": "HP",
     "name": "Toner Original HP LaserJet 55A Negro",
-    "description": null,
+    "description": "Toner Original HP LaserJet 55A Negro",
     "image": "assets/images/products/toner/1771379950809-HPCE255A.png"
   },
   {
@@ -1658,7 +1658,7 @@ const productsDB = [
     "category": "toner",
     "brand": "HP",
     "name": "Toner Original HP LaserJet 55X Negro",
-    "description": null,
+    "description": "Toner Original HP LaserJet 55X Negro",
     "image": "assets/images/products/toner/1771379950836-HPCE255X.png"
   },
   {
@@ -1666,7 +1666,7 @@ const productsDB = [
     "category": "toner",
     "brand": "HP",
     "name": "Toner Original HP LaserJet 647A Negro",
-    "description": null,
+    "description": "Toner Original HP LaserJet 647A Negro",
     "image": "assets/images/products/toner/1771379950894-HPCE260A.png"
   },
   {
@@ -1674,7 +1674,7 @@ const productsDB = [
     "category": "toner",
     "brand": "HP",
     "name": "Toner Original HP LaserJet 648A Amarillo",
-    "description": null,
+    "description": "Toner Original HP LaserJet 648A Amarillo",
     "image": "assets/images/products/toner/1771379950980-HPCE262A.png"
   },
   {
@@ -1682,7 +1682,7 @@ const productsDB = [
     "category": "toner",
     "brand": "HP",
     "name": "Toner Original HP LaserJet 648A Cian",
-    "description": null,
+    "description": "Toner Original HP LaserJet 648A Cian",
     "image": "assets/images/products/toner/1771379950940-HPCE261A.png"
   },
   {
@@ -1690,7 +1690,7 @@ const productsDB = [
     "category": "toner",
     "brand": "HP",
     "name": "Toner Original HP LaserJet 648A Magenta",
-    "description": null,
+    "description": "Toner Original HP LaserJet 648A Magenta",
     "image": "assets/images/products/toner/1771379951025-HPCE263A.png"
   },
   {
@@ -1698,7 +1698,7 @@ const productsDB = [
     "category": "toner",
     "brand": "HP",
     "name": "Toner Original HP LaserJet 64A Negro",
-    "description": null,
+    "description": "Toner Original HP LaserJet 64A Negro",
     "image": "assets/images/products/toner/1771379950412-HPCC364A.png"
   },
   {
@@ -1706,7 +1706,7 @@ const productsDB = [
     "category": "toner",
     "brand": "HP",
     "name": "Toner Original HP LaserJet 64X Negro",
-    "description": null,
+    "description": "Toner Original HP LaserJet 64X Negro",
     "image": "assets/images/products/toner/1771379950446-HPCC364X.png"
   },
   {
@@ -1714,7 +1714,7 @@ const productsDB = [
     "category": "toner",
     "brand": "HP",
     "name": "Toner Original HP LaserJet 650A Amarillo",
-    "description": null,
+    "description": "Toner Original HP LaserJet 650A Amarillo",
     "image": "assets/images/products/toner/1771379951200-HPCE272A.png"
   },
   {
@@ -1722,7 +1722,7 @@ const productsDB = [
     "category": "toner",
     "brand": "HP",
     "name": "Toner Original HP LaserJet 650A Cian",
-    "description": null,
+    "description": "Toner Original HP LaserJet 650A Cian",
     "image": "assets/images/products/toner/1771379951175-HPCE271A.png"
   },
   {
@@ -1730,7 +1730,7 @@ const productsDB = [
     "category": "toner",
     "brand": "HP",
     "name": "Toner Original HP LaserJet 650A Magenta",
-    "description": null,
+    "description": "Toner Original HP LaserJet 650A Magenta",
     "image": "assets/images/products/toner/1771379951228-HPCE273A.png"
   },
   {
@@ -1738,7 +1738,7 @@ const productsDB = [
     "category": "toner",
     "brand": "HP",
     "name": "Toner Original HP LaserJet 650A Negro",
-    "description": null,
+    "description": "Toner Original HP LaserJet 650A Negro",
     "image": "assets/images/products/toner/1771379951147-HPCE270A.png"
   },
   {
@@ -1746,7 +1746,7 @@ const productsDB = [
     "category": "toner",
     "brand": "HP",
     "name": "Toner Original HP LaserJet 78A Negro",
-    "description": null,
+    "description": "Toner Original HP LaserJet 78A Negro",
     "image": "assets/images/products/toner/1771379951252-HPCE278A.png"
   },
   {
@@ -1754,7 +1754,7 @@ const productsDB = [
     "category": "toner",
     "brand": "HP",
     "name": "Toner Original HP LaserJet 85A Negro",
-    "description": null,
+    "description": "Toner Original HP LaserJet 85A Negro",
     "image": "assets/images/products/toner/1771379951302-HPCE285A.png"
   },
   {
@@ -1762,7 +1762,7 @@ const productsDB = [
     "category": "toner",
     "brand": "HP",
     "name": "Toner Original HP LaserJet 90A Negro",
-    "description": null,
+    "description": "Toner Original HP LaserJet 90A Negro",
     "image": "assets/images/products/toner/1771379951698-HPCE390A.png"
   },
   {
@@ -1770,7 +1770,7 @@ const productsDB = [
     "category": "toner",
     "brand": "HP",
     "name": "Toner Original HP LaserJet 90X Negro",
-    "description": null,
+    "description": "Toner Original HP LaserJet 90X Negro",
     "image": "assets/images/products/toner/1771379951750-HPCE390X.png"
   },
   {
