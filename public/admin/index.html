@@ -4,131 +4,254 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inventario Pro 2026</title>
+    <title>Gestor de Catálogo Pro | Integral</title>
     <style>
+        :root {
+            --apple-bg: #f5f5f7;
+            --apple-card: rgba(255, 255, 255, 0.8);
+            --apple-text: #1d1d1f;
+            --apple-subtext: #86868b;
+            --apple-blue: #0071e3;
+            --apple-red: #ff3b30;
+            --apple-green: #34c759;
+            --apple-border: rgba(0, 0, 0, 0.08);
+            --glass-blur: blur(25px) saturate(180%);
+            --modal-bg: #ffffff;
+            --input-bg: #ffffff;
+            --card-shadow: 0 12px 40px rgba(0, 0, 0, 0.04);
+        }
+
+        [data-theme="dark"] {
+            --apple-bg: #000000;
+            --apple-card: rgba(28, 28, 30, 0.7);
+            --apple-text: #f5f5f7;
+            --apple-subtext: #a1a1a6;
+            --apple-blue: #0A84FF;
+            --apple-red: #ff453a;
+            --apple-green: #32d74b;
+            --apple-border: rgba(255, 255, 255, 0.15);
+            --modal-bg: #1c1c1e;
+            --input-bg: #2c2c2e;
+            --card-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        * {
+            box-sizing: border-box;
+            transition: background 0.4s ease, color 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+        }
+
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            padding: 20px;
-            background: #f0f2f5;
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+            padding: 40px 20px;
+            background: var(--apple-bg);
+            color: var(--apple-text);
+            -webkit-font-smoothing: antialiased;
+            letter-spacing: -0.01em;
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 1280px;
             margin: 0 auto;
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            background: var(--apple-card);
+            backdrop-filter: var(--glass-blur);
+            padding: 32px;
+            border-radius: 24px;
+            border: 1px solid var(--apple-border);
+            box-shadow: var(--card-shadow);
         }
 
         h1 {
-            color: #333;
-            margin: 0;
+            font-weight: 600;
+            font-size: 24px;
+            letter-spacing: -0.02em;
         }
 
         .toolbar {
             display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
+            gap: 16px;
+            margin-bottom: 24px;
             flex-wrap: wrap;
             align-items: center;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 12px;
+            border-radius: 16px;
+            border: 1px solid var(--apple-border);
         }
 
         .sort-chips {
             display: flex;
-            gap: 5px;
-            background: #e9ecef;
-            padding: 5px;
-            border-radius: 20px;
-            margin-left: 10px;
+            gap: 4px;
+            background: rgba(0, 0, 0, 0.03);
+            padding: 4px;
+            border-radius: 12px;
         }
 
         .chip {
-            padding: 5px 12px;
+            padding: 6px 14px;
             font-size: 13px;
-            border-radius: 15px;
+            font-weight: 500;
+            border-radius: 8px;
             cursor: pointer;
             border: none;
             background: transparent;
-            color: #666;
+            color: var(--apple-subtext);
         }
 
         .chip.active {
-            background: #007bff;
+            background: var(--apple-blue);
             color: white;
+            box-shadow: 0 4px 12px rgba(0, 113, 227, 0.3);
         }
 
         input,
         select {
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 6px;
+            padding: 10px 14px;
+            background: var(--input-bg);
+            border: 1px solid var(--apple-border);
+            border-radius: 12px;
+            font-size: 14px;
+            color: var(--apple-text);
+        }
+
+        input:focus,
+        select:focus {
+            outline: none;
+            border-color: var(--apple-blue);
+            box-shadow: 0 0 0 4px rgba(0, 113, 227, 0.1);
         }
 
         button {
-            padding: 10px 18px;
-            background: #007bff;
+            padding: 10px 20px;
+            background: var(--apple-blue);
             color: white;
             border: none;
-            border-radius: 6px;
+            border-radius: 12px;
             cursor: pointer;
             font-weight: 500;
+            font-size: 14px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        button:hover {
+            filter: brightness(1.05);
+            transform: translateY(-1px);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        /* Monochrome Dark Mode Buttons */
+        [data-theme="dark"] button {
+            background: #2c2c2e;
+            color: #f5f5f7;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        [data-theme="dark"] button:hover {
+            background: #3a3a3c;
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        [data-theme="dark"] button.success {
+            background: #f5f5f7;
+            color: #1c1c1e;
+            border: none;
+        }
+
+        [data-theme="dark"] button.success:hover {
+            background: #ffffff;
+            opacity: 0.9;
+        }
+
+        [data-theme="dark"] button.danger {
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #f5f5f7;
+        }
+
+        [data-theme="dark"] button.danger:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 255, 255, 0.4);
+        }
+
+        [data-theme="dark"] .chip.active {
+            background: #f5f5f7;
+            color: #1c1c1e;
+            box-shadow: 0 4px 15px rgba(255, 255, 255, 0.1);
+        }
+
+        [data-theme="dark"] button.secondary {
+            background: rgba(255, 255, 255, 0.05);
+            color: #f5f5f7;
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         button.secondary {
-            background: #6c757d;
+            background: rgba(0, 0, 0, 0.05);
+            color: var(--apple-text);
         }
 
         button.success {
-            background: #28a745;
+            background: var(--apple-green);
         }
 
         button.danger {
-            background: #dc3545;
+            background: var(--apple-red);
         }
 
         table {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 10px;
-        }
-
-        th,
-        td {
-            padding: 12px;
-            border-bottom: 1px solid #eee;
-            text-align: left;
-            vertical-align: middle;
+            margin-top: 16px;
         }
 
         th {
-            background: #f8f9fa;
+            background: transparent;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--apple-subtext);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            padding: 16px 12px;
+            border-bottom: 1px solid var(--apple-border);
+        }
+
+        td {
+            padding: 16px 12px;
+            border-bottom: 1px solid var(--apple-border);
             font-size: 14px;
-            color: #666;
+        }
+
+        tr:hover td {
+            background: rgba(0, 0, 0, 0.01);
         }
 
         tr.pending {
-            background-color: #fff9c4 !important;
+            background: rgba(251, 192, 45, 0.05) !important;
         }
 
         .pending-tag {
             font-size: 10px;
-            background: #fbc02d;
+            background: var(--apple-text);
             color: #fff;
-            padding: 2px 6px;
-            border-radius: 4px;
-            font-weight: bold;
-            margin-left: 5px;
+            padding: 2px 8px;
+            border-radius: 20px;
+            font-weight: 600;
+            margin-left: 8px;
         }
 
         .thumb {
-            width: 45px;
-            height: 45px;
+            width: 52px;
+            height: 52px;
             object-fit: contain;
-            border-radius: 6px;
-            border: 1px solid #ddd;
-            background: white;
+            border-radius: 14px;
+            background: var(--input-bg);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
             cursor: zoom-in;
+            border: 1px solid var(--apple-border);
         }
 
         .modal {
@@ -138,31 +261,55 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.6);
+            background: rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
             justify-content: center;
             align-items: center;
             z-index: 1000;
         }
 
         .modal-content {
-            background: white;
-            padding: 25px;
-            border-radius: 12px;
-            width: 480px;
-            max-height: 90vh;
-            overflow-y: auto;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            background: var(--modal-bg);
+            padding: 40px;
+            border-radius: 36px;
+            width: 520px;
+            border: 1px solid var(--apple-border);
+            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.3);
+            color: var(--apple-text);
+        }
+
+        #themeToggle {
+            background: var(--apple-card);
+            border: 1px solid var(--apple-border);
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 18px;
+            color: var(--apple-text);
+            backdrop-filter: var(--glass-blur);
+        }
+
+        #themeToggle:hover {
+            transform: scale(1.1);
         }
 
         .drop-zone {
-            border: 2px dashed #007bff;
-            padding: 25px;
+            border: 2px dashed var(--apple-border);
+            padding: 32px;
             text-align: center;
-            border-radius: 10px;
-            color: #007bff;
-            margin-bottom: 15px;
-            cursor: pointer;
-            background: #f8fbff;
+            border-radius: 20px;
+            color: var(--apple-subtext);
+            margin-bottom: 24px;
+            background: var(--apple-bg);
+        }
+
+        .drop-zone:hover {
+            border-color: var(--apple-blue);
+            background: rgba(0, 113, 227, 0.02);
         }
 
         #zoomOverlay {
@@ -172,7 +319,8 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.9);
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
             z-index: 2000;
             justify-content: center;
             align-items: center;
@@ -183,6 +331,16 @@
             max-width: 90%;
             max-height: 90%;
         }
+
+        .main-logo {
+            height: 48px;
+            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
+            transition: filter 0.4s ease;
+        }
+
+        [data-theme="dark"] .main-logo {
+            filter: brightness(0) invert(1) drop-shadow(0 4px 12px rgba(255, 255, 255, 0.1));
+        }
     </style>
     <!-- FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -190,23 +348,28 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.31/jspdf.plugin.autotable.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
 </head>
 
 <body>
 
     <div class="container">
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:24px;">
             <div style="display:flex; align-items:center; gap:20px;">
-                <img src="/assets/logo.svg" alt="Integral"
-                    style="height: 40px; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));">
-                <div style="display:flex; align-items:center; gap:10px;">
-                    <h1 style="margin:0; font-size: 1.5rem; color: #333;">Control de Inventario</h1>
+                <img src="/assets/logo.svg" alt="Integral" class="main-logo">
+                <div style="display:flex; align-items:center; gap:12px;">
+                    <h1 style="margin:0; font-size: 1.6rem;">Gestor de Catálogo Pro</h1>
                     <span id="pendingCount"
-                        style="background:#dc3545; color:white; padding:2px 10px; border-radius:12px; font-size:12px; font-weight:bold; display:none;">0
+                        style="background:var(--apple-red); color:white; padding:4px 12px; border-radius:20px; font-size:12px; font-weight:700; display:none;">0
                         pendientes</span>
                 </div>
             </div>
-            <button class="success" id="btnPublish" onclick="publishChanges()">🚀 ENVIAR A LA WEB</button>
+            <div style="display:flex; align-items:center; gap:12px;">
+                <button id="themeToggle" onclick="toggleTheme()" title="Cambiar Tema">
+                    <i class="fa-solid fa-moon"></i>
+                </button>
+                <button class="success" id="btnPublish" onclick="publishChanges()">🚀 ENVIAR A LA WEB</button>
+            </div>
         </div>
 
         <div class="toolbar">
@@ -229,17 +392,24 @@
             </span>
 
             <div style="margin-left: 10px; display: flex; gap: 5px;">
-                <button onclick="exportToExcel()" class="secondary" style="padding: 10px; background: #1d6f42;"
+                <button onclick="exportToExcel()" class="secondary"
+                    style="background: transparent; border: 1px solid var(--apple-border); color: #1d6f42;"
                     title="Exportar a Excel">
                     <i class="fa-solid fa-file-excel"></i>
                 </button>
-                <button onclick="exportToPDF()" class="secondary" style="padding: 10px; background: #a30000;"
+                <button onclick="exportToPDF()" class="secondary"
+                    style="background: transparent; border: 1px solid var(--apple-border); color: #a30000;"
                     title="Exportar a PDF">
                     <i class="fa-solid fa-file-pdf"></i>
                 </button>
             </div>
 
-            <button onclick="newProduct()" style="margin-left:auto">+ Nuevo Producto</button>
+            <div style="margin-left:auto; display:flex; gap:10px;">
+                <button class="secondary" onclick="openBulkModal()" title="Carga Masiva">
+                    <i class="fa-solid fa-file-import"></i> Carga Masiva
+                </button>
+                <button onclick="newProduct()">+ Nuevo Producto</button>
+            </div>
         </div>
 
         <table id="productTable">
@@ -322,7 +492,36 @@
         </div>
     </div>
 
-    <div id="zoomOverlay" onclick="this.style.display='none'"><img id="zoomedImg"></div>
+    <!-- Modal Masivo -->
+    <div id="bulkModal" class="modal">
+        <div class="modal-content">
+            <h2 style="margin-top:0">Carga Masiva Apple-style </h2>
+            <p style="color:var(--apple-subtext); font-size:14px">Sube un CSV y las imágenes (el nombre del archivo debe
+                ser el ID del producto).</p>
+
+            <div style="margin-bottom:20px">
+                <label style="display:block; margin-bottom:8px; font-weight:600">1. Archivo CSV</label>
+                <input type="file" id="bulkCSV" accept=".csv" style="width:100%">
+            </div>
+
+            <div style="margin-bottom:20px">
+                <label style="display:block; margin-bottom:8px; font-weight:600">2. Carpeta de Imágenes</label>
+                <input type="file" id="bulkImages" multiple accept="image/*" style="width:100%">
+            </div>
+
+            <div id="bulkProgress" style="display:none; margin-bottom:20px">
+                <div style="height:6px; background:var(--apple-bg); border-radius:10px; overflow:hidden">
+                    <div id="progressBar" style="height:100%; background:var(--apple-blue); width:0%"></div>
+                </div>
+                <p id="progressText" style="font-size:12px; margin-top:5px; text-align:center"></p>
+            </div>
+
+            <div style="display:flex; justify-content:space-between; margin-top:30px;">
+                <button class="secondary" onclick="closeBulkModal()">Cancelar</button>
+                <button onclick="processBulk()" id="btnProcessBulk">Iniciar Carga</button>
+            </div>
+        </div>
+    </div>
 
     <script>
         let products = [];
@@ -432,29 +631,89 @@
             }
         }
 
-        function exportToPDF() {
-            if (filteredList.length === 0) return alert("No hay datos para exportar");
-            const { jsPDF } = window.jspdf;
-            const doc = new jsPDF();
+        async function exportToPDF() {
+            try {
+                if (filteredList.length === 0) return alert("No hay datos para exportar");
+                const { jsPDF } = window.jspdf;
+                const doc = new jsPDF();
+                const isDark = document.body.getAttribute('data-theme') === 'dark';
 
-            doc.text("Reporte de Inventario - Integral Computación", 14, 15);
+                // Apple-style color palette
+                const colors = isDark ? {
+                    bg: [0, 0, 0],
+                    text: [245, 245, 247],
+                    headBg: [28, 28, 30],
+                    headText: [255, 255, 255],
+                    alternateRow: [18, 18, 20],
+                    border: [44, 44, 46]
+                } : {
+                    bg: [255, 255, 255],
+                    text: [29, 29, 31],
+                    headBg: [245, 245, 247],
+                    headText: [134, 134, 139],
+                    alternateRow: [250, 250, 252],
+                    border: [240, 240, 245]
+                };
 
-            const rows = filteredList.map(p => [
-                p.id,
-                p.brand,
-                p.name,
-                catMap[p.category] || p.category,
-                p.created_at ? new Date(p.created_at).toLocaleDateString('es-MX') : '-',
-                p.compatibility || '-'
-            ]);
+                // Fill background if dark mode
+                if (isDark) {
+                    doc.setFillColor(...colors.bg);
+                    doc.rect(0, 0, 210, 297, 'F');
+                }
 
-            doc.autoTable({
-                head: [['ID', 'Marca', 'Nombre', 'Cat', 'Fecha', 'Compatibilidad']],
-                body: rows,
-                startY: 25,
-            });
+                // Styled Header
+                doc.setFont("helvetica", "bold");
+                doc.setFontSize(22);
+                doc.setTextColor(...colors.text);
+                doc.text("Gestor de Catálogo Pro", 14, 25);
 
-            doc.save(`Inventario_Integral_${new Date().toISOString().split('T')[0]}.pdf`);
+                doc.setFont("helvetica", "normal");
+                doc.setFontSize(9);
+                doc.setTextColor(isDark ? 161 : 134, isDark ? 161 : 134, isDark ? 166 : 139);
+                doc.text("Reporte de Inventario | Integral Computación", 14, 32);
+                doc.text(`Generado: ${new Date().toLocaleString('es-MX')}`, 14, 37);
+
+                const rows = filteredList.map(p => [
+                    p.id,
+                    p.brand,
+                    p.name,
+                    catMap[p.category] || p.category,
+                    p.created_at ? new Date(p.created_at).toLocaleDateString('es-MX') : '-',
+                    p.compatibility || '-'
+                ]);
+
+                doc.autoTable({
+                    head: [['ID', 'Marca', 'Nombre', 'Categoría', 'Alta', 'Compatibilidad']],
+                    body: rows,
+                    startY: 45,
+                    margin: { left: 14, right: 14 },
+                    styles: {
+                        font: "helvetica",
+                        fontSize: 8,
+                        cellPadding: 4,
+                        textColor: colors.text,
+                        fillColor: isDark ? [0, 0, 0] : [255, 255, 255],
+                        lineColor: colors.border,
+                        lineWidth: 0.1,
+                    },
+                    headStyles: {
+                        fillColor: colors.headBg,
+                        textColor: colors.headText,
+                        fontSize: 8,
+                        fontStyle: 'bold'
+                    },
+                    alternateRowStyles: {
+                        fillColor: colors.alternateRow
+                    },
+                    tableLineColor: colors.border,
+                    tableLineWidth: 0.1,
+                });
+
+                doc.save(`Inventario_Integral_${new Date().toISOString().split('T')[0]}.pdf`);
+            } catch (err) {
+                console.error(err);
+                alert("Error al generar PDF: " + err.message);
+            }
         }
 
         const catMap = { toner: 'TONERS', papeleria: 'PAPELERÍA', accesorios: 'ACCESORIOS' };
@@ -575,9 +834,114 @@
             document.getElementById('modal').style.display = 'flex';
         }
 
+        function openBulkModal() { document.getElementById('bulkModal').style.display = 'flex'; }
+        function closeBulkModal() { document.getElementById('bulkModal').style.display = 'none'; }
+
+        async function processBulk() {
+            const csvFile = document.getElementById('bulkCSV').files[0];
+            const images = document.getElementById('bulkImages').files;
+            if (!csvFile) return alert("Selecciona un CSV");
+
+            const btn = document.getElementById('btnProcessBulk');
+            const progress = document.getElementById('bulkProgress');
+            const bar = document.getElementById('progressBar');
+            const text = document.getElementById('progressText');
+
+            btn.disabled = true;
+            progress.style.display = 'block';
+
+            Papa.parse(csvFile, {
+                header: true,
+                skipEmptyLines: true,
+                complete: async (results) => {
+                    const data = results.data;
+                    const total = data.length;
+                    let count = 0;
+
+                    for (const row of data) {
+                        try {
+                            const id = row.id || row.ID || row.Id;
+                            if (!id) continue;
+
+                            // Buscar imagen
+                            let imageUrl = '';
+                            const matchingImage = Array.from(images).find(f => {
+                                const nameNoExt = f.name.split('.').slice(0, -1).join('.');
+                                return nameNoExt.toLowerCase() === id.toString().toLowerCase();
+                            });
+
+                            if (matchingImage) {
+                                const formData = new FormData();
+                                formData.append('image', matchingImage);
+                                const uploadRes = await fetch('/api/upload', { method: 'POST', body: formData });
+                                const uploadData = await uploadRes.json();
+                                imageUrl = uploadData.url;
+                            }
+
+                            const productData = {
+                                id: id,
+                                name: row.name || row.Nombre || '',
+                                category: row.category || row.Categoria || 'toner',
+                                brand: row.brand || row.Marca || 'Otros',
+                                price: row.price || row.Precio || 0,
+                                stock: row.stock || row.Stock || 0,
+                                compatibility: row.compatibility || row.Compatibilidad || '',
+                                image: imageUrl
+                            };
+
+                            // Guardar (POST o PUT si existe)
+                            const exists = products.find(p => p.id == id);
+                            const method = exists ? 'PUT' : 'POST';
+                            const url = exists ? `/api/products/${id}` : '/api/products';
+
+                            await fetch(url, {
+                                method: method,
+                                headers: { 'Content-Type': 'application/json' },
+                                body: JSON.stringify(productData)
+                            });
+
+                        } catch (err) {
+                            console.error("Bulk Item Error:", err);
+                        }
+
+                        count++;
+                        const pct = Math.round((count / total) * 100);
+                        bar.style.width = pct + '%';
+                        text.innerText = `Procesando ${count} de ${total}...`;
+                    }
+
+                    alert("Carga masiva completada");
+                    btn.disabled = false;
+                    progress.style.display = 'none';
+                    closeBulkModal();
+                    loadProducts();
+                }
+            });
+        }
+
         async function deleteProduct(id) { if (confirm('¿Borrar?')) { await fetch(`/api/products/${id}`, { method: 'DELETE' }); loadProducts(); } }
         function closeModal() { document.getElementById('modal').style.display = 'none'; }
         function zoom(src) { document.getElementById('zoomedImg').src = src; document.getElementById('zoomOverlay').style.display = 'flex'; }
+
+        function toggleTheme() {
+            const current = document.body.getAttribute('data-theme');
+            const target = current === 'dark' ? 'light' : 'dark';
+            document.body.setAttribute('data-theme', target);
+            localStorage.setItem('integral-theme', target);
+            updateThemeIcon();
+        }
+
+        function updateThemeIcon() {
+            const isDark = document.body.getAttribute('data-theme') === 'dark';
+            const icon = document.querySelector('#themeToggle i');
+            icon.className = isDark ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
+        }
+
+        // Init Theme
+        const savedTheme = localStorage.getItem('integral-theme') || 'light';
+        document.body.setAttribute('data-theme', savedTheme);
+        updateThemeIcon();
+
         window.addEventListener('keydown', (e) => { if (e.key === "Escape") closeModal(); });
 
         loadProducts();
