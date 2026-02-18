@@ -42,14 +42,18 @@ app.post('/api/upload', upload.single('image'), async (req, res) => {
 });
 
 app.use('/assets', (req, res, next) => {
-    // 1. Intentar la ruta exacta primero (ej. /assets/images/products/toner/archivo.webp)
-    const exactPath = path.join(__dirname, 'assets', decodeURIComponent(req.url));
+    // Limpiar el query string (e.g. ?v=123) para que no rompa la búsqueda en el sistema de archivos
+    const cleanUrl = req.url.split('?')[0];
+    const decodedUrl = decodeURIComponent(cleanUrl);
+
+    // 1. Intentar la ruta exacta primero
+    const exactPath = path.join(__dirname, 'assets', decodedUrl);
     if (fs.existsSync(exactPath) && fs.lstatSync(exactPath).isFile()) {
         return res.sendFile(exactPath);
     }
 
-    // 2. Si falla, buscar por nombre de archivo en carpetas conocidas (Fallback para el Admin Panel)
-    const fileName = path.basename(decodeURIComponent(req.url));
+    // 2. Si falla, buscar por nombre de archivo en carpetas conocidas
+    const fileName = path.basename(decodedUrl);
     const searchFolders = [
         path.join(__dirname, 'assets/images/products/toner'),
         path.join(__dirname, 'assets/images/brands'),

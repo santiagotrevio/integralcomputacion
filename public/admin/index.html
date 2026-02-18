@@ -893,8 +893,8 @@
     <script>
         let products = [];
         let currentSort = 'recent';
-
         let filteredList = [];
+        let cacheBuster = Date.now();
 
         async function loadProducts() {
             const res = await fetch('/api/products');
@@ -1107,8 +1107,8 @@
                 // Common Logic
                 const hasNoImage = !p.image || p.image.includes('logo.svg') || p.image.includes('default');
                 const imgName = p.image ? p.image.split('/').pop() : 'logo.svg';
-                const imgSrc = `/assets/${imgName}`;
-                const brandLogosrc = `/assets/${(p.brand || '').toLowerCase().replace(/[^a-z0-9]/g, '')}.png`;
+                const imgSrc = `/assets/${imgName}?v=${cacheBuster}`;
+                const brandLogosrc = `/assets/${(p.brand || '').toLowerCase().replace(/[^a-z0-9]/g, '')}.png?v=${cacheBuster}`;
 
                 if (p.published === 0) pending++;
 
@@ -1498,6 +1498,7 @@
                 const data = await res.json();
                 if (data.success) {
                     statusText.innerText = `✅ ¡Éxito! ${wizardMode === 'product' ? 'Imagen' : 'Logo'} actualizado.`;
+                    cacheBuster = Date.now(); // Force refresh images
                     setTimeout(() => {
                         document.getElementById('imageWizardModal').style.display = 'none';
                         loadProducts();
