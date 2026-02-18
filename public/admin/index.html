@@ -461,11 +461,10 @@
         /* Grid View / Audit Mode */
         .grid-container {
             display: grid;
-            grid-template-columns: repeat(auto-fill, min-content);
-            gap: 20px;
-            padding: 20px 0;
+            grid-template-columns: repeat(auto-fill, 240px);
+            gap: 24px;
+            padding: 24px 0;
             display: none;
-            /* Hidden by default */
             justify-content: center;
         }
 
@@ -703,8 +702,15 @@
         <div class="modal-content">
             <h2 id="modalTitle">Nuevo Producto</h2>
 
-            <div id="dropZone" class="drop-zone" onclick="document.getElementById('fileInput').click()">
-                <p id="dropText">📁 Arrastra o selecciona la foto</p>
+            <div style="position:relative;">
+                <div id="dropZone" class="drop-zone" onclick="document.getElementById('fileInput').click()">
+                    <p id="dropText">📁 Arrastra o selecciona la foto</p>
+                </div>
+                <button type="button" onclick="openWizardFromEditor()"
+                    style="position:absolute; top:10px; right:10px; background:var(--apple-blue); color:white; width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center; cursor:pointer; border:2px solid white; box-shadow:0 4px 12px rgba(0,0,0,0.2); z-index: 10;"
+                    title="Buscar mejor imagen en Google">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i>
+                </button>
             </div>
             <input type="file" id="fileInput" style="display:none" onchange="handleFileUpload(this.files[0])">
             <input type="hidden" id="p_image">
@@ -733,8 +739,13 @@
                     <label>Marca</label><br>
                     <div style="display:flex; gap:5px;">
                         <select id="p_brand" style="flex-grow:1"></select>
-                        <button type="button" onclick="addNewBrand()"
-                            style="padding:5px 10px; background:#6c757d;">+</button>
+                        <button type="button" onclick="addNewBrand()" style="padding:5px 10px; background:#6c757d;"
+                            title="Añadir nueva marca">+</button>
+                        <button type="button" onclick="openBrandWizardFromEditor()"
+                            style="padding:5px 10px; background:#ff2d55; color:white; border-radius: 12px; border:none; display:flex; align-items:center; justify-content:center;"
+                            title="Buscar logo de esta marca">
+                            <i class="fa-solid fa-wand-magic-sparkles"></i>
+                        </button>
                     </div>
                 </div>
                 <div>
@@ -1164,14 +1175,6 @@
                 if (p.published === 0) card.style.borderColor = 'var(--apple-blue)';
 
                 card.innerHTML = `
-                    <div class="card-brand" style="position:relative;">
-                        <img src="${brandLogosrc}" style="max-height: 16px; object-fit: contain;" onerror="this.outerHTML='<span>${p.brand}</span>'; const wand = this.parentNode ? this.parentNode.querySelector('.brand-magic') : null; if(wand && ${p.brand && p.brand !== 'Otros' ? 'true' : 'false'}) wand.style.display='flex';">
-                        <div class="brand-magic" onclick='event.stopPropagation(); openImageWizard(${JSON.stringify(p.brand)}, "", "brand")' 
-                             style="display:none; position:absolute; bottom:-5px; right:-5px; background:#ff2d55; color:white; width:16px; height:16px; border-radius:50%; align-items:center; justify-content:center; cursor:pointer; font-size:8px; border:1px solid white; z-index: 2;">
-                            <i class="fa-solid fa-wand-magic-sparkles"></i>
-                        </div>
-                    </div>
-                    
                     <div style="position:relative;">
                         <img src="${imgSrc}" class="card-img" onclick='zoom("${imgSrc}")' onerror="this.src='/assets/logo.svg'">
                          ${hasNoImage ? `
@@ -1181,6 +1184,14 @@
                                 <i class="fa-solid fa-wand-magic-sparkles"></i>
                             </div>
                         ` : ''}
+
+                        <div class="card-brand">
+                            <img src="${brandLogosrc}" style="max-height: 16px; object-fit: contain;" onerror="this.outerHTML='<span>${p.brand}</span>'; const wand = this.parentNode ? this.parentNode.querySelector('.brand-magic') : null; if(wand && ${p.brand && p.brand !== 'Otros' ? 'true' : 'false'}) wand.style.display='flex';">
+                            <div class="brand-magic" onclick='event.stopPropagation(); openImageWizard(${JSON.stringify(p.brand)}, "", "brand")' 
+                                 style="display:none; position:absolute; bottom:-5px; right:-5px; background:#ff2d55; color:white; width:16px; height:16px; border-radius:50%; align-items:center; justify-content:center; cursor:pointer; font-size:8px; border:1px solid white; z-index: 2;">
+                                <i class="fa-solid fa-wand-magic-sparkles"></i>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="card-content">
@@ -1426,6 +1437,19 @@
 
         let wizardMode = 'product'; // 'product' or 'brand'
         let currentWizardTarget = null;
+
+        function openWizardFromEditor() {
+            const id = document.getElementById('p_id').value.trim();
+            const name = document.getElementById('p_name').value.trim();
+            if (!id) return alert("Por favor, ingresa el ID/Modelo antes de usar el asistente.");
+            openImageWizard(id, name, 'product');
+        }
+
+        function openBrandWizardFromEditor() {
+            const brand = document.getElementById('p_brand').value;
+            if (!brand || brand === 'Otros') return alert("Selecciona una marca válida para buscar su logo.");
+            openImageWizard(brand, '', 'brand');
+        }
 
         function openImageWizard(targetId, targetName, mode = 'product') {
             wizardMode = mode;
