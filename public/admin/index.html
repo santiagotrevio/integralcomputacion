@@ -635,6 +635,21 @@
             </div>
         </div>
     </div>
+    <!-- Price Scout Modal -->
+    <div id="scoutModal" class="modal">
+        <div class="modal-content" style="max-width: 500px;">
+            <h2 id="scoutTitle">Radar de Mercado</h2>
+            <div id="scoutLoading" style="text-align:center; padding: 20px; display:none;">
+                <i class="fa-solid fa-satellite-dish fa-spin" style="font-size: 30px; color: var(--apple-blue);"></i>
+                <p>Escaneando precios en tiempo real...</p>
+            </div>
+            <div id="scoutResults" style="margin-top:20px;"></div>
+            <div style="display:flex; justify-content:center; margin-top:20px;">
+                <button class="secondary" onclick="document.getElementById('scoutModal').style.display='none'">Cerrar
+                    Radar</button>
+            </div>
+        </div>
+    </div>
 
     <script>
         let products = [];
@@ -868,6 +883,9 @@
                     <button class="secondary" style="padding:6px 12px; font-size: 14px; border-radius: 6px;" onclick='editProduct(${JSON.stringify(p)})'>
                         <i class="fa-solid fa-pen-to-square"></i>
                     </button>
+                    <button class="secondary" style="padding:6px 12px; font-size: 14px; border-radius: 6px; color: #0071e3;" title="Espiar Precios" onclick="scoutMarket('${p.id}', '${p.name.replace(/'/g, "\\'")}')">
+                        <i class="fa-solid fa-magnifying-glass-dollar"></i>
+                    </button>
                     <button class="danger" style="padding:6px 14px; font-size: 14px; border-radius: 6px; background: #ea4335; color: white; border: none;" onclick="deleteProduct(${JSON.stringify(p.id)})">
                         <i class="fa-solid fa-trash-can"></i>
                     </button>
@@ -1050,6 +1068,44 @@
                     loadProducts();
                 }
             });
+        }
+
+        async function scoutMarket(model, name = "") {
+            const modal = document.getElementById('scoutModal');
+            const resultsDiv = document.getElementById('scoutResults');
+            const loading = document.getElementById('scoutLoading');
+
+            document.getElementById('scoutTitle').innerText = `Radar: ${model}`;
+            resultsDiv.innerHTML = '';
+            loading.style.display = 'block';
+            modal.style.display = 'flex';
+
+            try {
+                const res = await fetch(`/api/scout-price/${encodeURIComponent(model)}?name=${encodeURIComponent(name)}`);
+                const data = await res.json();
+                loading.style.display = 'none';
+
+                if (!data.data || data.data.length === 0) {
+                    resultsDiv.innerHTML = '<p style="text-align:center; color:#999;">No se encontraron precios competitivos en este momento.</p>';
+                    return;
+                }
+
+                data.data.forEach(item => {
+                    const row = document.createElement('div');
+                    row.style = 'padding:12px; border-bottom:1px solid var(--apple-border); display:flex; justify-content:space-between; align-items:center;';
+                    row.innerHTML = `
+                        <div style="flex-grow:1; padding-right:10px;">
+                            <div style="font-weight:600; font-size:13px;">${item.store || 'Referencia'}</div>
+                            <div style="font-size:11px; color:#666;">${item.title}</div>
+                        </div>
+                        <div style="font-weight:700; color:var(--apple-blue); min-width:80px; text-align:right;">${item.priceText}</div>
+                    `;
+                    resultsDiv.appendChild(row);
+                });
+            } catch (err) {
+                loading.style.display = 'none';
+                resultsDiv.innerHTML = '<p style="color:red; text-align:center;">Error al conectar con el Radar de Mercado.</p>';
+            }
         }
 
         async function deleteProduct(id) {

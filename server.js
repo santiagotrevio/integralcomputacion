@@ -109,6 +109,17 @@ app.post('/api/publish', (req, res) => {
     });
 });
 
+const scoutPrice = require('./scripts/price_scout');
+app.get('/api/scout-price/:model', async (req, res) => {
+    try {
+        const name = req.query.name || "";
+        const results = await scoutPrice(req.params.model, name);
+        res.json({ data: results });
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+});
+
 app.delete('/api/products/:id', (req, res) => {
     db.run(`DELETE FROM products WHERE id = ?`, [req.params.id], function (err) {
         if (err) return res.status(500).json({ error: err.message });
