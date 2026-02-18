@@ -1433,8 +1433,13 @@
 
         function highlightText(text, query) {
             if (!query) return text;
-            const regex = new RegExp(`(${query})`, 'gi');
-            return text.replace(regex, '<span class="highlight">$1</span>');
+            const words = query.split(/\s+/).filter(w => w.length > 0);
+            let highlighted = text;
+            words.forEach(word => {
+                const regex = new RegExp(`(${word})`, 'gi');
+                highlighted = highlighted.replace(regex, '<span class="highlight">$1</span>');
+            });
+            return highlighted;
         }
 
         function getBrandClass(name) {
@@ -1508,7 +1513,7 @@
 
         // Render Logic
         function renderProducts(products) {
-            const searchTerm = searchInput.value.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+            const searchTermRaw = searchInput.value.trim().toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
             productGrid.innerHTML = '';
 
             // Update Result Count
@@ -1619,10 +1624,9 @@
             return null;
         }
 
-        // Filtering Logic
-        // Filtering Logic
         function filterProducts() {
-            const searchTerm = searchInput.value.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+            const searchTermRaw = searchInput.value.trim().toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+            const searchWords = searchTermRaw.split(/\s+/).filter(w => w.length > 0);
 
             // Get selected Category (Radio)
             const catRadio = document.querySelector('input[name="category"]:checked');
@@ -1636,11 +1640,15 @@
             let filtered = productsDB.filter(prod => {
                 if (!prod.name) return false;
 
-                // 1. Text Search
+                // 1. Text Search (Check if ALL search words are present)
                 const prodName = prod.name.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
                 const prodId = prod.id.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
                 const prodDesc = prod.description ? prod.description.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "") : "";
-                const matchesSearch = prodName.includes(searchTerm) || prodId.includes(searchTerm) || prodDesc.includes(searchTerm);
+                const prodComp = prod.compatibility ? prod.compatibility.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "") : "";
+                const prodBrand = prod.brand ? prod.brand.toLowerCase() : "";
+
+                const combinedData = `${prodId} ${prodName} ${prodDesc} ${prodComp} ${prodBrand}`;
+                const matchesSearch = searchWords.every(word => combinedData.includes(word));
 
                 // 2. Category
                 const matchesCategory = categoryValue === 'all' || prod.category === categoryValue;
