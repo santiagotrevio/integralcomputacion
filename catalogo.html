@@ -118,20 +118,18 @@
 
         .catalog-item-row {
             background: white;
-            border-radius: 12px !important;
-            /* Force rectangle */
-            padding: 1.5rem;
-            margin-bottom: 1rem;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            border-radius: 14px !important;
+            padding: 1rem 1.5rem;
+            margin-bottom: 0.75rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
             display: grid;
-            grid-template-columns: 80px 1fr auto;
-            gap: 1.5rem;
+            grid-template-columns: 100px 1fr auto;
+            gap: 1.25rem;
             align-items: center;
-            border: 1px solid #f1f5f9;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            border: 1px solid #eef2f7;
+            transition: all 0.25s ease;
             position: relative;
             animation: none !important;
-            /* Kill morphing animation */
         }
 
         .catalog-item-row:hover {
@@ -146,74 +144,84 @@
         }
 
         .prod-image {
-            width: 80px;
-            height: 80px;
-            background: #fdfdfd;
-            border-radius: 8px;
+            width: 100px;
+            height: 100px;
+            background: #f8fafc;
+            border-radius: 12px;
+            border: 1px solid #eef2f7;
             display: flex;
             align-items: center;
             justify-content: center;
             color: #cbd5e1;
-            font-size: 1.5rem;
-            padding: 5px;
+            font-size: 1.8rem;
+            padding: 8px;
             overflow: hidden;
+            flex-shrink: 0;
         }
 
         .prod-image img {
             max-width: 100%;
             max-height: 100%;
             object-fit: contain;
-            border-radius: 4px;
+            border-radius: 6px;
+            filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.07));
         }
 
+        /* ============================================================
+           BRAND BADGE — mirrors admin .brand-logo-pill exactly
+           ============================================================ */
         .brand-badge {
             position: absolute;
-            top: 15px;
-            right: -8px;
+            top: 20px;
+            right: -10px;
             background: white;
-            padding: 0;
+            padding: 0 12px;
             border-radius: 20px 0 0 20px;
-            box-shadow: -2px 4px 12px rgba(0, 0, 0, 0.05);
+            box-shadow: -2px 4px 12px rgba(0, 0, 0, 0.08);
             height: 32px;
-            width: 80px;
+            min-width: 50px;
             display: flex;
             align-items: center;
             justify-content: center;
-            border: 1px solid #f1f5f9;
-            z-index: 2;
+            border: 1px solid #e8ecf0;
+            z-index: 5;
             overflow: hidden;
         }
 
         .brand-badge img {
             max-height: 15px;
-            max-width: 70px;
+            /* standardized safe zone — same as admin */
+            max-width: 60px;
             object-fit: contain;
+            display: block;
         }
 
+        /* ============================================================
+           GRID VIEW
+           ============================================================ */
         .catalog-grid.grid-view {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-            gap: 1.5rem;
+            grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+            gap: 1.25rem;
         }
 
         .catalog-item-card {
             background: white;
-            border: 1px solid #f1f5f9;
+            border: 1px solid #eef2f7;
             border-radius: 16px !important;
-            /* Force rectangle */
-            overflow: hidden;
-            transition: all 0.3s ease;
+            overflow: visible;
+            /* allow badge to bleed right */
+            transition: all 0.28s cubic-bezier(0.4, 0, 0.2, 1);
             display: flex;
             flex-direction: column;
             position: relative;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
             animation: none !important;
-            /* Kill morphing animation */
         }
 
         .catalog-item-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transform: translateY(-6px);
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.10);
             border-color: var(--ic-cyan);
         }
 
@@ -223,32 +231,35 @@
         }
 
         .catalog-item-card .card-img-container {
-            height: 180px;
+            height: 190px;
             display: flex;
             align-items: center;
             justify-content: center;
-            background: #fdfdfd;
-            border-bottom: 1px solid #f1f5f9;
-            padding: 1.5rem;
+            background: #f8fafc;
+            border-radius: 16px 16px 0 0;
+            padding: 1.25rem;
             position: relative;
+            overflow: hidden;
         }
 
         .catalog-item-card .card-img {
-            max-width: 90%;
-            max-height: 140px;
+            max-width: 88%;
+            max-height: 150px;
             object-fit: contain;
-            transition: transform 0.3s ease;
+            transition: transform 0.35s ease;
+            filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.08));
         }
 
         .catalog-item-card:hover .card-img {
-            transform: scale(1.05);
+            transform: scale(1.07);
         }
 
         .catalog-item-card .card-content {
-            padding: 1.2rem;
+            padding: 1rem 1.1rem 1.1rem;
             flex-grow: 1;
             display: flex;
             flex-direction: column;
+            gap: 0.5rem;
         }
 
         .view-toggle {
@@ -277,37 +288,93 @@
             color: var(--ic-cyan);
         }
 
+        /* Product info typography */
         .prod-info h3 {
-            font-size: 1.1rem;
+            font-size: 1rem;
             font-weight: 700;
             color: var(--ic-dark-gray);
-            margin-bottom: 0.25rem;
+            margin-bottom: 0.2rem;
+            line-height: 1.35;
         }
 
         .prod-code {
-            font-size: 0.85rem;
+            font-size: 0.78rem;
             font-weight: 800;
             color: var(--ic-magenta);
-            background: rgba(216, 27, 96, 0.1);
-            padding: 0.2rem 0.5rem;
-            border-radius: 4px;
-            display: inline-block;
-            margin-bottom: 0.5rem;
+            background: rgba(216, 27, 96, 0.08);
+            padding: 0.18rem 0.5rem;
+            border-radius: 5px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 0.4rem;
+            letter-spacing: 0.03em;
         }
 
         .prod-desc {
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             color: var(--ic-text-gray);
+            line-height: 1.5;
+        }
+
+        /* Action buttons — list view */
+        .prod-action {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            min-width: 130px;
         }
 
         .prod-action .btn-card {
-            background: var(--ic-light-gray);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            padding: 10px 14px;
+            border-radius: 10px;
+            background: #f1f5f9;
             color: var(--ic-dark-gray);
-            font-size: 0.85rem;
+            font-size: 0.82rem;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            white-space: nowrap;
         }
 
         .prod-action .btn-card:hover {
+            background: #25D366;
+            color: white;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(37, 211, 102, 0.25);
+        }
+
+        .btn-add-cart {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            padding: 10px 14px;
+            border-radius: 10px;
+            border: 2px solid var(--ic-cyan);
+            background: transparent;
+            color: var(--ic-cyan);
+            font-weight: 700;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            width: 100%;
+        }
+
+        .btn-add-cart:hover {
             background: var(--ic-cyan);
+            color: white;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0, 181, 204, 0.28);
+        }
+
+        .btn-add-cart.added {
+            background: var(--ic-magenta);
+            border-color: var(--ic-magenta);
             color: white;
         }
 
