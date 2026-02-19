@@ -183,6 +183,14 @@ app.post('/api/conflicts/:id/resolve', (req, res) => {
                     res.json({ message: "Updated with new version" });
                 });
             });
+        } else if (action === 'update_description') {
+            const sql = `UPDATE products SET description = ?, published = 0 WHERE id = ?`;
+            db.run(sql, [newData.description, productId], (uErr) => {
+                if (uErr) return res.status(500).json({ error: uErr.message });
+                db.run("UPDATE product_conflicts SET resolved = 1 WHERE id = ?", [conflictId], () => {
+                    res.json({ message: "Description updated" });
+                });
+            });
         } else {
             // keep_old: We just mark conflict as resolved (no change to products table)
             db.run("UPDATE product_conflicts SET resolved = 1 WHERE id = ?", [conflictId], () => {

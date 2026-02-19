@@ -1380,6 +1380,54 @@
             color: var(--apple-blue);
         }
 
+        .pagination-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            margin: 30px 0;
+            padding: 15px;
+            background: var(--apple-card);
+            border-radius: 16px;
+            border: 1px solid var(--apple-border);
+            backdrop-filter: var(--glass-blur);
+        }
+
+        .pg-btn {
+            background: var(--apple-bg);
+            border: 1px solid var(--apple-border);
+            color: var(--apple-text);
+            padding: 8px 16px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 700;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .pg-btn:hover:not(:disabled) {
+            background: var(--apple-blue);
+            color: white;
+            border-color: var(--apple-blue);
+            transform: translateY(-1px);
+        }
+
+        .pg-btn:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+
+        .pg-info {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--apple-subtext);
+            min-width: 150px;
+            text-align: center;
+        }
+
         [data-theme="dark"] .audit-card .card-brand {
             background: rgba(45, 45, 48, 0.8);
             backdrop-filter: blur(10px);
@@ -1879,6 +1927,8 @@
             </table>
 
             <div id="productGrid" class="grid-container" style="display:none;"></div>
+
+            <div id="pagination" class="pagination-container"></div>
         </div>
 
         <!-- VIEW 2: BRAND CUSTOMIZATION -->
@@ -2358,6 +2408,8 @@
         let currentSort = 'recent';
         let filteredList = [];
         let cacheBuster = Date.now();
+        let currentPage = 1;
+        const itemsPerPage = 50;
 
         const normalize = (str) => {
             if (!str) return '';
@@ -2607,6 +2659,7 @@
 
             document.getElementById('totalCount').innerText = `${list.length} productos`;
             filteredList = list;
+            currentPage = 1;
             renderTable(list);
         }
 
@@ -2735,12 +2788,21 @@
             updateDashboard(list);
             const tbody = document.querySelector('#productTable tbody');
             const grid = document.getElementById('productGrid');
+            const pagContainer = document.getElementById('pagination');
             tbody.innerHTML = '';
             grid.innerHTML = '';
+            pagContainer.innerHTML = '';
+
+            const totalPages = Math.ceil(list.length / itemsPerPage);
+            if (currentPage > totalPages && totalPages > 0) currentPage = totalPages;
+
+            const start = (currentPage - 1) * itemsPerPage;
+            const end = start + itemsPerPage;
+            const paginatedList = list.slice(start, end);
 
             let pending = 0;
 
-            list.forEach(p => {
+            paginatedList.forEach(p => {
                 // Common Logic
                 const hasNoImage = !p.image || p.image.includes('logo.svg') || p.image.includes('default');
                 const imgName = p.image ? p.image.split('/').pop() : 'logo.svg';
@@ -2876,6 +2938,31 @@
             const badge = document.getElementById('pendingCount');
             if (pending > 0) { badge.innerText = `${pending} pendientes`; badge.style.display = 'block'; }
             else { badge.style.display = 'none'; }
+
+            // Render Pagination
+            if (totalPages > 1) {
+                pagContainer.style.display = 'flex';
+                pagContainer.innerHTML = `
+                    <button class="pg-btn" ${currentPage === 1 ? 'disabled' : ''} onclick="changePage(-1)">
+                        <i class="fa-solid fa-chevron-left"></i> Anterior
+                    </button>
+                    <div class="pg-info">
+                        Página <b>${currentPage}</b> de <b>${totalPages}</b>
+                        <div style="font-size:10px; opacity:0.6; margin-top:2px;">Mostrando ${start + 1} - ${Math.min(end, list.length)} de ${list.length}</div>
+                    </div>
+                    <button class="pg-btn" ${currentPage === totalPages ? 'disabled' : ''} onclick="changePage(1)">
+                        Siguiente <i class="fa-solid fa-chevron-right"></i>
+                    </button>
+                `;
+            } else {
+                pagContainer.style.display = 'none';
+            }
+        }
+
+        function changePage(dir) {
+            currentPage += dir;
+            renderTable(filteredList);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
         async function handleFileUpload(file) {
@@ -3003,11 +3090,13 @@
                     const newItems = [];
                     const conflicts = [];
 
+                    const clean = (s) => (s || "").toString().replace(/[\uFEFF\u2028\u2029\u200B\u200C\u200D\u2060]/g, '').trim();
+
                     const getCsvVal = (row, tags) => {
                         const keys = Object.keys(row);
                         for (const tag of tags) {
-                            const found = keys.find(k => k.trim().toLowerCase() === tag.toLowerCase());
-                            if (found && row[found] !== null && row[found] !== undefined) return row[found].toString().trim();
+                            const found = keys.find(k => clean(k).toLowerCase() === tag.toLowerCase());
+                            if (found && row[found] !== null && row[found] !== undefined) return clean(row[found]);
                         }
                         return null;
                     };
@@ -3015,7 +3104,9 @@
                     data.forEach(row => {
                         const id = getCsvVal(row, ['id', 'modelo', 'sku', 'id/modelo', 'referencia', 'model']);
                         if (!id) return;
-                        if (products.some(p => p.id.toLowerCase() === id.toLowerCase())) {
+
+                        const normalizedId = id.toLowerCase();
+                        if (products.some(p => p.id.trim().toLowerCase() === normalizedId)) {
                             conflicts.push(row);
                         } else {
                             newItems.push(row);
@@ -3070,11 +3161,13 @@
 
             for (const row of toProcess) {
                 try {
+                    const clean = (s) => (s || "").toString().replace(/[\uFEFF\u2028\u2029\u200B\u200C\u200D\u2060]/g, '').trim();
+
                     const getCsvVal = (r, tags) => {
                         const keys = Object.keys(r);
                         for (const tag of tags) {
-                            const found = keys.find(k => k.trim().toLowerCase() === tag.toLowerCase());
-                            if (found && r[found] !== null && r[found] !== undefined) return r[found].toString().trim();
+                            const found = keys.find(k => clean(k).toLowerCase() === tag.toLowerCase());
+                            if (found && r[found] !== null && r[found] !== undefined) return clean(r[found]);
                         }
                         return null;
                     };
@@ -3082,36 +3175,37 @@
                     const id = getCsvVal(row, ['id', 'modelo', 'sku', 'id/modelo', 'referencia', 'model']);
                     if (!id) continue;
 
-                    const exists = products.find(p => p.id.toLowerCase() === id.toLowerCase());
+                    const exists = products.find(p => p.id.trim().toLowerCase() === id.toLowerCase());
+
+                    const name = getCsvVal(row, ['nombre', 'name', 'producto', 'product', 'descripción corta']) || id;
+                    let description = getCsvVal(row, ['description', 'descripción', 'descripciôn', 'detalle', 'observaciones']) || name;
+                    if (!description || !description.trim() || description.toLowerCase() === 'null') description = name;
+
+                    let brand = getCsvVal(row, ['marca', 'brand', 'fabricante']) || 'Otros';
+                    const standardBrands = ['HP', 'Brother', 'Canon', 'Lexmark', 'Xerox'];
+                    const standardMatch = standardBrands.find(b => b.toLowerCase() === brand.trim().toLowerCase());
+                    if (standardMatch) brand = standardMatch;
+
+                    let category = getCsvVal(row, ['categoría', 'category', 'familia', 'ctaegoria web', 'categoria web']) || 'toner';
+
+                    const productData = {
+                        id: exists ? exists.id : id,
+                        name: name,
+                        category: category,
+                        brand: brand,
+                        price: 0,
+                        stock: 0,
+                        compatibility: getCsvVal(row, ['compatibilidad', 'compatibility', 'impresoras compatibles', 'modelos compatibles']) || '',
+                        description: description,
+                        image: ''
+                    };
 
                     // IF we are in staging mode and it exists, call stage API
                     if (exists && stageConflicts) {
-                        const name = getCsvVal(row, ['nombre', 'name', 'producto', 'product', 'descripción corta']) || id;
-                        let description = getCsvVal(row, ['description', 'descripción', 'detalle', 'observaciones']) || name;
-                        if (!description || !description.trim() || description.toLowerCase() === 'null') description = name;
-
-                        let brand = getCsvVal(row, ['marca', 'brand', 'fabricante']) || 'Otros';
-                        const standardBrands = ['HP', 'Brother', 'Canon', 'Lexmark', 'Xerox'];
-                        const standardMatch = standardBrands.find(b => b.toLowerCase() === brand.trim().toLowerCase());
-                        if (standardMatch) brand = standardMatch;
-
-                        let category = getCsvVal(row, ['categoría', 'category', 'familia']) || 'toner';
-
-                        const productData = {
-                            id: id,
-                            name: name,
-                            category: category,
-                            brand: brand,
-                            price: 0,
-                            stock: 0,
-                            compatibility: getCsvVal(row, ['compatibilidad', 'compatibility', 'impresoras compatibles', 'modelos compatibles']) || '',
-                            description: description
-                        };
-
                         await fetch('/api/conflicts/stage', {
                             method: 'POST',
                             headers: { 'Content-Type': 'application/json' },
-                            body: JSON.stringify({ product_id: id, new_data: productData })
+                            body: JSON.stringify({ product_id: exists.id, new_data: productData })
                         });
 
                         count++;
@@ -3902,12 +3996,17 @@
                                 </div>
                             </div>
 
-                            <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px;">
-                                <button class="secondary" onclick="resolveConflict(${c.id}, 'keep_old', this)" style="font-size:11px; font-weight:700;">
-                                    <i class="fa-solid fa-clock-rotate-left"></i> MANTENER ACTUAL
-                                </button>
-                                <button class="primary" onclick="resolveConflict(${c.id}, 'keep_new', this)" style="font-size:11px; font-weight:700; background:#ff3b30;">
-                                    <i class="fa-solid fa-check"></i> USAR NUEVO
+                            <div style="display:grid; grid-template-columns: 1fr; gap:10px;">
+                                <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px;">
+                                    <button class="secondary" onclick="resolveConflict(${c.id}, 'keep_old', this)" style="font-size:10px; font-weight:700;">
+                                        <i class="fa-solid fa-clock-rotate-left"></i> MANTENER ACTUAL
+                                    </button>
+                                    <button class="primary" onclick="resolveConflict(${c.id}, 'keep_new', this)" style="font-size:10px; font-weight:700; background:#ff3b30;">
+                                        <i class="fa-solid fa-check-double"></i> USAR TODO EL NUEVO
+                                    </button>
+                                </div>
+                                <button class="primary" onclick="resolveConflict(${c.id}, 'update_description', this)" style="font-size:11px; font-weight:700; background:var(--apple-blue); width:100%;">
+                                    <i class="fa-solid fa-pen-to-square"></i> SÓLO ACTUALIZAR CON DESCRIPCIÓN NUEVA
                                 </button>
                             </div>
                         </div>
