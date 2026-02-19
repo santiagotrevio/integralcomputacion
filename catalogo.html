@@ -509,6 +509,21 @@
             <div id="productGrid" class="catalog-grid">
                 <!-- Products injected here -->
             </div>
+
+            <!-- Smart Pagination Footer -->
+            <div id="paginationFooter" style="display:none; text-align:center; padding:40px 20px;">
+                <div id="loadMoreBtn" style="display:inline-flex; flex-direction:column; align-items:center; gap:10px;">
+                    <button onclick="loadMoreProducts()" id="btnLoadMore"
+                        style="background: var(--ic-dark-gray); color:white; border:none; padding:14px 36px; border-radius:50px; font-size:15px; font-weight:700; cursor:pointer; display:flex; align-items:center; gap:10px; transition:all 0.2s;">
+                        <i class="fa-solid fa-circle-chevron-down"></i>
+                        <span id="btnLoadMoreText">Cargar más productos</span>
+                    </button>
+                    <p id="paginationCounter" style="font-size:13px; color:#94a3b8; margin:0;"></p>
+                </div>
+            </div>
+
+            <!-- Scroll Sentinel (Intersection Observer target) -->
+            <div id="scrollSentinel" style="height:1px;"></div>
         </main>
     </div>
 
@@ -1611,13 +1626,28 @@
             }, 300);
         }
 
+        // --- PAGINATION STATE ---
+        const PAGE_SIZE = 30;
+        let currentPage = 1;
+        let allFilteredProducts = [];
+        let isLoading = false;
+
         function renderProducts(products) {
+            allFilteredProducts = products;
+            currentPage = 1;
+            isLoading = false;
             const searchTerm = searchInput.value.trim().toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
             productGrid.innerHTML = '';
             productGrid.className = currentView === 'grid' ? 'catalog-grid grid-view' : 'catalog-grid';
 
             if (resultCount) {
-                resultCount.innerText = `${products.length} producto${products.length !== 1 ? 's' : ''} encontrado${products.length !== 1 ? 's' : ''}`;
+                const total = products.length;
+                if (total === 0) {
+                    resultCount.innerText = '0 productos encontrados';
+                } else {
+                    const showing = Math.min(PAGE_SIZE, total);
+                    resultCount.innerText = `Mostrando ${showing} de ${total.toLocaleString('es-MX')} producto${total !== 1 ? 's' : ''}`;
+                }
             }
 
             if (products.length === 0) {
@@ -1627,53 +1657,114 @@
                         <p>No encontramos productos con esa búsqueda.</p>
                     </div>
                 `;
+                document.getElementById('paginationFooter').style.display = 'none';
                 return;
             }
 
-            products.forEach((prod, index) => {
-                let icon = 'fa-box';
-                if (prod.category === 'toner') icon = 'fa-print';
-                if (prod.category === 'papeleria') icon = 'fa-pen-ruler';
-                if (prod.category.includes('accesorios')) icon = 'fa-keyboard';
+            const page = products.slice(0, PAGE_SIZE);
+            appendProductCards(page, 0);
+            updatePaginationFooter();
+        }
 
-                const isInCart = cart.some(item => item.id === prod.id);
-                const btnClass = isInCart ? 'btn-add-cart added' : 'btn-add-cart';
-                const btnText = isInCart ? '<i class="fa-solid fa-check"></i> En lista' : '<i class="fa-solid fa-plus"></i> Agregar';
-                const btnStyle = isInCart ? 'background-color: var(--ic-magenta); color: white; border-color: var(--ic-magenta);' : '';
+        function loadMoreProducts() {
+            if (isLoading) return;
+            const start = currentPage * PAGE_SIZE;
+            if (start >= allFilteredProducts.length) return;
+            isLoading = true;
+            const btn = document.getElementById('btnLoadMore');
+            const originalText = document.getElementById('btnLoadMoreText').textContent;
+            btn.disabled = true;
+            document.getElementById('btnLoadMoreText').textContent = 'Cargando...';
 
-                const v = Date.now();
-                let imgHtml = `<i class="fa-solid ${icon}"></i>`;
-                let imgSrc = '';
-                if (prod.image && prod.image.trim() !== '') {
-                    imgSrc = `${prod.image}?v=${v}`;
-                    imgHtml = `<img src="${imgSrc}" alt="${prod.name}" class="${currentView === 'grid' ? 'card-img' : ''}" loading="lazy" onerror="this.onerror=null;this.parentNode.innerHTML='<i class=\\'fa-solid ${icon}\\'></i>'">`;
+            // Tiny delay for smooth UX perception
+            setTimeout(() => {
+                const page = allFilteredProducts.slice(start, start + PAGE_SIZE);
+                appendProductCards(page, start);
+                currentPage++;
+                updatePaginationFooter();
+                btn.disabled = false;
+                document.getElementById('btnLoadMoreText').textContent = originalText;
+                isLoading = false;
+            }, 120);
+        }
+
+        function updatePaginationFooter() {
+            const footer = document.getElementById('paginationFooter');
+            const showing = Math.min((currentPage) * PAGE_SIZE, allFilteredProducts.length);
+            const total = allFilteredProducts.length;
+
+            // Update main result count text
+            if (resultCount) {
+                resultCount.innerText = `Mostrando ${showing} de ${total.toLocaleString('es-MX')} producto${total !== 1 ? 's' : ''}`;
+            }
+
+            if (showing >= total) {
+                footer.style.display = 'none';
+            } else {
+                footer.style.display = 'block';
+                const remaining = total - showing;
+                document.getElementById('btnLoadMoreText').textContent = `Cargar ${Math.min(PAGE_SIZE, remaining)} más`;
+                document.getElementById('paginationCounter').textContent =
+                    `${showing} de ${total.toLocaleString('es-MX')} productos`;
+            }
+        }
+
+        // Scroll Infinite with Intersection Observer
+        const sentinel = document.getElementById('scrollSentinel');
+        const observer = new IntersectionObserver((entries) => {
+            if (entries[0].isIntersecting && !isLoading) {
+                const showing = currentPage * PAGE_SIZE;
+                if (showing < allFilteredProducts.length) {
+                    loadMoreProducts();
                 }
+            }
+        }, { rootMargin: '200px' });
+        observer.observe(sentinel);
 
-                const brandName = prod.brand || "Otros";
-                const bSet = (typeof brandSettingsDB !== 'undefined') ? brandSettingsDB.find(s => s.id.toLowerCase() === brandName.toLowerCase()) : null;
+        function appendProductCards(products, startIndex) {
+            let icon = 'fa-box';
+            if (prod.category === 'toner') icon = 'fa-print';
+            if (prod.category === 'papeleria') icon = 'fa-pen-ruler';
+            if (prod.category.includes('accesorios')) icon = 'fa-keyboard';
 
-                let brandLogoUrl = bSet ? bSet.logo : getBrandLogo(brandName);
-                if (brandLogoUrl) brandLogoUrl += `?v=${v}`;
-                const scale = bSet ? bSet.scale : 1.0;
-                const offset_x = bSet ? (bSet.offset_x || 0) : 0;
-                const offset_y = bSet ? (bSet.offset_y || 0) : 0;
-                const brandImgStyle = `max-height: ${15 * scale}px !important; transform: translate(${offset_x}px, ${offset_y}px); object-fit: contain;`;
+            const isInCart = cart.some(item => item.id === prod.id);
+            const btnClass = isInCart ? 'btn-add-cart added' : 'btn-add-cart';
+            const btnText = isInCart ? '<i class="fa-solid fa-check"></i> En lista' : '<i class="fa-solid fa-plus"></i> Agregar';
+            const btnStyle = isInCart ? 'background-color: var(--ic-magenta); color: white; border-color: var(--ic-magenta);' : '';
 
-                const badgeHtml = (brandLogoUrl && brandName !== 'Otros') ?
-                    `<div class="brand-badge" title="${brandName}">
+            const v = Date.now();
+            let imgHtml = `<i class="fa-solid ${icon}"></i>`;
+            let imgSrc = '';
+            if (prod.image && prod.image.trim() !== '') {
+                imgSrc = `${prod.image}?v=${v}`;
+                imgHtml = `<img src="${imgSrc}" alt="${prod.name}" class="${currentView === 'grid' ? 'card-img' : ''}" loading="lazy" onerror="this.onerror=null;this.parentNode.innerHTML='<i class=\\'fa-solid ${icon}\\'></i>'">`;
+            }
+
+            const brandName = prod.brand || "Otros";
+            const bSet = (typeof brandSettingsDB !== 'undefined') ? brandSettingsDB.find(s => s.id.toLowerCase() === brandName.toLowerCase()) : null;
+
+            let brandLogoUrl = bSet ? bSet.logo : getBrandLogo(brandName);
+            if (brandLogoUrl) brandLogoUrl += `?v=${v}`;
+            const scale = bSet ? bSet.scale : 1.0;
+            const offset_x = bSet ? (bSet.offset_x || 0) : 0;
+            const offset_y = bSet ? (bSet.offset_y || 0) : 0;
+            const brandImgStyle = `max-height: ${15 * scale}px !important; transform: translate(${offset_x}px, ${offset_y}px); object-fit: contain;`;
+
+            const badgeHtml = (brandLogoUrl && brandName !== 'Otros') ?
+                `<div class="brand-badge" title="${brandName}">
                         <img src="${brandLogoUrl}" alt="${brandName}" style="${brandImgStyle}" onerror="this.parentNode.style.display='none'">
                      </div>` : '';
 
-                const nameHighlighted = highlightText(prod.name, searchTerm);
+            const nameHighlighted = highlightText(prod.name, searchTerm);
 
-                const card = document.createElement('div');
-                if (currentView === 'grid') {
-                    // GRID CARD VIEW (CLIENT)
-                    card.className = 'catalog-item-card';
-                    card.style.borderRadius = '12px';
-                    card.style.animation = 'none';
-                    card.style.animationDelay = `${index * 0.03}s`;
-                    card.innerHTML = `
+            const card = document.createElement('div');
+            if (currentView === 'grid') {
+                // GRID CARD VIEW (CLIENT)
+                card.className = 'catalog-item-card';
+                card.style.borderRadius = '12px';
+                card.style.animation = 'none';
+                card.style.animationDelay = `${index * 0.03}s`;
+                card.innerHTML = `
                         ${badgeHtml}
                         <div class="card-img-container" onclick="openLightbox('${imgSrc}')" style="cursor: zoom-in;">
                             ${imgHtml}
@@ -1698,14 +1789,14 @@
                             </div>
                         </div>
                     `;
-                    productGrid.appendChild(card);
-                } else {
-                    // LIST ROW VIEW (CLIENT)
-                    card.className = `catalog-item-row`;
-                    card.style.borderRadius = '12px';
-                    card.style.animation = 'none';
-                    card.style.animationDelay = `${index * 0.03}s`;
-                    card.innerHTML = `
+                productGrid.appendChild(card);
+            } else {
+                // LIST ROW VIEW (CLIENT)
+                card.className = `catalog-item-row`;
+                card.style.borderRadius = '12px';
+                card.style.animation = 'none';
+                card.style.animationDelay = `${index * 0.03}s`;
+                card.innerHTML = `
                         ${badgeHtml}
                         <div class="prod-image" onclick="openLightbox('${imgSrc}')" style="cursor: zoom-in;">
                             ${imgHtml}
@@ -1732,9 +1823,9 @@
                             </a>
                         </div>
                     `;
-                    productGrid.appendChild(card);
-                }
-            });
+                productGrid.appendChild(card);
+            }
+        });
         }
 
         function renderBrandOptions() {
