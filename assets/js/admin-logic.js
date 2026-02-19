@@ -512,9 +512,11 @@ function renderTable(list) {
         // Common Logic
         const hasNoImage = !p.image || p.image.includes('logo.svg') || p.image.includes('default');
         const imgName = p.image ? p.image.split('/').pop() : 'logo.svg';
-        const imgSrc = `/assets/${imgName}?v=${cacheBuster}`;
-        const brandLogosrc = `/assets/${(p.brand || '').toLowerCase().replace(/[^a-z0-9]/g, '')}.png?v=${cacheBuster}`;
-        const bSet = brandSettings.find(s => s.id === p.brand) || { scale: 1.0, offset_x: 0, offset_y: 0 };
+        const imgSrc = p.image ? `../${p.image}?v=${cacheBuster}` : '/assets/logo.svg';
+        const bSet = brandSettings.find(s => s.id.toLowerCase() === (p.brand || '').toLowerCase()) || { scale: 1.0, offset_x: 0, offset_y: 0 };
+        // Logo from brandSettings (single source of truth — matches Personalización de Marca)
+        let rawLogo = bSet.logo || '';
+        const brandLogosrc = rawLogo ? `../${rawLogo.replace(/^\//, '')}?v=${cacheBuster}` : '';
         const brandImgStyle = `max-height: ${15 * bSet.scale}px; transform: translate(${bSet.offset_x || 0}px, ${bSet.offset_y || 0}px); object-fit: contain;`;
 
         if (p.published === 0) pending++;
@@ -1779,7 +1781,7 @@ function renderBrandsTable() {
         const setting = brandSettings.find(s => s.id.toLowerCase() === brandName.toLowerCase()) || {
             id: brandName,
             name: brandName,
-            logo: `/assets/images/brands/${brandName.toLowerCase().replace(/[^a-z0-9]/g, '')}.png`,
+            logo: '',
             scale: 1.0,
             offset_x: 0,
             offset_y: 0,
