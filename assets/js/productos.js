@@ -13875,7 +13875,7 @@ const brandSettingsDB = [
   {
     "id": "RICOH",
     "name": "RICOH",
-    "logo": "/assets/images/brands/ricoh.png",
+    "logo": "/assets/images/brands/ricoh.webp",
     "scale": 0.6,
     "offset_y": 0,
     "color": "#0071e3",
@@ -13884,7 +13884,7 @@ const brandSettingsDB = [
   {
     "id": "Xerox",
     "name": "Xerox",
-    "logo": "/assets/images/brands/xerox.png",
+    "logo": "/assets/images/brands/xerox.webp",
     "scale": 1.3,
     "offset_y": 0,
     "color": "#0071e3",
@@ -13893,7 +13893,7 @@ const brandSettingsDB = [
   {
     "id": "Lexmark",
     "name": "Lexmark",
-    "logo": "/assets/images/brands/lexmark.png",
+    "logo": "/assets/images/brands/lexmark.webp",
     "scale": 1.75,
     "offset_y": 0,
     "color": "#0071e3",
@@ -13902,7 +13902,7 @@ const brandSettingsDB = [
   {
     "id": "HP",
     "name": "HP",
-    "logo": "/assets/images/brands/hp.png",
+    "logo": "/assets/images/brands/hp.webp",
     "scale": 1.55,
     "offset_y": 0,
     "color": "#0071e3",
@@ -13911,7 +13911,7 @@ const brandSettingsDB = [
   {
     "id": "Canon",
     "name": "Canon",
-    "logo": "/assets/images/brands/canon.png",
+    "logo": "/assets/images/brands/canon.webp",
     "scale": 1.4,
     "offset_y": -1,
     "color": "#0071e3",
@@ -13920,7 +13920,7 @@ const brandSettingsDB = [
   {
     "id": "Brother",
     "name": "Brother",
-    "logo": "/assets/images/brands/brother.png",
+    "logo": "/assets/images/brands/brother.webp",
     "scale": 1.45,
     "offset_y": 0,
     "color": "#0071e3",
@@ -13929,7 +13929,7 @@ const brandSettingsDB = [
   {
     "id": "ACER",
     "name": "ACER",
-    "logo": "/assets/images/brands/acer.png",
+    "logo": "/assets/images/brands/acer.webp",
     "scale": 1,
     "offset_y": 0,
     "color": "#0071e3",
@@ -13938,7 +13938,7 @@ const brandSettingsDB = [
   {
     "id": "ACTECK",
     "name": "ACTECK",
-    "logo": "/assets/images/brands/acteck.png",
+    "logo": "/assets/images/brands/acteck.webp",
     "scale": 1,
     "offset_y": 0,
     "color": "#0071e3",
@@ -13947,7 +13947,7 @@ const brandSettingsDB = [
   {
     "id": "ADATA",
     "name": "ADATA",
-    "logo": "/assets/images/brands/adata.png",
+    "logo": "/assets/images/brands/adata.webp",
     "scale": 1.65,
     "offset_y": -2,
     "color": "#0071e3",
@@ -13956,7 +13956,7 @@ const brandSettingsDB = [
   {
     "id": "AEROCOOL",
     "name": "AEROCOOL",
-    "logo": "/assets/images/brands/aerocool.png",
+    "logo": "/assets/images/brands/aerocool.webp",
     "scale": 1.55,
     "offset_y": -1,
     "color": "#0071e3",
@@ -13965,7 +13965,7 @@ const brandSettingsDB = [
   {
     "id": "AMD",
     "name": "AMD",
-    "logo": "/assets/images/brands/amd.png",
+    "logo": "/assets/images/brands/amd.webp",
     "scale": 0.8,
     "offset_y": 0,
     "color": "#0071e3",
@@ -13974,7 +13974,7 @@ const brandSettingsDB = [
   {
     "id": "APC",
     "name": "APC",
-    "logo": "/assets/images/brands/apc.png",
+    "logo": "/assets/images/brands/apc.webp",
     "scale": 1.75,
     "offset_y": 2,
     "color": "#0071e3",
@@ -13983,7 +13983,7 @@ const brandSettingsDB = [
   {
     "id": "ASUS",
     "name": "ASUS",
-    "logo": "/assets/images/brands/asus.png",
+    "logo": "/assets/images/brands/asus.webp",
     "scale": 2,
     "offset_y": 0,
     "color": "#0071e3",
@@ -13992,7 +13992,7 @@ const brandSettingsDB = [
   {
     "id": "AVERY",
     "name": "AVERY",
-    "logo": "/assets/images/brands/avery.png",
+    "logo": "/assets/images/brands/avery.webp",
     "scale": 1.45,
     "offset_y": 0,
     "color": "#0071e3",
@@ -14001,7 +14001,7 @@ const brandSettingsDB = [
   {
     "id": "BALAMRUSH",
     "name": "BALAMRUSH",
-    "logo": "/assets/images/brands/balamrush.png",
+    "logo": "/assets/images/brands/balamrush.webp",
     "scale": 0.95,
     "offset_y": 0,
     "color": "#0071e3",
@@ -14010,7 +14010,7 @@ const brandSettingsDB = [
   {
     "id": "BIC",
     "name": "BIC",
-    "logo": "/assets/images/brands/bic.png",
+    "logo": "/assets/images/brands/bic.webp",
     "scale": 1,
     "offset_y": 0,
     "color": "#0071e3",
@@ -14019,7 +14019,7 @@ const brandSettingsDB = [
   {
     "id": "BROBOTIX",
     "name": "BROBOTIX",
-    "logo": "/assets/images/brands/brobotix.png",
+    "logo": "/assets/images/brands/brobotix.webp",
     "scale": 1.95,
     "offset_y": -1,
     "color": "#0071e3",
@@ -14028,7 +14028,7 @@ const brandSettingsDB = [
   {
     "id": "COOLER MASTER",
     "name": "COOLER MASTER",
-    "logo": "/assets/images/brands/coolermaster.png",
+    "logo": "/assets/images/brands/coolermaster.webp",
     "scale": 1.65,
     "offset_y": 0,
     "color": "#0071e3",
@@ -14037,7 +14037,7 @@ const brandSettingsDB = [
   {
     "id": "DAHUA",
     "name": "DAHUA",
-    "logo": "/assets/images/brands/dahua.png",
+    "logo": "/assets/images/brands/dahua.webp",
     "scale": 1.65,
     "offset_y": 0,
     "color": "#0071e3",
@@ -14046,7 +14046,7 @@ const brandSettingsDB = [
   {
     "id": "DATAPAC",
     "name": "DATAPAC",
-    "logo": "/assets/images/brands/datapac.png",
+    "logo": "/assets/images/brands/datapac.webp",
     "scale": 1.8,
     "offset_y": 0,
     "color": "#0071e3",
@@ -14055,7 +14055,7 @@ const brandSettingsDB = [
   {
     "id": "DELL",
     "name": "DELL",
-    "logo": "/assets/images/brands/dell.png",
+    "logo": "/assets/images/brands/dell.webp",
     "scale": 0.9,
     "offset_y": 0,
     "color": "#0071e3",
@@ -14064,7 +14064,7 @@ const brandSettingsDB = [
   {
     "id": "DYMO",
     "name": "DYMO",
-    "logo": "/assets/images/brands/dymo.png",
+    "logo": "/assets/images/brands/dymo.webp",
     "scale": 0.55,
     "offset_y": 0,
     "color": "#0071e3",
@@ -14073,7 +14073,7 @@ const brandSettingsDB = [
   {
     "id": "EPSON",
     "name": "EPSON",
-    "logo": "/assets/images/brands/epson.png",
+    "logo": "/assets/images/brands/epson.webp",
     "scale": 2,
     "offset_y": 0,
     "color": "#0071e3",
@@ -14082,7 +14082,7 @@ const brandSettingsDB = [
   {
     "id": "FACIA BOND",
     "name": "FACIA BOND",
-    "logo": "/assets/images/brands/faciabond.png",
+    "logo": "/assets/images/brands/faciabond.webp",
     "scale": 1.45,
     "offset_y": 0,
     "color": "#0071e3",
@@ -14091,7 +14091,7 @@ const brandSettingsDB = [
   {
     "id": "FORZA",
     "name": "FORZA",
-    "logo": "/assets/images/brands/forza.png",
+    "logo": "/assets/images/brands/forza.webp",
     "scale": 1.35,
     "offset_y": 0,
     "color": "#0071e3",
@@ -14109,7 +14109,7 @@ const brandSettingsDB = [
   {
     "id": "GIGABYTE",
     "name": "GIGABYTE",
-    "logo": "/assets/images/brands/gigabyte.png",
+    "logo": "/assets/images/brands/gigabyte.webp",
     "scale": 1.8,
     "offset_y": 0,
     "color": "#0071e3",
@@ -14118,7 +14118,7 @@ const brandSettingsDB = [
   {
     "id": "GHIA",
     "name": "GHIA",
-    "logo": "/assets/images/brands/ghia.png",
+    "logo": "/assets/images/brands/ghia.webp",
     "scale": 1.55,
     "offset_y": -1,
     "color": "#0071e3",
@@ -14127,7 +14127,7 @@ const brandSettingsDB = [
   {
     "id": "HISENSE",
     "name": "HISENSE",
-    "logo": "/assets/images/brands/hisense.png",
+    "logo": "/assets/images/brands/hisense.webp",
     "scale": 1.95,
     "offset_y": 0,
     "color": "#0071e3",
@@ -14136,7 +14136,7 @@ const brandSettingsDB = [
   {
     "id": "INTEL",
     "name": "INTEL",
-    "logo": "/assets/images/brands/intel.png",
+    "logo": "/assets/images/brands/intel.webp",
     "scale": 1,
     "offset_y": -1,
     "color": "#0071e3",
@@ -14145,7 +14145,7 @@ const brandSettingsDB = [
   {
     "id": "LOGITECH",
     "name": "LOGITECH",
-    "logo": "/assets/images/brands/logitech.png",
+    "logo": "/assets/images/brands/logitech.webp",
     "scale": 1.05,
     "offset_y": 0,
     "color": "#0071e3",
@@ -14154,7 +14154,7 @@ const brandSettingsDB = [
   {
     "id": "NEXTEP",
     "name": "NEXTEP",
-    "logo": "/assets/images/brands/nextep.png",
+    "logo": "/assets/images/brands/nextep.webp",
     "scale": 2,
     "offset_y": -1,
     "color": "#0071e3",
@@ -14163,7 +14163,7 @@ const brandSettingsDB = [
   {
     "id": "PANASONIC",
     "name": "PANASONIC",
-    "logo": "/assets/images/brands/panasonic.png",
+    "logo": "/assets/images/brands/panasonic.webp",
     "scale": 2,
     "offset_y": 0,
     "color": "#0071e3",
@@ -14172,7 +14172,7 @@ const brandSettingsDB = [
   {
     "id": "OLMECA",
     "name": "OLMECA",
-    "logo": "/assets/images/brands/olmeca.png",
+    "logo": "/assets/images/brands/olmeca.webp",
     "scale": 2,
     "offset_y": 0,
     "color": "#0071e3",
@@ -14181,7 +14181,7 @@ const brandSettingsDB = [
   {
     "id": "PERFECT CHOICE",
     "name": "PERFECT CHOICE",
-    "logo": "/assets/images/brands/perfectchoice.png",
+    "logo": "/assets/images/brands/perfectchoice.webp",
     "scale": 2,
     "offset_y": -2,
     "color": "#0071e3",
@@ -14190,7 +14190,7 @@ const brandSettingsDB = [
   {
     "id": "POLY",
     "name": "POLY",
-    "logo": "/assets/images/brands/poly.png",
+    "logo": "/assets/images/brands/poly.webp",
     "scale": 1.35,
     "offset_y": 0,
     "color": "#0071e3",
@@ -14199,7 +14199,7 @@ const brandSettingsDB = [
   {
     "id": "Papermate",
     "name": "Papermate",
-    "logo": "/assets/images/brands/papermate.png",
+    "logo": "/assets/images/brands/papermate.webp",
     "scale": 0.8,
     "offset_y": -1,
     "color": "#0071e3",
@@ -14208,7 +14208,7 @@ const brandSettingsDB = [
   {
     "id": "REDRAGON",
     "name": "REDRAGON",
-    "logo": "/assets/images/brands/redragon.png",
+    "logo": "/assets/images/brands/redragon.webp",
     "scale": 0.8,
     "offset_y": 0,
     "color": "#0071e3",
@@ -14217,7 +14217,7 @@ const brandSettingsDB = [
   {
     "id": "SAMSUNG",
     "name": "SAMSUNG",
-    "logo": "/assets/images/brands/samsung.png",
+    "logo": "/assets/images/brands/samsung.webp",
     "scale": 1.25,
     "offset_y": 0,
     "color": "#0071e3",
@@ -14226,7 +14226,7 @@ const brandSettingsDB = [
   {
     "id": "SANDISK",
     "name": "SANDISK",
-    "logo": "/assets/images/brands/sandisk.png",
+    "logo": "/assets/images/brands/sandisk.webp",
     "scale": 2,
     "offset_y": 0,
     "color": "#0071e3",
@@ -14235,7 +14235,7 @@ const brandSettingsDB = [
   {
     "id": "SONY",
     "name": "SONY",
-    "logo": "/assets/images/brands/sony.png",
+    "logo": "/assets/images/brands/sony.webp",
     "scale": 1.9,
     "offset_y": 0,
     "color": "#0071e3",
@@ -14244,7 +14244,7 @@ const brandSettingsDB = [
   {
     "id": "TOSHIBA",
     "name": "TOSHIBA",
-    "logo": "/assets/images/brands/toshiba.png",
+    "logo": "/assets/images/brands/toshiba.webp",
     "scale": 1.65,
     "offset_y": 1,
     "color": "#0071e3",
@@ -14253,7 +14253,7 @@ const brandSettingsDB = [
   {
     "id": "TPLINK",
     "name": "TPLINK",
-    "logo": "/assets/images/brands/tplink.png",
+    "logo": "/assets/images/brands/tplink.webp",
     "scale": 1.35,
     "offset_y": -2,
     "color": "#0071e3",
@@ -14262,7 +14262,7 @@ const brandSettingsDB = [
   {
     "id": "Ugreen",
     "name": "Ugreen",
-    "logo": "/assets/images/brands/ugreen.png",
+    "logo": "/assets/images/brands/ugreen.webp",
     "scale": 0.6,
     "offset_y": -1,
     "color": "#0071e3",
@@ -14271,7 +14271,7 @@ const brandSettingsDB = [
   {
     "id": "VERBATIM",
     "name": "VERBATIM",
-    "logo": "/assets/images/brands/verbatim.png",
+    "logo": "/assets/images/brands/verbatim.webp",
     "scale": 2,
     "offset_y": 0,
     "color": "#0071e3",
@@ -14280,7 +14280,7 @@ const brandSettingsDB = [
   {
     "id": "ZEBRA",
     "name": "ZEBRA",
-    "logo": "/assets/images/brands/zebra.png",
+    "logo": "/assets/images/brands/zebra.webp",
     "scale": 1.1,
     "offset_y": 0,
     "color": "#0071e3",
@@ -14289,7 +14289,7 @@ const brandSettingsDB = [
   {
     "id": "STEREN",
     "name": "STEREN",
-    "logo": "/assets/images/brands/steren.png",
+    "logo": "/assets/images/brands/steren.webp",
     "scale": 0.9,
     "offset_y": 0,
     "color": "#0071e3",
@@ -14298,7 +14298,7 @@ const brandSettingsDB = [
   {
     "id": "KINGSTON",
     "name": "KINGSTON",
-    "logo": "/assets/images/brands/kingston.png",
+    "logo": "/assets/images/brands/kingston.webp",
     "scale": 1.75,
     "offset_y": -1,
     "color": "#0071e3",
@@ -14307,7 +14307,7 @@ const brandSettingsDB = [
   {
     "id": "KOBLENZ",
     "name": "KOBLENZ",
-    "logo": "/assets/images/brands/koblenz.png",
+    "logo": "/assets/images/brands/koblenz.webp",
     "scale": 1.05,
     "offset_y": 0,
     "color": "#0071e3",
@@ -14316,7 +14316,7 @@ const brandSettingsDB = [
   {
     "id": "LANIX",
     "name": "LANIX",
-    "logo": "/assets/images/brands/lanix.png",
+    "logo": "/assets/images/brands/lanix.webp",
     "scale": 2,
     "offset_y": 0,
     "color": "#0071e3",
@@ -14325,7 +14325,7 @@ const brandSettingsDB = [
   {
     "id": "Xzeal",
     "name": "Xzeal",
-    "logo": "/assets/images/brands/xzeal.png",
+    "logo": "/assets/images/brands/xzeal.webp",
     "scale": 1.4,
     "offset_y": 0,
     "color": "#0071e3",
@@ -14334,7 +14334,7 @@ const brandSettingsDB = [
   {
     "id": "YEYIAN",
     "name": "YEYIAN",
-    "logo": "/assets/images/brands/yeyian.png",
+    "logo": "/assets/images/brands/yeyian.webp",
     "scale": 1.3,
     "offset_y": 0,
     "color": "#0071e3",
@@ -14343,7 +14343,7 @@ const brandSettingsDB = [
   {
     "id": "XPG",
     "name": "XPG",
-    "logo": "/assets/images/brands/xpg.png",
+    "logo": "/assets/images/brands/xpg.webp",
     "scale": 1.1,
     "offset_y": -1,
     "color": "#0071e3",
@@ -14352,7 +14352,7 @@ const brandSettingsDB = [
   {
     "id": "VORAGO",
     "name": "VORAGO",
-    "logo": "/assets/images/brands/vorago.png",
+    "logo": "/assets/images/brands/vorago.webp",
     "scale": 2,
     "offset_y": 0,
     "color": "#0071e3",
@@ -14361,7 +14361,7 @@ const brandSettingsDB = [
   {
     "id": "TRIPP LITE",
     "name": "TRIPP LITE",
-    "logo": "/assets/images/brands/tripplite.png",
+    "logo": "/assets/images/brands/tripplite.webp",
     "scale": 1.2,
     "offset_y": 0,
     "color": "#0071e3",
@@ -14370,7 +14370,7 @@ const brandSettingsDB = [
   {
     "id": "THERMALTAKE",
     "name": "THERMALTAKE",
-    "logo": "/assets/images/brands/thermaltake.png",
+    "logo": "/assets/images/brands/thermaltake.webp",
     "scale": 1.7,
     "offset_y": 0,
     "color": "#0071e3",
@@ -14379,7 +14379,7 @@ const brandSettingsDB = [
   {
     "id": "TECHZONE",
     "name": "TECHZONE",
-    "logo": "/assets/images/brands/techzone.png",
+    "logo": "/assets/images/brands/techzone.webp",
     "scale": 0.65,
     "offset_y": -1,
     "color": "#0071e3",
@@ -14397,7 +14397,7 @@ const brandSettingsDB = [
   {
     "id": "TDE",
     "name": "TDE",
-    "logo": "/assets/images/brands/tde.png",
+    "logo": "/assets/images/brands/tde.webp",
     "scale": 1.15,
     "offset_y": 0,
     "color": "#0071e3",
@@ -14406,7 +14406,7 @@ const brandSettingsDB = [
   {
     "id": "TARGUS",
     "name": "TARGUS",
-    "logo": "/assets/images/brands/targus.png",
+    "logo": "/assets/images/brands/targus.webp",
     "scale": 0.75,
     "offset_y": 0,
     "color": "#0071e3",
@@ -14415,7 +14415,7 @@ const brandSettingsDB = [
   {
     "id": "STYLOS",
     "name": "STYLOS",
-    "logo": "/assets/images/brands/stylos.png",
+    "logo": "/assets/images/brands/stylos.webp",
     "scale": 1.3,
     "offset_y": -1,
     "color": "#0071e3",
@@ -14424,7 +14424,7 @@ const brandSettingsDB = [
   {
     "id": "STARTECH",
     "name": "STARTECH",
-    "logo": "/assets/images/brands/startech.png",
+    "logo": "/assets/images/brands/startech.webp",
     "scale": 1.1,
     "offset_y": 0,
     "color": "#0071e3",
@@ -14433,7 +14433,7 @@ const brandSettingsDB = [
   {
     "id": "SOLA BASIC",
     "name": "SOLA BASIC",
-    "logo": "/assets/images/brands/solabasic.png",
+    "logo": "/assets/images/brands/solabasic.webp",
     "scale": 2,
     "offset_y": 0,
     "color": "#0071e3",
@@ -14442,7 +14442,7 @@ const brandSettingsDB = [
   {
     "id": "SMARTBITT",
     "name": "SMARTBITT",
-    "logo": "/assets/images/brands/smartbitt.png",
+    "logo": "/assets/images/brands/smartbitt.webp",
     "scale": 2,
     "offset_y": -3,
     "color": "#0071e3",
@@ -14451,7 +14451,7 @@ const brandSettingsDB = [
   {
     "id": "EUROFORMAS",
     "name": "EUROFORMAS",
-    "logo": "/assets/images/brands/euroformas.png",
+    "logo": "/assets/images/brands/euroformas.webp",
     "scale": 1.65,
     "offset_y": -1,
     "color": "#0071e3",
@@ -14460,7 +14460,7 @@ const brandSettingsDB = [
   {
     "id": "EVOLUTION",
     "name": "EVOLUTION",
-    "logo": "/assets/images/brands/evolution.png",
+    "logo": "/assets/images/brands/evolution.webp",
     "scale": 2,
     "offset_y": -1,
     "color": "#0071e3",
@@ -14469,7 +14469,7 @@ const brandSettingsDB = [
   {
     "id": "LENOVO",
     "name": "LENOVO",
-    "logo": "/assets/images/brands/lenovo.png",
+    "logo": "/assets/images/brands/lenovo.webp",
     "scale": 0.8,
     "offset_y": 0,
     "color": "#0071e3",
@@ -14478,7 +14478,7 @@ const brandSettingsDB = [
   {
     "id": "LINKEDPRO",
     "name": "LINKEDPRO",
-    "logo": "/assets/images/brands/linkedpro.png",
+    "logo": "/assets/images/brands/linkedpro.webp",
     "scale": 2,
     "offset_y": 0,
     "color": "#0071e3",
@@ -14487,7 +14487,7 @@ const brandSettingsDB = [
   {
     "id": "MANHATTAN",
     "name": "MANHATTAN",
-    "logo": "/assets/images/brands/manhattan.png",
+    "logo": "/assets/images/brands/manhattan.webp",
     "scale": 1.05,
     "offset_y": 0,
     "color": "#0071e3",
@@ -14496,7 +14496,7 @@ const brandSettingsDB = [
   {
     "id": "MITA",
     "name": "MITA",
-    "logo": "/assets/images/brands/mita.png",
+    "logo": "/assets/images/brands/mita.webp",
     "scale": 1.35,
     "offset_y": 0,
     "color": "#0071e3",
@@ -14505,7 +14505,7 @@ const brandSettingsDB = [
   {
     "id": "MSI",
     "name": "MSI",
-    "logo": "/assets/images/brands/msi.png",
+    "logo": "/assets/images/brands/msi.webp",
     "scale": 1.9,
     "offset_y": -2,
     "color": "#0071e3",
@@ -14514,7 +14514,7 @@ const brandSettingsDB = [
   {
     "id": "PCM",
     "name": "PCM",
-    "logo": "/assets/images/brands/pcm.png",
+    "logo": "/assets/images/brands/pcm.webp",
     "scale": 1.6,
     "offset_y": -1,
     "color": "#0071e3",
@@ -14523,7 +14523,7 @@ const brandSettingsDB = [
   {
     "id": "PANTUM",
     "name": "PANTUM",
-    "logo": "/assets/images/brands/pantum.png",
+    "logo": "/assets/images/brands/pantum.webp",
     "scale": 1.85,
     "offset_y": 0,
     "color": "#0071e3",
@@ -14532,7 +14532,7 @@ const brandSettingsDB = [
   {
     "id": "KRONALINE",
     "name": "KRONALINE",
-    "logo": "/assets/images/brands/kronaline.png",
+    "logo": "/assets/images/brands/kronaline.webp",
     "scale": 0.9,
     "offset_y": 0,
     "color": "#0071e3",
@@ -14550,7 +14550,7 @@ const brandSettingsDB = [
   {
     "id": "JANEL",
     "name": "JANEL",
-    "logo": "/assets/images/brands/janel.png",
+    "logo": "/assets/images/brands/janel.webp",
     "scale": 1,
     "offset_y": 0,
     "color": "#0071e3",
@@ -14559,7 +14559,7 @@ const brandSettingsDB = [
   {
     "id": "SANFORD",
     "name": "SANFORD",
-    "logo": "/assets/images/brands/sanford.png",
+    "logo": "/assets/images/brands/sanford.webp",
     "scale": 1,
     "offset_y": 0,
     "color": "#0071e3",
