@@ -18,11 +18,11 @@ const productsDB = [
   },
   {
     "id": "TPUE300",
-    "category": "OTROS",
+    "category": "accesorios",
     "brand": "TPLINK",
     "name": "ADAPTADOR RED TP-LINK UE300 PLUG/PLAY",
     "description": "ADAPTADOR RED TP-LINK UE300 PLUG/PLAY",
-    "image": ""
+    "image": "assets/images/products/toner/TPUE300.webp"
   },
   {
     "id": "PC-101291",
@@ -186,11 +186,11 @@ const productsDB = [
   },
   {
     "id": "TPUB500",
-    "category": "OTROS",
+    "category": "accesorios",
     "brand": "TPLINK",
     "name": "Adaptador Nano USB Bluetooth 5.0 TP-LINK UB500, Negro",
     "description": "Adaptador Nano USB Bluetooth 5.0 TP-LINK UB500, Negro",
-    "image": ""
+    "image": "assets/images/products/toner/TPUB500.webp"
   },
   {
     "id": "PC-240426",
@@ -3329,7 +3329,7 @@ const productsDB = [
   },
   {
     "id": "V94554",
-    "category": "OTROS",
+    "category": "papeleria",
     "brand": "VERBATIM",
     "name": "CD-R VERBATIM 52X CAMPANA/100",
     "description": "CD-R VERBATIM 52X CAMPANA/100",
@@ -3337,7 +3337,7 @@ const productsDB = [
   },
   {
     "id": "V94776",
-    "category": "OTROS",
+    "category": "papeleria",
     "brand": "VERBATIM",
     "name": "CD-R VERBATIM 80M 52X SLIM 700MB",
     "description": "CD-R VERBATIM 80M 52X SLIM 700MB",
@@ -3345,7 +3345,7 @@ const productsDB = [
   },
   {
     "id": "V95005",
-    "category": "OTROS",
+    "category": "papeleria",
     "brand": "VERBATIM",
     "name": "CD-R VERBATIM IMPRIMIBLE CAMPANA/50",
     "description": "CD-R VERBATIM IMPRIMIBLE CAMPANA/50",
@@ -6760,11 +6760,11 @@ const productsDB = [
   },
   {
     "id": "TZ16MOU01-GAME",
-    "category": "OTROS",
+    "category": "accesorios",
     "brand": "TECHZONE",
     "name": "MOUSE GAMER TECHZONE 800A2400 USB",
     "description": "MOUSE GAMER TECHZONE 800A2400 USB",
-    "image": ""
+    "image": "assets/images/products/toner/TZ16MOU01_GAME.webp"
   },
   {
     "id": "PC-045205",
@@ -12020,27 +12020,27 @@ const productsDB = [
   },
   {
     "id": "TPARCHER-T2U-NANO",
-    "category": "OTROS",
+    "category": "accesorios",
     "brand": "TPLINK",
     "name": "TP-Link Adaptador de Red USB ARCHER T2U NANO, Inalámbrico, WLAN, 633 Mbit/s, Doble Banda 2.4/5 GHz",
     "description": "TP-Link Adaptador de Red USB ARCHER T2U NANO, Inalámbrico, WLAN, 633 Mbit/s, Doble Banda 2.4/5 GHz",
-    "image": ""
+    "image": "assets/images/products/toner/TPARCHER_T2U_NANO.webp"
   },
   {
     "id": "TPTG3468",
-    "category": "OTROS",
+    "category": "accesorios",
     "brand": "TPLINK",
     "name": "TP-Link TG-3468 Tarjeta de Red PCI Express, Alámbrico, IEEE 802.3/3u/3ab, 802.3x, 802.1q/1p",
     "description": "TP-Link TG-3468 Tarjeta de Red PCI Express, Alámbrico, IEEE 802.3/3u/3ab, 802.3x, 802.1q/1p",
-    "image": ""
+    "image": "assets/images/products/toner/TPTG3468.webp"
   },
   {
     "id": "TPARCHERTX20E",
-    "category": "OTROS",
+    "category": "accesorios",
     "brand": "TPLINK",
     "name": "TP-Link Tarjeta de Red/Bluetooth Archer TX20E, WiFi 6, 1800 Mbit/s, 2 Antenas",
     "description": "TP-Link Tarjeta de Red/Bluetooth Archer TX20E, WiFi 6, 1800 Mbit/s, 2 Antenas",
-    "image": ""
+    "image": "assets/images/products/toner/TPARCHERTX20E.webp"
   },
   {
     "id": "PC-171744",
