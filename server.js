@@ -1,4 +1,5 @@
 
+require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
@@ -12,8 +13,33 @@ const { exec } = require('child_process');
 const app = express();
 const PORT = 3000;
 
+// Configuración de Seguridad
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'admin123';
+const API_SECRET_TOKEN = process.env.API_SECRET_TOKEN || 'integral_secret_token_change_me';
+
+const authMiddleware = (req, res, next) => {
+    const authHeader = req.headers['authorization'];
+    const token = authHeader && authHeader.split(' ')[1]; // Bearer TOKEN
+
+    if (token === API_SECRET_TOKEN) {
+        next();
+    } else {
+        res.status(401).json({ error: 'No autorizado. Se requiere un token válido.' });
+    }
+};
+
 app.use(cors());
 app.use(bodyParser.json({ limit: '50mb' }));
+
+// Endpoint de Login para obtener el token
+app.post('/api/login', (req, res) => {
+    const { password } = req.body;
+    if (password === ADMIN_PASSWORD) {
+        res.json({ token: API_SECRET_TOKEN });
+    } else {
+        res.status(403).json({ error: 'Contraseña incorrecta' });
+    }
+});
 app.use(express.static('public'));
 app.use(express.static(__dirname)); // Servir archivos de la raíz (index.html, catalogo.html, etc.)
 app.use('/assets', express.static(path.join(__dirname, 'assets'))); // Servir assets directamente
@@ -21,7 +47,7 @@ app.use('/assets', express.static(path.join(__dirname, 'assets'))); // Servir as
 // Configuración de almacenamiento en memoria para procesamiento
 const upload = multer({ storage: multer.memoryStorage() });
 
-app.post('/api/upload', upload.single('image'), async (req, res) => {
+app.post('/api/upload', authMiddleware, upload.single('image'), async (req, res) => {
     if (!req.file) return res.status(400).send('Error');
 
     const fileName = `${Date.now()}-${req.file.originalname.split('.')[0]}.webp`;
@@ -42,7 +68,7 @@ app.post('/api/upload', upload.single('image'), async (req, res) => {
 });
 
 // Specific upload for Brand Logos
-app.post('/api/upload-brand', upload.single('image'), async (req, res) => {
+app.post('/api/upload-brand', authMiddleware, upload.single('image'), async (req, res) => {
     if (!req.file) return res.status(400).send('Error');
 
     const brandName = req.body.name || 'brand';
@@ -122,7 +148,7 @@ app.get('/api/brands', (req, res) => {
     });
 });
 
-app.put('/api/brands/:id', (req, res) => {
+app.put('/api/brands/:id', authMiddleware, (req, res) => {
     const { name, logo, scale, offset_x, offset_y, color } = req.body;
     const id = req.params.id;
 
@@ -143,14 +169,14 @@ app.put('/api/brands/:id', (req, res) => {
 });
 
 // --- CONFLICT MANAGEMENT ---
-app.get('/api/conflicts', (req, res) => {
+app.get('/api/conflicts', authMiddleware, (req, res) => {
     db.all("SELECT * FROM product_conflicts WHERE resolved = 0 ORDER BY created_at DESC", [], (err, rows) => {
         if (err) return res.status(500).json({ error: err.message });
         res.json({ data: rows });
     });
 });
 
-app.post('/api/conflicts/stage', (req, res) => {
+app.post('/api/conflicts/stage', authMiddleware, (req, res) => {
     const { product_id, new_data } = req.body;
 
     // Get current data to archive
@@ -165,7 +191,7 @@ app.post('/api/conflicts/stage', (req, res) => {
     });
 });
 
-app.post('/api/conflicts/:id/resolve', (req, res) => {
+app.post('/api/conflicts/:id/resolve', authMiddleware, (req, res) => {
     const { action } = req.body; // 'keep_old' or 'keep_new'
     const conflictId = req.params.id;
 
@@ -232,7 +258,7 @@ function ensureBrandExists(brandName) {
     });
 }
 
-app.post('/api/products', (req, res) => {
+app.post('/api/products', authMiddleware, (req, res) => {
     const { id, name, category, brand, price, stock, compatibility, image, description } = req.body;
     if (!id || id.trim() === "") return res.status(400).json({ error: "ID/Modelo es requerido" });
 
@@ -246,7 +272,7 @@ app.post('/api/products', (req, res) => {
     });
 });
 
-app.put('/api/products/:id', (req, res) => {
+app.put('/api/products/:id', authMiddleware, (req, res) => {
     const { id: newId, name, category, brand, price, stock, compatibility, image, description } = req.body;
 
     ensureBrandExists(brand);
@@ -258,7 +284,7 @@ app.put('/api/products/:id', (req, res) => {
     });
 });
 
-app.post('/api/publish', (req, res) => {
+app.post('/api/publish', authMiddleware, (req, res) => {
     const scriptPath = path.join(__dirname, 'scripts', 'generate_js.js');
     console.log(`Publishing: Running ${scriptPath}`);
     exec(`node "${scriptPath}"`, (err, stdout, stderr) => {
@@ -276,7 +302,7 @@ app.post('/api/publish', (req, res) => {
 
 // --- ENDPOINTS ELIMINADOS (Inteligencia de Ventas) ---
 
-app.post('/api/import-image-url', async (req, res) => {
+app.post('/api/import-image-url', authMiddleware, async (req, res) => {
     const { productId, imageUrl } = req.body;
     if (!productId || !imageUrl) return res.status(400).json({ error: 'Faltan datos' });
 
@@ -313,7 +339,7 @@ app.post('/api/import-image-url', async (req, res) => {
     }
 });
 
-app.post('/api/import-brand-logo', async (req, res) => {
+app.post('/api/import-brand-logo', authMiddleware, async (req, res) => {
     const { brandName, imageUrl } = req.body;
     if (!brandName || !imageUrl) return res.status(400).json({ error: 'Faltan datos' });
 
@@ -338,14 +364,14 @@ app.post('/api/import-brand-logo', async (req, res) => {
     }
 });
 
-app.delete('/api/products/pending', (req, res) => {
+app.delete('/api/products/pending', authMiddleware, (req, res) => {
     db.run(`DELETE FROM products WHERE published = 0`, function (err) {
         if (err) return res.status(500).json({ error: err.message });
         res.json({ message: "OK", changes: this.changes });
     });
 });
 
-app.delete('/api/products/:id', (req, res) => {
+app.delete('/api/products/:id', authMiddleware, (req, res) => {
     db.run(`DELETE FROM products WHERE id = ?`, [req.params.id], function (err) {
         if (err) return res.status(500).json({ error: err.message });
         res.json({ message: "OK", changes: this.changes });
