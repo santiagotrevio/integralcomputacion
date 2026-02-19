@@ -1406,14 +1406,6 @@ const productsDB = [
     "image": "assets/images/products/toner/lexmark-lx56f0z00.webp"
   },
   {
-    "id": "HPW1105A",
-    "category": "toner",
-    "brand": "HP",
-    "name": "Toner Original HP LaserJet 105A Negro",
-    "description": "Toner Original HP LaserJet 105A Negro",
-    "image": "assets/images/products/toner/1771379950011-HPW1105A.webp"
-  },
-  {
     "id": "HPCB542A",
     "category": "toner",
     "brand": "HP",
@@ -2095,5 +2087,62 @@ const productsDB = [
     "name": "UNIDAD DE IMAGEN LEXMARK B220Z00",
     "description": "UNIDAD DE IMAGEN LEXMARK B220Z00",
     "image": "assets/images/products/toner/LXB220Z00.webp"
+  }
+];
+
+const brandSettingsDB = [
+  {
+    "id": "RICOH",
+    "name": "RICOH",
+    "logo": "/assets/images/brands/ricoh.png",
+    "scale": 0.65,
+    "offset_y": 0,
+    "color": "#0071e3",
+    "offset_x": 0
+  },
+  {
+    "id": "Xerox",
+    "name": "Xerox",
+    "logo": "/assets/images/brands/xerox.png",
+    "scale": 1.25,
+    "offset_y": 0,
+    "color": "#0071e3",
+    "offset_x": 0
+  },
+  {
+    "id": "Lexmark",
+    "name": "Lexmark",
+    "logo": "/assets/images/brands/lexmark.png",
+    "scale": 1.7,
+    "offset_y": 0,
+    "color": "#0071e3",
+    "offset_x": 0
+  },
+  {
+    "id": "HP",
+    "name": "HP",
+    "logo": "/assets/images/brands/hp.png",
+    "scale": 1.55,
+    "offset_y": 0,
+    "color": "#0071e3",
+    "offset_x": 0
+  },
+  {
+    "id": "Canon",
+    "name": "Canon",
+    "logo": "/assets/images/brands/canon.png",
+    "scale": 1.4,
+    "offset_y": -1,
+    "color": "#0071e3",
+    "offset_x": 0
+  },
+  {
+    "id": "Brother",
+    "name": "Brother",
+    "logo": "/assets/images/brands/brother.png",
+    "scale": 1.45,
+    "offset_y": 0,
+    "color": "#0071e3",
+    "offset_x": 0
   }
 ];

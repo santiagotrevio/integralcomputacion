@@ -1650,10 +1650,11 @@
                 }
 
                 const brandName = prod.brand || "Otros";
-                let brandLogoUrl = getBrandLogo(brandName);
-                if (brandLogoUrl) brandLogoUrl += `?v=${v}`;
+                const bSet = (typeof brandSettingsDB !== 'undefined') ? brandSettingsDB.find(s => s.id.toLowerCase() === brandName.toLowerCase()) : null;
 
-                const bSet = (typeof brandSettingsDB !== 'undefined') ? brandSettingsDB.find(s => s.id === brandName) : null;
+                let brandLogoUrl = bSet ? bSet.logo : getBrandLogo(brandName);
+                if (brandLogoUrl && brandLogoUrl.startsWith('/')) brandLogoUrl = brandLogoUrl.substring(1);
+                if (brandLogoUrl) brandLogoUrl += `?v=${v}`;
                 const scale = bSet ? bSet.scale : 1.0;
                 const offset_x = bSet ? (bSet.offset_x || 0) : 0;
                 const offset_y = bSet ? (bSet.offset_y || 0) : 0;

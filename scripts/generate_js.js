@@ -46,9 +46,8 @@ db.serialize(() => {
             fs.writeFile(targetPath, fileContent, (err) => {
                 if (err) throw err;
                 console.log(`✅ Success! Updated assets/js/productos.js with ${products.length} items and brand customizations.`);
+                db.close();
             });
         });
     });
 });
-
-db.close();
