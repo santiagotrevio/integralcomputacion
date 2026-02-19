@@ -1747,6 +1747,8 @@
                 const bSet = (typeof brandSettingsDB !== 'undefined') ? brandSettingsDB.find(s => s.id.toLowerCase() === brandName.toLowerCase()) : null;
 
                 let brandLogoUrl = bSet ? bSet.logo : getBrandLogo(brandName);
+                // Normalize: strip leading slash so it works on GitHub Pages AND localhost
+                if (brandLogoUrl && brandLogoUrl.startsWith('/')) brandLogoUrl = brandLogoUrl.slice(1);
                 if (brandLogoUrl) brandLogoUrl += `?v=${v}`;
                 const scale = bSet ? bSet.scale : 1.0;
                 const offset_x = bSet ? (bSet.offset_x || 0) : 0;
