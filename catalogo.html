@@ -1722,110 +1722,116 @@
         observer.observe(sentinel);
 
         function appendProductCards(products, startIndex) {
-            let icon = 'fa-box';
-            if (prod.category === 'toner') icon = 'fa-print';
-            if (prod.category === 'papeleria') icon = 'fa-pen-ruler';
-            if (prod.category.includes('accesorios')) icon = 'fa-keyboard';
-
-            const isInCart = cart.some(item => item.id === prod.id);
-            const btnClass = isInCart ? 'btn-add-cart added' : 'btn-add-cart';
-            const btnText = isInCart ? '<i class="fa-solid fa-check"></i> En lista' : '<i class="fa-solid fa-plus"></i> Agregar';
-            const btnStyle = isInCart ? 'background-color: var(--ic-magenta); color: white; border-color: var(--ic-magenta);' : '';
-
+            const searchTerm = searchInput.value.trim().toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
             const v = Date.now();
-            let imgHtml = `<i class="fa-solid ${icon}"></i>`;
-            let imgSrc = '';
-            if (prod.image && prod.image.trim() !== '') {
-                imgSrc = `${prod.image}?v=${v}`;
-                imgHtml = `<img src="${imgSrc}" alt="${prod.name}" class="${currentView === 'grid' ? 'card-img' : ''}" loading="lazy" onerror="this.onerror=null;this.parentNode.innerHTML='<i class=\\'fa-solid ${icon}\\'></i>'">`;
-            }
 
-            const brandName = prod.brand || "Otros";
-            const bSet = (typeof brandSettingsDB !== 'undefined') ? brandSettingsDB.find(s => s.id.toLowerCase() === brandName.toLowerCase()) : null;
+            products.forEach((prod, index) => {
+                let icon = 'fa-box';
+                if (prod.category === 'toner') icon = 'fa-print';
+                if (prod.category === 'papeleria') icon = 'fa-pen-ruler';
+                if (prod.category && prod.category.includes('accesorios')) icon = 'fa-keyboard';
 
-            let brandLogoUrl = bSet ? bSet.logo : getBrandLogo(brandName);
-            if (brandLogoUrl) brandLogoUrl += `?v=${v}`;
-            const scale = bSet ? bSet.scale : 1.0;
-            const offset_x = bSet ? (bSet.offset_x || 0) : 0;
-            const offset_y = bSet ? (bSet.offset_y || 0) : 0;
-            const brandImgStyle = `max-height: ${15 * scale}px !important; transform: translate(${offset_x}px, ${offset_y}px); object-fit: contain;`;
+                const isInCart = cart.some(item => item.id === prod.id);
+                const btnClass = isInCart ? 'btn-add-cart added' : 'btn-add-cart';
+                const btnText = isInCart ? '<i class="fa-solid fa-check"></i> En lista' : '<i class="fa-solid fa-plus"></i> Agregar';
+                const btnStyle = isInCart ? 'background-color: var(--ic-magenta); color: white; border-color: var(--ic-magenta);' : '';
 
-            const badgeHtml = (brandLogoUrl && brandName !== 'Otros') ?
-                `<div class="brand-badge" title="${brandName}">
-                        <img src="${brandLogoUrl}" alt="${brandName}" style="${brandImgStyle}" onerror="this.parentNode.style.display='none'">
-                     </div>` : '';
+                let imgHtml = `<i class="fa-solid ${icon}"></i>`;
+                let imgSrc = '';
+                if (prod.image && prod.image.trim() !== '') {
+                    imgSrc = `${prod.image}?v=${v}`;
+                    imgHtml = `<img src="${imgSrc}" alt="${prod.name}" class="${currentView === 'grid' ? 'card-img' : ''}" loading="lazy" onerror="this.onerror=null;this.parentNode.innerHTML='<i class=\\'fa-solid ${icon}\\'></i>'">`;
+                }
 
-            const nameHighlighted = highlightText(prod.name, searchTerm);
+                const brandName = prod.brand || "Otros";
+                const bSet = (typeof brandSettingsDB !== 'undefined') ? brandSettingsDB.find(s => s.id.toLowerCase() === brandName.toLowerCase()) : null;
 
-            const card = document.createElement('div');
-            if (currentView === 'grid') {
-                // GRID CARD VIEW (CLIENT)
-                card.className = 'catalog-item-card';
-                card.style.borderRadius = '12px';
-                card.style.animation = 'none';
-                card.style.animationDelay = `${index * 0.03}s`;
-                card.innerHTML = `
-                        ${badgeHtml}
-                        <div class="card-img-container" onclick="openLightbox('${imgSrc}')" style="cursor: zoom-in;">
-                            ${imgHtml}
-                        </div>
-                        <div class="card-content">
-                            <span class="prod-code" style="margin-bottom: 8px;">
-                                ${prod.id}
-                                <button class="copy-btn" onclick="copyToClipboard('${prod.id}')" title="Copiar código">
-                                    <i class="fa-regular fa-copy"></i>
-                                </button>
-                            </span>
-                            <h3 style="font-size: 1rem; margin-bottom: 10px; min-height: 2.4em; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">${nameHighlighted}</h3>
-                            <div style="margin-top: auto; display: flex; flex-direction: column; gap: 8px;">
-                                <button id="add-btn-${prod.id}" onclick="toggleCart('${prod.id}')" class="${btnClass}" style="width:100%; justify-content:center; ${btnStyle}">
+                let brandLogoUrl = bSet ? bSet.logo : getBrandLogo(brandName);
+                if (brandLogoUrl) brandLogoUrl += `?v=${v}`;
+                const scale = bSet ? bSet.scale : 1.0;
+                const offset_x = bSet ? (bSet.offset_x || 0) : 0;
+                const offset_y = bSet ? (bSet.offset_y || 0) : 0;
+                const brandImgStyle = `max-height: ${15 * scale}px !important; transform: translate(${offset_x}px, ${offset_y}px); object-fit: contain;`;
+
+                const badgeHtml = (brandLogoUrl && brandName !== 'Otros') ?
+                    `<div class="brand-badge" title="${brandName}">
+                            <img src="${brandLogoUrl}" alt="${brandName}" style="${brandImgStyle}" onerror="this.parentNode.style.display='none'">
+                         </div>` : '';
+
+                const nameHighlighted = highlightText(prod.name, searchTerm);
+
+                const card = document.createElement('div');
+                // Fade-in animation for each new batch
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(12px)';
+                card.style.transition = `opacity 0.25s ease ${(index % PAGE_SIZE) * 0.02}s, transform 0.25s ease ${(index % PAGE_SIZE) * 0.02}s`;
+
+                if (currentView === 'grid') {
+                    card.className = 'catalog-item-card';
+                    card.style.borderRadius = '12px';
+                    card.innerHTML = `
+                            ${badgeHtml}
+                            <div class="card-img-container" onclick="openLightbox('${imgSrc}')" style="cursor: zoom-in;">
+                                ${imgHtml}
+                            </div>
+                            <div class="card-content">
+                                <span class="prod-code" style="margin-bottom: 8px;">
+                                    ${prod.id}
+                                    <button class="copy-btn" onclick="copyToClipboard('${prod.id}')" title="Copiar código">
+                                        <i class="fa-regular fa-copy"></i>
+                                    </button>
+                                </span>
+                                <h3 style="font-size: 1rem; margin-bottom: 10px; min-height: 2.4em; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">${nameHighlighted}</h3>
+                                <div style="margin-top: auto; display: flex; flex-direction: column; gap: 8px;">
+                                    <button id="add-btn-${prod.id}" onclick="toggleCart('${prod.id}')" class="${btnClass}" style="width:100%; justify-content:center; ${btnStyle}">
+                                        ${btnText}
+                                    </button>
+                                    <a href="https://wa.me/523312680092?text=Hola,%20me%20interesa%20el%20producto%20con%20código:%20${prod.id}" 
+                                       target="_blank" 
+                                       class="btn-card" style="width:100%; text-align:center; display:block; padding: 10px; background:#f1f5f9; border-radius:8px; font-weight:700; color:var(--ic-dark-gray);">
+                                       <i class="fa-brands fa-whatsapp"></i> Cotizar
+                                    </a>
+                                </div>
+                            </div>
+                        `;
+                } else {
+                    card.className = 'catalog-item-row';
+                    card.style.borderRadius = '12px';
+                    card.innerHTML = `
+                            ${badgeHtml}
+                            <div class="prod-image" onclick="openLightbox('${imgSrc}')" style="cursor: zoom-in;">
+                                ${imgHtml}
+                            </div>
+                            <div class="prod-info">
+                                <span class="prod-code">
+                                    ${prod.id}
+                                    <button class="copy-btn" onclick="copyToClipboard('${prod.id}')" title="Copiar código">
+                                        <i class="fa-regular fa-copy"></i>
+                                    </button>
+                                </span>
+                                <h3>${nameHighlighted}</h3>
+                                <p class="prod-desc">${prod.description}</p>
+                                ${prod.compatibility ? `<p style="font-size:0.8rem; color:var(--ic-magenta); margin-top:5px;"><b>Compatible con:</b> ${prod.compatibility}</p>` : ''}
+                            </div>
+                            <div class="prod-action">
+                                <button id="add-btn-${prod.id}" onclick="toggleCart('${prod.id}')" class="${btnClass}" style="${btnStyle}">
                                     ${btnText}
                                 </button>
                                 <a href="https://wa.me/523312680092?text=Hola,%20me%20interesa%20el%20producto%20con%20código:%20${prod.id}" 
                                    target="_blank" 
-                                   class="btn-card" style="width:100%; text-align:center; display:block; padding: 10px; background:#f1f5f9; border-radius:8px; font-weight:700; color:var(--ic-dark-gray);">
-                                   <i class="fa-brands fa-whatsapp"></i> Cotizar
+                                   class="btn-card">Cotizar
                                 </a>
                             </div>
-                        </div>
-                    `;
+                        `;
+                }
+
                 productGrid.appendChild(card);
-            } else {
-                // LIST ROW VIEW (CLIENT)
-                card.className = `catalog-item-row`;
-                card.style.borderRadius = '12px';
-                card.style.animation = 'none';
-                card.style.animationDelay = `${index * 0.03}s`;
-                card.innerHTML = `
-                        ${badgeHtml}
-                        <div class="prod-image" onclick="openLightbox('${imgSrc}')" style="cursor: zoom-in;">
-                            ${imgHtml}
-                        </div>
-                        <div class="prod-info">
-                            <span class="prod-code">
-                                ${prod.id}
-                                <button class="copy-btn" onclick="copyToClipboard('${prod.id}')" title="Copiar código">
-                                    <i class="fa-regular fa-copy"></i>
-                                </button>
-                            </span>
-                            <h3>${nameHighlighted}</h3>
-                            <p class="prod-desc">${prod.description}</p>
-                            ${prod.compatibility ? `<p style="font-size:0.8rem; color:var(--ic-magenta); margin-top:5px;"><b>Compatible con:</b> ${prod.compatibility}</p>` : ''}
-                        </div>
-                        <div class="prod-action">
-                             <button id="add-btn-${prod.id}" onclick="toggleCart('${prod.id}')" class="${btnClass}" style="${btnStyle}">
-                                ${btnText}
-                            </button>
-                             <a href="https://wa.me/523312680092?text=Hola,%20me%20interesa%20el%20producto%20con%20código:%20${prod.id}" 
-                               target="_blank" 
-                               class="btn-card">
-                               Cotizar
-                            </a>
-                        </div>
-                    `;
-                productGrid.appendChild(card);
-            }
-        });
+                // Trigger animation on next frame
+                requestAnimationFrame(() => {
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                });
+            });
         }
 
         function renderBrandOptions() {
