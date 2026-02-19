@@ -3797,17 +3797,17 @@
 
             tbody.innerHTML = '';
             uniqueBrands.forEach(brandName => {
-                const setting = brandSettings.find(s => s.id === brandName) || {
+                const setting = brandSettings.find(s => s.id.toLowerCase() === brandName.toLowerCase()) || {
                     id: brandName,
                     name: brandName,
-                    logo: `assets/images/brands/${brandName.toLowerCase().replace(/[^a-z0-9]/g, '')}.png`,
+                    logo: `/assets/images/brands/${brandName.toLowerCase().replace(/[^a-z0-9]/g, '')}.png`,
                     scale: 1.0,
                     offset_x: 0,
                     offset_y: 0,
                     color: '#0071e3'
                 };
 
-                const brandImgPath = setting.logo.startsWith('/') ? setting.logo.substring(1) : setting.logo;
+                const brandImgPath = setting.logo.startsWith('/') ? setting.logo.replace(/^\//, '../') : '../' + setting.logo;
                 const tr = document.createElement('tr');
 
                 tr.innerHTML = `
@@ -3925,7 +3925,7 @@
             const inputs = tr.querySelectorAll('input');
             const body = {
                 name: brandId,
-                logo: `assets/images/brands/${brandId.toLowerCase().replace(/[^a-z0-9]/g, '')}.png`,
+                logo: `/assets/images/brands/${brandId.toLowerCase().replace(/[^a-z0-9]/g, '')}.png`,
                 scale: parseFloat(inputs[0].value),
                 offset_x: parseInt(inputs[1].value),
                 offset_y: parseInt(inputs[2].value),
