@@ -1158,11 +1158,15 @@
         }
 
         .audit-card .card-img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            background: #f9f9f9;
+            max-width: 90%;
+            max-height: 160px;
+            object-fit: contain;
             cursor: zoom-in;
+            transition: transform 0.3s ease;
+        }
+
+        .audit-card:hover .card-img {
+            transform: scale(1.05);
         }
 
         .audit-card .card-content {
@@ -1174,16 +1178,19 @@
 
         .audit-card .card-brand {
             position: absolute;
-            top: 10px;
-            left: 10px;
+            top: 20px;
+            right: -10px;
             background: white;
-            padding: 4px 8px;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-            height: 24px;
+            padding: 6px 15px 6px 10px;
+            border-radius: 20px 0 0 20px;
+            box-shadow: -2px 4px 12px rgba(0, 0, 0, 0.08);
+            height: 32px;
             display: flex;
             align-items: center;
-            border: 1px solid #eee;
+            justify-content: center;
+            border: 1px solid var(--apple-border);
+            z-index: 2;
+            min-width: 40px;
         }
 
         .audit-card .card-id {
@@ -1813,6 +1820,15 @@
                     Cargando...
                 </div>
 
+                <div class="view-toggle">
+                    <button id="viewTable" class="active" onclick="setView('table')" title="Vista Lista">
+                        <i class="fa-solid fa-list-ul"></i>
+                    </button>
+                    <button id="viewGrid" onclick="setView('grid')" title="Vista Cuadrícula">
+                        <i class="fa-solid fa-table-cells"></i>
+                    </button>
+                </div>
+
                 <div style="display:flex; gap:10px;">
                     <button class="secondary" onclick="exportData('xlsx')" title="Exportar Excel">
                         <i class="fa-solid fa-file-excel"></i>
@@ -1824,10 +1840,9 @@
             </div>
 
             <div style="display:flex; gap:12px; margin-bottom: 24px;">
-                <button class="secondary" onclick="document.getElementById('csvInput').click()">
+                <button class="secondary" onclick="openBulkModal()">
                     <i class="fa-solid fa-file-import"></i> Carga Masiva
                 </button>
-                <input type="file" id="csvInput" style="display:none" accept=".csv" onchange="importCSV(this)">
                 <button onclick="newProduct()">+ Nuevo Producto</button>
             </div>
 
@@ -2671,32 +2686,32 @@
                 if (p.published === 0) card.style.borderColor = 'var(--apple-blue)';
 
                 card.innerHTML = `
-                    <div style="position:relative; height: 180px; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.02); border-radius: 12px 12px 0 0;">
+                    <div style="position:relative; height: 180px; display: flex; align-items: center; justify-content: center; background: #fdfdfd; border-bottom: 1px solid var(--apple-border); overflow: hidden;">
                         ${hasNoImage ? `
-                            <div class="no-image-placeholder" style="font-size: 12px; gap: 8px;">
-                                <i class="fa-solid fa-face-dizzy" style="font-size: 32px;"></i>
-                                <span>MULTIMEDIA NO ASIGNADA</span>
+                            <div class="no-image-placeholder" style="font-size: 10px; gap: 8px; opacity: 0.4;">
+                                <i class="fa-solid fa-camera-retro" style="font-size: 24px;"></i>
+                                <span>SIN IMAGEN</span>
                             </div>
                         ` : `
                             <img src="${imgSrc}" class="card-img" onclick='zoom("${imgSrc}")' onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                            <div class="no-image-placeholder" style="display:none; font-size: 12px; gap: 8px;">
-                                <i class="fa-solid fa-face-dizzy" style="font-size: 32px;"></i>
-                                <span>ERROR DE CARGA</span>
+                            <div class="no-image-placeholder" style="display:none; font-size: 10px; gap: 8px;">
+                                <i class="fa-solid fa-triangle-exclamation" style="font-size: 24px;"></i>
+                                <span>ERROR</span>
                             </div>
                         `}
                          ${hasNoImage ? `
                             <div onclick='event.stopPropagation(); openImageWizard(${JSON.stringify(p.id)}, ${JSON.stringify(p.name)}, "product")' 
-                                 style="position:absolute; top:10px; right:10px; background:var(--apple-blue); color:white; width:28px; height:28px; border-radius:50%; display:flex; align-items:center; justify-content:center; cursor:pointer; border:2px solid white; box-shadow:0 4px 12px rgba(0,0,0,0.2); z-index: 1;" 
-                                 title="Agregar imagen inteligente">
-                                <i class="fa-solid fa-wand-magic-sparkles"></i>
+                                 style="position:absolute; bottom:10px; right:10px; background:var(--apple-blue); color:white; width:24px; height:24px; border-radius:50%; display:flex; align-items:center; justify-content:center; cursor:pointer; border:2px solid white; box-shadow:0 2px 8px rgba(0,0,0,0.2); z-index: 3;" 
+                                 title="Agregar imagen">
+                                <i class="fa-solid fa-plus" style="font-size: 10px;"></i>
                             </div>
                         ` : ''}
 
-                        <div class="card-brand" data-brand="${p.brand || 'UNK'}" style="position:relative;">
-                            <img src="${brandLogosrc}" style="max-height: 16px; object-fit: contain;" 
-                                 onerror="this.outerHTML='<span>${p.brand}</span>'; const wand = this.parentNode ? this.parentNode.querySelector('.brand-magic') : null; if(wand && ${p.brand && p.brand !== 'Otros' ? 'true' : 'false'}) wand.style.display='flex';">
+                        <div class="card-brand" data-brand="${p.brand || 'UNK'}">
+                            <img src="${brandLogosrc}" style="max-height: 18px; max-width: 60px; object-fit: contain;" 
+                                 onerror="this.outerHTML='<span style=\'font-size:10px; font-weight:800; color:var(--apple-blue)\'>${p.brand}</span>'; const wand = this.parentNode ? this.parentNode.querySelector('.brand-magic') : null; if(wand && ${p.brand && p.brand !== 'Otros' ? 'true' : 'false'}) wand.style.display='flex';">
                             <div class="brand-magic" onclick='event.stopPropagation(); openImageWizard(${JSON.stringify(p.brand)}, "", "brand")' 
-                                 style="display:none; position:absolute; bottom:-5px; right:-5px; background:#ff2d55; color:white; width:16px; height:16px; border-radius:50%; display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:8px; border:1px solid white; z-index: 2;">
+                                 style="display:none; position:absolute; top:-5px; right:-5px; background:#ff2d55; color:white; width:14px; height:14px; border-radius:50%; display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:7px; border:1px solid white; z-index: 3;">
                                 <i class="fa-solid fa-wand-magic-sparkles"></i>
                             </div>
                         </div>

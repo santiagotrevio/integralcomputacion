@@ -128,6 +128,7 @@
             align-items: center;
             border: 1px solid #f1f5f9;
             transition: transform 0.2s ease, box-shadow 0.2s ease;
+            position: relative;
         }
 
         .product-list-card:hover {
@@ -139,20 +140,122 @@
         .prod-image {
             width: 80px;
             height: 80px;
-            background: #f8fafc;
+            background: #fdfdfd;
             border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
             color: #cbd5e1;
             font-size: 1.5rem;
+            padding: 5px;
+            overflow: hidden;
         }
 
         .prod-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            border-radius: 4px;
+        }
+
+        .brand-badge {
+            position: absolute;
+            top: 15px;
+            right: -8px;
+            background: white;
+            padding: 4px 12px 4px 8px;
+            border-radius: 20px 0 0 20px;
+            box-shadow: -2px 4px 10px rgba(0, 0, 0, 0.05);
+            height: 28px;
+            display: flex;
+            align-items: center;
+            border: 1px solid #f1f5f9;
+            z-index: 2;
+        }
+
+        .brand-badge img {
+            max-height: 16px;
+            max-width: 50px;
+            object-fit: contain;
+        }
+
+        .catalog-grid.grid-view {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .product-card {
+            background: white;
+            border: 1px solid #f1f5f9;
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border-color: var(--ic-cyan);
+        }
+
+        .product-card .card-img-container {
+            height: 180px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #fdfdfd;
+            border-bottom: 1px solid #f1f5f9;
+            padding: 1.5rem;
+            position: relative;
+        }
+
+        .product-card .card-img {
+            max-width: 90%;
+            max-height: 140px;
+            object-fit: contain;
+            transition: transform 0.3s ease;
+        }
+
+        .product-card:hover .card-img {
+            transform: scale(1.05);
+        }
+
+        .product-card .card-content {
+            padding: 1.2rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .view-toggle {
+            display: flex;
+            background: #f1f5f9;
+            padding: 4px;
+            border-radius: 10px;
+            gap: 4px;
+            margin-right: 1rem;
+        }
+
+        .view-toggle button {
+            background: transparent;
+            color: #64748b;
+            border: none;
+            padding: 6px 12px;
             border-radius: 8px;
+            cursor: pointer;
+            font-size: 13px;
+            transition: all 0.2s;
+        }
+
+        .view-toggle button.active {
+            background: white;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+            color: var(--ic-cyan);
         }
 
         .prod-info h3 {
@@ -359,13 +462,24 @@
                         placeholder="Buscar producto (ej. Toner 85A)..." oninput="filterProducts()">
                 </div>
 
-                <div class="sort-wrapper">
-                    <span class="sort-label">Ordenar:</span>
-                    <select id="sortFilter" onchange="filterProducts()" class="sort-select">
-                        <option value="relevance">Relevancia</option>
-                        <option value="az">Nombre (A-Z)</option>
-                        <option value="za">Nombre (Z-A)</option>
-                    </select>
+                <div style="display: flex; align-items: center; gap: 1rem;">
+                    <div class="view-toggle">
+                        <button id="viewList" class="active" onclick="setView('table')" title="Vista Lista">
+                            <i class="fa-solid fa-list-ul"></i>
+                        </button>
+                        <button id="viewGrid" onclick="setView('grid')" title="Vista Cuadrícula">
+                            <i class="fa-solid fa-table-cells"></i>
+                        </button>
+                    </div>
+
+                    <div class="sort-wrapper">
+                        <span class="sort-label">Ordenar:</span>
+                        <select id="sortFilter" onchange="filterProducts()" class="sort-select">
+                            <option value="relevance">Relevancia</option>
+                            <option value="az">Nombre (A-Z)</option>
+                            <option value="za">Nombre (Z-A)</option>
+                        </select>
+                    </div>
                 </div>
             </div>
             <div id="activeFilters" class="active-filters"></div>
@@ -1365,6 +1479,7 @@
 
         // ------------------------
 
+
         function updateCartCount() {
             cartCountEl.innerText = cart.length;
         }
@@ -1381,7 +1496,7 @@
                 cart.push(product);
                 if (btn) {
                     btn.classList.add('added');
-                    btn.innerHTML = '<i class="fa-solid fa-check"></i> Quitar';
+                    btn.innerHTML = '<i class="fa-solid fa-check"></i> En lista';
                     btn.style.backgroundColor = 'var(--ic-magenta)';
                     btn.style.color = 'white';
                     btn.style.borderColor = 'var(--ic-magenta)';
@@ -1419,13 +1534,15 @@
             return highlighted;
         }
 
-        function getBrandClass(name) {
-            const n = name.toLowerCase();
-            if (n.includes('brother') || n.includes('br-')) return 'brand-brother'; // Blue
-            if (n.includes('canon')) return 'brand-canon'; // Red
-            if (n.includes('lexmark') || n.includes('lx-')) return 'brand-lexmark'; // Green
-            if (n.includes('hp')) return 'brand-hp'; // Blue HP
-            return '';
+        // --- View Logic ---
+        let currentView = 'table';
+        function setView(v) {
+            currentView = v;
+            const btnList = document.getElementById('viewList');
+            const btnGrid = document.getElementById('viewGrid');
+            if (btnList) btnList.classList.toggle('active', v === 'table');
+            if (btnGrid) btnGrid.classList.toggle('active', v === 'grid');
+            filterProducts();
         }
 
         // Show Skeleton Loader
@@ -1449,26 +1566,19 @@
 
         // Function to Load Products (from JS file)
         function loadProducts() {
-            showSkeleton(); // Show loading state
-
-            // Simulate slight delay to see animations for demo
+            showSkeleton();
             setTimeout(() => {
                 if (typeof productsDB !== 'undefined' && Array.isArray(productsDB)) {
-                    console.log("Products Loaded from JS:", productsDB.length);
-
                     // Check for Add Action from Bot
                     const urlParams = new URLSearchParams(window.location.search);
                     const addId = urlParams.get('add');
                     if (addId) {
                         const product = productsDB.find(p => p.id === addId);
                         if (product) {
-                            // Check if already in cart to avoid toggling off
                             const inCart = cart.some(item => item.id === addId);
                             if (!inCart) {
                                 toggleCart(addId);
-                                showToast(`¡${product.name} agregado a tu lista!`, 'fa-cart-plus');
                             }
-                            // Clean URL
                             const newUrl = window.location.pathname + window.location.search.replace(/[\?&]add=[^&]+/, '').replace(/^&/, '?');
                             window.history.replaceState({}, '', newUrl);
                         }
@@ -1477,31 +1587,23 @@
                     renderBrandOptions();
                     filterProducts();
                 } else {
-                    console.error("Error: productsDB not found.");
-                    productGrid.innerHTML = `
-                        <div style="text-align:center; padding: 2rem; color: #dc2626; background: #fef2f2; border-radius: 12px;">
-                            <i class="fa-solid fa-triangle-exclamation" style="font-size: 2.5rem; margin-bottom: 1rem;"></i>
-                            <h3>Error de Datos</h3>
-                            <p>No se pudo cargar la base de datos de productos.</p>
-                        </div>
-                    `;
+                    productGrid.innerHTML = '<p>Error cargando productos.</p>';
                 }
             }, 300);
         }
 
-        // Render Logic
         function renderProducts(products) {
             const searchTerm = searchInput.value.trim().toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
             productGrid.innerHTML = '';
+            productGrid.className = currentView === 'grid' ? 'catalog-grid grid-view' : 'catalog-grid';
 
-            // Update Result Count
             if (resultCount) {
                 resultCount.innerText = `${products.length} producto${products.length !== 1 ? 's' : ''} encontrado${products.length !== 1 ? 's' : ''}`;
             }
 
             if (products.length === 0) {
                 productGrid.innerHTML = `
-                    <div style="text-align:center; padding: 4rem; color: #94a3b8;">
+                    <div style="text-align:center; padding: 4rem; color: #94a3b8; width: 100%; grid-column: 1 / -1;">
                         <i class="fa-regular fa-folder-open" style="font-size: 3rem; margin-bottom: 1rem;"></i>
                         <p>No encontramos productos con esa búsqueda.</p>
                     </div>
@@ -1515,30 +1617,19 @@
                 if (prod.category === 'papeleria') icon = 'fa-pen-ruler';
                 if (prod.category.includes('accesorios')) icon = 'fa-keyboard';
 
-                // Check if in cart for button state
                 const isInCart = cart.some(item => item.id === prod.id);
                 const btnClass = isInCart ? 'btn-add-cart added' : 'btn-add-cart';
-                const btnText = isInCart ? '<i class="fa-solid fa-check"></i> Quitar' : '<i class="fa-solid fa-plus"></i> Agregar';
+                const btnText = isInCart ? '<i class="fa-solid fa-check"></i> En lista' : '<i class="fa-solid fa-plus"></i> Agregar';
                 const btnStyle = isInCart ? 'background-color: var(--ic-magenta); color: white; border-color: var(--ic-magenta);' : '';
 
-                const card = document.createElement('div');
-                // Removed brandClass dependency for cleaner look, now using logos
-                card.className = `product-list-card`;
-
-                // Add staggered animation delay
-                card.style.animationDelay = `${index * 0.05}s`;
-
-                // Image Handling
-                let imgHtml = `<i class="fa-solid ${icon}"></i>`;
-                let imgClick = '';
                 const v = Date.now();
+                let imgHtml = `<i class="fa-solid ${icon}"></i>`;
+                let imgSrc = '';
                 if (prod.image && prod.image.trim() !== '') {
-                    const imgSrc = `${prod.image}?v=${v}`;
-                    imgHtml = `<img src="${imgSrc}" alt="${prod.name}" loading="lazy" onerror="this.onerror=null;this.parentNode.innerHTML='<i class=\\'fa-solid ${icon}\\'></i>'">`;
-                    imgClick = `onclick="openLightbox('${imgSrc}')" style="cursor: zoom-in;"`;
+                    imgSrc = `${prod.image}?v=${v}`;
+                    imgHtml = `<img src="${imgSrc}" alt="${prod.name}" class="${currentView === 'grid' ? 'card-img' : ''}" loading="lazy" onerror="this.onerror=null;this.parentNode.innerHTML='<i class=\\'fa-solid ${icon}\\'></i>'">`;
                 }
 
-                // Brand Logo Logic
                 const brandName = prod.brand || "Otros";
                 let brandLogoUrl = getBrandLogo(brandName);
                 if (brandLogoUrl) brandLogoUrl += `?v=${v}`;
@@ -1547,36 +1638,67 @@
                         <img src="${brandLogoUrl}" alt="${brandName}" onerror="this.parentNode.style.display='none'">
                      </div>` : '';
 
-                // Highlight Text Logic
                 const nameHighlighted = highlightText(prod.name, searchTerm);
 
-                card.innerHTML = `
-                    ${badgeHtml}
-                    <div class="prod-image" ${imgClick}>
-                        ${imgHtml}
-                    </div>
-                    <div class="prod-info">
-                        <span class="prod-code">
-                            ${prod.id}
-                            <button class="copy-btn" onclick="copyToClipboard('${prod.id}')" title="Copiar código">
-                                <i class="fa-regular fa-copy"></i>
+                const card = document.createElement('div');
+                if (currentView === 'grid') {
+                    card.className = 'product-card';
+                    card.innerHTML = `
+                        ${badgeHtml}
+                        <div class="card-img-container" onclick="openLightbox('${imgSrc}')" style="cursor: zoom-in;">
+                            ${imgHtml}
+                        </div>
+                        <div class="card-content">
+                            <span class="prod-code" style="margin-bottom: 8px;">
+                                ${prod.id}
+                                <button class="copy-btn" onclick="copyToClipboard('${prod.id}')" title="Copiar código">
+                                    <i class="fa-regular fa-copy"></i>
+                                </button>
+                            </span>
+                            <h3 style="font-size: 1rem; margin-bottom: 10px; min-height: 2.4em; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">${nameHighlighted}</h3>
+                            <div style="margin-top: auto; display: flex; flex-direction: column; gap: 8px;">
+                                <button id="add-btn-${prod.id}" onclick="toggleCart('${prod.id}')" class="${btnClass}" style="width:100%; justify-content:center; ${btnStyle}">
+                                    ${btnText}
+                                </button>
+                                <a href="https://wa.me/523312680092?text=Hola,%20me%20interesa%20el%20producto%20con%20código:%20${prod.id}" 
+                                   target="_blank" 
+                                   class="btn-card" style="width:100%; text-align:center; display:block; padding: 10px; background:#f1f5f9; border-radius:8px; font-weight:700; color:var(--ic-dark-gray);">
+                                   <i class="fa-brands fa-whatsapp"></i> Cotizar
+                                </a>
+                            </div>
+                        </div>
+                    `;
+                } else {
+                    card.className = `product-list-card`;
+                    card.innerHTML = `
+                        ${badgeHtml}
+                        <div class="prod-image" onclick="openLightbox('${imgSrc}')" style="cursor: zoom-in;">
+                            ${imgHtml}
+                        </div>
+                        <div class="prod-info">
+                            <span class="prod-code">
+                                ${prod.id}
+                                <button class="copy-btn" onclick="copyToClipboard('${prod.id}')" title="Copiar código">
+                                    <i class="fa-regular fa-copy"></i>
+                                </button>
+                            </span>
+                            <h3>${nameHighlighted}</h3>
+                            <p class="prod-desc">${prod.description}</p>
+                            ${prod.compatibility ? `<p style="font-size:0.8rem; color:var(--ic-magenta); margin-top:5px;"><b>Compatible con:</b> ${prod.compatibility}</p>` : ''}
+                        </div>
+                        <div class="prod-action">
+                             <button id="add-btn-${prod.id}" onclick="toggleCart('${prod.id}')" class="${btnClass}" style="${btnStyle}">
+                                ${btnText}
                             </button>
-                        </span>
-                        <h3>${nameHighlighted}</h3>
-                        <p class="prod-desc">${prod.description}</p>
-                        ${prod.compatibility ? `<p style="font-size:0.8rem; color:var(--ic-magenta); margin-top:5px;"><b>Compatible con:</b> ${prod.compatibility}</p>` : ''}
-                    </div>
-                    <div class="prod-action">
-                         <button id="add-btn-${prod.id}" onclick="toggleCart('${prod.id}')" class="${btnClass}" style="${btnStyle}">
-                            ${btnText}
-                        </button>
-                         <a href="https://wa.me/523312680092?text=Hola,%20me%20interesa%20el%20producto%20con%20código:%20${prod.id}" 
-                           target="_blank" 
-                           class="btn-card">
-                           Cotizar
-                        </a>
-                    </div>
-                `;
+                             <a href="https://wa.me/523312680092?text=Hola,%20me%20interesa%20el%20producto%20con%20código:%20${prod.id}" 
+                               target="_blank" 
+                               class="btn-card">
+                               Cotizar
+                            </a>
+                        </div>
+                    `;
+                }
+                card.style.animationDelay = `${index * 0.03}s`;
                 productGrid.appendChild(card);
             });
         }
@@ -1584,9 +1706,7 @@
         function renderBrandOptions() {
             const container = document.getElementById('brandOptions');
             if (!container) return;
-
             const brands = [...new Set(productsDB.map(p => p.brand).filter(b => b && b !== 'Otros' && b.trim() !== ''))].sort();
-
             container.innerHTML = brands.map(brand => `
                 <label class="filter-check">
                     <input type="checkbox" name="brand" value="${brand}" onchange="filterProducts()">
@@ -1600,32 +1720,22 @@
             `;
         }
 
-        // Helper for Logos
         function getBrandLogo(brandName) {
-            // Priority: Local Optimized PNGs
             const cleanName = brandName.toLowerCase().trim();
             if (!cleanName || cleanName === 'otros') return null;
-
             return `assets/images/brands/${cleanName.replace(/[^a-z0-9]/g, '')}.png`;
         }
 
         function filterProducts() {
             const searchTerm = searchInput.value.trim().toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
             const searchWords = searchTerm.split(/\s+/).filter(w => w.length > 0);
-
-            // Get selected Category (Radio)
             const catRadio = document.querySelector('input[name="category"]:checked');
             const categoryValue = catRadio ? catRadio.value : 'all';
-
-            // Get selected Brands (Checkboxes)
             const checkedBrands = Array.from(document.querySelectorAll('input[name="brand"]:checked')).map(cb => cb.value.toLowerCase());
-
             const sortValue = sortFilter.value;
 
             let filtered = productsDB.filter(prod => {
                 if (!prod.name) return false;
-
-                // 1. Text Search (Check if ALL search words are present)
                 const prodName = prod.name.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
                 const prodId = prod.id.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
                 const prodDesc = prod.description ? prod.description.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "") : "";
@@ -1634,25 +1744,15 @@
 
                 const combinedData = `${prodId} ${prodName} ${prodDesc} ${prodComp} ${prodBrand}`;
                 const matchesSearch = searchWords.every(word => combinedData.includes(word));
-
-                // 2. Category
                 const matchesCategory = categoryValue === 'all' || prod.category === categoryValue;
 
-                // 3. Brand (Multi-select)
                 let matchesBrand = true;
                 if (checkedBrands.length > 0) {
-                    const prodBrand = getBrand(prod).toLowerCase();
                     matchesBrand = checkedBrands.includes(prodBrand);
-                    // Handle "otros" if needed broadly or specific brand matching logic
-                    if (checkedBrands.includes('otros') && !['brother', 'canon', 'hp', 'lexmark', 'xerox'].includes(prodBrand)) {
-                        matchesBrand = true;
-                    }
                 }
-
                 return matchesSearch && matchesCategory && matchesBrand;
             });
 
-            // Update Filter Count UI for Mobile
             const filterCountEl = document.getElementById('filterCount');
             const totalFilters = (categoryValue !== 'all' ? 1 : 0) + checkedBrands.length;
             if (filterCountEl) {
@@ -1660,26 +1760,16 @@
                 filterCountEl.style.display = totalFilters > 0 ? 'inline-flex' : 'none';
             }
 
-            // Sorting Logic
             if (sortValue === 'az') {
                 filtered.sort((a, b) => a.name.localeCompare(b.name, 'es', { sensitivity: 'base' }));
             } else if (sortValue === 'za') {
                 filtered.sort((a, b) => b.name.localeCompare(a.name, 'es', { sensitivity: 'base' }));
-            }
-            // Brand sort is less relevant with checkbox filters but can keep if desired
-            else if (sortValue === 'brand') {
-                filtered.sort((a, b) => {
-                    const brandA = getBrand(a);
-                    const brandB = getBrand(b);
-                    return brandA.localeCompare(brandB) || a.name.localeCompare(b.name, 'es', { sensitivity: 'base' });
-                });
             }
 
             renderProducts(filtered);
             renderActiveFilters();
         }
 
-        // Active Filters Chip Logic
         function renderActiveFilters() {
             const container = document.getElementById('activeFilters');
             if (!container) return;
@@ -1690,7 +1780,6 @@
             const checkedBrands = Array.from(document.querySelectorAll('input[name="brand"]:checked'));
             let hasFilters = false;
 
-            // Search Filter
             if (searchTerm) {
                 hasFilters = true;
                 container.appendChild(createChip(`"${searchTerm}"`, () => {
@@ -1699,35 +1788,17 @@
                 }));
             }
 
-            // Category Filter (only show if not 'all')
             if (catRadio && catRadio.value !== 'all') {
                 hasFilters = true;
-                // Map values to readable labels if needed
-                const catLabels = {
-                    'toner': 'Tóners',
-                    'papeleria': 'Papelería',
-                    'accesorios': 'Accesorios'
-                };
-                const label = catLabels[catRadio.value] || catRadio.value;
-
-                container.appendChild(createChip(label, () => {
-                    // Reset to 'all'
+                const catLabels = { 'toner': 'Tóners', 'papeleria': 'Papelería', 'accesorios': 'Accesorios' };
+                container.appendChild(createChip(catLabels[catRadio.value] || catRadio.value, () => {
                     const allRadio = document.querySelector('input[name="category"][value="all"]');
                     if (allRadio) allRadio.checked = true;
-                    // Reset UI (show full list if hidden by Focus Mode)
-                    const catOptions = document.querySelector('.filter-options');
-                    const catGroup = document.querySelector('.filter-group h4');
-                    if (catOptions) catOptions.style.display = 'block';
-                    if (catGroup) catGroup.style.display = 'block';
-                    // Check if back link exists and remove?
-                    // Not strictly necessary as filterProducts re-runs logic but focus mode logic is separate.
-                    // Ideally we refresh page title too.
                     pageTitle.innerText = 'Catálogo de Productos';
                     filterProducts();
                 }));
             }
 
-            // Brand Filters
             checkedBrands.forEach(cb => {
                 hasFilters = true;
                 container.appendChild(createChip(cb.value, () => {
@@ -1736,7 +1807,6 @@
                 }));
             });
 
-            // Clear All Button
             if (hasFilters) {
                 const clearBtn = document.createElement('button');
                 clearBtn.className = 'clear-all-filters';
@@ -1746,14 +1816,7 @@
                     const allRadio = document.querySelector('input[name="category"][value="all"]');
                     if (allRadio) allRadio.checked = true;
                     document.querySelectorAll('input[name="brand"]').forEach(cb => cb.checked = false);
-
-                    // Reset UI for Focus Mode
-                    const catOptions = document.querySelector('.filter-options');
-                    const catGroup = document.querySelector('.filter-group h4');
-                    if (catOptions) catOptions.style.display = 'block';
-                    if (catGroup) catGroup.style.display = 'block';
                     pageTitle.innerText = 'Catálogo de Productos';
-
                     filterProducts();
                 };
                 container.appendChild(clearBtn);
@@ -1773,58 +1836,25 @@
 
         function toggleMobileFilters() {
             const sidebar = document.getElementById('filterSidebar');
-            // Check if overlay exists, if not create/select it properly
             let overlay = document.querySelector('.filter-overlay');
             if (sidebar) sidebar.classList.toggle('active');
             if (overlay) overlay.classList.toggle('active');
         }
 
-        // URL Params Logic with Focus Mode
+        // Initialize Everything
         const urlParams = new URLSearchParams(window.location.search);
         const codeParam = urlParams.get('cat');
-
         if (codeParam) {
-            // Check the proper radio
             const radio = document.querySelector(`input[name="category"][value="${codeParam}"]`);
             if (radio) {
                 radio.checked = true;
-
-                // Update Title
                 if (codeParam === 'toner') pageTitle.innerText = 'Catálogo de Tóners';
                 if (codeParam === 'papeleria') pageTitle.innerText = 'Catálogo de Papelería';
                 if (codeParam === 'accesorios') pageTitle.innerText = 'Accesorios de Cómputo';
-
-                // FOCUS MODE: Hide other categories and show navigation back
-                const catGroup = document.querySelector('.filter-group h4'); // "Categorías" label
-                const catOptions = document.querySelector('.filter-options'); // Container of radios
-
-                if (catGroup && catOptions) {
-                    // Hide the standard list
-                    catOptions.style.display = 'none';
-                    catGroup.style.display = 'none';
-
-                    // Create "Back" button container
-                    const backContainer = document.createElement('div');
-                    backContainer.innerHTML = `
-                        <a href="catalogo.html" style="display:flex; align-items:center; gap:8px; color:var(--ic-text-gray); text-decoration:none; margin-bottom:1rem; font-size:0.9rem;">
-                            <i class="fa-solid fa-arrow-left"></i> Ver todas las categorías
-                        </a>
-                        <h4 style="margin-bottom:0.5rem; color:var(--ic-magenta);">${pageTitle.innerText}</h4>
-                        <div style="height:2px; width:40px; background:var(--ic-magenta); margin-bottom:1.5rem;"></div>
-                    `;
-
-                    // Insert before the Marcas group
-                    const marcasGroup = document.querySelectorAll('.filter-group')[1]; // Assume Marcas is second
-                    if (marcasGroup) {
-                        marcasGroup.parentNode.insertBefore(backContainer, marcasGroup);
-                    }
-                }
             }
         }
 
-        // Event Listeners
         searchInput.addEventListener('input', filterProducts);
-        // Radio Button Listener
         document.querySelectorAll('input[name="category"]').forEach(radio => {
             radio.addEventListener('change', () => {
                 filterProducts();
@@ -1837,40 +1867,17 @@
         });
         sortFilter.addEventListener('change', filterProducts);
 
-        // Sticky Search Bar Scroll Logic
         window.addEventListener('scroll', () => {
-            const searchContainer = document.querySelector('.search-container');
-            const heroHeight = document.querySelector('.catalog-hero').offsetHeight;
-            const scrollPos = window.scrollY;
-
-            if (scrollPos > heroHeight - 100) {
-                searchContainer.classList.add('sticky');
-            } else {
-                searchContainer.classList.remove('sticky');
-            }
-
-            // Scroll to Top Button Visibility
-            if (scrollPos > 500) {
-                scrollToTopBtn.classList.add('show');
-            } else {
-                scrollToTopBtn.classList.remove('show');
-            }
+            const sc = document.querySelector('.search-sort-bar');
+            if (sc && window.scrollY > 400) sc.classList.add('sticky');
+            else if (sc) sc.classList.remove('sticky');
         });
 
-
-
-        // Initialize
         updateCartCount();
-
-        // Cargar productos con cache-buster para evitar versiones viejas
-        const script = document.createElement('script');
-        script.src = `assets/js/productos.js?v=${Date.now()}`;
-        script.onload = () => {
-            console.log("Database loaded!");
-            loadProducts();
-        };
-        document.body.appendChild(script);
+        const scProd = document.createElement('script');
+        scProd.src = `assets/js/productos.js?v=${Date.now()}`;
+        scProd.onload = loadProducts;
+        document.body.appendChild(scProd);
 
     </script>
-
 </body>
