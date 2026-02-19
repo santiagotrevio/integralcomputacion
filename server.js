@@ -273,6 +273,8 @@ app.post('/api/publish', (req, res) => {
     });
 });
 
+const scoutPrice = require('./scripts/price_scout');
+
 app.get('/api/scout-price/:model', async (req, res) => {
     try {
         const name = req.query.name || "";

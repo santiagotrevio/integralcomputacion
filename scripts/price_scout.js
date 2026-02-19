@@ -21,14 +21,15 @@ async function scoutPrice(model, name = "") {
     // --- LIMPIEZA AVANZADA DE IDENTIFICADOR ---
     // Muchos ERPs añaden prefijos como HT, IT, SKU, etc.
     // También aislamos el código si viene pegado a la marca: HPW2122A -> W2122A
+    // --- LIMPIEZA AVANZADA DE IDENTIFICADOR ---
     let cleanId = model.trim().toUpperCase()
-        .replace(/^(HT|IT|SKU|PROD|COD|REF|ART|ITEM|LOTE|KIT|COMP|GEN|OEM|HP|LX|BR|CANON|EPSON|SAMSUNG|BROTHER)+/i, '')
+        .replace(/^(HT|IT|SKU|PROD|COD|REF|ART|ITEM|LOTE|KIT|COMP|GEN|OEM|HP|LX|BR|CANON|EPSON|SAMSUNG|BROTHER|Z)+/i, '')
         .replace(/^[-_ ]+/, '');
 
-    // Si la limpieza dejó algo muy corto o vacío, regresamos al original
-    if (cleanId.length < 3) cleanId = model;
+    if (cleanId.length < 3) cleanId = model.toUpperCase();
+    const numericId = cleanId.replace(/\D/g, ''); // Solo números para match relajado
 
-    // Generar versiones con espacio para mejorar búsqueda: CE400X -> CE 400X
+    // Generar versiones con espacio
     const spacedId = cleanId.replace(/([A-Z]+)(\d+)/, '$1 $2');
 
     // --- DETECCIÓN DE COLOR ---
@@ -71,8 +72,24 @@ async function scoutPrice(model, name = "") {
     // Tiendas prioritarias en México
     const priorityStores = ['Va de volada', 'Cyberpuerta', 'CAD Toner', 'PCEL', 'Abasteo', 'Amazon', 'Mercado Libre', 'Office Depot', 'Walmart', 'Zegucom', 'Intercompras', 'Claro Shop'];
 
+    // --- DETECCIÓN DE CATEGORÍA ---
+    let categoryPrefix = ""; // Neutral por defecto
+    if (lowerName.includes("toner") || lowerName.includes("polvo")) {
+        categoryPrefix = "toner";
+    } else if (lowerName.includes("papel") || lowerName.includes("bond") || lowerName.includes("hojas") || lowerName.includes("oficio")) {
+        categoryPrefix = "papel";
+    } else if (lowerName.includes("laptop") || lowerName.includes("computadora") || lowerName.includes("macbook") || lowerName.includes("notebook")) {
+        categoryPrefix = "laptop";
+    } else if (lowerName.includes("tinta") || lowerName.includes("cartucho") || lowerName.includes("ink")) {
+        categoryPrefix = "tinta";
+    } else if (lowerName.includes("impresora") || lowerName.includes("multifuncional") || lowerName.includes("laserjet")) {
+        categoryPrefix = "impresora";
+    }
+
     const searchFunction = async (term) => {
-        const query = encodeURIComponent(`toner ${term} precio mexico`);
+        const finalQuery = `${categoryPrefix} ${term} precio mexico`.trim();
+        const query = encodeURIComponent(finalQuery);
+        console.log(`🔎 Buscando: "${finalQuery}"`);
         const searchPage = await browser.newPage();
 
         // Debug logs de la página
@@ -211,7 +228,69 @@ async function scoutPrice(model, name = "") {
         } finally {
             await searchPage.close();
         }
-        return localResults;
+
+        // --- FILTRO ESTRÍCTO DE RELEVANCIA ---
+        const genericStartWords = ['etiqueta', 'papel', 'toner', 'cartucho', 'tinta', 'hojas', 'bond', 'oficio', 'carta', 'caja', 'kit', 'original', 'generico', 'compatible', 'premium', 'nuevo', 'rollo'];
+        const knownBrands = ['zebra', 'hp', 'xerox', 'lexmark', 'samsung', 'brother', 'epson', 'canon', 'pantum', 'okidata', 'kyocera', 'ricoh', 'sharp', 'toshiba', 'kronaline', 'navitek', 'janel'];
+
+        let brandMatch = "";
+        const nameParts = name.toLowerCase().split(/[\s,.-]+/);
+        brandMatch = nameParts.find(word => knownBrands.includes(word)) || "";
+
+        if (!brandMatch) {
+            for (const word of nameParts) {
+                if (!genericStartWords.includes(word) && word.length > 2) {
+                    brandMatch = word;
+                    break;
+                }
+            }
+        }
+
+        const idLower = cleanId.toLowerCase();
+        const altIdLower = bestNameMatch ? bestNameMatch.toLowerCase() : idLower;
+        const numId = (numericId && numericId.length >= 4) ? numericId : "____NONE____";
+
+        return localResults.filter(res => {
+            const titleLower = res.title.toLowerCase();
+
+            // 0. EXCLUSIÓN DE BASURA (PDFs, Buscadores genéricos, etc)
+            if (titleLower.includes(".pdf") || titleLower.includes("adjudicaciones") || titleLower.includes("transparencia") ||
+                titleLower.includes("pdf)") || titleLower.includes("licitacion") || titleLower.includes("gob.mx")) return false;
+
+            // 1. ANÁLISIS DE CATEGORÍA (RECHAZO ABSOLUTO)
+            const isTonerProduct = (titleLower.includes("toner") || titleLower.includes("polvo") || titleLower.includes("drum") || titleLower.includes("tambor") || titleLower.includes("unidad de imagen"));
+            const isPaperProduct = (titleLower.includes("papel") || titleLower.includes("etiqueta") || titleLower.includes("bond") || titleLower.includes("hoja") || titleLower.includes("rollo") || titleLower.includes("ttr"));
+            const isInkProduct = (titleLower.includes("tinta") || titleLower.includes("ink") || titleLower.includes("cartucho"));
+
+            // BLOQUEO CRUZADO: Papel vs Consumibles Químicos
+            if (categoryPrefix === "papel" || lowerName.includes("etiqueta") || lowerName.includes("rollo")) {
+                if (isTonerProduct || isInkProduct) return false; // Prohibido toners si buscamos papel
+            }
+            if (categoryPrefix === "toner" || categoryPrefix === "tinta") {
+                if (isPaperProduct) return false; // Prohibido papel si buscamos toner
+            }
+
+            // 2. VALIDACIÓN DE MODELO
+            const hasModelId = (idLower.length > 3 && titleLower.includes(idLower)) ||
+                (altIdLower.length > 3 && titleLower.includes(altIdLower)) ||
+                (numId !== "____NONE____" && titleLower.includes(numId));
+
+            // 3. VALIDACIÓN DE MARCA Y COINCIDENCIA SEMÁNTICA
+            // Si tiene el ID del modelo Y pasó el filtro de categoría, es muy probable que sea correcto
+            if (hasModelId) return true;
+
+            // Sin ID: Validar marca y palabras clave (extremadamente estricto)
+            const isBrandRelevant = brandMatch.length > 2 ? titleLower.includes(brandMatch) : false;
+
+            const keywords = name.toLowerCase().split(' ')
+                .filter(w => w.length > 3 && !genericStartWords.includes(w) && w !== brandMatch);
+
+            const matchCount = keywords.filter(kw => titleLower.includes(kw)).length;
+            const matchRatio = keywords.length > 0 ? matchCount / keywords.length : 0;
+
+            // Para ser válido sin ID: Marca + 2 palabras clave descriptivas
+            return isBrandRelevant && matchCount >= 2;
+        });
     };
 
     try {
@@ -241,20 +320,14 @@ async function scoutPrice(model, name = "") {
 
         let finalResults = Array.from(finalResultsMap.values());
 
-        // Ordenar por tiendas prioritarias y luego por precio
+        // Ordenar por precio de MAYOR a MENOR (como solicitó el usuario)
         finalResults.sort((a, b) => {
-            // Priorizar resultados con URL
+            // Priorizar resultados con URL (estos son siempre más útiles)
             if (a.url && !b.url) return -1;
             if (!a.url && b.url) return 1;
 
-            const scoreIndexA = priorityStores.findIndex(s => a.store.toLowerCase().includes(s.toLowerCase()));
-            const scoreIndexB = priorityStores.findIndex(s => b.store.toLowerCase().includes(s.toLowerCase()));
-
-            const scoreA = scoreIndexA === -1 ? 999 : scoreIndexA;
-            const scoreB = scoreIndexB === -1 ? 999 : scoreIndexB;
-
-            if (scoreA !== scoreB) return scoreA - scoreB;
-            return a.price - b.price;
+            // Orden global por precio descendente
+            return b.price - a.price;
         });
 
         if (browser) await browser.close();
