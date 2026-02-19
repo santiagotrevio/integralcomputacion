@@ -7,7 +7,7 @@
       "minP": 24989,
       "maxP": 28737,
       "id": "MLM27949998",
-      "demanda": "94.4%",
+      "demanda": "92.9%",
       "opti": "LIVE DATA"
     },
     {
@@ -17,7 +17,7 @@
       "minP": 24989,
       "maxP": 28737,
       "id": "MLM27949998",
-      "demanda": "86.0%",
+      "demanda": "92.1%",
       "opti": "LIVE DATA"
     },
     {
@@ -27,7 +27,7 @@
       "minP": 30599,
       "maxP": 35188,
       "id": "MLM37637979",
-      "demanda": "93.2%",
+      "demanda": "89.7%",
       "opti": "LIVE DATA"
     },
     {
@@ -37,7 +37,7 @@
       "minP": 30599,
       "maxP": 35188,
       "id": "MLM37637979",
-      "demanda": "90.0%",
+      "demanda": "93.0%",
       "opti": "LIVE DATA"
     },
     {
@@ -47,7 +47,7 @@
       "minP": 30942,
       "maxP": 35583,
       "id": "MLM62377449",
-      "demanda": "90.9%",
+      "demanda": "91.4%",
       "opti": "LIVE DATA"
     },
     {
@@ -57,7 +57,7 @@
       "minP": 30942,
       "maxP": 35583,
       "id": "MLM62377449",
-      "demanda": "91.2%",
+      "demanda": "89.4%",
       "opti": "LIVE DATA"
     },
     {
@@ -67,7 +67,7 @@
       "minP": 34999,
       "maxP": 40248,
       "id": "MLM48946044",
-      "demanda": "86.0%",
+      "demanda": "94.0%",
       "opti": "LIVE DATA"
     },
     {
@@ -77,7 +77,7 @@
       "minP": 34999,
       "maxP": 40248,
       "id": "MLM48946044",
-      "demanda": "90.2%",
+      "demanda": "92.6%",
       "opti": "LIVE DATA"
     },
     {
@@ -87,7 +87,7 @@
       "minP": 20000,
       "maxP": 23000,
       "id": "MLM65521407",
-      "demanda": "94.8%",
+      "demanda": "90.7%",
       "opti": "LIVE DATA"
     },
     {
@@ -97,7 +97,7 @@
       "minP": 20000,
       "maxP": 23000,
       "id": "MLM65521407",
-      "demanda": "86.5%",
+      "demanda": "91.6%",
       "opti": "LIVE DATA"
     }
   ],
@@ -109,7 +109,7 @@
       "minP": 299,
       "maxP": 343,
       "id": "MLM42097020",
-      "demanda": "85.7%",
+      "demanda": "91.6%",
       "opti": "LIVE DATA"
     },
     {
@@ -119,7 +119,7 @@
       "minP": 299,
       "maxP": 343,
       "id": "MLM42097020",
-      "demanda": "94.1%",
+      "demanda": "93.5%",
       "opti": "LIVE DATA"
     },
     {
@@ -129,7 +129,7 @@
       "minP": 199,
       "maxP": 228,
       "id": "MLM47825116",
-      "demanda": "89.5%",
+      "demanda": "90.0%",
       "opti": "LIVE DATA"
     },
     {
@@ -139,7 +139,7 @@
       "minP": 199,
       "maxP": 228,
       "id": "MLM47825116",
-      "demanda": "94.6%",
+      "demanda": "90.8%",
       "opti": "LIVE DATA"
     },
     {
@@ -149,7 +149,7 @@
       "minP": 180,
       "maxP": 206,
       "id": "MLM26971450",
-      "demanda": "86.7%",
+      "demanda": "91.7%",
       "opti": "LIVE DATA"
     },
     {
@@ -159,7 +159,7 @@
       "minP": 180,
       "maxP": 206,
       "id": "MLM26971450",
-      "demanda": "88.5%",
+      "demanda": "90.9%",
       "opti": "LIVE DATA"
     },
     {
@@ -169,7 +169,7 @@
       "minP": 194,
       "maxP": 223,
       "id": "MLM-754447817",
-      "demanda": "86.2%",
+      "demanda": "86.3%",
       "opti": "LIVE DATA"
     },
     {
@@ -179,27 +179,27 @@
       "minP": 194,
       "maxP": 223,
       "id": "MLM-754447817",
-      "demanda": "89.0%",
+      "demanda": "85.3%",
       "opti": "LIVE DATA"
     },
     {
       "b": "Cuadernos",
-      "n": "Cuadernos Libretas Scribe Profesional 100 Hojas 36 Piezas Color Cuadro Grande",
+      "n": "Cuadernos Libretas Scribe Profesional 100 Hojas 36 Piezas Color Cuadro Chico",
       "c": "papeleria",
-      "minP": 1109,
-      "maxP": 1275,
-      "id": "MLM49924647",
-      "demanda": "88.9%",
+      "minP": 990,
+      "maxP": 1138,
+      "id": "MLM49781491",
+      "demanda": "90.8%",
       "opti": "LIVE DATA"
     },
     {
       "b": "Cuadernos",
-      "n": "Cuadernos Libretas Scribe Profesional 100 Hojas 36 Piezas Color Cuadro Grande",
+      "n": "Cuadernos Libretas Scribe Profesional 100 Hojas 36 Piezas Color Cuadro Chico",
       "c": "papeleria",
-      "minP": 1109,
-      "maxP": 1275,
-      "id": "MLM49924647",
-      "demanda": "86.6%",
+      "minP": 990,
+      "maxP": 1138,
+      "id": "MLM49781491",
+      "demanda": "87.6%",
       "opti": "LIVE DATA"
     }
   ],
@@ -211,7 +211,7 @@
       "minP": 2830,
       "maxP": 3254,
       "id": "MLM23086242",
-      "demanda": "90.7%",
+      "demanda": "89.5%",
       "opti": "LIVE DATA"
     },
     {
@@ -221,7 +221,7 @@
       "minP": 2830,
       "maxP": 3254,
       "id": "MLM23086242",
-      "demanda": "89.9%",
+      "demanda": "90.9%",
       "opti": "LIVE DATA"
     },
     {
@@ -231,7 +231,7 @@
       "minP": 950,
       "maxP": 1092,
       "id": "MLM36794468",
-      "demanda": "91.8%",
+      "demanda": "88.4%",
       "opti": "LIVE DATA"
     },
     {
@@ -241,16 +241,6 @@
       "minP": 950,
       "maxP": 1092,
       "id": "MLM36794468",
-      "demanda": "94.3%",
-      "opti": "LIVE DATA"
-    },
-    {
-      "b": "Pack",
-      "n": "Pack 2 Toner 85a / 36a / 35a P1005 / 1102w Compatible Tinta Negro",
-      "c": "toner",
-      "minP": 318,
-      "maxP": 365,
-      "id": "MLM44776197",
       "demanda": "88.0%",
       "opti": "LIVE DATA"
     },
@@ -261,6 +251,26 @@
       "minP": 318,
       "maxP": 365,
       "id": "MLM44776197",
+      "demanda": "94.1%",
+      "opti": "LIVE DATA"
+    },
+    {
+      "b": "Pack",
+      "n": "Pack 2 Toner 85a / 36a / 35a P1005 / 1102w Compatible Tinta Negro",
+      "c": "toner",
+      "minP": 318,
+      "maxP": 365,
+      "id": "MLM44776197",
+      "demanda": "91.9%",
+      "opti": "LIVE DATA"
+    },
+    {
+      "b": "Cartucho",
+      "n": "Cartucho De Tóner Hp 105a Negro Laserjet",
+      "c": "toner",
+      "minP": 1492,
+      "maxP": 1715,
+      "id": "MLM36750869",
       "demanda": "94.2%",
       "opti": "LIVE DATA"
     },
@@ -271,17 +281,7 @@
       "minP": 1492,
       "maxP": 1715,
       "id": "MLM36750869",
-      "demanda": "93.2%",
-      "opti": "LIVE DATA"
-    },
-    {
-      "b": "Cartucho",
-      "n": "Cartucho De Tóner Hp 105a Negro Laserjet",
-      "c": "toner",
-      "minP": 1492,
-      "maxP": 1715,
-      "id": "MLM36750869",
-      "demanda": "85.9%",
+      "demanda": "95.0%",
       "opti": "LIVE DATA"
     },
     {
@@ -291,7 +291,7 @@
       "minP": 1894,
       "maxP": 2178,
       "id": "MLM45943709",
-      "demanda": "93.9%",
+      "demanda": "90.4%",
       "opti": "LIVE DATA"
     },
     {
@@ -301,7 +301,7 @@
       "minP": 1894,
       "maxP": 2178,
       "id": "MLM45943709",
-      "demanda": "93.6%",
+      "demanda": "93.0%",
       "opti": "LIVE DATA"
     }
   ]
