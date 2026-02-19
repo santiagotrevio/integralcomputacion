@@ -982,11 +982,11 @@ const productsDB = [
   },
   {
     "id": "ST905-210BK",
-    "category": "OTROS",
+    "category": "accesorios",
     "brand": "STEREN",
     "name": "Barra Multicontactos Steren 1.7m 15A 6 Contactos Americanas/Europeas 70J Color Negro",
     "description": "Barra Multicontactos Steren 1.7m 15A 6 Contactos Americanas/Europeas 70J Color Negro",
-    "image": ""
+    "image": "assets/images/products/toner/ST905_210BK.webp"
   },
   {
     "id": "VOKSP-500",
@@ -3817,11 +3817,11 @@ const productsDB = [
   },
   {
     "id": "STUSB2HAB5M",
-    "category": "OTROS",
+    "category": "accesorios",
     "brand": "STARTECH",
     "name": "Cable StarTech para Impresora USB A Macho - USB B Macho, 5 Metros, Negro",
     "description": "Cable StarTech para Impresora USB A Macho - USB B Macho, 5 Metros, Negro",
-    "image": ""
+    "image": "assets/images/products/toner/STUSB2HAB5M.webp"
   },
   {
     "id": "PC-994329",
@@ -4511,11 +4511,11 @@ const productsDB = [
   },
   {
     "id": "SO1000050647",
-    "category": "OTROS",
+    "category": "accesorios",
     "brand": "SONY",
     "name": "Consola PlayStation 5 Edición Digital de 825 GB: ASTRO BOT y Gran Turismo 7 Modelo PS5DIG-ASTRO",
-    "description": "Consola PlayStation 5 Edición Digital de 825 GB: ASTRO BOT y Gran Turismo 7 Modelo PS5DIG-ASTRO",
-    "image": ""
+    "description": "Consola PlayStation 5 Edición Digital de 825 GB: ASTRO BOT y Gran Turismo 7 Modelo PS5DIG-ASTRO.",
+    "image": "assets/images/products/toner/SO1000050647.webp"
   },
   {
     "id": "NXNE-206",
@@ -5650,11 +5650,11 @@ const productsDB = [
   },
   {
     "id": "STST4200MINI2",
-    "category": "OTROS",
+    "category": "accesorios",
     "brand": "STARTECH",
     "name": "HUB USB 2.0 4 PUERTOS CON CABL E INTEGRADO",
     "description": "HUB USB 2.0 4 PUERTOS CON CABL E INTEGRADO",
-    "image": ""
+    "image": "assets/images/products/toner/STST4200MINI2.webp"
   },
   {
     "id": "HS75U65QFM",
@@ -6952,11 +6952,11 @@ const productsDB = [
   },
   {
     "id": "ST905-026BK",
-    "category": "OTROS",
+    "category": "accesorios",
     "brand": "STEREN",
     "name": "MULTICONTACTO STEREN C/6 HORIZONTALNEGRO",
     "description": "MULTICONTACTO STEREN C/6 HORIZONTALNEGRO",
-    "image": ""
+    "image": "assets/images/products/toner/ST905_026BK.webp"
   },
   {
     "id": "BRDCP1617NW",
@@ -7178,11 +7178,11 @@ const productsDB = [
   },
   {
     "id": "SYSTMS641B",
-    "category": "OTROS",
+    "category": "accesorios",
     "brand": "STYLOS",
     "name": "Memoria Flash Stylos STMS641B, 64GB MicroSDHC Clase 10",
     "description": "Memoria Flash Stylos STMS641B, 64GB MicroSDHC Clase 10",
-    "image": ""
+    "image": "assets/images/products/toner/SYSTMS641B.webp"
   },
   {
     "id": "KIKTL-TS426E/16G",
@@ -7539,11 +7539,11 @@ const productsDB = [
   },
   {
     "id": "ST905-160",
-    "category": "OTROS",
+    "category": "accesorios",
     "brand": "STEREN",
     "name": "Multicontacto con supresor de picos, 3 salidas y centro de carga STEREN",
     "description": "Multicontacto con supresor de picos, 3 salidas y centro de carga STEREN",
-    "image": ""
+    "image": "assets/images/products/toner/ST905_160.webp"
   },
   {
     "id": "BRDCPT230",
@@ -7654,27 +7654,27 @@ const productsDB = [
   },
   {
     "id": "SMSBNB1800",
-    "category": "OTROS",
+    "category": "accesorios",
     "brand": "SMARTBITT",
     "name": "NO BREAK SMARTBITT 1800VA/900W 8 CONT",
     "description": "NO BREAK SMARTBITT 1800VA/900W 8 CONT",
-    "image": ""
+    "image": "assets/images/products/toner/SMSBNB1800.webp"
   },
   {
     "id": "SMSBNB500",
-    "category": "OTROS",
+    "category": "accesorios",
     "brand": "SMARTBITT",
     "name": "NO BREAK SMARTBITT 500VA/250W 4CONT",
     "description": "NO BREAK SMARTBITT 500VA/250W 4CONT",
-    "image": ""
+    "image": "assets/images/products/toner/SMSBNB500.webp"
   },
   {
     "id": "SMSBNB750",
-    "category": "OTROS",
+    "category": "accesorios",
     "brand": "SMARTBITT",
     "name": "NO BREAK SMARTBITT 750VA/375W 6CONT",
     "description": "NO BREAK SMARTBITT 750VA/375W 6CONT",
-    "image": ""
+    "image": "assets/images/products/toner/SMSBNB750.webp"
   },
   {
     "id": "KL004241006",
@@ -7750,11 +7750,11 @@ const productsDB = [
   },
   {
     "id": "SBXRN21801",
-    "category": "OTROS",
+    "category": "accesorios",
     "brand": "SOLA BASIC",
     "name": "No Break Industrias Sola Basic XRN-21-801 Micro SR inet, 500W, 800VA, Entrada 95-140V, Salida 120V",
     "description": "No Break Industrias Sola Basic XRN-21-801 Micro SR inet, 500W, 800VA, Entrada 95-140V, Salida 120V",
-    "image": ""
+    "image": "assets/images/products/toner/SBXRN21801.webp"
   },
   {
     "id": "KL0042069",
@@ -7782,11 +7782,11 @@ const productsDB = [
   },
   {
     "id": "SMSBNB1200",
-    "category": "OTROS",
+    "category": "accesorios",
     "brand": "SMARTBITT",
     "name": "No-Break Smartbitt 1200VA/600 Watts 8 contactos puerto USB para monitoreo y software",
     "description": "No-Break Smartbitt 1200VA/600 Watts 8 contactos puerto USB para monitoreo y software",
-    "image": ""
+    "image": "assets/images/products/toner/SMSBNB1200.webp"
   },
   {
     "id": "JA6560304704",
@@ -8484,11 +8484,11 @@ const productsDB = [
   },
   {
     "id": "SMSBAVRC2000",
-    "category": "OTROS",
+    "category": "accesorios",
     "brand": "SMARTBITT",
     "name": "REGULADOR SMARTBITT 2000VA/1200W 1 CONT",
     "description": "REGULADOR SMARTBITT 2000VA/1200W 1 CONT",
-    "image": ""
+    "image": "assets/images/products/toner/SMSBAVRC2000.webp"
   },
   {
     "id": "SMSBAVR2200",
@@ -8709,11 +8709,11 @@ const productsDB = [
   },
   {
     "id": "SMSBAVRC3000",
-    "category": "OTROS",
+    "category": "accesorios",
     "brand": "SMARTBITT",
     "name": "SMARTBITT REGULADOR 3000VA/2000 WATTS 4",
     "description": "SMARTBITT REGULADOR 3000VA/2000 WATTS 4",
-    "image": ""
+    "image": "assets/images/products/toner/SMSBAVRC3000.webp"
   },
   {
     "id": "PC-270164",
@@ -8941,19 +8941,19 @@ const productsDB = [
   },
   {
     "id": "SO1000038897",
-    "category": "OTROS",
+    "category": "accesorios",
     "brand": "SONY",
     "name": "Sony PlayStation 5 Slim Digital Bundle Astro Bot y Gran Turismo 7 1TB, Wi-Fi, Negro/Blanco",
-    "description": "Sony PlayStation 5 Slim Digital Bundle Astro Bot y Gran Turismo 7 1TB, Wi-Fi, Negro/Blanco",
-    "image": ""
+    "description": "Sony PlayStation 5 Slim Digital Bundle Astro Bot y Gran Turismo 7 1TB, Wi-Fi, Negro/Blanco.",
+    "image": "assets/images/products/toner/SO1000038897.webp"
   },
   {
     "id": "STRJ45SPLITTER",
-    "category": "OTROS",
+    "category": "accesorios",
     "brand": "STARTECH",
-    "name": "StarTech.com Cable Adaptador Splitter RJ-45 2x Hembra - 1x Macho, 33cm, Gris",
+    "name": "StarTech Cable Adaptador Splitter RJ-45 2x Hembra - 1x Macho, 33cm, Gris",
     "description": "StarTech.com Cable Adaptador Splitter RJ-45 2x Hembra - 1x Macho, 33cm, Gris",
-    "image": ""
+    "image": "assets/images/products/toner/STRJ45SPLITTER.webp"
   },
   {
     "id": "NXNE-156",
@@ -13894,10 +13894,10 @@ const brandSettingsDB = [
     "id": "Lexmark",
     "name": "Lexmark",
     "logo": "/assets/images/brands/lexmark.png",
-    "scale": 1.7,
+    "scale": 1.75,
     "offset_y": 0,
     "color": "#0071e3",
-    "offset_x": 0
+    "offset_x": -6
   },
   {
     "id": "HP",
@@ -14245,10 +14245,10 @@ const brandSettingsDB = [
     "id": "TOSHIBA",
     "name": "TOSHIBA",
     "logo": "/assets/images/brands/toshiba.png",
-    "scale": 1.45,
+    "scale": 1.65,
     "offset_y": 1,
     "color": "#0071e3",
-    "offset_x": -2
+    "offset_x": -3
   },
   {
     "id": "TPLINK",
@@ -14326,7 +14326,7 @@ const brandSettingsDB = [
     "id": "Xzeal",
     "name": "Xzeal",
     "logo": "/assets/images/brands/xzeal.png",
-    "scale": 1,
+    "scale": 1.4,
     "offset_y": 0,
     "color": "#0071e3",
     "offset_x": 0
@@ -14542,9 +14542,18 @@ const brandSettingsDB = [
     "id": "MAE",
     "name": "MAE",
     "logo": "/assets/images/brands/mae.png",
-    "scale": 1.6,
+    "scale": 1.65,
     "offset_y": -1,
     "color": "#0071e3",
-    "offset_x": -3
+    "offset_x": -5
+  },
+  {
+    "id": "JANEL",
+    "name": "JANEL",
+    "logo": "/assets/images/brands/janel.png",
+    "scale": 1,
+    "offset_y": 0,
+    "color": "#0071e3",
+    "offset_x": -6
   }
 ];
