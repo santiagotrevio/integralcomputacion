@@ -5340,7 +5340,7 @@ const productsDB = [
     "brand": "PERFECT CHOICE",
     "name": "FUNDA E.LINE 14  REVERSIBLE",
     "description": "FUNDA E.LINE 14  REVERSIBLE",
-    "image": "assets/images/products/toner/PC_994312.webp"
+    "image": ""
   },
   {
     "id": "PC-084570",
@@ -9337,11 +9337,11 @@ const productsDB = [
   },
   {
     "id": "PC-993391",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "PERFECT CHOICE",
     "name": "TECLADO Y MOUSE E.LINE ALAMBRICO",
     "description": "TECLADO Y MOUSE E.LINE ALAMBRICO",
-    "image": "assets/images/products/toner/PC_993391.webp"
+    "image": ""
   },
   {
     "id": "NXNE-132",
