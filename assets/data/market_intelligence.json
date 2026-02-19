@@ -7,7 +7,7 @@
       "minP": 24989,
       "maxP": 28737,
       "id": "MLM27949998",
-      "demanda": "91.5%",
+      "demanda": "92.7%",
       "opti": "LIVE DATA"
     },
     {
@@ -17,7 +17,7 @@
       "minP": 24989,
       "maxP": 28737,
       "id": "MLM27949998",
-      "demanda": "88.2%",
+      "demanda": "91.5%",
       "opti": "LIVE DATA"
     },
     {
@@ -27,7 +27,7 @@
       "minP": 30996,
       "maxP": 35645,
       "id": "MLM62377449",
-      "demanda": "94.7%",
+      "demanda": "90.7%",
       "opti": "LIVE DATA"
     },
     {
@@ -37,7 +37,7 @@
       "minP": 30996,
       "maxP": 35645,
       "id": "MLM62377449",
-      "demanda": "87.8%",
+      "demanda": "85.9%",
       "opti": "LIVE DATA"
     },
     {
@@ -47,7 +47,7 @@
       "minP": 30599,
       "maxP": 35188,
       "id": "MLM37637979",
-      "demanda": "91.1%",
+      "demanda": "87.1%",
       "opti": "LIVE DATA"
     },
     {
@@ -57,47 +57,47 @@
       "minP": 30599,
       "maxP": 35188,
       "id": "MLM37637979",
-      "demanda": "85.8%",
+      "demanda": "92.2%",
       "opti": "LIVE DATA"
     },
     {
       "b": "Laptop",
-      "n": "Laptop Gamer Asus Tuf I7-13620h 16 Ram 1tb Ssd Rtx 4060 8gb Color Mecha Gray - Excelente (Reacondicionado)",
+      "n": "Laptop Gaming MSI CYBORG 15.6 pulgadas 16gb 512gb Rtx4060 Negro",
       "c": "computo",
-      "minP": 19479,
-      "maxP": 22400,
-      "id": "MLM2010671493",
-      "demanda": "91.1%",
+      "minP": 34999,
+      "maxP": 40248,
+      "id": "MLM48946044",
+      "demanda": "90.8%",
       "opti": "LIVE DATA"
     },
     {
       "b": "Laptop",
-      "n": "Laptop Gamer Asus Tuf I7-13620h 16 Ram 1tb Ssd Rtx 4060 8gb Color Mecha Gray - Excelente (Reacondicionado)",
+      "n": "Laptop Gaming MSI CYBORG 15.6 pulgadas 16gb 512gb Rtx4060 Negro",
       "c": "computo",
-      "minP": 19479,
-      "maxP": 22400,
-      "id": "MLM2010671493",
-      "demanda": "90.9%",
-      "opti": "LIVE DATA"
-    },
-    {
-      "b": "Nvidia",
-      "n": "Nvidia Geforce Rtx 4050 MACHENIKE S15 I5 12450H DDR5 16 Gb RAM 512 GB SSD 15.6'' 144 Hz Windows 11 Pro Español latino",
-      "c": "computo",
-      "minP": 23456,
-      "maxP": 26974,
-      "id": "MLM62832865",
-      "demanda": "90.6%",
-      "opti": "LIVE DATA"
-    },
-    {
-      "b": "Nvidia",
-      "n": "Nvidia Geforce Rtx 4050 MACHENIKE S15 I5 12450H DDR5 16 Gb RAM 512 GB SSD 15.6'' 144 Hz Windows 11 Pro Español latino",
-      "c": "computo",
-      "minP": 23456,
-      "maxP": 26974,
-      "id": "MLM62832865",
+      "minP": 34999,
+      "maxP": 40248,
+      "id": "MLM48946044",
       "demanda": "94.1%",
+      "opti": "LIVE DATA"
+    },
+    {
+      "b": "Laptop",
+      "n": "Laptop Gamer Hp Victus 15.6'' Amd Ryzen 7 7445hs 16gb Ram 512 Ssd Nvidia GeForce RTX 4050",
+      "c": "computo",
+      "minP": 15399,
+      "maxP": 17708,
+      "id": "MLM53049202",
+      "demanda": "93.8%",
+      "opti": "LIVE DATA"
+    },
+    {
+      "b": "Laptop",
+      "n": "Laptop Gamer Hp Victus 15.6'' Amd Ryzen 7 7445hs 16gb Ram 512 Ssd Nvidia GeForce RTX 4050",
+      "c": "computo",
+      "minP": 15399,
+      "maxP": 17708,
+      "id": "MLM53049202",
+      "demanda": "87.8%",
       "opti": "LIVE DATA"
     }
   ],
@@ -109,7 +109,7 @@
       "minP": 299,
       "maxP": 343,
       "id": "MLM42097020",
-      "demanda": "87.0%",
+      "demanda": "88.1%",
       "opti": "LIVE DATA"
     },
     {
@@ -119,7 +119,7 @@
       "minP": 299,
       "maxP": 343,
       "id": "MLM42097020",
-      "demanda": "94.7%",
+      "demanda": "89.3%",
       "opti": "LIVE DATA"
     },
     {
@@ -129,7 +129,7 @@
       "minP": 199,
       "maxP": 228,
       "id": "MLM26883453",
-      "demanda": "92.1%",
+      "demanda": "93.3%",
       "opti": "LIVE DATA"
     },
     {
@@ -139,7 +139,17 @@
       "minP": 199,
       "maxP": 228,
       "id": "MLM26883453",
-      "demanda": "91.9%",
+      "demanda": "92.0%",
+      "opti": "LIVE DATA"
+    },
+    {
+      "b": "Kit",
+      "n": "Kit 6 Cuadernos Scribe Profesional 100 Hojas Raya Color colores",
+      "c": "papeleria",
+      "minP": 199,
+      "maxP": 228,
+      "id": "MLM47825116",
+      "demanda": "92.9%",
       "opti": "LIVE DATA"
     },
     {
@@ -153,13 +163,13 @@
       "opti": "LIVE DATA"
     },
     {
-      "b": "Kit",
-      "n": "Kit 6 Cuadernos Scribe Profesional 100 Hojas Raya Color colores",
+      "b": "Scribe",
+      "n": "Scribe Escolar Plus Cuaderno Pro 100h Cuadro Chico Pack De 6",
       "c": "papeleria",
-      "minP": 199,
-      "maxP": 228,
-      "id": "MLM47825116",
-      "demanda": "85.1%",
+      "minP": 180,
+      "maxP": 206,
+      "id": "MLM26971450",
+      "demanda": "90.2%",
       "opti": "LIVE DATA"
     },
     {
@@ -169,59 +179,39 @@
       "minP": 180,
       "maxP": 206,
       "id": "MLM26971450",
-      "demanda": "91.8%",
+      "demanda": "87.8%",
       "opti": "LIVE DATA"
     },
     {
-      "b": "Scribe",
-      "n": "Scribe Escolar Plus Cuaderno Pro 100h Cuadro Chico Pack De 6",
+      "b": "5",
+      "n": "5 Cuadernos Scribe Profesional 100 Hojas Libreta De Espiral",
       "c": "papeleria",
-      "minP": 180,
-      "maxP": 206,
-      "id": "MLM26971450",
-      "demanda": "92.5%",
+      "minP": 194,
+      "maxP": 223,
+      "id": "MLM-696907346",
+      "demanda": "92.8%",
       "opti": "LIVE DATA"
     },
     {
-      "b": "3",
-      "n": "3 Cuaderno Profesional Scribe Serie 3 Raya 100 Hojas Multicolor",
+      "b": "5",
+      "n": "5 Cuadernos Scribe Profesional 100 Hojas Libreta De Espiral",
       "c": "papeleria",
-      "minP": 450,
-      "maxP": 517,
-      "id": "MLM64297486",
-      "demanda": "94.8%",
-      "opti": "LIVE DATA"
-    },
-    {
-      "b": "3",
-      "n": "3 Cuaderno Profesional Scribe Serie 3 Raya 100 Hojas Multicolor",
-      "c": "papeleria",
-      "minP": 450,
-      "maxP": 517,
-      "id": "MLM64297486",
-      "demanda": "91.0%",
+      "minP": 194,
+      "maxP": 223,
+      "id": "MLM-696907346",
+      "demanda": "85.4%",
       "opti": "LIVE DATA"
     }
   ],
   "toner": [
     {
-      "b": "Tóner",
-      "n": "Tóner HP W2310a Negro",
+      "b": "Pack",
+      "n": "Pack 2 Toner 85a / 36a / 35a P1005 / 1102w Compatible Tinta Negro",
       "c": "toner",
-      "minP": 1441,
-      "maxP": 1657,
-      "id": "MLM36779083",
-      "demanda": "89.8%",
-      "opti": "LIVE DATA"
-    },
-    {
-      "b": "Tóner",
-      "n": "Tóner HP W2310a Negro",
-      "c": "toner",
-      "minP": 1441,
-      "maxP": 1657,
-      "id": "MLM36779083",
-      "demanda": "85.0%",
+      "minP": 318,
+      "maxP": 365,
+      "id": "MLM44776197",
+      "demanda": "92.3%",
       "opti": "LIVE DATA"
     },
     {
@@ -231,7 +221,47 @@
       "minP": 318,
       "maxP": 365,
       "id": "MLM44776197",
-      "demanda": "90.9%",
+      "demanda": "85.1%",
+      "opti": "LIVE DATA"
+    },
+    {
+      "b": "Tóner",
+      "n": "Tóner HP W2310a Negro",
+      "c": "toner",
+      "minP": 1441,
+      "maxP": 1657,
+      "id": "MLM36779083",
+      "demanda": "91.9%",
+      "opti": "LIVE DATA"
+    },
+    {
+      "b": "Tóner",
+      "n": "Tóner HP W2310a Negro",
+      "c": "toner",
+      "minP": 1441,
+      "maxP": 1657,
+      "id": "MLM36779083",
+      "demanda": "93.4%",
+      "opti": "LIVE DATA"
+    },
+    {
+      "b": "Tóner",
+      "n": "Tóner Hp Q5945yc Color Polvo Negro",
+      "c": "toner",
+      "minP": 950,
+      "maxP": 1092,
+      "id": "MLM36794468",
+      "demanda": "85.4%",
+      "opti": "LIVE DATA"
+    },
+    {
+      "b": "Tóner",
+      "n": "Tóner Hp Q5945yc Color Polvo Negro",
+      "c": "toner",
+      "minP": 950,
+      "maxP": 1092,
+      "id": "MLM36794468",
+      "demanda": "89.7%",
       "opti": "LIVE DATA"
     },
     {
@@ -241,67 +271,37 @@
       "minP": 318,
       "maxP": 365,
       "id": "MLM44776197",
-      "demanda": "89.8%",
+      "demanda": "85.2%",
       "opti": "LIVE DATA"
     },
     {
-      "b": "Tóner",
-      "n": "Tóner Hp Q5945yc Color Polvo Negro",
+      "b": "Pack",
+      "n": "Pack 2 Toner 85a / 36a / 35a P1005 / 1102w Compatible Tinta Negro",
       "c": "toner",
-      "minP": 950,
-      "maxP": 1092,
-      "id": "MLM36794468",
-      "demanda": "86.9%",
-      "opti": "LIVE DATA"
-    },
-    {
-      "b": "Tóner",
-      "n": "Tóner Hp Q5945yc Color Polvo Negro",
-      "c": "toner",
-      "minP": 950,
-      "maxP": 1092,
-      "id": "MLM36794468",
-      "demanda": "92.5%",
-      "opti": "LIVE DATA"
-    },
-    {
-      "b": "Kit",
-      "n": "Kit Toners Hp 222a Para Laserjet 3303fdw Pack De Negro Magenta Amarillo Cyan",
-      "c": "toner",
-      "minP": 6750,
-      "maxP": 7762,
-      "id": "MLM2734210103",
-      "demanda": "89.9%",
-      "opti": "LIVE DATA"
-    },
-    {
-      "b": "Kit",
-      "n": "Kit Toners Hp 222a Para Laserjet 3303fdw Pack De Negro Magenta Amarillo Cyan",
-      "c": "toner",
-      "minP": 6750,
-      "maxP": 7762,
-      "id": "MLM2734210103",
+      "minP": 318,
+      "maxP": 365,
+      "id": "MLM44776197",
       "demanda": "85.8%",
       "opti": "LIVE DATA"
     },
     {
-      "b": "Pack",
-      "n": "Pack 2 Toner 85a / 36a / 35a P1005 / 1102w Compatible Tinta Negro",
+      "b": "Cartucho",
+      "n": "Cartucho de Tóner HP CF237A Negro LaserJet Original",
       "c": "toner",
-      "minP": 318,
-      "maxP": 365,
-      "id": "MLM44776197",
-      "demanda": "94.2%",
+      "minP": 2117,
+      "maxP": 2434,
+      "id": "MLM38256939",
+      "demanda": "85.4%",
       "opti": "LIVE DATA"
     },
     {
-      "b": "Pack",
-      "n": "Pack 2 Toner 85a / 36a / 35a P1005 / 1102w Compatible Tinta Negro",
+      "b": "Cartucho",
+      "n": "Cartucho de Tóner HP CF237A Negro LaserJet Original",
       "c": "toner",
-      "minP": 318,
-      "maxP": 365,
-      "id": "MLM44776197",
-      "demanda": "91.0%",
+      "minP": 2117,
+      "maxP": 2434,
+      "id": "MLM38256939",
+      "demanda": "87.2%",
       "opti": "LIVE DATA"
     }
   ]
