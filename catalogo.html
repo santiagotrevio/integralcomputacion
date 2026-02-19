@@ -1824,7 +1824,9 @@
                 const scale = bSet ? bSet.scale : 1.0;
                 const offset_x = bSet ? (bSet.offset_x || 0) : 0;
                 const offset_y = bSet ? (bSet.offset_y || 0) : 0;
-                const brandImgStyle = `max-height: ${15 * scale}px !important; transform: translate(${offset_x}px, ${offset_y}px); object-fit: contain;`;
+                // Safe zone: fixed 15px height, same as admin .brand-logo-img standard
+                // scale/offset only apply in brand customization preview, NOT in catalog display
+                const brandImgStyle = `max-height: 15px; transform: translate(${offset_x}px, ${offset_y}px); object-fit: contain;`;
 
                 const badgeHtml = (brandLogoUrl && brandName !== 'Otros') ?
                     `<div class="brand-badge" title="${brandName}">
