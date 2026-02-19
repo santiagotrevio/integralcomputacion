@@ -1572,41 +1572,21 @@
             }
         }
 
-        /* Sales View Specifics */
-        .sales-grid {
+        /* Generic Admin Grid and Cards */
+        .admin-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 20px;
             margin-top: 20px;
         }
 
-        .trend-card {
+        .admin-card {
             background: var(--apple-card);
             border: 1px solid var(--apple-border);
             border-radius: 20px;
             padding: 24px;
             position: relative;
             overflow: hidden;
-        }
-
-        .trend-badge {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            padding: 4px 10px;
-            border-radius: 20px;
-            font-size: 10px;
-            font-weight: 700;
-            background: rgba(52, 199, 89, 0.1);
-            color: #34c759;
-        }
-
-        .trend-up {
-            color: #34c759;
-        }
-
-        .trend-down {
-            color: #ff3b30;
         }
 
         [data-theme^="hp-"] .nav-tab {
@@ -1822,9 +1802,6 @@
             <div id="navBrands" class="nav-tab" onclick="switchView('brands')">
                 <i class="fa-solid fa-tags"></i> PERSONALIZACIÓN DE MARCA
             </div>
-            <div id="navSales" class="nav-tab" onclick="switchView('sales')">
-                <i class="fa-solid fa-chart-line"></i> INTELIGENCIA DE VENTAS
-            </div>
             <div id="navConflicts" class="nav-tab" onclick="switchView('conflicts')" style="position:relative">
                 <i class="fa-solid fa-triangle-exclamation"></i> RESOLUCIÓN DE CONFLICTOS
                 <span id="conflictBadge" class="nav-badge"
@@ -2009,127 +1986,6 @@
             </div>
         </div>
 
-        <!-- VIEW 2: SALES INTELLIGENCE -->
-        <div id="viewSales" class="view-container">
-            <div style="display:flex; align-items:center; gap:12px; margin-bottom:30px;">
-                <div
-                    style="background:var(--apple-blue); color:white; width:48px; height:48px; border-radius:14px; display:flex; align-items:center; justify-content:center; font-size:24px;">
-                    <i class="fa-solid fa-wand-magic-sparkles"></i>
-                </div>
-                <div>
-                    <h2 style="margin:0; font-size:22px;">Pulso de Mercado</h2>
-                    <p style="margin:0; opacity:0.6; font-size:14px;">Análisis de tendencias y optimización de ventas
-                    </p>
-                </div>
-            </div>
-
-            <div class="sales-grid">
-                <!-- Tendencias Reales FEB/MAR 2026 -->
-                <div class="trend-card">
-                    <div class="trend-badge" style="background:rgba(52,199,89,0.1); color:#34c759">LIVE PULSE: FEB 2026
-                    </div>
-                    <h3 style="margin-top:0; font-size:16px;"><i class="fa-solid fa-bolt" style="color:#ff9f0a"></i>
-                        Mercado México (Hoy)</h3>
-                    <div style="margin-top:20px;">
-                        <div class="trend-item" onclick="showTrendDetail('intel2026')"
-                            style="display:flex; justify-content:space-between; margin-bottom:12px; align-items:center; cursor:pointer; padding:5px; border-radius:8px; transition:0.2s;">
-                            <span>Intel Arrow Lake-S Refresh</span>
-                            <span class="trend-up" style="font-weight:700;"><i class="fa-solid fa-arrow-trend-up"></i>
-                                LANZAMIENTO</span>
-                        </div>
-                        <div class="trend-item" onclick="showTrendDetail('rtx50super')"
-                            style="display:flex; justify-content:space-between; margin-bottom:12px; align-items:center; cursor:pointer; padding:5px; border-radius:8px; transition:0.2s;">
-                            <span>NVIDIA RTX 50 SUPER (GDDR7)</span>
-                            <span class="trend-up" style="font-weight:700;"><i class="fa-solid fa-fire"></i> STOCK
-                                BAJO</span>
-                        </div>
-                        <div class="trend-item" onclick="showTrendDetail('amdryzen2026')"
-                            style="display:flex; justify-content:space-between; margin-bottom:12px; align-items:center; cursor:pointer; padding:5px; border-radius:8px; transition:0.2s;">
-                            <span>AMD Ryzen AI 400 / Zen 5</span>
-                            <span class="trend-up" style="font-weight:700;"><i class="fa-solid fa-brain"></i>
-                                TENDENCIA</span>
-                        </div>
-                        <div class="trend-item" onclick="showTrendDetail('apple2026')"
-                            style="display:flex; justify-content:space-between; margin-bottom:12px; align-items:center; cursor:pointer; padding:5px; border-radius:8px; transition:0.2s;">
-                            <span>MacBook M5 (Marzo 2026)</span>
-                            <span class="trend-up" style="font-weight:700; color:#0071e3;"><i
-                                    class="fa-solid fa-clock"></i> PRÓXIMO</span>
-                        </div>
-                    </div>
-                    <p
-                        style="font-size:11px; opacity:0.7; margin-top:20px; border-top:1px solid var(--apple-border); padding-top:10px; line-height:1.4;">
-                        <i class="fa-solid fa-circle-exclamation" style="color:#ff9f0a"></i> <b>Alerta:</b> La escasez
-                        de chips de IA está elevando los costos de memoria RAM en México este mes.
-                    </p>
-                </div>
-
-                <!-- Oportunidades SEO -->
-                <div class="trend-card">
-                    <h3 style="margin-top:0; font-size:16px;"><i class="fa-solid fa-magnifying-glass"
-                            style="color:var(--apple-blue)"></i> Mejoras SEO</h3>
-                    <div id="seoQualityBadge" style="margin-bottom:15px; font-size:12px; font-weight:700;"></div>
-                    <div id="seoSuggestions" style="margin-top:20px; display:flex; flex-direction:column; gap:10px;">
-                        <div style="text-align:center; padding:20px; opacity:0.5;">Analizando catálogo...</div>
-                    </div>
-                </div>
-
-                <!-- Radar de Competencia -->
-                <div class="trend-card">
-                    <h3 style="margin-top:0; font-size:16px;"><i class="fa-solid fa-radar" style="color:#ff9f0a"></i>
-                        Radar de Precios (México)</h3>
-                    <div id="radarContainer" style="text-align:center; padding-top:20px; min-height:180px;">
-                        <i class="fa-solid fa-satellite-dish"
-                            style="font-size:40px; opacity:0.2; margin-bottom:15px;"></i>
-                        <p style="font-size:13px; opacity:0.6;">Escaneando Mercado Libre y Amazon MX...</p>
-                        <button class="secondary" onclick="runPriceRadar()"
-                            style="font-size:11px; margin-top:10px;">EJECUTAR ESCANEO GLOBAL</button>
-                    </div>
-                </div>
-            </div>
-
-            <div
-                style="margin-top:40px; background:var(--apple-card); border:1px solid var(--apple-border); border-radius:24px; padding:30px; overflow:hidden;">
-                <div
-                    style="display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:25px; border-bottom:1px solid var(--apple-border); padding-bottom:15px;">
-                    <div>
-                        <h3 style="margin:0; font-size:18px;"><i class="fa-solid fa-list-check"
-                                style="color:var(--apple-blue)"></i> Ranking: Top 20 Oportunidades de Mercado</h3>
-                        <p style="margin:5px 0 0 0; font-size:12px; opacity:0.6;">Basado en volumen de búsqueda y
-                            competencia en Amazon MX y Mercado Libre.</p>
-                    </div>
-                    <div style="font-size:12px; font-weight:700; color:var(--apple-blue); cursor:pointer;"
-                        onclick="renderMarketHotlist(true)">
-                        <i class="fa-solid fa-rotate"></i> REFRESCAR REPORTE
-                    </div>
-                </div>
-
-                <div id="intelTabs"
-                    style="display:flex; gap:10px; margin-bottom:20px; padding-bottom:10px; border-bottom:1px solid var(--apple-border);">
-                    <div class="intel-tab active" onclick="switchIntelTab('computo')"
-                        style="padding:8px 16px; border-radius:10px; cursor:pointer; font-size:12px; font-weight:700; transition:0.3s; background:var(--apple-blue); color:white;">
-                        Tecnología</div>
-                    <div class="intel-tab" onclick="switchIntelTab('papeleria')"
-                        style="padding:8px 16px; border-radius:10px; cursor:pointer; font-size:12px; font-weight:700; transition:0.3s; background:rgba(0,0,0,0.05); color:var(--apple-text);">
-                        Papelería</div>
-                    <div class="intel-tab" onclick="switchIntelTab('toner')"
-                        style="padding:8px 16px; border-radius:10px; cursor:pointer; font-size:12px; font-weight:700; transition:0.3s; background:rgba(0,0,0,0.05); color:var(--apple-text);">
-                        Toners y Cartuchos</div>
-                </div>
-
-                <div id="marketHotlistContainer" style="max-height:600px; overflow-y:auto; padding-right:10px;">
-                    <!-- Se llena dinámicamente con las categorías -->
-                </div>
-
-                <div
-                    style="margin-top:25px; padding-top:20px; border-top:1px solid var(--apple-border); display:flex; flex-wrap:wrap; gap:20px; font-size:10px; opacity:0.5;">
-                    <div style="font-weight:700; color:var(--apple-text); opacity:1;">FUENTES Y CITAS:</div>
-                    <span><i class="fa-solid fa-link"></i> Xataka México (Reporte Hardware 2026)</span>
-                    <span><i class="fa-solid fa-link"></i> Infobae Tech (Finanzos México)</span>
-                    <span><i class="fa-solid fa-link"></i> Amazon Seller Central - MX Hub</span>
-                    <span><i class="fa-solid fa-link"></i> Mercado Libre Ads - Dashboard Tendencias</span>
-                </div>
-            </div>
-        </div>
 
         <!-- VIEW: CONFLICT RESOLUTION -->
         <div id="viewConflicts" class="view-container">
@@ -2149,7 +2005,7 @@
                     REFRESCAR</button>
             </div>
 
-            <div id="conflictsList" class="sales-grid"
+            <div id="conflictsList" class="admin-grid"
                 style="grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));">
                 <div style="grid-column: 1/-1; text-align:center; padding:100px; opacity:0.3;">
                     <i class="fa-solid fa-check-double" style="font-size:48px; margin-bottom:20px;"></i>
@@ -2283,20 +2139,6 @@
         </div>
     </div>
 
-    <!-- Trend Details Modal -->
-    <div id="trendDetailModal" class="modal">
-        <div class="modal-content" style="max-width: 600px;">
-            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
-                <h2 id="trendDetailTitle" style="margin:0; font-size:20px;">Detalles de Tendencia</h2>
-                <button class="secondary" onclick="document.getElementById('trendDetailModal').style.display='none'"><i
-                        class="fa-solid fa-xmark"></i></button>
-            </div>
-            <div id="trendDetailBody" style="font-size:14px; line-height:1.6;"></div>
-            <div style="margin-top:24px; display:flex; justify-content:flex-end;">
-                <button onclick="document.getElementById('trendDetailModal').style.display='none'">Cerrar</button>
-            </div>
-        </div>
-    </div>
 
     <!-- Modal Form -->
     <div id="modal" class="modal">
@@ -2442,39 +2284,6 @@
         </div>
     </div>
 
-    <!-- Price Scout Modal -->
-    <div id="scoutModal" class="modal">
-        <div class="modal-content"
-            style="max-width: 550px; max-height: 85vh; display: flex; flex-direction: column; overflow: hidden;">
-            <div id="scoutProductHeader"
-                style="display: flex; align-items: center; gap: 20px; margin-bottom: 25px; padding-bottom: 20px; border-bottom: 1px solid var(--apple-border);">
-                <img id="scoutProductImg" src=""
-                    style="width: 100px; height: 100px; object-fit: cover; border-radius: 12px; background: rgba(0,0,0,0.03); border: 1px solid var(--apple-border);">
-                <div style="flex: 1;">
-                    <h2
-                        style="margin: 0; font-size: 14px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--apple-subtext); margin-bottom: 4px;">
-                        Radar de Mercado</h2>
-                    <div id="scoutProductModel"
-                        style="font-weight: 800; font-size: 24px; color: var(--apple-blue); line-height: 1.1;"></div>
-                    <div id="scoutProductName"
-                        style="font-size: 13px; color: var(--apple-text); margin-top: 6px; opacity: 0.8; font-weight: 500;">
-                    </div>
-                </div>
-            </div>
-
-            <div id="scoutLoading" style="text-align:center; padding: 20px; display:none;">
-                <i class="fa-solid fa-satellite-dish fa-spin" style="font-size: 30px; color: var(--apple-blue);"></i>
-                <p style="margin-top:10px; font-weight:600;">Escaneando precios en tiempo real...</p>
-            </div>
-            <div id="scoutResults"
-                style="margin-top:10px; flex: 1; overflow-y: auto; padding-right: 5px; scrollbar-width: thin; scrollbar-color: var(--apple-blue) transparent;">
-            </div>
-            <div style="display:flex; justify-content:center; margin-top:20px;">
-                <button class="secondary" onclick="document.getElementById('scoutModal').style.display='none'">Cerrar
-                    Radar</button>
-            </div>
-        </div>
-    </div>
     <!-- Image Wizard Modal -->
     <div id="imageWizardModal" class="modal">
         <div class="modal-content" style="max-width: 500px;">
@@ -3081,9 +2890,6 @@
                             <button class="secondary" style="padding:6px 12px; font-size: 14px; border-radius: 6px;" onclick='editProduct(${JSON.stringify(p)})'>
                                 <i class="fa-solid fa-pen-to-square"></i>
                             </button>
-                            <button class="secondary" style="padding:6px 12px; font-size: 14px; border-radius: 6px; color: #0071e3;" title="Espiar Precios" onclick='scoutMarket(${JSON.stringify(p.id)}, ${JSON.stringify(p.name)}, "${imgSrc}")'>
-                                <i class="fa-solid fa-magnifying-glass-dollar"></i>
-                            </button>
                             <button class="danger" style="padding:6px 14px; font-size: 14px; border-radius: 6px; background: #ea4335; color: white; border: none;" onclick='deleteProduct(${JSON.stringify(p.id)})'>
                                 <i class="fa-solid fa-trash-can"></i>
                             </button>
@@ -3142,9 +2948,6 @@
                         <div class="card-actions">
                             <button class="secondary" style="flex:1; padding:6px; justify-content:center;" onclick='editProduct(${JSON.stringify(p)})'>
                                 <i class="fa-solid fa-pen"></i>
-                            </button>
-                            <button class="secondary" style="flex:1; padding:6px; justify-content:center; color: var(--apple-blue);" onclick='scoutMarket(${JSON.stringify(p.id)}, ${JSON.stringify(p.name)}, "${imgSrc}")'>
-                                <i class="fa-solid fa-satellite-dish"></i>
                             </button>
                             <button class="danger" style="flex:1; padding:6px; background: #ea4335; color: white; border: none; justify-content:center;" onclick='deleteProduct(${JSON.stringify(p.id)})'>
                                 <i class="fa-solid fa-trash"></i>
@@ -3519,68 +3322,6 @@
         /**
          * Espía el mercado para un producto específico (Abre modal de Radar)
          */
-        async function scoutMarket(model, name = "", image = "") {
-            const modal = document.getElementById('scoutModal');
-            const resultsDiv = document.getElementById('scoutResults');
-            const loading = document.getElementById('scoutLoading');
-
-            if (!modal || !resultsDiv || !loading) return;
-
-            // Header del Radar
-            document.getElementById('scoutProductImg').src = image || '/assets/logo.svg';
-            document.getElementById('scoutProductModel').innerText = model;
-            document.getElementById('scoutProductName').innerText = name;
-
-            resultsDiv.innerHTML = '';
-            loading.style.display = 'block';
-            modal.style.display = 'flex';
-
-            try {
-                const res = await fetch(`/api/scout-price/${encodeURIComponent(model.trim())}?name=${encodeURIComponent(name.trim())}`);
-                if (!res.ok) throw new Error("Servidor no responde");
-
-                const data = await res.json();
-                loading.style.display = 'none';
-
-                if (!data.data || data.data.length === 0) {
-                    resultsDiv.innerHTML = `
-                        <div style="text-align:center; padding:40px; opacity:0.6;">
-                            <i class="fa-solid fa-cloud-moon" style="font-size:30px; margin-bottom:10px;"></i>
-                            <p>No se encontraron precios competitivos para este modelo en Google o Mercado Libre.</p>
-                        </div>
-                    `;
-                    return;
-                }
-
-                // Rankeo: De Mayor a Menor para análisis de margen
-                const sorted = [...data.data].sort((a, b) => (b.price || 0) - (a.price || 0));
-
-                resultsDiv.innerHTML = sorted.map(item => `
-                    <div class="scout-row" style="padding:16px; border-bottom:1px solid var(--apple-border); display:flex; justify-content:space-between; align-items:center; transition:0.2s;">
-                        <div style="flex:1; padding-right:15px;">
-                            <div style="font-weight:700; font-size:13px; color:var(--apple-text);">${item.store || 'Competencia'}</div>
-                            <div style="font-size:11px; opacity:0.6; line-height:1.3; margin-top:2px;">${item.title}</div>
-                        </div>
-                        <div style="text-align:right; min-width:100px;">
-                            <div style="font-weight:800; color:var(--apple-blue); font-size:15px;">${item.priceText}</div>
-                            ${item.url ? `
-                                <a href="${item.url}" target="_blank" style="font-size:10px; color:var(--apple-blue); text-decoration:none; margin-top:5px; display:inline-block; font-weight:700;">
-                                    VER SITIO <i class="fa-solid fa-external-link" style="font-size:8px;"></i>
-                                </a>` : ''}
-                        </div>
-                    </div>
-                `).join('');
-            } catch (err) {
-                console.error("Radar Error:", err);
-                loading.style.display = 'none';
-                resultsDiv.innerHTML = `
-                    <div style="text-align:center; padding:30px; color:var(--apple-red);">
-                        <i class="fa-solid fa-triangle-exclamation" style="font-size:30px; margin-bottom:10px;"></i>
-                        <p>Error de conexión con el radar. Intente más tarde.</p>
-                    </div>
-                `;
-            }
-        }
 
         let wizardMode = 'product'; // 'product' or 'brand'
         let currentWizardTarget = null;
@@ -3972,114 +3713,6 @@
             }
         };
 
-        // =========================================================================
-        // --- SECCIÓN: INTELIGENCIA DE MERCADO Y TENDENCIAS ---
-        // =========================================================================
-
-        let globalIntelData = null; // Memoria de caché local
-        let currentIntelCat = 'computo';
-
-        /**
-         * Obtiene datos brutos de inteligencia sin afectar la interfaz
-         */
-        async function fetchMarketData(force = false) {
-            try {
-                const url = force ? '/api/market-trends?forceRefresh=true' : '/api/market-trends';
-                const res = await fetch(url);
-                if (!res.ok) throw new Error("Fallo en API de Tendencias");
-                globalIntelData = await res.json();
-                return globalIntelData;
-            } catch (err) {
-                console.error("Fetch Intel Error:", err);
-                return null;
-            }
-        }
-
-        /**
-         * Radar de Categoría (Dashboard) - Desacoplado del Ranking principal
-         */
-        async function runPriceRadar() {
-            const container = document.getElementById('radarContainer');
-            if (!container) return;
-
-            // Feedback visual de búsqueda
-            container.innerHTML = `
-                <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; height:100px;">
-                    <i class="fa-solid fa-satellite fa-spin" style="font-size:28px; color:var(--apple-blue); margin-bottom:12px;"></i>
-                    <div style="font-size:11px; font-weight:700; opacity:0.8; letter-spacing:0.5px;">SINCRONIZANDO RADAR...</div>
-                </div>
-            `;
-
-            // Si no hay datos, cargar en segundo plano
-            if (!globalIntelData) {
-                await fetchMarketData();
-            }
-
-            // Pausa estética para simular profundidad de análisis
-            await new Promise(r => setTimeout(r, 800));
-
-            const categoryData = globalIntelData ? globalIntelData[currentIntelCat] : [];
-
-            if (!categoryData || categoryData.length === 0) {
-                container.innerHTML = `<div style="padding:20px; font-size:12px; opacity:0.5;">No hay señales en esta categoría.</div>`;
-                return;
-            }
-
-            // Top 3 hallazgos rápidos
-            const topOps = categoryData.slice(0, 3);
-
-            container.innerHTML = `
-                <div style="text-align:left; animation: fadeIn 0.4s ease;">
-                    <div style="margin-bottom:12px; font-weight:700; color:var(--apple-blue); font-size:10px; border-bottom:1px solid rgba(0,113,227,0.1); padding-bottom:5px;">
-                        SEÑALES EN: ${currentIntelCat.toUpperCase()}
-                    </div>
-                    ${topOps.map(p => `
-                        <div class="radar-item" style="background:rgba(0,113,227,0.04); padding:10px; border-radius:10px; margin-bottom:8px; border:1px solid rgba(0,113,227,0.08);">
-                            <div style="font-weight:700; font-size:11px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${p.b} ${p.n}</div>
-                            <div style="display:flex; justify-content:space-between; margin-top:6px; align-items:center;">
-                                <span style="font-size:10px; opacity:0.6;">Mercado: $${p.minP.toLocaleString()}</span>
-                                <span style="color:#34c759; font-weight:800; font-size:10px;"><i class="fa-solid fa-bolt"></i> ${p.demanda}</span>
-                            </div>
-                        </div>
-                    `).join('')}
-                    <button class="secondary" onclick="runPriceRadar()" style="width:100%; margin-top:5px; font-size:10px; font-weight:800; padding:8px; border-radius:8px;">
-                        <i class="fa-solid fa-rotate"></i> RE-SINCRONIZAR RADAR
-                    </button>
-                </div>
-            `;
-        }
-
-        // DETALLES DE TENDENCIAS
-        function showTrendDetail(type) {
-            const modal = document.getElementById('trendDetailModal');
-            const title = document.getElementById('trendDetailTitle');
-            const body = document.getElementById('trendDetailBody');
-
-            const data = {
-                intel2026: {
-                    t: "Intel Arrow Lake-S Refresh (Marzo 2026)",
-                    b: "Lanzamiento inminente. Estas CPUs traen hasta un 10% más de rendimiento en gaming y soporte oficial para DDR5-7200. <br><br><b>Estrategia MX:</b> El 23 de marzo salen las reseñas de los Ultra 7 y Ultra 5. Ideal para mover stock de motherboards LGA-1851."
-                },
-                rtx50super: {
-                    t: "NVIDIA RTX 50 SUPER (GDDR7)",
-                    b: "Disponibilidad crítica en México. Las 5080 y 5090 SUPER están volando por la fiebre de la IA. <br><br><b>Estrategia MX:</b> Si tienes stock, es el momento de 'Precio Premium'. La falta de memoria GDDR7 está limitando el suministro global."
-                },
-                amdryzen2026: {
-                    t: "AMD Ryzen AI 400 / Zen 5 X3D",
-                    b: "AMD domina el sector de 'AI PCs' en México con los nuevos Ryzen 400. Se esperan los modelos X3D para marzo. <br><br><b>Estrategia MX:</b> Destacar el rendimiento por watt, clave para laptops en el mercado corporativo mexicano este semestre."
-                },
-                apple2026: {
-                    t: "MacBook Pro/Air M5 (Marzo 2026)",
-                    b: "Rumores fuertes de lanzamiento en marzo para la línea M5. <br><br><b>Estrategia MX:</b> Muchos clientes en Amazon MX están esperando este lanzamiento. Oportunidad para rematar inventario de M3 y M4 antes de la llegada del M5."
-                }
-            };
-
-            const info = data[type];
-            title.innerText = info.t;
-            body.innerHTML = info.b;
-            modal.style.display = 'flex';
-        }
-
         // SISTEMA DE AUDITORÍA SEO
         function runSEOAudit() {
             if (!products || products.length === 0) return;
@@ -4135,123 +3768,6 @@
             addSuggestion("Imágenes Pendientes", issues.imageGap.length, "El 90% de las ventas entran por los ojos.", "fa-image", "255, 159, 10");
         }
 
-        function switchIntelTab(cat) {
-            currentIntelCat = cat;
-            document.querySelectorAll('.intel-tab').forEach(tab => {
-                const isActive = tab.getAttribute('onclick').includes(`'${cat}'`);
-                tab.style.background = isActive ? 'var(--apple-blue)' : 'rgba(0,0,0,0.05)';
-                tab.style.color = isActive ? 'white' : 'var(--apple-text)';
-            });
-            renderMarketHotlist();
-            runPriceRadar(); // Sincronizar radar lateral también
-        }
-
-        async function renderMarketHotlist(refresh = false) {
-            const container = document.getElementById('marketHotlistContainer');
-            if (!container) return;
-
-            // Si ya tenemos data y no es refresh, solo pintar
-            if (!refresh && globalIntelData) {
-                renderHotlistFromData(globalIntelData[currentIntelCat]);
-                return;
-            }
-
-            // Loader
-            container.innerHTML = `
-                <div style="text-align:center; padding:60px; opacity:0.5;">
-                    <i class="fa-solid fa-satellite-dish fa-spin" style="font-size:32px; color:var(--apple-blue); margin-bottom:15px;"></i>
-                    <div style="font-weight:700; font-size:14px;">Buscando Oportunidades en México...</div>
-                </div>
-            `;
-
-            const data = await fetchMarketData(refresh);
-            if (data) {
-                renderHotlistFromData(data[currentIntelCat]);
-                if (refresh) runPriceRadar(); // Actualizar mini-radar si el escaneo fue global
-            } else {
-                container.innerHTML = `<div style="text-align:center; padding:30px; color:var(--apple-red);">Fallo en la conexión de datos de mercado.</div>`;
-            }
-        }
-
-        function renderHotlistFromData(data) {
-            const container = document.getElementById('marketHotlistContainer');
-            if (!data) return;
-
-            let html = `
-                <table style="width:100%; border-collapse:collapse; font-size:13px;">
-                    <thead>
-                        <tr style="text-align:left; border-bottom:1px solid var(--apple-border); opacity:0.7; font-size:11px;">
-                            <th style="padding:10px 5px;">#</th>
-                            <th style="padding:10px 5px;">PRODUCTO / MODELO</th>
-                            <th style="padding:10px 5px;">DEMANDA (MX)</th>
-                            <th style="padding:10px 5px;">PRECIO MIN. (MXN)</th>
-                            <th style="padding:10px 5px;">PRECIO MAX. (MXN)</th>
-                            <th style="padding:10px 5px;">RECOMENDACIÓN</th>
-                            <th style="padding:10px 5px;">ACCIONES</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-            `;
-
-            data.forEach((p, i) => {
-                const scoreColor = i < 5 ? "#34c759" : (i < 15 ? "#ff9f0a" : "var(--apple-blue)");
-                const minStr = p.minP.toLocaleString('es-MX', { style: 'currency', currency: 'MXN' });
-                const maxStr = p.maxP.toLocaleString('es-MX', { style: 'currency', currency: 'MXN' });
-
-                // Lógica de Inteligencia Artificial (Smart Advice)
-                let sugerencia = `<span style="opacity:0.5"><i class="fa-solid fa-clock"></i> Monitorear</span>`;
-                let sugColor = "rgba(0,0,0,0.03)";
-
-                if (parseFloat(p.demanda) > 94) {
-                    sugerencia = `<span style="color:#34c759"><i class="fa-solid fa-fire"></i> ¡STOCK CRÍTICO! COMPRAR</span>`;
-                    sugColor = "rgba(52, 199, 89, 0.08)";
-                } else if (p.opti === "ALTO MARGEN" || i < 3) {
-                    sugerencia = `<span style="color:#0071e3"><i class="fa-solid fa-lightbulb"></i> OPORTUNIDAD MARGEN</span>`;
-                    sugColor = "rgba(0, 113, 227, 0.08)";
-                } else if (parseFloat(p.demanda) < 80) {
-                    sugerencia = `<span style="color:#ff9f0a"><i class="fa-solid fa-tag"></i> POSIBLE OFERTA</span>`;
-                    sugColor = "rgba(255, 159, 10, 0.08)";
-                }
-
-                // Generar Link de Búsqueda Inteligente (Usa Marca + Nombre para asegurar resultados)
-                const searchQuery = `${p.b} ${p.n}`;
-                const verificationUrl = `https://listado.mercadolibre.com.mx/${encodeURIComponent(searchQuery)}`;
-
-                html += `
-                    <tr style="border-bottom:1px solid rgba(0,0,0,0.03);">
-                        <td style="padding:12px 5px; font-weight:700; opacity:0.3;">${i + 1}</td>
-                        <td style="padding:12px 5px;">
-                            <div style="font-weight:600;">${p.b} ${p.n}</div>
-                            <a href="${verificationUrl}" target="_blank" style="font-size:10px; color:var(--apple-blue); text-decoration:none; display:flex; align-items:center; gap:4px;">
-                                <i class="fa-solid fa-magnifying-glass" style="font-size:8px;"></i> ${p.id} (Buscar en Mercado Libre)
-                            </a>
-                        </td>
-                        <td style="padding:12px 5px;">
-                            <div style="display:flex; align-items:center; gap:8px;">
-                                <div style="width:60px; height:4px; background:rgba(0,0,0,0.05); border-radius:2px;">
-                                    <div style="width:${p.demanda}; height:100%; background:${scoreColor}; border-radius:2px;"></div>
-                                </div>
-                                <span style="font-size:10px; width:35px;">${p.demanda}</span>
-                            </div>
-                        </td>
-                        <td style="padding:12px 5px; font-weight:700; color:#34c759;">${minStr}</td>
-                        <td style="padding:12px 5px; font-weight:700; color:#ff3b30;">${maxStr}</td>
-                        <td style="padding:12px 5px;">
-                            <span style="background:${sugColor}; padding:3px 8px; border-radius:12px; font-size:10px; font-weight:700;">${sugerencia}</span>
-                        </td>
-                        <td style="padding:12px 5px;">
-                            <button onclick="window.open('${verificationUrl}', '_blank')" class="secondary" style="font-size:9px; padding:4px 8px; border-radius:8px;">
-                                <i class="fa-solid fa-eye"></i> ANALIZAR
-                            </button>
-                        </td>
-                    </tr>
-                `;
-            });
-
-            html += `</tbody></table>`;
-            container.innerHTML = html;
-        }
-
         // Cambio de vistas
         function switchView(view) {
             localStorage.setItem('admin-active-view', view); // Persistir vista
@@ -4265,11 +3781,6 @@
                 document.getElementById('viewBrands').classList.add('active');
                 document.getElementById('navBrands').classList.add('active');
                 loadBrandSettings();
-            } else if (view === 'sales') {
-                document.getElementById('viewSales').classList.add('active');
-                document.getElementById('navSales').classList.add('active');
-                runSEOAudit();
-                renderMarketHotlist();
             } else if (view === 'conflicts') {
                 document.getElementById('viewConflicts').classList.add('active');
                 document.getElementById('navConflicts').classList.add('active');
@@ -4294,7 +3805,7 @@
                     const incoming = JSON.parse(c.new_data);
 
                     return `
-                        <div class="trend-card" style="border-left: 4px solid #ff3b30; background: white; padding: 20px;">
+                        <div class="admin-card" style="border-left: 4px solid #ff3b30; background: white; padding: 20px;">
                             <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:15px;">
                                 <div>
                                     <h4 style="margin:0; font-size:16px;">${c.product_id}</h4>

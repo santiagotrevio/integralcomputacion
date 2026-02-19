@@ -273,60 +273,8 @@ app.post('/api/publish', (req, res) => {
     });
 });
 
-const scoutPrice = require('./scripts/price_scout');
 
-app.get('/api/scout-price/:model', async (req, res) => {
-    try {
-        const name = req.query.name || "";
-        console.log(`📡 [RADAR] Iniciando escaneo para: ${req.params.model} (${name})`);
-        const results = await scoutPrice(req.params.model, name);
-        console.log(`✅ [RADAR] Escaneo completado. Resultados encontrados: ${results.length}`);
-        res.json({ data: results });
-    } catch (err) {
-        console.error(`❌ [RADAR] Error en escaneo:`, err.message);
-        res.status(500).json({ error: err.message });
-    }
-});
-
-// --- SERVICIO DE INTELIGENCIA AUTÓNOMO ---
-const marketScanner = require('./scripts/market_trends_scanner');
-
-// Tarea de actualización automática (Cada 12 horas)
-const REFRESH_INTERVAL = 12 * 60 * 60 * 1000;
-
-const runMarketScanner = async () => {
-    console.log("🕒 [AUTO-INTEL] Actualizando tendencias de mercado de forma autónoma...");
-    try {
-        await marketScanner();
-        console.log("✅ [AUTO-INTEL] Datos actualizados con éxito.");
-    } catch (err) {
-        console.error("❌ [AUTO-INTEL] Error en actualización automática:", err.message);
-    }
-};
-
-// Primer escaneo al iniciar y luego programado
-runMarketScanner();
-setInterval(runMarketScanner, REFRESH_INTERVAL);
-
-app.get('/api/market-trends', async (req, res) => {
-    try {
-        const forceRefresh = req.query.forceRefresh === 'true';
-        const cachePath = path.join(__dirname, 'assets/data/market_intelligence.json');
-
-        // Si no es forceRefresh y el cache existe, devolver cache
-        if (!forceRefresh && fs.existsSync(cachePath)) {
-            const data = fs.readFileSync(cachePath, 'utf8');
-            return res.json(JSON.parse(data));
-        }
-
-        // De lo contrario, ejecutar escaneo real
-        console.log("⚡ [LIVE-INTEL] Ejecutando escaneo solicitado por el usuario...");
-        const results = await marketScanner();
-        res.json(results);
-    } catch (err) {
-        res.status(500).json({ error: err.message });
-    }
-});
+// --- ENDPOINTS ELIMINADOS (Inteligencia de Ventas) ---
 
 app.post('/api/import-image-url', async (req, res) => {
     const { productId, imageUrl } = req.body;
