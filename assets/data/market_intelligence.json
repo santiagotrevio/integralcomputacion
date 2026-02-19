@@ -1,548 +1,308 @@
 {
   "computo": [
     {
-      "b": "HP",
-      "n": "Victus 15 Gamer RTX 4050",
-      "minP": 16499,
-      "maxP": 18999,
-      "id": "79R42LA",
-      "demanda": "98.5%",
-      "opti": "ALTA ROTACIÓN"
-    },
-    {
-      "b": "Lenovo",
-      "n": "IdeaPad Slim 3 Ryzen 5",
-      "minP": 8299,
-      "maxP": 9499,
-      "id": "82X7002K",
-      "demanda": "96.2%",
-      "opti": "ALTA ROTACIÓN"
-    },
-    {
-      "b": "NVIDIA",
-      "n": "GeForce RTX 5080 SUPER",
-      "minP": 22400,
-      "maxP": 25900,
-      "id": "VCG5080S",
-      "demanda": "94.0%",
-      "opti": "ALTO MARGEN"
-    },
-    {
-      "b": "AMD",
-      "n": "Ryzen 7 9800X3D Processor",
-      "minP": 8900,
-      "maxP": 10200,
-      "id": "100-100001",
-      "demanda": "92.5%",
-      "opti": "ALTA ROTACIÓN"
-    },
-    {
-      "b": "Samsung",
-      "n": "Odyssey G7 4K 144Hz",
-      "minP": 11999,
-      "maxP": 13500,
-      "id": "LS28BG70",
-      "demanda": "89.4%",
-      "opti": "STOCK RECOMENDADO"
-    },
-    {
-      "b": "Logitech",
-      "n": "G Pro X Superlight 2",
-      "minP": 2899,
-      "maxP": 3400,
-      "id": "910-0066",
-      "demanda": "88.1%",
-      "opti": "ALTA ROTACIÓN"
-    },
-    {
-      "b": "Apple",
-      "n": "MacBook Air M3 13-inch",
-      "minP": 21999,
-      "maxP": 24999,
-      "id": "MXCV3LL",
-      "demanda": "95.6%",
-      "opti": "ALTO MARGEN"
-    },
-    {
-      "b": "Kingston",
-      "n": "NV2 SSD 1TB NVMe Gen4",
-      "minP": 1250,
-      "maxP": 1550,
-      "id": "SNV2S/1000",
-      "demanda": "97.2%",
-      "opti": "ALTA ROTACIÓN"
-    },
-    {
-      "b": "ASUS",
-      "n": "ROG Strix SCAR 18 (2026)",
-      "minP": 62000,
-      "maxP": 68000,
-      "id": "G834JY",
-      "demanda": "82.0%",
-      "opti": "ALTO MARGEN"
-    },
-    {
-      "b": "Corsair",
-      "n": "Vengeance DDR5 32GB 6000",
-      "minP": 2400,
-      "maxP": 2800,
-      "id": "CMK32GX5",
-      "demanda": "91.3%",
-      "opti": "STOCK RECOMENDADO"
-    },
-    {
-      "b": "Western Digital",
-      "n": "WD Blue 2TB Desktop",
-      "minP": 1450,
-      "maxP": 1750,
-      "id": "WD20EZAZ",
-      "demanda": "85.4%",
-      "opti": "STOCK RECOMENDADO"
-    },
-    {
-      "b": "Crucial",
-      "n": "P3 Plus 2TB NVMe",
-      "minP": 2800,
-      "maxP": 3200,
-      "id": "CT2000P3",
-      "demanda": "88.7%",
-      "opti": "RECOMENDADO"
-    },
-    {
-      "b": "Gigabyte",
-      "n": "B650 Gaming X AX",
-      "minP": 3900,
-      "maxP": 4500,
-      "id": "B650-G-AX",
-      "demanda": "86.2%",
-      "opti": "STOCK RECOMENDADO"
+      "b": "MSI",
+      "n": "MSI Thin GF63 THINGF6312436 Laptop 16GB RAM 512GB SSD Ddr4 Intel Core i7 Color Negro",
+      "c": "computo",
+      "minP": 24989,
+      "maxP": 28737,
+      "id": "MLM27949998",
+      "demanda": "94.4%",
+      "opti": "LIVE DATA"
     },
     {
       "b": "MSI",
-      "n": "MAG A1000G PCIE5 PSU",
-      "minP": 3400,
-      "maxP": 3900,
-      "id": "306-7ZP2",
-      "demanda": "84.1%",
-      "opti": "RECOMENDADO"
+      "n": "MSI Thin GF63 THINGF6312436 Laptop 16GB RAM 512GB SSD Ddr4 Intel Core i7 Color Negro",
+      "c": "computo",
+      "minP": 24989,
+      "maxP": 28737,
+      "id": "MLM27949998",
+      "demanda": "86.0%",
+      "opti": "LIVE DATA"
     },
     {
-      "b": "Dell",
-      "n": "Monitor 27 S2721DS QHD",
-      "minP": 5200,
-      "maxP": 6100,
-      "id": "S2721DS",
-      "demanda": "90.5%",
-      "opti": "ALTA ROTACIÓN"
+      "b": "Laptop",
+      "n": "Laptop Gamer Msi Sword Core I7 14650hx 16 GB 1 TB Rtx4060, color negro",
+      "c": "computo",
+      "minP": 30599,
+      "maxP": 35188,
+      "id": "MLM37637979",
+      "demanda": "93.2%",
+      "opti": "LIVE DATA"
     },
     {
-      "b": "Razer",
-      "n": "DeathAdder V3 Pro",
-      "minP": 3100,
-      "maxP": 3600,
-      "id": "RZ01-0463",
-      "demanda": "87.4%",
-      "opti": "RECOMENDADO"
+      "b": "Laptop",
+      "n": "Laptop Gamer Msi Sword Core I7 14650hx 16 GB 1 TB Rtx4060, color negro",
+      "c": "computo",
+      "minP": 30599,
+      "maxP": 35188,
+      "id": "MLM37637979",
+      "demanda": "90.0%",
+      "opti": "LIVE DATA"
     },
     {
-      "b": "Intel",
-      "n": "Core i5-14600K LGA1700",
-      "minP": 6400,
-      "maxP": 7200,
-      "id": "BX80715",
-      "demanda": "93.1%",
-      "opti": "ALTA ROTACIÓN"
+      "b": "Portátil",
+      "n": "Portátil Gamer Rtx 5060 Thunderobot 911x I7 13620h 16g 512g",
+      "c": "computo",
+      "minP": 30942,
+      "maxP": 35583,
+      "id": "MLM62377449",
+      "demanda": "90.9%",
+      "opti": "LIVE DATA"
     },
     {
-      "b": "TP-Link",
-      "n": "Archer AX55 Wi-Fi 6",
-      "minP": 1850,
-      "maxP": 2200,
-      "id": "AX55-PRO",
-      "demanda": "94.5%",
-      "opti": "ALTA ROTACIÓN"
+      "b": "Portátil",
+      "n": "Portátil Gamer Rtx 5060 Thunderobot 911x I7 13620h 16g 512g",
+      "c": "computo",
+      "minP": 30942,
+      "maxP": 35583,
+      "id": "MLM62377449",
+      "demanda": "91.2%",
+      "opti": "LIVE DATA"
     },
     {
-      "b": "Seagate",
-      "n": "IronWolf 4TB NAS",
-      "minP": 2100,
-      "maxP": 2600,
-      "id": "ST4000VN",
-      "demanda": "82.3%",
-      "opti": "RECOMENDADO"
+      "b": "Laptop",
+      "n": "Laptop Gaming MSI CYBORG 15.6 pulgadas 16gb 512gb Rtx4060 Negro",
+      "c": "computo",
+      "minP": 34999,
+      "maxP": 40248,
+      "id": "MLM48946044",
+      "demanda": "86.0%",
+      "opti": "LIVE DATA"
     },
     {
-      "b": "Elgato",
-      "n": "Stream Deck MK.2",
-      "minP": 3200,
-      "maxP": 3800,
-      "id": "10GBA990",
-      "demanda": "81.0%",
-      "opti": "ALTO MARGEN"
+      "b": "Laptop",
+      "n": "Laptop Gaming MSI CYBORG 15.6 pulgadas 16gb 512gb Rtx4060 Negro",
+      "c": "computo",
+      "minP": 34999,
+      "maxP": 40248,
+      "id": "MLM48946044",
+      "demanda": "90.2%",
+      "opti": "LIVE DATA"
+    },
+    {
+      "b": "Laptop",
+      "n": "Laptop Acer Nitro V15 Core 5- 210h 16 Ram 512 Ssd Nvidia Geforce Rtx 4050 Negro",
+      "c": "computo",
+      "minP": 20000,
+      "maxP": 23000,
+      "id": "MLM65521407",
+      "demanda": "94.8%",
+      "opti": "LIVE DATA"
+    },
+    {
+      "b": "Laptop",
+      "n": "Laptop Acer Nitro V15 Core 5- 210h 16 Ram 512 Ssd Nvidia Geforce Rtx 4050 Negro",
+      "c": "computo",
+      "minP": 20000,
+      "maxP": 23000,
+      "id": "MLM65521407",
+      "demanda": "86.5%",
+      "opti": "LIVE DATA"
     }
   ],
   "papeleria": [
     {
-      "b": "Scribe",
-      "n": "Cuaderno Profesional 100hj",
-      "minP": 38,
-      "maxP": 58,
-      "id": "SC-100P",
-      "demanda": "99.2%",
-      "opti": "ALTA ROTACIÓN"
+      "b": "Kit",
+      "n": "Kit 5 Cuadernos Scribe Profesional 100 Hojas Raya Color colores",
+      "c": "papeleria",
+      "minP": 299,
+      "maxP": 343,
+      "id": "MLM42097020",
+      "demanda": "85.7%",
+      "opti": "LIVE DATA"
     },
     {
-      "b": "Bic",
-      "n": "Pluma Cristal Negra 12pk",
-      "minP": 52,
-      "maxP": 75,
-      "id": "BIC-CR12",
-      "demanda": "98.5%",
-      "opti": "ALTA ROTACIÓN"
-    },
-    {
-      "b": "Crayola",
-      "n": "Plumones Lavables 12ct",
-      "minP": 98,
-      "maxP": 125,
-      "id": "CRAY-L12",
-      "demanda": "95.1%",
-      "opti": "STOCK RECOMENDADO"
-    },
-    {
-      "b": "Maped",
-      "n": "Colores 24 Piezas Duo",
-      "minP": 145,
-      "maxP": 185,
-      "id": "MAP-C24",
-      "demanda": "92.3%",
-      "opti": "RECOMENDADO"
-    },
-    {
-      "b": "Sharpie",
-      "n": "Marcador Negro Perman.",
-      "minP": 35,
-      "maxP": 48,
-      "id": "SH-PERM",
-      "demanda": "97.0%",
-      "opti": "ALTA ROTACIÓN"
-    },
-    {
-      "b": "Pritt",
-      "n": "Lápiz Adhesivo 42g 3pk",
-      "minP": 110,
-      "maxP": 145,
-      "id": "PR-42X3",
-      "demanda": "96.4%",
-      "opti": "ALTA ROTACIÓN"
-    },
-    {
-      "b": "Post-it",
-      "n": "Notas Adhesivas 3x3 6pk",
-      "minP": 185,
-      "maxP": 240,
-      "id": "3M-POST6",
-      "demanda": "94.2%",
-      "opti": "STOCK RECOMENDADO"
-    },
-    {
-      "b": "Staedtler",
-      "n": "Lápiz Noris 2B 12pk",
-      "minP": 135,
-      "maxP": 175,
-      "id": "ST-NORIS",
-      "demanda": "91.5%",
-      "opti": "RECOMENDADO"
-    },
-    {
-      "b": "Pappermate",
-      "n": "Kilométrico Negro 12pk",
-      "minP": 45,
-      "maxP": 65,
-      "id": "PM-KIL12",
-      "demanda": "97.8%",
-      "opti": "ALTA ROTACIÓN"
-    },
-    {
-      "b": "Scotch",
-      "n": "Cinta Invisible 2pk",
-      "minP": 85,
-      "maxP": 115,
-      "id": "3M-SCOT2",
-      "demanda": "93.0%",
-      "opti": "STOCK RECOMENDADO"
-    },
-    {
-      "b": "Casio",
-      "n": "Calculadora FX-991EX",
-      "minP": 480,
-      "maxP": 590,
-      "id": "CS-991EX",
-      "demanda": "95.5%",
-      "opti": "ALTO MARGEN"
-    },
-    {
-      "b": "Fellowes",
-      "n": "Engargoladora Pulsar+",
-      "minP": 3100,
-      "maxP": 3600,
-      "id": "FE-500",
-      "demanda": "81.4%",
-      "opti": "ALTO MARGEN"
-    },
-    {
-      "b": "Leitz",
-      "n": "Perforadora 2 orificios",
-      "minP": 240,
-      "maxP": 310,
-      "id": "LE-2H",
-      "demanda": "84.2%",
-      "opti": "RECOMENDADO"
-    },
-    {
-      "b": "Oxford",
-      "n": "Fichas Bibliográficas",
-      "minP": 65,
-      "maxP": 95,
-      "id": "OX-FICH",
-      "demanda": "88.1%",
-      "opti": "STOCK RECOMENDADO"
-    },
-    {
-      "b": "Azor",
-      "n": "Pizarrón Blanco 60x90",
-      "minP": 750,
-      "maxP": 950,
-      "id": "AZ-6090",
-      "demanda": "87.0%",
-      "opti": "RECOMENDADO"
-    },
-    {
-      "b": "Pilot",
-      "n": "G2 Rollerball Negro 4pk",
-      "minP": 125,
-      "maxP": 165,
-      "id": "PL-G2X4",
-      "demanda": "92.4%",
-      "opti": "STOCK RECOMENDADO"
-    },
-    {
-      "b": "Swingline",
-      "n": "Engrapadora Standard",
-      "minP": 185,
-      "maxP": 245,
-      "id": "SW-STD",
+      "b": "Kit",
+      "n": "Kit 5 Cuadernos Scribe Profesional 100 Hojas Raya Color colores",
+      "c": "papeleria",
+      "minP": 299,
+      "maxP": 343,
+      "id": "MLM42097020",
       "demanda": "94.1%",
-      "opti": "ALTA ROTACIÓN"
+      "opti": "LIVE DATA"
     },
     {
-      "b": "Wilson Jones",
-      "n": "Carpeta 3 Argollas 1in",
-      "minP": 85,
-      "maxP": 115,
-      "id": "WJ-3A1",
-      "demanda": "93.4%",
-      "opti": "STOCK RECOMENDADO"
+      "b": "Kit",
+      "n": "Kit 6 Cuadernos Scribe Profesional 100 Hojas Raya Color colores",
+      "c": "papeleria",
+      "minP": 199,
+      "maxP": 228,
+      "id": "MLM47825116",
+      "demanda": "89.5%",
+      "opti": "LIVE DATA"
     },
     {
-      "b": "Pentel",
-      "n": "Portaminas GraphGear",
-      "minP": 195,
-      "maxP": 260,
-      "id": "PT-GG500",
-      "demanda": "86.5%",
-      "opti": "RECOMENDADO"
+      "b": "Kit",
+      "n": "Kit 6 Cuadernos Scribe Profesional 100 Hojas Raya Color colores",
+      "c": "papeleria",
+      "minP": 199,
+      "maxP": 228,
+      "id": "MLM47825116",
+      "demanda": "94.6%",
+      "opti": "LIVE DATA"
     },
     {
-      "b": "Zebra",
-      "n": "F-301 Bolígrafo Acero",
-      "minP": 110,
-      "maxP": 145,
-      "id": "ZB-F301",
-      "demanda": "89.2%",
-      "opti": "RECOMENDADO"
+      "b": "Scribe",
+      "n": "Scribe Escolar Plus Cuaderno Pro 100h Cuadro Chico Pack De 6",
+      "c": "papeleria",
+      "minP": 180,
+      "maxP": 206,
+      "id": "MLM26971450",
+      "demanda": "86.7%",
+      "opti": "LIVE DATA"
+    },
+    {
+      "b": "Scribe",
+      "n": "Scribe Escolar Plus Cuaderno Pro 100h Cuadro Chico Pack De 6",
+      "c": "papeleria",
+      "minP": 180,
+      "maxP": 206,
+      "id": "MLM26971450",
+      "demanda": "88.5%",
+      "opti": "LIVE DATA"
+    },
+    {
+      "b": "5",
+      "n": "5 Cuadernos Profesional Scribe 100 Hojas Con Imagen",
+      "c": "papeleria",
+      "minP": 194,
+      "maxP": 223,
+      "id": "MLM-754447817",
+      "demanda": "86.2%",
+      "opti": "LIVE DATA"
+    },
+    {
+      "b": "5",
+      "n": "5 Cuadernos Profesional Scribe 100 Hojas Con Imagen",
+      "c": "papeleria",
+      "minP": 194,
+      "maxP": 223,
+      "id": "MLM-754447817",
+      "demanda": "89.0%",
+      "opti": "LIVE DATA"
+    },
+    {
+      "b": "Cuadernos",
+      "n": "Cuadernos Libretas Scribe Profesional 100 Hojas 36 Piezas Color Cuadro Grande",
+      "c": "papeleria",
+      "minP": 1109,
+      "maxP": 1275,
+      "id": "MLM49924647",
+      "demanda": "88.9%",
+      "opti": "LIVE DATA"
+    },
+    {
+      "b": "Cuadernos",
+      "n": "Cuadernos Libretas Scribe Profesional 100 Hojas 36 Piezas Color Cuadro Grande",
+      "c": "papeleria",
+      "minP": 1109,
+      "maxP": 1275,
+      "id": "MLM49924647",
+      "demanda": "86.6%",
+      "opti": "LIVE DATA"
     }
   ],
   "toner": [
     {
-      "b": "HP",
-      "n": "Toner 85A Negro Original",
-      "minP": 1540,
-      "maxP": 1850,
-      "id": "CE285A",
-      "demanda": "97.4%",
-      "opti": "ALTA ROTACIÓN"
+      "b": "Toner",
+      "n": "Toner 11x Q6511x 6511 Q6511 Hp2400 Series 2410 2420 2430",
+      "c": "toner",
+      "minP": 2830,
+      "maxP": 3254,
+      "id": "MLM23086242",
+      "demanda": "90.7%",
+      "opti": "LIVE DATA"
     },
     {
-      "b": "Brother",
-      "n": "TN-660 High Yield Black",
-      "minP": 980,
-      "maxP": 1280,
-      "id": "TN660",
-      "demanda": "96.5%",
-      "opti": "ALTA ROTACIÓN"
+      "b": "Toner",
+      "n": "Toner 11x Q6511x 6511 Q6511 Hp2400 Series 2410 2420 2430",
+      "c": "toner",
+      "minP": 2830,
+      "maxP": 3254,
+      "id": "MLM23086242",
+      "demanda": "89.9%",
+      "opti": "LIVE DATA"
     },
     {
-      "b": "Canon",
-      "n": "GPR-22 Black Toner",
-      "minP": 1350,
-      "maxP": 1680,
-      "id": "0386B003",
-      "demanda": "92.1%",
-      "opti": "STOCK RECOMENDADO"
+      "b": "Tóner",
+      "n": "Tóner Hp Q5945yc Color Polvo Negro",
+      "c": "toner",
+      "minP": 950,
+      "maxP": 1092,
+      "id": "MLM36794468",
+      "demanda": "91.8%",
+      "opti": "LIVE DATA"
     },
     {
-      "b": "Epson",
-      "n": "Tinta 544 Negro Original",
-      "minP": 265,
-      "maxP": 345,
-      "id": "T544120",
-      "demanda": "99.1%",
-      "opti": "ALTA ROTACIÓN"
+      "b": "Tóner",
+      "n": "Tóner Hp Q5945yc Color Polvo Negro",
+      "c": "toner",
+      "minP": 950,
+      "maxP": 1092,
+      "id": "MLM36794468",
+      "demanda": "94.3%",
+      "opti": "LIVE DATA"
     },
     {
-      "b": "Samsung",
-      "n": "MLT-D111S Black Toner",
-      "minP": 1480,
-      "maxP": 1790,
-      "id": "D111S",
-      "demanda": "91.4%",
-      "opti": "RECOMENDADO"
+      "b": "Pack",
+      "n": "Pack 2 Toner 85a / 36a / 35a P1005 / 1102w Compatible Tinta Negro",
+      "c": "toner",
+      "minP": 318,
+      "maxP": 365,
+      "id": "MLM44776197",
+      "demanda": "88.0%",
+      "opti": "LIVE DATA"
     },
     {
-      "b": "HP",
-      "n": "Toner 58A LaserJet Pro",
-      "minP": 2900,
-      "maxP": 3400,
-      "id": "CF258A",
-      "demanda": "93.5%",
-      "opti": "ALTO MARGEN"
+      "b": "Pack",
+      "n": "Pack 2 Toner 85a / 36a / 35a P1005 / 1102w Compatible Tinta Negro",
+      "c": "toner",
+      "minP": 318,
+      "maxP": 365,
+      "id": "MLM44776197",
+      "demanda": "94.2%",
+      "opti": "LIVE DATA"
     },
     {
-      "b": "Brother",
-      "n": "DR-630 Drum Unit",
-      "minP": 1850,
-      "maxP": 2200,
-      "id": "DR630",
-      "demanda": "88.4%",
-      "opti": "RECOMENDADO"
+      "b": "Cartucho",
+      "n": "Cartucho De Tóner Hp 105a Negro Laserjet",
+      "c": "toner",
+      "minP": 1492,
+      "maxP": 1715,
+      "id": "MLM36750869",
+      "demanda": "93.2%",
+      "opti": "LIVE DATA"
     },
     {
-      "b": "Xerox",
-      "n": "Phaser 3020 Toner",
-      "minP": 1150,
-      "maxP": 1450,
-      "id": "106R02773",
-      "demanda": "89.0%",
-      "opti": "STOCK RECOMENDADO"
+      "b": "Cartucho",
+      "n": "Cartucho De Tóner Hp 105a Negro Laserjet",
+      "c": "toner",
+      "minP": 1492,
+      "maxP": 1715,
+      "id": "MLM36750869",
+      "demanda": "85.9%",
+      "opti": "LIVE DATA"
     },
     {
-      "b": "Lexmark",
-      "n": "50F1H00 High Yield",
-      "minP": 3200,
-      "maxP": 3800,
-      "id": "501H",
-      "demanda": "84.2%",
-      "opti": "ALTO MARGEN"
+      "b": "Toner",
+      "n": "Toner Hp Laserjet 222a Magenta",
+      "c": "toner",
+      "minP": 1894,
+      "maxP": 2178,
+      "id": "MLM45943709",
+      "demanda": "93.9%",
+      "opti": "LIVE DATA"
     },
     {
-      "b": "Canon",
-      "n": "Cartucho 121 Negro",
-      "minP": 380,
-      "maxP": 490,
-      "id": "121BK",
-      "demanda": "95.6%",
-      "opti": "ALTA ROTACIÓN"
-    },
-    {
-      "b": "HP",
-      "n": "Kit 4 Toners 202A (CMYK)",
-      "minP": 7800,
-      "maxP": 9200,
-      "id": "CF500A-SET",
-      "demanda": "87.1%",
-      "opti": "ALTO MARGEN"
-    },
-    {
-      "b": "Kyocera",
-      "n": "TK-1175 Black Toner",
-      "minP": 1250,
-      "maxP": 1580,
-      "id": "TK1175",
-      "demanda": "85.4%",
-      "opti": "STOCK RECOMENDADO"
-    },
-    {
-      "b": "Brother",
-      "n": "TN-2420 High Yield",
-      "minP": 1100,
-      "maxP": 1450,
-      "id": "TN2420",
-      "demanda": "90.2%",
-      "opti": "STOCK RECOMENDADO"
-    },
-    {
-      "b": "Epson",
-      "n": "Tinta 664 Pack 4 Colores",
-      "minP": 840,
-      "maxP": 1150,
-      "id": "T664-SET",
-      "demanda": "96.4%",
-      "opti": "ALTA ROTACIÓN"
-    },
-    {
-      "b": "Canon",
-      "n": "GPR-53 Black Toner",
-      "minP": 1650,
-      "maxP": 1980,
-      "id": "GPR53",
-      "demanda": "83.1%",
-      "opti": "RECOMENDADO"
-    },
-    {
-      "b": "HP",
-      "n": "Toner 17A LaserJet Pro",
-      "minP": 1450,
-      "maxP": 1790,
-      "id": "CF217A",
-      "demanda": "92.4%",
-      "opti": "STOCK RECOMENDADO"
-    },
-    {
-      "b": "Brother",
-      "n": "LC3017 High Yield Ink",
-      "minP": 650,
-      "maxP": 850,
-      "id": "LC3017-SET",
-      "demanda": "91.1%",
-      "opti": "RECOMENDADO"
-    },
-    {
-      "b": "Samsung",
-      "n": "MLT-D101S Toner",
-      "minP": 1350,
-      "maxP": 1650,
-      "id": "D101S",
-      "demanda": "86.5%",
-      "opti": "RECOMENDADO"
-    },
-    {
-      "b": "OKI",
-      "n": "B412/B432 Black Toner",
-      "minP": 2100,
-      "maxP": 2600,
-      "id": "OKI-4581B",
-      "demanda": "82.4%",
-      "opti": "ALTO MARGEN"
-    },
-    {
-      "b": "Sharp",
-      "n": "MX-237NT Black Toner",
-      "minP": 1850,
-      "maxP": 2300,
-      "id": "MX237",
-      "demanda": "84.0%",
-      "opti": "STOCK RECOMENDADO"
+      "b": "Toner",
+      "n": "Toner Hp Laserjet 222a Magenta",
+      "c": "toner",
+      "minP": 1894,
+      "maxP": 2178,
+      "id": "MLM45943709",
+      "demanda": "93.6%",
+      "opti": "LIVE DATA"
     }
   ]
 }

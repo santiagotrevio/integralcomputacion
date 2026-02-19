@@ -85,9 +85,12 @@ db.serialize(() => {
         name TEXT,
         logo TEXT,
         scale REAL DEFAULT 1.0,
+        offset_x INTEGER DEFAULT 0,
         offset_y INTEGER DEFAULT 0,
         color TEXT DEFAULT '#0071e3'
     )`);
+    // Asegurar que existe offset_x si la tabla ya existía
+    db.run("ALTER TABLE brands ADD COLUMN offset_x INTEGER DEFAULT 0", (err) => { });
 });
 
 app.get('/api/brands', (req, res) => {
@@ -98,19 +101,20 @@ app.get('/api/brands', (req, res) => {
 });
 
 app.put('/api/brands/:id', (req, res) => {
-    const { name, logo, scale, offset_y, color } = req.body;
+    const { name, logo, scale, offset_x, offset_y, color } = req.body;
     const id = req.params.id;
 
     // UPSERT logic for brands
-    db.run(`INSERT INTO brands (id, name, logo, scale, offset_y, color) 
-            VALUES (?, ?, ?, ?, ?, ?)
+    db.run(`INSERT INTO brands (id, name, logo, scale, offset_x, offset_y, color) 
+            VALUES (?, ?, ?, ?, ?, ?, ?)
             ON CONFLICT(id) DO UPDATE SET 
             name = excluded.name,
             logo = excluded.logo,
             scale = excluded.scale,
+            offset_x = excluded.offset_x,
             offset_y = excluded.offset_y,
             color = excluded.color`,
-        [id, name, logo, scale, offset_y, color], function (err) {
+        [id, name, logo, scale, offset_x, offset_y, color], function (err) {
             if (err) return res.status(400).json({ error: err.message });
             res.json({ message: "Brand updated" });
         });

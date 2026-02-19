@@ -1811,36 +1811,7 @@
                 </div>
             </div>
 
-            <!-- VIEW 2: BRAND CUSTOMIZATION -->
-            <div id="viewBrands" class="view-container">
-                <div class="stats-grid">
-                    <div class="stat-card">
-                        <div class="stat-icon" style="background: rgba(88, 86, 214, 0.1); color: #5856d6;">
-                            <i class="fa-solid fa-fingerprint"></i>
-                        </div>
-                        <div>
-                            <div class="stat-value" id="brandCount">0</div>
-                            <div class="stat-label">Marcas Identificadas</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="admin-table-container" style="margin-top: 2rem;">
-                    <table class="admin-table">
-                        <thead>
-                            <tr>
-                                <th>Vista Previa (Badge)</th>
-                                <th>Marca</th>
-                                <th>Personalización (Escala / Offset / Color)</th>
-                                <th>Acciones</th>
-                            </tr>
-                        </thead>
-                        <tbody id="brandsTableBody">
-                            <!-- JS fills this -->
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+            <!-- Brands View was here, moved out -->
 
             <div class="toolbar">
                 <input type="text" id="search" placeholder="Buscar por nombre, ID o marca..." onkeyup="filterAndSort()"
@@ -1903,6 +1874,37 @@
             </table>
 
             <div id="productGrid" class="grid-container" style="display:none;"></div>
+        </div>
+
+        <!-- VIEW 2: BRAND CUSTOMIZATION -->
+        <div id="viewBrands" class="view-container">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon" style="background: rgba(88, 86, 214, 0.1); color: #5856d6;">
+                        <i class="fa-solid fa-fingerprint"></i>
+                    </div>
+                    <div>
+                        <div class="stat-value" id="brandCount">0</div>
+                        <div class="stat-label">Marcas Identificadas</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="admin-table-container" style="margin-top: 2rem;">
+                <table class="admin-table">
+                    <thead>
+                        <tr>
+                            <th>Vista Previa (Badge)</th>
+                            <th>Marca</th>
+                            <th>Personalización (Escala / Offset / Color)</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="brandsTableBody">
+                        <!-- JS fills this -->
+                    </tbody>
+                </table>
+            </div>
         </div>
 
         <!-- VIEW 2: SALES INTELLIGENCE -->
@@ -2438,18 +2440,33 @@
         }
 
         async function loadProducts() {
-            const [pRes, bRes] = await Promise.all([
-                fetch('/api/products'),
-                fetch('/api/brands')
-            ]);
-            const pData = await pRes.json();
-            const bData = await bRes.json();
+            try {
+                const fetchSafe = async (url) => {
+                    try {
+                        const r = await fetch(url);
+                        if (!r.ok) return { data: [] };
+                        return await r.json();
+                    } catch (e) {
+                        return { data: [] };
+                    }
+                };
 
-            products = pData.data;
-            brandSettings = bData.data || [];
+                const [pData, bData] = await Promise.all([
+                    fetchSafe('/api/products'),
+                    fetchSafe('/api/brands')
+                ]);
 
-            updateBrandSelector();
-            filterAndSort();
+                products = Array.isArray(pData.data) ? pData.data : [];
+                brandSettings = Array.isArray(bData.data) ? bData.data : [];
+
+                updateBrandSelector();
+                filterAndSort();
+            } catch (err) {
+                console.error("Critical loader error:", err);
+                products = products || [];
+                brandSettings = brandSettings || [];
+                filterAndSort();
+            }
         }
 
         function updateBrandSelector() {
@@ -2660,9 +2677,10 @@
                 // Common Logic
                 const hasNoImage = !p.image || p.image.includes('logo.svg') || p.image.includes('default');
                 const imgName = p.image ? p.image.split('/').pop() : 'logo.svg';
+                const imgSrc = `/assets/${imgName}?v=${cacheBuster}`;
                 const brandLogosrc = `/assets/${(p.brand || '').toLowerCase().replace(/[^a-z0-9]/g, '')}.png?v=${cacheBuster}`;
-                const bSet = brandSettings.find(s => s.id === p.brand) || { scale: 1.0, offset_y: 0 };
-                const brandImgStyle = `max-height: ${15 * bSet.scale}px; transform: translateY(${bSet.offset_y}px); object-fit: contain;`;
+                const bSet = brandSettings.find(s => s.id === p.brand) || { scale: 1.0, offset_x: 0, offset_y: 0 };
+                const brandImgStyle = `max-height: ${15 * bSet.scale}px; transform: translate(${bSet.offset_x || 0}px, ${bSet.offset_y || 0}px); object-fit: contain;`;
 
                 if (p.published === 0) pending++;
 
@@ -3745,7 +3763,18 @@
 
         function renderBrandsTable() {
             const tbody = document.getElementById('brandsTableBody');
-            const uniqueBrands = [...new Set(products.map(p => p.brand).filter(b => b && b !== 'Otros'))];
+
+            // Normalize brands to avoid duplicates like Ricoh/RICOH
+            const brandMap = new Map();
+            products.forEach(p => {
+                if (p.brand && p.brand !== 'Otros') {
+                    const key = p.brand.toLowerCase().trim();
+                    // Keep the first version found but prefer Capitalized if available
+                    if (!brandMap.has(key)) brandMap.set(key, p.brand.trim());
+                }
+            });
+            const uniqueBrands = [...brandMap.values()].sort();
+
             document.getElementById('brandCount').innerText = uniqueBrands.length;
 
             tbody.innerHTML = '';
@@ -3753,45 +3782,98 @@
                 const setting = brandSettings.find(s => s.id === brandName) || {
                     id: brandName,
                     name: brandName,
-                    logo: `/assets/${brandName.toLowerCase().replace(/[^a-z0-9]/g, '')}.png`,
+                    logo: `/assets/images/brands/${brandName.toLowerCase().replace(/[^a-z0-9]/g, '')}.png`,
                     scale: 1.0,
+                    offset_x: 0,
                     offset_y: 0,
                     color: '#0071e3'
                 };
 
+                const brandImgPath = setting.logo.startsWith('/') ? setting.logo : '/' + setting.logo;
                 const tr = document.createElement('tr');
+
                 tr.innerHTML = `
-                    <td>
-                        <div class="brand-logo-pill" style="position:static; margin:0 auto; box-shadow:none; border:1px solid #ddd; background:white;">
-                            <img src="${setting.logo}" style="max-height: ${15 * setting.scale}px; transform:translateY(${setting.offset_y}px); max-width:60px; object-fit:contain;">
+                    <td style="padding: 15px; width: 150px;">
+                        <div style="background:#f8f9fa; border:1px solid #eee; border-radius:12px; padding:20px; text-align:center;">
+                            <!-- FIXED SIZE CONTAINER (CANON STYLE) -->
+                            <div class="brand-logo-pill" style="position:relative; margin:0 auto; box-shadow:none; border:1px solid #ddd; background:white; width:80px; height:32px; overflow:hidden; padding:0; border-radius:16px;">
+                                <!-- Safe Zone Guides (Only visible in this preview) -->
+                                <div style="position:absolute; top:calc(50% - 7.5px); left:0; width:100%; height:15px; border-top:1px dashed #ff2d55; border-bottom:1px dashed #ff2d55; opacity:0.25; pointer-events:none; z-index:3;"></div>
+                                <div style="position:absolute; top:50%; left:2px; transform:translateY(-50%); font-size:5px; color:#ff2d55; opacity:0.8; font-weight:900; z-index:4;">SAFE</div>
+                                
+                                <img src="${brandImgPath}" class="brand-prev-img"
+                                     style="max-height: ${15 * setting.scale}px; transform:translate(${setting.offset_x || 0}px, ${setting.offset_y || 0}px); max-width:70px; object-fit:contain; z-index:2;"
+                                     onerror="this.style.opacity='0.2'">
+                            </div>
+                            <div style="font-weight:800; font-size:14px; margin-top:10px;">${brandName}</div>
                         </div>
                     </td>
-                    <td><b>${brandName}</b></td>
                     <td>
-                        <div style="display:flex; flex-direction:column; gap:8px;">
-                            <div style="display:flex; align-items:center; gap:10px;">
-                                <span style="font-size:11px; width:45px;">Escala:</span>
-                                <input type="range" min="0.5" max="1.8" step="0.1" value="${setting.scale}" 
+                        <div style="display:flex; flex-direction:column; gap:12px; background: #fff; padding: 15px; border-radius: 12px; border:1px solid #eee;">
+                            <div style="display:flex; align-items:center; gap:12px;">
+                                <span style="font-size:11px; width:60px; font-weight:700;">ESCALA</span>
+                                <input type="range" min="0.4" max="2.0" step="0.05" value="${setting.scale}" 
                                     oninput="updateBrandPreview(this, '${brandName}', 'scale')" style="flex:1">
-                                <span style="font-size:11px; width:25px;">${setting.scale}</span>
+                                <span style="font-size:11px; width:35px; font-family:monospace; text-align:right;">${setting.scale}</span>
                             </div>
-                            <div style="display:flex; align-items:center; gap:10px;">
-                                <span style="font-size:11px; width:45px;">Ajuste Y:</span>
-                                <input type="range" min="-10" max="10" step="1" value="${setting.offset_y}" 
+                            <div style="display:flex; align-items:center; gap:12px;">
+                                <span style="font-size:11px; width:60px; font-weight:700;">HORIZONTAL</span>
+                                <input type="range" min="-25" max="25" step="1" value="${setting.offset_x || 0}" 
+                                    oninput="updateBrandPreview(this, '${brandName}', 'offset_x')" style="flex:1">
+                                <span style="font-size:11px; width:35px; font-family:monospace; text-align:right;">${setting.offset_x || 0}px</span>
+                            </div>
+                            <div style="display:flex; align-items:center; gap:12px;">
+                                <span style="font-size:11px; width:60px; font-weight:700;">VERTICAL</span>
+                                <input type="range" min="-12" max="12" step="1" value="${setting.offset_y}" 
                                     oninput="updateBrandPreview(this, '${brandName}', 'offset_y')" style="flex:1">
-                                <span style="font-size:11px; width:25px;">${setting.offset_y}</span>
+                                <span style="font-size:11px; width:35px; font-family:monospace; text-align:right;">${setting.offset_y}px</span>
                             </div>
-                            <div style="display:flex; align-items:center; gap:10px;">
-                                <span style="font-size:11px; width:45px;">Color:</span>
-                                <input type="color" value="${setting.color}" 
-                                    oninput="updateBrandPreview(this, '${brandName}', 'color')" style="width:100%; height:20px; border:none; padding:0; background:none;">
-                            </div>
+                            <button class="primary" onclick="saveBrandConfig('${brandName}', this)" style="margin-top:5px; padding:10px; font-size:12px; font-weight:700;">
+                                <i class="fa-solid fa-floppy-disk"></i> GUARDAR CAMBIOS
+                            </button>
                         </div>
                     </td>
-                    <td>
-                        <button class="primary" onclick="saveBrandConfig('${brandName}', this)" style="padding:6px 12px; font-size:12px;">
-                            <i class="fa-solid fa-floppy-disk"></i> GUARDAR
-                        </button>
+                    <td style="background: #f1f5f980; padding: 20px;">
+                        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:20px; min-width:350px;">
+                            <!-- MOCKUP ADMIN -->
+                            <div style="text-align:center;">
+                                <div style="font-size:9px; font-weight:800; color:#999; margin-bottom:8px;">VISTA GESTOR (ADMIN)</div>
+                                <div class="audit-card" style="width:160px; margin:0 auto; transform:scale(0.8); transform-origin:top center; pointer-events:none;">
+                                    <div style="height:100px; background:#fdfdfd; display:flex; align-items:center; justify-content:center; border-bottom:1px solid #eee; position:relative;">
+                                         <i class="fa-solid fa-box" style="font-size:24px; opacity:0.1;"></i>
+                                         <div class="brand-logo-pill" style="top:10px; right:-10px; height:32px; width:80px; padding:0; overflow:hidden;">
+                                             <img src="${brandImgPath}" class="brand-prev-img" style="max-height: ${15 * setting.scale}px; transform:translate(${setting.offset_x || 0}px, ${setting.offset_y || 0}px); max-width:70px; object-fit:contain;">
+                                         </div>
+                                    </div>
+                                    <div style="padding:10px; text-align:left;">
+                                        <div style="font-size:8px; opacity:0.5;">RTX-4080</div>
+                                        <div style="font-size:10px; font-weight:700; border-bottom:1px solid #eee; padding-bottom:5px; margin-bottom:5px;">Tarjeta de Video...</div>
+                                        <div style="display:flex; gap:4px;">
+                                            <div style="width:15px; height:15px; border-radius:4px; background:#eee;"></div>
+                                            <div style="width:15px; height:15px; border-radius:4px; background:#eee;"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- MOCKUP CLIENTE -->
+                            <div style="text-align:center;">
+                                <div style="font-size:9px; font-weight:800; color:#999; margin-bottom:8px;">PÁGINA CLIENTES</div>
+                                <div class="catalog-item-card" style="width:160px; margin:0 auto; transform:scale(0.8); transform-origin:top center; pointer-events:none; border:1px solid #eee;">
+                                    <div style="height:100px; background:#fff; display:flex; align-items:center; justify-content:center; position:relative;">
+                                         <div class="brand-badge" style="top:10px; right:-8px; height:32px; width:80px; padding:0; overflow:hidden;">
+                                             <img src="${brandImgPath}" class="brand-prev-img" style="max-height: ${15 * setting.scale}px; transform:translate(${setting.offset_x || 0}px, ${setting.offset_y || 0}px); max-width:70px; object-fit:contain;">
+                                         </div>
+                                         <i class="fa-solid fa-print" style="font-size:24px; opacity:0.1;"></i>
+                                    </div>
+                                    <div style="padding:10px; text-align:left;">
+                                        <div style="font-size:10px; font-weight:800; color:var(--ic-cyan); margin-bottom:4px;">Tóner Compatible</div>
+                                        <div style="font-size:11px; font-weight:600; line-height:1.2;">Producto de Muestra...</div>
+                                        <div style="margin-top:10px; height:20px; border-radius:10px; background:var(--ic-cyan); opacity:0.1;"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </td>
                 `;
                 tbody.appendChild(tr);
@@ -3800,17 +3882,24 @@
 
         function updateBrandPreview(input, brandId, field) {
             const val = input.value;
-            input.nextElementSibling.innerText = val;
+            input.nextElementSibling.innerText = (field === 'offset_y' || field === 'offset_x') ? val + 'px' : val;
 
-            // Find the preview img in the same row
-            const img = input.closest('tr').querySelector('img');
-            const scaleInput = input.closest('tr').querySelectorAll('input')[0];
-            const offsetInput = input.closest('tr').querySelectorAll('input')[1];
+            const tr = input.closest('tr');
+            const scaleInput = tr.querySelectorAll('input')[0];
+            const xInput = tr.querySelectorAll('input')[1];
+            const yInput = tr.querySelectorAll('input')[2];
 
-            if (field === 'scale' || field === 'offset_y') {
+            const imgs = tr.querySelectorAll('.brand-prev-img');
+            imgs.forEach(img => {
                 img.style.maxHeight = `${15 * scaleInput.value}px`;
-                img.style.transform = `translateY(${offsetInput.value}px)`;
-            }
+                img.style.transform = `translate(${xInput.value}px, ${yInput.value}px)`;
+            });
+
+            // Highlight the Save button to indicate changes
+            const btn = tr.querySelector('.primary');
+            btn.style.boxShadow = '0 0 15px rgba(0, 113, 227, 0.4)';
+            const savedText = btn.innerHTML.includes('OK') ? '<i class="fa-solid fa-floppy-disk"></i> GUARDAR CAMBIOS' : btn.innerHTML;
+            if (!btn.innerHTML.includes('*')) btn.innerHTML = savedText + ' *';
         }
 
         async function saveBrandConfig(brandId, btn) {
@@ -3818,10 +3907,11 @@
             const inputs = tr.querySelectorAll('input');
             const body = {
                 name: brandId,
-                logo: `/assets/${brandId.toLowerCase().replace(/[^a-z0-9]/g, '')}.png`,
+                logo: `/assets/images/brands/${brandId.toLowerCase().replace(/[^a-z0-9]/g, '')}.png`,
                 scale: parseFloat(inputs[0].value),
-                offset_y: parseInt(inputs[1].value),
-                color: inputs[2].value
+                offset_x: parseInt(inputs[1].value),
+                offset_y: parseInt(inputs[2].value),
+                color: "#0071e3" // Default for now
             };
 
             btn.disabled = true;
