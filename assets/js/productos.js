@@ -3677,7 +3677,7 @@ const productsDB = [
     "brand": "ZEBRA",
     "name": "CINTA ZEBRA ZC100/ZC300 COLOR",
     "description": "CINTA ZEBRA ZC100/ZC300 COLOR",
-    "image": ""
+    "image": "assets/images/products/toner/Z800300350LA.webp"
   },
   {
     "id": "NXNE-040A",
@@ -4230,8 +4230,8 @@ const productsDB = [
   },
   {
     "id": "X006R04730",
-    "category": "OTROS",
-    "brand": "XEROX Consumible",
+    "category": "",
+    "brand": "Xerox",
     "name": "Cartucho de tóner Xerox Extra Alto Rendimiento Láser - Original - 2500",
     "description": "Cartucho de tóner Xerox Extra Alto Rendimiento Láser - Original - 2500",
     "image": ""
@@ -5268,7 +5268,7 @@ const productsDB = [
     "brand": "ZEBRA",
     "name": "Etiqueta Papel Zebra 4\"x6\" (1016 x 1524mm) DT Z-Perform 1000D Value sin Recubrimiento Adhesivo Permanente",
     "description": "Etiqueta Papel Zebra 4\"x6\" (1016 x 1524mm) DT Z-Perform 1000D Value sin Recubrimiento Adhesivo Permanente",
-    "image": ""
+    "image": "assets/images/products/toner/Z10026382.webp"
   },
   {
     "id": "EL5472",
@@ -5304,8 +5304,8 @@ const productsDB = [
   },
   {
     "id": "X113R00663",
-    "category": "OTROS",
-    "brand": "XEROX Consumible",
+    "category": "",
+    "brand": "Xerox",
     "name": "FOTORECEPTOR XEROX WORKCENTREPRO412",
     "description": "FOTORECEPTOR XEROX WORKCENTREPRO412",
     "image": ""
@@ -6724,7 +6724,7 @@ const productsDB = [
     "brand": "YEYIAN",
     "name": "MONITOR GAMING YEYIAN 24\" FHD100HZ HDMI - VGA",
     "description": "MONITOR GAMING YEYIAN 24\" FHD100HZ HDMI - VGA",
-    "image": ""
+    "image": "assets/images/products/toner/YMF_VAF24_G1.webp"
   },
   {
     "id": "XZXSPMG08B",
@@ -6732,7 +6732,7 @@ const productsDB = [
     "brand": "Xzeal",
     "name": "MONITOR XZEAL GAMER 23.8IN FHD /100HZ / 5MS / HDMI/VGA/FHD / CON SOPORTE VESA / PLANO/ COLOR NEGRO",
     "description": "MONITOR XZEAL GAMER 23.8IN FHD /100HZ / 5MS / HDMI/VGA/FHD / CON SOPORTE VESA / PLANO/ COLOR NEGRO",
-    "image": ""
+    "image": "assets/images/products/toner/XZXSPMG08B.webp"
   },
   {
     "id": "LT910-001601",
@@ -7206,7 +7206,7 @@ const productsDB = [
     "brand": "XPG",
     "name": "Memoria RAM para Laptop XPG Hunter DDR5, 5600MHz, 16GB, ECC CL46, 262-pin SO-DIMM, XMP",
     "description": "Memoria RAM para Laptop XPG Hunter DDR5, 5600MHz, 16GB, ECC CL46, 262-pin SO-DIMM, XMP",
-    "image": ""
+    "image": "assets/images/products/toner/XPAX5S5600C4616G_SBHT.webp"
   },
   {
     "id": "KIKC-U2L64-7LP",
@@ -7382,7 +7382,7 @@ const productsDB = [
     "brand": "Xzeal",
     "name": "Monitor Gamer Xzeal XST-590 27\" Plano 5ms 75Hz Resolución 1920x1080 HDMI/VGA",
     "description": "Monitor Gamer Xzeal XST-590 27\" Plano 5ms 75Hz Resolución 1920x1080 HDMI/VGA",
-    "image": ""
+    "image": "assets/images/products/toner/XZXSMO277B.webp"
   },
   {
     "id": "XZXZMXZ32B",
@@ -7390,7 +7390,7 @@ const productsDB = [
     "brand": "Xzeal",
     "name": "Monitor Gamer Xzeal XZMXZ32B LED 23.8\", 1920x1080 Full HD, FreeSync, 180Hz, DisplayPort, Negro",
     "description": "Monitor Gamer Xzeal XZMXZ32B LED 23.8\", 1920x1080 Full HD, FreeSync, 180Hz, DisplayPort, Negro",
-    "image": ""
+    "image": "assets/images/products/toner/XZXZMXZ32B.webp"
   },
   {
     "id": "HP9U5C1AA",
@@ -7888,8 +7888,8 @@ const productsDB = [
   },
   {
     "id": "PX3M02041",
-    "category": "OTROS",
-    "brand": "XEROX Papel",
+    "category": "",
+    "brand": "Xerox",
     "name": "PAPEL BOND XEROX OFICIO AZUL",
     "description": "PAPEL BOND XEROX OFICIO AZUL",
     "image": ""
@@ -7987,67 +7987,67 @@ const productsDB = [
   },
   {
     "id": "PX3M02056",
-    "category": "OTROS",
-    "brand": "XEROX Papel",
+    "category": "",
+    "brand": "Xerox",
     "name": "PAPEL XEROX BOND MARATHON OFICIO",
     "description": "PAPEL XEROX BOND MARATHON OFICIO",
     "image": ""
   },
   {
     "id": "PX3M02040",
-    "category": "OTROS",
-    "brand": "XEROX Papel",
+    "category": "",
+    "brand": "Xerox",
     "name": "PAPEL XEROX CARTA AZUL 97% BLANCURA",
     "description": "PAPEL XEROX CARTA AZUL 97% BLANCURA",
     "image": ""
   },
   {
     "id": "PX3M02010",
-    "category": "OTROS",
-    "brand": "XEROX Papel",
+    "category": "",
+    "brand": "Xerox",
     "name": "PAPEL XEROX CARTA ECOLOGICO 93% BLANCURA, CAJA CON 5000 HOJAS.",
     "description": "PAPEL XEROX CARTA ECOLOGICO 93% BLANCURA, CAJA CON 5000 HOJAS.",
     "image": ""
   },
   {
     "id": "PX3M02051",
-    "category": "OTROS",
-    "brand": "XEROX Papel",
+    "category": "",
+    "brand": "Xerox",
     "name": "PAPEL XEROX CARTA MARATHON 99% BLANCURA",
     "description": "PAPEL XEROX CARTA MARATHON 99% BLANCURA",
-    "image": ""
+    "image": "assets/images/products/toner/PX3M02051.webp"
   },
   {
     "id": "PX3M02000",
-    "category": "OTROS",
-    "brand": "XEROX Papel",
+    "category": "",
+    "brand": "Xerox",
     "name": "PAPEL XEROX CARTA ROJO 99% BLANCURA",
     "description": "PAPEL XEROX CARTA ROJO 99% BLANCURA",
     "image": ""
   },
   {
     "id": "PX3M02012",
-    "category": "OTROS",
-    "brand": "XEROX Papel",
+    "category": "",
+    "brand": "Xerox",
     "name": "PAPEL XEROX OFICIO ECOLOGICO 92% BLANCO",
     "description": "PAPEL XEROX OFICIO ECOLOGICO 92% BLANCO",
     "image": ""
   },
   {
     "id": "PX3M02021",
-    "category": "OTROS",
-    "brand": "XEROX Papel",
+    "category": "",
+    "brand": "Xerox",
     "name": "PAPEL XEROX ROJO OFICIO  P/5K",
     "description": "PAPEL XEROX ROJO OFICIO  P/5K",
     "image": ""
   },
   {
     "id": "PX3M02055",
-    "category": "OTROS",
-    "brand": "XEROX Papel",
+    "category": "",
+    "brand": "Xerox",
     "name": "PAPELBOND XEROX CARTA PONY MARATHON",
     "description": "PAPELBOND XEROX CARTA PONY MARATHON",
-    "image": ""
+    "image": "assets/images/products/toner/PX3M02055.webp"
   },
   {
     "id": "NXNE-128",
@@ -8179,11 +8179,11 @@ const productsDB = [
   },
   {
     "id": "PX3R75121",
-    "category": "OTROS",
-    "brand": "XEROX Papel",
+    "category": "",
+    "brand": "Xerox",
     "name": "Papel bond blanco Xerox Digital Paper Tamaño Doble Carta 500 Hojas",
     "description": "Papel bond blanco Xerox Digital Paper Tamaño Doble Carta 500 Hojas",
-    "image": ""
+    "image": "assets/images/products/toner/PX3R75121.webp"
   },
   {
     "id": "EPS041062",
@@ -8829,8 +8829,8 @@ const productsDB = [
   },
   {
     "id": "XD70N",
-    "category": "OTROS",
-    "brand": "XEROX Consumible",
+    "category": "",
+    "brand": "Xerox",
     "name": "Scanner Xerox D70N, 600 x 600 DPI, Escaneado Dúplex, USB 3.0, Blanco",
     "description": "Scanner Xerox D70N, 600 x 600 DPI, Escaneado Dúplex, USB 3.0, Blanco",
     "image": ""
@@ -9201,16 +9201,16 @@ const productsDB = [
   },
   {
     "id": "X101R00664",
-    "category": "OTROS",
-    "brand": "XEROX Consumible",
+    "category": "",
+    "brand": "Xerox",
     "name": "TAMBOR XEROX NEGRO B210/B205 10000 PAGS",
     "description": "TAMBOR XEROX NEGRO B210/B205 10000 PAGS",
     "image": ""
   },
   {
     "id": "X101R00582",
-    "category": "OTROS",
-    "brand": "XEROX Consumible",
+    "category": "",
+    "brand": "Xerox",
     "name": "TAMBOR XEROX PARA VERSALINK B600/B605/B610/B615",
     "description": "TAMBOR XEROX PARA VERSALINK B600/B605/B610/B615",
     "image": ""
@@ -9293,7 +9293,7 @@ const productsDB = [
     "brand": "ZEBRA",
     "name": "TARJETAS ZEBRA DE PVC  BLANCA PAQUETE DE 500",
     "description": "TARJETAS ZEBRA DE PVC  BLANCA PAQUETE DE 500",
-    "image": ""
+    "image": "assets/images/products/toner/ZE104523_111.webp"
   },
   {
     "id": "PC-201076",
@@ -11996,24 +11996,24 @@ const productsDB = [
   },
   {
     "id": "X106R03483",
-    "category": "OTROS",
-    "brand": "XEROX Consumible",
+    "category": "",
+    "brand": "Xerox",
     "name": "TONER XEROX WC AMARILLO 6510",
     "description": "TONER XEROX WC AMARILLO 6510",
     "image": ""
   },
   {
     "id": "X106R03481",
-    "category": "OTROS",
-    "brand": "XEROX Consumible",
+    "category": "",
+    "brand": "Xerox",
     "name": "TONER XEROX WC CYAN 6510",
     "description": "TONER XEROX WC CYAN 6510",
     "image": ""
   },
   {
     "id": "X106R03488",
-    "category": "OTROS",
-    "brand": "XEROX Consumible",
+    "category": "",
+    "brand": "Xerox",
     "name": "TONER XEROX WORKCENTRE 6510 A/C",
     "description": "TONER XEROX WORKCENTRE 6510 A/C",
     "image": ""
@@ -13169,8 +13169,8 @@ const productsDB = [
   },
   {
     "id": "X106R03520",
-    "category": "OTROS",
-    "brand": "XEROX Consumible",
+    "category": "",
+    "brand": "Xerox",
     "name": "Toner Xerox Alta Capacidad 4.8K VersaLink C400/405 Color Negro",
     "description": "Toner Xerox Alta Capacidad 4.8K VersaLink C400/405 Color Negro",
     "image": ""
@@ -13599,32 +13599,32 @@ const productsDB = [
   },
   {
     "id": "X006R04379",
-    "category": "OTROS",
-    "brand": "XEROX Consumible",
+    "category": "",
+    "brand": "Xerox",
     "name": "Tóner Xerox 006R04379 Negro, 3.000 Páginas",
     "description": "Tóner Xerox 006R04379 Negro, 3.000 Páginas",
     "image": ""
   },
   {
     "id": "X106R03482",
-    "category": "OTROS",
-    "brand": "XEROX Consumible",
+    "category": "",
+    "brand": "Xerox",
     "name": "Tóner Xerox 106R03482 Magenta, 1.000 Páginas",
     "description": "Tóner Xerox 106R03482 Magenta, 1.000 Páginas",
     "image": ""
   },
   {
     "id": "X106R03523",
-    "category": "OTROS",
-    "brand": "XEROX Consumible",
+    "category": "",
+    "brand": "Xerox",
     "name": "Tóner Xerox 106R03523 Alto Rendimiento Magenta, 4.800 Páginas",
     "description": "Tóner Xerox 106R03523 Alto Rendimiento Magenta, 4.800 Páginas",
     "image": ""
   },
   {
     "id": "X106R03746",
-    "category": "OTROS",
-    "brand": "XEROX Consumible",
+    "category": "",
+    "brand": "Xerox",
     "name": "Tóner Xerox 106R03746 Super Alto Rendimiento Amarillo, 11.800 Páginas",
     "description": "Tóner Xerox 106R03746 Super Alto Rendimiento Amarillo, 11.800 Páginas",
     "image": ""
@@ -13647,8 +13647,8 @@ const productsDB = [
   },
   {
     "id": "X013R00691",
-    "category": "OTROS",
-    "brand": "XEROX Consumible",
+    "category": "",
+    "brand": "Xerox",
     "name": "UNIDAD DE IMAGEN XEROX B230/B225/B235",
     "description": "UNIDAD DE IMAGEN XEROX B230/B225/B235",
     "image": ""
@@ -13839,24 +13839,24 @@ const productsDB = [
   },
   {
     "id": "X115R00128",
-    "category": "OTROS",
-    "brand": "XEROX Consumible",
+    "category": "",
+    "brand": "Xerox",
     "name": "Xerox Contenedor de Desperdicio 115R00128, 30.000 Páginas",
     "description": "Xerox Contenedor de Desperdicio 115R00128, 30.000 Páginas",
     "image": ""
   },
   {
     "id": "X108R01416",
-    "category": "OTROS",
-    "brand": "XEROX Consumible",
+    "category": "",
+    "brand": "Xerox",
     "name": "Xerox Contenedor de Residuos 108R01416, 30.000 Páginas",
     "description": "Xerox Contenedor de Residuos 108R01416, 30.000 Páginas",
     "image": ""
   },
   {
     "id": "X013R00702",
-    "category": "OTROS",
-    "brand": "XEROX Consumible",
+    "category": "",
+    "brand": "Xerox",
     "name": "Xerox Unidad de Imagen B410 Negro, 75.000 Páginas para B410/B415",
     "description": "Xerox Unidad de Imagen B410 Negro, 75.000 Páginas para B410/B415",
     "image": ""
@@ -13867,7 +13867,7 @@ const productsDB = [
     "brand": "ZEBRA",
     "name": "ZEBRA IX SERIES COLOR RIBBON ZXP3 YMCKO 280 IMAGES",
     "description": "ZEBRA IX SERIES COLOR RIBBON ZXP3 YMCKO 280 IMAGES",
-    "image": ""
+    "image": "assets/images/products/toner/ZE800033_340.webp"
   }
 ];
 
@@ -14104,7 +14104,7 @@ const brandSettingsDB = [
     "scale": 1,
     "offset_y": 0,
     "color": "#0071e3",
-    "offset_x": 0
+    "offset_x": -2
   },
   {
     "id": "GIGABYTE",
@@ -14119,10 +14119,10 @@ const brandSettingsDB = [
     "id": "GHIA",
     "name": "GHIA",
     "logo": "/assets/images/brands/ghia.png",
-    "scale": 1,
-    "offset_y": 0,
+    "scale": 1.55,
+    "offset_y": -1,
     "color": "#0071e3",
-    "offset_x": 0
+    "offset_x": -2
   },
   {
     "id": "HISENSE",
@@ -14284,6 +14284,42 @@ const brandSettingsDB = [
     "scale": 1.1,
     "offset_y": 0,
     "color": "#0071e3",
-    "offset_x": -8
+    "offset_x": -2
+  },
+  {
+    "id": "STEREN",
+    "name": "STEREN",
+    "logo": "/assets/images/brands/steren.png",
+    "scale": 0.9,
+    "offset_y": 0,
+    "color": "#0071e3",
+    "offset_x": -3
+  },
+  {
+    "id": "KINGSTON",
+    "name": "KINGSTON",
+    "logo": "/assets/images/brands/kingston.png",
+    "scale": 1.75,
+    "offset_y": -1,
+    "color": "#0071e3",
+    "offset_x": -5
+  },
+  {
+    "id": "KOBLENZ",
+    "name": "KOBLENZ",
+    "logo": "/assets/images/brands/koblenz.png",
+    "scale": 1.05,
+    "offset_y": 0,
+    "color": "#0071e3",
+    "offset_x": -4
+  },
+  {
+    "id": "LANIX",
+    "name": "LANIX",
+    "logo": "/assets/images/brands/lanix.png",
+    "scale": 2,
+    "offset_y": 0,
+    "color": "#0071e3",
+    "offset_x": 0
   }
 ];
