@@ -14173,10 +14173,10 @@ const brandSettingsDB = [
     "id": "OLMECA",
     "name": "OLMECA",
     "logo": "/assets/images/brands/olmeca.png",
-    "scale": 1,
+    "scale": 2,
     "offset_y": 0,
     "color": "#0071e3",
-    "offset_x": 0
+    "offset_x": -4
   },
   {
     "id": "PERFECT CHOICE",
@@ -14447,5 +14447,104 @@ const brandSettingsDB = [
     "offset_y": -3,
     "color": "#0071e3",
     "offset_x": -1
+  },
+  {
+    "id": "EUROFORMAS",
+    "name": "EUROFORMAS",
+    "logo": "/assets/images/brands/euroformas.png",
+    "scale": 1.65,
+    "offset_y": -1,
+    "color": "#0071e3",
+    "offset_x": -5
+  },
+  {
+    "id": "EVOLUTION",
+    "name": "EVOLUTION",
+    "logo": "/assets/images/brands/evolution.png",
+    "scale": 2,
+    "offset_y": -1,
+    "color": "#0071e3",
+    "offset_x": -5
+  },
+  {
+    "id": "LENOVO",
+    "name": "LENOVO",
+    "logo": "/assets/images/brands/lenovo.png",
+    "scale": 0.8,
+    "offset_y": 0,
+    "color": "#0071e3",
+    "offset_x": -2
+  },
+  {
+    "id": "LINKEDPRO",
+    "name": "LINKEDPRO",
+    "logo": "/assets/images/brands/linkedpro.png",
+    "scale": 2,
+    "offset_y": 0,
+    "color": "#0071e3",
+    "offset_x": 0
+  },
+  {
+    "id": "MANHATTAN",
+    "name": "MANHATTAN",
+    "logo": "/assets/images/brands/manhattan.png",
+    "scale": 1.05,
+    "offset_y": 0,
+    "color": "#0071e3",
+    "offset_x": -5
+  },
+  {
+    "id": "MITA",
+    "name": "MITA",
+    "logo": "/assets/images/brands/mita.png",
+    "scale": 1.35,
+    "offset_y": 0,
+    "color": "#0071e3",
+    "offset_x": -4
+  },
+  {
+    "id": "MSI",
+    "name": "MSI",
+    "logo": "/assets/images/brands/msi.png",
+    "scale": 1.9,
+    "offset_y": -2,
+    "color": "#0071e3",
+    "offset_x": -4
+  },
+  {
+    "id": "PCM",
+    "name": "PCM",
+    "logo": "/assets/images/brands/pcm.png",
+    "scale": 1.6,
+    "offset_y": -1,
+    "color": "#0071e3",
+    "offset_x": -5
+  },
+  {
+    "id": "PANTUM",
+    "name": "PANTUM",
+    "logo": "/assets/images/brands/pantum.png",
+    "scale": 1.85,
+    "offset_y": 0,
+    "color": "#0071e3",
+    "offset_x": -3
+  },
+  {
+    "id": "KRONALINE",
+    "name": "KRONALINE",
+    "logo": "/assets/images/brands/kronaline.png",
+    "scale": 0.9,
+    "offset_y": 0,
+    "color": "#0071e3",
+    "offset_x": -2
+  },
+  {
+    "id": "MAE",
+    "name": "MAE",
+    "logo": "/assets/images/brands/mae.png",
+    "scale": 1.6,
+    "offset_y": -1,
+    "color": "#0071e3",
+    "offset_x": -3
   }
 ];
