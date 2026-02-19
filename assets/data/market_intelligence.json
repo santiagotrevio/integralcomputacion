@@ -7,7 +7,7 @@
       "minP": 24989,
       "maxP": 28737,
       "id": "MLM27949998",
-      "demanda": "85.8%",
+      "demanda": "94.3%",
       "opti": "LIVE DATA"
     },
     {
@@ -17,87 +17,87 @@
       "minP": 24989,
       "maxP": 28737,
       "id": "MLM27949998",
-      "demanda": "93.7%",
-      "opti": "LIVE DATA"
-    },
-    {
-      "b": "Laptop",
-      "n": "Laptop Gamer Msi Sword Core I7 14650hx 16 GB 1 TB Rtx4060, color negro",
-      "c": "computo",
-      "minP": 30599,
-      "maxP": 35188,
-      "id": "MLM37637979",
-      "demanda": "87.2%",
-      "opti": "LIVE DATA"
-    },
-    {
-      "b": "Laptop",
-      "n": "Laptop Gamer Msi Sword Core I7 14650hx 16 GB 1 TB Rtx4060, color negro",
-      "c": "computo",
-      "minP": 30599,
-      "maxP": 35188,
-      "id": "MLM37637979",
-      "demanda": "88.7%",
-      "opti": "LIVE DATA"
-    },
-    {
-      "b": "Portátil",
-      "n": "Portátil Gamer Rtx 5060 Thunderobot 911x I7 13620h 16g 512g",
-      "c": "computo",
-      "minP": 30942,
-      "maxP": 35583,
-      "id": "MLM62377449",
-      "demanda": "94.2%",
-      "opti": "LIVE DATA"
-    },
-    {
-      "b": "Portátil",
-      "n": "Portátil Gamer Rtx 5060 Thunderobot 911x I7 13620h 16g 512g",
-      "c": "computo",
-      "minP": 30942,
-      "maxP": 35583,
-      "id": "MLM62377449",
-      "demanda": "92.8%",
-      "opti": "LIVE DATA"
-    },
-    {
-      "b": "Laptop",
-      "n": "Laptop Gaming MSI CYBORG 15.6 pulgadas 16gb 512gb Rtx4060 Negro",
-      "c": "computo",
-      "minP": 34999,
-      "maxP": 40248,
-      "id": "MLM48946044",
-      "demanda": "88.5%",
-      "opti": "LIVE DATA"
-    },
-    {
-      "b": "Laptop",
-      "n": "Laptop Gaming MSI CYBORG 15.6 pulgadas 16gb 512gb Rtx4060 Negro",
-      "c": "computo",
-      "minP": 34999,
-      "maxP": 40248,
-      "id": "MLM48946044",
-      "demanda": "85.3%",
-      "opti": "LIVE DATA"
-    },
-    {
-      "b": "Laptop",
-      "n": "Laptop Acer Nitro V15 Core 5- 210h 16 Ram 512 Ssd Nvidia Geforce Rtx 4050 Negro",
-      "c": "computo",
-      "minP": 20000,
-      "maxP": 23000,
-      "id": "MLM65521407",
-      "demanda": "90.1%",
-      "opti": "LIVE DATA"
-    },
-    {
-      "b": "Laptop",
-      "n": "Laptop Acer Nitro V15 Core 5- 210h 16 Ram 512 Ssd Nvidia Geforce Rtx 4050 Negro",
-      "c": "computo",
-      "minP": 20000,
-      "maxP": 23000,
-      "id": "MLM65521407",
       "demanda": "86.4%",
+      "opti": "LIVE DATA"
+    },
+    {
+      "b": "Laptop",
+      "n": "Laptop Gamer Msi Sword Core I7 14650hx 16 GB 1 TB Rtx4060, color negro",
+      "c": "computo",
+      "minP": 30599,
+      "maxP": 35188,
+      "id": "MLM37637979",
+      "demanda": "94.3%",
+      "opti": "LIVE DATA"
+    },
+    {
+      "b": "Laptop",
+      "n": "Laptop Gamer Msi Sword Core I7 14650hx 16 GB 1 TB Rtx4060, color negro",
+      "c": "computo",
+      "minP": 30599,
+      "maxP": 35188,
+      "id": "MLM37637979",
+      "demanda": "93.2%",
+      "opti": "LIVE DATA"
+    },
+    {
+      "b": "Portátil",
+      "n": "Portátil Gamer Rtx 5060 Thunderobot 911x I7 13620h 16g 512g",
+      "c": "computo",
+      "minP": 30942,
+      "maxP": 35583,
+      "id": "MLM62377449",
+      "demanda": "88.0%",
+      "opti": "LIVE DATA"
+    },
+    {
+      "b": "Portátil",
+      "n": "Portátil Gamer Rtx 5060 Thunderobot 911x I7 13620h 16g 512g",
+      "c": "computo",
+      "minP": 30942,
+      "maxP": 35583,
+      "id": "MLM62377449",
+      "demanda": "87.0%",
+      "opti": "LIVE DATA"
+    },
+    {
+      "b": "Laptop",
+      "n": "Laptop Gaming MSI CYBORG 15.6 pulgadas 16gb 512gb Rtx4060 Negro",
+      "c": "computo",
+      "minP": 34999,
+      "maxP": 40248,
+      "id": "MLM48946044",
+      "demanda": "92.1%",
+      "opti": "LIVE DATA"
+    },
+    {
+      "b": "Laptop",
+      "n": "Laptop Gaming MSI CYBORG 15.6 pulgadas 16gb 512gb Rtx4060 Negro",
+      "c": "computo",
+      "minP": 34999,
+      "maxP": 40248,
+      "id": "MLM48946044",
+      "demanda": "88.0%",
+      "opti": "LIVE DATA"
+    },
+    {
+      "b": "Laptop",
+      "n": "Laptop Acer Nitro V15 Core 5- 210h 16 Ram 512 Ssd Nvidia Geforce Rtx 4050 Negro",
+      "c": "computo",
+      "minP": 20000,
+      "maxP": 23000,
+      "id": "MLM65521407",
+      "demanda": "86.1%",
+      "opti": "LIVE DATA"
+    },
+    {
+      "b": "Laptop",
+      "n": "Laptop Acer Nitro V15 Core 5- 210h 16 Ram 512 Ssd Nvidia Geforce Rtx 4050 Negro",
+      "c": "computo",
+      "minP": 20000,
+      "maxP": 23000,
+      "id": "MLM65521407",
+      "demanda": "87.5%",
       "opti": "LIVE DATA"
     }
   ],
@@ -109,7 +109,7 @@
       "minP": 299,
       "maxP": 343,
       "id": "MLM42097020",
-      "demanda": "89.8%",
+      "demanda": "93.0%",
       "opti": "LIVE DATA"
     },
     {
@@ -119,7 +119,7 @@
       "minP": 299,
       "maxP": 343,
       "id": "MLM42097020",
-      "demanda": "90.3%",
+      "demanda": "93.0%",
       "opti": "LIVE DATA"
     },
     {
@@ -129,7 +129,7 @@
       "minP": 199,
       "maxP": 228,
       "id": "MLM47825116",
-      "demanda": "85.6%",
+      "demanda": "93.4%",
       "opti": "LIVE DATA"
     },
     {
@@ -139,7 +139,7 @@
       "minP": 199,
       "maxP": 228,
       "id": "MLM47825116",
-      "demanda": "86.1%",
+      "demanda": "92.2%",
       "opti": "LIVE DATA"
     },
     {
@@ -149,7 +149,7 @@
       "minP": 180,
       "maxP": 206,
       "id": "MLM26971450",
-      "demanda": "87.2%",
+      "demanda": "91.7%",
       "opti": "LIVE DATA"
     },
     {
@@ -159,7 +159,7 @@
       "minP": 180,
       "maxP": 206,
       "id": "MLM26971450",
-      "demanda": "90.8%",
+      "demanda": "86.6%",
       "opti": "LIVE DATA"
     },
     {
@@ -169,7 +169,7 @@
       "minP": 194,
       "maxP": 223,
       "id": "MLM-754447817",
-      "demanda": "94.7%",
+      "demanda": "90.0%",
       "opti": "LIVE DATA"
     },
     {
@@ -179,49 +179,39 @@
       "minP": 194,
       "maxP": 223,
       "id": "MLM-754447817",
-      "demanda": "88.8%",
+      "demanda": "90.0%",
       "opti": "LIVE DATA"
     },
     {
       "b": "Cuadernos",
-      "n": "Cuadernos Libretas Scribe Profesional 100 Hojas 36 Piezas Color Cuadro Grande",
+      "n": "Cuadernos Libretas Scribe Profesional 100 Hojas 36 Piezas Color Cuadro Chico",
       "c": "papeleria",
-      "minP": 1109,
-      "maxP": 1275,
-      "id": "MLM49924647",
-      "demanda": "94.1%",
+      "minP": 990,
+      "maxP": 1138,
+      "id": "MLM49781491",
+      "demanda": "86.4%",
       "opti": "LIVE DATA"
     },
     {
       "b": "Cuadernos",
-      "n": "Cuadernos Libretas Scribe Profesional 100 Hojas 36 Piezas Color Cuadro Grande",
+      "n": "Cuadernos Libretas Scribe Profesional 100 Hojas 36 Piezas Color Cuadro Chico",
       "c": "papeleria",
-      "minP": 1109,
-      "maxP": 1275,
-      "id": "MLM49924647",
-      "demanda": "89.8%",
+      "minP": 990,
+      "maxP": 1138,
+      "id": "MLM49781491",
+      "demanda": "90.4%",
       "opti": "LIVE DATA"
     }
   ],
   "toner": [
     {
-      "b": "Toner",
-      "n": "Toner 11x Q6511x 6511 Q6511 Hp2400 Series 2410 2420 2430",
+      "b": "Tóner",
+      "n": "Tóner Hp Q5945yc Color Polvo Negro",
       "c": "toner",
-      "minP": 2830,
-      "maxP": 3254,
-      "id": "MLM23086242",
-      "demanda": "89.8%",
-      "opti": "LIVE DATA"
-    },
-    {
-      "b": "Toner",
-      "n": "Toner 11x Q6511x 6511 Q6511 Hp2400 Series 2410 2420 2430",
-      "c": "toner",
-      "minP": 2830,
-      "maxP": 3254,
-      "id": "MLM23086242",
-      "demanda": "88.5%",
+      "minP": 950,
+      "maxP": 1092,
+      "id": "MLM36794468",
+      "demanda": "88.3%",
       "opti": "LIVE DATA"
     },
     {
@@ -231,17 +221,7 @@
       "minP": 950,
       "maxP": 1092,
       "id": "MLM36794468",
-      "demanda": "88.8%",
-      "opti": "LIVE DATA"
-    },
-    {
-      "b": "Tóner",
-      "n": "Tóner Hp Q5945yc Color Polvo Negro",
-      "c": "toner",
-      "minP": 950,
-      "maxP": 1092,
-      "id": "MLM36794468",
-      "demanda": "92.7%",
+      "demanda": "92.0%",
       "opti": "LIVE DATA"
     },
     {
@@ -251,7 +231,7 @@
       "minP": 318,
       "maxP": 365,
       "id": "MLM44776197",
-      "demanda": "94.6%",
+      "demanda": "86.7%",
       "opti": "LIVE DATA"
     },
     {
@@ -261,7 +241,7 @@
       "minP": 318,
       "maxP": 365,
       "id": "MLM44776197",
-      "demanda": "85.5%",
+      "demanda": "91.6%",
       "opti": "LIVE DATA"
     },
     {
@@ -271,7 +251,7 @@
       "minP": 1492,
       "maxP": 1715,
       "id": "MLM36750869",
-      "demanda": "94.1%",
+      "demanda": "90.9%",
       "opti": "LIVE DATA"
     },
     {
@@ -281,27 +261,47 @@
       "minP": 1492,
       "maxP": 1715,
       "id": "MLM36750869",
-      "demanda": "93.0%",
+      "demanda": "92.8%",
       "opti": "LIVE DATA"
     },
     {
-      "b": "Toner",
-      "n": "Toner Hp Laserjet 222a Magenta",
+      "b": "Cartucho",
+      "n": "Cartucho Tóner Hp Laserjet Negro 122a Q3960a",
       "c": "toner",
-      "minP": 1919,
-      "maxP": 2206,
-      "id": "MLM45943709",
-      "demanda": "86.6%",
+      "minP": 1100,
+      "maxP": 1265,
+      "id": "MLM3607272272",
+      "demanda": "90.2%",
       "opti": "LIVE DATA"
     },
     {
-      "b": "Toner",
-      "n": "Toner Hp Laserjet 222a Magenta",
+      "b": "Cartucho",
+      "n": "Cartucho Tóner Hp Laserjet Negro 122a Q3960a",
       "c": "toner",
-      "minP": 1919,
-      "maxP": 2206,
-      "id": "MLM45943709",
-      "demanda": "89.0%",
+      "minP": 1100,
+      "maxP": 1265,
+      "id": "MLM3607272272",
+      "demanda": "85.8%",
+      "opti": "LIVE DATA"
+    },
+    {
+      "b": "TToner",
+      "n": "TToner Hp Laserjet 150A Para M111w Color Negro",
+      "c": "toner",
+      "minP": 1399,
+      "maxP": 1608,
+      "id": "MLM36970492",
+      "demanda": "91.8%",
+      "opti": "LIVE DATA"
+    },
+    {
+      "b": "TToner",
+      "n": "TToner Hp Laserjet 150A Para M111w Color Negro",
+      "c": "toner",
+      "minP": 1399,
+      "maxP": 1608,
+      "id": "MLM36970492",
+      "demanda": "92.0%",
       "opti": "LIVE DATA"
     }
   ]

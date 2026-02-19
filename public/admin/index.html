@@ -3807,23 +3807,29 @@
                     color: '#0071e3'
                 };
 
+                const isNew = !brandSettings.find(s => s.id.toLowerCase() === brandName.toLowerCase());
                 const brandImgPath = setting.logo.startsWith('/') ? setting.logo.replace(/^\//, '../') : '../' + setting.logo;
                 const tr = document.createElement('tr');
 
                 tr.innerHTML = `
-                    <td style="padding: 15px; width: 150px;">
-                        <div style="background:#f8f9fa; border:1px solid #eee; border-radius:12px; padding:20px; text-align:center;">
+                    <td style="padding: 15px; width: 170px;">
+                        <div style="background:#f8f9fa; border:1px solid #eee; border-radius:12px; padding:20px; text-align:center; position:relative;">
+                            ${isNew ? '<span style="position:absolute; top:8px; left:8px; background:#ff9500; color:white; font-size:8px; padding:2px 6px; border-radius:10px; font-weight:900;">NUEVA</span>' : ''}
                             <!-- FIXED SIZE CONTAINER (CANON STYLE) -->
-                            <div class="brand-logo-pill" style="position:relative; margin:0 auto; box-shadow:none; border:1px solid #ddd; background:white; width:80px; height:32px; overflow:hidden; padding:0; border-radius:16px;">
+                            <div class="brand-logo-pill" style="position:relative; margin:0 auto; box-shadow:none; border:1px solid #ddd; background:white; width:80px; height:32px; overflow:hidden; padding:0; border-radius:16px; display:flex; align-items:center; justify-content:center;">
                                 <!-- Safe Zone Guides (Only visible in this preview) -->
                                 <div style="position:absolute; top:calc(50% - 7.5px); left:0; width:100%; height:15px; border-top:1px dashed #ff2d55; border-bottom:1px dashed #ff2d55; opacity:0.25; pointer-events:none; z-index:3;"></div>
-                                <div style="position:absolute; top:50%; left:2px; transform:translateY(-50%); font-size:5px; color:#ff2d55; opacity:0.8; font-weight:900; z-index:4;">SAFE</div>
                                 
+                                <div class="brand-placeholder" style="position:absolute; inset:0; background:#f1f5f9; display:none; flex-direction:column; align-items:center; justify-content:center; color:#94a3b8; font-size:8px; font-weight:800; text-transform:uppercase;">
+                                    <i class="fa-solid fa-image" style="font-size:10px; margin-bottom:2px;"></i>
+                                    ${brandName.substring(0, 8)}
+                                </div>
+
                                 <img src="${brandImgPath}" class="brand-prev-img"
                                      style="max-height: ${15 * setting.scale}px; transform:translate(${setting.offset_x || 0}px, ${setting.offset_y || 0}px); max-width:70px; object-fit:contain; z-index:2;"
-                                     onerror="this.style.opacity='0.2'">
+                                     onerror="this.style.display='none'; this.previousElementSibling.style.display='flex';">
                             </div>
-                            <div style="font-weight:800; font-size:14px; margin-top:10px;">${brandName}</div>
+                            <div style="font-weight:800; font-size:14px; margin-top:10px; color:#333;">${brandName}</div>
                         </div>
                     </td>
                     <td>
@@ -3846,9 +3852,16 @@
                                     oninput="updateBrandPreview(this, '${brandName}', 'offset_y')" style="flex:1">
                                 <span style="font-size:11px; width:35px; font-family:monospace; text-align:right;">${setting.offset_y}px</span>
                             </div>
-                            <button class="primary" onclick="saveBrandConfig('${brandName}', this)" style="margin-top:5px; padding:10px; font-size:12px; font-weight:700;">
-                                <i class="fa-solid fa-floppy-disk"></i> GUARDAR CAMBIOS
-                            </button>
+                            <div style="display:flex; gap:8px; margin-top:5px;">
+                                <button class="secondary" onclick="this.nextElementSibling.click()" style="flex:1; padding:10px; font-size:11px; font-weight:700;">
+                                    <i class="fa-solid fa-upload"></i> LOGO
+                                </button>
+                                <input type="file" style="display:none" accept="image/*" onchange="handleBrandLogoUpload(this, '${brandName}')">
+                                
+                                <button class="primary" onclick="saveBrandConfig('${brandName}', this)" style="flex:2; padding:10px; font-size:11px; font-weight:700;">
+                                    <i class="fa-solid fa-floppy-disk"></i> GUARDAR CAMBIOS
+                                </button>
+                            </div>
                         </div>
                     </td>
                     <td style="background: #f1f5f980; padding: 20px;">
@@ -3951,6 +3964,54 @@
                 alert("Error al guardar");
                 btn.disabled = false;
                 btn.innerHTML = '<i class="fa-solid fa-floppy-disk"></i> GUARDAR';
+            }
+        }
+
+        async function handleBrandLogoUpload(input, brandName) {
+            if (!input.files || !input.files[0]) return;
+            const file = input.files[0];
+            const btn = input.previousElementSibling;
+            const originalHtml = btn.innerHTML;
+
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i>';
+
+            const formData = new FormData();
+            formData.append('image', file);
+            formData.append('name', brandName);
+
+            try {
+                const res = await fetch('/api/upload-brand', { method: 'POST', body: formData });
+                const data = await res.json();
+
+                if (data.url) {
+                    // Update all previews in this row immediately
+                    const tr = input.closest('tr');
+                    const allImgs = tr.querySelectorAll('.brand-prev-img');
+                    const allPlaceholders = tr.querySelectorAll('.brand-placeholder');
+
+                    allPlaceholders.forEach(p => p.style.display = 'none');
+                    allImgs.forEach(img => {
+                        img.src = `${data.url.startsWith('/') ? data.url.replace(/^\//, '../') : '../' + data.url}?v=${Date.now()}`;
+                        img.style.display = 'block';
+                    });
+
+                    // Mark the Save button as modified
+                    const saveBtn = tr.querySelector('.primary');
+                    saveBtn.style.boxShadow = '0 0 15px rgba(0, 113, 227, 0.4)';
+                    if (!saveBtn.innerHTML.includes('*')) saveBtn.innerHTML += ' *';
+
+                    btn.innerHTML = '<i class="fa-solid fa-check"></i> OK';
+                }
+            } catch (err) {
+                alert("Error al subir logo: " + err.message);
+            } finally {
+                setTimeout(() => {
+                    btn.disabled = false;
+                    btn.innerHTML = originalHtml;
+                    // Reset input so it can be used again for same file
+                    input.value = '';
+                }, 1500);
             }
         }
 

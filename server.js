@@ -41,6 +41,28 @@ app.post('/api/upload', upload.single('image'), async (req, res) => {
     }
 });
 
+// Specific upload for Brand Logos
+app.post('/api/upload-brand', upload.single('image'), async (req, res) => {
+    if (!req.file) return res.status(400).send('Error');
+
+    const brandName = req.body.name || 'brand';
+    const fileName = `${brandName.toLowerCase().replace(/[^a-z0-9]/g, '')}-${Date.now()}.png`;
+    const outputPath = path.join(__dirname, 'assets/images/brands', fileName);
+
+    try {
+        await sharp(req.file.buffer)
+            .resize(400, 400, { fit: 'inside', withoutEnlargement: true })
+            .png()
+            .toFile(outputPath);
+
+        const relativePath = `/assets/images/brands/${fileName}`;
+        res.json({ url: relativePath });
+    } catch (err) {
+        console.error('Brand Upload Error:', err);
+        res.status(500).send('Error al procesar logo');
+    }
+});
+
 app.use('/assets', (req, res, next) => {
     // Limpiar el query string (e.g. ?v=123) para que no rompa la búsqueda en el sistema de archivos
     const cleanUrl = req.url.split('?')[0];
@@ -127,9 +149,28 @@ app.get('/api/products', (req, res) => {
     });
 });
 
+// Helper to auto-create brand config if not exists
+function ensureBrandExists(brandName) {
+    if (!brandName || brandName === 'Otros') return;
+    const brandId = brandName.trim();
+    const logoDefault = `/assets/images/brands/${brandId.toLowerCase().replace(/[^a-z0-9]/g, '')}.png`;
+
+    // Check if brand exists
+    db.get("SELECT id FROM brands WHERE id = ?", [brandId], (err, row) => {
+        if (err || row) return; // Error or already exists
+
+        // Auto-insert default config
+        db.run(`INSERT INTO brands (id, name, logo, scale, offset_x, offset_y, color) VALUES (?, ?, ?, 1.0, 0, 0, '#0071e3')`,
+            [brandId, brandId, logoDefault]);
+    });
+}
+
 app.post('/api/products', (req, res) => {
     const { id, name, category, brand, price, stock, compatibility, image, description } = req.body;
     if (!id || id.trim() === "") return res.status(400).json({ error: "ID/Modelo es requerido" });
+
+    ensureBrandExists(brand);
+
     const now = new Date().toISOString();
     const sql = `INSERT INTO products (id, name, category, brand, price, stock, compatibility, image, description, created_at, published) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 0)`;
     db.run(sql, [id, name, category, brand, price, stock, compatibility, image, description, now], function (err) {
@@ -140,6 +181,9 @@ app.post('/api/products', (req, res) => {
 
 app.put('/api/products/:id', (req, res) => {
     const { id: newId, name, category, brand, price, stock, compatibility, image, description } = req.body;
+
+    ensureBrandExists(brand);
+
     const sql = `UPDATE products SET id = ?, name = ?, category = ?, brand = ?, price = ?, stock = ?, compatibility = ?, image = ?, description = ?, published = 0 WHERE id = ?`;
     db.run(sql, [newId, name, category, brand, price, stock, compatibility, image, description, req.params.id], function (err) {
         if (err) return res.status(400).json({ error: err.message });
