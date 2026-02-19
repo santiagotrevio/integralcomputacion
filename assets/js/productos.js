@@ -990,11 +990,11 @@ const productsDB = [
   },
   {
     "id": "VOKSP-500",
-    "category": "OTROS",
+    "category": "accesorios",
     "brand": "VORAGO",
     "name": "Bocina Bafle Vorago Karaoke KSP-500 15\" Bluetooth TWS 2 Micrófonos Color Negro",
     "description": "Bocina Bafle Vorago Karaoke KSP-500 15\" Bluetooth TWS 2 Micrófonos Color Negro",
-    "image": ""
+    "image": "assets/images/products/toner/VOKSP_500.webp"
   },
   {
     "id": "PC-113096",
@@ -3353,11 +3353,11 @@ const productsDB = [
   },
   {
     "id": "V95161",
-    "category": "OTROS",
+    "category": "papeleria",
     "brand": "VERBATIM",
     "name": "CD-RW VERBATIM REESCRIBIBLE 12X S/C",
     "description": "CD-RW VERBATIM REESCRIBIBLE 12X S/C",
-    "image": ""
+    "image": "assets/images/products/toner/V95161.webp"
   },
   {
     "id": "NXNE-162",
@@ -3673,7 +3673,7 @@ const productsDB = [
   },
   {
     "id": "Z800300350LA",
-    "category": "OTROS",
+    "category": "papeleria",
     "brand": "ZEBRA",
     "name": "CINTA ZEBRA ZC100/ZC300 COLOR",
     "description": "CINTA ZEBRA ZC100/ZC300 COLOR",
@@ -4230,11 +4230,11 @@ const productsDB = [
   },
   {
     "id": "X006R04730",
-    "category": "",
+    "category": "toner",
     "brand": "Xerox",
     "name": "Cartucho de tóner Xerox Extra Alto Rendimiento Láser - Original - 2500",
     "description": "Cartucho de tóner Xerox Extra Alto Rendimiento Láser - Original - 2500",
-    "image": ""
+    "image": "assets/images/products/toner/X006R04730.webp"
   },
   {
     "id": "HI51604A",
@@ -4743,59 +4743,59 @@ const productsDB = [
   },
   {
     "id": "V97174",
-    "category": "OTROS",
+    "category": "papeleria",
     "brand": "VERBATIM",
     "name": "DVD+R VERBATIM 4.7GB 16X CAMPANA 50",
     "description": "DVD+R VERBATIM 4.7GB 16X CAMPANA 50",
-    "image": ""
+    "image": "assets/images/products/toner/V97174.webp"
   },
   {
     "id": "V95310",
-    "category": "OTROS",
+    "category": "papeleria",
     "brand": "VERBATIM",
     "name": "DVD+R VERBATIM 8.5GB DOUBLELAYER P/20",
     "description": "DVD+R VERBATIM 8.5GB DOUBLELAYER P/20",
-    "image": ""
+    "image": "assets/images/products/toner/V95310.webp"
   },
   {
     "id": "V97693",
-    "category": "OTROS",
+    "category": "papeleria",
     "brand": "VERBATIM",
     "name": "DVD, DVD+R DL, 8x, 8.5GB, VERBATIM CAMP/50",
     "description": "DVD, DVD+R DL, 8x, 8.5GB, VERBATIM CAMP/50",
-    "image": ""
+    "image": "assets/images/products/toner/V97693.webp"
   },
   {
     "id": "V95093",
-    "category": "OTROS",
+    "category": "papeleria",
     "brand": "VERBATIM",
     "name": "DVD-R VERBATIM 4.7GB 16X",
     "description": "DVD-R VERBATIM 4.7GB 16X",
-    "image": ""
+    "image": "assets/images/products/toner/V95093.webp"
   },
   {
     "id": "V97167",
-    "category": "OTROS",
+    "category": "papeleria",
     "brand": "VERBATIM",
     "name": "DVD-R VERBATIM 4.7GB 16X BLANCO C/50",
     "description": "DVD-R VERBATIM 4.7GB 16X BLANCO C/50",
-    "image": ""
+    "image": "assets/images/products/toner/V97167.webp"
   },
   {
     "id": "V97176",
-    "category": "OTROS",
+    "category": "papeleria",
     "brand": "VERBATIM",
     "name": "DVD-R VERBATIM 4.7GB 16X CAMPANA/50",
     "description": "DVD-R VERBATIM 4.7GB 16X CAMPANA/50",
-    "image": ""
+    "image": "assets/images/products/toner/V97176.webp"
   },
   {
     "id": "V95137",
-    "category": "OTROS",
+    "category": "papeleria",
     "brand": "VERBATIM",
     "name": "DVD-R VERBATIM C/BLANCA IMPRIM C/50",
     "description": "DVD-R VERBATIM C/BLANCA IMPRIM C/50",
-    "image": ""
+    "image": "assets/images/products/toner/V95137.webp"
   },
   {
     "id": "NXNE-019O",
@@ -4863,19 +4863,19 @@ const productsDB = [
   },
   {
     "id": "V97488",
-    "category": "OTROS",
+    "category": "papeleria",
     "brand": "VERBATIM",
     "name": "Disco Verbatim CD-R 80min 700MB 52x torre con 50 pzas",
     "description": "Disco Verbatim CD-R 80min 700MB 52x torre con 50 pzas",
-    "image": ""
+    "image": "assets/images/products/toner/V97488.webp"
   },
   {
     "id": "V97493",
-    "category": "OTROS",
+    "category": "papeleria",
     "brand": "VERBATIM",
     "name": "Disco Verbatim DVD-R 16x 4.7GB torre con 50 pzas (celofan)",
     "description": "Disco Verbatim DVD-R 16x 4.7GB torre con 50 pzas (celofan)",
-    "image": ""
+    "image": "assets/images/products/toner/V97493.webp"
   },
   {
     "id": "ADTAHD710P-4TU31-CBK",
@@ -5264,7 +5264,7 @@ const productsDB = [
   },
   {
     "id": "Z10026382",
-    "category": "OTROS",
+    "category": "papeleria",
     "brand": "ZEBRA",
     "name": "Etiqueta Papel Zebra 4\"x6\" (1016 x 1524mm) DT Z-Perform 1000D Value sin Recubrimiento Adhesivo Permanente",
     "description": "Etiqueta Papel Zebra 4\"x6\" (1016 x 1524mm) DT Z-Perform 1000D Value sin Recubrimiento Adhesivo Permanente",
@@ -5304,11 +5304,11 @@ const productsDB = [
   },
   {
     "id": "X113R00663",
-    "category": "",
+    "category": "toner",
     "brand": "Xerox",
     "name": "FOTORECEPTOR XEROX WORKCENTREPRO412",
     "description": "FOTORECEPTOR XEROX WORKCENTREPRO412",
-    "image": ""
+    "image": "assets/images/products/toner/X113R00663.webp"
   },
   {
     "id": "V903",
@@ -6720,7 +6720,7 @@ const productsDB = [
   },
   {
     "id": "YMF-VAF24-G1",
-    "category": "OTROS",
+    "category": "accesorios",
     "brand": "YEYIAN",
     "name": "MONITOR GAMING YEYIAN 24\" FHD100HZ HDMI - VGA",
     "description": "MONITOR GAMING YEYIAN 24\" FHD100HZ HDMI - VGA",
@@ -6728,7 +6728,7 @@ const productsDB = [
   },
   {
     "id": "XZXSPMG08B",
-    "category": "OTROS",
+    "category": "accesorios",
     "brand": "Xzeal",
     "name": "MONITOR XZEAL GAMER 23.8IN FHD /100HZ / 5MS / HDMI/VGA/FHD / CON SOPORTE VESA / PLANO/ COLOR NEGRO",
     "description": "MONITOR XZEAL GAMER 23.8IN FHD /100HZ / 5MS / HDMI/VGA/FHD / CON SOPORTE VESA / PLANO/ COLOR NEGRO",
@@ -7202,7 +7202,7 @@ const productsDB = [
   },
   {
     "id": "XPAX5S5600C4616G-SBHT",
-    "category": "OTROS",
+    "category": "accesorios",
     "brand": "XPG",
     "name": "Memoria RAM para Laptop XPG Hunter DDR5, 5600MHz, 16GB, ECC CL46, 262-pin SO-DIMM, XMP",
     "description": "Memoria RAM para Laptop XPG Hunter DDR5, 5600MHz, 16GB, ECC CL46, 262-pin SO-DIMM, XMP",
@@ -7378,7 +7378,7 @@ const productsDB = [
   },
   {
     "id": "XZXSMO277B",
-    "category": "OTROS",
+    "category": "accesorios",
     "brand": "Xzeal",
     "name": "Monitor Gamer Xzeal XST-590 27\" Plano 5ms 75Hz Resolución 1920x1080 HDMI/VGA",
     "description": "Monitor Gamer Xzeal XST-590 27\" Plano 5ms 75Hz Resolución 1920x1080 HDMI/VGA",
@@ -7386,7 +7386,7 @@ const productsDB = [
   },
   {
     "id": "XZXZMXZ32B",
-    "category": "OTROS",
+    "category": "accesorios",
     "brand": "Xzeal",
     "name": "Monitor Gamer Xzeal XZMXZ32B LED 23.8\", 1920x1080 Full HD, FreeSync, 180Hz, DisplayPort, Negro",
     "description": "Monitor Gamer Xzeal XZMXZ32B LED 23.8\", 1920x1080 Full HD, FreeSync, 180Hz, DisplayPort, Negro",
@@ -7888,11 +7888,11 @@ const productsDB = [
   },
   {
     "id": "PX3M02041",
-    "category": "",
+    "category": "papeleria",
     "brand": "Xerox",
     "name": "PAPEL BOND XEROX OFICIO AZUL",
     "description": "PAPEL BOND XEROX OFICIO AZUL",
-    "image": ""
+    "image": "assets/images/products/toner/PX3M02041.webp"
   },
   {
     "id": "PFB8216C",
@@ -7987,31 +7987,31 @@ const productsDB = [
   },
   {
     "id": "PX3M02056",
-    "category": "",
+    "category": "papeleria",
     "brand": "Xerox",
     "name": "PAPEL XEROX BOND MARATHON OFICIO",
     "description": "PAPEL XEROX BOND MARATHON OFICIO",
-    "image": ""
+    "image": "assets/images/products/toner/PX3M02056.webp"
   },
   {
     "id": "PX3M02040",
-    "category": "",
+    "category": "papeleria",
     "brand": "Xerox",
     "name": "PAPEL XEROX CARTA AZUL 97% BLANCURA",
     "description": "PAPEL XEROX CARTA AZUL 97% BLANCURA",
-    "image": ""
+    "image": "assets/images/products/toner/PX3M02040.webp"
   },
   {
     "id": "PX3M02010",
-    "category": "",
+    "category": "papeleria",
     "brand": "Xerox",
     "name": "PAPEL XEROX CARTA ECOLOGICO 93% BLANCURA, CAJA CON 5000 HOJAS.",
     "description": "PAPEL XEROX CARTA ECOLOGICO 93% BLANCURA, CAJA CON 5000 HOJAS.",
-    "image": ""
+    "image": "assets/images/products/toner/PX3M02010.webp"
   },
   {
     "id": "PX3M02051",
-    "category": "",
+    "category": "papeleria",
     "brand": "Xerox",
     "name": "PAPEL XEROX CARTA MARATHON 99% BLANCURA",
     "description": "PAPEL XEROX CARTA MARATHON 99% BLANCURA",
@@ -8019,31 +8019,31 @@ const productsDB = [
   },
   {
     "id": "PX3M02000",
-    "category": "",
+    "category": "papeleria",
     "brand": "Xerox",
     "name": "PAPEL XEROX CARTA ROJO 99% BLANCURA",
     "description": "PAPEL XEROX CARTA ROJO 99% BLANCURA",
-    "image": ""
+    "image": "assets/images/products/toner/PX3M02000.webp"
   },
   {
     "id": "PX3M02012",
-    "category": "",
+    "category": "papeleria",
     "brand": "Xerox",
     "name": "PAPEL XEROX OFICIO ECOLOGICO 92% BLANCO",
     "description": "PAPEL XEROX OFICIO ECOLOGICO 92% BLANCO",
-    "image": ""
+    "image": "assets/images/products/toner/PX3M02012.webp"
   },
   {
     "id": "PX3M02021",
-    "category": "",
+    "category": "papeleria",
     "brand": "Xerox",
     "name": "PAPEL XEROX ROJO OFICIO  P/5K",
     "description": "PAPEL XEROX ROJO OFICIO  P/5K",
-    "image": ""
+    "image": "assets/images/products/toner/PX3M02021.webp"
   },
   {
     "id": "PX3M02055",
-    "category": "",
+    "category": "papeleria",
     "brand": "Xerox",
     "name": "PAPELBOND XEROX CARTA PONY MARATHON",
     "description": "PAPELBOND XEROX CARTA PONY MARATHON",
@@ -8179,7 +8179,7 @@ const productsDB = [
   },
   {
     "id": "PX3R75121",
-    "category": "",
+    "category": "papeleria",
     "brand": "Xerox",
     "name": "Papel bond blanco Xerox Digital Paper Tamaño Doble Carta 500 Hojas",
     "description": "Papel bond blanco Xerox Digital Paper Tamaño Doble Carta 500 Hojas",
@@ -8833,7 +8833,7 @@ const productsDB = [
     "brand": "Xerox",
     "name": "Scanner Xerox D70N, 600 x 600 DPI, Escaneado Dúplex, USB 3.0, Blanco",
     "description": "Scanner Xerox D70N, 600 x 600 DPI, Escaneado Dúplex, USB 3.0, Blanco",
-    "image": ""
+    "image": "assets/images/products/toner/XD70N.webp"
   },
   {
     "id": "EL23079",
@@ -9201,19 +9201,19 @@ const productsDB = [
   },
   {
     "id": "X101R00664",
-    "category": "",
+    "category": "toner",
     "brand": "Xerox",
     "name": "TAMBOR XEROX NEGRO B210/B205 10000 PAGS",
     "description": "TAMBOR XEROX NEGRO B210/B205 10000 PAGS",
-    "image": ""
+    "image": "assets/images/products/toner/X101R00664.webp"
   },
   {
     "id": "X101R00582",
-    "category": "",
+    "category": "toner",
     "brand": "Xerox",
     "name": "TAMBOR XEROX PARA VERSALINK B600/B605/B610/B615",
     "description": "TAMBOR XEROX PARA VERSALINK B600/B605/B610/B615",
-    "image": ""
+    "image": "assets/images/products/toner/X101R00582.webp"
   },
   {
     "id": "EPT699700",
@@ -9289,7 +9289,7 @@ const productsDB = [
   },
   {
     "id": "ZE104523-111",
-    "category": "OTROS",
+    "category": "papeleria",
     "brand": "ZEBRA",
     "name": "TARJETAS ZEBRA DE PVC  BLANCA PAQUETE DE 500",
     "description": "TARJETAS ZEBRA DE PVC  BLANCA PAQUETE DE 500",
@@ -11996,27 +11996,27 @@ const productsDB = [
   },
   {
     "id": "X106R03483",
-    "category": "",
+    "category": "toner",
     "brand": "Xerox",
     "name": "TONER XEROX WC AMARILLO 6510",
     "description": "TONER XEROX WC AMARILLO 6510",
-    "image": ""
+    "image": "assets/images/products/toner/X106R03483.webp"
   },
   {
     "id": "X106R03481",
-    "category": "",
+    "category": "toner",
     "brand": "Xerox",
     "name": "TONER XEROX WC CYAN 6510",
     "description": "TONER XEROX WC CYAN 6510",
-    "image": ""
+    "image": "assets/images/products/toner/X106R03481.webp"
   },
   {
     "id": "X106R03488",
-    "category": "",
+    "category": "toner",
     "brand": "Xerox",
     "name": "TONER XEROX WORKCENTRE 6510 A/C",
     "description": "TONER XEROX WORKCENTRE 6510 A/C",
-    "image": ""
+    "image": "assets/images/products/toner/X106R03488.webp"
   },
   {
     "id": "TPARCHER-T2U-NANO",
@@ -13169,11 +13169,11 @@ const productsDB = [
   },
   {
     "id": "X106R03520",
-    "category": "",
+    "category": "toner",
     "brand": "Xerox",
     "name": "Toner Xerox Alta Capacidad 4.8K VersaLink C400/405 Color Negro",
     "description": "Toner Xerox Alta Capacidad 4.8K VersaLink C400/405 Color Negro",
-    "image": ""
+    "image": "assets/images/products/toner/X106R03520.webp"
   },
   {
     "id": "X106R03623",
@@ -13599,35 +13599,35 @@ const productsDB = [
   },
   {
     "id": "X006R04379",
-    "category": "",
+    "category": "toner",
     "brand": "Xerox",
     "name": "Tóner Xerox 006R04379 Negro, 3.000 Páginas",
     "description": "Tóner Xerox 006R04379 Negro, 3.000 Páginas",
-    "image": ""
+    "image": "assets/images/products/toner/X006R04379.webp"
   },
   {
     "id": "X106R03482",
-    "category": "",
+    "category": "toner",
     "brand": "Xerox",
     "name": "Tóner Xerox 106R03482 Magenta, 1.000 Páginas",
     "description": "Tóner Xerox 106R03482 Magenta, 1.000 Páginas",
-    "image": ""
+    "image": "assets/images/products/toner/X106R03482.webp"
   },
   {
     "id": "X106R03523",
-    "category": "",
+    "category": "toner",
     "brand": "Xerox",
     "name": "Tóner Xerox 106R03523 Alto Rendimiento Magenta, 4.800 Páginas",
     "description": "Tóner Xerox 106R03523 Alto Rendimiento Magenta, 4.800 Páginas",
-    "image": ""
+    "image": "assets/images/products/toner/X106R03523.webp"
   },
   {
     "id": "X106R03746",
-    "category": "",
+    "category": "toner",
     "brand": "Xerox",
     "name": "Tóner Xerox 106R03746 Super Alto Rendimiento Amarillo, 11.800 Páginas",
     "description": "Tóner Xerox 106R03746 Super Alto Rendimiento Amarillo, 11.800 Páginas",
-    "image": ""
+    "image": "assets/images/products/toner/X106R03746.webp"
   },
   {
     "id": "DL429-AAUQ",
@@ -13647,11 +13647,11 @@ const productsDB = [
   },
   {
     "id": "X013R00691",
-    "category": "",
+    "category": "toner",
     "brand": "Xerox",
     "name": "UNIDAD DE IMAGEN XEROX B230/B225/B235",
     "description": "UNIDAD DE IMAGEN XEROX B230/B225/B235",
-    "image": ""
+    "image": "assets/images/products/toner/X013R00691.webp"
   },
   {
     "id": "ADTASU630SS-240GQ-R",
@@ -13815,55 +13815,55 @@ const productsDB = [
   },
   {
     "id": "V98938",
-    "category": "OTROS",
+    "category": "accesorios",
     "brand": "VERBATIM",
     "name": "Verbatim Slimline Quemador de DVD, DVD+RW 8x / CD-RW 24x, USB 2.0, Externo, Negro",
     "description": "Verbatim Slimline Quemador de DVD, DVD+RW 8x / CD-RW 24x, USB 2.0, Externo, Negro",
-    "image": ""
+    "image": "assets/images/products/toner/V98938.webp"
   },
   {
     "id": "V95155",
-    "category": "OTROS",
+    "category": "papeleria",
     "brand": "VERBATIM",
     "name": "Verbatim Torre de Discos Virgenes para CD, CD-RW, 25 Discos",
     "description": "Verbatim Torre de Discos Virgenes para CD, CD-RW, 25 Discos",
-    "image": ""
+    "image": "assets/images/products/toner/V95155.webp"
   },
   {
     "id": "VOSPK-105",
-    "category": "OTROS",
+    "category": "accesorios",
     "brand": "VORAGO",
     "name": "Vorago Bocinas Portátiles SPK-105, Alámbrico, 2.0, 6W RMS, Negro/Azul",
     "description": "Vorago Bocinas Portátiles SPK-105, Alámbrico, 2.0, 6W RMS, Negro/Azul",
-    "image": ""
+    "image": "assets/images/products/toner/VOSPK_105.webp"
   },
   {
     "id": "X115R00128",
-    "category": "",
+    "category": "toner",
     "brand": "Xerox",
     "name": "Xerox Contenedor de Desperdicio 115R00128, 30.000 Páginas",
     "description": "Xerox Contenedor de Desperdicio 115R00128, 30.000 Páginas",
-    "image": ""
+    "image": "assets/images/products/toner/X115R00128.webp"
   },
   {
     "id": "X108R01416",
-    "category": "",
+    "category": "toner",
     "brand": "Xerox",
     "name": "Xerox Contenedor de Residuos 108R01416, 30.000 Páginas",
     "description": "Xerox Contenedor de Residuos 108R01416, 30.000 Páginas",
-    "image": ""
+    "image": "assets/images/products/toner/X108R01416.webp"
   },
   {
     "id": "X013R00702",
-    "category": "",
+    "category": "toner",
     "brand": "Xerox",
     "name": "Xerox Unidad de Imagen B410 Negro, 75.000 Páginas para B410/B415",
     "description": "Xerox Unidad de Imagen B410 Negro, 75.000 Páginas para B410/B415",
-    "image": ""
+    "image": "assets/images/products/toner/X013R00702.webp"
   },
   {
     "id": "ZE800033-340",
-    "category": "OTROS",
+    "category": "papeleria",
     "brand": "ZEBRA",
     "name": "ZEBRA IX SERIES COLOR RIBBON ZXP3 YMCKO 280 IMAGES",
     "description": "ZEBRA IX SERIES COLOR RIBBON ZXP3 YMCKO 280 IMAGES",
@@ -14318,6 +14318,42 @@ const brandSettingsDB = [
     "name": "LANIX",
     "logo": "/assets/images/brands/lanix.png",
     "scale": 2,
+    "offset_y": 0,
+    "color": "#0071e3",
+    "offset_x": 0
+  },
+  {
+    "id": "Xzeal",
+    "name": "Xzeal",
+    "logo": "/assets/images/brands/xzeal.png",
+    "scale": 1,
+    "offset_y": 0,
+    "color": "#0071e3",
+    "offset_x": 0
+  },
+  {
+    "id": "YEYIAN",
+    "name": "YEYIAN",
+    "logo": "/assets/images/brands/yeyian.png",
+    "scale": 1,
+    "offset_y": 0,
+    "color": "#0071e3",
+    "offset_x": 0
+  },
+  {
+    "id": "XPG",
+    "name": "XPG",
+    "logo": "/assets/images/brands/xpg.png",
+    "scale": 1,
+    "offset_y": 0,
+    "color": "#0071e3",
+    "offset_x": 0
+  },
+  {
+    "id": "VORAGO",
+    "name": "VORAGO",
+    "logo": "/assets/images/brands/vorago.png",
+    "scale": 1,
     "offset_y": 0,
     "color": "#0071e3",
     "offset_x": 0
