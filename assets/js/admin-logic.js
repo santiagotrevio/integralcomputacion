@@ -1493,30 +1493,45 @@ async function loadSearchIntelligence() {
         const missedList = document.getElementById('lostOpportunitiesList');
         const topList = document.getElementById('topSearchesList');
 
+        const createBar = (count, max) => {
+            const pct = Math.min((count / max) * 100, 100);
+            return `<div style="height:4px; width:100%; background:#eee; border-radius:2px; margin-top:8px;">
+                        <div style="height:100%; width:${pct}%; background:currentColor; border-radius:2px;"></div>
+                    </div>`;
+        };
+
         if (data.missed && data.missed.length > 0) {
+            const maxOcc = Math.max(...data.missed.map(i => i.occurrences));
             missedList.innerHTML = data.missed.map(item => `
-                <div style="display:flex; justify-content:space-between; align-items:center; padding:12px; border-bottom:1px solid #eee;">
-                    <span style="font-weight:700; text-transform:uppercase; font-size:14px;">"${item.query}"</span>
-                    <span style="background:rgba(255,59,48,0.1); color:#ff3b30; padding:4px 10px; border-radius:10px; font-size:12px; font-weight:800;">
-                        ${item.occurrences} intentos
-                    </span>
+                <div style="padding:15px; border-bottom:1px solid rgba(0,0,0,0.05); color:#ff3b30;">
+                    <div style="display:flex; justify-content:space-between; align-items:center;">
+                        <span style="font-weight:700; text-transform:uppercase; font-size:14px; color:#333;">"${item.query}"</span>
+                        <span style="background:rgba(255,59,48,0.1); padding:4px 10px; border-radius:10px; font-size:12px; font-weight:800;">
+                            ${item.occurrences} clics fallidos
+                        </span>
+                    </div>
+                    ${createBar(item.occurrences, maxOcc)}
                 </div>
             `).join('');
         } else {
-            missedList.innerHTML = '<p style="opacity:0.5; text-align:center; padding:20px;">No hay oportunidades perdidas registradas aún.</p>';
+            missedList.innerHTML = '<div style="text-align:center; padding:40px; opacity:0.3;"><i class="fa-solid fa-leaf" style="font-size:32px; margin-bottom:10px;"></i><p>¡Todo bajo control! Tus clientes encuentran lo que buscan.</p></div>';
         }
 
         if (data.top && data.top.length > 0) {
+            const maxOcc = Math.max(...data.top.map(i => i.occurrences));
             topList.innerHTML = data.top.map(item => `
-                <div style="display:flex; justify-content:space-between; align-items:center; padding:12px; border-bottom:1px solid #eee;">
-                    <span style="font-weight:600; font-size:14px;">${item.query}</span>
-                    <span style="background:rgba(0,113,227,0.1); color:var(--apple-blue); padding:4px 10px; border-radius:10px; font-size:12px; font-weight:800;">
-                        ${item.occurrences} búsquedas
-                    </span>
+                <div style="padding:15px; border-bottom:1px solid rgba(0,0,0,0.05); color:var(--apple-blue);">
+                    <div style="display:flex; justify-content:space-between; align-items:center;">
+                        <span style="font-weight:600; font-size:14px; color:#333;">${item.query}</span>
+                        <span style="background:rgba(0,113,227,0.1); padding:4px 10px; border-radius:10px; font-size:12px; font-weight:800;">
+                            ${item.occurrences} búsquedas
+                        </span>
+                    </div>
+                    ${createBar(item.occurrences, maxOcc)}
                 </div>
             `).join('');
         } else {
-            topList.innerHTML = '<p style="opacity:0.5; text-align:center; padding:20px;">Sin datos de búsqueda disponibles.</p>';
+            topList.innerHTML = '<p style="opacity:0.5; text-align:center; padding:40px;">Sin datos de búsqueda disponibles.</p>';
         }
     } catch (err) {
         console.error("Error cargando analíticas:", err);
