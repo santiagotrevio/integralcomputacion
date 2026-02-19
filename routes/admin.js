@@ -336,4 +336,35 @@ router.delete('/products/:id', (req, res) => {
     });
 });
 
+// --- Search Intelligence Analytics ---
+router.get('/search-analytics', (req, res) => {
+    // 1. Oportunidades perdidas (Búsquedas comunes con 0 resultados)
+    const sqlMissed = `
+        SELECT query, COUNT(*) as occurrences 
+        FROM search_analytics 
+        WHERE results_count = 0 
+        GROUP BY query 
+        ORDER BY occurrences DESC 
+        LIMIT 20
+    `;
+
+    // 2. Búsquedas más frecuentes en general
+    const sqlTop = `
+        SELECT query, COUNT(*) as occurrences 
+        FROM search_analytics 
+        GROUP BY query 
+        ORDER BY occurrences DESC 
+        LIMIT 20
+    `;
+
+    db.all(sqlMissed, [], (err, missed) => {
+        if (err) return res.status(500).json({ error: err.message });
+
+        db.all(sqlTop, [], (err2, top) => {
+            if (err2) return res.status(500).json({ error: err2.message });
+            res.json({ missed, top });
+        });
+    });
+});
+
 module.exports = router;

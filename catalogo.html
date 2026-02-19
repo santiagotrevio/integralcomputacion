@@ -1802,6 +1802,23 @@
 
             renderProducts(filtered);
             renderActiveFilters();
+
+            // Log search query with debounce
+            if (searchTerm.length > 3) {
+                logSearch(searchTerm, filtered.length);
+            }
+        }
+
+        let searchLogTimeout;
+        function logSearch(query, count) {
+            clearTimeout(searchLogTimeout);
+            searchLogTimeout = setTimeout(() => {
+                fetch('/api/log-search', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ query, count })
+                }).catch(err => console.error("Search log fail:", err));
+            }, 2000); // 2 seconds debounce to avoid noise
         }
 
         function renderActiveFilters() {

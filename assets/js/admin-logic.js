@@ -1478,6 +1478,48 @@ function switchView(view) {
         document.getElementById('viewSnapshots').classList.add('active');
         document.getElementById('navSnapshots').classList.add('active');
         loadSnapshots();
+    } else if (view === 'intelligence') {
+        document.getElementById('viewIntelligence').classList.add('active');
+        document.getElementById('navIntelligence').classList.add('active');
+        loadSearchIntelligence();
+    }
+}
+
+async function loadSearchIntelligence() {
+    try {
+        const res = await apiFetch('/api/search-analytics');
+        const data = await res.json();
+
+        const missedList = document.getElementById('lostOpportunitiesList');
+        const topList = document.getElementById('topSearchesList');
+
+        if (data.missed && data.missed.length > 0) {
+            missedList.innerHTML = data.missed.map(item => `
+                <div style="display:flex; justify-content:space-between; align-items:center; padding:12px; border-bottom:1px solid #eee;">
+                    <span style="font-weight:700; text-transform:uppercase; font-size:14px;">"${item.query}"</span>
+                    <span style="background:rgba(255,59,48,0.1); color:#ff3b30; padding:4px 10px; border-radius:10px; font-size:12px; font-weight:800;">
+                        ${item.occurrences} intentos
+                    </span>
+                </div>
+            `).join('');
+        } else {
+            missedList.innerHTML = '<p style="opacity:0.5; text-align:center; padding:20px;">No hay oportunidades perdidas registradas aún.</p>';
+        }
+
+        if (data.top && data.top.length > 0) {
+            topList.innerHTML = data.top.map(item => `
+                <div style="display:flex; justify-content:space-between; align-items:center; padding:12px; border-bottom:1px solid #eee;">
+                    <span style="font-weight:600; font-size:14px;">${item.query}</span>
+                    <span style="background:rgba(0,113,227,0.1); color:var(--apple-blue); padding:4px 10px; border-radius:10px; font-size:12px; font-weight:800;">
+                        ${item.occurrences} búsquedas
+                    </span>
+                </div>
+            `).join('');
+        } else {
+            topList.innerHTML = '<p style="opacity:0.5; text-align:center; padding:20px;">Sin datos de búsqueda disponibles.</p>';
+        }
+    } catch (err) {
+        console.error("Error cargando analíticas:", err);
     }
 }
 
