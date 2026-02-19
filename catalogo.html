@@ -168,14 +168,14 @@
         }
 
         /* ============================================================
-           BRAND BADGE — mirrors admin .brand-logo-pill exactly
+           BRAND LOGO PILL — identical to admin .brand-logo-pill
            ============================================================ */
-        .brand-badge {
+        .brand-logo-pill {
             position: absolute;
             top: 20px;
             right: -10px;
             background: white;
-            padding: 0 12px;
+            padding: 0 15px;
             border-radius: 20px 0 0 20px;
             box-shadow: -2px 4px 12px rgba(0, 0, 0, 0.08);
             height: 32px;
@@ -185,15 +185,67 @@
             justify-content: center;
             border: 1px solid #e8ecf0;
             z-index: 5;
-            overflow: hidden;
         }
 
-        .brand-badge img {
+        .brand-logo-img {
             max-height: 15px;
             /* standardized safe zone — same as admin */
             max-width: 60px;
             object-fit: contain;
             display: block;
+        }
+
+        /* ============================================================
+           CARD CONTENT — matching admin audit-card content styles
+           ============================================================ */
+        .card-id {
+            font-size: 11px;
+            font-weight: 800;
+            color: #888;
+            margin-bottom: 4px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .card-title {
+            font-size: 13px;
+            font-weight: 700;
+            line-height: 1.35;
+            margin-bottom: 8px;
+            height: 36px;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            color: var(--ic-dark-gray);
+        }
+
+        .card-actions {
+            display: flex;
+            gap: 6px;
+            margin-top: auto;
+        }
+
+        .btn-whatsapp {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 38px;
+            height: 38px;
+            border-radius: 10px;
+            background: #25D366;
+            color: white;
+            font-size: 16px;
+            text-decoration: none;
+            flex-shrink: 0;
+            transition: all 0.2s ease;
+        }
+
+        .btn-whatsapp:hover {
+            background: #20b558;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
         }
 
         /* ============================================================
@@ -209,8 +261,8 @@
             background: white;
             border: 1px solid #eef2f7;
             border-radius: 16px !important;
-            overflow: visible;
-            /* allow badge to bleed right */
+            overflow: hidden;
+            /* clips brand pill at right edge — same effect as admin */
             transition: all 0.28s cubic-bezier(0.4, 0, 0.2, 1);
             display: flex;
             flex-direction: column;
@@ -1828,10 +1880,14 @@
                 // scale/offset only apply in brand customization preview, NOT in catalog display
                 const brandImgStyle = `max-height: 15px; transform: translate(${offset_x}px, ${offset_y}px); object-fit: contain;`;
 
+                // Badge HTML — goes INSIDE the image container (same as admin)
+                // overflow:hidden on the container clips it at the right edge = signature pill look
                 const badgeHtml = (brandLogoUrl && brandName !== 'Otros') ?
-                    `<div class="brand-badge" title="${brandName}">
-                            <img src="${brandLogoUrl}" alt="${brandName}" style="${brandImgStyle}" onerror="this.parentNode.style.display='none'">
-                         </div>` : '';
+                    `<div class="brand-logo-pill">
+                        <img src="${brandLogoUrl}" class="brand-logo-img"
+                             style="${brandImgStyle}"
+                             onerror="this.parentNode.style.display='none'">
+                     </div>` : '';
 
                 const nameHighlighted = highlightText(prod.name, searchTerm);
 
@@ -1843,61 +1899,60 @@
 
                 if (currentView === 'grid') {
                     card.className = 'catalog-item-card';
-                    card.style.borderRadius = '12px';
                     card.innerHTML = `
+                        <div style="position:relative; height:180px; display:flex; align-items:center; justify-content:center; background:#fdfdfd; border-bottom:1px solid #f1f5f9; overflow:hidden; cursor:zoom-in;" onclick="openLightbox('${imgSrc}')">
+                            ${imgHtml}
                             ${badgeHtml}
-                            <div class="card-img-container" onclick="openLightbox('${imgSrc}')" style="cursor: zoom-in;">
-                                ${imgHtml}
+                        </div>
+                        <div class="card-content">
+                            <div class="card-id">
+                                ${prod.id}
+                                <button class="copy-btn" onclick="event.stopPropagation(); copyToClipboard('${prod.id}')" title="Copiar código">
+                                    <i class="fa-regular fa-copy"></i>
+                                </button>
                             </div>
-                            <div class="card-content">
-                                <span class="prod-code" style="margin-bottom: 8px;">
-                                    ${prod.id}
-                                    <button class="copy-btn" onclick="copyToClipboard('${prod.id}')" title="Copiar código">
-                                        <i class="fa-regular fa-copy"></i>
-                                    </button>
-                                </span>
-                                <h3 style="font-size: 1rem; margin-bottom: 10px; min-height: 2.4em; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">${nameHighlighted}</h3>
-                                <div style="margin-top: auto; display: flex; flex-direction: column; gap: 8px;">
-                                    <button id="add-btn-${prod.id}" onclick="toggleCart('${prod.id}')" class="${btnClass}" style="width:100%; justify-content:center; ${btnStyle}">
-                                        ${btnText}
-                                    </button>
-                                    <a href="https://wa.me/523312680092?text=Hola,%20me%20interesa%20el%20producto%20con%20código:%20${prod.id}" 
-                                       target="_blank" 
-                                       class="btn-card" style="width:100%; text-align:center; display:block; padding: 10px; background:#f1f5f9; border-radius:8px; font-weight:700; color:var(--ic-dark-gray);">
-                                       <i class="fa-brands fa-whatsapp"></i> Cotizar
-                                    </a>
-                                </div>
-                            </div>
-                        `;
-                } else {
-                    card.className = 'catalog-item-row';
-                    card.style.borderRadius = '12px';
-                    card.innerHTML = `
-                            ${badgeHtml}
-                            <div class="prod-image" onclick="openLightbox('${imgSrc}')" style="cursor: zoom-in;">
-                                ${imgHtml}
-                            </div>
-                            <div class="prod-info">
-                                <span class="prod-code">
-                                    ${prod.id}
-                                    <button class="copy-btn" onclick="copyToClipboard('${prod.id}')" title="Copiar código">
-                                        <i class="fa-regular fa-copy"></i>
-                                    </button>
-                                </span>
-                                <h3>${nameHighlighted}</h3>
-                                <p class="prod-desc">${prod.description}</p>
-                                ${prod.compatibility ? `<p style="font-size:0.8rem; color:var(--ic-magenta); margin-top:5px;"><b>Compatible con:</b> ${prod.compatibility}</p>` : ''}
-                            </div>
-                            <div class="prod-action">
-                                <button id="add-btn-${prod.id}" onclick="toggleCart('${prod.id}')" class="${btnClass}" style="${btnStyle}">
+                            <div class="card-title">${nameHighlighted}</div>
+                            <div class="card-actions">
+                                <button id="add-btn-${prod.id}" onclick="toggleCart('${prod.id}')" class="${btnClass}" style="flex:1; justify-content:center; ${btnStyle}">
                                     ${btnText}
                                 </button>
-                                <a href="https://wa.me/523312680092?text=Hola,%20me%20interesa%20el%20producto%20con%20código:%20${prod.id}" 
-                                   target="_blank" 
-                                   class="btn-card">Cotizar
+                                <a href="https://wa.me/523312680092?text=Hola,%20me%20interesa%20el%20producto%20con%20código:%20${prod.id}"
+                                   target="_blank"
+                                   class="btn-whatsapp">
+                                    <i class="fa-brands fa-whatsapp"></i>
                                 </a>
                             </div>
-                        `;
+                        </div>
+                    `;
+                } else {
+                    card.className = 'catalog-item-row';
+                    card.innerHTML = `
+                        <div class="prod-image" style="position:relative; overflow:hidden; cursor:zoom-in;" onclick="openLightbox('${imgSrc}')">
+                            ${imgHtml}
+                            ${badgeHtml}
+                        </div>
+                        <div class="prod-info">
+                            <div class="card-id">
+                                ${prod.id}
+                                <button class="copy-btn" onclick="event.stopPropagation(); copyToClipboard('${prod.id}')" title="Copiar código">
+                                    <i class="fa-regular fa-copy"></i>
+                                </button>
+                            </div>
+                            <h3>${nameHighlighted}</h3>
+                            <p class="prod-desc">${prod.description || ''}</p>
+                            ${prod.compatibility ? `<p style="font-size:0.8rem; color:var(--ic-magenta); margin-top:4px;"><b>Compatible:</b> ${prod.compatibility}</p>` : ''}
+                        </div>
+                        <div class="prod-action">
+                            <button id="add-btn-${prod.id}" onclick="toggleCart('${prod.id}')" class="${btnClass}" style="${btnStyle}">
+                                ${btnText}
+                            </button>
+                            <a href="https://wa.me/523312680092?text=Hola,%20me%20interesa%20el%20producto%20con%20código:%20${prod.id}"
+                               target="_blank"
+                               class="btn-card">
+                                <i class="fa-brands fa-whatsapp"></i> Cotizar
+                            </a>
+                        </div>
+                    `;
                 }
 
                 productGrid.appendChild(card);
