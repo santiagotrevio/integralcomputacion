@@ -6932,7 +6932,7 @@ const productsDB = [
     "brand": "PERFECT CHOICE",
     "name": "MOUSE OPTICO E.LINE ALAMBRICO",
     "description": "MOUSE OPTICO E.LINE ALAMBRICO",
-    "image": "assets/images/products/toner/PC_993377.webp"
+    "image": ""
   },
   {
     "id": "PC-993346",

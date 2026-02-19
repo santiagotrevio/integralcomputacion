@@ -108,6 +108,9 @@
                 <span id="conflictBadge" class="nav-badge"
                     style="display:none; position:absolute; top:-5px; right:-5px; background:#ff3b30; color:white; font-size:9px; min-width:18px; height:18px; border-radius:50%; align-items:center; justify-content:center; font-weight:900; border:2px solid white;">0</span>
             </div>
+            <div id="navSnapshots" class="nav-tab" onclick="switchView('snapshots')">
+                <i class="fa-solid fa-clock-rotate-left"></i> HISTORIAL DE PUBLICACIONES
+            </div>
         </div>
 
         <!-- VIEW 1: CATALOG MANAGEMENT -->
@@ -312,6 +315,42 @@
                     <i class="fa-solid fa-check-double" style="font-size:48px; margin-bottom:20px;"></i>
                     <p>No hay conflictos de versión pendientes</p>
                 </div>
+            </div>
+        </div>
+
+        <!-- VIEW: SITE SNAPSHOTS & ROLLBACK -->
+        <div id="viewSnapshots" class="view-container">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:30px;">
+                <div style="display:flex; align-items:center; gap:12px;">
+                    <div
+                        style="background:var(--apple-blue); color:white; width:48px; height:48px; border-radius:14px; display:flex; align-items:center; justify-content:center; font-size:24px;">
+                        <i class="fa-solid fa-clock-rotate-left"></i>
+                    </div>
+                    <div>
+                        <h2 style="margin:0; font-size:22px;">Historial de Publicaciones</h2>
+                        <p style="margin:0; opacity:0.6; font-size:14px;">Copia de seguridad automática de cada envío a
+                            la web</p>
+                    </div>
+                </div>
+                <button class="secondary" onclick="loadSnapshots()"><i class="fa-solid fa-rotate"></i>
+                    REFRESCAR</button>
+            </div>
+
+            <div id="snapshotsList" class="admin-table-container">
+                <table class="admin-table">
+                    <thead>
+                        <tr>
+                            <th>Estado</th>
+                            <th>Versión</th>
+                            <th>Fecha y Hora</th>
+                            <th>Descripción</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="snapshotsTableBody">
+                        <!-- JS fills this -->
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>

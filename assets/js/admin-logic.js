@@ -1474,6 +1474,63 @@ function switchView(view) {
         document.getElementById('viewConflicts').classList.add('active');
         document.getElementById('navConflicts').classList.add('active');
         loadConflicts();
+    } else if (view === 'snapshots') {
+        document.getElementById('viewSnapshots').classList.add('active');
+        document.getElementById('navSnapshots').classList.add('active');
+        loadSnapshots();
+    }
+}
+
+async function loadSnapshots() {
+    try {
+        const res = await apiFetch('/api/snapshots');
+        const data = await res.json();
+        const tbody = document.getElementById('snapshotsTableBody');
+
+        if (!data.data || data.data.length === 0) {
+            tbody.innerHTML = '<tr><td colspan="5" style="text-align:center; padding:40px; opacity:0.5;">No hay copias de seguridad aún. Haz clic en "Enviar a la Web" para crear una.</td></tr>';
+            return;
+        }
+
+        tbody.innerHTML = data.data.map(s => `
+            <tr>
+                <td>
+                    ${s.is_active ?
+                '<span style="background:#34c759; color:white; padding:4px 10px; border-radius:12px; font-size:10px; font-weight:800;">ACTIVA EN WEB</span>' :
+                '<span style="background:#8e8e93; color:white; padding:4px 10px; border-radius:12px; font-size:10px; font-weight:800; opacity:0.5;">RESPALDO</span>'}
+                </td>
+                <td style="font-family:monospace; font-weight:700;">${s.version_tag}</td>
+                <td style="font-size:13px; opacity:0.7;">${new Date(s.created_at).toLocaleString('es-MX')}</td>
+                <td style="font-size:13px;">${s.description}</td>
+                <td>
+                    <button class="secondary" onclick="rollbackToVersion(${s.id}, '${s.version_tag}')" 
+                            ${s.is_active ? 'disabled style="opacity:0.3; cursor:not-allowed;"' : ''}
+                            style="padding:6px 12px; font-size:11px; font-weight:700;">
+                        <i class="fa-solid fa-clock-rotate-left"></i> RESTAURAR ESTA VERSIÓN
+                    </button>
+                </td>
+            </tr>
+        `).join('');
+    } catch (err) {
+        console.error("Error cargando snapshots:", err);
+    }
+}
+
+async function rollbackToVersion(id, tag) {
+    if (!confirm(`¿Estás seguro de que quieres restaurar la versión ${tag}? \n\nEsto reemplazará los productos que ven los clientes actualmente por los de esa fecha.`)) return;
+
+    try {
+        const res = await apiFetch(`/api/snapshots/${id}/rollback`, { method: 'POST' });
+        const data = await res.json();
+
+        if (res.ok) {
+            alert(`✅ ¡Restauración exitosa! La versión ${tag} ahora está activa en la web.`);
+            loadSnapshots();
+        } else {
+            throw new Error(data.error);
+        }
+    } catch (err) {
+        alert("Error al restaurar: " + err.message);
     }
 }
 

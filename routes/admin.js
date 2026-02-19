@@ -198,15 +198,71 @@ router.put('/products/:id', (req, res) => {
 router.post('/publish', (req, res) => {
     const scriptPath = path.join(__dirname, '../scripts', 'generate_js.js');
     console.log(`Publishing: Running ${scriptPath}`);
+
     exec(`node "${scriptPath}"`, (err, stdout, stderr) => {
         if (err) {
             console.error('Publish Error:', err, stderr);
             return res.status(500).json({ error: 'Fallo al generar productos.js' });
         }
+
+        // Crear un Snapshot automático después de publicar con éxito
+        const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
+        const versionTag = `V-${timestamp}`;
+        const sourcePath = path.join(__dirname, '../assets/js/productos.js');
+        const snapshotName = `productos-${versionTag}.js`;
+        const destPath = path.join(__dirname, '../backups/snapshots', snapshotName);
+
+        try {
+            if (fs.existsSync(sourcePath)) {
+                fs.copyFileSync(sourcePath, destPath);
+
+                db.run(`INSERT INTO site_snapshots (version_tag, file_path, description) VALUES (?, ?, ?)`,
+                    [versionTag, `/backups/snapshots/${snapshotName}`, 'Snapshot automático post-publicación']);
+
+                db.run("UPDATE site_snapshots SET is_active = 0"); // Reset previous
+                db.run("UPDATE site_snapshots SET is_active = 1 WHERE version_tag = ?", [versionTag]);
+            }
+        } catch (copyErr) {
+            console.error('Snapshot error:', copyErr);
+        }
+
         db.run("UPDATE products SET published = 1", (uErr) => {
             if (uErr) console.error('DB Update Error:', uErr);
-            res.json({ message: 'OK' });
+            res.json({ message: 'OK', version: versionTag });
         });
+    });
+});
+
+// --- Snapshots & Rollback ---
+router.get('/snapshots', (req, res) => {
+    db.all("SELECT * FROM site_snapshots ORDER BY created_at DESC LIMIT 10", [], (err, rows) => {
+        if (err) return res.status(500).json({ error: err.message });
+        res.json({ data: rows });
+    });
+});
+
+router.post('/snapshots/:id/rollback', (req, res) => {
+    const snapshotId = req.params.id;
+    db.get("SELECT * FROM site_snapshots WHERE id = ?", [snapshotId], (err, row) => {
+        if (err || !row) return res.status(404).json({ error: "Snapshot no encontrado" });
+
+        const sourcePath = path.join(__dirname, '..', row.file_path);
+        const destPath = path.join(__dirname, '../assets/js/productos.js');
+
+        try {
+            if (fs.existsSync(sourcePath)) {
+                fs.copyFileSync(sourcePath, destPath);
+
+                db.run("UPDATE site_snapshots SET is_active = 0");
+                db.run("UPDATE site_snapshots SET is_active = 1 WHERE id = ?", [snapshotId]);
+
+                res.json({ message: "Rollback exitoso", version: row.version_tag });
+            } else {
+                res.status(404).json({ error: "El archivo de respaldo no existe físicamente" });
+            }
+        } catch (err) {
+            res.status(500).json({ error: "Error al restaurar: " + err.message });
+        }
     });
 });
 
