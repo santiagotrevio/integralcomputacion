@@ -14335,27 +14335,117 @@ const brandSettingsDB = [
     "id": "YEYIAN",
     "name": "YEYIAN",
     "logo": "/assets/images/brands/yeyian.png",
-    "scale": 1,
+    "scale": 1.3,
     "offset_y": 0,
     "color": "#0071e3",
-    "offset_x": 0
+    "offset_x": -3
   },
   {
     "id": "XPG",
     "name": "XPG",
     "logo": "/assets/images/brands/xpg.png",
+    "scale": 1.1,
+    "offset_y": -1,
+    "color": "#0071e3",
+    "offset_x": -7
+  },
+  {
+    "id": "VORAGO",
+    "name": "VORAGO",
+    "logo": "/assets/images/brands/vorago.png",
+    "scale": 2,
+    "offset_y": 0,
+    "color": "#0071e3",
+    "offset_x": 0
+  },
+  {
+    "id": "TRIPP LITE",
+    "name": "TRIPP LITE",
+    "logo": "/assets/images/brands/tripplite.png",
+    "scale": 1.2,
+    "offset_y": 0,
+    "color": "#0071e3",
+    "offset_x": -4
+  },
+  {
+    "id": "THERMALTAKE",
+    "name": "THERMALTAKE",
+    "logo": "/assets/images/brands/thermaltake.png",
+    "scale": 1.7,
+    "offset_y": 0,
+    "color": "#0071e3",
+    "offset_x": -4
+  },
+  {
+    "id": "TECHZONE",
+    "name": "TECHZONE",
+    "logo": "/assets/images/brands/techzone.png",
+    "scale": 0.65,
+    "offset_y": -1,
+    "color": "#0071e3",
+    "offset_x": -3
+  },
+  {
+    "id": "TUK",
+    "name": "TUK",
+    "logo": "/assets/images/brands/tuk.png",
     "scale": 1,
     "offset_y": 0,
     "color": "#0071e3",
     "offset_x": 0
   },
   {
-    "id": "VORAGO",
-    "name": "VORAGO",
-    "logo": "/assets/images/brands/vorago.png",
-    "scale": 1,
+    "id": "TDE",
+    "name": "TDE",
+    "logo": "/assets/images/brands/tde.png",
+    "scale": 1.15,
     "offset_y": 0,
     "color": "#0071e3",
-    "offset_x": 0
+    "offset_x": -3
+  },
+  {
+    "id": "TARGUS",
+    "name": "TARGUS",
+    "logo": "/assets/images/brands/targus.png",
+    "scale": 0.75,
+    "offset_y": 0,
+    "color": "#0071e3",
+    "offset_x": -5
+  },
+  {
+    "id": "STYLOS",
+    "name": "STYLOS",
+    "logo": "/assets/images/brands/stylos.png",
+    "scale": 1.3,
+    "offset_y": -1,
+    "color": "#0071e3",
+    "offset_x": -5
+  },
+  {
+    "id": "STARTECH",
+    "name": "STARTECH",
+    "logo": "/assets/images/brands/startech.png",
+    "scale": 1.1,
+    "offset_y": 0,
+    "color": "#0071e3",
+    "offset_x": -3
+  },
+  {
+    "id": "SOLA BASIC",
+    "name": "SOLA BASIC",
+    "logo": "/assets/images/brands/solabasic.png",
+    "scale": 2,
+    "offset_y": 0,
+    "color": "#0071e3",
+    "offset_x": -6
+  },
+  {
+    "id": "SMARTBITT",
+    "name": "SMARTBITT",
+    "logo": "/assets/images/brands/smartbitt.png",
+    "scale": 2,
+    "offset_y": -3,
+    "color": "#0071e3",
+    "offset_x": -1
   }
 ];
