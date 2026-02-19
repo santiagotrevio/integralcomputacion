@@ -4855,11 +4855,11 @@ const productsDB = [
   },
   {
     "id": "TOHDTB520XK3AA",
-    "category": "OTROS",
+    "category": "accesorios",
     "brand": "TOSHIBA",
     "name": "Disco Duro Externo Toshiba Canvio Basics 2.5\", 2TB, USB 3.0, Negro - para Mac/PC",
     "description": "Disco Duro Externo Toshiba Canvio Basics 2.5\", 2TB, USB 3.0, Negro - para Mac/PC",
-    "image": ""
+    "image": "assets/images/products/toner/TOHDTB520XK3AA.webp"
   },
   {
     "id": "V97488",
@@ -5464,11 +5464,11 @@ const productsDB = [
   },
   {
     "id": "THCA-1S3-00M6WN-03",
-    "category": "OTROS",
+    "category": "accesorios",
     "brand": "THERMALTAKE",
     "name": "Gabinete Thermaltake V350 TG ARGB Air con Ventana ARGB, Midi-Tower, ATX/Mini-ITX/Micro-ATX, USB 3.0, sin Fuente, 4 Ventiladores Instalados (3x RGB), Blanco",
     "description": "Gabinete Thermaltake V350 TG ARGB Air con Ventana ARGB, Midi-Tower, ATX/Mini-ITX/Micro-ATX, USB 3.0, sin Fuente, 4 Ventiladores Instalados (3x RGB), Blanco",
-    "image": ""
+    "image": "assets/images/products/toner/THCA_1S3_00M6WN_03.webp"
   },
   {
     "id": "GAC-LENOVO-GRIS",
@@ -7258,11 +7258,11 @@ const productsDB = [
   },
   {
     "id": "SYTSTMUSB6B",
-    "category": "OTROS",
+    "category": "accesorios",
     "brand": "STYLOS",
     "name": "Memoria USB Stylos ST100, 256GB, USB 2.0, Plata",
     "description": "Memoria USB Stylos ST100, 256GB, USB 2.0, Plata",
-    "image": ""
+    "image": "assets/images/products/toner/SYTSTMUSB6B.webp"
   },
   {
     "id": "NXNE-020",
@@ -8621,11 +8621,11 @@ const productsDB = [
   },
   {
     "id": "TDET1621",
-    "category": "OTROS",
+    "category": "accesorios",
     "brand": "TDE",
     "name": "Regulador TDE ProNet T1621 1200VA, 80J, 120/95 - 145V, Blanco",
     "description": "Regulador TDE ProNet T1621 1200VA, 80J, 120/95 - 145V, Blanco",
-    "image": ""
+    "image": "assets/images/products/toner/TDET1621.webp"
   },
   {
     "id": "NX-NE234",
@@ -8789,11 +8789,11 @@ const productsDB = [
   },
   {
     "id": "TAAMM01TBUS",
-    "category": "OTROS",
+    "category": "accesorios",
     "brand": "TARGUS",
     "name": "STYLUS PARA TABLETAS/SMARTPHONE CON PANTALLA CAPACITIVA TACTIL",
     "description": "STYLUS PARA TABLETAS/SMARTPHONE CON PANTALLA CAPACITIVA TACTIL",
-    "image": ""
+    "image": "assets/images/products/toner/TAAMM01TBUS.webp"
   },
   {
     "id": "NXNE-153",
