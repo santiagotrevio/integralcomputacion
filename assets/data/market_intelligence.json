@@ -7,7 +7,7 @@
       "minP": 24989,
       "maxP": 28737,
       "id": "MLM27949998",
-      "demanda": "88.7%",
+      "demanda": "92.8%",
       "opti": "LIVE DATA"
     },
     {
@@ -17,7 +17,7 @@
       "minP": 24989,
       "maxP": 28737,
       "id": "MLM27949998",
-      "demanda": "92.3%",
+      "demanda": "88.8%",
       "opti": "LIVE DATA"
     },
     {
@@ -27,7 +27,7 @@
       "minP": 30996,
       "maxP": 35645,
       "id": "MLM62377449",
-      "demanda": "85.0%",
+      "demanda": "93.3%",
       "opti": "LIVE DATA"
     },
     {
@@ -37,7 +37,7 @@
       "minP": 30996,
       "maxP": 35645,
       "id": "MLM62377449",
-      "demanda": "94.7%",
+      "demanda": "86.7%",
       "opti": "LIVE DATA"
     },
     {
@@ -47,7 +47,7 @@
       "minP": 30599,
       "maxP": 35188,
       "id": "MLM37637979",
-      "demanda": "90.4%",
+      "demanda": "91.1%",
       "opti": "LIVE DATA"
     },
     {
@@ -62,32 +62,22 @@
     },
     {
       "b": "Laptop",
-      "n": "Laptop Gaming MSI CYBORG 15.6 pulgadas 16gb 512gb Rtx4060 Negro",
+      "n": "Laptop Lenovo Legión Slim 5 16arp9 16 7435hs Rtx 4060 16gb Color Gris",
       "c": "computo",
-      "minP": 34999,
-      "maxP": 40248,
-      "id": "MLM48946044",
-      "demanda": "94.0%",
+      "minP": 39999,
+      "maxP": 45998,
+      "id": "MLM43487977",
+      "demanda": "90.7%",
       "opti": "LIVE DATA"
     },
     {
       "b": "Laptop",
-      "n": "Laptop Gaming MSI CYBORG 15.6 pulgadas 16gb 512gb Rtx4060 Negro",
+      "n": "Laptop Lenovo Legión Slim 5 16arp9 16 7435hs Rtx 4060 16gb Color Gris",
       "c": "computo",
-      "minP": 34999,
-      "maxP": 40248,
-      "id": "MLM48946044",
-      "demanda": "88.5%",
-      "opti": "LIVE DATA"
-    },
-    {
-      "b": "Laptop",
-      "n": "Laptop Gamer Hp Victus 15.6'' Amd Ryzen 7 7445hs 16gb Ram 512 Ssd Nvidia GeForce RTX 4050",
-      "c": "computo",
-      "minP": 15399,
-      "maxP": 17708,
-      "id": "MLM53049202",
-      "demanda": "94.3%",
+      "minP": 39999,
+      "maxP": 45998,
+      "id": "MLM43487977",
+      "demanda": "87.8%",
       "opti": "LIVE DATA"
     },
     {
@@ -97,7 +87,117 @@
       "minP": 15399,
       "maxP": 17708,
       "id": "MLM53049202",
-      "demanda": "86.6%",
+      "demanda": "89.5%",
+      "opti": "LIVE DATA"
+    },
+    {
+      "b": "Laptop",
+      "n": "Laptop Gamer Hp Victus 15.6'' Amd Ryzen 7 7445hs 16gb Ram 512 Ssd Nvidia GeForce RTX 4050",
+      "c": "computo",
+      "minP": 15399,
+      "maxP": 17708,
+      "id": "MLM53049202",
+      "demanda": "92.2%",
+      "opti": "LIVE DATA"
+    },
+    {
+      "b": "Nvidia",
+      "n": "Nvidia Geforce Rtx5060 MACHENIKE R7 7745HX L16S DDR5 16 Gb RAM 1 Tb SSD 16'' QHD 300 Hz Windows 11 Pro Español latino Teclado UK - Español Latino",
+      "c": "computo",
+      "minP": 34502,
+      "maxP": 39677,
+      "id": "MLM53624282",
+      "demanda": "92.0%",
+      "opti": "LIVE DATA"
+    },
+    {
+      "b": "Nvidia",
+      "n": "Nvidia Geforce Rtx5060 MACHENIKE R7 7745HX L16S DDR5 16 Gb RAM 1 Tb SSD 16'' QHD 300 Hz Windows 11 Pro Español latino Teclado UK - Español Latino",
+      "c": "computo",
+      "minP": 34502,
+      "maxP": 39677,
+      "id": "MLM53624282",
+      "demanda": "90.8%",
+      "opti": "LIVE DATA"
+    },
+    {
+      "b": "Nvidia",
+      "n": "Nvidia Geforce Rtx 5060 Thunderobot I7 13620H 911X17 DDR5 16 Gb RAM 1 Tb SSD 17.3'' QHD 165 Hz Windows 11 Pro Español latino",
+      "c": "computo",
+      "minP": 32757,
+      "maxP": 37670,
+      "id": "MLM54123509",
+      "demanda": "93.6%",
+      "opti": "LIVE DATA"
+    },
+    {
+      "b": "Nvidia",
+      "n": "Nvidia Geforce Rtx 5060 Thunderobot I7 13620H 911X17 DDR5 16 Gb RAM 1 Tb SSD 17.3'' QHD 165 Hz Windows 11 Pro Español latino",
+      "c": "computo",
+      "minP": 32757,
+      "maxP": 37670,
+      "id": "MLM54123509",
+      "demanda": "93.6%",
+      "opti": "LIVE DATA"
+    },
+    {
+      "b": "Portátil",
+      "n": "Portátil Gamer Rtx3050 I7 13620h Thunderobot 911t 16g 512g",
+      "c": "computo",
+      "minP": 22407,
+      "maxP": 25768,
+      "id": "MLM43497238",
+      "demanda": "93.3%",
+      "opti": "LIVE DATA"
+    },
+    {
+      "b": "Portátil",
+      "n": "Portátil Gamer Rtx3050 I7 13620h Thunderobot 911t 16g 512g",
+      "c": "computo",
+      "minP": 22407,
+      "maxP": 25768,
+      "id": "MLM43497238",
+      "demanda": "85.7%",
+      "opti": "LIVE DATA"
+    },
+    {
+      "b": "Laptop",
+      "n": "Laptop Gaming MSI CYBORG 15.6 pulgadas 16gb 512gb Rtx4060 Negro",
+      "c": "computo",
+      "minP": 34999,
+      "maxP": 40248,
+      "id": "MLM48946044",
+      "demanda": "85.8%",
+      "opti": "LIVE DATA"
+    },
+    {
+      "b": "Laptop",
+      "n": "Laptop Gaming MSI CYBORG 15.6 pulgadas 16gb 512gb Rtx4060 Negro",
+      "c": "computo",
+      "minP": 34999,
+      "maxP": 40248,
+      "id": "MLM48946044",
+      "demanda": "94.2%",
+      "opti": "LIVE DATA"
+    },
+    {
+      "b": "Laptop",
+      "n": "Laptop Gamer Asus Tuf I7-13620h 16 Ram 1tb Ssd Rtx 4060 8gb Color Mecha Gray - Excelente (Reacondicionado)",
+      "c": "computo",
+      "minP": 19479,
+      "maxP": 22400,
+      "id": "MLM2010671493",
+      "demanda": "87.6%",
+      "opti": "LIVE DATA"
+    },
+    {
+      "b": "Laptop",
+      "n": "Laptop Gamer Asus Tuf I7-13620h 16 Ram 1tb Ssd Rtx 4060 8gb Color Mecha Gray - Excelente (Reacondicionado)",
+      "c": "computo",
+      "minP": 19479,
+      "maxP": 22400,
+      "id": "MLM2010671493",
+      "demanda": "92.2%",
       "opti": "LIVE DATA"
     }
   ],
@@ -109,7 +209,7 @@
       "minP": 299,
       "maxP": 343,
       "id": "MLM42097020",
-      "demanda": "90.1%",
+      "demanda": "88.7%",
       "opti": "LIVE DATA"
     },
     {
@@ -119,7 +219,7 @@
       "minP": 299,
       "maxP": 343,
       "id": "MLM42097020",
-      "demanda": "89.1%",
+      "demanda": "89.5%",
       "opti": "LIVE DATA"
     },
     {
@@ -129,47 +229,37 @@
       "minP": 199,
       "maxP": 228,
       "id": "MLM26883453",
-      "demanda": "87.5%",
-      "opti": "LIVE DATA"
-    },
-    {
-      "b": "Scribe",
-      "n": "Scribe Escolar Plus Cuaderno Pro 100 Cuadro Grande Pack De 6",
-      "c": "papeleria",
-      "minP": 199,
-      "maxP": 228,
-      "id": "MLM26883453",
-      "demanda": "94.0%",
-      "opti": "LIVE DATA"
-    },
-    {
-      "b": "Kit",
-      "n": "Kit 6 Cuadernos Scribe Profesional 100 Hojas Raya Color colores",
-      "c": "papeleria",
-      "minP": 199,
-      "maxP": 228,
-      "id": "MLM47825116",
-      "demanda": "88.2%",
-      "opti": "LIVE DATA"
-    },
-    {
-      "b": "Kit",
-      "n": "Kit 6 Cuadernos Scribe Profesional 100 Hojas Raya Color colores",
-      "c": "papeleria",
-      "minP": 199,
-      "maxP": 228,
-      "id": "MLM47825116",
       "demanda": "93.9%",
       "opti": "LIVE DATA"
     },
     {
       "b": "Scribe",
-      "n": "Scribe Escolar Plus Cuaderno Pro 100h Cuadro Chico Pack De 6",
+      "n": "Scribe Escolar Plus Cuaderno Pro 100 Cuadro Grande Pack De 6",
       "c": "papeleria",
-      "minP": 180,
-      "maxP": 206,
-      "id": "MLM26971450",
-      "demanda": "88.9%",
+      "minP": 199,
+      "maxP": 228,
+      "id": "MLM26883453",
+      "demanda": "86.8%",
+      "opti": "LIVE DATA"
+    },
+    {
+      "b": "Kit",
+      "n": "Kit 6 Cuadernos Scribe Profesional 100 Hojas Raya Color colores",
+      "c": "papeleria",
+      "minP": 199,
+      "maxP": 228,
+      "id": "MLM47825116",
+      "demanda": "91.2%",
+      "opti": "LIVE DATA"
+    },
+    {
+      "b": "Kit",
+      "n": "Kit 6 Cuadernos Scribe Profesional 100 Hojas Raya Color colores",
+      "c": "papeleria",
+      "minP": 199,
+      "maxP": 228,
+      "id": "MLM47825116",
+      "demanda": "89.4%",
       "opti": "LIVE DATA"
     },
     {
@@ -179,7 +269,17 @@
       "minP": 180,
       "maxP": 206,
       "id": "MLM26971450",
-      "demanda": "89.8%",
+      "demanda": "87.7%",
+      "opti": "LIVE DATA"
+    },
+    {
+      "b": "Scribe",
+      "n": "Scribe Escolar Plus Cuaderno Pro 100h Cuadro Chico Pack De 6",
+      "c": "papeleria",
+      "minP": 180,
+      "maxP": 206,
+      "id": "MLM26971450",
+      "demanda": "90.4%",
       "opti": "LIVE DATA"
     },
     {
@@ -189,7 +289,7 @@
       "minP": 194,
       "maxP": 223,
       "id": "MLM-696907346",
-      "demanda": "90.3%",
+      "demanda": "93.7%",
       "opti": "LIVE DATA"
     },
     {
@@ -199,7 +299,107 @@
       "minP": 194,
       "maxP": 223,
       "id": "MLM-696907346",
-      "demanda": "88.4%",
+      "demanda": "91.6%",
+      "opti": "LIVE DATA"
+    },
+    {
+      "b": "Cuaderno",
+      "n": "Cuaderno Profesional Scribe Mega Plus Cuadro Grande 7mm Hoja Blanca",
+      "c": "papeleria",
+      "minP": 54,
+      "maxP": 62,
+      "id": "MLM705157198",
+      "demanda": "90.6%",
+      "opti": "LIVE DATA"
+    },
+    {
+      "b": "Cuaderno",
+      "n": "Cuaderno Profesional Scribe Mega Plus Cuadro Grande 7mm Hoja Blanca",
+      "c": "papeleria",
+      "minP": 54,
+      "maxP": 62,
+      "id": "MLM705157198",
+      "demanda": "94.6%",
+      "opti": "LIVE DATA"
+    },
+    {
+      "b": "3",
+      "n": "3 Cuaderno Profesional Scribe Serie 3 Raya 100 Hojas Multicolor",
+      "c": "papeleria",
+      "minP": 450,
+      "maxP": 517,
+      "id": "MLM64297486",
+      "demanda": "90.2%",
+      "opti": "LIVE DATA"
+    },
+    {
+      "b": "3",
+      "n": "3 Cuaderno Profesional Scribe Serie 3 Raya 100 Hojas Multicolor",
+      "c": "papeleria",
+      "minP": 450,
+      "maxP": 517,
+      "id": "MLM64297486",
+      "demanda": "92.1%",
+      "opti": "LIVE DATA"
+    },
+    {
+      "b": "5",
+      "n": "5 Cuadernos Profesional Scribe 100 Hojas Con Imagen",
+      "c": "papeleria",
+      "minP": 194,
+      "maxP": 223,
+      "id": "MLM-754447817",
+      "demanda": "90.9%",
+      "opti": "LIVE DATA"
+    },
+    {
+      "b": "5",
+      "n": "5 Cuadernos Profesional Scribe 100 Hojas Con Imagen",
+      "c": "papeleria",
+      "minP": 194,
+      "maxP": 223,
+      "id": "MLM-754447817",
+      "demanda": "85.5%",
+      "opti": "LIVE DATA"
+    },
+    {
+      "b": "Cuaderno",
+      "n": "Cuaderno Profesional Scribe Clásico R 100h Colores Variados Rojo",
+      "c": "papeleria",
+      "minP": 79,
+      "maxP": 90,
+      "id": "MLM3164028044",
+      "demanda": "94.3%",
+      "opti": "LIVE DATA"
+    },
+    {
+      "b": "Cuaderno",
+      "n": "Cuaderno Profesional Scribe Clásico R 100h Colores Variados Rojo",
+      "c": "papeleria",
+      "minP": 79,
+      "maxP": 90,
+      "id": "MLM3164028044",
+      "demanda": "86.8%",
+      "opti": "LIVE DATA"
+    },
+    {
+      "b": "Cuadernos",
+      "n": "Cuadernos Libretas Scribe Profesional 100 Hojas 36 Piezas Color Cuadro Chico",
+      "c": "papeleria",
+      "minP": 990,
+      "maxP": 1138,
+      "id": "MLM49781491",
+      "demanda": "94.9%",
+      "opti": "LIVE DATA"
+    },
+    {
+      "b": "Cuadernos",
+      "n": "Cuadernos Libretas Scribe Profesional 100 Hojas 36 Piezas Color Cuadro Chico",
+      "c": "papeleria",
+      "minP": 990,
+      "maxP": 1138,
+      "id": "MLM49781491",
+      "demanda": "93.9%",
       "opti": "LIVE DATA"
     }
   ],
@@ -211,7 +411,7 @@
       "minP": 318,
       "maxP": 365,
       "id": "MLM44776197",
-      "demanda": "86.5%",
+      "demanda": "91.8%",
       "opti": "LIVE DATA"
     },
     {
@@ -221,7 +421,7 @@
       "minP": 318,
       "maxP": 365,
       "id": "MLM44776197",
-      "demanda": "93.0%",
+      "demanda": "90.7%",
       "opti": "LIVE DATA"
     },
     {
@@ -231,7 +431,7 @@
       "minP": 1441,
       "maxP": 1657,
       "id": "MLM36779083",
-      "demanda": "92.1%",
+      "demanda": "91.5%",
       "opti": "LIVE DATA"
     },
     {
@@ -241,7 +441,7 @@
       "minP": 1441,
       "maxP": 1657,
       "id": "MLM36779083",
-      "demanda": "92.0%",
+      "demanda": "85.5%",
       "opti": "LIVE DATA"
     },
     {
@@ -251,7 +451,7 @@
       "minP": 950,
       "maxP": 1092,
       "id": "MLM36794468",
-      "demanda": "93.3%",
+      "demanda": "88.9%",
       "opti": "LIVE DATA"
     },
     {
@@ -261,7 +461,7 @@
       "minP": 950,
       "maxP": 1092,
       "id": "MLM36794468",
-      "demanda": "94.4%",
+      "demanda": "92.2%",
       "opti": "LIVE DATA"
     },
     {
@@ -271,7 +471,7 @@
       "minP": 6750,
       "maxP": 7762,
       "id": "MLM2734210103",
-      "demanda": "88.8%",
+      "demanda": "92.5%",
       "opti": "LIVE DATA"
     },
     {
@@ -281,7 +481,17 @@
       "minP": 6750,
       "maxP": 7762,
       "id": "MLM2734210103",
-      "demanda": "89.7%",
+      "demanda": "90.2%",
+      "opti": "LIVE DATA"
+    },
+    {
+      "b": "Pack",
+      "n": "Pack 2 Toner 85a / 36a / 35a P1005 / 1102w Compatible Tinta Negro",
+      "c": "toner",
+      "minP": 318,
+      "maxP": 365,
+      "id": "MLM44776197",
+      "demanda": "86.2%",
       "opti": "LIVE DATA"
     },
     {
@@ -295,13 +505,103 @@
       "opti": "LIVE DATA"
     },
     {
-      "b": "Pack",
-      "n": "Pack 2 Toner 85a / 36a / 35a P1005 / 1102w Compatible Tinta Negro",
+      "b": "Cartucho",
+      "n": "Cartucho de Tóner HP CF237A Negro LaserJet Original",
       "c": "toner",
-      "minP": 318,
-      "maxP": 365,
-      "id": "MLM44776197",
-      "demanda": "88.4%",
+      "minP": 2117,
+      "maxP": 2434,
+      "id": "MLM38256939",
+      "demanda": "88.0%",
+      "opti": "LIVE DATA"
+    },
+    {
+      "b": "Cartucho",
+      "n": "Cartucho de Tóner HP CF237A Negro LaserJet Original",
+      "c": "toner",
+      "minP": 2117,
+      "maxP": 2434,
+      "id": "MLM38256939",
+      "demanda": "92.7%",
+      "opti": "LIVE DATA"
+    },
+    {
+      "b": "Cartucho",
+      "n": "Cartucho Tóner Hp Laserjet Negro 122a Q3960a",
+      "c": "toner",
+      "minP": 1100,
+      "maxP": 1265,
+      "id": "MLM3607272272",
+      "demanda": "85.3%",
+      "opti": "LIVE DATA"
+    },
+    {
+      "b": "Cartucho",
+      "n": "Cartucho Tóner Hp Laserjet Negro 122a Q3960a",
+      "c": "toner",
+      "minP": 1100,
+      "maxP": 1265,
+      "id": "MLM3607272272",
+      "demanda": "91.6%",
+      "opti": "LIVE DATA"
+    },
+    {
+      "b": "Cartucho",
+      "n": "Cartucho De Tóner Hp 105a Negro Laserjet",
+      "c": "toner",
+      "minP": 1499,
+      "maxP": 1723,
+      "id": "MLM36750869",
+      "demanda": "85.1%",
+      "opti": "LIVE DATA"
+    },
+    {
+      "b": "Cartucho",
+      "n": "Cartucho De Tóner Hp 105a Negro Laserjet",
+      "c": "toner",
+      "minP": 1499,
+      "maxP": 1723,
+      "id": "MLM36750869",
+      "demanda": "91.3%",
+      "opti": "LIVE DATA"
+    },
+    {
+      "b": "Hp",
+      "n": "Hp Laserjet Enterprise 414a Tinta Amarilla Amarillo",
+      "c": "toner",
+      "minP": 3109,
+      "maxP": 3575,
+      "id": "MLM2093601631",
+      "demanda": "91.8%",
+      "opti": "LIVE DATA"
+    },
+    {
+      "b": "Hp",
+      "n": "Hp Laserjet Enterprise 414a Tinta Amarilla Amarillo",
+      "c": "toner",
+      "minP": 3109,
+      "maxP": 3575,
+      "id": "MLM2093601631",
+      "demanda": "90.8%",
+      "opti": "LIVE DATA"
+    },
+    {
+      "b": "Pack",
+      "n": "Pack De 2 Cartuchos De Tóner Hp 78a Negro Laserjet",
+      "c": "toner",
+      "minP": 3689,
+      "maxP": 4242,
+      "id": "MLM567164976",
+      "demanda": "90.4%",
+      "opti": "LIVE DATA"
+    },
+    {
+      "b": "Pack",
+      "n": "Pack De 2 Cartuchos De Tóner Hp 78a Negro Laserjet",
+      "c": "toner",
+      "minP": 3689,
+      "maxP": 4242,
+      "id": "MLM567164976",
+      "demanda": "91.9%",
       "opti": "LIVE DATA"
     }
   ]
