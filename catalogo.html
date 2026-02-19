@@ -1744,9 +1744,13 @@
                 }
 
                 const brandName = prod.brand || "Otros";
-                const bSet = (typeof brandSettingsDB !== 'undefined') ? brandSettingsDB.find(s => s.id.toLowerCase() === brandName.toLowerCase()) : null;
+                // Single source of truth: brandSettingsDB (from Personalización de Marca)
+                const bSet = (typeof brandSettingsDB !== 'undefined')
+                    ? brandSettingsDB.find(s => s.id.toLowerCase() === brandName.toLowerCase())
+                    : null;
 
-                let brandLogoUrl = bSet ? bSet.logo : getBrandLogo(brandName);
+                // Logo always from brandSettingsDB — no hardcoded fallback
+                let brandLogoUrl = bSet ? bSet.logo : null;
                 // Normalize: strip leading slash so it works on GitHub Pages AND localhost
                 if (brandLogoUrl && brandLogoUrl.startsWith('/')) brandLogoUrl = brandLogoUrl.slice(1);
                 if (brandLogoUrl) brandLogoUrl += `?v=${v}`;
@@ -1853,11 +1857,8 @@
             `;
         }
 
-        function getBrandLogo(brandName) {
-            const cleanName = brandName.toLowerCase().trim();
-            if (!cleanName || cleanName === 'otros') return null;
-            return `assets/images/brands/${cleanName.replace(/[^a-z0-9]/g, '')}.png`;
-        }
+        // getBrandLogo removed: logos always come from brandSettingsDB (Personalización de Marca)
+        // This ensures any logo change in the admin is reflected everywhere automatically.
 
         function filterProducts() {
             const searchTerm = searchInput.value.trim().toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
