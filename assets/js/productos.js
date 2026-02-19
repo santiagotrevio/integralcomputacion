@@ -13876,19 +13876,19 @@ const brandSettingsDB = [
     "id": "RICOH",
     "name": "RICOH",
     "logo": "/assets/images/brands/ricoh.png",
-    "scale": 0.65,
+    "scale": 0.6,
     "offset_y": 0,
     "color": "#0071e3",
-    "offset_x": 0
+    "offset_x": -2
   },
   {
     "id": "Xerox",
     "name": "Xerox",
     "logo": "/assets/images/brands/xerox.png",
-    "scale": 1.25,
+    "scale": 1.3,
     "offset_y": 0,
     "color": "#0071e3",
-    "offset_x": 0
+    "offset_x": -3
   },
   {
     "id": "Lexmark",
@@ -14141,5 +14141,149 @@ const brandSettingsDB = [
     "offset_y": -1,
     "color": "#0071e3",
     "offset_x": -3
+  },
+  {
+    "id": "LOGITECH",
+    "name": "LOGITECH",
+    "logo": "/assets/images/brands/logitech.png",
+    "scale": 1.05,
+    "offset_y": 0,
+    "color": "#0071e3",
+    "offset_x": -2
+  },
+  {
+    "id": "NEXTEP",
+    "name": "NEXTEP",
+    "logo": "/assets/images/brands/nextep.png",
+    "scale": 2,
+    "offset_y": -1,
+    "color": "#0071e3",
+    "offset_x": -3
+  },
+  {
+    "id": "PANASONIC",
+    "name": "PANASONIC",
+    "logo": "/assets/images/brands/panasonic.png",
+    "scale": 2,
+    "offset_y": 0,
+    "color": "#0071e3",
+    "offset_x": -2
+  },
+  {
+    "id": "OLMECA",
+    "name": "OLMECA",
+    "logo": "/assets/images/brands/olmeca.png",
+    "scale": 1,
+    "offset_y": 0,
+    "color": "#0071e3",
+    "offset_x": 0
+  },
+  {
+    "id": "PERFECT CHOICE",
+    "name": "PERFECT CHOICE",
+    "logo": "/assets/images/brands/perfectchoice.png",
+    "scale": 2,
+    "offset_y": -2,
+    "color": "#0071e3",
+    "offset_x": -2
+  },
+  {
+    "id": "POLY",
+    "name": "POLY",
+    "logo": "/assets/images/brands/poly.png",
+    "scale": 1.35,
+    "offset_y": 0,
+    "color": "#0071e3",
+    "offset_x": -3
+  },
+  {
+    "id": "Papermate",
+    "name": "Papermate",
+    "logo": "/assets/images/brands/papermate.png",
+    "scale": 0.8,
+    "offset_y": -1,
+    "color": "#0071e3",
+    "offset_x": -3
+  },
+  {
+    "id": "REDRAGON",
+    "name": "REDRAGON",
+    "logo": "/assets/images/brands/redragon.png",
+    "scale": 0.8,
+    "offset_y": 0,
+    "color": "#0071e3",
+    "offset_x": -4
+  },
+  {
+    "id": "SAMSUNG",
+    "name": "SAMSUNG",
+    "logo": "/assets/images/brands/samsung.png",
+    "scale": 1.25,
+    "offset_y": 0,
+    "color": "#0071e3",
+    "offset_x": -4
+  },
+  {
+    "id": "SANDISK",
+    "name": "SANDISK",
+    "logo": "/assets/images/brands/sandisk.png",
+    "scale": 2,
+    "offset_y": 0,
+    "color": "#0071e3",
+    "offset_x": -2
+  },
+  {
+    "id": "SONY",
+    "name": "SONY",
+    "logo": "/assets/images/brands/sony.png",
+    "scale": 1.9,
+    "offset_y": 0,
+    "color": "#0071e3",
+    "offset_x": -3
+  },
+  {
+    "id": "TOSHIBA",
+    "name": "TOSHIBA",
+    "logo": "/assets/images/brands/toshiba.png",
+    "scale": 1.45,
+    "offset_y": 1,
+    "color": "#0071e3",
+    "offset_x": -2
+  },
+  {
+    "id": "TPLINK",
+    "name": "TPLINK",
+    "logo": "/assets/images/brands/tplink.png",
+    "scale": 1.35,
+    "offset_y": -2,
+    "color": "#0071e3",
+    "offset_x": -3
+  },
+  {
+    "id": "Ugreen",
+    "name": "Ugreen",
+    "logo": "/assets/images/brands/ugreen.png",
+    "scale": 0.6,
+    "offset_y": -1,
+    "color": "#0071e3",
+    "offset_x": -3
+  },
+  {
+    "id": "VERBATIM",
+    "name": "VERBATIM",
+    "logo": "/assets/images/brands/verbatim.png",
+    "scale": 2,
+    "offset_y": 0,
+    "color": "#0071e3",
+    "offset_x": -5
+  },
+  {
+    "id": "ZEBRA",
+    "name": "ZEBRA",
+    "logo": "/assets/images/brands/zebra.png",
+    "scale": 1.1,
+    "offset_y": 0,
+    "color": "#0071e3",
+    "offset_x": -8
   }
 ];
