@@ -1748,6 +1748,11 @@
             <div id="navSales" class="nav-tab" onclick="switchView('sales')">
                 <i class="fa-solid fa-chart-line"></i> INTELIGENCIA DE VENTAS
             </div>
+            <div id="navConflicts" class="nav-tab" onclick="switchView('conflicts')" style="position:relative">
+                <i class="fa-solid fa-triangle-exclamation"></i> RESOLUCIÓN DE CONFLICTOS
+                <span id="conflictBadge" class="nav-badge"
+                    style="display:none; position:absolute; top:-5px; right:-5px; background:#ff3b30; color:white; font-size:9px; min-width:18px; height:18px; border-radius:50%; align-items:center; justify-content:center; font-weight:900; border:2px solid white;">0</span>
+            </div>
         </div>
 
         <!-- VIEW 1: CATALOG MANAGEMENT -->
@@ -2046,6 +2051,33 @@
                 </div>
             </div>
         </div>
+
+        <!-- VIEW: CONFLICT RESOLUTION -->
+        <div id="viewConflicts" class="view-container">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:30px;">
+                <div style="display:flex; align-items:center; gap:12px;">
+                    <div
+                        style="background:#ff3b30; color:white; width:48px; height:48px; border-radius:14px; display:flex; align-items:center; justify-content:center; font-size:24px;">
+                        <i class="fa-solid fa-code-merge"></i>
+                    </div>
+                    <div>
+                        <h2 style="margin:0; font-size:22px;">Control de Versiones y Conflictos</h2>
+                        <p style="margin:0; opacity:0.6; font-size:14px;">Comparación y archivado de cambios en
+                            productos existentes</p>
+                    </div>
+                </div>
+                <button class="secondary" onclick="loadConflicts()"><i class="fa-solid fa-rotate"></i>
+                    REFRESCAR</button>
+            </div>
+
+            <div id="conflictsList" class="sales-grid"
+                style="grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));">
+                <div style="grid-column: 1/-1; text-align:center; padding:100px; opacity:0.3;">
+                    <i class="fa-solid fa-check-double" style="font-size:48px; margin-bottom:20px;"></i>
+                    <p>No hay conflictos de versión pendientes</p>
+                </div>
+            </div>
+        </div>
     </div>
 
     <!-- Trend Details Modal -->
@@ -2191,12 +2223,18 @@
             </div>
 
             <div style="display:flex; flex-direction:column; gap:10px; margin-top:30px;">
-                <button onclick="executeBulkImport(true)" style="width:100%; justify-content:center;">🚀 SOBRESCRIBIR
-                    TODO (Incluir Existentes)</button>
+                <button onclick="executeBulkImport(true)"
+                    style="width:100%; justify-content:center; background:var(--apple-blue); color:white;">
+                    🚀 SOBRESCRIBIR TODO EL CATÁLOGO
+                </button>
+                <button onclick="executeBulkImport(false, true)" class="secondary"
+                    style="width:100%; justify-content:center; background:#ff9f0a; color:white; border:none;">
+                    <i class="fa-solid fa-code-branch"></i> ARCHIVAR Y REVISAR DESPUÉS
+                </button>
                 <button onclick="executeBulkImport(false)" class="secondary"
                     style="width:100%; justify-content:center;">✅ SOLO CARGAR NUEVOS</button>
                 <button class="secondary" onclick="document.getElementById('bulkConflictModal').style.display='none'"
-                    style="width:100%; justify-content:center; border:none;">Cancelar</button>
+                    style="width:100%; justify-content:center; border:none; opacity:0.5;">Cancelar</button>
             </div>
         </div>
     </div>
@@ -2479,6 +2517,17 @@
 
                 updateBrandSelector();
                 filterAndSort();
+
+                // Update conflicts badge
+                const cRes = await fetch('/api/conflicts');
+                const cData = await cRes.json();
+                const badge = document.getElementById('conflictBadge');
+                if (cData.data && cData.data.length > 0) {
+                    badge.innerText = cData.data.length;
+                    badge.style.display = 'flex';
+                } else {
+                    badge.style.display = 'none';
+                }
             } catch (err) {
                 console.error("Critical loader error:", err);
                 products = products || [];
@@ -2954,10 +3003,19 @@
                     const newItems = [];
                     const conflicts = [];
 
+                    const getCsvVal = (row, tags) => {
+                        const keys = Object.keys(row);
+                        for (const tag of tags) {
+                            const found = keys.find(k => k.trim().toLowerCase() === tag.toLowerCase());
+                            if (found && row[found] !== null && row[found] !== undefined) return row[found].toString().trim();
+                        }
+                        return null;
+                    };
+
                     data.forEach(row => {
-                        const id = row.id || row.ID || row.Id;
+                        const id = getCsvVal(row, ['id', 'modelo', 'sku', 'id/modelo', 'referencia', 'model']);
                         if (!id) return;
-                        if (products.some(p => p.id == id)) {
+                        if (products.some(p => p.id.toLowerCase() === id.toLowerCase())) {
                             conflicts.push(row);
                         } else {
                             newItems.push(row);
@@ -2970,8 +3028,17 @@
                     if (conflicts.length > 0) {
                         document.getElementById('newItemsCount').innerText = newItems.length;
                         document.getElementById('conflictItemsCount').innerText = conflicts.length;
-                        document.getElementById('newItemsList').innerHTML = newItems.map(i => `• ${i.id || i.ID || i.Id}`).join('<br>');
-                        document.getElementById('conflictItemsList').innerHTML = conflicts.map(i => `• ${i.id || i.ID || i.Id}`).join('<br>');
+
+                        document.getElementById('newItemsList').innerHTML = newItems.map(row => {
+                            const id = getCsvVal(row, ['id', 'modelo', 'sku', 'id/modelo', 'referencia', 'model']);
+                            return `• ${id}`;
+                        }).join('<br>');
+
+                        document.getElementById('conflictItemsList').innerHTML = conflicts.map(row => {
+                            const id = getCsvVal(row, ['id', 'modelo', 'sku', 'id/modelo', 'referencia', 'model']);
+                            return `• ${id}`;
+                        }).join('<br>');
+
                         document.getElementById('bulkConflictModal').style.display = 'flex';
                     } else {
                         executeBulkImport(true);
@@ -2980,15 +3047,16 @@
             });
         }
 
-        async function executeBulkImport(overwriteExisting) {
+        async function executeBulkImport(overwriteExisting, stageConflicts = false) {
             document.getElementById('bulkConflictModal').style.display = 'none';
             const progress = document.getElementById('bulkProgress');
             const bar = document.getElementById('progressBar');
             const text = document.getElementById('progressText');
 
-            const toProcess = overwriteExisting
-                ? [...pendingBulkData.newItems, ...pendingBulkData.conflicts]
-                : pendingBulkData.newItems;
+            const toProcess = [
+                ...pendingBulkData.newItems,
+                ...((overwriteExisting || stageConflicts) ? pendingBulkData.conflicts : [])
+            ];
 
             if (toProcess.length === 0) {
                 alert("No hay productos nuevos para cargar.");
@@ -3002,8 +3070,55 @@
 
             for (const row of toProcess) {
                 try {
-                    const id = row.id || row.ID || row.Id;
+                    const getCsvVal = (r, tags) => {
+                        const keys = Object.keys(r);
+                        for (const tag of tags) {
+                            const found = keys.find(k => k.trim().toLowerCase() === tag.toLowerCase());
+                            if (found && r[found] !== null && r[found] !== undefined) return r[found].toString().trim();
+                        }
+                        return null;
+                    };
+
+                    const id = getCsvVal(row, ['id', 'modelo', 'sku', 'id/modelo', 'referencia', 'model']);
                     if (!id) continue;
+
+                    const exists = products.find(p => p.id.toLowerCase() === id.toLowerCase());
+
+                    // IF we are in staging mode and it exists, call stage API
+                    if (exists && stageConflicts) {
+                        const name = getCsvVal(row, ['nombre', 'name', 'producto', 'product', 'descripción corta']) || id;
+                        let description = getCsvVal(row, ['description', 'descripción', 'detalle', 'observaciones']) || name;
+                        if (!description || !description.trim() || description.toLowerCase() === 'null') description = name;
+
+                        let brand = getCsvVal(row, ['marca', 'brand', 'fabricante']) || 'Otros';
+                        const standardBrands = ['HP', 'Brother', 'Canon', 'Lexmark', 'Xerox'];
+                        const standardMatch = standardBrands.find(b => b.toLowerCase() === brand.trim().toLowerCase());
+                        if (standardMatch) brand = standardMatch;
+
+                        let category = getCsvVal(row, ['categoría', 'category', 'familia']) || 'toner';
+
+                        const productData = {
+                            id: id,
+                            name: name,
+                            category: category,
+                            brand: brand,
+                            price: 0,
+                            stock: 0,
+                            compatibility: getCsvVal(row, ['compatibilidad', 'compatibility', 'impresoras compatibles', 'modelos compatibles']) || '',
+                            description: description
+                        };
+
+                        await fetch('/api/conflicts/stage', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ product_id: id, new_data: productData })
+                        });
+
+                        count++;
+                        bar.style.width = (count / total * 100) + '%';
+                        text.innerText = `Archivando para revisión: ${count} de ${total}`;
+                        continue;
+                    }
 
                     // Buscar imagen
                     let imageUrl = '';
@@ -3022,28 +3137,8 @@
                         }
                     }
 
-                    const name = row.name || row.Nombre || '';
-                    let description = row.description || row.descripcion || row.Descripción || '';
-                    if (!description || !description.trim() || description.toLowerCase() === 'null') description = name;
+                    productData.image = imageUrl;
 
-                    let brand = row.brand || row.Marca || 'Otros';
-                    const standardBrands = ['HP', 'Brother', 'Canon', 'Lexmark', 'Xerox'];
-                    const standardMatch = standardBrands.find(b => b.toLowerCase() === brand.trim().toLowerCase());
-                    if (standardMatch) brand = standardMatch;
-
-                    const productData = {
-                        id: id,
-                        name: name,
-                        category: row.category || row.Categoria || 'toner',
-                        brand: brand,
-                        price: 0,
-                        stock: 0,
-                        compatibility: row.compatibility || row.Compatibilidad || '',
-                        image: imageUrl,
-                        description: description
-                    };
-
-                    const exists = products.find(p => p.id == id);
                     const method = exists ? 'PUT' : 'POST';
                     const url = exists ? `/api/products/${id}` : '/api/products';
 
@@ -3758,11 +3853,96 @@
                 document.getElementById('viewBrands').classList.add('active');
                 document.getElementById('navBrands').classList.add('active');
                 loadBrandSettings();
-            } else {
+            } else if (view === 'sales') {
                 document.getElementById('viewSales').classList.add('active');
                 document.getElementById('navSales').classList.add('active');
-                runSEOAudit(); // Correr escaneo al entrar
-                renderMarketHotlist(); // Cargar ranking de 100 items
+                runSEOAudit();
+                renderMarketHotlist();
+            } else if (view === 'conflicts') {
+                document.getElementById('viewConflicts').classList.add('active');
+                document.getElementById('navConflicts').classList.add('active');
+                loadConflicts();
+            }
+        }
+
+        async function loadConflicts() {
+            const res = await fetch('/api/conflicts');
+            const data = await res.json();
+            const container = document.getElementById('conflictsList');
+            const badge = document.getElementById('conflictBadge');
+
+            if (data.data && data.data.length > 0) {
+                badge.innerText = data.data.length;
+                badge.style.display = 'flex';
+
+                container.innerHTML = data.data.map(c => {
+                    const old = JSON.parse(c.old_data);
+                    const incoming = JSON.parse(c.new_data);
+
+                    return `
+                        <div class="trend-card" style="border-left: 4px solid #ff3b30; background: white; padding: 20px;">
+                            <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:15px;">
+                                <div>
+                                    <h4 style="margin:0; font-size:16px;">${c.product_id}</h4>
+                                    <span style="font-size:10px; opacity:0.5;">Detectado el ${new Date(c.created_at).toLocaleString()}</span>
+                                </div>
+                                <div style="background:rgba(255,59,48,0.1); color:#ff3b30; font-size:9px; font-weight:900; padding:4px 8px; border-radius:10px;">CONFLICTO</div>
+                            </div>
+
+                            <div style="display:grid; grid-template-columns: 1fr 1fr; gap:15px; margin-bottom:20px;">
+                                <div style="font-size:12px; border-right:1px solid #eee; padding-right:10px;">
+                                    <div style="font-weight:800; color:#888; margin-bottom:5px; font-size:10px;">ACTUAL EN WEB</div>
+                                    <div style="color:#333;">${old.name}</div>
+                                    <div style="font-size:10px; opacity:0.6; margin-top:4px;">${(old.compatibility || '').substring(0, 60)}...</div>
+                                </div>
+                                <div style="font-size:12px;">
+                                    <div style="font-weight:800; color:var(--apple-blue); margin-bottom:5px; font-size:10px;">ENTRANTE (CSV)</div>
+                                    <div style="color:#333;">${incoming.name}</div>
+                                    <div style="font-size:10px; opacity:0.6; margin-top:4px;">${(incoming.compatibility || '').substring(0, 60)}...</div>
+                                </div>
+                            </div>
+
+                            <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px;">
+                                <button class="secondary" onclick="resolveConflict(${c.id}, 'keep_old', this)" style="font-size:11px; font-weight:700;">
+                                    <i class="fa-solid fa-clock-rotate-left"></i> MANTENER ACTUAL
+                                </button>
+                                <button class="primary" onclick="resolveConflict(${c.id}, 'keep_new', this)" style="font-size:11px; font-weight:700; background:#ff3b30;">
+                                    <i class="fa-solid fa-check"></i> USAR NUEVO
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+            } else {
+                badge.style.display = 'none';
+                container.innerHTML = `
+                    <div style="grid-column: 1/-1; text-align:center; padding:100px; opacity:0.3;">
+                        <i class="fa-solid fa-check-double" style="font-size:48px; margin-bottom:20px;"></i>
+                        <p>No hay conflictos de versión pendientes</p>
+                    </div>
+                `;
+            }
+        }
+
+        async function resolveConflict(conflictId, action, btn) {
+            const originalHtml = btn.innerHTML;
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i>';
+
+            try {
+                await fetch(`/api/conflicts/${conflictId}/resolve`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ action })
+                });
+
+                // Refresh list and badge
+                loadConflicts();
+                loadProducts(); // Important to refresh main catalog
+            } catch (err) {
+                alert("Error al resolver: " + err.message);
+                btn.disabled = false;
+                btn.innerHTML = originalHtml;
             }
         }
 

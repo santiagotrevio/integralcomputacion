@@ -142,6 +142,56 @@ app.put('/api/brands/:id', (req, res) => {
         });
 });
 
+// --- CONFLICT MANAGEMENT ---
+app.get('/api/conflicts', (req, res) => {
+    db.all("SELECT * FROM product_conflicts WHERE resolved = 0 ORDER BY created_at DESC", [], (err, rows) => {
+        if (err) return res.status(500).json({ error: err.message });
+        res.json({ data: rows });
+    });
+});
+
+app.post('/api/conflicts/stage', (req, res) => {
+    const { product_id, new_data } = req.body;
+
+    // Get current data to archive
+    db.get("SELECT * FROM products WHERE id = ?", [product_id], (err, currentData) => {
+        if (err || !currentData) return res.status(404).json({ error: "Product not found to archive" });
+
+        db.run(`INSERT INTO product_conflicts (product_id, old_data, new_data) VALUES (?, ?, ?)`,
+            [product_id, JSON.stringify(currentData), JSON.stringify(new_data)], function (iErr) {
+                if (iErr) return res.status(500).json({ error: iErr.message });
+                res.json({ message: "Conflict staged", id: this.lastID });
+            });
+    });
+});
+
+app.post('/api/conflicts/:id/resolve', (req, res) => {
+    const { action } = req.body; // 'keep_old' or 'keep_new'
+    const conflictId = req.params.id;
+
+    db.get("SELECT * FROM product_conflicts WHERE id = ?", [conflictId], (err, conflict) => {
+        if (err || !conflict) return res.status(404).json({ error: "Conflict not found" });
+
+        const productId = conflict.product_id;
+        const newData = JSON.parse(conflict.new_data);
+
+        if (action === 'keep_new') {
+            const sql = `UPDATE products SET name = ?, category = ?, brand = ?, compatibility = ?, image = ?, description = ?, published = 0 WHERE id = ?`;
+            db.run(sql, [newData.name, newData.category, newData.brand, newData.compatibility, newData.image, newData.description, productId], (uErr) => {
+                if (uErr) return res.status(500).json({ error: uErr.message });
+                db.run("UPDATE product_conflicts SET resolved = 1 WHERE id = ?", [conflictId], () => {
+                    res.json({ message: "Updated with new version" });
+                });
+            });
+        } else {
+            // keep_old: We just mark conflict as resolved (no change to products table)
+            db.run("UPDATE product_conflicts SET resolved = 1 WHERE id = ?", [conflictId], () => {
+                res.json({ message: "Kept original version" });
+            });
+        }
+    });
+});
+
 app.get('/api/products', (req, res) => {
     db.all("SELECT * FROM products ORDER BY created_at DESC", [], (err, rows) => {
         if (err) return res.status(500).json({ error: err.message });
