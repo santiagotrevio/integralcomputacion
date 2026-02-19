@@ -191,6 +191,15 @@ app.post('/api/conflicts/:id/resolve', (req, res) => {
                     res.json({ message: "Description updated" });
                 });
             });
+        } else if (action === 'custom') {
+            const { custom_data } = req.body;
+            const sql = `UPDATE products SET name = ?, category = ?, brand = ?, compatibility = ?, description = ?, published = 0 WHERE id = ?`;
+            db.run(sql, [custom_data.name, custom_data.category, custom_data.brand, custom_data.compatibility, custom_data.description, productId], (uErr) => {
+                if (uErr) return res.status(500).json({ error: uErr.message });
+                db.run("UPDATE product_conflicts SET resolved = 1 WHERE id = ?", [conflictId], () => {
+                    res.json({ message: "Updated with manual edits" });
+                });
+            });
         } else {
             // keep_old: We just mark conflict as resolved (no change to products table)
             db.run("UPDATE product_conflicts SET resolved = 1 WHERE id = ?", [conflictId], () => {
@@ -264,13 +273,15 @@ app.post('/api/publish', (req, res) => {
     });
 });
 
-const scoutPrice = require('./scripts/price_scout');
 app.get('/api/scout-price/:model', async (req, res) => {
     try {
         const name = req.query.name || "";
+        console.log(`📡 [RADAR] Iniciando escaneo para: ${req.params.model} (${name})`);
         const results = await scoutPrice(req.params.model, name);
+        console.log(`✅ [RADAR] Escaneo completado. Resultados encontrados: ${results.length}`);
         res.json({ data: results });
     } catch (err) {
+        console.error(`❌ [RADAR] Error en escaneo:`, err.message);
         res.status(500).json({ error: err.message });
     }
 });

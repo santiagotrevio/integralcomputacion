@@ -2130,6 +2130,130 @@
         </div>
     </div>
 
+    <!-- Conflict Editor Modal -->
+    <div id="conflictEditorModal" class="modal">
+        <div class="modal-content" style="max-width: 900px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
+                <h2 style="margin:0;">Manual de Resolución: <span id="ce_id_title"></span></h2>
+                <span class="close" onclick="closeConflictEditor()">&times;</span>
+            </div>
+
+            <div style="display:grid; grid-template-columns: 1fr 1fr; gap:30px;">
+                <!-- EDITABLE SIDE -->
+                <div
+                    style="background:rgba(0,113,227,0.03); padding:20px; border-radius:16px; border:1px solid rgba(0,113,227,0.1);">
+                    <h4
+                        style="color:var(--apple-blue); margin-top:0; margin-bottom:15px; font-size:12px; font-weight:800; letter-spacing:0.05em;">
+                        DATO ACTUAL (EDITABLE)</h4>
+
+                    <div style="margin-bottom:15px;">
+                        <label
+                            style="font-size:11px; font-weight:700; opacity:0.6; display:block; margin-bottom:5px;">NOMBRE
+                            DEL PRODUCTO</label>
+                        <input type="text" id="ce_name" style="width:100%; font-size:13px;">
+                    </div>
+
+                    <div style="margin-bottom:15px;">
+                        <label
+                            style="font-size:11px; font-weight:700; opacity:0.6; display:block; margin-bottom:5px;">DESCRIPCIÓN
+                            TÉCNICA</label>
+                        <textarea id="ce_desc" rows="8"
+                            style="width:100%; font-size:12px; line-height:1.5; padding:10px; border-radius:12px; border:1px solid var(--apple-border); background:var(--input-bg); color:var(--apple-text); resize:none;"></textarea>
+                    </div>
+
+                    <div style="display:grid; grid-template-columns: 1fr 1fr; gap:15px;">
+                        <div>
+                            <label
+                                style="font-size:11px; font-weight:700; opacity:0.6; display:block; margin-bottom:5px;">MARCA</label>
+                            <input type="text" id="ce_brand" style="width:100%; font-size:13px;">
+                        </div>
+                        <div>
+                            <label
+                                style="font-size:11px; font-weight:700; opacity:0.6; display:block; margin-bottom:5px;">CATEGORÍA</label>
+                            <select id="ce_cat" style="width:100%; font-size:13px;">
+                                <option value="toner">Tóners</option>
+                                <option value="papeleria">Papelería</option>
+                                <option value="accesorios">Accesorios</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div style="margin-top:15px;">
+                        <label
+                            style="font-size:11px; font-weight:700; opacity:0.6; display:block; margin-bottom:5px;">COMPATIBILIDAD</label>
+                        <input type="text" id="ce_comp" style="width:100%; font-size:13px;">
+                    </div>
+                </div>
+
+                <!-- REFERENCE SIDE -->
+                <div style="background:rgba(0,0,0,0.03); padding:20px; border-radius:16px; border:1px dashed #ddd;">
+                    <h4
+                        style="color:#666; margin-top:0; margin-bottom:15px; font-size:12px; font-weight:800; letter-spacing:0.05em;">
+                        DATO ENTRANTE (CSV)</h4>
+
+                    <div style="margin-bottom:15px;">
+                        <label
+                            style="font-size:11px; font-weight:700; opacity:0.6; display:block; margin-bottom:5px;">NOMBRE
+                            SUGERIDO</label>
+                        <div id="ce_ref_name"
+                            style="font-size:13px; font-weight:600; background:white; padding:10px; border-radius:10px; border:1px solid #eee;">
+                        </div>
+                    </div>
+
+                    <div style="margin-bottom:15px;">
+                        <label
+                            style="font-size:11px; font-weight:700; opacity:0.6; display:block; margin-bottom:5px;">DESCRIPCIÓN
+                            SUGERIDA</label>
+                        <div id="ce_ref_desc"
+                            style="font-size:12px; line-height:1.5; background:white; padding:10px; border-radius:10px; border:1px solid #eee; height:152px; overflow-y:auto;">
+                        </div>
+                    </div>
+
+                    <div style="display:grid; grid-template-columns: 1fr 1fr; gap:15px;">
+                        <div>
+                            <label
+                                style="font-size:11px; font-weight:700; opacity:0.6; display:block; margin-bottom:5px;">MARCA
+                                CSV</label>
+                            <div id="ce_ref_brand"
+                                style="font-size:13px; font-weight:600; background:white; padding:10px; border-radius:10px; border:1px solid #eee;">
+                            </div>
+                        </div>
+                        <div>
+                            <label
+                                style="font-size:11px; font-weight:700; opacity:0.6; display:block; margin-bottom:5px;">CAT
+                                CSV</label>
+                            <div id="ce_ref_cat"
+                                style="font-size:13px; font-weight:600; background:white; padding:10px; border-radius:10px; border:1px solid #eee;">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="margin-top:15px;">
+                        <label
+                            style="font-size:11px; font-weight:700; opacity:0.6; display:block; margin-bottom:5px;">COMPATIBILIDAD
+                            CSV</label>
+                        <div id="ce_ref_comp"
+                            style="font-size:13px; font-weight:600; background:white; padding:10px; border-radius:10px; border:1px solid #eee;">
+                        </div>
+                    </div>
+
+                    <div
+                        style="margin-top:20px; padding:10px; background:#fff9e6; border-radius:10px; border:1px solid #ffeeba; font-size:10px; color:#856404;">
+                        <i class="fa-solid fa-circle-info"></i> Puedes copiar del bloque derecho y pegar en el izquierdo
+                        para fusionar los datos como prefieras.
+                    </div>
+                </div>
+            </div>
+
+            <div style="margin-top:30px; display:flex; gap:12px; justify-content:flex-end;">
+                <button class="secondary" onclick="closeConflictEditor()"><i class="fa-solid fa-xmark"></i>
+                    DESCARTAR</button>
+                <button class="primary" id="btnSaveCE" onclick="saveConflictEdits()"><i class="fa-solid fa-check"></i>
+                    GUARDAR Y RESOLVER</button>
+            </div>
+        </div>
+    </div>
+
     <!-- Trend Details Modal -->
     <div id="trendDetailModal" class="modal">
         <div class="modal-content" style="max-width: 600px;">
@@ -2978,39 +3102,55 @@
         }
 
         async function saveProduct() {
-            const id = document.getElementById('p_id').value.trim();
-            if (!id) return alert("❌ El ID/Modelo es obligatorio.");
+            try {
+                const id = document.getElementById('p_id').value.trim();
+                if (!id) return alert("❌ El ID/Modelo es obligatorio.");
 
-            const name = document.getElementById('p_name').value;
-            let description = document.getElementById('p_description').value;
+                const name = document.getElementById('p_name').value;
+                let description = document.getElementById('p_description').value;
 
-            // Lógica: Si no hay descripción o es "null", copiar el nombre
-            if (!description || !description.trim() || description.toLowerCase() === 'null') description = name;
+                // Lógica: Si no hay descripción o es "null", copiar el nombre
+                if (!description || !description.trim() || description.toLowerCase() === 'null') description = name;
 
-            const body = {
-                id,
-                name,
-                category: document.getElementById('p_category').value,
-                brand: document.getElementById('p_brand').value,
-                price: 0,
-                stock: 0,
-                compatibility: document.getElementById('p_compatibility').value,
-                image: document.getElementById('p_image').value,
-                description
-            };
+                const body = {
+                    id,
+                    name,
+                    category: document.getElementById('p_category').value,
+                    brand: document.getElementById('p_brand').value,
+                    price: 0,
+                    stock: 0,
+                    compatibility: document.getElementById('p_compatibility').value,
+                    image: document.getElementById('p_image').value,
+                    description
+                };
 
-            const isEdit = editingId !== null;
-            const method = isEdit ? 'PUT' : 'POST';
-            const url = isEdit ? `/api/products/${editingId}` : '/api/products';
+                const isEdit = editingId !== null;
+                const method = isEdit ? 'PUT' : 'POST';
+                const url = isEdit ? `/api/products/${encodeURIComponent(editingId)}` : '/api/products';
 
-            const res = await fetch(url, { method, headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
-            if (!res.ok) {
-                const errData = await res.json();
-                alert("Error al guardar: " + (errData.error || "Desconocido"));
-                return;
+                const res = await fetch(url, {
+                    method,
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(body)
+                });
+
+                if (!res.ok) {
+                    let errorMessage = "Desconocido";
+                    try {
+                        const errData = await res.json();
+                        errorMessage = errData.error || errorMessage;
+                    } catch (e) {
+                        errorMessage = res.statusText || "Error de servidor (posible error de ruta)";
+                    }
+                    alert("Error al guardar: " + errorMessage);
+                    return;
+                }
+                closeModal();
+                loadProducts();
+            } catch (err) {
+                console.error("Save error:", err);
+                alert("Error técnico al conectar con el servidor: " + err.message);
             }
-            closeModal();
-            loadProducts();
         }
 
         async function publishChanges() {
@@ -3405,6 +3545,7 @@
                     setTimeout(() => {
                         document.getElementById('imageWizardModal').style.display = 'none';
                         loadProducts();
+                        if (wizardMode === 'brand') loadBrandSettings();
                     }, 1500);
                 } else {
                     throw new Error(data.error);
@@ -3959,9 +4100,11 @@
             }
         }
 
+        let currentConflicts = [];
         async function loadConflicts() {
             const res = await fetch('/api/conflicts');
             const data = await res.json();
+            currentConflicts = data.data || [];
             const container = document.getElementById('conflictsList');
             const badge = document.getElementById('conflictBadge');
 
@@ -4005,8 +4148,8 @@
                                         <i class="fa-solid fa-check-double"></i> USAR TODO EL NUEVO
                                     </button>
                                 </div>
-                                <button class="primary" onclick="resolveConflict(${c.id}, 'update_description', this)" style="font-size:11px; font-weight:700; background:var(--apple-blue); width:100%;">
-                                    <i class="fa-solid fa-pen-to-square"></i> SÓLO ACTUALIZAR CON DESCRIPCIÓN NUEVA
+                                <button class="primary" onclick="openConflictEditor(${c.id})" style="font-size:11px; font-weight:700; background:var(--apple-blue); width:100%;">
+                                    <i class="fa-solid fa-pen-to-square"></i> EDITAR ACTUAL
                                 </button>
                             </div>
                         </div>
@@ -4042,6 +4185,72 @@
                 alert("Error al resolver: " + err.message);
                 btn.disabled = false;
                 btn.innerHTML = originalHtml;
+            }
+        }
+
+        let ce_current_id = null;
+        function openConflictEditor(id) {
+            const conflict = currentConflicts.find(c => c.id === id);
+            if (!conflict) return;
+
+            ce_current_id = id;
+            const old = JSON.parse(conflict.old_data);
+            const incoming = JSON.parse(conflict.new_data);
+
+            document.getElementById('ce_id_title').innerText = conflict.product_id;
+
+            // Editable (Current)
+            document.getElementById('ce_name').value = old.name || '';
+            document.getElementById('ce_desc').value = (old.description && old.description !== 'null') ? old.description : '';
+            document.getElementById('ce_brand').value = old.brand || '';
+            document.getElementById('ce_cat').value = old.category || 'toner';
+            document.getElementById('ce_comp').value = old.compatibility || '';
+
+            // Reference (Incoming)
+            document.getElementById('ce_ref_name').innerText = incoming.name || '-';
+            document.getElementById('ce_ref_desc').innerText = (incoming.description && incoming.description !== 'null') ? incoming.description : (incoming.name || '-');
+            document.getElementById('ce_ref_brand').innerText = incoming.brand || '-';
+            document.getElementById('ce_ref_cat').innerText = (catMap[incoming.category] || incoming.category) || '-';
+            document.getElementById('ce_ref_comp').innerText = incoming.compatibility || '-';
+
+            document.getElementById('conflictEditorModal').style.display = 'flex';
+        }
+
+        function closeConflictEditor() {
+            document.getElementById('conflictEditorModal').style.display = 'none';
+        }
+
+        async function saveConflictEdits() {
+            const btn = document.getElementById('btnSaveCE');
+            const original = btn.innerHTML;
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Guardando...';
+
+            const custom_data = {
+                name: document.getElementById('ce_name').value,
+                description: document.getElementById('ce_desc').value,
+                brand: document.getElementById('ce_brand').value,
+                category: document.getElementById('ce_cat').value,
+                compatibility: document.getElementById('ce_comp').value
+            };
+
+            try {
+                const res = await fetch(`/api/conflicts/${ce_current_id}/resolve`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ action: 'custom', custom_data })
+                });
+
+                if (!res.ok) throw new Error("Error en el servidor");
+
+                closeConflictEditor();
+                loadConflicts();
+                loadProducts();
+            } catch (err) {
+                alert("Error al guardar: " + err.message);
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = original;
             }
         }
 
@@ -4107,6 +4316,12 @@
                                 <img src="${brandImgPath}" class="brand-prev-img"
                                      style="max-height: ${15 * setting.scale}px; transform:translate(${setting.offset_x || 0}px, ${setting.offset_y || 0}px); max-width:70px; object-fit:contain; z-index:2;"
                                      onerror="this.style.display='none'; this.previousElementSibling.style.display='flex';">
+                                
+                                <div onclick="openImageWizard('${brandName}', '', 'brand')" 
+                                     style="position:absolute; top:4px; right:4px; background:rgba(255,45,85,0.7); color:white; width:16px; height:16px; border-radius:50%; display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:7px; z-index:4; border:1px solid white;" 
+                                     title="Buscar logo">
+                                    <i class="fa-solid fa-wand-magic-sparkles"></i>
+                                </div>
                             </div>
                             <div style="font-weight:800; font-size:14px; margin-top:10px; color:#333;">${brandName}</div>
                         </div>
@@ -4132,6 +4347,9 @@
                                 <span style="font-size:11px; width:35px; font-family:monospace; text-align:right;">${setting.offset_y}px</span>
                             </div>
                             <div style="display:flex; gap:8px; margin-top:5px;">
+                                <button class="secondary" onclick="openImageWizard('${brandName}', '', 'brand')" style="padding:10px; font-size:11px; font-weight:700;" title="Buscador Inteligente">
+                                    <i class="fa-solid fa-wand-magic-sparkles"></i>
+                                </button>
                                 <button class="secondary" onclick="this.nextElementSibling.click()" style="flex:1; padding:10px; font-size:11px; font-weight:700;">
                                     <i class="fa-solid fa-upload"></i> LOGO
                                 </button>
