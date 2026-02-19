@@ -72,12 +72,48 @@ app.use('/assets', (req, res, next) => {
 const dbPath = path.resolve(__dirname, 'inventario.db');
 const db = new sqlite3.Database(dbPath);
 
-// Asegurar columnas
+// Asegurar columnas y tablas
 db.serialize(() => {
     db.run("ALTER TABLE products ADD COLUMN created_at DATETIME", (err) => { });
     db.run("ALTER TABLE products ADD COLUMN published INTEGER DEFAULT 1", (err) => { });
     db.run("ALTER TABLE products ADD COLUMN brand TEXT", (err) => { });
     db.run("ALTER TABLE products ADD COLUMN description TEXT", (err) => { });
+
+    // Nueva tabla de marcas para personalización
+    db.run(`CREATE TABLE IF NOT EXISTS brands (
+        id TEXT PRIMARY KEY,
+        name TEXT,
+        logo TEXT,
+        scale REAL DEFAULT 1.0,
+        offset_y INTEGER DEFAULT 0,
+        color TEXT DEFAULT '#0071e3'
+    )`);
+});
+
+app.get('/api/brands', (req, res) => {
+    db.all("SELECT * FROM brands", [], (err, rows) => {
+        if (err) return res.status(500).json({ error: err.message });
+        res.json({ data: rows });
+    });
+});
+
+app.put('/api/brands/:id', (req, res) => {
+    const { name, logo, scale, offset_y, color } = req.body;
+    const id = req.params.id;
+
+    // UPSERT logic for brands
+    db.run(`INSERT INTO brands (id, name, logo, scale, offset_y, color) 
+            VALUES (?, ?, ?, ?, ?, ?)
+            ON CONFLICT(id) DO UPDATE SET 
+            name = excluded.name,
+            logo = excluded.logo,
+            scale = excluded.scale,
+            offset_y = excluded.offset_y,
+            color = excluded.color`,
+        [id, name, logo, scale, offset_y, color], function (err) {
+            if (err) return res.status(400).json({ error: err.message });
+            res.json({ message: "Brand updated" });
+        });
 });
 
 app.get('/api/products', (req, res) => {
@@ -99,9 +135,9 @@ app.post('/api/products', (req, res) => {
 });
 
 app.put('/api/products/:id', (req, res) => {
-    const { name, category, brand, price, stock, compatibility, image, description } = req.body;
-    const sql = `UPDATE products SET name = ?, category = ?, brand = ?, price = ?, stock = ?, compatibility = ?, image = ?, description = ?, published = 0 WHERE id = ?`;
-    db.run(sql, [name, category, brand, price, stock, compatibility, image, description, req.params.id], function (err) {
+    const { id: newId, name, category, brand, price, stock, compatibility, image, description } = req.body;
+    const sql = `UPDATE products SET id = ?, name = ?, category = ?, brand = ?, price = ?, stock = ?, compatibility = ?, image = ?, description = ?, published = 0 WHERE id = ?`;
+    db.run(sql, [newId, name, category, brand, price, stock, compatibility, image, description, req.params.id], function (err) {
         if (err) return res.status(400).json({ error: err.message });
         res.json({ message: "Updated" });
     });

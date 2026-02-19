@@ -171,19 +171,22 @@
             top: 15px;
             right: -8px;
             background: white;
-            padding: 4px 12px 4px 8px;
+            padding: 0 12px;
             border-radius: 20px 0 0 20px;
-            box-shadow: -2px 4px 10px rgba(0, 0, 0, 0.05);
-            height: 28px;
+            box-shadow: -2px 4px 12px rgba(0, 0, 0, 0.05);
+            height: 32px;
             display: flex;
             align-items: center;
+            justify-content: center;
             border: 1px solid #f1f5f9;
             z-index: 2;
+            min-width: 40px;
         }
 
         .brand-badge img {
-            max-height: 16px;
-            max-width: 50px;
+            max-height: 15px;
+            /* Visual Safe Zone */
+            max-width: 60px;
             object-fit: contain;
         }
 
@@ -1649,9 +1652,15 @@
                 const brandName = prod.brand || "Otros";
                 let brandLogoUrl = getBrandLogo(brandName);
                 if (brandLogoUrl) brandLogoUrl += `?v=${v}`;
+
+                const bSet = (typeof brandSettingsDB !== 'undefined') ? brandSettingsDB.find(s => s.id === brandName) : null;
+                const scale = bSet ? bSet.scale : 1.0;
+                const offset_y = bSet ? bSet.offset_y : 0;
+                const brandImgStyle = `max-height: ${15 * scale}px; transform: translateY(${offset_y}px); object-fit: contain;`;
+
                 const badgeHtml = (brandLogoUrl && brandName !== 'Otros') ?
                     `<div class="brand-badge" title="${brandName}">
-                        <img src="${brandLogoUrl}" alt="${brandName}" onerror="this.parentNode.style.display='none'">
+                        <img src="${brandLogoUrl}" alt="${brandName}" style="${brandImgStyle}" onerror="this.parentNode.style.display='none'">
                      </div>` : '';
 
                 const nameHighlighted = highlightText(prod.name, searchTerm);

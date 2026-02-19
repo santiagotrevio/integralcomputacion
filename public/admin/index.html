@@ -1176,12 +1176,12 @@
             flex-direction: column;
         }
 
-        .audit-card .card-brand {
+        .brand-logo-pill {
             position: absolute;
             top: 20px;
             right: -10px;
             background: white;
-            padding: 6px 15px 6px 10px;
+            padding: 0 15px;
             border-radius: 20px 0 0 20px;
             box-shadow: -2px 4px 12px rgba(0, 0, 0, 0.08);
             height: 32px;
@@ -1189,8 +1189,15 @@
             align-items: center;
             justify-content: center;
             border: 1px solid var(--apple-border);
-            z-index: 2;
-            min-width: 40px;
+            z-index: 5;
+            min-width: 50px;
+        }
+
+        .brand-logo-img {
+            max-height: 15px;
+            /* Standardized Safe Zone */
+            max-width: 60px;
+            object-fit: contain;
         }
 
         .audit-card .card-id {
@@ -1735,6 +1742,9 @@
             <div id="navCatalog" class="nav-tab active" onclick="switchView('catalog')">
                 <i class="fa-solid fa-boxes-stacked"></i> GESTIÓN DE CATÁLOGO
             </div>
+            <div id="navBrands" class="nav-tab" onclick="switchView('brands')">
+                <i class="fa-solid fa-tags"></i> PERSONALIZACIÓN DE MARCA
+            </div>
             <div id="navSales" class="nav-tab" onclick="switchView('sales')">
                 <i class="fa-solid fa-chart-line"></i> INTELIGENCIA DE VENTAS
             </div>
@@ -1798,6 +1808,37 @@
                         <div class="stat-value" id="statBrands">0</div>
                         <div class="stat-label">Marcas Activas</div>
                     </div>
+                </div>
+            </div>
+
+            <!-- VIEW 2: BRAND CUSTOMIZATION -->
+            <div id="viewBrands" class="view-container">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background: rgba(88, 86, 214, 0.1); color: #5856d6;">
+                            <i class="fa-solid fa-fingerprint"></i>
+                        </div>
+                        <div>
+                            <div class="stat-value" id="brandCount">0</div>
+                            <div class="stat-label">Marcas Identificadas</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="admin-table-container" style="margin-top: 2rem;">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>Vista Previa (Badge)</th>
+                                <th>Marca</th>
+                                <th>Personalización (Escala / Offset / Color)</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="brandsTableBody">
+                            <!-- JS fills this -->
+                        </tbody>
+                    </table>
                 </div>
             </div>
 
@@ -2255,6 +2296,7 @@
 
     <script>
         let products = [];
+        let editingId = null;
         let currentSort = 'recent';
         let filteredList = [];
         let cacheBuster = Date.now();
@@ -2396,9 +2438,16 @@
         }
 
         async function loadProducts() {
-            const res = await fetch('/api/products');
-            const data = await res.json();
-            products = data.data;
+            const [pRes, bRes] = await Promise.all([
+                fetch('/api/products'),
+                fetch('/api/brands')
+            ]);
+            const pData = await pRes.json();
+            const bData = await bRes.json();
+
+            products = pData.data;
+            brandSettings = bData.data || [];
+
             updateBrandSelector();
             filterAndSort();
         }
@@ -2611,8 +2660,9 @@
                 // Common Logic
                 const hasNoImage = !p.image || p.image.includes('logo.svg') || p.image.includes('default');
                 const imgName = p.image ? p.image.split('/').pop() : 'logo.svg';
-                const imgSrc = `/assets/${imgName}?v=${cacheBuster}`;
                 const brandLogosrc = `/assets/${(p.brand || '').toLowerCase().replace(/[^a-z0-9]/g, '')}.png?v=${cacheBuster}`;
+                const bSet = brandSettings.find(s => s.id === p.brand) || { scale: 1.0, offset_y: 0 };
+                const brandImgStyle = `max-height: ${15 * bSet.scale}px; transform: translateY(${bSet.offset_y}px); object-fit: contain;`;
 
                 if (p.published === 0) pending++;
 
@@ -2642,9 +2692,9 @@
                 </td>
                 <td><b>${p.id}</b></td>
                 <td>
-                    <div class="brand-container" data-brand="${p.brand || 'UNK'}" style="position:relative; display:flex; align-items:center; justify-content: center; background:#f8f9fa; padding:4px; border-radius:6px; border:1px solid #eee; width: 60px; height: 30px;">
-                        <img src="${brandLogosrc}" 
-                             style="max-width: 100%; max-height: 100%; object-fit: contain;" 
+                    <div class="brand-container" data-brand="${p.brand || 'UNK'}" style="position:relative; display:flex; align-items:center; justify-content: center; background:#f8f9fa; padding:4px; border-radius:6px; border:1px solid #eee; width: 60px; height: 32px;">
+                        <img src="${brandLogosrc}" class="brand-logo-img" 
+                             style="${brandImgStyle}" 
                              onerror="this.style.display='none'; this.nextElementSibling.style.display='block'; const wand = this.parentNode.querySelector('.brand-magic'); if(wand && ${p.brand && p.brand !== 'Otros' ? 'true' : 'false'}) wand.style.display='flex';">
                         <span style="display:none; font-size:10px; font-weight:600; color:#999; text-transform:uppercase;">${p.brand || 'S/M'}</span>
                         <div class="brand-magic" onclick='event.stopPropagation(); openImageWizard(${JSON.stringify(p.brand)}, "", "brand")' 
@@ -2707,8 +2757,9 @@
                             </div>
                         ` : ''}
 
-                        <div class="card-brand" data-brand="${p.brand || 'UNK'}">
-                            <img src="${brandLogosrc}" style="max-height: 18px; max-width: 60px; object-fit: contain;" 
+                        <div class="brand-logo-pill" data-brand="${p.brand || 'UNK'}">
+                            <img src="${brandLogosrc}" class="brand-logo-img" 
+                                 style="${brandImgStyle}"
                                  onerror="this.outerHTML='<span style=\'font-size:10px; font-weight:800; color:var(--apple-blue)\'>${p.brand}</span>'; const wand = this.parentNode ? this.parentNode.querySelector('.brand-magic') : null; if(wand && ${p.brand && p.brand !== 'Otros' ? 'true' : 'false'}) wand.style.display='flex';">
                             <div class="brand-magic" onclick='event.stopPropagation(); openImageWizard(${JSON.stringify(p.brand)}, "", "brand")' 
                                  style="display:none; position:absolute; top:-5px; right:-5px; background:#ff2d55; color:white; width:14px; height:14px; border-radius:50%; display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:7px; border:1px solid white; z-index: 3;">
@@ -2776,9 +2827,9 @@
                 description
             };
 
-            const isEdit = products.find(p => p.id === id);
+            const isEdit = editingId !== null;
             const method = isEdit ? 'PUT' : 'POST';
-            const url = isEdit ? `/api/products/${id}` : '/api/products';
+            const url = isEdit ? `/api/products/${editingId}` : '/api/products';
 
             const res = await fetch(url, { method, headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
             if (!res.ok) {
@@ -2821,6 +2872,7 @@
         }
 
         function newProduct() {
+            editingId = null;
             document.getElementById('modalTitle').innerText = "Nuevo Producto";
             document.getElementById('p_id').value = ""; document.getElementById('p_id').disabled = false;
             document.getElementById('p_name').value = ""; document.getElementById('p_brand').value = "";
@@ -2831,8 +2883,9 @@
         }
 
         function editProduct(p) {
+            editingId = p.id;
             document.getElementById('modalTitle').innerText = "Editar Producto";
-            document.getElementById('p_id').value = p.id; document.getElementById('p_id').disabled = true;
+            document.getElementById('p_id').value = p.id; document.getElementById('p_id').disabled = false;
             document.getElementById('p_name').value = p.name;
             document.getElementById('p_brand').value = p.brand || "";
             document.getElementById('p_category').value = p.category;
@@ -3392,16 +3445,20 @@
         const originalSave = saveProduct;
         saveProduct = async function () {
             const id = document.getElementById('p_id').value;
-            // Capturar estado ANTES de que el original lo cambie
-            const existingProduct = products.find(p => p.id === id);
+            // Capturar estado ANTES de que el original lo cambie usando el editingId
+            const existingProduct = editingId ? products.find(p => p.id === editingId) : null;
             const backup = existingProduct ? JSON.parse(JSON.stringify(existingProduct)) : null;
 
             try {
                 await originalSave(); // Ejecutar guardado real
 
                 // Si el originalSave terminó sin errores, procedemos al log
-                if (existingProduct) {
-                    auditManager.logAction('update', `Actualizado: ${id}`, document.getElementById('p_name').value, backup);
+                if (editingId) {
+                    let logMsg = `Actualizado: ${id}`;
+                    if (id !== editingId) {
+                        logMsg = `Código modificado: ${editingId} ➔ ${id}`;
+                    }
+                    auditManager.logAction('update', logMsg, document.getElementById('p_name').value, backup);
                 } else {
                     auditManager.logAction('create', `Creado: ${id}`, document.getElementById('p_name').value);
                 }
@@ -3661,6 +3718,10 @@
             if (view === 'catalog') {
                 document.getElementById('viewCatalog').classList.add('active');
                 document.getElementById('navCatalog').classList.add('active');
+            } else if (view === 'brands') {
+                document.getElementById('viewBrands').classList.add('active');
+                document.getElementById('navBrands').classList.add('active');
+                loadBrandSettings();
             } else {
                 document.getElementById('viewSales').classList.add('active');
                 document.getElementById('navSales').classList.add('active');
@@ -3671,6 +3732,119 @@
 
         // Inicializar auditoría
         auditManager.render();
+
+        // --- BRAND CUSTOMIZATION LOGIC ---
+        let brandSettings = [];
+
+        async function loadBrandSettings() {
+            const res = await fetch('/api/brands');
+            const data = await res.json();
+            brandSettings = data.data || [];
+            renderBrandsTable();
+        }
+
+        function renderBrandsTable() {
+            const tbody = document.getElementById('brandsTableBody');
+            const uniqueBrands = [...new Set(products.map(p => p.brand).filter(b => b && b !== 'Otros'))];
+            document.getElementById('brandCount').innerText = uniqueBrands.length;
+
+            tbody.innerHTML = '';
+            uniqueBrands.forEach(brandName => {
+                const setting = brandSettings.find(s => s.id === brandName) || {
+                    id: brandName,
+                    name: brandName,
+                    logo: `/assets/${brandName.toLowerCase().replace(/[^a-z0-9]/g, '')}.png`,
+                    scale: 1.0,
+                    offset_y: 0,
+                    color: '#0071e3'
+                };
+
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>
+                        <div class="brand-logo-pill" style="position:static; margin:0 auto; box-shadow:none; border:1px solid #ddd; background:white;">
+                            <img src="${setting.logo}" style="max-height: ${15 * setting.scale}px; transform:translateY(${setting.offset_y}px); max-width:60px; object-fit:contain;">
+                        </div>
+                    </td>
+                    <td><b>${brandName}</b></td>
+                    <td>
+                        <div style="display:flex; flex-direction:column; gap:8px;">
+                            <div style="display:flex; align-items:center; gap:10px;">
+                                <span style="font-size:11px; width:45px;">Escala:</span>
+                                <input type="range" min="0.5" max="1.8" step="0.1" value="${setting.scale}" 
+                                    oninput="updateBrandPreview(this, '${brandName}', 'scale')" style="flex:1">
+                                <span style="font-size:11px; width:25px;">${setting.scale}</span>
+                            </div>
+                            <div style="display:flex; align-items:center; gap:10px;">
+                                <span style="font-size:11px; width:45px;">Ajuste Y:</span>
+                                <input type="range" min="-10" max="10" step="1" value="${setting.offset_y}" 
+                                    oninput="updateBrandPreview(this, '${brandName}', 'offset_y')" style="flex:1">
+                                <span style="font-size:11px; width:25px;">${setting.offset_y}</span>
+                            </div>
+                            <div style="display:flex; align-items:center; gap:10px;">
+                                <span style="font-size:11px; width:45px;">Color:</span>
+                                <input type="color" value="${setting.color}" 
+                                    oninput="updateBrandPreview(this, '${brandName}', 'color')" style="width:100%; height:20px; border:none; padding:0; background:none;">
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <button class="primary" onclick="saveBrandConfig('${brandName}', this)" style="padding:6px 12px; font-size:12px;">
+                            <i class="fa-solid fa-floppy-disk"></i> GUARDAR
+                        </button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function updateBrandPreview(input, brandId, field) {
+            const val = input.value;
+            input.nextElementSibling.innerText = val;
+
+            // Find the preview img in the same row
+            const img = input.closest('tr').querySelector('img');
+            const scaleInput = input.closest('tr').querySelectorAll('input')[0];
+            const offsetInput = input.closest('tr').querySelectorAll('input')[1];
+
+            if (field === 'scale' || field === 'offset_y') {
+                img.style.maxHeight = `${15 * scaleInput.value}px`;
+                img.style.transform = `translateY(${offsetInput.value}px)`;
+            }
+        }
+
+        async function saveBrandConfig(brandId, btn) {
+            const tr = btn.closest('tr');
+            const inputs = tr.querySelectorAll('input');
+            const body = {
+                name: brandId,
+                logo: `/assets/${brandId.toLowerCase().replace(/[^a-z0-9]/g, '')}.png`,
+                scale: parseFloat(inputs[0].value),
+                offset_y: parseInt(inputs[1].value),
+                color: inputs[2].value
+            };
+
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i>';
+
+            const res = await fetch(`/api/brands/${brandId}`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(body)
+            });
+
+            if (res.ok) {
+                btn.innerHTML = '<i class="fa-solid fa-check"></i> OK';
+                setTimeout(() => {
+                    btn.innerHTML = '<i class="fa-solid fa-floppy-disk"></i> GUARDAR';
+                    btn.disabled = false;
+                }, 1500);
+            } else {
+                alert("Error al guardar");
+                btn.disabled = false;
+                btn.innerHTML = '<i class="fa-solid fa-floppy-disk"></i> GUARDAR';
+            }
+        }
 
         loadProducts();
     </script>
