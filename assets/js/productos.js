@@ -3321,11 +3321,11 @@ const productsDB = [
   },
   {
     "id": "V94691",
-    "category": "OTROS",
+    "category": "papeleria",
     "brand": "VERBATIM",
     "name": "CD-R VERBATIM 52X CAMPANA 50 PZAS",
     "description": "CD-R VERBATIM 52X CAMPANA 50 PZAS",
-    "image": ""
+    "image": "assets/images/products/toner/V94691.webp"
   },
   {
     "id": "V94554",
@@ -3333,7 +3333,7 @@ const productsDB = [
     "brand": "VERBATIM",
     "name": "CD-R VERBATIM 52X CAMPANA/100",
     "description": "CD-R VERBATIM 52X CAMPANA/100",
-    "image": ""
+    "image": "assets/images/products/toner/V94554.webp"
   },
   {
     "id": "V94776",
@@ -3341,7 +3341,7 @@ const productsDB = [
     "brand": "VERBATIM",
     "name": "CD-R VERBATIM 80M 52X SLIM 700MB",
     "description": "CD-R VERBATIM 80M 52X SLIM 700MB",
-    "image": ""
+    "image": "assets/images/products/toner/V94776.webp"
   },
   {
     "id": "V95005",
@@ -3349,7 +3349,7 @@ const productsDB = [
     "brand": "VERBATIM",
     "name": "CD-R VERBATIM IMPRIMIBLE CAMPANA/50",
     "description": "CD-R VERBATIM IMPRIMIBLE CAMPANA/50",
-    "image": ""
+    "image": "assets/images/products/toner/V95005.webp"
   },
   {
     "id": "V95161",
@@ -3665,11 +3665,11 @@ const productsDB = [
   },
   {
     "id": "TU182C48X150",
-    "category": "OTROS",
+    "category": "papeleria",
     "brand": "TUK",
     "name": "CINTA TUK EMPAQUE CANELA .48 X 150 MTS C/6",
     "description": "CINTA TUK EMPAQUE CANELA .48 X 150 MTS C/6",
-    "image": ""
+    "image": "assets/images/products/toner/TU182C48X150.webp"
   },
   {
     "id": "Z800300350LA",
@@ -7774,11 +7774,11 @@ const productsDB = [
   },
   {
     "id": "RLSMART1500LCD",
-    "category": "OTROS",
+    "category": "accesorios",
     "brand": "TRIPP LITE",
     "name": "No Break Tripp Lite by Eaton SMART1500LCD Línea Interactiva, 900W, 1.500VA, Entrada 75V - 147V, Salida 115V - 120V, 8 Salidas",
     "description": "No Break Tripp Lite by Eaton SMART1500LCD Línea Interactiva, 900W, 1.500VA, Entrada 75V - 147V, Salida 115V - 120V, 8 Salidas",
-    "image": ""
+    "image": "assets/images/products/toner/RLSMART1500LCD.webp"
   },
   {
     "id": "SMSBNB1200",
@@ -8741,11 +8741,11 @@ const productsDB = [
   },
   {
     "id": "V49976",
-    "category": "OTROS",
+    "category": "papeleria",
     "brand": "VERBATIM",
     "name": "SOBRE PAPEL VERBATIM CON VENTANA P/CD DVD PAQ 100",
     "description": "SOBRE PAPEL VERBATIM CON VENTANA P/CD DVD PAQ 100",
-    "image": ""
+    "image": "assets/images/products/toner/V49976.webp"
   },
   {
     "id": "PC-332978",
@@ -8989,11 +8989,11 @@ const productsDB = [
   },
   {
     "id": "TPTL-SG1016D",
-    "category": "OTROS",
+    "category": "accesorios",
     "brand": "TPLINK",
     "name": "Switch TP-Link Gigabit Ethernet TL-SG1016D, 16 Puertos 10/100/1000Mbps, 32Gbit/s, 8000 Entradas – No Administrable",
     "description": "Switch TP-Link Gigabit Ethernet TL-SG1016D, 16 Puertos 10/100/1000Mbps, 32Gbit/s, 8000 Entradas – No Administrable",
-    "image": ""
+    "image": "assets/images/products/toner/TPTL_SG1016D.webp"
   },
   {
     "id": "NXNE-170",
@@ -13783,11 +13783,11 @@ const productsDB = [
   },
   {
     "id": "UG90576",
-    "category": "OTROS",
+    "category": "accesorios",
     "brand": "Ugreen",
     "name": "Ugreen Cable USB-A Macho - USB-A Macho, 3 Metros",
     "description": "Ugreen Cable USB-A Macho - USB-A Macho, 3 Metros",
-    "image": ""
+    "image": "assets/images/products/toner/UG90576.webp"
   },
   {
     "id": "ADTASU800SS-512GT-C",

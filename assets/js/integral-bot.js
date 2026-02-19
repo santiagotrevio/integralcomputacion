@@ -457,6 +457,44 @@
             addMessage(`¡Sí facturamos! ✍️ Precios netos. Envíanos tu constancia al pedir.`, 'bot'); showSuggestions(); return;
         }
 
+        // Market Intelligence Intent (New Agentic Capability)
+        if (lower.includes('tendencia') || lower.includes('oportunidad') || lower.includes(' que se vende') || lower.includes('mas buscado') || lower.includes('hotlist')) {
+            addMessage(`Analizando tendencias en Amazon MX y Mercado Libre... 📊`, 'bot');
+            showTyping(true);
+
+            fetch('/api/market-trends')
+                .then(res => res.json())
+                .then(data => {
+                    showTyping(false);
+                    // Determinar qué categoría mostrar basándose en la pregunta o por defecto 'computo'
+                    let targetCat = 'computo';
+                    if (lower.includes('papel') || lower.includes('utiles')) targetCat = 'papeleria';
+                    if (lower.includes('toner') || lower.includes('tinta') || lower.includes('cartucho')) targetCat = 'toner';
+
+                    const intel = data[targetCat];
+                    if (!intel || intel.length === 0) {
+                        addMessage("No tengo datos frescos sobre tendencias en este momento, pero te puedo decir lo que más buscan nuestros clientes.", 'bot');
+                        return;
+                    }
+
+                    const topItem = intel[0];
+                    const catLabel = targetCat === 'papeleria' ? 'Papelería' : (targetCat === 'toner' ? 'Consumibles' : 'Tecnología');
+
+                    let msg = `En <b>${catLabel}</b>, lo que más se está moviendo hoy en México es:<br><br>`;
+                    msg += `🚀 <b>${topItem.b} ${topItem.n}</b><br>`;
+                    msg += `📈 Demanda estimada: ${topItem.demanda}<br>`;
+                    msg += `💰 Precio mercado: ${topItem.minP.toLocaleString('es-MX', { style: 'currency', currency: 'MXN' })}<br><br>`;
+                    msg += `<em>¿Te gustaría que busquemos este producto o algo similar en nuestro stock?</em>`;
+
+                    addMessage(msg, 'bot');
+                })
+                .catch(err => {
+                    showTyping(false);
+                    addMessage("Mmm, mi conexión con el radar de mercado está intermitente. Pero dime, ¿qué producto estás buscando tú específicamente?", 'bot');
+                });
+            return;
+        }
+
         // Human Handoff Intent
         if (lower.includes('humano') || lower.includes('persona') || lower.includes('asesor') || lower.includes('gente')) {
             addMessage(`¡Claro! 🙋‍♂️ A veces es mejor hablar con una persona real.`, 'bot');

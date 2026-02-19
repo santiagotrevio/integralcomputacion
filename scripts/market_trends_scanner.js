@@ -51,7 +51,7 @@ async function runIndependentScan() {
 
                 const data = await page.evaluate((catId) => {
                     const cards = Array.from(document.querySelectorAll('.ui-search-result__wrapper, .poly-card'));
-                    return cards.slice(0, 10).map(card => {
+                    return cards.slice(0, 20).map(card => {
                         const title = card.querySelector('h2, .ui-search-item__title, .poly-component__title')?.innerText;
                         const price = card.querySelector('.andes-money-amount__fraction')?.innerText;
 

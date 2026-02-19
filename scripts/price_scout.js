@@ -26,19 +26,23 @@ async function scoutPrice(model, name = "") {
         let keywords = [];
 
         const catMap = {
-            'toner': { keys: ['toner', 'polvo', 'cartucho', 'laserjet'], bad: ['papel', 'hoja', 'disco', 'dvd', 'collarin'] },
-            'papel': { keys: ['papel', 'etiqueta', 'bond', 'rollo', 'termica', 'z-perform'], bad: ['toner', 'tinta', 'cartucho', 'disco', 'dvd', 'collarin'] },
+            'papel': { keys: ['papel', 'etiqueta', 'bond', 'rollo', 'termica', 'z-perform', 'libreta'], bad: ['toner', 'tinta', 'cartucho', 'disco', 'dvd', 'collarin'] },
+            'toner': { keys: ['toner', 'polvo', 'cartucho', 'laserjet', 'tambor', 'drum'], bad: ['papel', 'hoja', 'disco', 'dvd', 'collarin'] },
             'disco': { keys: ['dvd', 'cd', 'disco', 'verbatim', 'sony'], bad: ['toner', 'papel', 'etiqueta', 'mouse'] },
             'mouse': { keys: ['mouse', 'gamer', 'optico', 'alambrico', 'inalambrico', 'mou'], bad: ['toner', 'papel', 'etiqueta', 'refaccion'] },
             'laptop': { keys: ['laptop', 'notebook', 'computadora', 'portatil'], bad: ['toner', 'cartucho', 'papel'] },
             'tinta': { keys: ['tinta', 'ink', 'cartucho', 'ecotank'], bad: ['toner', 'papel', 'disco'] }
         };
 
+        // Detección de categoría mejorada (priorizada)
         for (const [cat, data] of Object.entries(catMap)) {
             if (data.keys.some(k => n.includes(k))) {
-                category = cat;
-                keywords = data.keys;
-                break;
+                // Verificar que no contenga palabras "bad" de esta categoría
+                if (!data.bad.some(b => n.includes(b))) {
+                    category = cat;
+                    keywords = data.keys;
+                    break;
+                }
             }
         }
 
