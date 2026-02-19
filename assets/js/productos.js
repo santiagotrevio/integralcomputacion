@@ -10104,8 +10104,8 @@ const productsDB = [
     "id": "BRTN920XXL",
     "category": "toner",
     "brand": "Brother",
-    "name": "TONER BROTHER TN920XXL NEGRO, RENDIMIENTO 11,000 PAGINAS",
-    "description": "TONER BROTHER TN920XXL NEGRO, RENDIMIENTO 11,000 PAGINAS",
+    "name": "TONER BROTHER TN920XXL NEGRO, SUPER ALTO RENDIMIENTO 11,000 PAGINAS",
+    "description": "TONER BROTHER TN920XXL NEGRO, SUPER ALTO RENDIMIENTO 11,000 PAGINAS",
     "image": "assets/images/products/toner/BRTN920XXL.webp"
   },
   {
