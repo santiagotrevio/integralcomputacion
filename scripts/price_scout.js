@@ -1,8 +1,8 @@
 const puppeteer = require('puppeteer');
 
 /**
- * RADAR SNIPER v2.3
- * Inteligencia de Mercado Avanzada con Triple Validación de Identidad.
+ * RADAR SNIPER v3.1 - "Identity Armor"
+ * Sistema de inteligencia de mercado con validación de ADN de categoría y búsqueda multitérmino.
  */
 async function scoutPrice(model, name = "") {
     const browser = await puppeteer.launch({
@@ -19,122 +19,133 @@ async function scoutPrice(model, name = "") {
         const rawModel = model.trim().toUpperCase();
         const rawName = name.trim();
         const norm = (str) => (str || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
-        const normName = norm(rawName);
 
-        // 1. EXTRACCIÓN DE MARCA Y CATEGORÍA
-        const knownBrands = ['zebra', 'hp', 'xerox', 'lexmark', 'samsung', 'brother', 'epson', 'canon', 'sony', 'verbatim', 'kingston', 'adata', 'sandisk', 'logitech', 'dell', 'lenovo', 'techzone', 'teros', 'acteck', 'vorago'];
-        let detectedBrand = knownBrands.find(b => normName.includes(b)) || "";
+        // --- 1. EXTRACCIÓN DE IDENTIDAD ---
+        const n = norm(rawName);
+        let category = "general";
+        let keywords = [];
 
-        // Identificar "Palabra Clave Maestra" (DVD, Mouse, Toner, Papel)
-        let masterKeyword = "";
-        if (normName.includes("toner")) masterKeyword = "toner";
-        else if (normName.includes("etiqueta") || normName.includes("papel")) masterKeyword = "etiqueta";
-        else if (normName.includes("dvd") || normName.includes("cd")) masterKeyword = "dvd";
-        else if (normName.includes("mouse") || normName.includes("mou")) masterKeyword = "mouse";
-        else if (normName.includes("laptop")) masterKeyword = "laptop";
+        const catMap = {
+            'toner': { keys: ['toner', 'polvo', 'cartucho', 'laserjet'], bad: ['papel', 'hoja', 'disco', 'dvd', 'collarin'] },
+            'papel': { keys: ['papel', 'etiqueta', 'bond', 'rollo', 'termica', 'z-perform'], bad: ['toner', 'tinta', 'cartucho', 'disco', 'dvd', 'collarin'] },
+            'disco': { keys: ['dvd', 'cd', 'disco', 'verbatim', 'sony'], bad: ['toner', 'papel', 'etiqueta', 'mouse'] },
+            'mouse': { keys: ['mouse', 'gamer', 'optico', 'alambrico', 'inalambrico', 'mou'], bad: ['toner', 'papel', 'etiqueta', 'refaccion'] },
+            'laptop': { keys: ['laptop', 'notebook', 'computadora', 'portatil'], bad: ['toner', 'cartucho', 'papel'] },
+            'tinta': { keys: ['tinta', 'ink', 'cartucho', 'ecotank'], bad: ['toner', 'papel', 'disco'] }
+        };
 
-        // 2. CONSTRUCCIÓN DE BÚSQUEDA ROBUSTA
-        // Si buscamos Z10026382 solo, sale basura. Si buscamos "Zebra Z10026382" sale el producto.
+        for (const [cat, data] of Object.entries(catMap)) {
+            if (data.keys.some(k => n.includes(k))) {
+                category = cat;
+                keywords = data.keys;
+                break;
+            }
+        }
+
+        const brandKeywords = ['hp', 'zebra', 'techzone', 'teros', 'logitech', 'sony', 'verbatim', 'kingston', 'xerox', 'lexmark', 'samsung', 'brother', 'epson', 'canon'];
+        const detectedBrand = brandKeywords.find(b => n.includes(b)) || "";
+
+        // --- 2. BÚSQUEDA INTELIGENTE CON FALLBACK ---
+        let masterKeyword = category !== "general" ? category : (keywords.length > 0 ? keywords[0] : "");
+        if (masterKeyword === "general") masterKeyword = "";
+
         const searchTerms = [
-            `${detectedBrand} ${rawModel} ${masterKeyword}`.trim(),
-            rawModel
-        ].filter((v, i, a) => v.length > 2 && a.indexOf(v) === i);
+            `${detectedBrand} ${rawModel} ${masterKeyword} precio`.trim(),
+            `${rawModel} ${masterKeyword} precio`.trim()
+        ].filter((v, i, a) => v.length > 3 && a.indexOf(v) === i);
 
-        console.log(`📡 Radar Sniper 2.3 | Objetivo: ${rawModel} (${masterKeyword}) | Marca: ${detectedBrand || 'Indeterminada'}`);
+        console.log(`📡 Radar Sniper 3.1 | Identidad: ${category.toUpperCase()} | Marca: ${detectedBrand.toUpperCase()}`);
 
-        let allResults = [];
+        let allItems = [];
 
         for (const term of searchTerms) {
+            console.log(`🔍 Escaneando: "${term}"...`);
             const page = await browser.newPage();
             await page.setUserAgent('Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36');
-            console.log(`🔍 Escaneando: "${term}"...`);
 
             try {
-                const query = encodeURIComponent(term);
-                // Realizar búsqueda WEB (más confiable para SKUs técnicos)
-                await page.goto(`https://www.google.com/search?q=${query}+precio&hl=es-MX`, { waitUntil: 'domcontentloaded', timeout: 10000 });
+                const url = `https://www.google.com/search?q=${encodeURIComponent(term)}&hl=es-MX`;
+                await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 15000 });
 
                 const results = await page.evaluate(() => {
                     const items = [];
-                    // Analizar bloques de resultados de búsqueda y snippets
-                    document.querySelectorAll('.g, .MjjYud, .Sr66ed').forEach(el => {
-                        const titleEl = el.querySelector('h3');
-                        const linkEl = el.querySelector('a');
-                        const text = el.innerText;
+                    // 1. Shopping (Carrusel/Ads)
+                    document.querySelectorAll('.mnr-c, .pla-unit, .commercial-unit-desktop-top').forEach(el => {
+                        const title = el.querySelector('[role="heading"], .pla-unit-title, .mB697c')?.innerText;
+                        const priceMatch = el.innerText.match(/(?:MXN|\$)\s?([\d,]+(?:\.\d+)?)/i);
+                        const store = el.querySelector('.LbUacb, .pla-unit-seller, .pj79ce')?.innerText;
+                        const link = el.querySelector('a')?.href;
+                        if (title && priceMatch) {
+                            items.push({
+                                title,
+                                price: parseFloat(priceMatch[1].replace(/,/g, '')),
+                                store: store || "Shopping",
+                                url: link || '',
+                                source: 'shop'
+                            });
+                        }
+                    });
 
-                        // Capturar precio (formatos: $1,234.00, MXN 500, etc)
-                        const match = text.match(/(?:MXN|\$)\s?([\d,]+(?:\.\d+)?)/i);
-
-                        if (titleEl && linkEl && match) {
-                            const val = parseFloat(match[1].replace(/,/g, ''));
-                            if (val > 20) {
-                                items.push({
-                                    title: titleEl.innerText,
-                                    price: val,
-                                    url: linkEl.href,
-                                    text: text // Para validación de contexto
-                                });
-                            }
+                    // 2. Orgánicos
+                    document.querySelectorAll('.g, .MjjYud').forEach(el => {
+                        const title = el.querySelector('h3')?.innerText;
+                        const link = el.querySelector('a')?.href;
+                        const priceMatch = el.innerText.match(/(?:MXN|\$)\s?([\d,]+(?:\.\d+)?)/i);
+                        if (title && link && priceMatch) {
+                            items.push({
+                                title,
+                                price: parseFloat(priceMatch[1].replace(/,/g, '')),
+                                store: "Web",
+                                url: link,
+                                source: 'web'
+                            });
                         }
                     });
                     return items;
                 });
-                allResults.push(...results);
+                allItems.push(...results);
             } catch (e) {
-                console.log(`⚠️ Error en "${term}":`, e.message);
+                console.log(`⚠️ Error en término "${term}":`, e.message);
             } finally {
                 await page.close();
             }
+            if (allItems.length >= 8) break; // Si ya tenemos suficientes con el primer término, terminamos
         }
 
-        // --- FILTRO DE RELEVANCIA QUIRÚRGICO (PUNTAJE) ---
-        const finalResults = [];
-        const seen = new Set();
+        // --- 3. FILTRO DE ADN (QUIRÚRGICO) ---
+        const finalResultsMap = new Map();
         const m = norm(rawModel);
 
-        allResults.forEach(res => {
+        allItems.forEach(item => {
             let score = 0;
-            const t = norm(res.title);
-            const body = norm(res.text);
+            const t = norm(item.title);
 
-            // 1. ¿Contiene el modelo exacto? (Vital)
-            if (t.includes(m) || body.includes(m)) score += 80;
+            // A. Coincidencia de Modelo
+            const cleanM = m.replace(/[^a-z0-9]/g, '');
+            const cleanT = t.replace(/[^a-z0-9]/g, '');
+            if (t.includes(m) || cleanT.includes(cleanM)) score += 70;
 
-            // 2. ¿Contiene la palabra clave maestra? (Evita confusiones)
-            if (masterKeyword && (t.includes(masterKeyword) || body.includes(masterKeyword))) score += 40;
+            // B. ADN de Categoría
+            const currentCat = catMap[category] || { keys: [], bad: [] };
+            if (currentCat.keys.some(k => t.includes(k))) score += 30;
+            if (currentCat.bad.some(b => t.includes(b))) score -= 500; // BLOQUEO
 
-            // 3. ¿Contiene la marca?
-            if (detectedBrand && (t.includes(detectedBrand) || body.includes(detectedBrand))) score += 20;
-
-            // PENALIZACIONES (Los "Impostores")
-            // Si buscamos algo que NO es toner, y el resultado es toner -> CHAO.
-            if (masterKeyword !== "toner" && (t.includes("toner") || body.includes("toner") || t.includes("polvo") || body.includes("polvo"))) score -= 300;
-            if (masterKeyword !== "etiqueta" && (t.includes("etiqueta") || body.includes("etiqueta"))) score -= 300;
-
-            // Si el puntaje es alto, es un match real
             if (score >= 60) {
-                let store = "Tienda";
-                try {
-                    const host = new URL(res.url).hostname.replace('www.', '').split('.')[0].toUpperCase();
-                    store = host;
-                } catch (e) { }
-
-                const key = `${store}_${Math.round(res.price / 10)}`;
-                if (!seen.has(key)) {
-                    seen.add(key);
-                    finalResults.push({
-                        title: res.title.substring(0, 100),
-                        price: res.price,
-                        priceText: `MXN ${res.price.toLocaleString('es-MX')}`,
-                        store: store,
-                        url: res.url,
+                if (item.store === "Web" || item.store === "Shopping") {
+                    try { item.store = new URL(item.url).hostname.replace('www.', '').split('.')[0].toUpperCase(); } catch (e) { }
+                }
+                const key = `${item.store}_${Math.round(item.price / 10)}`;
+                if (!finalResultsMap.has(key)) {
+                    finalResultsMap.set(key, {
+                        ...item,
+                        priceText: `MXN ${item.price.toLocaleString('es-MX')}`,
                         score: score
                     });
                 }
             }
         });
 
-        // Ordenar: Mayores precios primero (Margen competitivo)
+        const finalResults = Array.from(finalResultsMap.values());
         finalResults.sort((a, b) => b.price - a.price);
 
         await browser.close();
@@ -146,10 +157,8 @@ async function scoutPrice(model, name = "") {
     }
 }
 
-// CLI Support
 if (require.main === module) {
-    const model = process.argv[2], name = process.argv[3] || "";
-    if (model) scoutPrice(model, name).then(res => console.log(JSON.stringify(res, null, 2)));
+    const m = process.argv[2], n = process.argv[3];
+    if (m) scoutPrice(m, n).then(res => console.log(JSON.stringify(res, null, 2)));
 }
-
 module.exports = scoutPrice;
