@@ -431,7 +431,27 @@ router.get('/clients', authMiddleware, (req, res) => {
     });
 });
 
-// Guardar cotización y cliente
+// Editar cliente
+router.put('/clients/:id', authMiddleware, (req, res) => {
+    const { name, email, phone } = req.body;
+    if (!name) return res.status(400).json({ error: 'Nombre requerido' });
+    db.run('UPDATE clients SET name=?, email=?, phone=? WHERE id=?',
+        [name, email || '', phone || '', req.params.id],
+        function (err) {
+            if (err) return res.status(500).json({ error: err.message });
+            res.json({ success: true });
+        });
+});
+
+// Eliminar cliente (y sus cotizaciones si se desea)
+router.delete('/clients/:id', authMiddleware, (req, res) => {
+    db.run('DELETE FROM clients WHERE id=?', [req.params.id], function (err) {
+        if (err) return res.status(500).json({ error: err.message });
+        res.json({ success: true, changes: this.changes });
+    });
+});
+
+
 router.post('/quotes', authMiddleware, (req, res) => {
     const { quoteId, clientName, clientEmail, clientPhone, userId, total, items, notes, validity } = req.body;
 
