@@ -195,6 +195,26 @@
             display: block;
         }
 
+        /* Brand badge for LIST VIEW — top-left corner of the row card, not inside thumbnail */
+        .brand-logo-pill-row {
+            position: absolute;
+            top: -1px;
+            left: 12px;
+            background: white;
+            padding: 0 12px;
+            border-radius: 0 0 16px 16px;
+            /* tab hanging from top */
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.07);
+            height: 28px;
+            min-width: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #e8ecf0;
+            border-top: none;
+            z-index: 5;
+        }
+
         /* ============================================================
            CARD CONTENT — matching admin audit-card content styles
            ============================================================ */
@@ -1927,10 +1947,15 @@
                 } else {
                     card.className = 'catalog-item-row';
                     card.innerHTML = `
-                        <div class="prod-image" style="position:relative; overflow:hidden; cursor:zoom-in;" onclick="openLightbox('${imgSrc}')">
+                        <div class="prod-image" onclick="openLightbox('${imgSrc}')" style="cursor:zoom-in;">
                             ${imgHtml}
-                            ${badgeHtml}
                         </div>
+                        ${brandLogoUrl && brandName !== 'Otros' ? `
+                        <div class="brand-logo-pill-row">
+                            <img src="${brandLogoUrl}" class="brand-logo-img"
+                                 style="${brandImgStyle}"
+                                 onerror="this.parentNode.style.display='none'">
+                        </div>` : ''}
                         <div class="prod-info">
                             <div class="card-id">
                                 ${prod.id}
