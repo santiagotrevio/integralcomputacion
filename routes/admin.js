@@ -476,7 +476,7 @@ router.post('/quotes', authMiddleware, (req, res) => {
 // Listar historial de cotizaciones
 router.get('/quotes', authMiddleware, (req, res) => {
     const { status = 'active', userId, clientName } = req.query;
-    let query = `SELECT id, quote_id, client_name, client_company, client_email, client_phone, user_id, total, notes, validity, status, created_at
+    let query = `SELECT id, quote_id, client_name, client_company, client_email, client_phone, user_id, total, items, notes, validity, status, created_at
                  FROM quotes WHERE status = ?`;
     const params = [status];
     if (userId) {
@@ -493,6 +493,22 @@ router.get('/quotes', authMiddleware, (req, res) => {
         res.json({ data: rows });
     });
 });
+
+// Obtener cotización individual por quote_id
+router.get('/quotes/:id', authMiddleware, (req, res) => {
+    const { id } = req.params;
+    db.get(
+        `SELECT id, quote_id, client_name, client_company, client_email, client_phone, user_id, total, items, notes, validity, status, created_at
+         FROM quotes WHERE quote_id = ?`,
+        [id],
+        (err, row) => {
+            if (err) return res.status(500).json({ error: err.message });
+            if (!row) return res.status(404).json({ error: 'Cotización no encontrada' });
+            res.json({ data: row });
+        }
+    );
+});
+
 
 
 // Cambiar estado de una cotización (archivar / papelera / restaurar)
