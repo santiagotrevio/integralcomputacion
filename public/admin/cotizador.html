@@ -2237,10 +2237,24 @@
     html, body { margin: 0; padding: 0; background: white;
                  font-family: -apple-system, 'Helvetica Neue', Arial, sans-serif; }
     ${css}
-    #printView { display: block !important; position: static !important;
-                 width: auto !important; height: auto !important;
-                 overflow: visible !important; }
+    /* ── Override: resetear restricciones de la app que cortan el PDF ── */
+    html, body {
+      max-width: none !important;
+      width: 100% !important;
+      overflow: visible !important;
+      padding: 0 !important;
+      margin: 0 !important;
+    }
+    #printView {
+      display: block !important;
+      position: static !important;
+      width: auto !important;
+      max-width: none !important;
+      height: auto !important;
+      overflow: visible !important;
+    }
   </style>
+
 </head>
 <body><div id="printView">${pagesHtml}</div></body>
 </html>`;
