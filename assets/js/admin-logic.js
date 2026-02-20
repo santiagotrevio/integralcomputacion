@@ -1877,6 +1877,26 @@ function renderBrandsTable() {
                             </div>
                         </div>
                     </td>
+                    <td style="background: #f1f5f980; padding: 20px; text-align:center;">
+                        <!-- MOCKUP ADMIN -->
+                        <div style="font-size:9px; font-weight:800; color:#999; margin-bottom:8px; text-transform:uppercase; letter-spacing:0.5px;">Vista Gestor (Admin)</div>
+                        <div class="audit-card" style="width:160px; margin:0 auto; transform:scale(0.85); transform-origin:top center; pointer-events:none;">
+                            <div style="height:100px; background:#fdfdfd; display:flex; align-items:center; justify-content:center; border-bottom:1px solid #eee; position:relative;">
+                                 <i class="fa-solid fa-box" style="font-size:24px; opacity:0.1;"></i>
+                                 <div class="brand-logo-pill" style="top:10px; right:-10px; height:32px; width:80px; padding:0; overflow:hidden;">
+                                     <img src="${brandImgPath}" class="brand-prev-img" style="max-height: ${15 * setting.scale}px; transform:translate(${setting.offset_x || 0}px, ${setting.offset_y || 0}px); max-width:70px; object-fit:contain;">
+                                 </div>
+                            </div>
+                            <div style="padding:10px; text-align:left;">
+                                <div style="font-size:8px; opacity:0.5;">RTX-4080</div>
+                                <div style="font-size:10px; font-weight:700; border-bottom:1px solid #eee; padding-bottom:5px; margin-bottom:5px;">Tarjeta de Video...</div>
+                                <div style="display:flex; gap:4px;">
+                                    <div style="width:15px; height:15px; border-radius:4px; background:#eee;"></div>
+                                    <div style="width:15px; height:15px; border-radius:4px; background:#eee;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
                 `;
         tbody.appendChild(tr);
     });
@@ -1893,8 +1913,8 @@ function updateBrandPreview(input, brandId, field) {
 
     const imgs = tr.querySelectorAll('.brand-prev-img');
     imgs.forEach(img => {
-        img.style.maxHeight = `${ 15 * scaleInput.value } px`;
-        img.style.transform = `translate(${ xInput.value }px, ${ yInput.value }px)`;
+        img.style.maxHeight = `${15 * scaleInput.value} px`;
+        img.style.transform = `translate(${xInput.value}px, ${yInput.value}px)`;
     });
 
     // Highlight the Save button to indicate changes
@@ -1909,7 +1929,7 @@ async function saveBrandConfig(brandId, btn) {
     const inputs = tr.querySelectorAll('input');
     const body = {
         name: brandId,
-        logo: `/ assets / images / brands / ${ brandId.toLowerCase().replace(/[^a-z0-9]/g, '') }.png`,
+        logo: `/ assets / images / brands / ${brandId.toLowerCase().replace(/[^a-z0-9]/g, '')}.png`,
         scale: parseFloat(inputs[0].value),
         offset_x: parseInt(inputs[1].value),
         offset_y: parseInt(inputs[2].value),
@@ -1919,7 +1939,7 @@ async function saveBrandConfig(brandId, btn) {
     btn.disabled = true;
     btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i>';
 
-    const res = await apiFetch(`/ api / brands / ${ brandId } `, {
+    const res = await apiFetch(`/ api / brands / ${brandId} `, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(body)
@@ -1963,7 +1983,7 @@ async function handleBrandLogoUpload(input, brandName) {
 
             allPlaceholders.forEach(p => p.style.display = 'none');
             allImgs.forEach(img => {
-                img.src = `${ data.url.startsWith('/') ? data.url.replace(/^\//, '../') : '../' + data.url }?v = ${ Date.now() } `;
+                img.src = `${data.url.startsWith('/') ? data.url.replace(/^\//, '../') : '../' + data.url}?v = ${Date.now()} `;
                 img.style.display = 'block';
             });
 
@@ -2027,7 +2047,7 @@ async function renameBrand(oldName, inputEl) {
         // 1. Update all products that have this brand
         const affected = products.filter(p => (p.brand || '').toLowerCase() === oldName.toLowerCase());
         for (const p of affected) {
-            await apiFetch(`/ api / products / ${ p.id } `, {
+            await apiFetch(`/ api / products / ${p.id} `, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ ...p, brand: newName })
@@ -2044,7 +2064,7 @@ async function renameBrand(oldName, inputEl) {
             });
         }
 
-        showToast(`✅ Marca renombrada: "${oldName}" → "${newName}"(${ affected.length } productos)`);
+        showToast(`✅ Marca renombrada: "${oldName}" → "${newName}"(${affected.length} productos)`);
 
         // 3. Reload everything
         await loadProducts();
