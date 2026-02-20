@@ -12,7 +12,11 @@ const PORT = process.env.PORT || 3000;
 // ── Seguridad: solo el dominio propio puede hacer requests ──────────────────────
 const allowedOrigins = process.env.ALLOWED_ORIGIN
     ? process.env.ALLOWED_ORIGIN.split(',')
-    : ['http://localhost:3000', 'http://localhost:3001'];
+    : [
+        'http://localhost:3000',
+        'http://localhost:3001',
+        'https://integral-computacion-production.up.railway.app'
+    ];
 
 app.use(cors({
     origin: (origin, cb) => {
