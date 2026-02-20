@@ -792,12 +792,9 @@
 
             html,
             body {
-                margin: 0 !important;
-                padding: 0 !important;
-                min-height: auto !important;
-                height: auto !important;
+                margin: 0;
+                padding: 0;
                 background: white !important;
-                overflow: visible !important;
             }
 
             body>*:not(#printView) {
@@ -818,20 +815,21 @@
             /* Explicit Multi-Page A4/Letter Structure */
             .pv-page {
                 width: 100%;
-                height: 100vh;
-                padding: 16mm 14mm 16mm 14mm;
+                min-height: 275mm;
+                /* Usar min-height permite que crezca, usando mm ayuda al navegador con Chrome PDF engine */
+                padding: 18mm 14mm 20mm 14mm;
                 box-sizing: border-box;
                 display: flex;
                 flex-direction: column;
                 break-after: page;
                 page-break-after: always;
                 overflow: hidden;
-                margin: 0 !important;
             }
 
             .pv-page:last-child {
-                break-after: avoid !important;
-                page-break-after: avoid !important;
+                break-after: auto !important;
+                page-break-after: auto !important;
+                min-height: auto;
             }
 
             .pv-flex-spacer {
