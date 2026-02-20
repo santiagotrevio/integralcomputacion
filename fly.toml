@@ -1,0 +1,40 @@
+# fly.toml — Integral Computación
+# Generado para Fly.io deployment con SQLite en volumen persistente
+
+app = "integral-computacion"
+primary_region = "mia"   # Miami — más cercano a México
+
+[build]
+  dockerfile = "Dockerfile"
+
+[env]
+  PORT      = "3000"
+  NODE_ENV  = "production"
+  DB_PATH   = "/data/inventario.db"
+
+[http_service]
+  internal_port       = 3000
+  force_https         = true
+  auto_stop_machines  = true
+  auto_start_machines = true
+  min_machines_running = 0
+
+  [http_service.concurrency]
+    type       = "requests"
+    soft_limit = 25
+    hard_limit = 50
+
+# ── Volumen persistente para la base de datos SQLite ─────────────────────────
+# Se crea automáticamente con: fly volumes create inventario_data --region mia --size 1
+[[mounts]]
+  source      = "inventario_data"
+  destination = "/data"
+
+# ── VM size ──────────────────────────────────────────────────────────────────
+# shared-cpu-1x es el tier gratuito (256MB RAM).
+# Si el Price Radar con Puppeteer falla por falta de memoria, escala a:
+#   fly scale vm shared-cpu-1x --memory 512
+[[vm]]
+  memory = "512mb"
+  cpu_kind = "shared"
+  cpus = 1
