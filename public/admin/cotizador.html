@@ -1772,7 +1772,11 @@
 
         function matchCode(code) {
             let p = products.find(pr => pr.id.toUpperCase() === code);
-            if (!p) p = products.find(pr => pr.id.toUpperCase().includes(code) || code.includes(pr.id.toUpperCase()));
+            // Fuzzy match solo si el string es complejo (>= 5 letras y mezcla letras/números) o si parece claramente un código.
+            // Esto evita que "2000" de "C/2000" o "INKJET" liguen productos erróneos.
+            if (!p && code.length >= 5 && /[A-Z]/.test(code) && /[0-9]/.test(code)) {
+                p = products.find(pr => pr.id.toUpperCase().includes(code) || code.includes(pr.id.toUpperCase()));
+            }
             return p || null;
         }
 
