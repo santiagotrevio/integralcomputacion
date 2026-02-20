@@ -859,9 +859,10 @@
             }
 
             .pv-logo {
-                height: 50pt;
-                max-width: 200pt;
+                height: 55pt;
+                max-width: 300pt;
                 object-fit: contain;
+                object-position: left center;
             }
 
             .pv-biz {
@@ -1714,7 +1715,7 @@
         <div class="pv-page">
             ${isFirstPage ? `
             <div class="pv-header">
-                <img class="pv-logo" src="/assets/images/HORIZONTAL grande.png" onerror="this.src='/assets/logo.svg'" style="max-height: 50pt; object-position: left center;">
+                <img class="pv-logo" src="/assets/images/HORIZONTAL grande.png" onerror="this.src='/assets/logo.svg'">
                 <div class="pv-biz">
                     Suministros y Equipos de Cómputo<br>
                     Tel: ${bizPhone}<br>
