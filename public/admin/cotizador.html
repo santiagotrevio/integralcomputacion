@@ -2874,7 +2874,7 @@
                 list.innerHTML = all.map(q => {
                     const date = new Date(q.created_at).toLocaleDateString('es-MX', { day: '2-digit', month: 'short', year: 'numeric' });
                     const total = q.total ? `$${Number(q.total).toLocaleString('es-MX', { minimumFractionDigits: 2 })} ` : '—';
-                    const vendor = q.user_id === '01' ? 'Rocío Romero' : q.user_id === '02' ? 'Rocío Vázquez' : `Usuario ${q.user_id} `;
+                    const vendor = q.user_id === '01' ? 'Rocío Romero' : q.user_id === '02' ? 'Rocío Vázquez' : `Usuario ${q.user_id}`;
                     const statusBadge = q.status === 'archived'
                         ? `<span style="font-size:10px;font-weight:700;color:var(--orange);background:rgba(255,149,0,.1);padding:2px 7px;border-radius:8px;" > Archivada</span> `
                         : `<span style="font-size:10px;font-weight:700;color:var(--green);background:rgba(52,199,89,.1);padding:2px 7px;border-radius:8px;" > Activa</span> `;
@@ -3046,7 +3046,7 @@
                 list.innerHTML = data.map(q => {
                     const date = new Date(q.created_at).toLocaleDateString('es-MX', { day: '2-digit', month: 'short', year: 'numeric' });
                     const total = q.total ? `$${Number(q.total).toLocaleString('es-MX', { minimumFractionDigits: 2 })} ` : '—';
-                    const vendor = q.user_id === '01' ? 'Rocío Romero' : q.user_id === '02' ? 'Rocío Vázquez' : `Usuario ${q.user_id} `;
+                    const vendor = q.user_id === '01' ? 'Rocío Romero' : q.user_id === '02' ? 'Rocío Vázquez' : `Usuario ${q.user_id}`;
                     const vendorColor = q.user_id === '01' ? '#0071e3' : '#9b59b6';
                     const actions = _histFilter.status === 'active'
                         ? `<button onclick="updateQuoteStatus(${q.id},'archived')" title="Archivar" style="background:none;border:none;color:var(--subtext);cursor:pointer;font-size:15px;padding:6px;">
