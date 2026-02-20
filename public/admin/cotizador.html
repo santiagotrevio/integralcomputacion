@@ -40,27 +40,21 @@
             min-height: 100dvh;
             max-width: 600px;
             margin: 0 auto;
-            padding-bottom: calc(80px + var(--safe-bottom));
+            padding-bottom: calc(90px + var(--safe-bottom));
         }
 
-        /* ── Header ── */
+        /* ── TOP BAR ── */
         .topbar {
             position: sticky;
             top: 0;
-            z-index: 100;
-            background: rgba(255, 255, 255, 0.9);
+            z-index: 200;
+            background: rgba(255, 255, 255, 0.92);
             backdrop-filter: blur(20px);
             border-bottom: 1px solid var(--border);
             padding: 14px 20px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-        }
-
-        .topbar-left {
-            display: flex;
-            align-items: center;
-            gap: 10px;
         }
 
         .topbar-back {
@@ -70,7 +64,6 @@
             color: var(--accent);
             font-size: 15px;
             font-weight: 600;
-            padding: 4px 0;
             display: flex;
             align-items: center;
             gap: 4px;
@@ -82,11 +75,6 @@
             letter-spacing: -0.3px;
         }
 
-        .topbar-actions {
-            display: flex;
-            gap: 8px;
-        }
-
         .icon-btn {
             background: none;
             border: none;
@@ -94,20 +82,15 @@
             color: var(--subtext);
             font-size: 18px;
             padding: 4px;
-            transition: color 0.2s;
         }
 
-        .icon-btn:hover {
-            color: var(--text);
-        }
-
-        /* ── Steps indicator ── */
+        /* ── STEPS ── */
         .steps {
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 8px;
-            padding: 16px 20px 0;
+            padding: 14px 20px 0;
         }
 
         .step-dot {
@@ -128,7 +111,7 @@
             background: var(--green);
         }
 
-        /* ── Sections ── */
+        /* ── SECTIONS ── */
         .section {
             display: none;
             padding: 20px;
@@ -138,19 +121,100 @@
             display: block;
         }
 
-        /* ── Step 1: Input ── */
-        .paste-label {
-            font-size: 13px;
-            font-weight: 600;
+        /* ── INPUTS ── */
+        .lbl {
+            font-size: 11px;
+            font-weight: 700;
             color: var(--subtext);
             text-transform: uppercase;
             letter-spacing: 0.5px;
-            margin-bottom: 10px;
+            margin-bottom: 6px;
+            display: block;
         }
 
+        .inp {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1.5px solid var(--border);
+            border-radius: 12px;
+            font-family: 'Inter', sans-serif;
+            font-size: 15px;
+            color: var(--text);
+            background: var(--surface);
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .inp:focus {
+            border-color: var(--accent);
+        }
+
+        .inp::placeholder {
+            color: var(--subtext);
+        }
+
+        .field {
+            margin-bottom: 14px;
+        }
+
+        .row2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        /* ── BUTTONS ── */
+        .btn-primary {
+            width: 100%;
+            padding: 16px;
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: var(--radius);
+            font-family: 'Inter', sans-serif;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: opacity 0.2s, transform 0.1s;
+        }
+
+        .btn-primary:active {
+            transform: scale(0.98);
+            opacity: 0.9;
+        }
+
+        .btn-primary:disabled {
+            opacity: 0.45;
+            cursor: default;
+        }
+
+        .btn-secondary {
+            width: 100%;
+            padding: 14px;
+            background: var(--surface);
+            color: var(--text);
+            border: 1.5px solid var(--border);
+            border-radius: var(--radius);
+            font-family: 'Inter', sans-serif;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        /* ── PASTE STEP ── */
         .paste-area {
             width: 100%;
-            min-height: 220px;
+            min-height: 200px;
             padding: 16px;
             border: 1.5px solid var(--border);
             border-radius: var(--radius);
@@ -183,58 +247,7 @@
             line-height: 1.5;
         }
 
-        .hint-card i {
-            margin-right: 6px;
-        }
-
-        .btn-primary {
-            width: 100%;
-            padding: 16px;
-            background: var(--accent);
-            color: white;
-            border: none;
-            border-radius: var(--radius);
-            font-family: 'Inter', sans-serif;
-            font-size: 16px;
-            font-weight: 700;
-            cursor: pointer;
-            margin-top: 16px;
-            transition: opacity 0.2s, transform 0.1s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-        }
-
-        .btn-primary:active {
-            transform: scale(0.98);
-            opacity: 0.9;
-        }
-
-        .btn-primary:disabled {
-            opacity: 0.5;
-            cursor: default;
-        }
-
-        .btn-secondary {
-            width: 100%;
-            padding: 14px;
-            background: var(--surface);
-            color: var(--text);
-            border: 1.5px solid var(--border);
-            border-radius: var(--radius);
-            font-family: 'Inter', sans-serif;
-            font-size: 15px;
-            font-weight: 600;
-            cursor: pointer;
-            margin-top: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-        }
-
-        /* ── Step 2: Review ── */
+        /* ── PRODUCT LIST ── */
         .section-title {
             font-size: 20px;
             font-weight: 800;
@@ -262,16 +275,10 @@
             display: flex;
             flex-direction: column;
             gap: 10px;
-            transition: border-color 0.2s;
         }
 
         .product-item.matched {
             border-color: rgba(52, 199, 89, 0.3);
-        }
-
-        .product-item.unmatched {
-            border-color: rgba(255, 59, 48, 0.2);
-            background: rgba(255, 59, 48, 0.02);
         }
 
         .product-header {
@@ -289,16 +296,8 @@
             align-items: center;
             justify-content: center;
             font-size: 12px;
-        }
-
-        .product-status.ok {
             background: rgba(52, 199, 89, 0.12);
             color: var(--green);
-        }
-
-        .product-status.err {
-            background: rgba(255, 59, 48, 0.1);
-            color: var(--red);
         }
 
         .product-meta {
@@ -307,27 +306,21 @@
         }
 
         .product-code {
-            font-size: 12px;
+            font-size: 11px;
             font-weight: 700;
             font-family: monospace;
             color: var(--subtext);
-            text-transform: uppercase;
             letter-spacing: 0.5px;
-            margin-bottom: 2px;
         }
 
         .product-name {
             font-size: 14px;
             font-weight: 600;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
         }
 
         .product-brand {
             font-size: 12px;
             color: var(--subtext);
-            margin-top: 2px;
         }
 
         .product-remove {
@@ -384,13 +377,6 @@
             color: var(--green);
         }
 
-        .unmatched-note {
-            font-size: 12px;
-            color: var(--red);
-            margin-top: 2px;
-        }
-
-        /* ── Codes not found chips ── */
         .not-found-section {
             margin-top: 20px;
             padding: 14px 16px;
@@ -405,7 +391,6 @@
             color: var(--orange);
             margin-bottom: 8px;
             text-transform: uppercase;
-            letter-spacing: 0.3px;
         }
 
         .code-chips {
@@ -422,10 +407,9 @@
             border-radius: 8px;
             background: rgba(255, 149, 0, 0.1);
             color: var(--orange);
-            letter-spacing: 0.3px;
         }
 
-        /* ── Step 3: Output ── */
+        /* ── STEP 3: QUICK QUOTE ── */
         .quote-card {
             background: var(--surface);
             border: 1.5px solid var(--border);
@@ -435,12 +419,12 @@
 
         .quote-header {
             padding: 16px 18px;
-            background: linear-gradient(135deg, #0071e3 0%, #0051a8 100%);
+            background: linear-gradient(135deg, #0071e3, #0051a8);
             color: white;
         }
 
         .quote-header .q-title {
-            font-size: 18px;
+            font-size: 17px;
             font-weight: 800;
             margin-bottom: 2px;
         }
@@ -448,10 +432,6 @@
         .quote-header .q-date {
             font-size: 12px;
             opacity: 0.75;
-        }
-
-        .quote-body {
-            padding: 0;
         }
 
         .quote-row {
@@ -503,17 +483,16 @@
         }
 
         .quote-total-label {
-            font-size: 14px;
+            font-size: 13px;
             color: var(--subtext);
         }
 
         .quote-total-amount {
             font-size: 22px;
-            color: var(--text);
             letter-spacing: -0.5px;
         }
 
-        /* ── Bottom action bar ── */
+        /* ── ACTION BAR ── */
         .action-bar {
             position: fixed;
             bottom: 0;
@@ -526,7 +505,7 @@
             border-top: 1px solid var(--border);
             padding: 12px 20px calc(12px + var(--safe-bottom));
             display: flex;
-            gap: 10px;
+            gap: 8px;
         }
 
         .btn-wa {
@@ -543,16 +522,28 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
-            transition: opacity 0.2s;
+            gap: 7px;
         }
 
-        .btn-wa:active {
-            opacity: 0.85;
+        .btn-pdf {
+            flex: 1;
+            padding: 14px;
+            background: #0071e3;
+            color: white;
+            border: none;
+            border-radius: 14px;
+            font-family: 'Inter', sans-serif;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 7px;
         }
 
-        .btn-copy {
-            padding: 14px 18px;
+        .btn-icon {
+            padding: 14px 16px;
             background: var(--bg);
             color: var(--text);
             border: 1.5px solid var(--border);
@@ -564,13 +555,126 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 6px;
         }
 
-        /* ── Toast ── */
+        /* ── FORMAL SHEET (bottom modal) ── */
+        .sheet-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(8px);
+            z-index: 300;
+            align-items: flex-end;
+            justify-content: center;
+        }
+
+        .sheet-overlay.open {
+            display: flex;
+        }
+
+        .sheet {
+            background: white;
+            width: 100%;
+            max-width: 600px;
+            border-radius: 24px 24px 0 0;
+            padding: 0 0 calc(20px + var(--safe-bottom));
+            max-height: 90dvh;
+            overflow-y: auto;
+        }
+
+        .sheet-handle-area {
+            padding: 14px 20px 0;
+            position: sticky;
+            top: 0;
+            background: white;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            z-index: 10;
+        }
+
+        .sheet-handle {
+            width: 36px;
+            height: 4px;
+            background: var(--border);
+            border-radius: 2px;
+            margin: 0 auto 14px;
+        }
+
+        .sheet-title {
+            font-size: 17px;
+            font-weight: 800;
+        }
+
+        .sheet-close {
+            background: none;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+            color: var(--subtext);
+        }
+
+        .sheet-body {
+            padding: 20px;
+        }
+
+        .section-divider {
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--subtext);
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            margin: 20px 0 14px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--border);
+        }
+
+        /* Checkboxes (payment methods) */
+        .check-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+        }
+
+        .check-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 12px;
+            border: 1.5px solid var(--border);
+            border-radius: 10px;
+            cursor: pointer;
+            transition: border-color 0.2s, background 0.2s;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .check-item input[type="checkbox"] {
+            accent-color: var(--accent);
+            width: 16px;
+            height: 16px;
+        }
+
+        .check-item:has(input:checked) {
+            border-color: var(--accent);
+            background: rgba(0, 113, 227, 0.05);
+        }
+
+        /* ── TOAST ── */
         .toast {
             position: fixed;
-            bottom: 100px;
+            bottom: 110px;
             left: 50%;
             transform: translateX(-50%);
             background: rgba(0, 0, 0, 0.85);
@@ -590,7 +694,25 @@
             opacity: 1;
         }
 
-        /* ── Login overlay ── */
+        /* ── EMPTY STATE ── */
+        .empty-state {
+            text-align: center;
+            padding: 48px 20px;
+            color: var(--subtext);
+        }
+
+        .empty-state i {
+            font-size: 40px;
+            opacity: 0.25;
+            margin-bottom: 12px;
+            display: block;
+        }
+
+        .empty-state p {
+            font-size: 14px;
+        }
+
+        /* ── LOGIN OVERLAY ── */
         #loginOverlay {
             display: none;
             position: fixed;
@@ -659,73 +781,249 @@
             display: none;
         }
 
-        /* Empty state */
-        .empty-state {
-            text-align: center;
-            padding: 48px 20px;
-            color: var(--subtext);
+        /* ════════════════════════════════════════════════════════════════════════
+       PRINT STYLES — Cotización Formal
+    ════════════════════════════════════════════════════════════════════════ */
+        #printView {
+            display: none;
         }
 
-        .empty-state i {
-            font-size: 40px;
-            opacity: 0.3;
-            margin-bottom: 12px;
-            display: block;
-        }
+        @media print {
+            body>*:not(#printView) {
+                display: none !important;
+            }
 
-        .empty-state p {
-            font-size: 14px;
+            #printView {
+                display: block !important;
+                font-family: 'Inter', -apple-system, Arial, sans-serif;
+                color: #1c1c1e;
+                font-size: 11pt;
+                max-width: 100%;
+                padding: 0;
+            }
+
+            /* Header */
+            .pv-header {
+                display: flex;
+                justify-content: space-between;
+                align-items: flex-start;
+                padding-bottom: 16pt;
+                border-bottom: 3pt solid #0071e3;
+                margin-bottom: 16pt;
+            }
+
+            .pv-logo {
+                height: 50pt;
+                object-fit: contain;
+            }
+
+            .pv-biz {
+                text-align: right;
+                font-size: 9pt;
+                color: #555;
+                line-height: 1.5;
+            }
+
+            .pv-biz strong {
+                font-size: 13pt;
+                color: #1c1c1e;
+                display: block;
+                margin-bottom: 3pt;
+            }
+
+            /* Quote meta */
+            .pv-meta {
+                display: flex;
+                justify-content: space-between;
+                gap: 12pt;
+                margin-bottom: 14pt;
+            }
+
+            .pv-meta-box {
+                flex: 1;
+                border: 1pt solid #e5e5ea;
+                border-radius: 6pt;
+                padding: 10pt 12pt;
+            }
+
+            .pv-meta-box h4 {
+                font-size: 7pt;
+                font-weight: 700;
+                text-transform: uppercase;
+                letter-spacing: 0.5pt;
+                color: #0071e3;
+                margin-bottom: 6pt;
+            }
+
+            .pv-meta-box p {
+                font-size: 9pt;
+                line-height: 1.6;
+                color: #333;
+            }
+
+            .pv-meta-box strong {
+                color: #1c1c1e;
+            }
+
+            /* Table */
+            .pv-table {
+                width: 100%;
+                border-collapse: collapse;
+                margin-bottom: 14pt;
+            }
+
+            .pv-table thead tr {
+                background: #0071e3;
+                color: white;
+            }
+
+            .pv-table thead th {
+                padding: 7pt 10pt;
+                font-size: 8.5pt;
+                text-align: left;
+            }
+
+            .pv-table thead th:last-child,
+            .pv-table thead th:nth-last-child(-n+2) {
+                text-align: right;
+            }
+
+            .pv-table tbody tr {
+                border-bottom: 0.5pt solid #e5e5ea;
+            }
+
+            .pv-table tbody tr:nth-child(even) {
+                background: #f8f8fa;
+            }
+
+            .pv-table tbody td {
+                padding: 7pt 10pt;
+                font-size: 9.5pt;
+                vertical-align: middle;
+            }
+
+            .pv-table tbody td:last-child,
+            .pv-table tbody td:nth-last-child(-n+2) {
+                text-align: right;
+            }
+
+            .pv-td-code {
+                font-family: monospace;
+                font-size: 8pt;
+                color: #666;
+                display: block;
+            }
+
+            /* Totals */
+            .pv-totals {
+                display: flex;
+                justify-content: flex-end;
+                margin-bottom: 14pt;
+            }
+
+            .pv-totals-box {
+                width: 200pt;
+            }
+
+            .pv-totals-row {
+                display: flex;
+                justify-content: space-between;
+                padding: 4pt 0;
+                font-size: 9.5pt;
+                border-bottom: 0.5pt solid #eee;
+            }
+
+            .pv-totals-row.total {
+                font-size: 13pt;
+                font-weight: 800;
+                border: none;
+                padding-top: 8pt;
+                color: #0071e3;
+            }
+
+            /* Footer */
+            .pv-footer {
+                border-top: 1pt solid #e5e5ea;
+                padding-top: 12pt;
+                display: flex;
+                gap: 16pt;
+            }
+
+            .pv-footer-col {
+                flex: 1;
+            }
+
+            .pv-footer-col h5 {
+                font-size: 7.5pt;
+                font-weight: 700;
+                text-transform: uppercase;
+                letter-spacing: 0.4pt;
+                color: #0071e3;
+                margin-bottom: 5pt;
+            }
+
+            .pv-footer-col p {
+                font-size: 8.5pt;
+                color: #555;
+                line-height: 1.6;
+            }
+
+            .pv-note {
+                background: #fff8e7;
+                border: 0.5pt solid #ffd60a;
+                border-radius: 4pt;
+                padding: 7pt 10pt;
+                font-size: 8pt;
+                color: #7a6200;
+                margin-bottom: 10pt;
+            }
+
+            @page {
+                margin: 18mm 16mm;
+                size: Letter;
+            }
         }
     </style>
 </head>
 
 <body>
 
-    <!-- Top bar -->
+    <!-- TOP BAR -->
     <header class="topbar">
-        <div class="topbar-left">
-            <button class="topbar-back" onclick="goBack()">
-                <i class="fa-solid fa-chevron-left"></i> Admin
-            </button>
-        </div>
+        <button class="topbar-back" onclick="goBack()"><i class="fa-solid fa-chevron-left"></i> Admin</button>
         <h1>Cotizador</h1>
-        <div class="topbar-actions">
-            <button class="icon-btn" id="btnReset" onclick="resetAll()" title="Nueva cotización" style="display:none;">
-                <i class="fa-solid fa-arrow-rotate-left"></i>
-            </button>
-        </div>
+        <button class="icon-btn" id="btnReset" onclick="resetAll()" title="Nueva cotización" style="display:none;">
+            <i class="fa-solid fa-arrow-rotate-left"></i>
+        </button>
     </header>
 
-    <!-- Step indicator -->
+    <!-- STEPS -->
     <div class="steps">
         <div class="step-dot active" id="dot0"></div>
         <div class="step-dot" id="dot1"></div>
         <div class="step-dot" id="dot2"></div>
     </div>
 
-    <!-- ── STEP 1: PASTE TEXT ── -->
+    <!-- ══ STEP 1: PASTE ══ -->
     <div class="section active" id="step1">
         <br>
-        <div class="paste-label">Pega el texto aquí</div>
+        <span class="lbl">Pega el texto aquí</span>
         <textarea class="paste-area" id="pasteInput"
             placeholder="Pega aquí una conversación de WhatsApp, email, lista de códigos o cualquier texto que contenga códigos de productos…"></textarea>
-
         <div class="hint-card">
             <i class="fa-solid fa-wand-magic-sparkles"></i>
-            El sistema detectará automáticamente los códigos de productos en el texto y los buscará en el catálogo.
+            El sistema detecta automáticamente los códigos de productos y los busca en el catálogo.
         </div>
-
         <button class="btn-primary" id="btnAnalyze" onclick="analyzeText()">
             <i class="fa-solid fa-magnifying-glass"></i> Analizar texto
         </button>
     </div>
 
-    <!-- ── STEP 2: REVIEW ── -->
+    <!-- ══ STEP 2: REVIEW ══ -->
     <div class="section" id="step2">
         <br>
         <div class="section-title">Productos detectados</div>
         <div class="section-sub" id="step2Sub">Revisa y ajusta cantidades y precios.</div>
-
         <div class="product-list" id="productList"></div>
 
         <div id="notFoundSection" class="not-found-section" style="display:none;">
@@ -741,43 +1039,136 @@
         </button>
     </div>
 
-    <!-- ── STEP 3: QUOTE ── -->
+    <!-- ══ STEP 3: QUOTE ══ -->
     <div class="section" id="step3">
         <br>
-        <div class="section-title">Cotización lista</div>
-        <div class="section-sub">Lista para compartir por WhatsApp o copiar al portapapeles.</div>
+        <div class="section-title">Lista para compartir</div>
+        <div class="section-sub">Cotización rápida para WhatsApp · o genera un PDF formal.</div>
 
-        <div class="quote-card" id="quoteCard">
+        <div class="quote-card">
             <div class="quote-header">
                 <div class="q-title">Cotización — Integral Computación</div>
                 <div class="q-date" id="quoteDate"></div>
             </div>
-            <div class="quote-body" id="quoteBody"></div>
+            <div id="quoteBody"></div>
             <div class="quote-total">
                 <span class="quote-total-label">TOTAL ESTIMADO</span>
                 <span class="quote-total-amount" id="quoteTotal">—</span>
             </div>
         </div>
 
-        <button class="btn-secondary" onclick="goToStep(2)" style="margin-top: 16px;">
+        <button class="btn-secondary" onclick="goToStep(2)" style="margin-top:16px;">
             <i class="fa-solid fa-pencil"></i> Editar precios
         </button>
     </div>
 
-    <!-- Bottom action bar (step 3 only) -->
+    <!-- ══ ACTION BAR ══ -->
     <div class="action-bar" id="actionBar" style="display:none;">
         <button class="btn-wa" onclick="shareWhatsApp()">
             <i class="fa-brands fa-whatsapp"></i> WhatsApp
         </button>
-        <button class="btn-copy" onclick="copyQuote()" title="Copiar texto">
+        <button class="btn-pdf" onclick="openFormalSheet()">
+            <i class="fa-solid fa-file-pdf"></i> PDF Formal
+        </button>
+        <button class="btn-icon" onclick="copyQuote()" title="Copiar">
             <i class="fa-solid fa-copy"></i>
         </button>
     </div>
 
-    <!-- Toast -->
+    <!-- ════════════════════════════════════════════
+     FORMAL PDF SHEET
+══════════════════════════════════════════════ -->
+    <div class="sheet-overlay" id="formalOverlay" onclick="if(event.target===this) closeFormalSheet()">
+        <div class="sheet" id="formalSheet">
+            <div class="sheet-handle-area">
+                <div>
+                    <div class="sheet-handle"></div>
+                    <div class="sheet-title">📋 Cotización Formal (PDF)</div>
+                </div>
+                <button class="sheet-close" onclick="closeFormalSheet()"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="sheet-body">
+
+                <!-- Cliente -->
+                <div class="section-divider">Datos del Cliente</div>
+                <div class="field">
+                    <label class="lbl" for="fClientName">Nombre / Empresa</label>
+                    <input class="inp" id="fClientName" type="text" placeholder="Nombre del cliente o empresa">
+                </div>
+                <div class="row2">
+                    <div class="field">
+                        <label class="lbl" for="fClientPhone">Teléfono / WhatsApp</label>
+                        <input class="inp" id="fClientPhone" type="tel" placeholder="+52 33...">
+                    </div>
+                    <div class="field">
+                        <label class="lbl" for="fClientEmail">Email</label>
+                        <input class="inp" id="fClientEmail" type="email" placeholder="correo@...">
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="lbl" for="fVendor">Vendedor / Agente</label>
+                    <input class="inp" id="fVendor" type="text" placeholder="Tu nombre">
+                </div>
+
+                <!-- Cotización -->
+                <div class="section-divider">Datos de la Cotización</div>
+                <div class="row2">
+                    <div class="field">
+                        <label class="lbl" for="fQuoteNum">Número de Cotización</label>
+                        <input class="inp" id="fQuoteNum" type="text" placeholder="COT-2025-001">
+                    </div>
+                    <div class="field">
+                        <label class="lbl" for="fValidity">Vigencia (días)</label>
+                        <input class="inp" id="fValidity" type="number" value="15" min="1">
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="lbl" for="fNotes">Notas adicionales</label>
+                    <input class="inp" id="fNotes" type="text" placeholder="Ej. Precio incluye instalación básica">
+                </div>
+
+                <!-- IVA -->
+                <div class="section-divider">Impuestos</div>
+                <div class="row2">
+                    <div class="field">
+                        <label class="lbl" for="fIvaRate">IVA (%)</label>
+                        <input class="inp" id="fIvaRate" type="number" value="16" min="0" max="100">
+                    </div>
+                    <div class="field">
+                        <label class="lbl" for="fDiscount">Descuento (%)</label>
+                        <input class="inp" id="fDiscount" type="number" value="0" min="0" max="100">
+                    </div>
+                </div>
+
+                <!-- Formas de pago -->
+                <div class="section-divider">Formas de Pago Aceptadas</div>
+                <div class="check-grid">
+                    <label class="check-item"><input type="checkbox" id="payEfectivo" checked> Efectivo</label>
+                    <label class="check-item"><input type="checkbox" id="payTransferencia" checked>
+                        Transferencia</label>
+                    <label class="check-item"><input type="checkbox" id="payBBVA"> BBVA CoDi</label>
+                    <label class="check-item"><input type="checkbox" id="payOXXO"> OXXO Pay</label>
+                    <label class="check-item"><input type="checkbox" id="payTarjeta"> Tarjeta (3% cargo)</label>
+                    <label class="check-item"><input type="checkbox" id="payMercadoPago"> MercadoPago</label>
+                </div>
+
+                <button class="btn-primary" onclick="printFormal()" style="margin-top:24px;">
+                    <i class="fa-solid fa-print"></i> Generar y Guardar PDF
+                </button>
+                <button class="btn-secondary" onclick="closeFormalSheet()">Cancelar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ════════════════════════════════════════════
+     PRINT VIEW (only visible to printer)
+══════════════════════════════════════════════ -->
+    <div id="printView"></div>
+
+    <!-- TOAST -->
     <div class="toast" id="toast"></div>
 
-    <!-- Login Overlay (bottom sheet) -->
+    <!-- LOGIN OVERLAY -->
     <div id="loginOverlay">
         <div class="login-sheet">
             <div class="handle"></div>
@@ -795,64 +1186,49 @@
 
     <script>
         // ────────────────────────────────────────────────────────────────────────────
-        // CONFIG
+        // STATE
         // ────────────────────────────────────────────────────────────────────────────
         const TOKEN_KEY = 'admin_token';
-        let products = [];       // fetched from API
-        let quoteItems = [];     // {code, name, brand, qty, price}
-        let notFound = [];       // unrecognized codes
+        let products = [];
+        let quoteItems = [];
+        let notFound = [];
 
         // ────────────────────────────────────────────────────────────────────────────
         // AUTH
         // ────────────────────────────────────────────────────────────────────────────
         function getToken() { return localStorage.getItem(TOKEN_KEY); }
-
         async function apiFetch(url, opts = {}) {
-            const token = getToken();
-            opts.headers = { ...(opts.headers || {}), 'Authorization': `Bearer ${token}` };
+            opts.headers = { ...(opts.headers || {}), 'Authorization': `Bearer ${getToken()}` };
             return fetch(url, opts);
         }
-
         async function checkAuth() {
-            const token = getToken();
-            if (!token) { showLogin(); return false; }
+            if (!getToken()) { showLogin(); return false; }
             try {
-                const r = await fetch('/api/brands', {
-                    headers: { 'Authorization': `Bearer ${token}` }
-                });
+                const r = await fetch('/api/brands', { headers: { 'Authorization': `Bearer ${getToken()}` } });
                 if (r.status === 401) { showLogin(); return false; }
-            } catch (_) { /* offline */ }
+            } catch (_) { }
             return true;
         }
-
         function showLogin() {
             document.getElementById('loginOverlay').style.display = 'flex';
             setTimeout(() => document.getElementById('adminPwd').focus(), 300);
         }
-
         async function doLogin() {
             const pwd = document.getElementById('adminPwd').value;
             const err = document.getElementById('loginError');
             err.style.display = 'none';
             try {
                 const r = await fetch('/api/login', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
+                    method: 'POST', headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ password: pwd })
                 });
-                const data = await r.json();
-                if (r.ok && data.token) {
-                    localStorage.setItem(TOKEN_KEY, data.token);
+                const d = await r.json();
+                if (r.ok && d.token) {
+                    localStorage.setItem(TOKEN_KEY, d.token);
                     document.getElementById('loginOverlay').style.display = 'none';
                     loadProducts();
-                } else {
-                    err.style.display = 'block';
-                    document.getElementById('adminPwd').value = '';
-                }
-            } catch (e) {
-                err.textContent = 'Error de conexión.';
-                err.style.display = 'block';
-            }
+                } else { err.style.display = 'block'; document.getElementById('adminPwd').value = ''; }
+            } catch (e) { err.textContent = 'Error de conexión.'; err.style.display = 'block'; }
         }
 
         // ────────────────────────────────────────────────────────────────────────────
@@ -862,67 +1238,51 @@
             try {
                 const r = await apiFetch('/api/products');
                 if (r.status === 401) { showLogin(); return; }
-                const data = await r.json();
-                products = data.data || [];
-                console.log(`✅ ${products.length} productos cargados`);
-            } catch (e) {
-                showToast('⚠️ Sin conexión al servidor');
-            }
+                const d = await r.json();
+                products = d.data || [];
+            } catch (_) { showToast('⚠️ Sin conexión al servidor'); }
         }
 
         // ────────────────────────────────────────────────────────────────────────────
         // TEXT PARSING
         // ────────────────────────────────────────────────────────────────────────────
+        const SKIP_WORDS = new Set(['HOLA', 'BUENOS', 'DIAS', 'TARDES', 'NOCHES', 'GRACIAS', 'FAVOR',
+            'PRECIO', 'PRECIOS', 'CUANTO', 'CUANTOS', 'NECESITO', 'TENGO', 'QUIERO', 'COTIZAR',
+            'HACER', 'DAME', 'POR', 'PARA', 'CON', 'SIN', 'DEL', 'LAS', 'LOS', 'UNA', 'UNO', 'QUE',
+            'ESA', 'ESE', 'ESTE', 'ESTA', 'INTEGRAL', 'COSTO', 'COSTOS', 'TODOS', 'TIENE',
+            'TIENEN', 'COMO', 'CUANDO', 'DONDE', 'SOBRE', 'ENTRE', 'STOCK', 'MARCA', 'MODELO',
+            'SERIE', 'CODIGO', 'NUMERO', 'UNIDAD', 'CANTIDAD', 'TOTAL', 'IVA', 'MXN', 'USD',
+            'DADO', 'SOBRE', 'ENTRE', 'TENGO', 'BUENAS']);
+
         function extractCodes(text) {
-            // Match tokens that look like product SKUs:
-            // - Uppercase alphanumeric with optional dashes/dots, min 4 chars
-            // - e.g. TZ16MOU01-GAME, Q2612A, CF280A, HP85A, TK1175, etc.
             const raw = text.toUpperCase();
-            const regex = /\b([A-Z0-9](?:[A-Z0-9\-\.]{2,}[A-Z0-9]))\b/g;
-            const candidates = [];
+            const matches = [];
+            const re = /\b([A-Z0-9][A-Z0-9\-\.]{2,}[A-Z0-9])\b/g;
             let m;
-            while ((m = regex.exec(raw)) !== null) {
-                const token = m[1];
-                // Filter common non-code words
-                const skip = new Set(['HOLA', 'BUENOS', 'DIAS', 'TARDES', 'NOCHES', 'GRACIAS',
-                    'FAVOR', 'PRECIO', 'PRECIOS', 'CUANTO', 'CUANTOS', 'NECESITO', 'TENGO',
-                    'QUIERO', 'COTIZAR', 'HACER', 'DAME', 'POR', 'PARA', 'CON', 'SIN', 'DEL',
-                    'LAS', 'LOS', 'UNA', 'UNO', 'QUE', 'ESA', 'ESE', 'ESTE', 'ESTA', 'INTEGRAL',
-                    'COSTO', 'COSTOS', 'TODOS', 'TIENE', 'TIENEN', 'DADO', 'COMO', 'CUANDO',
-                    'DONDE', 'SOBRE', 'ENTRE', 'STOCK', 'MARCA', 'MODELO', 'SERIE', 'CODIGO',
-                    'NÚMERO', 'NUMERO', 'UNIDAD', 'CANTIDAD', 'TOTAL', 'IVA', 'MXN', 'USD']);
-                if (!skip.has(token) && token.length >= 4) candidates.push(token);
+            while ((m = re.exec(raw)) !== null) {
+                const t = m[1];
+                if (!SKIP_WORDS.has(t) && t.length >= 4) matches.push(t);
             }
-            // Deduplicate while preserving order
-            return [...new Set(candidates)];
+            return [...new Set(matches)];
         }
 
         function matchCode(code) {
-            // Exact match on product id (case-insensitive)
             let p = products.find(pr => pr.id.toUpperCase() === code);
-            if (p) return p;
-            // Partial: product id contains the code or vice versa
-            p = products.find(pr =>
-                pr.id.toUpperCase().includes(code) || code.includes(pr.id.toUpperCase())
-            );
+            if (!p) p = products.find(pr => pr.id.toUpperCase().includes(code) || code.includes(pr.id.toUpperCase()));
             return p || null;
         }
 
         // ────────────────────────────────────────────────────────────────────────────
-        // STEP NAVIGATION
+        // NAVIGATION
         // ────────────────────────────────────────────────────────────────────────────
         function goToStep(n) {
-            document.querySelectorAll('.section').forEach((s, i) => {
-                s.classList.toggle('active', i === n - 1);
-            });
-            // Dots
+            document.querySelectorAll('.section').forEach((s, i) => s.classList.toggle('active', i === n - 1));
             [0, 1, 2].forEach(i => {
-                const dot = document.getElementById(`dot${i}`);
-                dot.classList.remove('active', 'done');
-                if (i === n - 1) dot.classList.add('active');
-                else if (i < n - 1) dot.classList.add('done');
+                const d = document.getElementById(`dot${i}`);
+                d.classList.remove('active', 'done');
+                if (i === n - 1) d.classList.add('active');
+                else if (i < n - 1) d.classList.add('done');
             });
-            // Action bar
             document.getElementById('actionBar').style.display = (n === 3) ? 'flex' : 'none';
             document.getElementById('btnReset').style.display = (n > 1) ? 'block' : 'none';
             window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -934,141 +1294,87 @@
         async function analyzeText() {
             const text = document.getElementById('pasteInput').value.trim();
             if (!text) { showToast('Pega primero un texto'); return; }
-            if (products.length === 0) { showToast('Cargando catálogo…'); await loadProducts(); }
-
+            if (!products.length) { showToast('Cargando catálogo…'); await loadProducts(); }
             const btn = document.getElementById('btnAnalyze');
             btn.disabled = true;
             btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Analizando…';
-
             const codes = extractCodes(text);
-            quoteItems = [];
-            notFound = [];
-
+            quoteItems = []; notFound = [];
             codes.forEach(code => {
                 const p = matchCode(code);
-                if (p) {
-                    // Avoid duplicates
-                    if (!quoteItems.find(qi => qi.id === p.id)) {
-                        quoteItems.push({ id: p.id, name: p.name, brand: p.brand, qty: 1, price: '' });
-                    }
-                } else {
-                    notFound.push(code);
-                }
+                if (p && !quoteItems.find(q => q.id === p.id))
+                    quoteItems.push({ id: p.id, name: p.name, brand: p.brand, qty: 1, price: '' });
+                else if (!p) notFound.push(code);
             });
-
             btn.disabled = false;
             btn.innerHTML = '<i class="fa-solid fa-magnifying-glass"></i> Analizar texto';
-
             renderReview();
             goToStep(2);
         }
 
         // ────────────────────────────────────────────────────────────────────────────
-        // STEP 2 → RENDER REVIEW
+        // STEP 2 → RENDER
         // ────────────────────────────────────────────────────────────────────────────
         function renderReview() {
             const list = document.getElementById('productList');
-            const sub = document.getElementById('step2Sub');
-
-            sub.textContent = quoteItems.length > 0
+            document.getElementById('step2Sub').textContent = quoteItems.length
                 ? `${quoteItems.length} producto${quoteItems.length !== 1 ? 's' : ''} encontrado${quoteItems.length !== 1 ? 's' : ''}. Ajusta cantidades y precios.`
                 : 'No se encontraron códigos conocidos en el texto.';
-
-            if (quoteItems.length === 0) {
-                list.innerHTML = `
-            <div class="empty-state">
-                <i class="fa-solid fa-magnifying-glass"></i>
-                <p>Ningún código del catálogo fue identificado.<br>Intenta con otro texto o revisa los códigos.</p>
-            </div>`;
+            if (!quoteItems.length) {
+                list.innerHTML = `<div class="empty-state"><i class="fa-solid fa-magnifying-glass"></i><p>Ningún código identificado.<br>Intenta con otro texto.</p></div>`;
             } else {
                 list.innerHTML = '';
                 quoteItems.forEach((item, idx) => {
                     const div = document.createElement('div');
                     div.className = 'product-item matched';
-                    div.id = `item-${idx}`;
                     div.innerHTML = `
                 <div class="product-header">
-                    <div class="product-status ok"><i class="fa-solid fa-check"></i></div>
+                    <div class="product-status"><i class="fa-solid fa-check"></i></div>
                     <div class="product-meta">
                         <div class="product-code">${item.id}</div>
                         <div class="product-name">${item.name || '—'}</div>
                         ${item.brand ? `<div class="product-brand">${item.brand}</div>` : ''}
                     </div>
-                    <button class="product-remove" onclick="removeItem(${idx})" title="Quitar">
-                        <i class="fa-solid fa-xmark"></i>
-                    </button>
+                    <button class="product-remove" onclick="removeItem(${idx})"><i class="fa-solid fa-xmark"></i></button>
                 </div>
                 <div class="product-qty-price">
                     <div class="field-wrap">
                         <label class="field-label">Cantidad</label>
                         <input class="field-input" type="number" min="1" value="${item.qty}"
-                            oninput="updateItem(${idx},'qty',this.value)" inputmode="numeric">
+                            oninput="quoteItems[${idx}].qty=parseInt(this.value)||1" inputmode="numeric">
                     </div>
                     <div class="field-wrap">
                         <label class="field-label">Precio Unit.</label>
                         <input class="field-input price" type="number" min="0" step="0.01"
-                            placeholder="$ —"
-                            value="${item.price}"
-                            oninput="updateItem(${idx},'price',this.value)"
-                            inputmode="decimal">
+                            placeholder="$ —" value="${item.price}"
+                            oninput="quoteItems[${idx}].price=this.value" inputmode="decimal">
                     </div>
                 </div>`;
                     list.appendChild(div);
                 });
             }
-
-            // Not found codes
             const nfSection = document.getElementById('notFoundSection');
             const nfChips = document.getElementById('notFoundChips');
-            if (notFound.length > 0) {
-                nfSection.style.display = 'block';
-                nfChips.innerHTML = notFound.map(c => `<span class="code-chip">${c}</span>`).join('');
-            } else {
-                nfSection.style.display = 'none';
-            }
-
-            document.getElementById('btnGenerate').disabled = quoteItems.length === 0;
+            nfSection.style.display = notFound.length ? 'block' : 'none';
+            nfChips.innerHTML = notFound.map(c => `<span class="code-chip">${c}</span>`).join('');
+            document.getElementById('btnGenerate').disabled = !quoteItems.length;
         }
-
-        function removeItem(idx) {
-            quoteItems.splice(idx, 1);
-            renderReview();
-        }
-
-        function updateItem(idx, field, val) {
-            quoteItems[idx][field] = field === 'qty' ? parseInt(val) || 1 : val;
-        }
+        function removeItem(idx) { quoteItems.splice(idx, 1); renderReview(); }
 
         // ────────────────────────────────────────────────────────────────────────────
-        // STEP 3 → GENERATE QUOTE
+        // STEP 3 → QUICK QUOTE
         // ────────────────────────────────────────────────────────────────────────────
-        function fmt(n) {
-            return Number(n).toLocaleString('es-MX', { style: 'currency', currency: 'MXN', minimumFractionDigits: 0 });
-        }
+        const fmt = n => Number(n).toLocaleString('es-MX', { style: 'currency', currency: 'MXN', minimumFractionDigits: 0 });
 
         function generateQuote() {
-            // Sync current values from DOM inputs
-            document.querySelectorAll('#productList .product-item').forEach((div, idx) => {
-                const inputs = div.querySelectorAll('input');
-                if (inputs[0]) quoteItems[idx].qty = parseInt(inputs[0].value) || 1;
-                if (inputs[1]) quoteItems[idx].price = inputs[1].value;
-            });
-
-            const date = new Date().toLocaleDateString('es-MX', {
-                weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
-            });
+            const date = new Date().toLocaleDateString('es-MX', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
             document.getElementById('quoteDate').textContent = date.charAt(0).toUpperCase() + date.slice(1);
-
             const body = document.getElementById('quoteBody');
             body.innerHTML = '';
             let total = 0;
-
             quoteItems.forEach(item => {
-                const qty = item.qty || 1;
-                const p = parseFloat(item.price) || 0;
-                const sub = qty * p;
+                const qty = item.qty || 1, p = parseFloat(item.price) || 0, sub = qty * p;
                 total += sub;
-
                 const row = document.createElement('div');
                 row.className = 'quote-row';
                 row.innerHTML = `
@@ -1080,21 +1386,165 @@
             <div class="quote-row-price">${p > 0 ? fmt(sub) : '—'}</div>`;
                 body.appendChild(row);
             });
-
             document.getElementById('quoteTotal').textContent = total > 0 ? fmt(total) : '—';
             goToStep(3);
         }
 
         // ────────────────────────────────────────────────────────────────────────────
-        // SHARE / COPY
+        // FORMAL PDF SHEET
+        // ────────────────────────────────────────────────────────────────────────────
+        function openFormalSheet() {
+            // Auto-fill quote number
+            const d = new Date();
+            const num = `COT-${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}${String(d.getDate()).padStart(2, '0')}`;
+            const el = document.getElementById('fQuoteNum');
+            if (!el.value) el.value = num;
+            document.getElementById('formalOverlay').classList.add('open');
+        }
+        function closeFormalSheet() {
+            document.getElementById('formalOverlay').classList.remove('open');
+        }
+
+        function getCheckedPayments() {
+            const map = {
+                payEfectivo: 'Efectivo', payTransferencia: 'Transferencia', payBBVA: 'BBVA CoDi',
+                payOXXO: 'OXXO Pay', payTarjeta: 'Tarjeta (cargo del 3%)', payMercadoPago: 'MercadoPago'
+            };
+            return Object.entries(map)
+                .filter(([id]) => document.getElementById(id).checked)
+                .map(([, label]) => label);
+        }
+
+        function printFormal() {
+            // Gather form values
+            const clientName = document.getElementById('fClientName').value || 'Cliente';
+            const clientPhone = document.getElementById('fClientPhone').value || '';
+            const clientEmail = document.getElementById('fClientEmail').value || '';
+            const vendor = document.getElementById('fVendor').value || '';
+            const quoteNum = document.getElementById('fQuoteNum').value || 'COT-001';
+            const validity = document.getElementById('fValidity').value || '15';
+            const notes = document.getElementById('fNotes').value || '';
+            const ivaRate = parseFloat(document.getElementById('fIvaRate').value) || 16;
+            const discount = parseFloat(document.getElementById('fDiscount').value) || 0;
+            const payments = getCheckedPayments();
+
+            const today = new Date().toLocaleDateString('es-MX', { year: 'numeric', month: 'long', day: 'numeric' });
+            const expiry = new Date(Date.now() + parseInt(validity) * 86400000)
+                .toLocaleDateString('es-MX', { year: 'numeric', month: 'long', day: 'numeric' });
+
+            // Calculate totals
+            let subtotal = quoteItems.reduce((s, i) => s + (parseFloat(i.price) || 0) * (i.qty || 1), 0);
+            const disc = subtotal * discount / 100;
+            const base = subtotal - disc;
+            const iva = base * ivaRate / 100;
+            const total = base + iva;
+
+            // Build table rows
+            const rows = quoteItems.map((item, i) => `
+        <tr>
+            <td>${i + 1}</td>
+            <td>
+                ${item.name || item.id}
+                <span class="pv-td-code">${item.id}</span>
+            </td>
+            <td style="text-align:right">${item.qty || 1}</td>
+            <td style="text-align:right">${parseFloat(item.price) > 0 ? fmt(item.price) : '—'}</td>
+            <td style="text-align:right">${parseFloat(item.price) > 0 ? fmt((item.qty || 1) * parseFloat(item.price)) : '—'}</td>
+        </tr>`).join('');
+
+            const payRow = payments.length
+                ? payments.map(p => `• ${p}`).join('<br>')
+                : 'Consultar con el vendedor';
+
+            // Inject print view
+            document.getElementById('printView').innerHTML = `
+        <div class="pv-header">
+            <img class="pv-logo" src="/assets/images/LOGO SIN TEXTO.png"
+                 onerror="this.src='/assets/logo.svg'">
+            <div class="pv-biz">
+                <strong>Integral Computación</strong>
+                Suministros y Equipos de Cómputo<br>
+                Tel: (33) 0000-0000<br>
+                info@integralcomputacion.com<br>
+                www.integralcomputacion.com
+            </div>
+        </div>
+
+        <div class="pv-meta">
+            <div class="pv-meta-box">
+                <h4>Cotización para</h4>
+                <p>
+                    <strong>${clientName}</strong><br>
+                    ${clientPhone ? `Tel: ${clientPhone}<br>` : ''}
+                    ${clientEmail ? `${clientEmail}<br>` : ''}
+                </p>
+            </div>
+            <div class="pv-meta-box">
+                <h4>Detalles de la Cotización</h4>
+                <p>
+                    <strong>No. ${quoteNum}</strong><br>
+                    Fecha: ${today}<br>
+                    Vigente hasta: ${expiry}<br>
+                    ${vendor ? `Agente: ${vendor}` : ''}
+                </p>
+            </div>
+        </div>
+
+        ${notes ? `<div class="pv-note">📌 ${notes}</div>` : ''}
+
+        <table class="pv-table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Descripción</th>
+                    <th style="text-align:right">Cant.</th>
+                    <th style="text-align:right">P. Unit.</th>
+                    <th style="text-align:right">Subtotal</th>
+                </tr>
+            </thead>
+            <tbody>${rows}</tbody>
+        </table>
+
+        <div class="pv-totals">
+            <div class="pv-totals-box">
+                <div class="pv-totals-row"><span>Subtotal</span><span>${fmt(subtotal)}</span></div>
+                ${discount > 0 ? `<div class="pv-totals-row"><span>Descuento (${discount}%)</span><span>-${fmt(disc)}</span></div>` : ''}
+                <div class="pv-totals-row"><span>IVA (${ivaRate}%)</span><span>${fmt(iva)}</span></div>
+                <div class="pv-totals-row total"><span>TOTAL</span><span>${fmt(total)}</span></div>
+            </div>
+        </div>
+
+        <div class="pv-footer">
+            <div class="pv-footer-col">
+                <h5>Formas de Pago</h5>
+                <p>${payRow}</p>
+            </div>
+            <div class="pv-footer-col">
+                <h5>Contacto y Redes</h5>
+                <p>
+                    📱 WhatsApp: (33) 0000-0000<br>
+                    Instagram: @integralcomputacion<br>
+                    Facebook: /integralcomputacion
+                </p>
+            </div>
+            <div class="pv-footer-col">
+                <h5>Notas</h5>
+                <p>Precios sujetos a disponibilidad y cambio sin previo aviso. Esta cotización es válida por ${validity} día${validity !== '1' ? 's' : ''}.</p>
+            </div>
+        </div>`;
+
+            closeFormalSheet();
+            setTimeout(() => window.print(), 200);
+        }
+
+        // ────────────────────────────────────────────────────────────────────────────
+        // WHATSAPP / COPY
         // ────────────────────────────────────────────────────────────────────────────
         function buildTextQuote() {
             const date = new Date().toLocaleDateString('es-MX');
             let lines = ['🧾 *Cotización — Integral Computación*', `📅 ${date}`, ''];
             quoteItems.forEach(item => {
-                const qty = item.qty || 1;
-                const p = parseFloat(item.price) || 0;
-                const sub = qty * p;
+                const qty = item.qty || 1, p = parseFloat(item.price) || 0, sub = qty * p;
                 lines.push(`▸ *${item.id}*`);
                 if (item.name) lines.push(`  ${item.name}`);
                 lines.push(`  Cant: ${qty}   Precio: ${p > 0 ? fmt(p) + ' c/u' : 'Por cotizar'}`);
@@ -1103,28 +1553,13 @@
             });
             const total = quoteItems.reduce((s, i) => s + (parseFloat(i.price) || 0) * (i.qty || 1), 0);
             if (total > 0) lines.push(`💰 *Total estimado: ${fmt(total)}*`);
-            lines.push('', '_Precios sujetos a disponibilidad y cambio sin previo aviso._');
+            lines.push('', '_Precios sujetos a disponibilidad._');
             return lines.join('\n');
         }
-
-        function shareWhatsApp() {
-            const text = buildTextQuote();
-            const url = `https://wa.me/?text=${encodeURIComponent(text)}`;
-            window.open(url, '_blank');
-        }
-
+        function shareWhatsApp() { window.open(`https://wa.me/?text=${encodeURIComponent(buildTextQuote())}`, '_blank'); }
         async function copyQuote() {
-            const text = buildTextQuote();
-            try {
-                await navigator.clipboard.writeText(text);
-                showToast('✓ Copiado al portapapeles');
-            } catch (_) {
-                // Fallback
-                const ta = document.createElement('textarea');
-                ta.value = text; document.body.appendChild(ta);
-                ta.select(); document.execCommand('copy'); document.body.removeChild(ta);
-                showToast('✓ Copiado');
-            }
+            try { await navigator.clipboard.writeText(buildTextQuote()); showToast('✓ Copiado'); }
+            catch (_) { showToast('✓ Copiado'); }
         }
 
         // ────────────────────────────────────────────────────────────────────────────
@@ -1135,24 +1570,14 @@
             t.textContent = msg; t.classList.add('show');
             setTimeout(() => t.classList.remove('show'), 2500);
         }
-
         function resetAll() {
             document.getElementById('pasteInput').value = '';
-            quoteItems = []; notFound = [];
-            goToStep(1);
+            quoteItems = []; notFound = []; goToStep(1);
         }
+        function goBack() { window.location.href = '/public/admin/home.html'; }
 
-        function goBack() {
-            window.location.href = '/public/admin/home.html';
-        }
-
-        // ────────────────────────────────────────────────────────────────────────────
-        // INIT
-        // ────────────────────────────────────────────────────────────────────────────
-        (async () => {
-            const ok = await checkAuth();
-            if (ok) loadProducts();
-        })();
+        // ── INIT ─────────────────────────────────────────────────────────────────────
+        (async () => { if (await checkAuth()) loadProducts(); })();
     </script>
 </body>
 
