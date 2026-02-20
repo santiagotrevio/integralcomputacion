@@ -431,4 +431,56 @@ router.post('/quotes', (req, res) => {
     });
 });
 
+
+// ──────────────────────────────────────────────────────────────────────────────
+// POST /api/quotes/pdf  — Genera PDF A4 con Puppeteer
+// ──────────────────────────────────────────────────────────────────────────────
+let _puppeteerBrowser = null;
+async function getBrowser() {
+    if (_puppeteerBrowser && _puppeteerBrowser.connected) return _puppeteerBrowser;
+    const puppeteer = require('puppeteer');
+    _puppeteerBrowser = await puppeteer.launch({
+        headless: 'new',
+        args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage']
+    });
+    return _puppeteerBrowser;
+}
+
+router.post('/quotes/pdf', authMiddleware, async (req, res) => {
+    const { html, filename } = req.body;
+    if (!html) return res.status(400).json({ error: 'HTML requerido' });
+
+    try {
+        const browser = await getBrowser();
+        const page = await browser.newPage();
+        await page.setViewport({ width: 794, height: 1123 });
+        await page.setContent(html, { waitUntil: 'networkidle0', timeout: 15000 });
+
+        // Esperar fuentes + render
+        try {
+            await page.evaluate(() => document.fonts.ready);
+            await new Promise(r => setTimeout(r, 800));
+        } catch (_) { }
+
+        const pdfBuffer = await page.pdf({
+            format: 'A4',
+            printBackground: true,
+            margin: { top: 0, right: 0, bottom: 0, left: 0 }
+        });
+        await page.close();
+
+        const safeFilename = (filename || 'cotizacion').replace(/[^\w\-_.]/g, '_') + '.pdf';
+        res.set({
+            'Content-Type': 'application/pdf',
+            'Content-Disposition': `attachment; filename="${safeFilename}"`,
+            'Content-Length': pdfBuffer.length
+        });
+        res.send(pdfBuffer);
+
+    } catch (err) {
+        console.error('[PDF] Puppeteer error:', err.message);
+        res.status(500).json({ error: 'Error generando PDF: ' + err.message });
+    }
+});
+
 module.exports = router;
