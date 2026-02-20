@@ -851,7 +851,7 @@
             .pv-header {
                 display: flex;
                 justify-content: space-between;
-                align-items: flex-end;
+                align-items: stretch;
                 padding-bottom: 12pt;
                 border-bottom: 2pt solid #00AEEF;
                 border-image: linear-gradient(to right, #00AEEF, #EC008C, #FFF200) 1;
@@ -859,10 +859,12 @@
             }
 
             .pv-logo {
-                height: 55pt;
-                max-width: 300pt;
+                width: auto;
+                height: 100%;
+                max-height: 90pt;
                 object-fit: contain;
                 object-position: left center;
+                display: block;
             }
 
             .pv-biz {
