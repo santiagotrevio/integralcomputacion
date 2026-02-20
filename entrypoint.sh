@@ -3,24 +3,14 @@ set -e
 
 echo "🚀 Integral Computación — iniciando..."
 
-# ── Primer arranque: copiar DB al volumen persistente ─────────────────────────
-if [ ! -f /data/inventario.db ]; then
-    echo "📦 Primera ejecución: copiando base de datos inicial a /data/..."
-    if [ -f /app/inventario.db ]; then
-        cp /app/inventario.db /data/inventario.db
-        echo "✅ Base de datos copiada."
-    else
-        echo "⚠️  No hay inventario.db en el build — se creará una vacía."
-    fi
-fi
+# ── Asegurar que el directorio de datos existe ────────────────────────────────
+mkdir -p /data
 
-# ── (Opcional) Sincronizar imágenes de marcas al volumen ─────────────────────
-# Si en el futuro quieres que las imágenes subidas persistan,
-# descomenta esto y ajusta fly.toml para montar /data en /app/assets/images:
-#
-# if [ ! -d /data/brands ]; then
-#     cp -r /app/assets/images/brands /data/brands 2>/dev/null || true
-# fi
+# ── La BD se crea vacía si no existe; las migraciones llenan la estructura ────
+if [ ! -f /data/inventario.db ]; then
+    echo "📦 Primera ejecución: la base de datos se creará en /data/inventario.db"
+    echo "   Las migraciones se ejecutarán automáticamente al arrancar Node.js"
+fi
 
 echo "✅ Entorno listo — arrancando servidor Node.js..."
 exec "$@"
