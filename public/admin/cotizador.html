@@ -821,7 +821,14 @@
 
             .pv-content {
                 padding: 0 12mm;
+                height: 100%;
+                display: flex;
+                flex-direction: column;
                 /* Margen lateral reducido de 16mm a 12mm */
+            }
+
+            .pv-flex-spacer {
+                flex-grow: 1;
             }
 
             /* Global Fixed Footer */
@@ -837,6 +844,16 @@
                 border-top: 1pt solid #00AEEF;
                 border-image: linear-gradient(to right, #00AEEF, #EC008C, #FFF200) 1;
                 font-size: 8pt;
+                color: #555;
+            }
+
+            .pv-global-footer::before {
+                counter-increment: page;
+                content: "Página " counter(page);
+                font-weight: 600;
+                position: absolute;
+                left: 50%;
+                transform: translateX(-50%);
                 color: #555;
             }
 
@@ -1664,7 +1681,7 @@
 
             // Build table rows
             const rows = quoteItems.map((item, i) => `
-        <tr${(i > 0 && i % 5 === 0) ? ' style="break-before: page; page-break-before: always;"' : ''}>
+        <tr${(i > 0 && i % 6 === 0) ? ' style="break-before: page; page-break-before: always;"' : ''}>
             <td>${i + 1}</td>
             <td>
                 ${item.name || item.id}
@@ -1741,7 +1758,9 @@
                         </div>
                     </div>
 
-                    <div style="page-break-inside: avoid;">
+                    <div class="pv-flex-spacer"></div>
+
+                    <div style="page-break-inside: avoid; margin-top: auto; padding-top: 20pt;">
                         <div class="pv-legal-notes" style="border-top: none; padding-top: 0; margin-bottom: 12pt; text-align: justify;">
                             <strong>CONDICIONES:</strong> Vigencia: ${validity} días naturales. ${bizTerms}
                         </div>
