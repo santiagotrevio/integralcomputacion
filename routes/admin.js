@@ -367,4 +367,54 @@ router.get('/search-analytics', (req, res) => {
     });
 });
 
+
+// ─── SISTEMA DE COTIZACIONES ───
+
+// Listar clientes (historial)
+router.get('/clients', (req, res) => {
+    db.all("SELECT * FROM clients ORDER BY name ASC", [], (err, rows) => {
+        if (err) return res.status(500).json({ error: err.message });
+        res.json({ data: rows });
+    });
+});
+
+// Obtener el siguiente ID de cotización
+router.get('/quotes/next-id/:userId', (req, res) => {
+    const userId = req.params.userId.padStart(2, '0');
+    const now = new Date();
+    const dateStr = `${String(now.getDate()).padStart(2, '0')}${String(now.getMonth() + 1).padStart(2, '0')}${String(now.getFullYear()).slice(-2)}`;
+
+    const prefix = `IC${userId}-${dateStr}-`;
+
+    db.get("SELECT COUNT(*) as count FROM quotes WHERE quote_id LIKE ?", [`${prefix}%`], (err, row) => {
+        if (err) return res.status(500).json({ error: err.message });
+        const nextNum = (row.count + 1).toString().padStart(2, '0');
+        res.json({ nextId: `${prefix}${nextNum}` });
+    });
+});
+
+// Guardar cotización y cliente
+router.post('/quotes', (req, res) => {
+    const { quoteId, clientName, clientEmail, clientPhone, userId, total, items } = req.body;
+
+    if (!quoteId || !clientName) return res.status(400).json({ error: 'Datos incompletos' });
+
+    db.serialize(() => {
+        // 1. Upsert del cliente
+        db.run(`INSERT INTO clients (name, email, phone) VALUES (?, ?, ?)
+                ON CONFLICT(name) DO UPDATE SET 
+                email = excluded.email, 
+                phone = excluded.phone, 
+                last_quoted_at = CURRENT_TIMESTAMP`,
+            [clientName, clientEmail, clientPhone]);
+
+        // 2. Insertar la cotización
+        db.run(`INSERT INTO quotes (quote_id, client_name, user_id, total, items) VALUES (?, ?, ?, ?, ?)`,
+            [quoteId, clientName, userId, total, JSON.stringify(items)], (err) => {
+                if (err) return res.status(500).json({ error: err.message });
+                res.json({ success: true, quoteId });
+            });
+    });
+});
+
 module.exports = router;

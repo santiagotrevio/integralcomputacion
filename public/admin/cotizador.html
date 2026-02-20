@@ -1093,7 +1093,9 @@
                 <div class="section-divider">Datos del Cliente</div>
                 <div class="field">
                     <label class="lbl" for="fClientName">Nombre / Empresa</label>
-                    <input class="inp" id="fClientName" type="text" placeholder="Nombre del cliente o empresa">
+                    <input class="inp" id="fClientName" type="text" placeholder="Nombre del cliente o empresa"
+                        list="clientsList" onchange="onClientSelect(this.value)">
+                    <datalist id="clientsList"></datalist>
                 </div>
                 <div class="row2">
                     <div class="field">
@@ -1107,7 +1109,10 @@
                 </div>
                 <div class="field">
                     <label class="lbl" for="fVendor">Vendedor / Agente</label>
-                    <input class="inp" id="fVendor" type="text" placeholder="Tu nombre">
+                    <select class="inp" id="fVendor" onchange="updateQuoteId()">
+                        <option value="01">Rocío Romero (USUARIO 01)</option>
+                        <option value="02">Rocío Vázquez (USUARIO 02)</option>
+                    </select>
                 </div>
 
                 <!-- Cotización -->
@@ -1115,7 +1120,8 @@
                 <div class="row2">
                     <div class="field">
                         <label class="lbl" for="fQuoteNum">Número de Cotización</label>
-                        <input class="inp" id="fQuoteNum" type="text" placeholder="COT-2025-001">
+                        <input class="inp" id="fQuoteNum" type="text" readonly
+                            style="background:#f5f5f7; color:#8e8e93; font-weight:700;">
                     </div>
                     <div class="field">
                         <label class="lbl" for="fValidity">Vigencia (días)</label>
@@ -1192,9 +1198,10 @@
         let products = [];
         let quoteItems = [];
         let notFound = [];
+        let clients = []; // Historial de clientes
 
         // ────────────────────────────────────────────────────────────────────────────
-        // AUTH
+        // AUTH & LOAD
         // ────────────────────────────────────────────────────────────────────────────
         function getToken() { return localStorage.getItem(TOKEN_KEY); }
         async function apiFetch(url, opts = {}) {
@@ -1226,14 +1233,16 @@
                 if (r.ok && d.token) {
                     localStorage.setItem(TOKEN_KEY, d.token);
                     document.getElementById('loginOverlay').style.display = 'none';
-                    loadProducts();
+                    loadInitialData();
                 } else { err.style.display = 'block'; document.getElementById('adminPwd').value = ''; }
             } catch (e) { err.textContent = 'Error de conexión.'; err.style.display = 'block'; }
         }
 
-        // ────────────────────────────────────────────────────────────────────────────
-        // LOAD PRODUCTS
-        // ────────────────────────────────────────────────────────────────────────────
+        async function loadInitialData() {
+            loadProducts();
+            loadClients();
+        }
+
         async function loadProducts() {
             try {
                 const r = await apiFetch('/api/products');
@@ -1241,6 +1250,35 @@
                 const d = await r.json();
                 products = d.data || [];
             } catch (_) { showToast('⚠️ Sin conexión al servidor'); }
+        }
+
+        async function loadClients() {
+            try {
+                const r = await apiFetch('/api/clients');
+                const d = await r.json();
+                clients = d.data || [];
+                const list = document.getElementById('clientsList');
+                list.innerHTML = clients.map(c => `<option value="${c.name}">`).join('');
+            } catch (_) { }
+        }
+
+        function onClientSelect(name) {
+            const c = clients.find(cl => cl.name === name);
+            if (c) {
+                document.getElementById('fClientPhone').value = c.phone || '';
+                document.getElementById('fClientEmail').value = c.email || '';
+            }
+        }
+
+        async function updateQuoteId() {
+            const userId = document.getElementById('fVendor').value;
+            try {
+                const r = await apiFetch(`/api/quotes/next-id/${userId}`);
+                const d = await r.json();
+                document.getElementById('fQuoteNum').value = d.nextId;
+            } catch (_) {
+                showToast('Error al generar folio');
+            }
         }
 
         // ────────────────────────────────────────────────────────────────────────────
@@ -1394,11 +1432,7 @@
         // FORMAL PDF SHEET
         // ────────────────────────────────────────────────────────────────────────────
         function openFormalSheet() {
-            // Auto-fill quote number
-            const d = new Date();
-            const num = `COT-${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}${String(d.getDate()).padStart(2, '0')}`;
-            const el = document.getElementById('fQuoteNum');
-            if (!el.value) el.value = num;
+            updateQuoteId();
             document.getElementById('formalOverlay').classList.add('open');
         }
         function closeFormalSheet() {
@@ -1415,12 +1449,16 @@
                 .map(([, label]) => label);
         }
 
-        function printFormal() {
+        async function printFormal() {
             // Gather form values
             const clientName = document.getElementById('fClientName').value || 'Cliente';
             const clientPhone = document.getElementById('fClientPhone').value || '';
             const clientEmail = document.getElementById('fClientEmail').value || '';
-            const vendor = document.getElementById('fVendor').value || '';
+
+            const vendorSelect = document.getElementById('fVendor');
+            const userId = vendorSelect.value;
+            const vendorName = vendorSelect.options[vendorSelect.selectedIndex].text.split(' (')[0];
+
             const quoteNum = document.getElementById('fQuoteNum').value || 'COT-001';
             const validity = document.getElementById('fValidity').value || '15';
             const notes = document.getElementById('fNotes').value || '';
@@ -1438,6 +1476,18 @@
             const base = subtotal - disc;
             const iva = base * ivaRate / 100;
             const total = base + iva;
+
+            // Guardar en DB antes de imprimir
+            try {
+                await apiFetch('/api/quotes', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        quoteId: quoteNum, clientName, clientEmail, clientPhone, userId, total, items: quoteItems
+                    })
+                });
+                loadClients(); // Recargar historial de clientes
+            } catch (e) { console.error('Error saving quote', e); }
 
             // Build table rows
             const rows = quoteItems.map((item, i) => `
@@ -1485,7 +1535,7 @@
                     <strong>No. ${quoteNum}</strong><br>
                     Fecha: ${today}<br>
                     Vigente hasta: ${expiry}<br>
-                    ${vendor ? `Agente: ${vendor}` : ''}
+                    Agente: ${vendorName}
                 </p>
             </div>
         </div>
@@ -1577,7 +1627,7 @@
         function goBack() { window.location.href = '/public/admin/home.html'; }
 
         // ── INIT ─────────────────────────────────────────────────────────────────────
-        (async () => { if (await checkAuth()) loadProducts(); })();
+        (async () => { if (await checkAuth()) loadInitialData(); })();
     </script>
 </body>
 
