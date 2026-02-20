@@ -2257,10 +2257,10 @@
             const chunkedPages = [];
             const itemsCopy = [...quoteItems];
 
-            const FIRST_PAGE_MAX_WITH_TOTALS = 7;
-            const FIRST_PAGE_MAX_NO_TOTALS = 12;
-            const MIDDLE_PAGE_MAX = 18;
-            const LAST_PAGE_MAX_WITH_TOTALS = 12;
+            const FIRST_PAGE_MAX_WITH_TOTALS = 9;
+            const FIRST_PAGE_MAX_NO_TOTALS = 14;
+            const MIDDLE_PAGE_MAX = 20;
+            const LAST_PAGE_MAX_WITH_TOTALS = 14;
             const MIN_ITEMS_LAST_PAGE = 3;
 
             let isFirst = true;
@@ -2364,7 +2364,7 @@
             ${notes ? `<div style="font-size:8.5pt; color:#2c2c2e; padding:6pt 0; font-weight:600;">📌 Nota al cliente: ${notes}</div>` : ''}
             ` : `<div style="height: 15mm;"></div>`}
 
-            <div class="pv-table-container" ${(!isLastPage || (isFirstPage && isLastPage)) ? 'style="flex-grow: 1; display: flex; flex-direction: column; justify-content: center;"' : ''}>
+            <div class="pv-table-container">
                 <table class="pv-table">
                     <thead>
                         <tr>
