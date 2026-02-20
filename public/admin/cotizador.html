@@ -1749,6 +1749,14 @@
         function goBack() { window.location.href = '/public/admin/home.html'; }
 
         // ── INIT ─────────────────────────────────────────────────────────────────────
+        // Migración automática: corregir email antiguo en localStorage
+        (function migrateDefaults() {
+            const savedEmail = localStorage.getItem('bizEmail');
+            if (!savedEmail || savedEmail === 'info@integralcomputacion.com') {
+                localStorage.setItem('bizEmail', 'ventas@integralcomputacion.com');
+            }
+        })();
+
         (async () => { if (await checkAuth()) loadInitialData(); })();
     </script>
 </body>
