@@ -1,5 +1,6 @@
 
-const API_SECRET_TOKEN = process.env.API_SECRET_TOKEN || 'integral_secret_token_change_me';
+const API_SECRET_TOKEN = process.env.API_SECRET_TOKEN;
+
 
 const authMiddleware = (req, res, next) => {
     const authHeader = req.headers['authorization'];

@@ -9,8 +9,14 @@ const { exec } = require('child_process');
 const db = require('../lib/db');
 const authMiddleware = require('../middleware/auth');
 
-const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'admin123';
-const API_SECRET_TOKEN = process.env.API_SECRET_TOKEN || 'integral_secret_token_change_me';
+
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD;
+const API_SECRET_TOKEN = process.env.API_SECRET_TOKEN;
+
+if (!ADMIN_PASSWORD || !API_SECRET_TOKEN) {
+    console.error('❌ FATAL: ADMIN_PASSWORD y API_SECRET_TOKEN deben estar definidos en .env');
+    process.exit(1);
+}
 
 // Configuración de almacenamiento en memoria para procesamiento
 const upload = multer({ storage: multer.memoryStorage() });
