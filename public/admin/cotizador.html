@@ -1808,12 +1808,32 @@
 
         // --- FORMAL SHEET ---
         async function openFormalSheet() {
+            // 1. Abrir el sheet INMEDIATAMENTE (no esperar el fetch del folio)
             const today = new Date().toISOString().split('T')[0];
             document.getElementById('fQuoteDate').value = today;
-            await updateQuoteId();
-            // Activar listeners de autocompletado al abrir
             loadClientCRM();
             document.getElementById('formalOverlay').classList.add('open');
+
+            // 2. Cargar el folio en segundo plano (sin bloquear apertura)
+            const quoteNumEl = document.getElementById('fQuoteNum');
+            quoteNumEl.value = '...';
+            try {
+                const userId = document.getElementById('fVendor').value;
+                const r = await apiFetch(`/api/quotes/next-id/${userId}?date=${today}`);
+                const d = await r.json();
+                quoteNumEl.value = d.nextId || generarFolioLocal(userId, today);
+            } catch (_) {
+                quoteNumEl.value = generarFolioLocal(
+                    document.getElementById('fVendor').value, today
+                );
+            }
+        }
+        function generarFolioLocal(userId, dateStr) {
+            // Fallback cuando la red falla: genera folio con timestamp único
+            const [y, m, d] = dateStr.split('-');
+            const date = `${d}${m}${y.slice(-2)}`;
+            const rand = String(Math.floor(Math.random() * 90) + 10);
+            return `IC${userId.padStart(2, '0')}-${date}-${rand}`;
         }
         function closeFormalSheet() {
             document.getElementById('formalOverlay').classList.remove('open');
