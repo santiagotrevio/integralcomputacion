@@ -1161,8 +1161,6 @@
                     <div class="sheet-title">📋 Cotización Formal (PDF)</div>
                 </div>
                 <div>
-                    <button class="sheet-close" onclick="openDesignSheet()" style="margin-right:8px;"
-                        title="Ajustar Diseño del PDF"><i class="fa-solid fa-wand-magic-sparkles"></i></button>
                     <button class="sheet-close" onclick="openSettingsSheet()" style="margin-right:8px;"
                         title="Configurar Empresa"><i class="fa-solid fa-gear"></i></button>
                     <button class="sheet-close" onclick="closeFormalSheet()"><i class="fa-solid fa-xmark"></i></button>
@@ -1295,56 +1293,8 @@
     </div>
 
     <!-- ════════════════════════════════════════════
-     DESIGN SHEET (PDF Layout Tune)
-══════════════════════════════════════════════ -->
-    <div class="sheet-overlay" id="designOverlay" onclick="if(event.target===this) closeDesignSheet()">
-        <div class="sheet" id="designSheet">
-            <div class="sheet-handle-area">
-                <div>
-                    <div class="sheet-handle"></div>
-                    <div class="sheet-title">✨ Ajustar Diseño de Cotización</div>
-                </div>
-                <button class="sheet-close" onclick="closeDesignSheet()"><i class="fa-solid fa-xmark"></i></button>
-            </div>
-            <div class="sheet-body">
-                <div class="section-divider">Tamaño del Logo</div>
-                <div class="field" style="display:flex; align-items:center; gap:16px;">
-                    <i class="fa-solid fa-image" style="color:#aaa;"></i>
-                    <input type="range" id="cfgLogoScale" min="0.5" max="2" step="0.1" value="1"
-                        style="flex:1; accent-color:#0071e3;">
-                    <span id="cfgLogoScaleVal" style="font-weight:700; font-size:12px; min-width:30px;">1x</span>
-                </div>
-
-                <div class="section-divider">Margen Vertical (Alinear Subidas/Bajadas)</div>
-                <div class="row2">
-                    <div class="field">
-                        <label class="lbl">Ajuste Altura de Logo</label>
-                        <div style="display:flex; align-items:center; gap:8px;">
-                            <input type="range" id="cfgLogoY" min="-50" max="50" step="1" value="0" style="flex:1;">
-                        </div>
-                    </div>
-                    <div class="field">
-                        <label class="lbl">Ajuste Altura de Texto (Der.)</label>
-                        <div style="display:flex; align-items:center; gap:8px;">
-                            <input type="range" id="cfgTextY" min="-50" max="50" step="1" value="0" style="flex:1;">
-                        </div>
-                    </div>
-                </div>
-
-                <button class="btn-primary" onclick="saveDesignSettings()" style="margin-top:24px;">
-                    <i class="fa-solid fa-save"></i> Aplicar y Guardar
-                </button>
-                <div style="text-align:center; margin-top:16px;">
-                    <button class="btn-secondary" onclick="resetDesignSettings()"
-                        style="width: auto; padding: 4px 12px; font-size: 11px;">Restaurar por defecto</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- ════════════════════════════════════════════
      PRINT VIEW (only visible to printer)
-══════════════════════════════════════════════ -->
+ ══════════════════════════════════════════════ -->
     <div id="printView"></div>
 
     <!-- TOAST -->
@@ -1648,42 +1598,7 @@
             closeSettingsSheet();
         }
 
-        // --- DESIGN SHEET ---
-        function openDesignSheet() {
-            closeFormalSheet();
-            document.getElementById('designOverlay').classList.add('open');
-
-            const logoScale = localStorage.getItem('cfgLogoScale') || 1;
-            document.getElementById('cfgLogoScale').value = logoScale;
-            document.getElementById('cfgLogoScaleVal').innerText = logoScale + 'x';
-            document.getElementById('cfgLogoY').value = localStorage.getItem('cfgLogoY') || 0;
-            document.getElementById('cfgTextY').value = localStorage.getItem('cfgTextY') || 0;
-
-            document.getElementById('cfgLogoScale').oninput = function () {
-                document.getElementById('cfgLogoScaleVal').innerText = this.value + 'x';
-            };
-        }
-        function closeDesignSheet() {
-            document.getElementById('designOverlay').classList.remove('open');
-            openFormalSheet();
-        }
-        function saveDesignSettings() {
-            localStorage.setItem('cfgLogoScale', document.getElementById('cfgLogoScale').value);
-            localStorage.setItem('cfgLogoY', document.getElementById('cfgLogoY').value);
-            localStorage.setItem('cfgTextY', document.getElementById('cfgTextY').value);
-            showToast('✓ Ajustes de diseño guardados');
-            closeDesignSheet();
-        }
-        function resetDesignSettings() {
-            localStorage.removeItem('cfgLogoScale');
-            localStorage.removeItem('cfgLogoY');
-            localStorage.removeItem('cfgTextY');
-            document.getElementById('cfgLogoScale').value = 1;
-            document.getElementById('cfgLogoY').value = 0;
-            document.getElementById('cfgTextY').value = 0;
-            document.getElementById('cfgLogoScaleVal').innerText = '1x';
-            showToast('✓ Ajustes restaurados. Guarda para aplicar.');
-        }
+        // --- DESIGN SHEET (Moved to Admin Home) ---
 
         function getCheckedPayments() {
             const map = {

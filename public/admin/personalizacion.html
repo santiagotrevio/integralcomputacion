@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Configuración de Facturas/PDF | Integral Computación</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #f5f5f7;
+            --text: #1d1d1f;
+            --subtext: #8e8e93;
+            --accent: #0071e3;
+            --border: #e5e5ea;
+            --card-bg: #fff;
+        }
+
+        body.dark-mode {
+            --bg: #000;
+            --text: #f5f5f7;
+            --subtext: #98989d;
+            --border: #333336;
+            --card-bg: #1c1c1e;
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* TOP BAR */
+        .topbar {
+            height: 60px;
+            background: var(--card-bg);
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+        }
+
+        .topbar-back {
+            background: transparent;
+            border: none;
+            color: var(--accent);
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            text-decoration: none;
+        }
+
+        .topbar h1 {
+            font-size: 17px;
+            font-weight: 700;
+            margin-left: auto;
+            margin-right: auto;
+            transform: translateX(-20px);
+        }
+
+        /* CONTAINER */
+        .container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 0 20px;
+            width: 100%;
+        }
+
+        h2.section-title {
+            font-size: 24px;
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+
+        p.section-desc {
+            font-size: 15px;
+            color: var(--subtext);
+            margin-bottom: 32px;
+            line-height: 1.5;
+        }
+
+        /* DESIGN CARD */
+        .design-card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 24px;
+            border: 1px solid var(--border);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+            margin-bottom: 30px;
+        }
+
+        /* PREVIEW AREA */
+        .preview-box {
+            background: white;
+            /* Siempre blanco para simular hoja bond */
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            padding: 20px 40px 0;
+            margin-bottom: 30px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        .preview-box::before {
+            content: "VISTA PREVIA DE HOJA (PDF)";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            font-size: 10px;
+            font-weight: 700;
+            color: #888;
+            background: #f0f0f0;
+            padding: 4px 0;
+            letter-spacing: 1px;
+        }
+
+        /* HEADER REPLICA */
+        .pv-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: stretch;
+            padding-bottom: 12pt;
+            border-bottom: 2pt solid #00AEEF;
+            border-image: linear-gradient(to right, #00AEEF, #EC008C, #FFF200) 1;
+            margin-bottom: 16pt;
+            margin-top: 30px;
+        }
+
+        .pv-logo {
+            width: auto;
+            height: 100%;
+            max-height: 90pt;
+            object-fit: contain;
+            object-position: left center;
+            display: block;
+            outline: 1px dashed rgba(0, 113, 227, 0.3);
+            transform-origin: left center;
+            transition: transform 0.1s;
+        }
+
+        .pv-biz {
+            text-align: right;
+            font-size: 9pt;
+            color: #555;
+            line-height: 1.5;
+            font-family: inherit;
+            /* Simulate font */
+            outline: 1px dashed rgba(0, 113, 227, 0.3);
+            transition: transform 0.1s;
+        }
+
+        .pv-biz strong {
+            font-size: 13pt;
+            color: #1c1c1e;
+            display: block;
+            margin-bottom: 3pt;
+        }
+
+        /* FIELDS */
+        .field {
+            margin-bottom: 24px;
+        }
+
+        .lbl {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--subtext);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 12px;
+            display: block;
+        }
+
+        .slider-row {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        input[type="range"] {
+            flex: 1;
+            accent-color: var(--accent);
+        }
+
+        .val-badge {
+            font-weight: 700;
+            font-size: 14px;
+            min-width: 45px;
+            text-align: right;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .btn-primary {
+            width: 100%;
+            padding: 16px;
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 14px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .btn-primary:hover {
+            background: #005bb5;
+        }
+
+        .btn-secondary {
+            width: 100%;
+            background: transparent;
+            color: var(--subtext);
+            border: none;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            padding: 10px;
+            margin-top: 10px;
+        }
+
+        .btn-secondary:hover {
+            color: var(--text);
+        }
+
+        #toast {
+            position: fixed;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.85);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 24px;
+            font-size: 14px;
+            font-weight: 600;
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        #toast.show {
+            opacity: 1;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="topbar">
+        <a href="home.html" class="topbar-back"><i class="fa-solid fa-chevron-left"></i> Home</a>
+        <h1>Personalización</h1>
+    </header>
+
+    <div class="container">
+        <h2 class="section-title">Plantillas de Factura / PDF</h2>
+        <p class="section-desc">Arrastra los controles para ajustar visualmente el acomodo de tu logotipo y texto. Estos
+            ajustes se aplicarán en todas las cotizaciones futuras que generes desde tu computadora.</p>
+
+        <!-- PREVIEW -->
+        <div class="preview-box">
+            <div class="pv-header">
+                <img class="pv-logo" id="pvLogo" src="/assets/images/HORIZONTAL grande.png"
+                    onerror="this.src='/assets/logo.svg'">
+                <div class="pv-biz" id="pvBiz">
+                    Suministros y Equipos de Cómputo<br>
+                    Tel: <span id="prevPhone">(33) 12680092</span><br>
+                    <span id="prevEmail">ventas@integralcomputacion.com</span><br>
+                    www.integralcomputacion.com
+                </div>
+            </div>
+        </div>
+
+        <!-- CONTROLS -->
+        <div class="design-card">
+
+            <div class="field">
+                <label class="lbl"><i class="fa-solid fa-compress"></i> Tamaño del Logotipo (Escala)</label>
+                <div class="slider-row">
+                    <input type="range" id="cfgLogoScale" min="0.5" max="2" step="0.1" value="1">
+                    <span class="val-badge" id="valScale">1.0x</span>
+                </div>
+            </div>
+
+            <div class="field">
+                <label class="lbl"><i class="fa-solid fa-arrows-up-down"></i> Altura del Logotipo</label>
+                <div class="slider-row">
+                    <input type="range" id="cfgLogoY" min="-50" max="50" step="1" value="0">
+                    <span class="val-badge" id="valLogoY">0px</span>
+                </div>
+            </div>
+
+            <div class="field">
+                <label class="lbl"><i class="fa-solid fa-arrows-up-down"></i> Altura del Párrafo (Sucursal)</label>
+                <div class="slider-row">
+                    <input type="range" id="cfgTextY" min="-50" max="50" step="1" value="0">
+                    <span class="val-badge" id="valTextY">0px</span>
+                </div>
+            </div>
+
+            <button class="btn-primary" onclick="saveSettings()"><i class="fa-solid fa-save"></i> Guardar
+                Cambios</button>
+            <button class="btn-secondary" onclick="resetSettings()">Restaurar ajustes por defecto</button>
+        </div>
+    </div>
+
+    <div id="toast"></div>
+
+    <script>
+        // Set dark mode if any
+        if (localStorage.getItem('admin-theme') === 'dark') document.body.classList.add('dark-mode');
+
+        const logoScaleObj = document.getElementById('cfgLogoScale');
+        const logoYObj = document.getElementById('cfgLogoY');
+        const textYObj = document.getElementById('cfgTextY');
+
+        const pvLogo = document.getElementById('pvLogo');
+        const pvBiz = document.getElementById('pvBiz');
+
+        function updatePreview() {
+            const scale = logoScaleObj.value;
+            const ly = logoYObj.value;
+            const ty = textYObj.value;
+
+            document.getElementById('valScale').innerText = Number(scale).toFixed(1) + 'x';
+            document.getElementById('valLogoY').innerText = ly + 'px';
+            document.getElementById('valTextY').innerText = ty + 'px';
+
+            pvLogo.style.transform = `translateY(${ly}px) scale(${scale})`;
+            pvBiz.style.transform = `translateY(${ty}px)`;
+        }
+
+        // Load initials
+        logoScaleObj.value = localStorage.getItem('cfgLogoScale') || 1;
+        logoYObj.value = localStorage.getItem('cfgLogoY') || 0;
+        textYObj.value = localStorage.getItem('cfgTextY') || 0;
+
+        // Simular datos de localStorage si los hay
+        document.getElementById('prevPhone').innerText = localStorage.getItem('bizPhone') || '(33) 12680092';
+        document.getElementById('prevEmail').innerText = localStorage.getItem('bizEmail') || 'ventas@integralcomputacion.com';
+
+        updatePreview();
+
+        logoScaleObj.addEventListener('input', updatePreview);
+        logoYObj.addEventListener('input', updatePreview);
+        textYObj.addEventListener('input', updatePreview);
+
+        function showToast(msg) {
+            const t = document.getElementById('toast');
+            t.innerText = msg;
+            t.classList.add('show');
+            setTimeout(() => t.classList.remove('show'), 3000);
+        }
+
+        function saveSettings() {
+            localStorage.setItem('cfgLogoScale', logoScaleObj.value);
+            localStorage.setItem('cfgLogoY', logoYObj.value);
+            localStorage.setItem('cfgTextY', textYObj.value);
+            showToast('✓ Ajustes guardados correctamente');
+        }
+
+        function resetSettings() {
+            logoScaleObj.value = 1;
+            logoYObj.value = 0;
+            textYObj.value = 0;
+            updatePreview();
+            localStorage.removeItem('cfgLogoScale');
+            localStorage.removeItem('cfgLogoY');
+            localStorage.removeItem('cfgTextY');
+            showToast('✓ Ajustes restaurados por defecto');
+        }
+    </script>
+</body>
+
+</html>
