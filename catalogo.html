@@ -189,10 +189,12 @@
             /* fixed container — logo clips to this, no CSS overrides to img */
         }
 
-        /* brand-logo-img: NO size overrides here.
-           Size is controlled by brandImgStyle in JS (15px * scale from Personalización de Marca).
-           Only layout/display properties here. */
+        /* brand-logo-img: max-height is controlled by JS inline style (15px × scale from Personalización de Marca).
+           max-width is set here as a CSS cap to prevent horizontal overflow regardless of scale.
+           This matches admin.css where max-width:60px is class-level and max-height is overridden inline. */
         .brand-logo-img {
+            max-width: 80px;
+            /* cap horizontal growth — JS inline style controls height via scale */
             object-fit: contain;
             display: block;
         }
