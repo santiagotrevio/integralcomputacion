@@ -381,8 +381,22 @@ router.get('/clients', (req, res) => {
 // Obtener el siguiente ID de cotización
 router.get('/quotes/next-id/:userId', (req, res) => {
     const userId = req.params.userId.padStart(2, '0');
-    const now = new Date();
-    const dateStr = `${String(now.getDate()).padStart(2, '0')}${String(now.getMonth() + 1).padStart(2, '0')}${String(now.getFullYear()).slice(-2)}`;
+    let dateStr;
+
+    if (req.query.date) {
+        // Formato esperado: YYYY-MM-DD del input date
+        const parts = req.query.date.split('-');
+        if (parts.length === 3) {
+            const [y, m, d] = parts;
+            dateStr = `${d.padStart(2, '0')}${m.padStart(2, '0')}${y.slice(-2)}`;
+        }
+    }
+
+    // Fallback a hoy si no hay fecha o es inválida
+    if (!dateStr) {
+        const now = new Date();
+        dateStr = `${String(now.getDate()).padStart(2, '0')}${String(now.getMonth() + 1).padStart(2, '0')}${String(now.getFullYear()).slice(-2)}`;
+    }
 
     const prefix = `IC${userId}-${dateStr}-`;
 

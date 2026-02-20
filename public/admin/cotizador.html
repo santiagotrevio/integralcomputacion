@@ -1118,7 +1118,7 @@
                 <div class="row2">
                     <div class="field">
                         <label class="lbl" for="fQuoteDate">Fecha de Cotización</label>
-                        <input class="inp" id="fQuoteDate" type="date">
+                        <input class="inp" id="fQuoteDate" type="date" onchange="updateQuoteId()">
                     </div>
                     <div class="field">
                         <label class="lbl" for="fValidity">Vigencia (días)</label>
@@ -1274,8 +1274,9 @@
 
         async function updateQuoteId() {
             const userId = document.getElementById('fVendor').value;
+            const date = document.getElementById('fQuoteDate').value;
             try {
-                const r = await apiFetch(`/api/quotes/next-id/${userId}`);
+                const r = await apiFetch(`/api/quotes/next-id/${userId}?date=${date}`);
                 const d = await r.json();
                 document.getElementById('fQuoteNum').value = d.nextId;
             } catch (_) {
@@ -1465,7 +1466,7 @@
             const userId = vendorSelect.value;
             const vendorName = vendorSelect.options[vendorSelect.selectedIndex].text.split(' (')[0];
 
-            const quoteNum = document.getElementById('fQuoteNum').value || `IC${userId}-${new Date().toLocaleDateString('es-MX', { day: '2-digit', month: '2-digit', year: '2-digit' }).replace(/\//g, '')}-01`;
+            const quoteNum = document.getElementById('fQuoteNum').value || `IC${userId}-${new Date().toISOString().split('T')[0].split('-').reverse().join('').slice(0, 4)}${new Date().getFullYear().toString().slice(-2)}-01`;
             const validity = document.getElementById('fValidity').value || '15';
             const notes = document.getElementById('fNotes').value || '';
             const ivaRate = parseFloat(document.getElementById('fIvaRate').value) || 16;
