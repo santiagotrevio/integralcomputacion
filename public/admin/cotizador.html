@@ -1085,7 +1085,11 @@
                     <div class="sheet-handle"></div>
                     <div class="sheet-title">📋 Cotización Formal (PDF)</div>
                 </div>
-                <button class="sheet-close" onclick="closeFormalSheet()"><i class="fa-solid fa-xmark"></i></button>
+                <div>
+                    <button class="sheet-close" onclick="openSettingsSheet()" style="margin-right:8px;"
+                        title="Configurar Empresa"><i class="fa-solid fa-gear"></i></button>
+                    <button class="sheet-close" onclick="closeFormalSheet()"><i class="fa-solid fa-xmark"></i></button>
+                </div>
             </div>
             <div class="sheet-body">
 
@@ -1164,6 +1168,65 @@
                     <i class="fa-solid fa-print"></i> Generar y Guardar PDF
                 </button>
                 <button class="btn-secondary" onclick="closeFormalSheet()">Cancelar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ════════════════════════════════════════════
+     SETTINGS SHEET (Company Data)
+══════════════════════════════════════════════ -->
+    <div class="sheet-overlay" id="settingsOverlay" onclick="if(event.target===this) closeSettingsSheet()">
+        <div class="sheet" id="settingsSheet">
+            <div class="sheet-handle-area">
+                <div>
+                    <div class="sheet-handle"></div>
+                    <div class="sheet-title">⚙️ Datos de la Empresa</div>
+                </div>
+                <button class="sheet-close" onclick="closeSettingsSheet()"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="sheet-body">
+                <div class="section-divider">Contacto Principal</div>
+                <div class="row2">
+                    <div class="field">
+                        <label class="lbl" for="cfgPhone">Teléfono del Negocio</label>
+                        <input class="inp" id="cfgPhone" type="text" placeholder="(33) 0000-0000">
+                    </div>
+                    <div class="field">
+                        <label class="lbl" for="cfgEmail">Email del Negocio</label>
+                        <input class="inp" id="cfgEmail" type="email" placeholder="info@...">
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="lbl" for="cfgWeb">Sitio Web</label>
+                    <input class="inp" id="cfgWeb" type="text" placeholder="www.integralcomputacion.com">
+                </div>
+
+                <div class="section-divider">Redes Sociales</div>
+                <div class="field">
+                    <label class="lbl" for="cfgWa">WhatsApp (PDF Footer)</label>
+                    <input class="inp" id="cfgWa" type="text" placeholder="(33) 0000-0000">
+                </div>
+                <div class="row2">
+                    <div class="field">
+                        <label class="lbl" for="cfgIg">Instagram</label>
+                        <input class="inp" id="cfgIg" type="text" placeholder="@integralcomputacion">
+                    </div>
+                    <div class="field">
+                        <label class="lbl" for="cfgFb">Facebook</label>
+                        <input class="inp" id="cfgFb" type="text" placeholder="/integralcomputacion">
+                    </div>
+                </div>
+
+                <div class="section-divider">Pie de Página (Legales)</div>
+                <div class="field">
+                    <label class="lbl" for="cfgTerms">Condiciones (fijas en toda cotización)</label>
+                    <input class="inp" id="cfgTerms" type="text"
+                        placeholder="Precios sujetos a disponibilidad y cambio sin previo aviso.">
+                </div>
+
+                <button class="btn-primary" onclick="saveSettings()" style="margin-top:24px;">
+                    <i class="fa-solid fa-save"></i> Guardar Cambios
+                </button>
             </div>
         </div>
     </div>
@@ -1446,6 +1509,36 @@
             document.getElementById('formalOverlay').classList.remove('open');
         }
 
+        // --- SETTINGS SHEET ---
+        function openSettingsSheet() {
+            closeFormalSheet();
+            document.getElementById('settingsOverlay').classList.add('open');
+
+            // Cargar desde localStorage o poner defaults
+            document.getElementById('cfgPhone').value = localStorage.getItem('bizPhone') || '(33) 0000-0000';
+            document.getElementById('cfgEmail').value = localStorage.getItem('bizEmail') || 'info@integralcomputacion.com';
+            document.getElementById('cfgWeb').value = localStorage.getItem('bizWeb') || 'www.integralcomputacion.com';
+            document.getElementById('cfgWa').value = localStorage.getItem('bizWa') || '(33) 0000-0000';
+            document.getElementById('cfgIg').value = localStorage.getItem('bizIg') || '@integralcomputacion';
+            document.getElementById('cfgFb').value = localStorage.getItem('bizFb') || '/integralcomputacion';
+            document.getElementById('cfgTerms').value = localStorage.getItem('bizTerms') || 'Precios sujetos a disponibilidad y cambio sin previo aviso.';
+        }
+        function closeSettingsSheet() {
+            document.getElementById('settingsOverlay').classList.remove('open');
+            openFormalSheet(); // Vuelve al PDF
+        }
+        function saveSettings() {
+            localStorage.setItem('bizPhone', document.getElementById('cfgPhone').value);
+            localStorage.setItem('bizEmail', document.getElementById('cfgEmail').value);
+            localStorage.setItem('bizWeb', document.getElementById('cfgWeb').value);
+            localStorage.setItem('bizWa', document.getElementById('cfgWa').value);
+            localStorage.setItem('bizIg', document.getElementById('cfgIg').value);
+            localStorage.setItem('bizFb', document.getElementById('cfgFb').value);
+            localStorage.setItem('bizTerms', document.getElementById('cfgTerms').value);
+            showToast('✓ Datos de empresa guardados');
+            closeSettingsSheet();
+        }
+
         function getCheckedPayments() {
             const map = {
                 payEfectivo: 'Efectivo', payTransferencia: 'Transferencia', payBBVA: 'BBVA CoDi',
@@ -1457,6 +1550,15 @@
         }
 
         async function printFormal() {
+            // Cargar configuración de empresa
+            const bizPhone = localStorage.getItem('bizPhone') || '(33) 0000-0000';
+            const bizEmail = localStorage.getItem('bizEmail') || 'info@integralcomputacion.com';
+            const bizWeb = localStorage.getItem('bizWeb') || 'www.integralcomputacion.com';
+            const bizWa = localStorage.getItem('bizWa') || '(33) 0000-0000';
+            const bizIg = localStorage.getItem('bizIg') || '@integralcomputacion';
+            const bizFb = localStorage.getItem('bizFb') || '/integralcomputacion';
+            const bizTerms = localStorage.getItem('bizTerms') || 'Precios sujetos a disponibilidad y cambio sin previo aviso.';
+
             // Gather form values
             const clientName = document.getElementById('fClientName').value || 'Cliente';
             const clientPhone = document.getElementById('fClientPhone').value || '';
@@ -1522,11 +1624,11 @@
             <img class="pv-logo" src="/assets/images/LOGO SIN TEXTO.png"
                  onerror="this.src='/assets/logo.svg'">
             <div class="pv-biz">
-                <strong>Integral Computación</strong>
+                <strong>Integral Computación</strong><br>
                 Suministros y Equipos de Cómputo<br>
-                Tel: (33) 0000-0000<br>
-                info@integralcomputacion.com<br>
-                www.integralcomputacion.com
+                Tel: ${bizPhone}<br>
+                ${bizEmail}<br>
+                ${bizWeb}
             </div>
         </div>
 
@@ -1582,14 +1684,14 @@
             <div class="pv-footer-col">
                 <h5>Contacto y Redes</h5>
                 <p>
-                    📱 WhatsApp: (33) 0000-0000<br>
-                    Instagram: @integralcomputacion<br>
-                    Facebook: /integralcomputacion
+                    📱 WhatsApp: ${bizWa}<br>
+                    Instagram: ${bizIg}<br>
+                    Facebook: ${bizFb}
                 </p>
             </div>
             <div class="pv-footer-col">
                 <h5>Notas</h5>
-                <p>Precios sujetos a disponibilidad y cambio sin previo aviso. Esta cotización es válida por ${validity} día${validity !== '1' ? 's' : ''}.</p>
+                <p>${bizTerms} Esta cotización es válida por ${validity} día${validity !== '1' ? 's' : ''}.</p>
             </div>
         </div>`;
 
