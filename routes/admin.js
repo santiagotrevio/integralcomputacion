@@ -407,6 +407,30 @@ router.get('/quotes/next-id/:userId', (req, res) => {
     });
 });
 
+// Listar clientes del CRM con conteo de cotizaciones
+router.get('/clients', authMiddleware, (req, res) => {
+    const { q } = req.query; // búsqueda opcional
+    let query = `
+        SELECT c.id, c.name, c.email, c.phone, c.last_quoted_at,
+               COUNT(qu.id) as quote_count,
+               MAX(qu.total) as max_total,
+               SUM(qu.total) as total_spent
+        FROM clients c
+        LEFT JOIN quotes qu ON qu.client_name = c.name AND qu.status != 'trash'
+    `;
+    const params = [];
+    if (q) {
+        query += ` WHERE (c.name LIKE ? OR c.email LIKE ? OR c.phone LIKE ?)`;
+        const like = `%${q}%`;
+        params.push(like, like, like);
+    }
+    query += ` GROUP BY c.id ORDER BY c.last_quoted_at DESC`;
+    db.all(query, params, (err, rows) => {
+        if (err) return res.status(500).json({ error: err.message });
+        res.json({ data: rows });
+    });
+});
+
 // Guardar cotización y cliente
 router.post('/quotes', authMiddleware, (req, res) => {
     const { quoteId, clientName, clientEmail, clientPhone, userId, total, items, notes, validity } = req.body;

@@ -1938,6 +1938,18 @@
             document.getElementById('fQuoteDateDisplay').value =
                 new Date(today + 'T12:00:00').toLocaleDateString('es-MX', { day: '2-digit', month: 'short', year: 'numeric' });
 
+            // Pre-llenar cliente si viene desde Contactos Guardados
+            const prefillRaw = localStorage.getItem('_prefillClient');
+            if (prefillRaw) {
+                try {
+                    const { name, phone, email } = JSON.parse(prefillRaw);
+                    document.getElementById('fClientName').value = name || '';
+                    document.getElementById('fClientPhone').value = phone || '';
+                    document.getElementById('fClientEmail').value = email || '';
+                } catch (_) { }
+                localStorage.removeItem('_prefillClient');
+            }
+
             loadClientCRM();
             document.getElementById('formalOverlay').classList.add('open');
 
@@ -2393,8 +2405,135 @@
             if (target === 'history') {
                 showHistoryPanel();
             } else if (target === 'contacts') {
-                showToast('Contactos en construcción 🚧');
+                showContactsPanel();
             }
+        }
+
+        // ── PANEL DE CONTACTOS GUARDADOS ─────────────────────────────────────────
+        function showContactsPanel() {
+            let panel = document.getElementById('contactsPanel');
+            if (!panel) {
+                panel = document.createElement('div');
+                panel.id = 'contactsPanel';
+                panel.style.cssText = 'position:fixed;inset:0;z-index:600;background:var(--bg);display:flex;flex-direction:column;';
+                panel.innerHTML = `
+                    <div style="position:sticky;top:0;background:var(--surface);border-bottom:1px solid var(--border);
+                                padding:16px 20px;display:flex;align-items:center;gap:12px;z-index:10;">
+                        <button onclick="closeContactsPanel()" style="background:none;border:none;font-size:20px;color:var(--accent);cursor:pointer;">
+                            <i class="fa-solid fa-chevron-left"></i>
+                        </button>
+                        <h2 style="font-size:17px;font-weight:800;flex:1;">Contactos Guardados</h2>
+                        <span id="contactsCount" style="font-size:13px;color:var(--subtext);font-weight:600;"></span>
+                    </div>
+                    <!-- Buscador -->
+                    <div style="padding:12px 16px;background:var(--surface);border-bottom:1px solid var(--border);">
+                        <div style="position:relative;">
+                            <i class="fa-solid fa-magnifying-glass" style="position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--subtext);font-size:14px;"></i>
+                            <input id="contactSearch" type="search" placeholder="Buscar por nombre, teléfono o email…"
+                                oninput="searchContacts(this.value)"
+                                style="width:100%;box-sizing:border-box;padding:10px 12px 10px 36px;border:1.5px solid var(--border);
+                                       border-radius:12px;font-size:14px;font-family:'Inter',sans-serif;background:var(--bg);
+                                       color:var(--text);outline:none;">
+                        </div>
+                    </div>
+                    <!-- Lista -->
+                    <div id="contactsList" style="flex:1;overflow-y:auto;padding:12px 16px;"></div>
+                `;
+                document.body.appendChild(panel);
+            }
+            panel.style.display = 'flex';
+            loadContacts('');
+        }
+
+        function closeContactsPanel() {
+            const p = document.getElementById('contactsPanel');
+            if (p) p.style.display = 'none';
+        }
+
+        let _contactSearchTimer = null;
+        function searchContacts(q) {
+            clearTimeout(_contactSearchTimer);
+            _contactSearchTimer = setTimeout(() => loadContacts(q), 300);
+        }
+
+        async function loadContacts(q = '') {
+            const list = document.getElementById('contactsList');
+            const countEl = document.getElementById('contactsCount');
+            if (!list) return;
+            list.innerHTML = '<p style="text-align:center;color:var(--subtext);padding:40px 0;">Cargando…</p>';
+            try {
+                const url = q ? `/api/clients?q=${encodeURIComponent(q)}` : '/api/clients';
+                const res = await apiFetch(url);
+                const { data } = await res.json();
+                if (countEl) countEl.textContent = `${data.length} contacto${data.length !== 1 ? 's' : ''}`;
+                if (!data || data.length === 0) {
+                    list.innerHTML = '<p style="text-align:center;color:var(--subtext);padding:40px 0;"><i class="fa-solid fa-user-slash" style="font-size:32px;display:block;margin-bottom:12px;opacity:.3;"></i>Sin contactos aún</p>';
+                    return;
+                }
+                list.innerHTML = data.map(c => {
+                    const lastDate = c.last_quoted_at
+                        ? new Date(c.last_quoted_at).toLocaleDateString('es-MX', { day: '2-digit', month: 'short', year: 'numeric' })
+                        : '—';
+                    const totalSpent = c.total_spent
+                        ? `$${Number(c.total_spent).toLocaleString('es-MX', { minimumFractionDigits: 2 })}`
+                        : '—';
+                    const quotes = c.quote_count || 0;
+                    const initials = c.name.split(' ').slice(0, 2).map(w => w[0]).join('').toUpperCase();
+                    const avatarColor = stringToColor(c.name);
+                    return `
+                    <div style="background:var(--surface);border:1.5px solid var(--border);border-radius:14px;
+                                padding:14px 16px;margin-bottom:10px;display:flex;gap:12px;align-items:center;">
+                        <!-- Avatar -->
+                        <div style="width:44px;height:44px;border-radius:50%;background:${avatarColor};
+                                    display:flex;align-items:center;justify-content:center;
+                                    font-size:15px;font-weight:800;color:white;flex-shrink:0;">
+                            ${initials}
+                        </div>
+                        <!-- Info -->
+                        <div style="flex:1;min-width:0;">
+                            <div style="font-size:15px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${c.name}</div>
+                            ${c.phone ? `<div style="font-size:12px;color:var(--subtext);">${c.phone}</div>` : ''}
+                            ${c.email ? `<div style="font-size:12px;color:var(--subtext);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${c.email}</div>` : ''}
+                            <div style="display:flex;gap:10px;margin-top:4px;align-items:center;">
+                                <span style="font-size:11px;color:var(--subtext);">${quotes} cotización${quotes !== 1 ? 'es' : ''}</span>
+                                <span style="font-size:11px;font-weight:700;color:var(--green);">${totalSpent}</span>
+                                <span style="font-size:11px;color:var(--subtext);">Último: ${lastDate}</span>
+                            </div>
+                        </div>
+                        <!-- Acciones -->
+                        <div style="display:flex;flex-direction:column;gap:6px;">
+                            ${c.phone ? `<a href="https://wa.me/52${c.phone.replace(/\D/g, '')}" target="_blank"
+                                style="width:32px;height:32px;border-radius:50%;background:#25d366;display:flex;align-items:center;
+                                       justify-content:center;color:white;font-size:14px;text-decoration:none;">
+                                <i class="fa-brands fa-whatsapp"></i></a>` : ''}
+                            <button onclick="newQuoteForClient('${c.name.replace(/'/g, "\\'")}','${(c.phone || '').replace(/'/g, "\\'")}','${(c.email || '').replace(/'/g, "\\'")}' )"
+                                style="width:32px;height:32px;border-radius:50%;background:var(--accent);border:none;display:flex;align-items:center;
+                                       justify-content:center;color:white;font-size:14px;cursor:pointer;" title="Nueva cotización">
+                                <i class="fa-solid fa-file-circle-plus"></i></button>
+                        </div>
+                    </div>`;
+                }).join('');
+            } catch (e) {
+                list.innerHTML = `<p style="text-align:center;color:var(--red);padding:40px 0;">Error: ${e.message}</p>`;
+            }
+        }
+
+        function stringToColor(str) {
+            // Genera un color consistente a partir del nombre
+            let hash = 0;
+            for (let i = 0; i < str.length; i++) hash = str.charCodeAt(i) + ((hash << 5) - hash);
+            const colors = ['#0071e3', '#34c759', '#ff9500', '#ff3b30', '#af52de', '#5ac8fa', '#ff6b6b', '#4ecdc4'];
+            return colors[Math.abs(hash) % colors.length];
+        }
+
+        function newQuoteForClient(name, phone, email) {
+            closeContactsPanel();
+            // Ir al cotizador y pre-llenar el cliente en la sheet formal
+            // Si ya estamos en step3, abre la sheet y pre-llena; si no, lleva al inicio
+            goToStep(1);
+            // Guardar datos para pre-llenar cuando se abra la sheet
+            localStorage.setItem('_prefillClient', JSON.stringify({ name, phone, email }));
+            showToast(`✅ Contacto cargado: ${name}`);
         }
 
         function showHistoryPanel() {
