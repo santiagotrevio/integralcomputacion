@@ -1,0 +1,42 @@
+{
+    "name": "Cotizador Integral",
+    "short_name": "Cotizador",
+    "description": "Cotizador profesional de Integral Computación",
+    "start_url": "/admin/cotizador.html",
+    "display": "standalone",
+    "background_color": "#f5f5f7",
+    "theme_color": "#0071e3",
+    "orientation": "portrait-primary",
+    "lang": "es-MX",
+    "icons": [
+        {
+            "src": "/admin/icon-192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "/admin/icon-512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any maskable"
+        }
+    ],
+    "categories": [
+        "business",
+        "productivity"
+    ],
+    "shortcuts": [
+        {
+            "name": "Nueva Cotización",
+            "short_name": "Nueva",
+            "url": "/admin/cotizador.html",
+            "icons": [
+                {
+                    "src": "/admin/icon-192.png",
+                    "sizes": "192x192"
+                }
+            ]
+        }
+    ]
+}
