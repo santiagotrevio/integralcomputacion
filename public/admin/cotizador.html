@@ -803,58 +803,43 @@
                 padding: 0;
             }
 
-            /* Shell Structure for Multi-Page Margins */
-            .pv-shell-table {
-                width: 100%;
-                border-collapse: collapse;
-            }
-
-            .pv-shell-header-space {
-                height: 18mm;
-                /* Top Margin */
-            }
-
-            .pv-shell-footer-space {
-                height: 20mm;
-                /* Bottom Margin */
-            }
-
-            .pv-content {
-                padding: 0 12mm;
-                height: 100%;
+            /* Explicit Multi-Page A4 Structure */
+            .pv-page {
+                width: 215.9mm;
+                /* Letter width */
+                height: 279.4mm;
+                /* Letter height */
+                padding: 18mm 13mm 20mm 13mm;
+                /* top right bottom left */
+                box-sizing: border-box;
                 display: flex;
                 flex-direction: column;
-                /* Margen lateral reducido de 16mm a 12mm */
+                page-break-after: always;
+                overflow: hidden;
+            }
+
+            .pv-page:last-child {
+                page-break-after: avoid;
             }
 
             .pv-flex-spacer {
                 flex-grow: 1;
             }
 
-            /* Global Fixed Footer */
+            /* Global Footer (now anchored perfectly via flexbox) */
             .pv-global-footer {
-                position: fixed;
-                bottom: 0;
-                left: 12mm;
-                right: 12mm;
+                margin-top: auto;
                 height: 15mm;
                 display: flex;
+                width: 100%;
                 justify-content: space-between;
                 align-items: center;
                 border-top: 1pt solid #00AEEF;
                 border-image: linear-gradient(to right, #00AEEF, #EC008C, #FFF200) 1;
                 font-size: 8pt;
                 color: #555;
-            }
-
-            .pv-global-footer::before {
-                counter-increment: page;
-                content: "Página " counter(page);
-                font-weight: 600;
-                position: absolute;
-                left: 50%;
-                transform: translateX(-50%);
-                color: #555;
+                flex-shrink: 0;
+                padding-top: 8pt;
             }
 
             .pv-global-footer strong {
@@ -1679,10 +1664,38 @@
                 loadClients(); // Recargar historial de clientes
             } catch (e) { console.error('Error saving quote', e); }
 
-            // Build table rows
-            const rows = quoteItems.map((item, i) => `
-        <tr${(i > 0 && i % 6 === 0) ? ' style="break-before: page; page-break-before: always;"' : ''}>
-            <td>${i + 1}</td>
+            const payRow = payments.length ? payments.map(p => `• ${p}`).join('<br>') : 'Consultar con el vendedor';
+
+            // Explicit Pagination Logic
+            const chunkedPages = [];
+            const itemsCopy = [...quoteItems];
+            const itemsLimitWithTotals = 5;
+            const itemsLimitWithoutTotals = 6;
+
+            while (itemsCopy.length > 0) {
+                let takeCount = itemsLimitWithoutTotals;
+                if (itemsCopy.length <= itemsLimitWithTotals) {
+                    takeCount = itemsCopy.length;
+                } else if (itemsCopy.length === itemsLimitWithoutTotals) {
+                    takeCount = itemsLimitWithoutTotals - 1;
+                }
+                chunkedPages.push(itemsCopy.splice(0, takeCount));
+            }
+            if (chunkedPages.length === 0) chunkedPages.push([]);
+
+            let pagesHtml = '';
+            const totalPages = chunkedPages.length;
+            let currentGlobalItemIndex = 0;
+
+            chunkedPages.forEach((chunk, pageIndex) => {
+                const isFirstPage = pageIndex === 0;
+                const isLastPage = pageIndex === totalPages - 1;
+
+                const chunkRows = chunk.map((item) => {
+                    currentGlobalItemIndex++;
+                    return `
+        <tr>
+            <td>${currentGlobalItemIndex}</td>
             <td>
                 ${item.name || item.id}
                 <span class="pv-td-code">${item.id}</span>
@@ -1690,107 +1703,107 @@
             <td style="text-align:right">${item.qty || 1}</td>
             <td style="text-align:right">${parseFloat(item.price) > 0 ? fmt(item.price) : '—'}</td>
             <td style="text-align:right">${parseFloat(item.price) > 0 ? fmt((item.qty || 1) * parseFloat(item.price)) : '—'}</td>
-        </tr>`).join('');
+        </tr>`;
+                }).join('');
 
-            const payRow = payments.length
-                ? payments.map(p => `• ${p}`).join('<br>')
-                : 'Consultar con el vendedor';
+                const pagePagination = `Página ${pageIndex + 1} de ${totalPages}`;
 
-            // Inject print view
-            document.getElementById('printView').innerHTML = `
-        <table class="pv-shell-table">
-            <thead><tr><td><div class="pv-shell-header-space"></div></td></tr></thead>
-            <tbody><tr><td>
-                <div class="pv-content">
-                    
-                    <div class="pv-header">
-                        <img class="pv-logo" src="/assets/images/LOGO SIN TEXTO.png" onerror="this.src='/assets/logo.svg'">
-                        <div class="pv-biz">
-                            <strong>Integral Computación</strong><br>
-                            Suministros y Equipos de Cómputo<br>
-                            Tel: ${bizPhone}<br>
-                            ${bizEmail}<br>
-                            ${bizWeb}
-                        </div>
-                    </div>
-
-                    <div class="pv-meta">
-                        <div class="pv-meta-box">
-                            <h4>Cotización para</h4>
-                            <p>
-                                <strong>${clientName}</strong><br>
-                                ${clientPhone ? `Tel: ${clientPhone}<br>` : ''}
-                                ${clientEmail ? `${clientEmail}<br>` : ''}
-                            </p>
-                        </div>
-                        <div class="pv-meta-box">
-                            <h4>Condiciones Comerciales</h4>
-                            <p>
-                                <strong>Folio: ${quoteNum}</strong><br>
-                                Fecha: <span style="white-space: nowrap;">${dateStr}</span><br>
-                                Vigente hasta: <span style="white-space: nowrap;">${expiry}</span><br>
-                                Agente de Ventas: ${vendorName}
-                            </p>
-                        </div>
-                    </div>
-
-                    ${notes ? `<div style="font-size:8.5pt; color:#2c2c2e; padding:6pt 0; font-weight:600;">📌 Nota al cliente: ${notes}</div>` : ''}
-
-                    <table class="pv-table">
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Descripción</th>
-                                <th style="text-align:right">Cant.</th>
-                                <th style="text-align:right">P. Unit.</th>
-                                <th style="text-align:right">Subtotal</th>
-                            </tr>
-                        </thead>
-                        <tbody>${rows}</tbody>
-                    </table>
-
-                    <div class="pv-totals">
-                        <div class="pv-totals-box">
-                            <div class="pv-totals-row"><span>Subtotal</span><span>${fmt(subtotal)}</span></div>
-                            ${discount > 0 ? `<div class="pv-totals-row"><span>Descuento (${discount}%)</span><span>-${fmt(disc)}</span></div>` : ''}
-                            <div class="pv-totals-row"><span>IVA (${ivaRate}%)</span><span>${fmt(iva)}</span></div>
-                            <div class="pv-totals-row total"><span>TOTAL</span><span>${fmt(total)}</span></div>
-                        </div>
-                    </div>
-
-                    <div class="pv-flex-spacer"></div>
-
-                    <div style="page-break-inside: avoid; margin-top: auto; padding-top: 20pt;">
-                        <div class="pv-legal-notes" style="border-top: none; padding-top: 0; margin-bottom: 12pt; text-align: justify;">
-                            <strong>CONDICIONES:</strong> Vigencia: ${validity} días naturales. ${bizTerms}
-                        </div>
-
-                        <div class="pv-footer" style="border-top: 1pt solid #e5e5ea; padding-top: 12pt;">
-                            <div class="pv-footer-col">
-                                <h5>Formas de Pago</h5>
-                                <p>${payRow}</p>
-                            </div>
-                            <div class="pv-footer-col">
-                                <h5>Atención al Cliente</h5>
-                                <p>
-                                    📱 Directo / WhatsApp: ${bizWa}<br>
-                                    ${bizEmail}
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-
+                pagesHtml += `
+        <div class="pv-page">
+            ${isFirstPage ? `
+            <div class="pv-header">
+                <img class="pv-logo" src="/assets/images/LOGO SIN TEXTO.png" onerror="this.src='/assets/logo.svg'">
+                <div class="pv-biz">
+                    <strong>Integral Computación</strong><br>
+                    Suministros y Equipos de Cómputo<br>
+                    Tel: ${bizPhone}<br>
+                    ${bizEmail}<br>
+                    ${bizWeb}
                 </div>
-            </td></tr></tbody>
-            <tfoot><tr><td><div class="pv-shell-footer-space"></div></td></tr></tfoot>
-        </table>
+            </div>
 
-        <!-- Global fixed footer on all pages -->
-        <div class="pv-global-footer">
-            <div class="pv-g-left">Cotización No. <strong>${quoteNum}</strong></div>
-            <div class="pv-g-right"><strong>${bizEmail}</strong> &nbsp;|&nbsp; ${bizWeb}</div>
+            <div class="pv-meta">
+                <div class="pv-meta-box">
+                    <h4>Cotización para</h4>
+                    <p>
+                        <strong>${clientName}</strong><br>
+                        ${clientPhone ? `Tel: ${clientPhone}<br>` : ''}
+                        ${clientEmail ? `${clientEmail}<br>` : ''}
+                    </p>
+                </div>
+                <div class="pv-meta-box">
+                    <h4>Condiciones Comerciales</h4>
+                    <p>
+                        <strong>Folio: ${quoteNum}</strong><br>
+                        Fecha: <span style="white-space: nowrap;">${dateStr}</span><br>
+                        Vigente hasta: <span style="white-space: nowrap;">${expiry}</span><br>
+                        Agente de Ventas: ${vendorName}
+                    </p>
+                </div>
+            </div>
+
+            ${notes ? `<div style="font-size:8.5pt; color:#2c2c2e; padding:6pt 0; font-weight:600;">📌 Nota al cliente: ${notes}</div>` : ''}
+            ` : `<div style="height: 15mm;"></div>`}
+
+            <div class="pv-table-container" ${(!isLastPage || (isFirstPage && isLastPage)) ? 'style="flex-grow: 1; display: flex; flex-direction: column; justify-content: center;"' : ''}>
+                <table class="pv-table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Descripción</th>
+                            <th style="text-align:right">Cant.</th>
+                            <th style="text-align:right">P. Unit.</th>
+                            <th style="text-align:right">Subtotal</th>
+                        </tr>
+                    </thead>
+                    <tbody>${chunkRows}</tbody>
+                </table>
+            </div>
+
+            ${isLastPage ? `
+            <div class="pv-totals">
+                <div class="pv-totals-box">
+                    <div class="pv-totals-row"><span>Subtotal</span><span>${fmt(subtotal)}</span></div>
+                    ${discount > 0 ? `<div class="pv-totals-row"><span>Descuento (${discount}%)</span><span>-${fmt(disc)}</span></div>` : ''}
+                    <div class="pv-totals-row"><span>IVA (${ivaRate}%)</span><span>${fmt(iva)}</span></div>
+                    <div class="pv-totals-row total"><span>TOTAL</span><span>${fmt(total)}</span></div>
+                </div>
+            </div>
+
+            <div class="pv-flex-spacer" style="flex-grow:1;"></div>
+
+            <div style="page-break-inside: avoid; margin-top: auto; padding-top: 15pt;">
+                <div class="pv-legal-notes" style="border-top: none; padding-top: 0; margin-bottom: 12pt; text-align: justify;">
+                    <strong>CONDICIONES:</strong> Vigencia: ${validity} días naturales. ${bizTerms}
+                </div>
+
+                <div class="pv-footer" style="border-top: 1pt solid #e5e5ea; padding-top: 12pt;">
+                    <div class="pv-footer-col">
+                        <h5>Formas de Pago</h5>
+                        <p>${payRow}</p>
+                    </div>
+                    <div class="pv-footer-col">
+                        <h5>Atención al Cliente</h5>
+                        <p>
+                            📱 Directo / WhatsApp: ${bizWa}<br>
+                            ${bizEmail}
+                        </p>
+                    </div>
+                </div>
+            </div>
+            ` : ``}
+
+            <div class="pv-global-footer">
+                <div style="flex:1; text-align:left;">Cotización No. <strong>${quoteNum}</strong></div>
+                <div style="flex:1; text-align:center;"><strong>${pagePagination}</strong></div>
+                <div style="flex:1; text-align:right;"><strong>${bizEmail}</strong> &nbsp;|&nbsp; ${bizWeb}</div>
+            </div>
         </div>
         `;
+            });
+
+            // Inject print view
+            document.getElementById('printView').innerHTML = pagesHtml;
 
             closeFormalSheet();
 
