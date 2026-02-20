@@ -859,7 +859,8 @@
             }
 
             .pv-logo {
-                height: 60pt;
+                height: 50pt;
+                max-width: 200pt;
                 object-fit: contain;
             }
 
@@ -1713,9 +1714,8 @@
         <div class="pv-page">
             ${isFirstPage ? `
             <div class="pv-header">
-                <img class="pv-logo" src="/assets/images/LOGO SIN TEXTO.png" onerror="this.src='/assets/logo.svg'">
+                <img class="pv-logo" src="/assets/images/HORIZONTAL grande.png" onerror="this.src='/assets/logo.svg'" style="max-height: 50pt; object-position: left center;">
                 <div class="pv-biz">
-                    <strong>Integral Computación</strong><br>
                     Suministros y Equipos de Cómputo<br>
                     Tel: ${bizPhone}<br>
                     ${bizEmail}<br>
