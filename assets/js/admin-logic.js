@@ -224,6 +224,12 @@ async function loadProducts() {
         updateBrandSelector();
         filterAndSort(true);
 
+        // If brand view is already active (e.g. loaded from localStorage), re-render
+        // now that products are populated (fixes race condition: renderBrandsTable ran before products loaded)
+        if (document.getElementById('viewBrands')?.classList.contains('active')) {
+            renderBrandsTable();
+        }
+
         // Update conflicts badge
         const cRes = await apiFetch('/api/conflicts');
         const cData = await cRes.json();
