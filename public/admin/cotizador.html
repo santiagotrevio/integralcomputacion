@@ -968,7 +968,6 @@
             .pv-page {
                 width: 210mm;
                 height: 296mm;
-                /* A4 height slightly reduced to prevent invisible overflow */
                 margin: 0 auto;
                 padding: 15mm 15mm 15mm 15mm;
                 box-sizing: border-box;
@@ -976,7 +975,7 @@
                 flex-direction: column;
                 break-after: page;
                 page-break-after: always;
-                overflow: hidden;
+                overflow: visible;
             }
 
             .pv-page:last-child {
@@ -1217,6 +1216,35 @@
             #printView {
                 padding: 0;
                 box-sizing: border-box;
+            }
+        }
+
+        /* ── iOS preview override: responsive en pantalla chica ──────────── */
+        @media screen and (max-width: 600px) {
+            body.ios-preview #printView .pv-page {
+                width: 100% !important;
+                max-width: 210mm;
+                height: auto !important;
+                min-height: 0 !important;
+                padding: 16px !important;
+                margin: 0 auto 20px !important;
+                overflow: visible !important;
+                break-after: auto !important;
+                page-break-after: auto !important;
+                border-bottom: 2px dashed #e5e5ea;
+            }
+
+            body.ios-preview #printView .pv-page:last-child {
+                border-bottom: none;
+            }
+
+            body.ios-preview #printView .pv-meta {
+                flex-direction: column;
+                gap: 8px;
+            }
+
+            body.ios-preview #printView .pv-totals-box {
+                width: 100%;
             }
         }
     </style>
@@ -2098,20 +2126,28 @@
             if (isIOS) {
                 // En iOS: mostrar printView en pantalla completa con botón de Share
                 const pv = document.getElementById('printView');
+                document.body.classList.add('ios-preview');
                 pv.style.cssText = 'display:block;position:fixed;top:0;left:0;width:100%;height:100%;z-index:9999;overflow-y:auto;background:white;';
                 // Botón para cerrar la vista previa
                 const closeBar = document.createElement('div');
+                const closeFn = () => {
+                    pv.style.cssText = 'display:none';
+                    if (pv.firstChild) pv.removeChild(pv.firstChild);
+                    document.title = originalTitle;
+                    document.body.classList.remove('ios-preview');
+                };
                 closeBar.innerHTML = `
                     <div style="position:sticky;top:0;background:#1c1c1e;color:white;padding:12px 16px;display:flex;justify-content:space-between;align-items:center;z-index:10000;">
-                        <span style="font-size:14px;font-weight:600;">📄 ${pdfName}</span>
-                        <div style="display:flex;gap:12px;">
-                            <button onclick="window.print()" style="background:#0071e3;color:white;border:none;padding:8px 14px;border-radius:8px;font-size:13px;font-weight:700;">🖨️ Imprimir / PDF</button>
-                            <button onclick="document.getElementById('printView').style.cssText='display:none';document.getElementById('printView').removeChild(document.getElementById('printView').firstChild);document.title='${originalTitle}';" style="background:#3a3a3c;color:white;border:none;padding:8px 14px;border-radius:8px;font-size:13px;">✕ Cerrar</button>
+                        <span style="font-size:13px;font-weight:600;">📄 ${pdfName}</span>
+                        <div style="display:flex;gap:10px;">
+                            <button onclick="window.print()" style="background:#0071e3;color:white;border:none;padding:8px 14px;border-radius:8px;font-size:13px;font-weight:700;">🖨️ Guardar PDF</button>
+                            <button id="iosPvClose" style="background:#3a3a3c;color:white;border:none;padding:8px 14px;border-radius:8px;font-size:13px;">✕ Cerrar</button>
                         </div>
                     </div>`;
                 pv.prepend(closeBar);
+                document.getElementById('iosPvClose').addEventListener('click', closeFn);
                 document.title = pdfName;
-                showToast('📄 Usa Compartir (☐↑) → Imprimir para guardar el PDF');
+                showToast('📄 Toca Guardar PDF o usa Compartir (☐↑) → Imprimir');
             } else {
                 setTimeout(() => {
                     window.print();
