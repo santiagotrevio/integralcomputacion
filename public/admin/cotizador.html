@@ -392,7 +392,53 @@
             gap: 8px;
         }
 
-        /* ── PASTE STEP ── */
+        /* ── SEARCH & PASTE STEP ── */
+        .search-results-dropdown {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: var(--surface);
+            border: 1.5px solid var(--border);
+            border-radius: 8px;
+            max-height: 250px;
+            overflow-y: auto;
+            z-index: 100;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            margin-top: 5px;
+        }
+
+        body.dark-mode .search-results-dropdown {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+        }
+
+        .search-result-item {
+            padding: 10px 14px;
+            border-bottom: 1px solid var(--border);
+            cursor: pointer;
+            transition: 0.1s;
+        }
+
+        .search-result-item:hover {
+            background: rgba(0, 113, 227, 0.05);
+        }
+
+        .search-result-item:last-child {
+            border-bottom: none;
+        }
+
+        .manual-selected-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 8px 12px;
+            background: rgba(0, 113, 227, 0.06);
+            border: 1px solid rgba(0, 113, 227, 0.2);
+            border-radius: 8px;
+            font-size: 13px;
+        }
+
         .paste-area {
             width: 100%;
             min-height: 200px;
@@ -1395,15 +1441,33 @@
     <!-- ══ STEP 1: PASTE ══ -->
     <div class="section active" id="step1">
         <br>
+        <span class="lbl">Búsqueda rápida (manual)</span>
+        <div style="position:relative; margin-bottom: 20px;">
+            <input type="text" id="manualSearchInput" class="inp" placeholder="Buscar por código, modelo o nombre..."
+                autocomplete="off" oninput="handleManualSearch(this.value)">
+            <div id="manualSearchResults" class="search-results-dropdown"></div>
+        </div>
+
+        <div id="manualSelectedItems" style="margin-bottom: 20px; display: flex; flex-direction: column; gap: 8px;">
+        </div>
+
+        <div style="display:flex; align-items:center; gap:10px; margin: 30px 0;">
+            <div style="flex:1; height:1px; background:var(--border);"></div>
+            <div
+                style="font-size:11px; color:var(--subtext); font-weight:700; text-transform:uppercase; letter-spacing:0.5px;">
+                o pega un bloque de texto</div>
+            <div style="flex:1; height:1px; background:var(--border);"></div>
+        </div>
+
         <span class="lbl">Pega el texto aquí</span>
         <textarea class="paste-area" id="pasteInput"
-            placeholder="Pega aquí una conversación de WhatsApp, email, lista de códigos o cualquier texto que contenga códigos de productos…"></textarea>
+            placeholder="Pega aquí una conversación de WhatsApp, email, o texto que contenga códigos…"></textarea>
         <div class="hint-card">
             <i class="fa-solid fa-wand-magic-sparkles"></i>
-            El sistema detecta automáticamente los códigos de productos y los busca en el catálogo.
+            El sistema detecta automáticamente los códigos de productos.
         </div>
         <button class="btn-primary" id="btnAnalyze" onclick="analyzeText()">
-            <i class="fa-solid fa-magnifying-glass"></i> Analizar texto
+            <i class="fa-solid fa-magnifying-glass"></i> Continuar
         </button>
     </div>
 
@@ -1797,25 +1861,100 @@
         }
 
         // ────────────────────────────────────────────────────────────────────────────
-        // STEP 1 → ANALYZE
+        // STEP 1 → SEARCH & ANALYZE
         // ────────────────────────────────────────────────────────────────────────────
+        let manualSelectedProducts = [];
+
+        async function handleManualSearch(val) {
+            const resBox = document.getElementById('manualSearchResults');
+            const q = val.trim().toLowerCase();
+            if (!q) { resBox.style.display = 'none'; return; }
+            if (!products.length) await loadProducts();
+
+            const matched = products.filter(p => p.id.toLowerCase().includes(q) || p.name.toLowerCase().includes(q) || (p.brand || '').toLowerCase().includes(q)).slice(0, 10);
+
+            if (matched.length === 0) {
+                resBox.innerHTML = '<div style="padding:10px; color:var(--subtext); text-align:center; font-size:13px;">Sin resultados</div>';
+                resBox.style.display = 'block';
+                return;
+            }
+
+            resBox.innerHTML = matched.map(p => `
+                <div class="search-result-item" onclick="addManualProduct('${p.id.replace(/'/g, "\\'")}')">
+                    <div style="font-size:11px; color:var(--accent); font-weight:700;">${p.id}</div>
+                    <div style="font-size:13px; font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${p.name}</div>
+                </div>
+            `).join('');
+            resBox.style.display = 'block';
+        }
+
+        function addManualProduct(id) {
+            const p = products.find(x => x.id === id);
+            if (p && !manualSelectedProducts.find(x => x.id === id)) {
+                manualSelectedProducts.push(p);
+                renderManualSelected();
+            }
+            document.getElementById('manualSearchInput').value = '';
+            document.getElementById('manualSearchResults').style.display = 'none';
+        }
+
+        function removeManualProduct(id) {
+            manualSelectedProducts = manualSelectedProducts.filter(x => x.id !== id);
+            renderManualSelected();
+        }
+
+        function renderManualSelected() {
+            const box = document.getElementById('manualSelectedItems');
+            if (manualSelectedProducts.length === 0) {
+                box.innerHTML = '';
+                return;
+            }
+            box.innerHTML = manualSelectedProducts.map(p => `
+                <div class="manual-selected-item">
+                    <div style="flex:1; min-width:0; margin-right:10px;">
+                        <span style="font-weight:700; color:var(--accent); margin-right:5px;">${p.id}</span>
+                        <span style="white-space:nowrap; overflow:hidden; text-overflow:ellipsis; display:inline-block; vertical-align:bottom; max-width:70%;">${p.name}</span>
+                    </div>
+                    <i class="fa-solid fa-xmark" style="color:var(--red); cursor:pointer; padding:5px;" onclick="removeManualProduct('${p.id.replace(/'/g, "\\'")}')"></i>
+                </div>
+            `).join('');
+        }
+
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('#manualSearchResults') && e.target.id !== 'manualSearchInput') {
+                const bx = document.getElementById('manualSearchResults');
+                if (bx) bx.style.display = 'none';
+            }
+        });
+
         async function analyzeText() {
             const text = document.getElementById('pasteInput').value.trim();
-            if (!text) { showToast('Pega primero un texto'); return; }
-            if (!products.length) { showToast('Cargando catálogo…'); await loadProducts(); }
+            if (!text && manualSelectedProducts.length === 0) { showToast('Busca un producto o pega un texto'); return; }
+            if (!products.length && text) { showToast('Cargando catálogo…'); await loadProducts(); }
             const btn = document.getElementById('btnAnalyze');
             btn.disabled = true;
-            btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Analizando…';
-            const codes = extractCodes(text);
+            btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Procesando…';
+
             quoteItems = []; notFound = [];
-            codes.forEach(code => {
-                const p = matchCode(code);
-                if (p && !quoteItems.find(q => q.id === p.id))
-                    quoteItems.push({ id: p.id, name: p.name, brand: p.brand, qty: 1, price: '' });
-                else if (!p) notFound.push(code);
+
+            // 1. Añadir los manuales
+            manualSelectedProducts.forEach(p => {
+                quoteItems.push({ id: p.id, name: p.name, brand: p.brand, qty: 1, price: '' });
             });
+
+            // 2. Extraer del texto si lo hay
+            if (text) {
+                const codes = extractCodes(text);
+                codes.forEach(code => {
+                    const p = matchCode(code);
+                    if (p && !quoteItems.find(q => q.id === p.id))
+                        quoteItems.push({ id: p.id, name: p.name, brand: p.brand, qty: 1, price: '' });
+                    else if (!p) notFound.push(code);
+                });
+            }
+
             btn.disabled = false;
-            btn.innerHTML = '<i class="fa-solid fa-magnifying-glass"></i> Analizar texto';
+            btn.innerHTML = '<i class="fa-solid fa-magnifying-glass"></i> Continuar';
             renderReview();
             goToStep(2);
         }
@@ -2410,6 +2549,11 @@
         }
         function resetAll() {
             document.getElementById('pasteInput').value = '';
+            if (document.getElementById('manualSearchInput')) {
+                document.getElementById('manualSearchInput').value = '';
+                manualSelectedProducts = [];
+                renderManualSelected();
+            }
             quoteItems = []; notFound = []; goToStep(1);
         }
         function goBack() { window.location.href = '/public/admin/home.html'; }
