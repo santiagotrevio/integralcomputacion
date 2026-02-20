@@ -500,23 +500,43 @@ router.get('/quotes', authMiddleware, (req, res) => {
 router.patch('/quotes/:id/status', authMiddleware, (req, res) => {
     const { id } = req.params;
     const { status } = req.body; // 'active' | 'archived' | 'trash'
-    console.log(`[PATCH /quotes/${id}/status] status=${status}`);
     if (!['active', 'archived', 'trash'].includes(status))
         return res.status(400).json({ error: 'Status inválido' });
 
     // Intentar primero como quote_id (texto), luego como id numérico
     db.run('UPDATE quotes SET status = ? WHERE quote_id = ?', [status, id], function (err) {
         if (err) return res.status(500).json({ error: err.message });
-        console.log(`[PATCH] quote_id match: ${this.changes} changes`);
         if (this.changes > 0) return res.json({ success: true, changes: this.changes });
-        // Fallback: buscar por id numérico
         db.run('UPDATE quotes SET status = ? WHERE id = ?', [status, id], function (err2) {
             if (err2) return res.status(500).json({ error: err2.message });
-            console.log(`[PATCH] id numeric match: ${this.changes} changes`);
             res.json({ success: true, changes: this.changes });
         });
     });
 });
+
+// Vaciar papelera manual
+router.delete('/quotes/trash', authMiddleware, (req, res) => {
+    db.run("DELETE FROM quotes WHERE status = 'trash'", [], function (err) {
+        if (err) return res.status(500).json({ error: err.message });
+        res.json({ success: true, deleted: this.changes });
+    });
+});
+
+// ── Auto-limpieza: eliminar de papelera cotizaciones con +30 días ──────────────
+function cleanOldTrash() {
+    db.run(
+        "DELETE FROM quotes WHERE status = 'trash' AND created_at < datetime('now', '-30 days')",
+        [],
+        function (err) {
+            if (err) { console.error('[Auto-limpieza] Error:', err.message); return; }
+            if (this.changes > 0)
+                console.log(`🗑️  Auto-limpieza: ${this.changes} cotizaciones eliminadas de la papelera (+30 días).`);
+        }
+    );
+}
+// Ejecutar al arrancar y luego cada 24 horas
+cleanOldTrash();
+setInterval(cleanOldTrash, 24 * 60 * 60 * 1000);
 
 
 
