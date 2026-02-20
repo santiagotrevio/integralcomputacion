@@ -1772,7 +1772,10 @@ function renderBrandsTable() {
             if (!brandMap.has(key)) brandMap.set(key, p.brand.trim());
         }
     });
-    const uniqueBrands = [...brandMap.values()].sort();
+    const uniqueBrands = [...brandMap.values()];
+
+    // Apply sort: default = order of appearance, sorted = A-Z
+    if (window._brandSortAZ) uniqueBrands.sort((a, b) => a.localeCompare(b, 'es'));
 
     document.getElementById('brandCount').innerText = uniqueBrands.length;
 
@@ -1816,7 +1819,16 @@ function renderBrandsTable() {
                                     <i class="fa-solid fa-wand-magic-sparkles"></i>
                                 </div>
                             </div>
-                            <div style="font-weight:800; font-size:14px; margin-top:10px; color:#333;">${brandName}</div>
+                            <!-- Editable brand name -->
+                            <div style="margin-top:10px; display:flex; align-items:center; gap:6px;">
+                                <input id="brandNameInput-${brandName}" type="text" value="${brandName}"
+                                    style="flex:1; padding:5px 8px; border:1px solid #ddd; border-radius:8px; font-size:12px; font-weight:800; text-align:center; color:#333; background:white;"
+                                    onkeydown="if(event.key==='Enter') renameBrand('${brandName}', this)">
+                                <button onclick="renameBrand('${brandName}', document.getElementById('brandNameInput-${brandName}'))" 
+                                    style="background:#f1f5f9; border:1px solid #ddd; border-radius:8px; padding:5px 8px; cursor:pointer; font-size:11px;" title="Guardar nuevo nombre">
+                                    <i class="fa-solid fa-check"></i>
+                                </button>
+                            </div>
                         </div>
                     </td>
                     <td>
@@ -2002,6 +2014,75 @@ async function handleBrandLogoUpload(input, brandName) {
             // Reset input so it can be used again for same file
             input.value = '';
         }, 1500);
+    }
+}
+
+// ─── Brand Search ──────────────────────────────────────────────────────────────
+function filterBrandsTable(query) {
+    const q = query.trim().toLowerCase();
+    const rows = document.querySelectorAll('#brandsTableBody tr');
+    rows.forEach(row => {
+        const nameInput = row.querySelector('input[id^="brandNameInput-"]');
+        const name = nameInput ? nameInput.value.toLowerCase() : '';
+        row.style.display = (!q || name.includes(q)) ? '' : 'none';
+    });
+}
+
+// ─── Brand Sort A-Z ───────────────────────────────────────────────────────────
+window._brandSortAZ = false;
+function toggleBrandSort() {
+    window._brandSortAZ = !window._brandSortAZ;
+    const btn = document.getElementById('brandSortBtn');
+    if (btn) {
+        btn.innerHTML = window._brandSortAZ
+            ? '<i class="fa-solid fa-arrow-down-z-a"></i> Z → A'
+            : '<i class="fa-solid fa-arrow-down-a-z"></i> A → Z';
+        btn.style.background = window._brandSortAZ ? 'var(--apple-blue)' : '';
+        btn.style.color = window._brandSortAZ ? 'white' : '';
+    }
+    renderBrandsTable();
+    // Re-apply current search after re-render
+    const q = document.getElementById('brandSearchInput')?.value || '';
+    if (q) filterBrandsTable(q);
+}
+
+// ─── Brand Rename ─────────────────────────────────────────────────────────────
+async function renameBrand(oldName, inputEl) {
+    const newName = inputEl.value.trim();
+    if (!newName || newName === oldName) return;
+
+    if (!confirm(`¿Renombrar "${oldName}" → "${newName}"?\n\nEsto actualizará todos los productos con esa marca.`)) return;
+
+    inputEl.disabled = true;
+    try {
+        // 1. Update all products that have this brand
+        const affected = products.filter(p => (p.brand || '').toLowerCase() === oldName.toLowerCase());
+        for (const p of affected) {
+            await apiFetch(`/api/products/${p.id}`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ ...p, brand: newName })
+            });
+        }
+
+        // 2. Rename in brandSettings: transfer config to new id
+        const existing = brandSettings.find(s => s.id.toLowerCase() === oldName.toLowerCase());
+        if (existing) {
+            await apiFetch(`/api/brands`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ ...existing, id: newName, name: newName })
+            });
+        }
+
+        showToast(`✅ Marca renombrada: "${oldName}" → "${newName}" (${affected.length} productos)`);
+
+        // 3. Reload everything
+        await loadProducts();
+        await loadBrandSettings();
+    } catch (err) {
+        alert('Error al renombrar: ' + err.message);
+        inputEl.disabled = false;
     }
 }
 
