@@ -480,7 +480,7 @@ router.post('/quotes', authMiddleware, (req, res) => {
 
 // Listar historial de cotizaciones
 router.get('/quotes', authMiddleware, (req, res) => {
-    const { status = 'active', userId } = req.query;
+    const { status = 'active', userId, clientName } = req.query;
     let query = `SELECT id, quote_id, client_name, client_email, client_phone, user_id, total, notes, validity, status, created_at
                  FROM quotes WHERE status = ?`;
     const params = [status];
@@ -488,12 +488,17 @@ router.get('/quotes', authMiddleware, (req, res) => {
         query += ' AND user_id = ?';
         params.push(userId);
     }
+    if (clientName) {
+        query += ' AND client_name = ?';
+        params.push(clientName);
+    }
     query += ' ORDER BY created_at DESC';
     db.all(query, params, (err, rows) => {
         if (err) return res.status(500).json({ error: err.message });
         res.json({ data: rows });
     });
 });
+
 
 // Cambiar estado de una cotización (archivar / papelera / restaurar)
 router.patch('/quotes/:id/status', authMiddleware, (req, res) => {

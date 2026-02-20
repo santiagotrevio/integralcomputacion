@@ -2596,15 +2596,19 @@
                     <i class="fa-brands fa-whatsapp" style="color:#25d366;width:20px;text-align:center;"></i> WhatsApp
                 </a>` : ''}
                 <button style="${btnStyle} color:var(--text);"
-                    onclick="closeCtxSheet();newQuoteForClient('${name.replace(/'/g, "\'")}','${phone.replace(/'/g, "\'")}','${email.replace(/'/g, "\'")}'  )">
-                    <i class="fa-solid fa-file-circle-plus" style="color:var(--accent);width:20px;text-align:center;"></i> Nueva Cotización
+                    onclick="closeCtxSheet();showClientQuotes('${nameEnc}')">
+                    <i class="fa-solid fa-clock-rotate-left" style="color:var(--accent);width:20px;text-align:center;"></i> Cotizaciones Previas
+                </button>
+                <button style="${btnStyle} color:var(--text);"
+                    onclick="closeCtxSheet();newQuoteForClient(decodeURIComponent('${nameEnc}'),decodeURIComponent('${phoneEnc}'),decodeURIComponent('${emailEnc}'))">
+                    <i class="fa-solid fa-file-circle-plus" style="color:var(--green);width:20px;text-align:center;"></i> Nueva Cotización
                 </button>
                 <button style="${btnStyle} color:var(--text);"
                     onclick="closeCtxSheet();openEditClient(${id},'${nameEnc}','${phoneEnc}','${emailEnc}')">
                     <i class="fa-solid fa-pen" style="color:var(--orange);width:20px;text-align:center;"></i> Editar Contacto
                 </button>
                 <button style="${btnStyle} color:var(--red);"
-                    onclick="closeCtxSheet();confirmDeleteClient(${id},'${name.replace(/'/g, "\'")}'  )">
+                    onclick="closeCtxSheet();confirmDeleteClient(${id},decodeURIComponent('${nameEnc}'))">
                     <i class="fa-solid fa-trash" style="width:20px;text-align:center;"></i> Eliminar Contacto
                 </button>
             `;
@@ -2616,6 +2620,81 @@
         function closeCtxSheet() {
             document.getElementById('ctxOverlay').style.display = 'none';
             document.getElementById('ctxSheet').style.display = 'none';
+        }
+
+        // ── COTIZACIONES PREVIAS DE UN CLIENTE ──────────────────────────────
+        async function showClientQuotes(nameEnc) {
+            const name = decodeURIComponent(nameEnc);
+
+            // Crear o reutilizar el panel
+            let panel = document.getElementById('clientQuotesPanel');
+            if (!panel) {
+                panel = document.createElement('div');
+                panel.id = 'clientQuotesPanel';
+                panel.style.cssText = 'position:fixed;inset:0;z-index:700;background:var(--bg);display:flex;flex-direction:column;';
+                document.body.appendChild(panel);
+            }
+            panel.innerHTML = `
+                < div style = "position:sticky;top:0;background:var(--surface);border-bottom:1px solid var(--border);
+            padding: 16px 20px; display: flex; align - items: center; gap: 12px; z - index: 10; ">
+                < button onclick = "document.getElementById('clientQuotesPanel').style.display='none';"
+            style = "background:none;border:none;font-size:20px;color:var(--accent);cursor:pointer;" >
+                <i class="fa-solid fa-chevron-left"></i>
+                    </button >
+                <div style="flex:1;min-width:0;">
+                    <div style="font-size:17px;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${name}</div>
+                    <div style="font-size:12px;color:var(--subtext);">Historial de cotizaciones</div>
+                </div>
+                </div >
+                <div id="clientQuotesList" style="flex:1;overflow-y:auto;padding:12px 16px;">
+                    <p style="text-align:center;color:var(--subtext);padding:40px 0;">Cargando…</p>
+                </div>
+            `;
+            panel.style.display = 'flex';
+
+            // Cargar activas + archivadas (no papelera)
+            try {
+                const nameParam = encodeURIComponent(name);
+                const [resActive, resArch] = await Promise.all([
+                    apiFetch(`/ api / quotes ? status = active & clientName=${ nameParam } `),
+                    apiFetch(`/ api / quotes ? status = archived & clientName=${ nameParam } `)
+                ]);
+                const { data: active }   = await resActive.json();
+                const { data: archived } = await resArch.json();
+                const all = [...(active||[]), ...(archived||[])]
+                    .sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+
+                const list = document.getElementById('clientQuotesList');
+                if (!list) return;
+                if (all.length === 0) {
+                    list.innerHTML = '<p style="text-align:center;color:var(--subtext);padding:40px 0;"><i class="fa-solid fa-inbox" style="font-size:32px;display:block;margin-bottom:12px;opacity:.3;"></i>Sin cotizaciones</p>';
+                    return;
+                }
+                list.innerHTML = all.map(q => {
+                    const date = new Date(q.created_at).toLocaleDateString('es-MX', {day:'2-digit', month:'short', year:'numeric'});
+                    const total = q.total ? `$${ Number(q.total).toLocaleString('es-MX', { minimumFractionDigits: 2 }) } ` : '—';
+                    const vendor = q.user_id === '01' ? 'Rocío Romero' : q.user_id === '02' ? 'Rocío Vázquez' : `Usuario ${ q.user_id } `;
+                    const statusBadge = q.status === 'archived'
+                        ? `< span style = "font-size:10px;font-weight:700;color:var(--orange);background:rgba(255,149,0,.1);padding:2px 7px;border-radius:8px;" > Archivada</span > `
+                        : `< span style = "font-size:10px;font-weight:700;color:var(--green);background:rgba(52,199,89,.1);padding:2px 7px;border-radius:8px;" > Activa</span > `;
+                    return `
+                < div style = "background:var(--surface);border:1.5px solid var(--border);border-radius:14px;
+            padding: 14px 16px; margin - bottom: 10px; ">
+                < div style = "display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;" >
+                    <span style="font-size:12px;font-weight:800;font-family:monospace;color:var(--accent);">${q.quote_id}</span>
+                            ${ statusBadge }
+                        </div >
+                <div style="display:flex;justify-content:space-between;align-items:center;">
+                    <span style="font-size:12px;color:var(--subtext);">${date} · ${vendor}</span>
+                    <span style="font-size:16px;font-weight:800;color:var(--green);">${total}</span>
+                </div>
+                        ${ q.notes ? `<div style="font-size:11px;color:var(--subtext);margin-top:4px;font-style:italic;">📌 ${q.notes}</div>` : '' }
+                    </div > `;
+                }).join('');
+            } catch (e) {
+                const list = document.getElementById('clientQuotesList');
+                if (list) list.innerHTML = `< p style = "text-align:center;color:var(--red);padding:40px 0;" > Error: ${ e.message }</p > `;
+            }
         }
 
         // ── EDITAR CONTACTO ────────────────────────────────────────────────
@@ -2640,7 +2719,7 @@
             const email = document.getElementById('editClientEmail').value.trim();
             if (!name) { showToast('❌ El nombre es obligatorio'); return; }
             try {
-                const res = await apiFetch(`/api/clients/${id}`, {
+                const res = await apiFetch(`/ api / clients / ${ id } `, {
                     method: 'PUT',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ name, phone, email })
@@ -2656,18 +2735,18 @@
 
         // ── ELIMINAR CON CONFIRMACIÓN ─────────────────────────────────────────
         function confirmDeleteClient(id, name) {
-            if (confirm(`¿Eliminar a "${name}" de los contactos?
+            if (confirm(`¿Eliminar a "${name}" de los contactos ?
 
-Esta acción no elimina sus cotizaciones anteriores.`)) {
+                Esta acción no elimina sus cotizaciones anteriores.`)) {
                 deleteClient(id, name);
             }
         }
 
         async function deleteClient(id, name) {
             try {
-                const res = await apiFetch(`/api/clients/${id}`, { method: 'DELETE' });
+                const res = await apiFetch(`/ api / clients / ${ id } `, { method: 'DELETE' });
                 if (!res.ok) throw new Error('Error del servidor');
-                showToast(`🗑️ ${name} eliminado`);
+                showToast(`🗑️ ${ name } eliminado`);
                 loadContacts(document.getElementById('contactSearch')?.value || '');
             } catch (e) {
                 showToast('❌ Error: ' + e.message);
@@ -2678,7 +2757,7 @@ Esta acción no elimina sus cotizaciones anteriores.`)) {
             closeContactsPanel();
             goToStep(1);
             localStorage.setItem('_prefillClient', JSON.stringify({ name, phone, email }));
-            showToast(`✅ Contacto cargado: ${name}`);
+            showToast(`✅ Contacto cargado: ${ name } `);
         }
 
         function showHistoryPanel() {
@@ -2687,16 +2766,16 @@ Esta acción no elimina sus cotizaciones anteriores.`)) {
             if (!panel) {
                 panel = document.createElement('div');
                 panel.id = 'historyPanel';
-                panel.style.cssText = `position:fixed;inset:0;z-index:600;background:var(--bg);display:flex;flex-direction:column;`;
+                panel.style.cssText = `position: fixed; inset: 0; z - index: 600; background: var(--bg); display: flex; flex - direction: column; `;
                 panel.innerHTML = `
-                    <div style="position:sticky;top:0;background:var(--surface);border-bottom:1px solid var(--border);
-                                padding:16px 20px;display:flex;align-items:center;gap:12px;z-index:10;">
-                        <button onclick="closeHistoryPanel()" style="background:none;border:none;font-size:20px;color:var(--accent);cursor:pointer;">
-                            <i class="fa-solid fa-chevron-left"></i>
-                        </button>
-                        <h2 style="font-size:17px;font-weight:800;flex:1;">Historial de Cotizaciones</h2>
-                    </div>
-                    <!-- Tabs vendedor -->
+                < div style = "position:sticky;top:0;background:var(--surface);border-bottom:1px solid var(--border);
+            padding: 16px 20px; display: flex; align - items: center; gap: 12px; z - index: 10; ">
+                < button onclick = "closeHistoryPanel()" style = "background:none;border:none;font-size:20px;color:var(--accent);cursor:pointer;" >
+                    <i class="fa-solid fa-chevron-left"></i>
+                        </button >
+                <h2 style="font-size:17px;font-weight:800;flex:1;">Historial de Cotizaciones</h2>
+                    </div >
+                    < !--Tabs vendedor-- >
                     <div style="display:flex;gap:0;border-bottom:1px solid var(--border);background:var(--surface);">
                         <button class="hist-tab active" data-uid="" onclick="setHistTab(this,'')" 
                             style="flex:1;padding:12px 8px;border:none;background:none;font-weight:700;font-size:13px;cursor:pointer;border-bottom:2px solid var(--accent);color:var(--accent);">Todos</button>
@@ -2705,7 +2784,7 @@ Esta acción no elimina sus cotizaciones anteriores.`)) {
                         <button class="hist-tab" data-uid="02" onclick="setHistTab(this,'02')"
                             style="flex:1;padding:12px 8px;border:none;background:none;font-weight:600;font-size:13px;cursor:pointer;color:var(--subtext);">R. Vázquez</button>
                     </div>
-                    <!-- Filtro status -->
+                    <!--Filtro status-- >
                     <div style="display:flex;gap:8px;padding:12px 16px;background:var(--surface);border-bottom:1px solid var(--border);">
                         <button class="hist-status-btn active" onclick="setHistStatus(this,'active')" 
                             style="flex:1;padding:7px;border-radius:20px;border:1.5px solid var(--accent);background:rgba(0,113,227,.08);color:var(--accent);font-size:12px;font-weight:700;cursor:pointer;">Activas</button>
@@ -2714,9 +2793,9 @@ Esta acción no elimina sus cotizaciones anteriores.`)) {
                         <button class="hist-status-btn" onclick="setHistStatus(this,'trash')"
                             style="flex:1;padding:7px;border-radius:20px;border:1.5px solid var(--border);background:none;color:var(--subtext);font-size:12px;font-weight:700;cursor:pointer;">Papelera</button>
                     </div>
-                    <!-- Lista -->
-                    <div id="historyList" style="flex:1;overflow-y:auto;padding:12px 16px;"></div>
-                `;
+                    <!--Lista -->
+                <div id="historyList" style="flex:1;overflow-y:auto;padding:12px 16px;"></div>
+            `;
                 document.body.appendChild(panel);
             }
             panel.style.display = 'flex';
@@ -2755,8 +2834,8 @@ Esta acción no elimina sus cotizaciones anteriores.`)) {
             if (!list) return;
             list.innerHTML = '<p style="text-align:center;color:var(--subtext);padding:40px 0;">Cargando...</p>';
             try {
-                let url = `/api/quotes?status=${_histFilter.status}`;
-                if (_histFilter.userId) url += `&userId=${_histFilter.userId}`;
+                let url = `/ api / quotes ? status = ${ _histFilter.status } `;
+                if (_histFilter.userId) url += `& userId=${ _histFilter.userId } `;
                 const res = await apiFetch(url);
                 const { data } = await res.json();
                 if (!data || data.length === 0) {
@@ -2765,59 +2844,59 @@ Esta acción no elimina sus cotizaciones anteriores.`)) {
                 }
                 list.innerHTML = data.map(q => {
                     const date = new Date(q.created_at).toLocaleDateString('es-MX', { day: '2-digit', month: 'short', year: 'numeric' });
-                    const total = q.total ? `$${Number(q.total).toLocaleString('es-MX', { minimumFractionDigits: 2 })}` : '—';
-                    const vendor = q.user_id === '01' ? 'Rocío Romero' : q.user_id === '02' ? 'Rocío Vázquez' : `Usuario ${q.user_id}`;
+                    const total = q.total ? `$${ Number(q.total).toLocaleString('es-MX', { minimumFractionDigits: 2 }) } ` : '—';
+                    const vendor = q.user_id === '01' ? 'Rocío Romero' : q.user_id === '02' ? 'Rocío Vázquez' : `Usuario ${ q.user_id } `;
                     const vendorColor = q.user_id === '01' ? '#0071e3' : '#9b59b6';
                     const actions = _histFilter.status === 'active'
-                        ? `<button onclick="updateQuoteStatus(${q.id},'archived')" title="Archivar"
-                                style="background:none;border:none;color:var(--subtext);cursor:pointer;font-size:15px;padding:6px;">
-                                <i class="fa-solid fa-box-archive"></i></button>
-                           <button onclick="updateQuoteStatus(${q.id},'trash')" title="Papelera"
-                                style="background:none;border:none;color:var(--red);cursor:pointer;font-size:15px;padding:6px;">
-                                <i class="fa-solid fa-trash"></i></button>`
+                        ? `< button onclick = "updateQuoteStatus(${q.id},'archived')" title = "Archivar"
+            style = "background:none;border:none;color:var(--subtext);cursor:pointer;font-size:15px;padding:6px;" >
+                <i class="fa-solid fa-box-archive"></i></button >
+                    <button onclick="updateQuoteStatus(${q.id},'trash')" title="Papelera"
+                        style="background:none;border:none;color:var(--red);cursor:pointer;font-size:15px;padding:6px;">
+                        <i class="fa-solid fa-trash"></i></button>`
                         : _histFilter.status === 'archived'
-                            ? `<button onclick="updateQuoteStatus(${q.id},'active')" title="Restaurar"
-                                style="background:none;border:none;color:var(--green);cursor:pointer;font-size:15px;padding:6px;">
-                                <i class="fa-solid fa-rotate-left"></i></button>
-                           <button onclick="updateQuoteStatus(${q.id},'trash')" title="Papelera"
-                                style="background:none;border:none;color:var(--red);cursor:pointer;font-size:15px;padding:6px;">
-                                <i class="fa-solid fa-trash"></i></button>`
-                            : `<button onclick="updateQuoteStatus(${q.id},'active')" title="Restaurar"
-                                style="background:none;border:none;color:var(--green);cursor:pointer;font-size:15px;padding:6px;">
-                                <i class="fa-solid fa-rotate-left"></i></button>`;
+                            ? `< button onclick = "updateQuoteStatus(${q.id},'active')" title = "Restaurar"
+            style = "background:none;border:none;color:var(--green);cursor:pointer;font-size:15px;padding:6px;" >
+                <i class="fa-solid fa-rotate-left"></i></button >
+                    <button onclick="updateQuoteStatus(${q.id},'trash')" title="Papelera"
+                        style="background:none;border:none;color:var(--red);cursor:pointer;font-size:15px;padding:6px;">
+                        <i class="fa-solid fa-trash"></i></button>`
+                            : `< button onclick = "updateQuoteStatus(${q.id},'active')" title = "Restaurar"
+            style = "background:none;border:none;color:var(--green);cursor:pointer;font-size:15px;padding:6px;" >
+                <i class="fa-solid fa-rotate-left"></i></button > `;
                     return `
-                    <div style="background:var(--surface);border:1.5px solid var(--border);border-radius:14px;
-                                padding:14px 16px;margin-bottom:10px;display:flex;flex-direction:column;gap:6px;">
-                        <div style="display:flex;align-items:center;justify-content:space-between;">
+                    < div style = "background:var(--surface);border:1.5px solid var(--border);border-radius:14px;
+            padding: 14px 16px; margin - bottom: 10px; display: flex; flex - direction: column; gap: 6px; ">
+                < div style = "display:flex;align-items:center;justify-content:space-between;" >
                             <span style="font-size:12px;font-weight:800;font-family:monospace;color:var(--accent);">${q.quote_id}</span>
                             <div style="display:flex;gap:4px;">${actions}</div>
-                        </div>
+                        </div >
                         <div style="font-size:15px;font-weight:700;">${q.client_name}</div>
                         <div style="display:flex;align-items:center;justify-content:space-between;">
                             <span style="font-size:12px;color:var(--subtext);">${date}</span>
                             <span style="font-size:14px;font-weight:800;color:var(--green);">${total}</span>
                         </div>
                         <div style="font-size:11px;font-weight:700;color:${vendorColor};">${vendor}</div>
-                    </div>`;
+                    </div > `;
                 }).join('');
             } catch (e) {
-                list.innerHTML = `<p style="text-align:center;color:var(--red);padding:40px 0;">Error: ${e.message}</p>`;
+                list.innerHTML = `< p style = "text-align:center;color:var(--red);padding:40px 0;" > Error: ${ e.message }</p > `;
             }
         }
 
         async function updateQuoteStatus(id, status) {
             try {
-                await apiFetch(`/api/quotes/${id}/status`, {
-                    method: 'PATCH',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ status })
-                });
-                const msgs = { archived: '📦 Cotización archivada', trash: '�️ Enviada a papelera', active: '✅ Cotización restaurada' };
-                showToast(msgs[status] || 'Actualizado');
-                loadHistory();
+                await apiFetch(`/ api / quotes / ${ id }/status`, {
+            method: 'PATCH',
+                headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ status })
+        });
+        const msgs = { archived: '📦 Cotización archivada', trash: '�️ Enviada a papelera', active: '✅ Cotización restaurada' };
+        showToast(msgs[status] || 'Actualizado');
+        loadHistory();
             } catch (e) {
-                showToast('❌ Error: ' + e.message);
-            }
+            showToast('❌ Error: ' + e.message);
+        }
         }
 
         function toggleDarkMode() {
