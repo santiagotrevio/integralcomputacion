@@ -411,7 +411,7 @@ router.get('/quotes/next-id/:userId', (req, res) => {
 router.get('/clients', authMiddleware, (req, res) => {
     const { q } = req.query; // búsqueda opcional
     let query = `
-        SELECT c.id, c.name, c.email, c.phone, c.last_quoted_at,
+        SELECT c.id, c.name, c.company, c.email, c.phone, c.last_quoted_at,
                COUNT(qu.id) as quote_count,
                MAX(qu.total) as max_total,
                SUM(qu.total) as total_spent
@@ -433,10 +433,10 @@ router.get('/clients', authMiddleware, (req, res) => {
 
 // Editar cliente
 router.put('/clients/:id', authMiddleware, (req, res) => {
-    const { name, email, phone } = req.body;
+    const { name, company, email, phone } = req.body;
     if (!name) return res.status(400).json({ error: 'Nombre requerido' });
-    db.run('UPDATE clients SET name=?, email=?, phone=? WHERE id=?',
-        [name, email || '', phone || '', req.params.id],
+    db.run('UPDATE clients SET name=?, company=?, email=?, phone=? WHERE id=?',
+        [name, company || '', email || '', phone || '', req.params.id],
         function (err) {
             if (err) return res.status(500).json({ error: err.message });
             res.json({ success: true });
@@ -453,24 +453,27 @@ router.delete('/clients/:id', authMiddleware, (req, res) => {
 
 
 router.post('/quotes', authMiddleware, (req, res) => {
-    const { quoteId, clientName, clientEmail, clientPhone, userId, total, items, notes, validity } = req.body;
+    const { quoteId, clientName, clientCompany, clientEmail, clientPhone, userId, total, items, notes, validity } = req.body;
 
-    if (!quoteId || !clientName) return res.status(400).json({ error: 'Datos incompletos' });
+    if (!quoteId || (!clientName && !clientCompany)) return res.status(400).json({ error: 'Datos incompletos' });
+
+    const nameKey = clientName || clientCompany; // usar empresa como clave si no hay nombre
 
     db.serialize(() => {
         // 1. Upsert del cliente
-        db.run(`INSERT INTO clients (name, email, phone) VALUES (?, ?, ?)
+        db.run(`INSERT INTO clients (name, company, email, phone) VALUES (?, ?, ?, ?)
                 ON CONFLICT(name) DO UPDATE SET 
+                company = excluded.company,
                 email = excluded.email, 
                 phone = excluded.phone, 
                 last_quoted_at = CURRENT_TIMESTAMP`,
-            [clientName, clientEmail || '', clientPhone || '']);
+            [nameKey, clientCompany || '', clientEmail || '', clientPhone || '']);
 
         // 2. Insertar la cotización (ignorar si ya existe el mismo folio)
         db.run(`INSERT OR IGNORE INTO quotes 
-                (quote_id, client_name, client_email, client_phone, user_id, total, items, notes, validity, status)
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 'active')`,
-            [quoteId, clientName, clientEmail || '', clientPhone || '', userId, total, JSON.stringify(items), notes || '', validity || 15],
+                (quote_id, client_name, client_company, client_email, client_phone, user_id, total, items, notes, validity, status)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'active')`,
+            [quoteId, nameKey, clientCompany || '', clientEmail || '', clientPhone || '', userId, total, JSON.stringify(items), notes || '', validity || 15],
             (err) => {
                 if (err) return res.status(500).json({ error: err.message });
                 res.json({ success: true, quoteId });
@@ -481,7 +484,7 @@ router.post('/quotes', authMiddleware, (req, res) => {
 // Listar historial de cotizaciones
 router.get('/quotes', authMiddleware, (req, res) => {
     const { status = 'active', userId, clientName } = req.query;
-    let query = `SELECT id, quote_id, client_name, client_email, client_phone, user_id, total, notes, validity, status, created_at
+    let query = `SELECT id, quote_id, client_name, client_company, client_email, client_phone, user_id, total, notes, validity, status, created_at
                  FROM quotes WHERE status = ?`;
     const params = [status];
     if (userId) {

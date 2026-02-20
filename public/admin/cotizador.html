@@ -1484,8 +1484,13 @@
                 <!-- Cliente -->
                 <div class="section-divider">Datos del Cliente</div>
                 <div class="field">
-                    <label class="lbl" for="fClientName">Nombre / Empresa</label>
-                    <input class="inp" id="fClientName" type="text" placeholder="Nombre del cliente o empresa"
+                    <label class="lbl" for="fClientCompany">Empresa <span
+                            style="font-weight:400;color:var(--subtext);">(opcional)</span></label>
+                    <input class="inp" id="fClientCompany" type="text" placeholder="Razón social o nombre de empresa">
+                </div>
+                <div class="field">
+                    <label class="lbl" for="fClientName">Nombre del contacto</label>
+                    <input class="inp" id="fClientName" type="text" placeholder="Nombre completo del cliente"
                         list="clientsList" onchange="onClientSelect(this.value)">
                     <datalist id="clientsList"></datalist>
                 </div>
@@ -1954,13 +1959,15 @@
             const prefillRaw = localStorage.getItem('_prefillClient');
             if (prefillRaw) {
                 try {
-                    const { name, phone, email } = JSON.parse(prefillRaw);
+                    const { name, company, phone, email } = JSON.parse(prefillRaw);
+                    document.getElementById('fClientCompany').value = company || '';
                     document.getElementById('fClientName').value = name || '';
                     document.getElementById('fClientPhone').value = phone || '';
                     document.getElementById('fClientEmail').value = email || '';
                 } catch (_) { }
                 localStorage.removeItem('_prefillClient');
             }
+
 
             loadClientCRM();
             document.getElementById('formalOverlay').classList.add('open');
@@ -2050,7 +2057,8 @@
             const bizFb = '/integralcomputacion';
 
             // Gather form values
-            const clientName = document.getElementById('fClientName').value || 'Cliente';
+            const clientCompany = document.getElementById('fClientCompany').value.trim();
+            const clientName = document.getElementById('fClientName').value.trim() || (clientCompany ? '' : 'Cliente');
             const clientPhone = document.getElementById('fClientPhone').value || '';
             const clientEmail = document.getElementById('fClientEmail').value || '';
 
@@ -2087,7 +2095,7 @@
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
-                        quoteId: quoteNum, clientName, clientEmail, clientPhone,
+                        quoteId: quoteNum, clientName, clientCompany, clientEmail, clientPhone,
                         userId, total, items: quoteItems, notes, validity
                     })
                 });
@@ -2162,6 +2170,7 @@
                 <div class="pv-meta-box">
                     <h4>Cotización para</h4>
                     <p>
+                        ${clientCompany ? `<strong style="font-size:10pt;">${clientCompany}</strong><br>` : ''}
                         <strong>${clientName}</strong><br>
                         ${clientPhone ? `Tel: ${clientPhone}<br>` : ''}
                         ${clientEmail ? `${clientEmail}<br>` : ''}
@@ -2474,9 +2483,14 @@
                         <h3 style="font-size:17px;font-weight:800;margin-bottom:20px;">Editar Contacto</h3>
                         <input type="hidden" id="editClientId">
                         <div class="field">
-                            <label class="lbl">Nombre / Empresa</label>
+                            <label class="lbl">Empresa <span style="font-weight:400;color:var(--subtext);">(opcional)</span></label>
+                            <input class="inp" id="editClientCompany" type="text" placeholder="Razón social o empresa">
+                        </div>
+                        <div class="field">
+                            <label class="lbl">Nombre del contacto</label>
                             <input class="inp" id="editClientNameField" type="text" placeholder="Nombre completo">
                         </div>
+
                         <div class="field">
                             <label class="lbl">Teléfono / WhatsApp</label>
                             <input class="inp" id="editClientPhone" type="text" inputmode="tel" placeholder="+52 33...">
@@ -2532,7 +2546,6 @@
                     const quotes = c.quote_count || 0;
                     const initials = c.name.split(' ').slice(0, 2).map(w => w[0]).join('').toUpperCase();
                     const avatarColor = stringToColor(c.name);
-                    // Serializar datos del contacto para el action sheet
                     const safe = (s) => encodeURIComponent(s || '');
                     return `
                     <div style="background:var(--surface);border:1.5px solid var(--border);border-radius:14px;
@@ -2543,6 +2556,7 @@
                             ${initials}
                         </div>
                         <div style="flex:1;min-width:0;">
+                            ${c.company ? `<div style="font-size:11px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${c.company}</div>` : ''}
                             <div style="font-size:15px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${c.name}</div>
                             ${c.phone ? `<div style="font-size:12px;color:var(--subtext);">${c.phone}</div>` : ''}
                             ${c.email ? `<div style="font-size:12px;color:var(--subtext);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${c.email}</div>` : ''}
@@ -2552,11 +2566,11 @@
                                 <span style="font-size:11px;color:var(--subtext);">Último: ${lastDate}</span>
                             </div>
                         </div>
-                        <button onclick="openCtxSheet(${c.id},'${safe(c.name)}','${safe(c.phone)}','${safe(c.email)}')"
+                        <button onclick="openCtxSheet(${c.id},'${safe(c.name)}','${safe(c.company)}','${safe(c.phone)}','${safe(c.email)}')"
                             style="background:var(--bg);border:1.5px solid var(--border);border-radius:50%;
                                    width:36px;height:36px;display:flex;align-items:center;justify-content:center;
                                    font-size:18px;color:var(--subtext);cursor:pointer;flex-shrink:0;letter-spacing:1px;">
-                            "◯"
+                            ⋯
                         </button>
                     </div>`;
                 }).join('');
@@ -2574,12 +2588,16 @@
         }
 
         // ── ACTION SHEET POR CONTACTO ───────────────────────────────────────
-        function openCtxSheet(id, nameEnc, phoneEnc, emailEnc) {
+        function openCtxSheet(id, nameEnc, companyEnc, phoneEnc, emailEnc) {
             const name = decodeURIComponent(nameEnc);
+            const company = decodeURIComponent(companyEnc);
             const phone = decodeURIComponent(phoneEnc);
             const email = decodeURIComponent(emailEnc);
 
-            document.getElementById('ctxClientName').textContent = name;
+            const nameEl = document.getElementById('ctxClientName');
+            nameEl.innerHTML = company
+                ? `<div style="font-size:12px;font-weight:700;color:var(--accent);text-transform:uppercase;">${company}</div>${name}`
+                : name;
 
             const btnStyle = `width:100%;padding:14px;border-radius:14px;border:1.5px solid var(--border);
                 background:var(--surface);font-size:15px;font-family:'Inter',sans-serif;
@@ -2600,11 +2618,11 @@
                     <i class="fa-solid fa-clock-rotate-left" style="color:var(--accent);width:20px;text-align:center;"></i> Cotizaciones Previas
                 </button>
                 <button style="${btnStyle} color:var(--text);"
-                    onclick="closeCtxSheet();newQuoteForClient(decodeURIComponent('${nameEnc}'),decodeURIComponent('${phoneEnc}'),decodeURIComponent('${emailEnc}'))">
+                    onclick="closeCtxSheet();newQuoteForClient(decodeURIComponent('${nameEnc}'),decodeURIComponent('${companyEnc}'),decodeURIComponent('${phoneEnc}'),decodeURIComponent('${emailEnc}'))">
                     <i class="fa-solid fa-file-circle-plus" style="color:var(--green);width:20px;text-align:center;"></i> Nueva Cotización
                 </button>
                 <button style="${btnStyle} color:var(--text);"
-                    onclick="closeCtxSheet();openEditClient(${id},'${nameEnc}','${phoneEnc}','${emailEnc}')">
+                    onclick="closeCtxSheet();openEditClient(${id},'${nameEnc}','${companyEnc}','${phoneEnc}','${emailEnc}')">
                     <i class="fa-solid fa-pen" style="color:var(--orange);width:20px;text-align:center;"></i> Editar Contacto
                 </button>
                 <button style="${btnStyle} color:var(--red);"
@@ -2656,12 +2674,12 @@
             try {
                 const nameParam = encodeURIComponent(name);
                 const [resActive, resArch] = await Promise.all([
-                    apiFetch(`/ api / quotes ? status = active & clientName=${ nameParam } `),
-                    apiFetch(`/ api / quotes ? status = archived & clientName=${ nameParam } `)
+                    apiFetch(`/ api / quotes ? status = active & clientName=${nameParam} `),
+                    apiFetch(`/ api / quotes ? status = archived & clientName=${nameParam} `)
                 ]);
-                const { data: active }   = await resActive.json();
+                const { data: active } = await resActive.json();
                 const { data: archived } = await resArch.json();
-                const all = [...(active||[]), ...(archived||[])]
+                const all = [...(active || []), ...(archived || [])]
                     .sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
 
                 const list = document.getElementById('clientQuotesList');
@@ -2671,9 +2689,9 @@
                     return;
                 }
                 list.innerHTML = all.map(q => {
-                    const date = new Date(q.created_at).toLocaleDateString('es-MX', {day:'2-digit', month:'short', year:'numeric'});
-                    const total = q.total ? `$${ Number(q.total).toLocaleString('es-MX', { minimumFractionDigits: 2 }) } ` : '—';
-                    const vendor = q.user_id === '01' ? 'Rocío Romero' : q.user_id === '02' ? 'Rocío Vázquez' : `Usuario ${ q.user_id } `;
+                    const date = new Date(q.created_at).toLocaleDateString('es-MX', { day: '2-digit', month: 'short', year: 'numeric' });
+                    const total = q.total ? `$${Number(q.total).toLocaleString('es-MX', { minimumFractionDigits: 2 })} ` : '—';
+                    const vendor = q.user_id === '01' ? 'Rocío Romero' : q.user_id === '02' ? 'Rocío Vázquez' : `Usuario ${q.user_id} `;
                     const statusBadge = q.status === 'archived'
                         ? `< span style = "font-size:10px;font-weight:700;color:var(--orange);background:rgba(255,149,0,.1);padding:2px 7px;border-radius:8px;" > Archivada</span > `
                         : `< span style = "font-size:10px;font-weight:700;color:var(--green);background:rgba(52,199,89,.1);padding:2px 7px;border-radius:8px;" > Activa</span > `;
@@ -2682,25 +2700,26 @@
             padding: 14px 16px; margin - bottom: 10px; ">
                 < div style = "display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;" >
                     <span style="font-size:12px;font-weight:800;font-family:monospace;color:var(--accent);">${q.quote_id}</span>
-                            ${ statusBadge }
+                            ${statusBadge}
                         </div >
                 <div style="display:flex;justify-content:space-between;align-items:center;">
                     <span style="font-size:12px;color:var(--subtext);">${date} · ${vendor}</span>
                     <span style="font-size:16px;font-weight:800;color:var(--green);">${total}</span>
                 </div>
-                        ${ q.notes ? `<div style="font-size:11px;color:var(--subtext);margin-top:4px;font-style:italic;">📌 ${q.notes}</div>` : '' }
+                        ${q.notes ? `<div style="font-size:11px;color:var(--subtext);margin-top:4px;font-style:italic;">📌 ${q.notes}</div>` : ''}
                     </div > `;
                 }).join('');
             } catch (e) {
                 const list = document.getElementById('clientQuotesList');
-                if (list) list.innerHTML = `< p style = "text-align:center;color:var(--red);padding:40px 0;" > Error: ${ e.message }</p > `;
+                if (list) list.innerHTML = `< p style = "text-align:center;color:var(--red);padding:40px 0;" > Error: ${e.message}</p > `;
             }
         }
 
         // ── EDITAR CONTACTO ────────────────────────────────────────────────
-        function openEditClient(id, nameEnc, phoneEnc, emailEnc) {
+        function openEditClient(id, nameEnc, companyEnc, phoneEnc, emailEnc) {
             document.getElementById('editClientId').value = id;
             document.getElementById('editClientNameField').value = decodeURIComponent(nameEnc);
+            document.getElementById('editClientCompany').value = decodeURIComponent(companyEnc || '');
             document.getElementById('editClientPhone').value = decodeURIComponent(phoneEnc);
             document.getElementById('editClientEmail').value = decodeURIComponent(emailEnc);
             document.getElementById('editClientOverlay').style.display = 'block';
@@ -2715,14 +2734,15 @@
         async function saveEditClient() {
             const id = document.getElementById('editClientId').value;
             const name = document.getElementById('editClientNameField').value.trim();
+            const company = document.getElementById('editClientCompany').value.trim();
             const phone = document.getElementById('editClientPhone').value.trim();
             const email = document.getElementById('editClientEmail').value.trim();
             if (!name) { showToast('❌ El nombre es obligatorio'); return; }
             try {
-                const res = await apiFetch(`/ api / clients / ${ id } `, {
+                const res = await apiFetch(`/api/clients/${id}`, {
                     method: 'PUT',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ name, phone, email })
+                    body: JSON.stringify({ name, company, phone, email })
                 });
                 if (!res.ok) throw new Error('Error del servidor');
                 showToast('✅ Contacto actualizado');
@@ -2744,20 +2764,20 @@
 
         async function deleteClient(id, name) {
             try {
-                const res = await apiFetch(`/ api / clients / ${ id } `, { method: 'DELETE' });
+                const res = await apiFetch(`/api/clients/${id}`, { method: 'DELETE' });
                 if (!res.ok) throw new Error('Error del servidor');
-                showToast(`🗑️ ${ name } eliminado`);
+                showToast(`🗑️ ${name} eliminado`);
                 loadContacts(document.getElementById('contactSearch')?.value || '');
             } catch (e) {
                 showToast('❌ Error: ' + e.message);
             }
         }
 
-        function newQuoteForClient(name, phone, email) {
+        function newQuoteForClient(name, company, phone, email) {
             closeContactsPanel();
             goToStep(1);
-            localStorage.setItem('_prefillClient', JSON.stringify({ name, phone, email }));
-            showToast(`✅ Contacto cargado: ${ name } `);
+            localStorage.setItem('_prefillClient', JSON.stringify({ name, company, phone, email }));
+            showToast(`✅ Contacto cargado: ${company || name}`);
         }
 
         function showHistoryPanel() {
@@ -2834,8 +2854,8 @@
             if (!list) return;
             list.innerHTML = '<p style="text-align:center;color:var(--subtext);padding:40px 0;">Cargando...</p>';
             try {
-                let url = `/ api / quotes ? status = ${ _histFilter.status } `;
-                if (_histFilter.userId) url += `& userId=${ _histFilter.userId } `;
+                let url = `/ api / quotes ? status = ${_histFilter.status} `;
+                if (_histFilter.userId) url += `& userId=${_histFilter.userId} `;
                 const res = await apiFetch(url);
                 const { data } = await res.json();
                 if (!data || data.length === 0) {
@@ -2844,8 +2864,8 @@
                 }
                 list.innerHTML = data.map(q => {
                     const date = new Date(q.created_at).toLocaleDateString('es-MX', { day: '2-digit', month: 'short', year: 'numeric' });
-                    const total = q.total ? `$${ Number(q.total).toLocaleString('es-MX', { minimumFractionDigits: 2 }) } ` : '—';
-                    const vendor = q.user_id === '01' ? 'Rocío Romero' : q.user_id === '02' ? 'Rocío Vázquez' : `Usuario ${ q.user_id } `;
+                    const total = q.total ? `$${Number(q.total).toLocaleString('es-MX', { minimumFractionDigits: 2 })} ` : '—';
+                    const vendor = q.user_id === '01' ? 'Rocío Romero' : q.user_id === '02' ? 'Rocío Vázquez' : `Usuario ${q.user_id} `;
                     const vendorColor = q.user_id === '01' ? '#0071e3' : '#9b59b6';
                     const actions = _histFilter.status === 'active'
                         ? `< button onclick = "updateQuoteStatus(${q.id},'archived')" title = "Archivar"
@@ -2880,23 +2900,23 @@
                     </div > `;
                 }).join('');
             } catch (e) {
-                list.innerHTML = `< p style = "text-align:center;color:var(--red);padding:40px 0;" > Error: ${ e.message }</p > `;
+                list.innerHTML = `< p style = "text-align:center;color:var(--red);padding:40px 0;" > Error: ${e.message}</p > `;
             }
         }
 
         async function updateQuoteStatus(id, status) {
             try {
-                await apiFetch(`/ api / quotes / ${ id }/status`, {
-            method: 'PATCH',
-                headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ status })
-        });
-        const msgs = { archived: '📦 Cotización archivada', trash: '�️ Enviada a papelera', active: '✅ Cotización restaurada' };
-        showToast(msgs[status] || 'Actualizado');
-        loadHistory();
+                await apiFetch(`/ api / quotes / ${id}/status`, {
+                    method: 'PATCH',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ status })
+                });
+                const msgs = { archived: '📦 Cotización archivada', trash: '�️ Enviada a papelera', active: '✅ Cotización restaurada' };
+                showToast(msgs[status] || 'Actualizado');
+                loadHistory();
             } catch (e) {
-            showToast('❌ Error: ' + e.message);
-        }
+                showToast('❌ Error: ' + e.message);
+            }
         }
 
         function toggleDarkMode() {
