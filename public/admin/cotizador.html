@@ -980,12 +980,13 @@
 
             @page {
                 size: Letter;
-                margin: 0;
+                margin: 0 !important;
                 /* Margin 0 evita que el navegador imprima cabeceras y pie de URLs */
             }
 
             #printView {
                 padding: 18mm 16mm;
+                box-sizing: border-box;
                 /* Margen trasladado a la vista */
             }
         }
@@ -1506,9 +1507,13 @@
             closeFormalSheet();
             document.getElementById('settingsOverlay').classList.add('open');
 
+            // Reemplazar antiguo default si quedó en caché
+            let bizEmail = localStorage.getItem('bizEmail');
+            if (bizEmail === 'info@integralcomputacion.com') bizEmail = 'ventas@integralcomputacion.com';
+
             // Cargar desde localStorage o poner defaults
             document.getElementById('cfgPhone').value = localStorage.getItem('bizPhone') || '(33) 12680092';
-            document.getElementById('cfgEmail').value = localStorage.getItem('bizEmail') || 'ventas@integralcomputacion.com';
+            document.getElementById('cfgEmail').value = bizEmail || 'ventas@integralcomputacion.com';
             document.getElementById('cfgWa').value = localStorage.getItem('bizWa') || '(33) 12680092';
             document.getElementById('cfgTerms').value = localStorage.getItem('bizTerms') || 'Esta cotización es válida por 15 días naturales. Los precios se respetan dentro de este plazo al confirmar el pedido.';
         }
@@ -1536,9 +1541,16 @@
         }
 
         async function printFormal() {
+            // Reemplazar antiguo default si quedó en caché
+            let currentEmail = localStorage.getItem('bizEmail');
+            if (currentEmail === 'info@integralcomputacion.com') {
+                currentEmail = 'ventas@integralcomputacion.com';
+                localStorage.setItem('bizEmail', currentEmail);
+            }
+
             // Cargar configuración de empresa
             const bizPhone = localStorage.getItem('bizPhone') || '(33) 12680092';
-            const bizEmail = localStorage.getItem('bizEmail') || 'ventas@integralcomputacion.com';
+            const bizEmail = currentEmail || 'ventas@integralcomputacion.com';
             const bizWa = localStorage.getItem('bizWa') || '(33) 12680092';
             const bizTerms = localStorage.getItem('bizTerms') || 'Esta cotización es válida por 15 días naturales. Los precios se respetan dentro de este plazo al confirmar el pedido.';
 
