@@ -979,8 +979,14 @@
             }
 
             @page {
-                margin: 18mm 16mm;
                 size: Letter;
+                margin: 0;
+                /* Margin 0 evita que el navegador imprima cabeceras y pie de URLs */
+            }
+
+            #printView {
+                padding: 18mm 16mm;
+                /* Margen trasladado a la vista */
             }
         }
     </style>
