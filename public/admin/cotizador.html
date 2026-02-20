@@ -75,6 +75,12 @@
             letter-spacing: -0.3px;
         }
 
+        .topbar-right {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
         .icon-btn {
             background: none;
             border: none;
@@ -82,6 +88,107 @@
             color: var(--subtext);
             font-size: 18px;
             padding: 4px;
+        }
+
+        /* ── SIDEBAR (Drawer) ── */
+        .sidebar-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.4);
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+            transition: 0.3s;
+        }
+
+        .sidebar-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: -320px;
+            width: 80%;
+            max-width: 320px;
+            height: 100vh;
+            background: var(--surface);
+            z-index: 1000;
+            transition: 0.3s cubic-bezier(0.1, 0, 0.1, 1);
+            box-shadow: 4px 0 15px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .sidebar.active {
+            left: 0;
+        }
+
+        .sidebar-header {
+            padding: 24px 20px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .sidebar-header h2 {
+            font-size: 18px;
+            font-weight: 800;
+            color: var(--text);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .sidebar-close {
+            background: rgba(0, 0, 0, 0.05);
+            border: none;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: var(--subtext);
+        }
+
+        .sidebar-menu {
+            padding: 16px 12px;
+            flex: 1;
+            overflow-y: auto;
+        }
+
+        .sidebar-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 16px;
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 15px;
+            border-radius: 12px;
+            margin-bottom: 4px;
+            transition: background 0.2s;
+        }
+
+        .sidebar-link i {
+            color: var(--accent);
+            font-size: 18px;
+            width: 20px;
+            text-align: center;
+        }
+
+        .sidebar-link:hover,
+        .sidebar-link:active {
+            background: rgba(0, 113, 227, 0.08);
+            color: var(--accent);
         }
 
         /* ── STEPS ── */
@@ -1072,13 +1179,45 @@
 
 <body>
 
+    <!-- SIDEBAR OVERLAY -->
+    <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
+
+    <!-- SIDEBAR MAIN -->
+    <nav class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h2><i class="fa-solid fa-file-invoice" style="color:var(--accent)"></i> Cotizador</h2>
+            <button class="sidebar-close" onclick="closeSidebar()"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="sidebar-menu">
+            <a href="#" class="sidebar-link" onclick="openSidebarTab('history')">
+                <i class="fa-solid fa-clock-rotate-left"></i> Historial de Facturas
+            </a>
+            <a href="#" class="sidebar-link" onclick="openSidebarTab('contacts')">
+                <i class="fa-solid fa-address-book"></i> Contactos Guardados
+            </a>
+            <hr style="border:0; border-top:1px solid var(--border); margin: 16px 4px;">
+            <a href="home.html" class="sidebar-link">
+                <i class="fa-solid fa-arrow-left"></i> Volver a Home
+            </a>
+        </div>
+    </nav>
+
     <!-- TOP BAR -->
     <header class="topbar">
-        <button class="topbar-back" onclick="goBack()"><i class="fa-solid fa-chevron-left"></i> Admin</button>
+        <div style="display:flex; align-items:center; gap: 12px;">
+            <button class="icon-btn" onclick="openSidebar()" style="color:var(--text); font-size: 20px;">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+            <button class="topbar-back" onclick="goBack()"><i class="fa-solid fa-chevron-left"></i> Admin</button>
+        </div>
+
         <h1>Cotizador</h1>
-        <button class="icon-btn" id="btnReset" onclick="resetAll()" title="Nueva cotización" style="display:none;">
-            <i class="fa-solid fa-arrow-rotate-left"></i>
-        </button>
+
+        <div class="topbar-right">
+            <button class="icon-btn" id="btnReset" onclick="resetAll()" title="Nueva cotización" style="display:none;">
+                <i class="fa-solid fa-arrow-rotate-left"></i>
+            </button>
+        </div>
     </header>
 
     <!-- STEPS -->
@@ -1887,6 +2026,27 @@
         })();
 
         (async () => { if (await checkAuth()) loadInitialData(); })();
+        /* ── SIDEBAR JS ── */
+        function openSidebar() {
+            document.getElementById('sidebarOverlay').classList.add('active');
+            document.getElementById('sidebar').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeSidebar() {
+            document.getElementById('sidebarOverlay').classList.remove('active');
+            document.getElementById('sidebar').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        function openSidebarTab(target) {
+            closeSidebar();
+            if (target === 'history') {
+                showToast('Historial en construcción 🚧');
+            } else if (target === 'contacts') {
+                showToast('Contactos en construcción 🚧');
+            }
+        }
     </script>
 </body>
 
