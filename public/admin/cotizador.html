@@ -1552,6 +1552,7 @@
         let quoteItems = [];
         let notFound = [];
         let clients = []; // Historial de clientes
+        let _iosPrintData = null; // Almacena HTML para imprimir en iOS (nueva ventana)
 
         // ────────────────────────────────────────────────────────────────────────────
         // AUTH & LOAD
@@ -2121,14 +2122,17 @@
             const pdfName = `Cotizacion_${quoteNum}_${clientName.replace(/[^a-zA-Z0-9]/g, '_')}`;
             document.title = pdfName;
 
-            // Detect iOS Safari (window.print() no funciona en iPhone)
+            // Detect iOS Safari — window.print() captura pantalla, no genera A4
             const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
             if (isIOS) {
-                // En iOS: mostrar printView en pantalla completa con botón de Share
+                // Guardar HTML para que el botón lo abra en ventana separada (gesture síncrono)
+                _iosPrintData = { html: pagesHtml, title: pdfName, originalTitle };
+
+                // Mostrar preview responsive en pantalla
                 const pv = document.getElementById('printView');
                 document.body.classList.add('ios-preview');
                 pv.style.cssText = 'display:block;position:fixed;top:0;left:0;width:100%;height:100%;z-index:9999;overflow-y:auto;background:white;';
-                // Botón para cerrar la vista previa
+
                 const closeBar = document.createElement('div');
                 const closeFn = () => {
                     pv.style.cssText = 'display:none';
@@ -2139,15 +2143,15 @@
                 closeBar.innerHTML = `
                     <div style="position:sticky;top:0;background:#1c1c1e;color:white;padding:12px 16px;display:flex;justify-content:space-between;align-items:center;z-index:10000;">
                         <span style="font-size:13px;font-weight:600;">📄 ${pdfName}</span>
-                        <div style="display:flex;gap:10px;">
-                            <button onclick="window.print()" style="background:#0071e3;color:white;border:none;padding:8px 14px;border-radius:8px;font-size:13px;font-weight:700;">🖨️ Guardar PDF</button>
+                        <div style="display:flex;gap:8px;">
+                            <button onclick="openIosPdf()" style="background:#0071e3;color:white;border:none;padding:8px 14px;border-radius:8px;font-size:13px;font-weight:700;">🖨️ Guardar PDF</button>
                             <button id="iosPvClose" style="background:#3a3a3c;color:white;border:none;padding:8px 14px;border-radius:8px;font-size:13px;">✕ Cerrar</button>
                         </div>
                     </div>`;
                 pv.prepend(closeBar);
                 document.getElementById('iosPvClose').addEventListener('click', closeFn);
                 document.title = pdfName;
-                showToast('📄 Toca Guardar PDF o usa Compartir (☐↑) → Imprimir');
+                showToast('Vista previa lista — toca 🖨️ Guardar PDF');
             } else {
                 setTimeout(() => {
                     window.print();
@@ -2157,7 +2161,69 @@
         }
 
         // ────────────────────────────────────────────────────────────────────────────
-        // WHATSAPP / COPY
+        // iOS PDF — Abrir ventana limpia con viewport A4 para imprimir correctamente
+        // ────────────────────────────────────────────────────────────────────────────
+        function openIosPdf() {
+            if (!_iosPrintData) { showToast('⚠️ Genera primero la cotización'); return; }
+            const { html, title } = _iosPrintData;
+
+            // Extraer CSS embebido del <style> tag principal (mismo origen, sin problemas)
+            let css = '';
+            document.querySelectorAll('style').forEach(s => { css += s.textContent; });
+
+            // Construir página de impresión mínima: solo la cotización, sin UI de la app
+            const printHtml = `<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=794">
+  <title>${title}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; background: white;
+                 font-family: 'Inter', -apple-system, Arial, sans-serif; }
+    /* ── Estilos de la cotización (extraídos del @media print) ── */
+    ${css}
+    /* Forzar que printView sea visible y sin posicionamiento fijo */
+    #printView { display: block !important; position: static !important;
+                 width: auto !important; height: auto !important;
+                 overflow: visible !important; z-index: auto !important; }
+    /* Ocultar TODO lo demás que no sea printView */
+    body > *:not(#printView) { display: none !important; }
+    @page { size: A4; margin: 0; }
+    @media print {
+      html, body { background: white !important; }
+      #printView { display: block !important; }
+    }
+  </style>
+</head>
+<body>
+  <div id="printView">${html}</div>
+  <script>
+    // Auto-imprimir cuando cargue la fuente (máximo 2s de espera)
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(function() { window.print(); });
+    } else {
+      setTimeout(function() { window.print(); }, 1200);
+    }
+  <\/script>
+</body>
+</html>`;
+
+            const w = window.open('about:blank', '_blank');
+            if (!w) {
+                showToast('⚠️ Activa "Ventanas emergentes" en Safari → Configuración → Safari');
+                return;
+            }
+            w.document.open();
+            w.document.write(printHtml);
+            w.document.close();
+            w.focus();
+        }
+
+
         // ────────────────────────────────────────────────────────────────────────────
         function buildTextQuote() {
             const date = new Date().toLocaleDateString('es-MX');
