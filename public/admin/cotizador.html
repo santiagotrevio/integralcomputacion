@@ -799,7 +799,48 @@
                 color: #1c1c1e;
                 font-size: 11pt;
                 max-width: 100%;
+                width: 100%;
                 padding: 0;
+            }
+
+            /* Shell Structure for Multi-Page Margins */
+            .pv-shell-table {
+                width: 100%;
+                border-collapse: collapse;
+            }
+
+            .pv-shell-header-space {
+                height: 18mm;
+                /* Top Margin */
+            }
+
+            .pv-shell-footer-space {
+                height: 20mm;
+                /* Bottom Margin */
+            }
+
+            .pv-content {
+                padding: 0 16mm;
+                /* Left/Right Margins */
+            }
+
+            /* Global Fixed Footer */
+            .pv-global-footer {
+                position: fixed;
+                bottom: 0;
+                left: 16mm;
+                right: 16mm;
+                height: 15mm;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                border-top: 1pt solid #e5e5ea;
+                font-size: 8.5pt;
+                color: #555;
+            }
+
+            .pv-global-footer strong {
+                color: #1c1c1e;
             }
 
             /* Header */
@@ -870,6 +911,11 @@
                 width: 100%;
                 border-collapse: collapse;
                 margin-bottom: 14pt;
+                page-break-inside: auto;
+            }
+
+            .pv-table thead {
+                display: table-header-group;
             }
 
             .pv-table thead tr {
@@ -890,6 +936,7 @@
 
             .pv-table tbody tr {
                 border-bottom: 0.5pt solid #e5e5ea;
+                page-break-inside: avoid;
             }
 
             .pv-table tbody tr:nth-child(even) {
@@ -919,10 +966,15 @@
                 display: flex;
                 justify-content: flex-end;
                 margin-bottom: 14pt;
+                page-break-inside: avoid;
             }
 
             .pv-totals-box {
                 width: 200pt;
+                background: #fdfdfd;
+                border: 1pt solid #e5e5ea;
+                border-radius: 6pt;
+                padding: 10pt;
             }
 
             .pv-totals-row {
@@ -985,9 +1037,8 @@
             }
 
             #printView {
-                padding: 18mm 16mm;
+                padding: 0;
                 box-sizing: border-box;
-                /* Margen trasladado a la vista */
             }
         }
     </style>
@@ -1620,80 +1671,96 @@
 
             // Inject print view
             document.getElementById('printView').innerHTML = `
-        <div class="pv-header">
-            <img class="pv-logo" src="/assets/images/LOGO SIN TEXTO.png"
-                 onerror="this.src='/assets/logo.svg'">
-            <div class="pv-biz">
-                <strong>Integral Computación</strong><br>
-                Suministros y Equipos de Cómputo<br>
-                Tel: ${bizPhone}<br>
-                ${bizEmail}<br>
-                ${bizWeb}
-            </div>
-        </div>
+        <table class="pv-shell-table">
+            <thead><tr><td><div class="pv-shell-header-space"></div></td></tr></thead>
+            <tbody><tr><td>
+                <div class="pv-content">
+                    
+                    <div class="pv-header">
+                        <img class="pv-logo" src="/assets/images/LOGO SIN TEXTO.png" onerror="this.src='/assets/logo.svg'">
+                        <div class="pv-biz">
+                            <strong>Integral Computación</strong><br>
+                            Suministros y Equipos de Cómputo<br>
+                            Tel: ${bizPhone}<br>
+                            ${bizEmail}<br>
+                            ${bizWeb}
+                        </div>
+                    </div>
 
-        <div class="pv-meta">
-            <div class="pv-meta-box">
-                <h4>Cotización para</h4>
-                <p>
-                    <strong>${clientName}</strong><br>
-                    ${clientPhone ? `Tel: ${clientPhone}<br>` : ''}
-                    ${clientEmail ? `${clientEmail}<br>` : ''}
-                </p>
-            </div>
-            <div class="pv-meta-box">
-                <h4>Detalles de la Cotización</h4>
-                <p>
-                    <strong>No. ${quoteNum}</strong><br>
-                    Fecha: ${dateStr}<br>
-                    Vigente hasta: ${expiry}<br>
-                    Agente: ${vendorName}
-                </p>
-            </div>
-        </div>
+                    <div class="pv-meta">
+                        <div class="pv-meta-box">
+                            <h4>Cotización para</h4>
+                            <p>
+                                <strong>${clientName}</strong><br>
+                                ${clientPhone ? `Tel: ${clientPhone}<br>` : ''}
+                                ${clientEmail ? `${clientEmail}<br>` : ''}
+                            </p>
+                        </div>
+                        <div class="pv-meta-box">
+                            <h4>Detalles de la Cotización</h4>
+                            <p>
+                                <strong>No. ${quoteNum}</strong><br>
+                                Fecha: ${dateStr}<br>
+                                Vigente hasta: ${expiry}<br>
+                                Agente: ${vendorName}
+                            </p>
+                        </div>
+                    </div>
 
-        ${notes ? `<div class="pv-note">📌 ${notes}</div>` : ''}
+                    ${notes ? `<div class="pv-note">📌 ${notes}</div>` : ''}
 
-        <table class="pv-table">
-            <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Descripción</th>
-                    <th style="text-align:right">Cant.</th>
-                    <th style="text-align:right">P. Unit.</th>
-                    <th style="text-align:right">Subtotal</th>
-                </tr>
-            </thead>
-            <tbody>${rows}</tbody>
+                    <table class="pv-table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Descripción</th>
+                                <th style="text-align:right">Cant.</th>
+                                <th style="text-align:right">P. Unit.</th>
+                                <th style="text-align:right">Subtotal</th>
+                            </tr>
+                        </thead>
+                        <tbody>${rows}</tbody>
+                    </table>
+
+                    <div class="pv-totals">
+                        <div class="pv-totals-box">
+                            <div class="pv-totals-row"><span>Subtotal</span><span>${fmt(subtotal)}</span></div>
+                            ${discount > 0 ? `<div class="pv-totals-row"><span>Descuento (${discount}%)</span><span>-${fmt(disc)}</span></div>` : ''}
+                            <div class="pv-totals-row"><span>IVA (${ivaRate}%)</span><span>${fmt(iva)}</span></div>
+                            <div class="pv-totals-row total"><span>TOTAL</span><span>${fmt(total)}</span></div>
+                        </div>
+                    </div>
+
+                    <div class="pv-footer" style="page-break-inside: avoid;">
+                        <div class="pv-footer-col">
+                            <h5>Formas de Pago</h5>
+                            <p>${payRow}</p>
+                        </div>
+                        <div class="pv-footer-col">
+                            <h5>Contacto y Redes</h5>
+                            <p>
+                                📱 WhatsApp: ${bizWa}<br>
+                                Instagram: ${bizIg}<br>
+                                Facebook: ${bizFb}
+                            </p>
+                        </div>
+                        <div class="pv-footer-col">
+                            <h5>Notas</h5>
+                            <p>${bizTerms} Esta cotización es válida por ${validity} día${validity !== '1' ? 's' : ''}.</p>
+                        </div>
+                    </div>
+
+                </div>
+            </td></tr></tbody>
+            <tfoot><tr><td><div class="pv-shell-footer-space"></div></td></tr></tfoot>
         </table>
 
-        <div class="pv-totals">
-            <div class="pv-totals-box">
-                <div class="pv-totals-row"><span>Subtotal</span><span>${fmt(subtotal)}</span></div>
-                ${discount > 0 ? `<div class="pv-totals-row"><span>Descuento (${discount}%)</span><span>-${fmt(disc)}</span></div>` : ''}
-                <div class="pv-totals-row"><span>IVA (${ivaRate}%)</span><span>${fmt(iva)}</span></div>
-                <div class="pv-totals-row total"><span>TOTAL</span><span>${fmt(total)}</span></div>
-            </div>
+        <!-- Global fixed footer on all pages -->
+        <div class="pv-global-footer">
+            <div class="pv-g-left">Cotización No. <strong>${quoteNum}</strong></div>
+            <div class="pv-g-right">${bizEmail} &nbsp; | &nbsp; ${bizWeb}</div>
         </div>
-
-        <div class="pv-footer">
-            <div class="pv-footer-col">
-                <h5>Formas de Pago</h5>
-                <p>${payRow}</p>
-            </div>
-            <div class="pv-footer-col">
-                <h5>Contacto y Redes</h5>
-                <p>
-                    📱 WhatsApp: ${bizWa}<br>
-                    Instagram: ${bizIg}<br>
-                    Facebook: ${bizFb}
-                </p>
-            </div>
-            <div class="pv-footer-col">
-                <h5>Notas</h5>
-                <p>${bizTerms} Esta cotización es válida por ${validity} día${validity !== '1' ? 's' : ''}.</p>
-            </div>
-        </div>`;
+        `;
 
             closeFormalSheet();
 
