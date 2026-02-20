@@ -884,7 +884,7 @@
 
             .pv-meta-box {
                 flex: 1;
-                border: 0.5pt solid #FFF200;
+                border: 0.5pt solid #EC008C;
                 border-left: 3pt solid #00AEEF;
                 border-radius: 4pt;
                 padding: 10pt 12pt;
@@ -896,7 +896,7 @@
                 font-weight: 700;
                 text-transform: uppercase;
                 letter-spacing: 0.5pt;
-                color: #00AEEF;
+                color: #004b93;
                 margin-bottom: 6pt;
             }
 
@@ -1000,7 +1000,7 @@
             }
 
             .pv-totals-row.total span:last-child {
-                color: #EC008C;
+                color: #1c1c1e;
             }
 
             /* Footer */
@@ -1021,7 +1021,7 @@
                 font-weight: 700;
                 text-transform: uppercase;
                 letter-spacing: 0.4pt;
-                color: #00AEEF;
+                color: #004b93;
                 margin-bottom: 5pt;
             }
 
@@ -1664,7 +1664,7 @@
 
             // Build table rows
             const rows = quoteItems.map((item, i) => `
-        <tr>
+        <tr${(i > 0 && i % 5 === 0) ? ' style="break-before: page; page-break-before: always;"' : ''}>
             <td>${i + 1}</td>
             <td>
                 ${item.name || item.id}
@@ -1741,22 +1741,24 @@
                         </div>
                     </div>
 
-                    <div class="pv-footer" style="page-break-inside: avoid;">
-                        <div class="pv-footer-col">
-                            <h5>Formas de Pago</h5>
-                            <p>${payRow}</p>
+                    <div style="page-break-inside: avoid;">
+                        <div class="pv-legal-notes" style="border-top: none; padding-top: 0; margin-bottom: 12pt; text-align: justify;">
+                            <strong>CONDICIONES:</strong> Vigencia: ${validity} días naturales. ${bizTerms}
                         </div>
-                        <div class="pv-footer-col">
-                            <h5>Atención al Cliente</h5>
-                            <p>
-                                📱 Directo / WhatsApp: ${bizWa}<br>
-                                ${bizEmail}
-                            </p>
-                        </div>
-                    </div>
 
-                    <div class="pv-legal-notes" style="page-break-inside: avoid;">
-                        <strong>NOTAS:</strong> Vigencia: ${validity} días naturales. | ${bizTerms.replace(/\n|(\.\s)/g, ' | ')}
+                        <div class="pv-footer" style="border-top: 1pt solid #e5e5ea; padding-top: 12pt;">
+                            <div class="pv-footer-col">
+                                <h5>Formas de Pago</h5>
+                                <p>${payRow}</p>
+                            </div>
+                            <div class="pv-footer-col">
+                                <h5>Atención al Cliente</h5>
+                                <p>
+                                    📱 Directo / WhatsApp: ${bizWa}<br>
+                                    ${bizEmail}
+                                </p>
+                            </div>
+                        </div>
                     </div>
 
                 </div>
