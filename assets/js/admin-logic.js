@@ -1877,44 +1877,22 @@ function renderBrandsTable() {
                             </div>
                         </div>
                     </td>
-                    <td style="background: #f1f5f980; padding: 20px;">
-                        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:20px; min-width:350px;">
-                            <!-- MOCKUP ADMIN -->
-                            <div style="text-align:center;">
-                                <div style="font-size:9px; font-weight:800; color:#999; margin-bottom:8px;">VISTA GESTOR (ADMIN)</div>
-                                <div class="audit-card" style="width:160px; margin:0 auto; transform:scale(0.8); transform-origin:top center; pointer-events:none;">
-                                    <div style="height:100px; background:#fdfdfd; display:flex; align-items:center; justify-content:center; border-bottom:1px solid #eee; position:relative;">
-                                         <i class="fa-solid fa-box" style="font-size:24px; opacity:0.1;"></i>
-                                         <div class="brand-logo-pill" style="top:10px; right:-10px; height:32px; width:80px; padding:0; overflow:hidden;">
-                                             <img src="${brandImgPath}" class="brand-prev-img" style="max-height: ${15 * setting.scale}px; transform:translate(${setting.offset_x || 0}px, ${setting.offset_y || 0}px); max-width:70px; object-fit:contain;">
-                                         </div>
-                                    </div>
-                                    <div style="padding:10px; text-align:left;">
-                                        <div style="font-size:8px; opacity:0.5;">RTX-4080</div>
-                                        <div style="font-size:10px; font-weight:700; border-bottom:1px solid #eee; padding-bottom:5px; margin-bottom:5px;">Tarjeta de Video...</div>
-                                        <div style="display:flex; gap:4px;">
-                                            <div style="width:15px; height:15px; border-radius:4px; background:#eee;"></div>
-                                            <div style="width:15px; height:15px; border-radius:4px; background:#eee;"></div>
-                                        </div>
-                                    </div>
-                                </div>
+                    <td style="background: #f1f5f980; padding: 20px; text-align:center;">
+                        <!-- MOCKUP ADMIN -->
+                        <div style="font-size:9px; font-weight:800; color:#999; margin-bottom:8px; text-transform:uppercase; letter-spacing:0.5px;">Vista Gestor (Admin)</div>
+                        <div class="audit-card" style="width:160px; margin:0 auto; transform:scale(0.85); transform-origin:top center; pointer-events:none;">
+                            <div style="height:100px; background:#fdfdfd; display:flex; align-items:center; justify-content:center; border-bottom:1px solid #eee; position:relative;">
+                                 <i class="fa-solid fa-box" style="font-size:24px; opacity:0.1;"></i>
+                                 <div class="brand-logo-pill" style="top:10px; right:-10px; height:32px; width:80px; padding:0; overflow:hidden;">
+                                     <img src="${brandImgPath}" class="brand-prev-img" style="max-height: ${15 * setting.scale}px; transform:translate(${setting.offset_x || 0}px, ${setting.offset_y || 0}px); max-width:70px; object-fit:contain;">
+                                 </div>
                             </div>
-
-                            <!-- MOCKUP CLIENTE -->
-                            <div style="text-align:center;">
-                                <div style="font-size:9px; font-weight:800; color:#999; margin-bottom:8px;">PÁGINA CLIENTES</div>
-                                <div class="catalog-item-card" style="width:160px; margin:0 auto; transform:scale(0.8); transform-origin:top center; pointer-events:none; border:1px solid #eee;">
-                                    <div style="height:100px; background:#fff; display:flex; align-items:center; justify-content:center; position:relative;">
-                                         <div class="brand-badge" style="top:10px; right:-8px; height:32px; width:80px; padding:0; overflow:hidden;">
-                                             <img src="${brandImgPath}" class="brand-prev-img" style="max-height: ${15 * setting.scale}px; transform:translate(${setting.offset_x || 0}px, ${setting.offset_y || 0}px); max-width:70px; object-fit:contain;">
-                                         </div>
-                                         <i class="fa-solid fa-print" style="font-size:24px; opacity:0.1;"></i>
-                                    </div>
-                                    <div style="padding:10px; text-align:left;">
-                                        <div style="font-size:10px; font-weight:800; color:var(--ic-cyan); margin-bottom:4px;">Tóner Compatible</div>
-                                        <div style="font-size:11px; font-weight:600; line-height:1.2;">Producto de Muestra...</div>
-                                        <div style="margin-top:10px; height:20px; border-radius:10px; background:var(--ic-cyan); opacity:0.1;"></div>
-                                    </div>
+                            <div style="padding:10px; text-align:left;">
+                                <div style="font-size:8px; opacity:0.5;">RTX-4080</div>
+                                <div style="font-size:10px; font-weight:700; border-bottom:1px solid #eee; padding-bottom:5px; margin-bottom:5px;">Tarjeta de Video...</div>
+                                <div style="display:flex; gap:4px;">
+                                    <div style="width:15px; height:15px; border-radius:4px; background:#eee;"></div>
+                                    <div style="width:15px; height:15px; border-radius:4px; background:#eee;"></div>
                                 </div>
                             </div>
                         </div>
