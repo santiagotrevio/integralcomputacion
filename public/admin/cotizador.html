@@ -812,12 +812,15 @@
                 margin: 0 !important;
             }
 
-            /* Explicit Multi-Page A4/Letter Structure */
+            /* Explicit Multi-Page A4 Structure */
             .pv-page {
-                width: 100%;
-                min-height: 275mm;
-                /* Usar min-height permite que crezca, usando mm ayuda al navegador con Chrome PDF engine */
-                padding: 18mm 14mm 20mm 14mm;
+                width: 210mm;
+                /* A4 exact width */
+                min-height: 292mm;
+                /* A4 exact height minus some tolerance */
+                margin: 0 auto;
+                /* Force horizontal centering */
+                padding: 15mm 15mm 15mm 15mm;
                 box-sizing: border-box;
                 display: flex;
                 flex-direction: column;
@@ -1058,9 +1061,8 @@
             }
 
             @page {
-                size: Letter;
+                size: A4;
                 margin: 0 !important;
-                /* Margin 0 evita que el navegador imprima cabeceras y pie de URLs */
             }
 
             #printView {
