@@ -1879,7 +1879,7 @@ function renderBrandsTable() {
                     </td>
                     <td style="background: #f1f5f980; padding: 20px; text-align:center; width: 220px;">
                         <!-- MOCKUP ADMIN -->
-                        <div style="font-size:9px; font-weight:800; color:#999; margin-bottom:8px; text-transform:uppercase; letter-spacing:0.5px;">Vista Gestor (Admin)</div>
+                        <div style="font-size:9px; font-weight:800; color:#999; margin-bottom:8px; text-transform:uppercase; letter-spacing:0.5px;">Vista Previa</div>
                         <div class="audit-card" style="width:160px; margin:0 auto; transform:scale(0.85); transform-origin:top center; pointer-events:none;">
                             <div style="height:100px; background:#fdfdfd; display:flex; align-items:center; justify-content:center; border-bottom:1px solid #eee; position:relative;">
                                  <i class="fa-solid fa-box" style="font-size:24px; opacity:0.1;"></i>
