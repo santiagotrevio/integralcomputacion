@@ -370,14 +370,6 @@ router.get('/search-analytics', (req, res) => {
 
 // ─── SISTEMA DE COTIZACIONES ───
 
-// Listar clientes (historial)
-router.get('/clients', (req, res) => {
-    db.all("SELECT * FROM clients ORDER BY name ASC", [], (err, rows) => {
-        if (err) return res.status(500).json({ error: err.message });
-        res.json({ data: rows });
-    });
-});
-
 // Obtener el siguiente ID de cotización
 router.get('/quotes/next-id/:userId', (req, res) => {
     const userId = req.params.userId.padStart(2, '0');
@@ -412,17 +404,17 @@ router.get('/clients', authMiddleware, (req, res) => {
     const { q } = req.query; // búsqueda opcional
     let query = `
         SELECT c.id, c.name, c.company, c.email, c.phone, c.last_quoted_at,
-               COUNT(qu.id) as quote_count,
+               COUNT(qu.rowid) as quote_count,
                MAX(qu.total) as max_total,
                SUM(qu.total) as total_spent
         FROM clients c
-        LEFT JOIN quotes qu ON qu.client_name = c.name AND qu.status != 'trash'
+        LEFT JOIN quotes qu ON qu.client_name = c.name AND COALESCE(qu.status,'active') != 'trash'
     `;
     const params = [];
     if (q) {
-        query += ` WHERE (c.name LIKE ? OR c.email LIKE ? OR c.phone LIKE ?)`;
+        query += ` WHERE (c.name LIKE ? OR c.company LIKE ? OR c.email LIKE ? OR c.phone LIKE ?)`;
         const like = `%${q}%`;
-        params.push(like, like, like);
+        params.push(like, like, like, like);
     }
     query += ` GROUP BY c.id ORDER BY c.last_quoted_at DESC`;
     db.all(query, params, (err, rows) => {
