@@ -1877,7 +1877,7 @@ function renderBrandsTable() {
                             </div>
                         </div>
                     </td>
-                    <td style="background: #f1f5f980; padding: 20px; text-align:center;">
+                    <td style="background: #f1f5f980; padding: 20px; text-align:center; width: 220px;">
                         <!-- MOCKUP ADMIN -->
                         <div style="font-size:9px; font-weight:800; color:#999; margin-bottom:8px; text-transform:uppercase; letter-spacing:0.5px;">Vista Gestor (Admin)</div>
                         <div class="audit-card" style="width:160px; margin:0 auto; transform:scale(0.85); transform-origin:top center; pointer-events:none;">
