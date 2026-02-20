@@ -185,12 +185,14 @@
             justify-content: center;
             border: 1px solid #e8ecf0;
             z-index: 5;
+            overflow: hidden;
+            /* fixed container — logo clips to this, no CSS overrides to img */
         }
 
+        /* brand-logo-img: NO size overrides here.
+           Size is controlled by brandImgStyle in JS (15px * scale from Personalización de Marca).
+           Only layout/display properties here. */
         .brand-logo-img {
-            max-height: 15px;
-            /* standardized safe zone — same as admin */
-            max-width: 60px;
             object-fit: contain;
             display: block;
         }
@@ -203,7 +205,6 @@
             background: white;
             padding: 0 12px;
             border-radius: 14px 0 14px 0;
-            /* follows card's top-left corner */
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.07);
             height: 28px;
             min-width: 44px;
@@ -212,6 +213,8 @@
             justify-content: center;
             border: 1px solid #e8ecf0;
             z-index: 5;
+            overflow: hidden;
+            /* fixed container — logo clips to this, no CSS overrides to img */
         }
 
         /* ============================================================
@@ -1895,9 +1898,9 @@
                 const scale = bSet ? bSet.scale : 1.0;
                 const offset_x = bSet ? (bSet.offset_x || 0) : 0;
                 const offset_y = bSet ? (bSet.offset_y || 0) : 0;
-                // Safe zone: fixed 15px height, same as admin .brand-logo-img standard
-                // scale/offset only apply in brand customization preview, NOT in catalog display
-                const brandImgStyle = `max-height: 15px; transform: translate(${offset_x}px, ${offset_y}px); object-fit: contain;`;
+                // Respect scale/offset exactly as configured in Personalización de Marca.
+                // The badge container is fixed size; overflow:hidden clips any excess.
+                const brandImgStyle = `max-height: ${15 * scale}px; transform: translate(${offset_x}px, ${offset_y}px); object-fit: contain;`;
 
                 // Badge HTML — goes INSIDE the image container (same as admin)
                 // overflow:hidden on the container clips it at the right edge = signature pill look
