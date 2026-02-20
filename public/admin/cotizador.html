@@ -1161,6 +1161,8 @@
                     <div class="sheet-title">📋 Cotización Formal (PDF)</div>
                 </div>
                 <div>
+                    <button class="sheet-close" onclick="openDesignSheet()" style="margin-right:8px;"
+                        title="Ajustar Diseño del PDF"><i class="fa-solid fa-wand-magic-sparkles"></i></button>
                     <button class="sheet-close" onclick="openSettingsSheet()" style="margin-right:8px;"
                         title="Configurar Empresa"><i class="fa-solid fa-gear"></i></button>
                     <button class="sheet-close" onclick="closeFormalSheet()"><i class="fa-solid fa-xmark"></i></button>
@@ -1288,6 +1290,54 @@
                 <button class="btn-primary" onclick="saveSettings()" style="margin-top:24px;">
                     <i class="fa-solid fa-save"></i> Guardar Cambios
                 </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ════════════════════════════════════════════
+     DESIGN SHEET (PDF Layout Tune)
+══════════════════════════════════════════════ -->
+    <div class="sheet-overlay" id="designOverlay" onclick="if(event.target===this) closeDesignSheet()">
+        <div class="sheet" id="designSheet">
+            <div class="sheet-handle-area">
+                <div>
+                    <div class="sheet-handle"></div>
+                    <div class="sheet-title">✨ Ajustar Diseño de Cotización</div>
+                </div>
+                <button class="sheet-close" onclick="closeDesignSheet()"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="sheet-body">
+                <div class="section-divider">Tamaño del Logo</div>
+                <div class="field" style="display:flex; align-items:center; gap:16px;">
+                    <i class="fa-solid fa-image" style="color:#aaa;"></i>
+                    <input type="range" id="cfgLogoScale" min="0.5" max="2" step="0.1" value="1"
+                        style="flex:1; accent-color:#0071e3;">
+                    <span id="cfgLogoScaleVal" style="font-weight:700; font-size:12px; min-width:30px;">1x</span>
+                </div>
+
+                <div class="section-divider">Margen Vertical (Alinear Subidas/Bajadas)</div>
+                <div class="row2">
+                    <div class="field">
+                        <label class="lbl">Ajuste Altura de Logo</label>
+                        <div style="display:flex; align-items:center; gap:8px;">
+                            <input type="range" id="cfgLogoY" min="-50" max="50" step="1" value="0" style="flex:1;">
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label class="lbl">Ajuste Altura de Texto (Der.)</label>
+                        <div style="display:flex; align-items:center; gap:8px;">
+                            <input type="range" id="cfgTextY" min="-50" max="50" step="1" value="0" style="flex:1;">
+                        </div>
+                    </div>
+                </div>
+
+                <button class="btn-primary" onclick="saveDesignSettings()" style="margin-top:24px;">
+                    <i class="fa-solid fa-save"></i> Aplicar y Guardar
+                </button>
+                <div style="text-align:center; margin-top:16px;">
+                    <button class="btn-secondary" onclick="resetDesignSettings()"
+                        style="width: auto; padding: 4px 12px; font-size: 11px;">Restaurar por defecto</button>
+                </div>
             </div>
         </div>
     </div>
@@ -1598,6 +1648,43 @@
             closeSettingsSheet();
         }
 
+        // --- DESIGN SHEET ---
+        function openDesignSheet() {
+            closeFormalSheet();
+            document.getElementById('designOverlay').classList.add('open');
+
+            const logoScale = localStorage.getItem('cfgLogoScale') || 1;
+            document.getElementById('cfgLogoScale').value = logoScale;
+            document.getElementById('cfgLogoScaleVal').innerText = logoScale + 'x';
+            document.getElementById('cfgLogoY').value = localStorage.getItem('cfgLogoY') || 0;
+            document.getElementById('cfgTextY').value = localStorage.getItem('cfgTextY') || 0;
+
+            document.getElementById('cfgLogoScale').oninput = function () {
+                document.getElementById('cfgLogoScaleVal').innerText = this.value + 'x';
+            };
+        }
+        function closeDesignSheet() {
+            document.getElementById('designOverlay').classList.remove('open');
+            openFormalSheet();
+        }
+        function saveDesignSettings() {
+            localStorage.setItem('cfgLogoScale', document.getElementById('cfgLogoScale').value);
+            localStorage.setItem('cfgLogoY', document.getElementById('cfgLogoY').value);
+            localStorage.setItem('cfgTextY', document.getElementById('cfgTextY').value);
+            showToast('✓ Ajustes de diseño guardados');
+            closeDesignSheet();
+        }
+        function resetDesignSettings() {
+            localStorage.removeItem('cfgLogoScale');
+            localStorage.removeItem('cfgLogoY');
+            localStorage.removeItem('cfgTextY');
+            document.getElementById('cfgLogoScale').value = 1;
+            document.getElementById('cfgLogoY').value = 0;
+            document.getElementById('cfgTextY').value = 0;
+            document.getElementById('cfgLogoScaleVal').innerText = '1x';
+            showToast('✓ Ajustes restaurados. Guarda para aplicar.');
+        }
+
         function getCheckedPayments() {
             const map = {
                 payEfectivo: 'Efectivo', payTransferencia: 'Transferencia', payBBVA: 'BBVA CoDi',
@@ -1671,6 +1758,11 @@
 
             const payRow = payments.length ? payments.map(p => `• ${p}`).join('<br>') : 'Consultar con el vendedor';
 
+            // Design Layout Values
+            const cfgLogoScale = parseFloat(localStorage.getItem('cfgLogoScale')) || 1;
+            const cfgLogoY = parseFloat(localStorage.getItem('cfgLogoY')) || 0;
+            const cfgTextY = parseFloat(localStorage.getItem('cfgTextY')) || 0;
+
             // Explicit Pagination Logic
             const chunkedPages = [];
             const itemsCopy = [...quoteItems];
@@ -1717,8 +1809,8 @@
         <div class="pv-page">
             ${isFirstPage ? `
             <div class="pv-header">
-                <img class="pv-logo" src="/assets/images/HORIZONTAL grande.png" onerror="this.src='/assets/logo.svg'">
-                <div class="pv-biz">
+                <img class="pv-logo" src="/assets/images/HORIZONTAL grande.png" onerror="this.src='/assets/logo.svg'" style="transform: translateY(${cfgLogoY}px) scale(${cfgLogoScale}); transform-origin: left center;">
+                <div class="pv-biz" style="transform: translateY(${cfgTextY}px);">
                     Suministros y Equipos de Cómputo<br>
                     Tel: ${bizPhone}<br>
                     ${bizEmail}<br>
