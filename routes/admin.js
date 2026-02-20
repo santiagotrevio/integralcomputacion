@@ -496,14 +496,22 @@ router.get('/quotes', authMiddleware, (req, res) => {
 
 
 // Cambiar estado de una cotización (archivar / papelera / restaurar)
+// Acepta tanto el id numérico como el quote_id textual (IC01-...)
 router.patch('/quotes/:id/status', authMiddleware, (req, res) => {
     const { id } = req.params;
     const { status } = req.body; // 'active' | 'archived' | 'trash'
     if (!['active', 'archived', 'trash'].includes(status))
         return res.status(400).json({ error: 'Status inválido' });
-    db.run('UPDATE quotes SET status = ? WHERE id = ?', [status, id], function (err) {
+
+    // Intentar primero como quote_id (texto), luego como id numérico
+    db.run('UPDATE quotes SET status = ? WHERE quote_id = ?', [status, id], function (err) {
         if (err) return res.status(500).json({ error: err.message });
-        res.json({ success: true, changes: this.changes });
+        if (this.changes > 0) return res.json({ success: true, changes: this.changes });
+        // Fallback: buscar por id numérico
+        db.run('UPDATE quotes SET status = ? WHERE id = ?', [status, id], function (err2) {
+            if (err2) return res.status(500).json({ error: err2.message });
+            res.json({ success: true, changes: this.changes });
+        });
     });
 });
 

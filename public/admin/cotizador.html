@@ -3048,17 +3048,18 @@
                     const total = q.total ? `$${Number(q.total).toLocaleString('es-MX', { minimumFractionDigits: 2 })} ` : '—';
                     const vendor = q.user_id === '01' ? 'Rocío Romero' : q.user_id === '02' ? 'Rocío Vázquez' : `Usuario ${q.user_id}`;
                     const vendorColor = q.user_id === '01' ? '#0071e3' : '#9b59b6';
+                    const qid = encodeURIComponent(q.quote_id);
                     const actions = _histFilter.status === 'active'
-                        ? `<button onclick="updateQuoteStatus(${q.id},'archived')" title="Archivar" style="background:none;border:none;color:var(--subtext);cursor:pointer;font-size:15px;padding:6px;">
+                        ? `<button onclick="updateQuoteStatus('${qid}','archived')" title="Archivar" style="background:none;border:none;color:var(--subtext);cursor:pointer;font-size:15px;padding:6px;">
                             <i class="fa-solid fa-box-archive"></i></button>
-                           <button onclick="updateQuoteStatus(${q.id},'trash')" title="Papelera" style="background:none;border:none;color:var(--red);cursor:pointer;font-size:15px;padding:6px;">
+                           <button onclick="updateQuoteStatus('${qid}','trash')" title="Papelera" style="background:none;border:none;color:var(--red);cursor:pointer;font-size:15px;padding:6px;">
                             <i class="fa-solid fa-trash"></i></button>`
                         : _histFilter.status === 'archived'
-                            ? `<button onclick="updateQuoteStatus(${q.id},'active')" title="Restaurar" style="background:none;border:none;color:var(--green);cursor:pointer;font-size:15px;padding:6px;">
+                            ? `<button onclick="updateQuoteStatus('${qid}','active')" title="Restaurar" style="background:none;border:none;color:var(--green);cursor:pointer;font-size:15px;padding:6px;">
                                 <i class="fa-solid fa-rotate-left"></i></button>
-                               <button onclick="updateQuoteStatus(${q.id},'trash')" title="Papelera" style="background:none;border:none;color:var(--red);cursor:pointer;font-size:15px;padding:6px;">
+                               <button onclick="updateQuoteStatus('${qid}','trash')" title="Papelera" style="background:none;border:none;color:var(--red);cursor:pointer;font-size:15px;padding:6px;">
                                 <i class="fa-solid fa-trash"></i></button>`
-                            : `<button onclick="updateQuoteStatus(${q.id},'active')" title="Restaurar" style="background:none;border:none;color:var(--green);cursor:pointer;font-size:15px;padding:6px;">
+                            : `<button onclick="updateQuoteStatus('${qid}','active')" title="Restaurar" style="background:none;border:none;color:var(--green);cursor:pointer;font-size:15px;padding:6px;">
                                 <i class="fa-solid fa-rotate-left"></i></button>`;
                     return `
                     <div style="background:var(--surface);border:1.5px solid var(--border);border-radius:14px;padding:14px 16px;margin-bottom:10px;display:flex;flex-direction:column;gap:6px;">
@@ -3081,12 +3082,18 @@
 
         async function updateQuoteStatus(id, status) {
             try {
-                await apiFetch(`/api/quotes/${id}/status`, {
+                const decodedId = decodeURIComponent(id);
+                const res = await apiFetch(`/api/quotes/${decodedId}/status`, {
                     method: 'PATCH',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ status })
                 });
-                const msgs = { archived: '📦 Cotización archivada', trash: '�️ Enviada a papelera', active: '✅ Cotización restaurada' };
+                if (!res.ok) {
+                    const errBody = await res.json().catch(() => ({ error: `HTTP ${res.status}` }));
+                    showToast('❌ ' + (errBody.error || `Error ${res.status}`));
+                    return;
+                }
+                const msgs = { archived: '📦 Cotización archivada', trash: '🗑️ Enviada a papelera', active: '✅ Cotización restaurada' };
                 showToast(msgs[status] || 'Actualizado');
                 loadHistory();
             } catch (e) {
