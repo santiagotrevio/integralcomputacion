@@ -1189,32 +1189,18 @@
                 <div class="row2">
                     <div class="field">
                         <label class="lbl" for="cfgPhone">Teléfono del Negocio</label>
-                        <input class="inp" id="cfgPhone" type="text" placeholder="(33) 0000-0000">
+                        <input class="inp" id="cfgPhone" type="text" placeholder="(33) 12680092">
                     </div>
                     <div class="field">
                         <label class="lbl" for="cfgEmail">Email del Negocio</label>
-                        <input class="inp" id="cfgEmail" type="email" placeholder="info@...">
+                        <input class="inp" id="cfgEmail" type="email" placeholder="ventas@...">
                     </div>
-                </div>
-                <div class="field">
-                    <label class="lbl" for="cfgWeb">Sitio Web</label>
-                    <input class="inp" id="cfgWeb" type="text" placeholder="www.integralcomputacion.com">
                 </div>
 
                 <div class="section-divider">Redes Sociales</div>
                 <div class="field">
                     <label class="lbl" for="cfgWa">WhatsApp (PDF Footer)</label>
-                    <input class="inp" id="cfgWa" type="text" placeholder="(33) 0000-0000">
-                </div>
-                <div class="row2">
-                    <div class="field">
-                        <label class="lbl" for="cfgIg">Instagram</label>
-                        <input class="inp" id="cfgIg" type="text" placeholder="@integralcomputacion">
-                    </div>
-                    <div class="field">
-                        <label class="lbl" for="cfgFb">Facebook</label>
-                        <input class="inp" id="cfgFb" type="text" placeholder="/integralcomputacion">
-                    </div>
+                    <input class="inp" id="cfgWa" type="text" placeholder="(33) 12680092">
                 </div>
 
                 <div class="section-divider">Pie de Página (Legales)</div>
@@ -1515,13 +1501,10 @@
             document.getElementById('settingsOverlay').classList.add('open');
 
             // Cargar desde localStorage o poner defaults
-            document.getElementById('cfgPhone').value = localStorage.getItem('bizPhone') || '(33) 0000-0000';
-            document.getElementById('cfgEmail').value = localStorage.getItem('bizEmail') || 'info@integralcomputacion.com';
-            document.getElementById('cfgWeb').value = localStorage.getItem('bizWeb') || 'www.integralcomputacion.com';
-            document.getElementById('cfgWa').value = localStorage.getItem('bizWa') || '(33) 0000-0000';
-            document.getElementById('cfgIg').value = localStorage.getItem('bizIg') || '@integralcomputacion';
-            document.getElementById('cfgFb').value = localStorage.getItem('bizFb') || '/integralcomputacion';
-            document.getElementById('cfgTerms').value = localStorage.getItem('bizTerms') || 'Precios sujetos a disponibilidad y cambio sin previo aviso.';
+            document.getElementById('cfgPhone').value = localStorage.getItem('bizPhone') || '(33) 12680092';
+            document.getElementById('cfgEmail').value = localStorage.getItem('bizEmail') || 'ventas@integralcomputacion.com';
+            document.getElementById('cfgWa').value = localStorage.getItem('bizWa') || '(33) 12680092';
+            document.getElementById('cfgTerms').value = localStorage.getItem('bizTerms') || 'Esta cotización es válida por 15 días naturales. Los precios se respetan dentro de este plazo al confirmar el pedido.';
         }
         function closeSettingsSheet() {
             document.getElementById('settingsOverlay').classList.remove('open');
@@ -1530,10 +1513,7 @@
         function saveSettings() {
             localStorage.setItem('bizPhone', document.getElementById('cfgPhone').value);
             localStorage.setItem('bizEmail', document.getElementById('cfgEmail').value);
-            localStorage.setItem('bizWeb', document.getElementById('cfgWeb').value);
             localStorage.setItem('bizWa', document.getElementById('cfgWa').value);
-            localStorage.setItem('bizIg', document.getElementById('cfgIg').value);
-            localStorage.setItem('bizFb', document.getElementById('cfgFb').value);
             localStorage.setItem('bizTerms', document.getElementById('cfgTerms').value);
             showToast('✓ Datos de empresa guardados');
             closeSettingsSheet();
@@ -1551,13 +1531,15 @@
 
         async function printFormal() {
             // Cargar configuración de empresa
-            const bizPhone = localStorage.getItem('bizPhone') || '(33) 0000-0000';
-            const bizEmail = localStorage.getItem('bizEmail') || 'info@integralcomputacion.com';
-            const bizWeb = localStorage.getItem('bizWeb') || 'www.integralcomputacion.com';
-            const bizWa = localStorage.getItem('bizWa') || '(33) 0000-0000';
-            const bizIg = localStorage.getItem('bizIg') || '@integralcomputacion';
-            const bizFb = localStorage.getItem('bizFb') || '/integralcomputacion';
-            const bizTerms = localStorage.getItem('bizTerms') || 'Precios sujetos a disponibilidad y cambio sin previo aviso.';
+            const bizPhone = localStorage.getItem('bizPhone') || '(33) 12680092';
+            const bizEmail = localStorage.getItem('bizEmail') || 'ventas@integralcomputacion.com';
+            const bizWa = localStorage.getItem('bizWa') || '(33) 12680092';
+            const bizTerms = localStorage.getItem('bizTerms') || 'Esta cotización es válida por 15 días naturales. Los precios se respetan dentro de este plazo al confirmar el pedido.';
+
+            // Valores inmutables
+            const bizWeb = 'www.integralcomputacion.com';
+            const bizIg = '@integralcomputacion';
+            const bizFb = '/integralcomputacion';
 
             // Gather form values
             const clientName = document.getElementById('fClientName').value || 'Cliente';
