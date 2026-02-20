@@ -286,6 +286,7 @@
 
         .inp {
             width: 100%;
+            box-sizing: border-box;
             padding: 12px 14px;
             border: 1.5px solid var(--border);
             border-radius: 12px;
@@ -296,6 +297,7 @@
             outline: none;
             transition: border-color 0.2s;
         }
+
 
         .inp:focus {
             border-color: var(--accent);
@@ -311,8 +313,18 @@
 
         .row2 {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+            grid-template-columns: 1fr 1fr;
             gap: 12px;
+        }
+
+        .row2>* {
+            min-width: 0;
+            overflow: hidden;
+        }
+
+        .row2 .inp {
+            width: 100%;
+            box-sizing: border-box;
         }
 
 
