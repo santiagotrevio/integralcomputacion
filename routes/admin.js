@@ -453,14 +453,24 @@ router.post('/quotes/pdf', authMiddleware, async (req, res) => {
     try {
         const browser = await getBrowser();
         const page = await browser.newPage();
-        await page.setViewport({ width: 794, height: 1123 });
-        await page.setContent(html, { waitUntil: 'networkidle0', timeout: 15000 });
 
-        // Esperar fuentes + render
-        try {
-            await page.evaluate(() => document.fonts.ready);
-            await new Promise(r => setTimeout(r, 800));
-        } catch (_) { }
+        // Bloquear Google Fonts y otros recursos externos para evitar timeout
+        await page.setRequestInterception(true);
+        page.on('request', req => {
+            const url = req.url();
+            if (url.includes('fonts.googleapis.com') || url.includes('fonts.gstatic.com')) {
+                req.abort(); // No necesitamos esperar fuentes externas
+            } else {
+                req.continue();
+            }
+        });
+
+        await page.setViewport({ width: 794, height: 1123 });
+        // domcontentloaded: no espera recursos externos (fonts, imágenes remotas)
+        await page.setContent(html, { waitUntil: 'domcontentloaded', timeout: 10000 });
+
+        // Pequeño delay para render con fuentes del sistema
+        await new Promise(r => setTimeout(r, 600));
 
         const pdfBuffer = await page.pdf({
             format: 'A4',

@@ -2131,11 +2131,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=794">
   <title>${pdfName}</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; }
     html, body { margin: 0; padding: 0; background: white;
-                 font-family: 'Inter', -apple-system, Arial, sans-serif; }
+                 font-family: -apple-system, 'Helvetica Neue', Arial, sans-serif; }
     ${css}
     #printView { display: block !important; position: static !important;
                  width: auto !important; height: auto !important;
@@ -2144,6 +2143,7 @@
 </head>
 <body><div id="printView">${pagesHtml}</div></body>
 </html>`;
+
 
             // Mostrar spinner mientras el servidor genera el PDF
             showToast('⏳ Generando PDF…');
