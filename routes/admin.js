@@ -408,8 +408,8 @@ router.get('/quotes/next-id/:userId', (req, res) => {
 });
 
 // Guardar cotización y cliente
-router.post('/quotes', (req, res) => {
-    const { quoteId, clientName, clientEmail, clientPhone, userId, total, items } = req.body;
+router.post('/quotes', authMiddleware, (req, res) => {
+    const { quoteId, clientName, clientEmail, clientPhone, userId, total, items, notes, validity } = req.body;
 
     if (!quoteId || !clientName) return res.status(400).json({ error: 'Datos incompletos' });
 
@@ -420,16 +420,49 @@ router.post('/quotes', (req, res) => {
                 email = excluded.email, 
                 phone = excluded.phone, 
                 last_quoted_at = CURRENT_TIMESTAMP`,
-            [clientName, clientEmail, clientPhone]);
+            [clientName, clientEmail || '', clientPhone || '']);
 
-        // 2. Insertar la cotización
-        db.run(`INSERT INTO quotes (quote_id, client_name, user_id, total, items) VALUES (?, ?, ?, ?, ?)`,
-            [quoteId, clientName, userId, total, JSON.stringify(items)], (err) => {
+        // 2. Insertar la cotización (ignorar si ya existe el mismo folio)
+        db.run(`INSERT OR IGNORE INTO quotes 
+                (quote_id, client_name, client_email, client_phone, user_id, total, items, notes, validity, status)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 'active')`,
+            [quoteId, clientName, clientEmail || '', clientPhone || '', userId, total, JSON.stringify(items), notes || '', validity || 15],
+            (err) => {
                 if (err) return res.status(500).json({ error: err.message });
                 res.json({ success: true, quoteId });
             });
     });
 });
+
+// Listar historial de cotizaciones
+router.get('/quotes', authMiddleware, (req, res) => {
+    const { status = 'active', userId } = req.query;
+    let query = `SELECT id, quote_id, client_name, client_email, client_phone, user_id, total, notes, validity, status, created_at
+                 FROM quotes WHERE status = ?`;
+    const params = [status];
+    if (userId) {
+        query += ' AND user_id = ?';
+        params.push(userId);
+    }
+    query += ' ORDER BY created_at DESC';
+    db.all(query, params, (err, rows) => {
+        if (err) return res.status(500).json({ error: err.message });
+        res.json({ data: rows });
+    });
+});
+
+// Cambiar estado de una cotización (archivar / papelera / restaurar)
+router.patch('/quotes/:id/status', authMiddleware, (req, res) => {
+    const { id } = req.params;
+    const { status } = req.body; // 'active' | 'archived' | 'trash'
+    if (!['active', 'archived', 'trash'].includes(status))
+        return res.status(400).json({ error: 'Status inválido' });
+    db.run('UPDATE quotes SET status = ? WHERE id = ?', [status, id], function (err) {
+        if (err) return res.status(500).json({ error: err.message });
+        res.json({ success: true, changes: this.changes });
+    });
+});
+
 
 
 // ──────────────────────────────────────────────────────────────────────────────
