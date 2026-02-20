@@ -1678,7 +1678,17 @@
         </div>`;
 
             closeFormalSheet();
-            setTimeout(() => window.print(), 200);
+
+            // Cambiar título de la página temporalmente para prenombrar el PDF ("Cotizacion_ICXX_..._Cliente")
+            const originalTitle = document.title;
+            const pdfName = `Cotizacion_${quoteNum}_${clientName.replace(/[^a-zA-Z0-9]/g, '_')}`;
+            document.title = pdfName;
+
+            setTimeout(() => {
+                window.print();
+                // Restaurar el título después de imprimir
+                document.title = originalTitle;
+            }, 200);
         }
 
         // ────────────────────────────────────────────────────────────────────────────
