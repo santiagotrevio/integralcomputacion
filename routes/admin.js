@@ -469,8 +469,9 @@ router.post('/quotes/pdf', authMiddleware, async (req, res) => {
         // domcontentloaded: no espera recursos externos (fonts, imágenes remotas)
         await page.setContent(html, { waitUntil: 'domcontentloaded', timeout: 10000 });
 
-        // Pequeño delay para render con fuentes del sistema
-        await new Promise(r => setTimeout(r, 600));
+        // Delay para que carguen imágenes del servidor local y el CSS se aplique
+        await new Promise(r => setTimeout(r, 1200));
+
 
         const pdfBuffer = await page.pdf({
             format: 'A4',

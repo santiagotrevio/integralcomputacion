@@ -2023,7 +2023,8 @@
         <div class="pv-page">
             ${isFirstPage ? `
             <div class="pv-header">
-                <img class="pv-logo" src="/assets/images/HORIZONTAL grande.png" onerror="this.src='/assets/logo.svg'" style="transform: translateY(${cfgLogoY}px) scale(${cfgLogoScale}); transform-origin: left center;">
+                <img class="pv-logo" src="${window.location.origin}/assets/images/HORIZONTAL grande.png" onerror="this.style.display='none'" style="transform: translateY(${cfgLogoY}px) scale(${cfgLogoScale}); transform-origin: left center;">
+
                 <div class="pv-biz" style="transform: translateY(${cfgTextY}px);">
                     Suministros y Equipos de Cómputo<br>
                     Tel: ${bizPhone}<br>
