@@ -55,6 +55,28 @@
             border-bottom-color: var(--border);
         }
 
+        body.dark-mode input.field-input,
+        body.dark-mode input.inp,
+        body.dark-mode select.inp,
+        body.dark-mode textarea.paste-area,
+        body.dark-mode textarea.inp {
+            background-color: #000;
+            color: var(--text);
+        }
+
+        body.dark-mode .action-bar {
+            background: rgba(28, 28, 30, 0.95);
+            border-top: 1px solid var(--border);
+        }
+
+        body.dark-mode .quote-total {
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        body.dark-mode .sidebar {
+            background-color: var(--surface);
+        }
+
         body {
             font-family: 'Inter', -apple-system, sans-serif;
             background: var(--bg);
@@ -629,7 +651,7 @@
             right: 0;
             max-width: 600px;
             margin: 0 auto;
-            background: rgba(255, 255, 255, 0.95);
+            background: rgba(var(--surface-rgb, 255, 255, 255), 0.95);
             backdrop-filter: blur(20px);
             border-top: 1px solid var(--border);
             padding: 12px 20px calc(12px + var(--safe-bottom));
