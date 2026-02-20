@@ -33,6 +33,28 @@
             --safe-bottom: env(safe-area-inset-bottom, 0px);
         }
 
+        body.dark-mode {
+            --bg: #000000;
+            --surface: #1c1c1e;
+            --border: #333336;
+            --text: #f5f5f7;
+            --subtext: #98989d;
+        }
+
+        body.dark-mode .topbar {
+            background: rgba(28, 28, 30, 0.92);
+        }
+
+        body.dark-mode .sheet {
+            background: var(--surface);
+        }
+
+        body.dark-mode .sheet-header,
+        body.dark-mode .section-divider {
+            color: var(--text);
+            border-bottom-color: var(--border);
+        }
+
         body {
             font-family: 'Inter', -apple-system, sans-serif;
             background: var(--bg);
@@ -1523,7 +1545,18 @@
                 if (r.status === 401) { showLogin(); return; }
                 const d = await r.json();
                 products = d.data || [];
-            } catch (_) { showToast('⚠️ Sin conexión al servidor'); }
+                // Guardar en caché local para modo offline
+                localStorage.setItem('offlineProducts', JSON.stringify(products));
+            } catch (_) {
+                // Modo Offline: intentar usar catálogo guardado
+                const cached = localStorage.getItem('offlineProducts');
+                if (cached) {
+                    products = JSON.parse(cached);
+                    showToast('⚡️ Modo Offline: Usando catálogo descargado');
+                } else {
+                    showToast('⚠️ Sin conexión y sin catálogo guardado');
+                }
+            }
         }
 
         async function loadClients() {
@@ -1706,12 +1739,51 @@
         // ────────────────────────────────────────────────────────────────────────────
         // FORMAL PDF SHEET
         // ────────────────────────────────────────────────────────────────────────────
+        // --- AUTO-COMPLETE CRM ---
+        function loadClientCRM() {
+            const savedClients = JSON.parse(localStorage.getItem('crmClients') || '[]');
+            const nameInput = document.getElementById('fClientName');
+            const emailInput = document.getElementById('fClientEmail');
+            const phoneInput = document.getElementById('fClientPhone');
+
+            nameInput.addEventListener('change', () => {
+                const found = savedClients.find(c => c.name.toLowerCase() === nameInput.value.trim().toLowerCase());
+                if (found && emailInput.value === '' && phoneInput.value === '') {
+                    emailInput.value = found.email || '';
+                    phoneInput.value = found.phone || '';
+                    showToast('⚡️ Autocompletado desde libreta');
+                }
+            });
+
+            emailInput.addEventListener('change', () => {
+                const found = savedClients.find(c => c.email.toLowerCase() === emailInput.value.trim().toLowerCase());
+                if (found && nameInput.value === '') {
+                    nameInput.value = found.name || '';
+                    phoneInput.value = found.phone || '';
+                    showToast('⚡️ Autocompletado desde libreta');
+                }
+            });
+        }
+
+        function saveClientToCRM(name, email, phone) {
+            if (!name || name === 'Cliente') return;
+            let saved = JSON.parse(localStorage.getItem('crmClients') || '[]');
+            const idx = saved.findIndex(c => c.email && c.email === email || (c.name === name && name.length > 3));
+            const entry = { name, email, phone };
+            if (idx >= 0) saved[idx] = entry;
+            else saved.unshift(entry); // newest first
+            // Keep max 200 contacts
+            saved = saved.slice(0, 200);
+            localStorage.setItem('crmClients', JSON.stringify(saved));
+        }
+
+        // --- FORMAL SHEET ---
         async function openFormalSheet() {
-            // Predeterminar fecha de hoy
             const today = new Date().toISOString().split('T')[0];
             document.getElementById('fQuoteDate').value = today;
-
             await updateQuoteId();
+            // Activar listeners de autocompletado al abrir
+            loadClientCRM();
             document.getElementById('formalOverlay').classList.add('open');
         }
         function closeFormalSheet() {
@@ -1785,6 +1857,8 @@
             const vendorSelect = document.getElementById('fVendor');
             const userId = vendorSelect.value;
             const vendorName = vendorSelect.options[vendorSelect.selectedIndex].text.split(' (')[0];
+
+            saveClientToCRM(clientName, clientEmail, clientPhone); // Guardar en CRM local inmediato
 
             const quoteNum = document.getElementById('fQuoteNum').value || `IC${userId}-${new Date().toISOString().split('T')[0].split('-').reverse().join('').slice(0, 4)}${new Date().getFullYear().toString().slice(-2)}-01`;
             const validity = document.getElementById('fValidity').value || '15';
@@ -2025,7 +2099,13 @@
             }
         })();
 
+        // Theme initialization
+        if (localStorage.getItem('admin-theme') === 'dark') {
+            document.body.classList.add('dark-mode');
+        }
+
         (async () => { if (await checkAuth()) loadInitialData(); })();
+
         /* ── SIDEBAR JS ── */
         function openSidebar() {
             document.getElementById('sidebarOverlay').classList.add('active');
