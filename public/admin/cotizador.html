@@ -806,7 +806,8 @@
             /* Explicit Multi-Page A4 Structure */
             .pv-page {
                 width: 100%;
-                height: 100vh;
+                height: 278mm;
+                /* Ligeramente menor a Letter (279.4mm) para evitar salto de hoja accidental */
                 padding: 18mm 14mm 20mm 14mm;
                 box-sizing: border-box;
                 display: flex;
@@ -1729,7 +1730,6 @@
                     </p>
                 </div>
                 <div class="pv-meta-box">
-                    <h4>Condiciones Comerciales</h4>
                     <p>
                         <strong>Folio: ${quoteNum}</strong><br>
                         Fecha: <span style="white-space: nowrap;">${dateStr}</span><br>
@@ -1791,9 +1791,9 @@
             ` : ``}
 
             <div class="pv-global-footer">
-                <div style="text-align:left; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Cotización No. <strong>${quoteNum}</strong></div>
-                <div style="text-align:center; white-space: nowrap; padding: 0 10pt;"><strong>${pagePagination}</strong></div>
-                <div style="text-align:right; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><strong>${bizEmail}</strong> &nbsp;|&nbsp; ${bizWeb}</div>
+                <div style="text-align:left;">Cotización No. <strong>${quoteNum}</strong></div>
+                <div style="text-align:center; padding: 0 5pt;">${pagePagination}</div>
+                <div style="text-align:right;"><strong>${bizEmail}</strong> &nbsp;|&nbsp; ${bizWeb}</div>
             </div>
         </div>
         `;
