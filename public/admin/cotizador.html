@@ -2153,7 +2153,7 @@
             document.getElementById('cfgPhone').value = localStorage.getItem('bizPhone') || '(33) 12680092';
             document.getElementById('cfgEmail').value = bizEmail || 'ventas@integralcomputacion.com';
             document.getElementById('cfgWa').value = localStorage.getItem('bizWa') || '(33) 12680092';
-            document.getElementById('cfgTerms').value = localStorage.getItem('bizTerms') || 'Esta cotización es válida por 15 días naturales. Los precios se respetan dentro de este plazo al confirmar el pedido.';
+            document.getElementById('cfgTerms').value = localStorage.getItem('bizTerms') || 'Todos los precios están expresados en moneda nacional (MXN) e incluyen IVA. Entrega sujeta a disponibilidad y confirmación de pedido.';
         }
         function closeSettingsSheet() {
             document.getElementById('settingsOverlay').classList.remove('open');
@@ -2192,7 +2192,7 @@
             const bizPhone = localStorage.getItem('bizPhone') || '(33) 12680092';
             const bizEmail = currentEmail || 'ventas@integralcomputacion.com';
             const bizWa = localStorage.getItem('bizWa') || '(33) 12680092';
-            const bizTerms = localStorage.getItem('bizTerms') || 'Esta cotización es válida por 15 días naturales. Los precios se respetan dentro de este plazo al confirmar el pedido.';
+            const bizTerms = localStorage.getItem('bizTerms') || 'Todos los precios están expresados en moneda nacional (MXN) e incluyen IVA. Entrega sujeta a disponibilidad y confirmación de pedido.';
 
             // Valores inmutables
             const bizWeb = 'www.integralcomputacion.com';
@@ -2393,7 +2393,7 @@
 
             <div style="page-break-inside: avoid; margin-top: auto; padding-top: 15pt;">
                 <div class="pv-legal-notes" style="border-top: none; padding-top: 0; margin-bottom: 12pt; text-align: center;">
-                    Vigencia: ${validity} días naturales. ${bizTerms}
+                    ${bizTerms}
                 </div>
 
 
@@ -2564,6 +2564,10 @@
             const savedEmail = localStorage.getItem('bizEmail');
             if (!savedEmail || savedEmail === 'info@integralcomputacion.com') {
                 localStorage.setItem('bizEmail', 'ventas@integralcomputacion.com');
+            }
+            const savedTerms = localStorage.getItem('bizTerms');
+            if (savedTerms && savedTerms.includes('Esta cotización es válida por 15 días naturales')) {
+                localStorage.setItem('bizTerms', 'Todos los precios están expresados en moneda nacional (MXN) e incluyen IVA. Entrega sujeta a disponibilidad y confirmación de pedido.');
             }
         })();
 
