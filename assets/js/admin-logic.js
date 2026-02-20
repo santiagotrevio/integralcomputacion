@@ -1814,18 +1814,18 @@ function renderBrandsTable() {
                                 <i class="fa-solid fa-wand-magic-sparkles"></i>
                             </div>
 
-                            <!-- PILL PREVIEW — centered by flex parent -->
-                            <div class="brand-logo-pill" style="position:relative; flex-shrink:0; box-shadow:none; border:1px solid #ddd; background:white; width:160px; height:56px; overflow:hidden; padding:0; border-radius:28px; display:flex; align-items:center; justify-content:center;">
+                            <!-- PILL PREVIEW — sin clase brand-logo-pill para evitar conflicto CSS -->
+                            <div data-brand-preview="pill" style="position:relative; flex-shrink:0; box-shadow:0 2px 8px rgba(0,0,0,0.08); border:1px solid #ddd; background:white; width:170px; height:60px; overflow:hidden; padding:0; border-radius:30px; display:flex; align-items:center; justify-content:center;">
                                 <!-- Safe Zone Guides -->
-                                <div style="position:absolute; top:calc(50% - 7.5px); left:0; width:100%; height:15px; border-top:1px dashed #ff2d55; border-bottom:1px dashed #ff2d55; opacity:0.25; pointer-events:none; z-index:3;"></div>
+                                <div style="position:absolute; top:calc(50% - 7.5px); left:0; width:100%; height:15px; border-top:1px dashed #ff2d55; border-bottom:1px dashed #ff2d55; opacity:0.3; pointer-events:none; z-index:3;"></div>
 
-                                <div class="brand-placeholder" style="position:absolute; inset:0; background:#f1f5f9; display:none; flex-direction:column; align-items:center; justify-content:center; color:#94a3b8; font-size:8px; font-weight:800; text-transform:uppercase;">
-                                    <i class="fa-solid fa-image" style="font-size:12px; margin-bottom:3px;"></i>
+                                <div class="brand-placeholder" style="position:absolute; inset:0; background:#f1f5f9; display:none; flex-direction:column; align-items:center; justify-content:center; color:#94a3b8; font-size:9px; font-weight:800; text-transform:uppercase;">
+                                    <i class="fa-solid fa-image" style="font-size:14px; margin-bottom:4px;"></i>
                                     ${brandName.substring(0, 8)}
                                 </div>
 
                                 <img src="${brandImgPath}" class="brand-prev-img"
-                                     style="max-height: ${15 * setting.scale}px; transform:translate(${setting.offset_x || 0}px, ${setting.offset_y || 0}px); max-width:140px; object-fit:contain; z-index:2;"
+                                     style="max-height: ${15 * setting.scale}px; transform:translate(${setting.offset_x || 0}px, ${setting.offset_y || 0}px); max-width:150px; object-fit:contain; z-index:2;"
                                      onerror="this.style.display='none'; this.previousElementSibling.style.display='flex';">
                             </div>
 
