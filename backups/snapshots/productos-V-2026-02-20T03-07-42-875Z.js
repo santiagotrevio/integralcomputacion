@@ -2,19 +2,19 @@
 const productsDB = [
   {
     "id": "PC-101253",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "PERFECT CHOICE",
     "name": "ADAPTADOR PCH  USB A A TIPO C",
     "description": "ADAPTADOR PCH  USB A A TIPO C",
-    "image": "assets/images/products/toner/PC_101253.webp"
+    "image": ""
   },
   {
     "id": "PC-240747",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "PERFECT CHOICE",
     "name": "ADAPTADOR PCH DE CORRIENTE LAPTOP",
     "description": "ADAPTADOR PCH DE CORRIENTE LAPTOP",
-    "image": "assets/images/products/toner/PC_240747.webp"
+    "image": ""
   },
   {
     "id": "TPUE300",
@@ -26,11 +26,11 @@ const productsDB = [
   },
   {
     "id": "PC-101291",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "PERFECT CHOICE",
     "name": "ADAPTADOR USB A HEMBRA A USB TIPO C MACHO",
     "description": "ADAPTADOR USB A HEMBRA A USB TIPO C MACHO",
-    "image": "assets/images/products/toner/PC_101291.webp"
+    "image": ""
   },
   {
     "id": "PC-030331",
@@ -58,11 +58,11 @@ const productsDB = [
   },
   {
     "id": "PC-120407",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "PERFECT CHOICE",
     "name": "ARO DE LUZ DE 10\" PARA STREAMING",
     "description": "ARO DE LUZ DE 10\" PARA STREAMING",
-    "image": "assets/images/products/toner/PC_120407.webp"
+    "image": ""
   },
   {
     "id": "ASUM3406KA",
@@ -90,35 +90,35 @@ const productsDB = [
   },
   {
     "id": "PC-117179",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "PERFECT CHOICE",
     "name": "AUDÍFONOS TWS ANC+ENC CON PANTALLA TÁCTIL LED - SONOR",
     "description": "AUDÍFONOS TWS ANC+ENC CON PANTALLA TÁCTIL LED - SONOR",
-    "image": "assets/images/products/toner/PC_117179.webp"
+    "image": ""
   },
   {
     "id": "PC-117209",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "PERFECT CHOICE",
     "name": "AUDÍFONOS TWS ANC+ENC INTUNE- NEGRO",
     "description": "AUDÍFONOS TWS ANC+ENC INTUNE- NEGRO",
-    "image": "assets/images/products/toner/PC_117209.webp"
+    "image": ""
   },
   {
     "id": "PC-117193",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "PERFECT CHOICE",
     "name": "AUDÍFONOS TWS ENC CARGA INALÁMBRICA - BLANCO",
     "description": "AUDÍFONOS TWS ENC CARGA INALÁMBRICA - BLANCO",
-    "image": "assets/images/products/toner/PC_117193.webp"
+    "image": ""
   },
   {
     "id": "PC-117186",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "PERFECT CHOICE",
     "name": "AUDÍFONOS TWS ENC CARGA INALÁMBRICA - NEGRO",
     "description": "AUDÍFONOS TWS ENC CARGA INALÁMBRICA - NEGRO",
-    "image": "assets/images/products/toner/PC_117186.webp"
+    "image": ""
   },
   {
     "id": "PC-995548",
@@ -154,11 +154,11 @@ const productsDB = [
   },
   {
     "id": "PC-117230",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "PERFECT CHOICE",
     "name": "AURALIS Audífonos TWS con Inteligencia Artificial y Cancelación Activa de Ruido ANC",
     "description": "AURALIS Audífonos TWS con Inteligencia Artificial y Cancelación Activa de Ruido ANC",
-    "image": "assets/images/products/toner/PC_117230.webp"
+    "image": ""
   },
   {
     "id": "LT981-000612",
@@ -194,11 +194,11 @@ const productsDB = [
   },
   {
     "id": "PC-240426",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "PERFECT CHOICE",
     "name": "Adaptador de Corriente Carga Rápida 30W",
     "description": "Adaptador de Corriente Carga Rápida 30W",
-    "image": "assets/images/products/toner/PC_240426.webp"
+    "image": ""
   },
   {
     "id": "RD6950376715401",
@@ -210,11 +210,11 @@ const productsDB = [
   },
   {
     "id": "PC-117049",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "PERFECT CHOICE",
     "name": "Audífonos Inalámbricos Bluetooth Transparentes ClearBeat- Morado",
     "description": "Audífonos Inalámbricos Bluetooth Transparentes ClearBeat- Morado",
-    "image": "assets/images/products/toner/PC_117049.webp"
+    "image": ""
   },
   {
     "id": "LT981-001285",
@@ -230,7 +230,7 @@ const productsDB = [
     "brand": "PERFECT CHOICE",
     "name": "BARRA DE AUD RGB 2.1 EMPHORIA",
     "description": "BARRA DE AUD RGB 2.1 EMPHORIA",
-    "image": "assets/images/products/toner/PC_114024.webp"
+    "image": ""
   },
   {
     "id": "PC-332961",
@@ -258,11 +258,11 @@ const productsDB = [
   },
   {
     "id": "PC-120414",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "PERFECT CHOICE",
     "name": "BASTÓN PLEGABLE CON LUZ (SELFIE STICK) - SELFIX",
     "description": "BASTÓN PLEGABLE CON LUZ (SELFIE STICK) - SELFIX",
-    "image": "assets/images/products/toner/PC_120414.webp"
+    "image": ""
   },
   {
     "id": "EFER0005",
@@ -274,91 +274,91 @@ const productsDB = [
   },
   {
     "id": "PC-113287",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "PERFECT CHOICE",
     "name": "BOCINA INALÁMBRICA RGB CON 2 MICROFONOS INALÁMBRICOS",
     "description": "BOCINA INALÁMBRICA RGB CON 2 MICROFONOS INALÁMBRICOS",
-    "image": "assets/images/products/toner/PC_113287.webp"
+    "image": ""
   },
   {
     "id": "PC-113065",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "PERFECT CHOICE",
     "name": "BOCINA PCH INALÁMBRICA X-PLOTION NEGRA",
     "description": "BOCINA PCH INALÁMBRICA X-PLOTION NEGRA",
-    "image": "assets/images/products/toner/PC_113065.webp"
+    "image": ""
   },
   {
     "id": "PC-113249",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "PERFECT CHOICE",
     "name": "BOCINA PORTÁTIL 30W OUTDOORS - BLUETO",
     "description": "BOCINA PORTÁTIL 30W OUTDOORS - BLUETO",
-    "image": "assets/images/products/toner/PC_113249.webp"
+    "image": ""
   },
   {
     "id": "PC-112815",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "PERFECT CHOICE",
     "name": "BOCINA PORTÁTIL CON MICRÓFONO INALÁMBRICO - OUTDOORS LITE",
     "description": "BOCINA PORTÁTIL CON MICRÓFONO INALÁMBRICO - OUTDOORS LITE",
-    "image": "assets/images/products/toner/PC_112815.webp"
+    "image": ""
   },
   {
     "id": "PC-113317",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "PERFECT CHOICE",
     "name": "BOCINA PORTÁTIL INALÁMBRICA 10W - AZUL",
     "description": "BOCINA PORTÁTIL INALÁMBRICA 10W - AZUL",
-    "image": "assets/images/products/toner/PC_113317.webp"
+    "image": ""
   },
   {
     "id": "PC-113294",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "PERFECT CHOICE",
     "name": "BOCINA PORTÁTIL INALÁMBRICA 10W - NEGRO",
     "description": "BOCINA PORTÁTIL INALÁMBRICA 10W - NEGRO",
-    "image": "assets/images/products/toner/PC_113294.webp"
+    "image": ""
   },
   {
     "id": "PC-113300",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "PERFECT CHOICE",
     "name": "BOCINA PORTÁTIL INALÁMBRICA 10W - ROSA",
     "description": "BOCINA PORTÁTIL INALÁMBRICA 10W - ROSA",
-    "image": "assets/images/products/toner/PC_113300.webp"
+    "image": ""
   },
   {
     "id": "PC-113089",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "PERFECT CHOICE",
     "name": "BOCINA PORTÁTIL INALÁMBRICA RGB - HANDY",
     "description": "BOCINA PORTÁTIL INALÁMBRICA RGB - HANDY",
-    "image": "assets/images/products/toner/PC_113089.webp"
+    "image": ""
   },
   {
     "id": "PC-113270",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "PERFECT CHOICE",
     "name": "BOCINA PORTÁTIL PERFECT CHOICE SONIDO ESTÉREO  30W - SOUNDUS",
     "description": "BOCINA PORTÁTIL PERFECT CHOICE SONIDO ESTÉREO  30W - SOUNDUS",
-    "image": "assets/images/products/toner/PC_113270.webp"
+    "image": ""
   },
   {
     "id": "PC-113140",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "PERFECT CHOICE",
     "name": "BOCINA PORTÁTIL RECARGABLE 15W - LOOPSTAR",
     "description": "BOCINA PORTÁTIL RECARGABLE 15W - LOOPSTAR",
-    "image": "assets/images/products/toner/PC_113140.webp"
+    "image": ""
   },
   {
     "id": "PC-113263",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "PERFECT CHOICE",
     "name": "BOCINA PORÁTIL PERFECT CHOICE RGB 20W - LUMINO",
     "description": "BOCINA PORÁTIL PERFECT CHOICE RGB 20W - LUMINO",
-    "image": "assets/images/products/toner/PC_113263.webp"
+    "image": ""
   },
   {
     "id": "NXNE-060A",
@@ -442,43 +442,43 @@ const productsDB = [
   },
   {
     "id": "PC-084730",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "PERFECT CHOICE",
     "name": "BOLSO DEPORTIVO SPORTIVA - NEGRO",
     "description": "BOLSO DEPORTIVO SPORTIVA - NEGRO",
-    "image": "assets/images/products/toner/PC_084730.webp"
+    "image": ""
   },
   {
     "id": "PC-085034",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "PERFECT CHOICE",
     "name": "BOLSO HOLDI PERFECT CHOICE - AVELLANA",
     "description": "BOLSO HOLDI PERFECT CHOICE - AVELLANA",
-    "image": "assets/images/products/toner/PC_085034.webp"
+    "image": ""
   },
   {
     "id": "PC-085058",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "PERFECT CHOICE",
     "name": "BOLSO HOLDI PERFECT CHOICE - NEGRO",
     "description": "BOLSO HOLDI PERFECT CHOICE - NEGRO",
-    "image": "assets/images/products/toner/PC_085058.webp"
+    "image": ""
   },
   {
     "id": "PC-084853",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "PERFECT CHOICE",
     "name": "BOLSO NECESER PARA ACCESORIOS - MOSSORI",
     "description": "BOLSO NECESER PARA ACCESORIOS - MOSSORI",
-    "image": "assets/images/products/toner/PC_084853.webp"
+    "image": ""
   },
   {
     "id": "PC-084891",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "PERFECT CHOICE",
     "name": "BOLSO PARA LAPTOP - SAHARA",
     "description": "BOLSO PARA LAPTOP - SAHARA",
-    "image": "assets/images/products/toner/PC_084891.webp"
+    "image": ""
   },
   {
     "id": "C008BK/16GBX10",
@@ -998,35 +998,35 @@ const productsDB = [
   },
   {
     "id": "PC-113096",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "PERFECT CHOICE",
     "name": "Bocina Bluetooth Inalámbrica Portátil con Protección a Salpicaduras 16W Splash",
     "description": "Bocina Bluetooth Inalámbrica Portátil con Protección a Salpicaduras 16W Splash",
-    "image": "assets/images/products/toner/PC_113096.webp"
+    "image": ""
   },
   {
     "id": "PC-113218",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "PERFECT CHOICE",
     "name": "Bocina Bluetooth Portátil Recargable con Luz RGB y Teclas Mecánicas Owty",
     "description": "Bocina Bluetooth Portátil Recargable con Luz RGB y Teclas Mecánicas Owty",
-    "image": "assets/images/products/toner/PC_113218.webp"
+    "image": ""
   },
   {
     "id": "PC-113225",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "PERFECT CHOICE",
     "name": "Bocina Portátil Festa Mini, Bluetooth, Inalámbrico, 10W RMS, USB, Negro",
     "description": "Bocina Portátil Festa Mini, Bluetooth, Inalámbrico, 10W RMS, USB, Negro",
-    "image": "assets/images/products/toner/PC_113225.webp"
+    "image": ""
   },
   {
     "id": "PC-112914",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "PERFECT CHOICE",
     "name": "Bocinas Estéreo 2.0 Mosso",
     "description": "Bocinas Estéreo 2.0 Mosso",
-    "image": "assets/images/products/toner/PC_112914.webp"
+    "image": ""
   },
   {
     "id": "NXNE-060R",
@@ -1242,27 +1242,27 @@ const productsDB = [
   },
   {
     "id": "PC-101703",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "PERFECT CHOICE",
     "name": "CABLE PCH HDMI 2.1  8K 2 MTS NEGRO",
     "description": "CABLE PCH HDMI 2.1  8K 2 MTS NEGRO",
-    "image": "assets/images/products/toner/PC_101703.webp"
+    "image": ""
   },
   {
     "id": "PC-101680",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "PERFECT CHOICE",
     "name": "CABLE PCH USB A MICRO USB 1 METRO",
     "description": "CABLE PCH USB A MICRO USB 1 METRO",
-    "image": "assets/images/products/toner/PC_101680.webp"
+    "image": ""
   },
   {
     "id": "PC-101710",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "PERFECT CHOICE",
     "name": "CABLE PCH USB TIPO C A TIPO C 2M",
     "description": "CABLE PCH USB TIPO C A TIPO C 2M",
-    "image": "assets/images/products/toner/PC_101710.webp"
+    "image": ""
   },
   {
     "id": "MH333382",
@@ -1338,19 +1338,19 @@ const productsDB = [
   },
   {
     "id": "PC-241034",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "PERFECT CHOICE",
     "name": "CARGADOR INALÁMBRICO PERFECT CHOICE 3 EN 1 - 3CHARGE",
     "description": "CARGADOR INALÁMBRICO PERFECT CHOICE 3 EN 1 - 3CHARGE",
-    "image": "assets/images/products/toner/PC_241034.webp"
+    "image": ""
   },
   {
     "id": "PC-241041",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "PERFECT CHOICE",
     "name": "CARGADOR MAGNÉTICO PARA SMARTPHONE - VOLTUS",
     "description": "CARGADOR MAGNÉTICO PARA SMARTPHONE - VOLTUS",
-    "image": "assets/images/products/toner/PC_241041.webp"
+    "image": ""
   },
   {
     "id": "ADTAP20000QCD-DGT-CBK",
@@ -3721,11 +3721,11 @@ const productsDB = [
   },
   {
     "id": "PC-201281",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "PERFECT CHOICE",
     "name": "COMBO INALÁMBRICO SILENCIOSO TECLADO + MOUSE - RESISTENTE A DERRAMES",
     "description": "COMBO INALÁMBRICO SILENCIOSO TECLADO + MOUSE - RESISTENTE A DERRAMES",
-    "image": "assets/images/products/toner/PC_201281.webp"
+    "image": ""
   },
   {
     "id": "RD6950376781062",
@@ -3769,11 +3769,11 @@ const productsDB = [
   },
   {
     "id": "PC-085027",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "PERFECT CHOICE",
     "name": "CROSSBODY HOLDI PERFECT CHOICE - AVELLANA",
     "description": "CROSSBODY HOLDI PERFECT CHOICE - AVELLANA",
-    "image": "assets/images/products/toner/PC_085027.webp"
+    "image": ""
   },
   {
     "id": "NXNE-178MR",
@@ -4614,6 +4614,14 @@ const productsDB = [
     "image": ""
   },
   {
+    "id": "PC-084921",
+    "category": "OTROS",
+    "brand": "PERFECT CHOICE",
+    "name": "DESCONTINUADO - MOCHILA PERFECT CHOICE PARA LAPTOPP 15.6\" JETPACK - NEGRO",
+    "description": "DESCONTINUADO - MOCHILA PERFECT CHOICE PARA LAPTOPP 15.6\" JETPACK - NEGRO",
+    "image": ""
+  },
+  {
     "id": "CA119",
     "category": "toner",
     "brand": "Canon",
@@ -4639,27 +4647,27 @@ const productsDB = [
   },
   {
     "id": "PC-112150",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "PERFECT CHOICE",
     "name": "DIADEMA ALÁMBRICA 3.5MM PARA STREAMING - STREAM PRO",
     "description": "DIADEMA ALÁMBRICA 3.5MM PARA STREAMING - STREAM PRO",
-    "image": "assets/images/products/toner/PC_112150.webp"
+    "image": ""
   },
   {
     "id": "PC-113171",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "PERFECT CHOICE",
     "name": "DIADEMA AUDIFONO P.CH NEGRO",
     "description": "DIADEMA AUDIFONO P.CH NEGRO",
-    "image": "assets/images/products/toner/PC_113171.webp"
+    "image": ""
   },
   {
     "id": "PC-117315",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "PERFECT CHOICE",
     "name": "DIADEMA CON CANCELACIÓN DE RUIDO ACTIVA ANC HIBRIDO - SERENITY",
     "description": "DIADEMA CON CANCELACIÓN DE RUIDO ACTIVA ANC HIBRIDO - SERENITY",
-    "image": "assets/images/products/toner/PC_117315.webp"
+    "image": ""
   },
   {
     "id": "LT981-000587",
@@ -4679,11 +4687,11 @@ const productsDB = [
   },
   {
     "id": "PC-112167",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "PERFECT CHOICE",
     "name": "DIADEMA PROFESIONAL USB CON MICRÓFONO - LOUDY",
     "description": "DIADEMA PROFESIONAL USB CON MICRÓFONO - LOUDY",
-    "image": "assets/images/products/toner/PC_112167.webp"
+    "image": ""
   },
   {
     "id": "RD6950376779083",
@@ -4839,11 +4847,11 @@ const productsDB = [
   },
   {
     "id": "PC-116981",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "PERFECT CHOICE",
     "name": "Diadema Inalámbrica para niños con luz LED Catto- Azul",
     "description": "Diadema Inalámbrica para niños con luz LED Catto- Azul",
-    "image": "assets/images/products/toner/PC_116981.webp"
+    "image": ""
   },
   {
     "id": "TOHDTB520XK3AA",
@@ -5824,19 +5832,19 @@ const productsDB = [
   },
   {
     "id": "PC-201250",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "PERFECT CHOICE",
     "name": "KIT COMPACTO BLUETOOTH 2 EN 1 GENOVA - NEGRO",
     "description": "KIT COMPACTO BLUETOOTH 2 EN 1 GENOVA - NEGRO",
-    "image": "assets/images/products/toner/PC_201250.webp"
+    "image": ""
   },
   {
     "id": "PC-201434",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "PERFECT CHOICE",
     "name": "KIT INALÁMBRICO ERGONÓMICO MULTIMEDIA - KEYVANCE",
     "description": "KIT INALÁMBRICO ERGONÓMICO MULTIMEDIA - KEYVANCE",
-    "image": "assets/images/products/toner/PC_201434.webp"
+    "image": ""
   },
   {
     "id": "LT920-007901",
@@ -5856,19 +5864,19 @@ const productsDB = [
   },
   {
     "id": "PC-201717",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "PERFECT CHOICE",
     "name": "KIT PCH ALAMBRICO 3 EN 1 NEGRO",
     "description": "KIT PCH ALAMBRICO 3 EN 1 NEGRO",
-    "image": "assets/images/products/toner/PC_201717.webp"
+    "image": ""
   },
   {
     "id": "PC-201236",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "PERFECT CHOICE",
     "name": "KIT PCH INALM ERGONOMICO  TECLADO MOUSE",
     "description": "KIT PCH INALM ERGONOMICO  TECLADO MOUSE",
-    "image": "assets/images/products/toner/PC_201236.webp"
+    "image": ""
   },
   {
     "id": "DL580AKCU",
@@ -5880,19 +5888,19 @@ const productsDB = [
   },
   {
     "id": "PC-201380",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "PERFECT CHOICE",
     "name": "KIT TECLADO+RATÓN 2.4 GHZ+BT RECARGABLE ZEBRARY - BLANCO",
     "description": "KIT TECLADO+RATÓN 2.4 GHZ+BT RECARGABLE ZEBRARY - BLANCO",
-    "image": "assets/images/products/toner/PC_201380.webp"
+    "image": ""
   },
   {
     "id": "PC-201373",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "PERFECT CHOICE",
     "name": "KIT TECLADO+RATÓN 2.4GHZ+BT RECARGABLE ZEBRARY- NEGRO",
     "description": "KIT TECLADO+RATÓN 2.4GHZ+BT RECARGABLE ZEBRARY- NEGRO",
-    "image": "assets/images/products/toner/PC_201373.webp"
+    "image": ""
   },
   {
     "id": "LT920-004430",
@@ -6027,11 +6035,11 @@ const productsDB = [
   },
   {
     "id": "PC-117292",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "PERFECT CHOICE",
     "name": "LENTES INTELIGENTES CON AUDIO POLARIZADOS - EVOIR",
     "description": "LENTES INTELIGENTES CON AUDIO POLARIZADOS - EVOIR",
-    "image": "assets/images/products/toner/PC_117292.webp"
+    "image": ""
   },
   {
     "id": "NXNE-018",
@@ -6295,11 +6303,11 @@ const productsDB = [
   },
   {
     "id": "PC-117223",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "PERFECT CHOICE",
     "name": "MANOS LIBRES BLUETOOTH 20H DE USO - MEUCCI",
     "description": "MANOS LIBRES BLUETOOTH 20H DE USO - MEUCCI",
-    "image": "assets/images/products/toner/PC_117223.webp"
+    "image": ""
   },
   {
     "id": "NXNE-079",
@@ -6495,11 +6503,11 @@ const productsDB = [
   },
   {
     "id": "PC-110583",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "PERFECT CHOICE",
     "name": "MICRÓFONO PCH 3.5MM CON FILTRO Y TRIPIÉ",
     "description": "MICRÓFONO PCH 3.5MM CON FILTRO Y TRIPIÉ",
-    "image": "assets/images/products/toner/PC_110583.webp"
+    "image": ""
   },
   {
     "id": "HP9E8G7LS",
@@ -6536,11 +6544,11 @@ const productsDB = [
   },
   {
     "id": "PC-084747",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "PERFECT CHOICE",
     "name": "MOCHILA EJECUTIVA 15.6\"-17\" - NEBLUM",
     "description": "MOCHILA EJECUTIVA 15.6\"-17\" - NEBLUM",
-    "image": "assets/images/products/toner/PC_084747.webp"
+    "image": ""
   },
   {
     "id": "PC-084532",
@@ -6560,11 +6568,11 @@ const productsDB = [
   },
   {
     "id": "PC-085324",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "PERFECT CHOICE",
     "name": "MOCHILA ESCOLAR PARA NIÑOS GROOVY - AZUL",
     "description": "MOCHILA ESCOLAR PARA NIÑOS GROOVY - AZUL",
-    "image": "assets/images/products/toner/PC_085324.webp"
+    "image": ""
   },
   {
     "id": "PC-084433",
@@ -6576,11 +6584,11 @@ const productsDB = [
   },
   {
     "id": "PC-084808",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "PERFECT CHOICE",
     "name": "MOCHILA EXPANDIBLE PARA VIAJE - TRAVELA",
     "description": "MOCHILA EXPANDIBLE PARA VIAJE - TRAVELA",
-    "image": "assets/images/products/toner/PC_084808.webp"
+    "image": ""
   },
   {
     "id": "PC-083337",
@@ -6592,19 +6600,19 @@ const productsDB = [
   },
   {
     "id": "PC-084549",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "PERFECT CHOICE",
     "name": "MOCHILA PARA LAPTOP 15-6 - 17\" COMFORT - NEGRO",
     "description": "MOCHILA PARA LAPTOP 15-6 - 17\" COMFORT - NEGRO",
-    "image": "assets/images/products/toner/PC_084549.webp"
+    "image": ""
   },
   {
     "id": "PC-085140",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "PERFECT CHOICE",
     "name": "MOCHILA PARA LAPTOP 15.6\"  EXPANDIBLE - OBSIDIA (ROSA)",
     "description": "MOCHILA PARA LAPTOP 15.6\"  EXPANDIBLE - OBSIDIA (ROSA)",
-    "image": "assets/images/products/toner/PC_085140.webp"
+    "image": ""
   },
   {
     "id": "PC-084181",
@@ -6640,27 +6648,27 @@ const productsDB = [
   },
   {
     "id": "PC-084679",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "PERFECT CHOICE",
     "name": "MOCHILA PARA LAPTOP 15.6\"-17\" - FORTER NEGRO",
     "description": "MOCHILA PARA LAPTOP 15.6\"-17\" - FORTER NEGRO",
-    "image": "assets/images/products/toner/PC_084679.webp"
+    "image": ""
   },
   {
     "id": "PC-084846",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "PERFECT CHOICE",
     "name": "MOCHILA PARA LAPTOP COMPACTA EXPANDIBLE OBSIDIA - NEGRO",
     "description": "MOCHILA PARA LAPTOP COMPACTA EXPANDIBLE OBSIDIA - NEGRO",
-    "image": "assets/images/products/toner/PC_084846.webp"
+    "image": ""
   },
   {
     "id": "PC-084761",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "PERFECT CHOICE",
     "name": "MOCHILA PARA LAPTOP ESSENTIALS - MORADO",
     "description": "MOCHILA PARA LAPTOP ESSENTIALS - MORADO",
-    "image": "assets/images/products/toner/PC_084761.webp"
+    "image": ""
   },
   {
     "id": "PC-084457",
@@ -6680,19 +6688,19 @@ const productsDB = [
   },
   {
     "id": "PC-084907",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "PERFECT CHOICE",
     "name": "MOCHILA PERFECT CHOICE  P/LAPTOPP 15.6\" JETPACK - GRIS",
     "description": "MOCHILA PERFECT CHOICE  P/LAPTOPP 15.6\" JETPACK - GRIS",
-    "image": "assets/images/products/toner/PC_084907.webp"
+    "image": ""
   },
   {
     "id": "PC-084969",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "PERFECT CHOICE",
     "name": "MOCHILA PERFECT CHOICE PARA LAPTOP 15-6 - 17\" COMFORT - BURGUNDY",
     "description": "MOCHILA PERFECT CHOICE PARA LAPTOP 15-6 - 17\" COMFORT - BURGUNDY",
-    "image": "assets/images/products/toner/PC_084969.webp"
+    "image": ""
   },
   {
     "id": "PC-084563",
@@ -8091,27 +8099,27 @@ const productsDB = [
   },
   {
     "id": "PC-241102",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "PERFECT CHOICE",
     "name": "POWER BANK 10,000 MAH CARGA RÁPIDA 22.5W CON CABLE TIPO C - BOLT AZUL",
     "description": "POWER BANK 10,000 MAH CARGA RÁPIDA 22.5W CON CABLE TIPO C - BOLT AZUL",
-    "image": "assets/images/products/toner/PC_241102.webp"
+    "image": ""
   },
   {
     "id": "PC-241119",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "PERFECT CHOICE",
     "name": "POWER BANK CARGA RÁPIDA 20,000 MAH 22.5W - THUNDER",
     "description": "POWER BANK CARGA RÁPIDA 20,000 MAH 22.5W - THUNDER",
-    "image": "assets/images/products/toner/PC_241119.webp"
+    "image": ""
   },
   {
     "id": "PC-241027",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "PERFECT CHOICE",
     "name": "POWER BANK CON CARGA INALÁMBRICA MAGSAFE - MAGNIFY",
     "description": "POWER BANK CON CARGA INALÁMBRICA MAGSAFE - MAGNIFY",
-    "image": "assets/images/products/toner/PC_241027.webp"
+    "image": ""
   },
   {
     "id": "HTCB436AD",
@@ -8187,19 +8195,19 @@ const productsDB = [
   },
   {
     "id": "PC-116943",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "PERFECT CHOICE",
     "name": "Perfect Choice Audífonos Cloud, Bluetooth, Inalámbrico, USB-C, Blanco",
     "description": "Perfect Choice Audífonos Cloud, Bluetooth, Inalámbrico, USB-C, Blanco",
-    "image": "assets/images/products/toner/PC_116943.webp"
+    "image": ""
   },
   {
     "id": "PC-084716",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "PERFECT CHOICE",
     "name": "Perfect Choice Maletín de Poliéster Branston para Laptop 17\", Negro",
     "description": "Perfect Choice Maletín de Poliéster Branston para Laptop 17\", Negro",
-    "image": "assets/images/products/toner/PC_084716.webp"
+    "image": ""
   },
   {
     "id": "PC-084143",
@@ -8492,11 +8500,11 @@ const productsDB = [
   },
   {
     "id": "PC-270188",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "PERFECT CHOICE",
     "name": "RELOJ INTELIGENTE CASUAL AMOLED - ELEMENTUM",
     "description": "RELOJ INTELIGENTE CASUAL AMOLED - ELEMENTUM",
-    "image": "assets/images/products/toner/PC_270188.webp"
+    "image": ""
   },
   {
     "id": "PC-270195",
@@ -8709,11 +8717,11 @@ const productsDB = [
   },
   {
     "id": "PC-270164",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "PERFECT CHOICE",
     "name": "SMARTWATCH CON PANTALLA AMOLED AMBER",
     "description": "SMARTWATCH CON PANTALLA AMOLED AMBER",
-    "image": "assets/images/products/toner/PC_270164.webp"
+    "image": ""
   },
   {
     "id": "V908",
@@ -8901,11 +8909,11 @@ const productsDB = [
   },
   {
     "id": "PC-270171",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "PERFECT CHOICE",
     "name": "Smartwatch Pantalla Amoled Siempre Encendida Citrine",
     "description": "Smartwatch Pantalla Amoled Siempre Encendida Citrine",
-    "image": "assets/images/products/toner/PC_270171.webp"
+    "image": ""
   },
   {
     "id": "NXNE-015G",
@@ -9289,19 +9297,19 @@ const productsDB = [
   },
   {
     "id": "PC-201076",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "PERFECT CHOICE",
     "name": "TECLADO ALAMBRICO USB + MOUSE PCH",
     "description": "TECLADO ALAMBRICO USB + MOUSE PCH",
-    "image": "assets/images/products/toner/PC_201076.webp"
+    "image": ""
   },
   {
     "id": "PC-201304",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "PERFECT CHOICE",
     "name": "TECLADO CON ILUMINACIÓN EN TECLAS PARA OFICINA",
     "description": "TECLADO CON ILUMINACIÓN EN TECLAS PARA OFICINA",
-    "image": "assets/images/products/toner/PC_201304.webp"
+    "image": ""
   },
   {
     "id": "LT920-004422",
@@ -9313,19 +9321,19 @@ const productsDB = [
   },
   {
     "id": "PC-201106",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "PERFECT CHOICE",
     "name": "TECLADO PC NUMERICO INALAMBRICO",
     "description": "TECLADO PC NUMERICO INALAMBRICO",
-    "image": "assets/images/products/toner/PC_201106.webp"
+    "image": ""
   },
   {
     "id": "PC-201038",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "PERFECT CHOICE",
     "name": "TECLADO PCH BASICO",
     "description": "TECLADO PCH BASICO",
-    "image": "assets/images/products/toner/PC_201038.webp"
+    "image": ""
   },
   {
     "id": "PC-993391",
@@ -9509,11 +9517,11 @@ const productsDB = [
   },
   {
     "id": "PC-108184",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "PERFECT CHOICE",
     "name": "TIRA DE LEDS PCH  IOT 2MTS",
     "description": "TIRA DE LEDS PCH  IOT 2MTS",
-    "image": "assets/images/products/toner/PC_108184.webp"
+    "image": ""
   },
   {
     "id": "PC-030324",
@@ -12036,11 +12044,11 @@ const productsDB = [
   },
   {
     "id": "PC-171744",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "PERFECT CHOICE",
     "name": "TRITURADORA PCH DE PAPEL",
     "description": "TRITURADORA PCH DE PAPEL",
-    "image": "assets/images/products/toner/PC_171744.webp"
+    "image": ""
   },
   {
     "id": "NXNE-171",
