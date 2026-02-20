@@ -820,22 +820,23 @@
             }
 
             .pv-content {
-                padding: 0 16mm;
-                /* Left/Right Margins */
+                padding: 0 12mm;
+                /* Margen lateral reducido de 16mm a 12mm */
             }
 
             /* Global Fixed Footer */
             .pv-global-footer {
                 position: fixed;
                 bottom: 0;
-                left: 16mm;
-                right: 16mm;
+                left: 12mm;
+                right: 12mm;
                 height: 15mm;
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
-                border-top: 1pt solid #e5e5ea;
-                font-size: 8.5pt;
+                border-top: 1pt solid #00AEEF;
+                border-image: linear-gradient(to right, #00AEEF, #EC008C, #FFF200) 1;
+                font-size: 8pt;
                 color: #555;
             }
 
@@ -847,14 +848,15 @@
             .pv-header {
                 display: flex;
                 justify-content: space-between;
-                align-items: flex-start;
-                padding-bottom: 16pt;
-                border-bottom: 3pt solid #0071e3;
+                align-items: flex-end;
+                padding-bottom: 12pt;
+                border-bottom: 2pt solid #00AEEF;
+                border-image: linear-gradient(to right, #00AEEF, #EC008C, #FFF200) 1;
                 margin-bottom: 16pt;
             }
 
             .pv-logo {
-                height: 50pt;
+                height: 60pt;
                 object-fit: contain;
             }
 
@@ -882,9 +884,11 @@
 
             .pv-meta-box {
                 flex: 1;
-                border: 1pt solid #e5e5ea;
-                border-radius: 6pt;
+                border: 0.5pt solid #FFF200;
+                border-left: 3pt solid #00AEEF;
+                border-radius: 4pt;
                 padding: 10pt 12pt;
+                background: #fafafc;
             }
 
             .pv-meta-box h4 {
@@ -892,7 +896,7 @@
                 font-weight: 700;
                 text-transform: uppercase;
                 letter-spacing: 0.5pt;
-                color: #0071e3;
+                color: #00AEEF;
                 margin-bottom: 6pt;
             }
 
@@ -919,7 +923,7 @@
             }
 
             .pv-table thead tr {
-                background: #0071e3;
+                background: #00AEEF;
                 color: white;
             }
 
@@ -970,27 +974,33 @@
             }
 
             .pv-totals-box {
-                width: 200pt;
+                width: 220pt;
                 background: #fdfdfd;
                 border: 1pt solid #e5e5ea;
-                border-radius: 6pt;
-                padding: 10pt;
+                border-top: 2pt solid #00AEEF;
+                border-radius: 4pt;
+                padding: 12pt;
             }
 
             .pv-totals-row {
                 display: flex;
                 justify-content: space-between;
-                padding: 4pt 0;
+                padding: 5pt 0;
                 font-size: 9.5pt;
-                border-bottom: 0.5pt solid #eee;
+                font-weight: 400;
+                border-bottom: 0.5pt solid #f0f0f0;
             }
 
             .pv-totals-row.total {
-                font-size: 13pt;
+                font-size: 14pt;
                 font-weight: 800;
                 border: none;
-                padding-top: 8pt;
-                color: #0071e3;
+                padding-top: 10pt;
+                color: #1c1c1e;
+            }
+
+            .pv-totals-row.total span:last-child {
+                color: #EC008C;
             }
 
             /* Footer */
@@ -999,6 +1009,7 @@
                 padding-top: 12pt;
                 display: flex;
                 gap: 16pt;
+                margin-bottom: 8pt;
             }
 
             .pv-footer-col {
@@ -1010,7 +1021,7 @@
                 font-weight: 700;
                 text-transform: uppercase;
                 letter-spacing: 0.4pt;
-                color: #0071e3;
+                color: #00AEEF;
                 margin-bottom: 5pt;
             }
 
@@ -1020,14 +1031,13 @@
                 line-height: 1.6;
             }
 
-            .pv-note {
-                background: #fff8e7;
-                border: 0.5pt solid #ffd60a;
-                border-radius: 4pt;
-                padding: 7pt 10pt;
-                font-size: 8pt;
-                color: #7a6200;
-                margin-bottom: 10pt;
+            .pv-legal-notes {
+                font-size: 7.5pt;
+                color: #777;
+                text-align: justify;
+                border-top: 0.5pt dashed #ccc;
+                padding-top: 6pt;
+                line-height: 1.4;
             }
 
             @page {
@@ -1697,17 +1707,17 @@
                             </p>
                         </div>
                         <div class="pv-meta-box">
-                            <h4>Detalles de la Cotización</h4>
+                            <h4>Condiciones Comerciales</h4>
                             <p>
-                                <strong>No. ${quoteNum}</strong><br>
-                                Fecha: ${dateStr}<br>
-                                Vigente hasta: ${expiry}<br>
-                                Agente: ${vendorName}
+                                <strong>Folio: ${quoteNum}</strong><br>
+                                Fecha: <span style="white-space: nowrap;">${dateStr}</span><br>
+                                Vigente hasta: <span style="white-space: nowrap;">${expiry}</span><br>
+                                Agente de Ventas: ${vendorName}
                             </p>
                         </div>
                     </div>
 
-                    ${notes ? `<div class="pv-note">📌 ${notes}</div>` : ''}
+                    ${notes ? `<div style="font-size:8.5pt; color:#2c2c2e; padding:6pt 0; font-weight:600;">📌 Nota al cliente: ${notes}</div>` : ''}
 
                     <table class="pv-table">
                         <thead>
@@ -1737,17 +1747,16 @@
                             <p>${payRow}</p>
                         </div>
                         <div class="pv-footer-col">
-                            <h5>Contacto y Redes</h5>
+                            <h5>Atención al Cliente</h5>
                             <p>
-                                📱 WhatsApp: ${bizWa}<br>
-                                Instagram: ${bizIg}<br>
-                                Facebook: ${bizFb}
+                                📱 Directo / WhatsApp: ${bizWa}<br>
+                                ${bizEmail}
                             </p>
                         </div>
-                        <div class="pv-footer-col">
-                            <h5>Notas</h5>
-                            <p>${bizTerms} Esta cotización es válida por ${validity} día${validity !== '1' ? 's' : ''}.</p>
-                        </div>
+                    </div>
+
+                    <div class="pv-legal-notes" style="page-break-inside: avoid;">
+                        <strong>NOTAS:</strong> Vigencia: ${validity} días naturales. | ${bizTerms.replace(/\n|(\.\s)/g, ' | ')}
                     </div>
 
                 </div>
@@ -1758,7 +1767,7 @@
         <!-- Global fixed footer on all pages -->
         <div class="pv-global-footer">
             <div class="pv-g-left">Cotización No. <strong>${quoteNum}</strong></div>
-            <div class="pv-g-right">${bizEmail} &nbsp; | &nbsp; ${bizWeb}</div>
+            <div class="pv-g-right"><strong>${bizEmail}</strong> &nbsp;|&nbsp; ${bizWeb}</div>
         </div>
         `;
 
