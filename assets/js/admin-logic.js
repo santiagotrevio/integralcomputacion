@@ -1802,42 +1802,44 @@ function renderBrandsTable() {
         const tr = document.createElement('tr');
 
         tr.innerHTML = `
-                    <td style="padding: 15px; width: 200px;">
-                        <div style="background:#f8f9fa; border:1px solid #eee; border-radius:12px; padding:20px 16px 16px; text-align:center; position:relative;">
+                    <td style="padding: 12px; width: 210px; vertical-align: middle;">
+                        <div style="background:#f8f9fa; border:1px solid #eee; border-radius:14px; padding:24px 16px 16px; display:flex; flex-direction:column; align-items:center; gap:16px; position:relative;">
+
                             ${isNew ? '<span style="position:absolute; top:8px; left:8px; background:#ff9500; color:white; font-size:8px; padding:2px 6px; border-radius:10px; font-weight:900;">NUEVA</span>' : ''}
 
-                            <!-- Wand button — positioned on the card, NOT inside the pill -->
+                            <!-- Wand button — top-right of card -->
                             <div onclick="openImageWizard('${brandName}', '', 'brand')"
-                                 style="position:absolute; top:8px; right:8px; background:rgba(255,45,85,0.85); color:white; width:22px; height:22px; border-radius:50%; display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:9px; z-index:4; border:2px solid white; box-shadow:0 2px 6px rgba(255,45,85,0.3);"
+                                 style="position:absolute; top:10px; right:10px; background:rgba(255,45,85,0.85); color:white; width:24px; height:24px; border-radius:50%; display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:9px; z-index:4; border:2px solid white; box-shadow:0 2px 8px rgba(255,45,85,0.35);"
                                  title="Buscar logo">
                                 <i class="fa-solid fa-wand-magic-sparkles"></i>
                             </div>
 
-                            <!-- BIGGER PILL PREVIEW -->
-                            <div class="brand-logo-pill" style="position:relative; margin:0 auto; box-shadow:none; border:1px solid #ddd; background:white; width:130px; height:48px; overflow:hidden; padding:0; border-radius:24px; display:flex; align-items:center; justify-content:center;">
+                            <!-- PILL PREVIEW — centered by flex parent -->
+                            <div class="brand-logo-pill" style="position:relative; flex-shrink:0; box-shadow:none; border:1px solid #ddd; background:white; width:160px; height:56px; overflow:hidden; padding:0; border-radius:28px; display:flex; align-items:center; justify-content:center;">
                                 <!-- Safe Zone Guides -->
                                 <div style="position:absolute; top:calc(50% - 7.5px); left:0; width:100%; height:15px; border-top:1px dashed #ff2d55; border-bottom:1px dashed #ff2d55; opacity:0.25; pointer-events:none; z-index:3;"></div>
 
                                 <div class="brand-placeholder" style="position:absolute; inset:0; background:#f1f5f9; display:none; flex-direction:column; align-items:center; justify-content:center; color:#94a3b8; font-size:8px; font-weight:800; text-transform:uppercase;">
-                                    <i class="fa-solid fa-image" style="font-size:10px; margin-bottom:2px;"></i>
+                                    <i class="fa-solid fa-image" style="font-size:12px; margin-bottom:3px;"></i>
                                     ${brandName.substring(0, 8)}
                                 </div>
 
                                 <img src="${brandImgPath}" class="brand-prev-img"
-                                     style="max-height: ${15 * setting.scale}px; transform:translate(${setting.offset_x || 0}px, ${setting.offset_y || 0}px); max-width:110px; object-fit:contain; z-index:2;"
+                                     style="max-height: ${15 * setting.scale}px; transform:translate(${setting.offset_x || 0}px, ${setting.offset_y || 0}px); max-width:140px; object-fit:contain; z-index:2;"
                                      onerror="this.style.display='none'; this.previousElementSibling.style.display='flex';">
                             </div>
 
-                            <!-- Editable brand name — with clear gap below the pill -->
-                            <div style="margin-top:14px; display:flex; align-items:center; gap:6px;">
+                            <!-- Editable brand name — separated by flex gap -->
+                            <div style="width:100%; display:flex; align-items:center; gap:6px;">
                                 <input id="brandNameInput-${brandName}" type="text" value="${brandName}"
-                                    style="flex:1; padding:5px 8px; border:1px solid #ddd; border-radius:8px; font-size:12px; font-weight:800; text-align:center; color:#333; background:white;"
+                                    style="flex:1; padding:6px 10px; border:1px solid #ddd; border-radius:8px; font-size:12px; font-weight:800; text-align:center; color:#333; background:white; min-width:0;"
                                     onkeydown="if(event.key==='Enter') renameBrand('${brandName}', this)">
                                 <button onclick="renameBrand('${brandName}', document.getElementById('brandNameInput-${brandName}'))"
-                                    style="background:#f1f5f9; border:1px solid #ddd; border-radius:8px; padding:5px 8px; cursor:pointer; font-size:11px;" title="Guardar nuevo nombre">
+                                    style="flex-shrink:0; background:#f1f5f9; border:1px solid #ddd; border-radius:8px; padding:6px 9px; cursor:pointer; font-size:11px;" title="Guardar nuevo nombre">
                                     <i class="fa-solid fa-check"></i>
                                 </button>
                             </div>
+
                         </div>
                     </td>
                     <td>
