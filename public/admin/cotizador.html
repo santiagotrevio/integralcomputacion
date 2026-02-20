@@ -78,6 +78,10 @@
             background-color: var(--surface);
         }
 
+        html {
+            overflow-x: hidden;
+        }
+
         body {
             font-family: 'Inter', -apple-system, sans-serif;
             background: var(--bg);
@@ -86,7 +90,11 @@
             max-width: 600px;
             margin: 0 auto;
             padding-bottom: calc(90px + var(--safe-bottom));
+            overflow-x: hidden;
+            -webkit-text-size-adjust: 100%;
+            /* evita zoom de texto en iOS al rotar */
         }
+
 
         /* ── TOP BAR ── */
         .topbar {
@@ -1268,8 +1276,68 @@
                 width: 100%;
             }
         }
+
+        /* ── Ajustes para pantallas muy chicas (ej. iPhone SE 375px) ─────── */
+        @media screen and (max-width: 390px) {
+            .topbar {
+                padding: 12px 14px;
+            }
+
+            .topbar h1 {
+                font-size: 15px;
+            }
+
+            .section {
+                padding: 16px 14px;
+            }
+
+            .sheet-body {
+                padding: 16px 14px;
+            }
+
+            /* Toast: limitar ancho en pantallas chicas para no salirse */
+            .toast {
+                white-space: normal;
+                text-align: center;
+                max-width: calc(100vw - 48px);
+                left: 24px;
+                right: 24px;
+                transform: none;
+            }
+
+            /* Quote row: reducir fuentes para que precio no se corte */
+            .quote-row {
+                font-size: 13px;
+                padding: 10px 14px;
+            }
+
+            .quote-row-price {
+                font-size: 13px;
+            }
+
+            .quote-total-amount {
+                font-size: 19px;
+            }
+
+            /* Action bar: botones más compactos */
+            .btn-wa,
+            .btn-pdf {
+                font-size: 14px;
+                padding: 12px 10px;
+            }
+
+            .btn-icon {
+                padding: 12px 14px;
+            }
+
+            /* Check payment grid: 1 columna en muy chico */
+            .check-grid {
+                grid-template-columns: 1fr;
+            }
+        }
     </style>
 </head>
+
 
 <body>
 
