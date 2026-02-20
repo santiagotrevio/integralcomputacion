@@ -1171,28 +1171,28 @@
             }
 
             .pv-totals-box {
-                width: 220pt;
+                width: 190pt;
                 background: #fdfdfd;
                 border: 1pt solid #e5e5ea;
                 border-top: 2pt solid #00AEEF;
                 border-radius: 4pt;
-                padding: 12pt;
+                padding: 8pt 10pt;
             }
 
             .pv-totals-row {
                 display: flex;
                 justify-content: space-between;
-                padding: 5pt 0;
-                font-size: 9.5pt;
+                padding: 3pt 0;
+                font-size: 8.5pt;
                 font-weight: 400;
                 border-bottom: 0.5pt solid #f0f0f0;
             }
 
             .pv-totals-row.total {
-                font-size: 14pt;
+                font-size: 12pt;
                 font-weight: 800;
                 border: none;
-                padding-top: 10pt;
+                padding-top: 6pt;
                 color: #1c1c1e;
             }
 
@@ -1203,10 +1203,10 @@
             /* Footer */
             .pv-footer {
                 border-top: 1pt solid #e5e5ea;
-                padding-top: 12pt;
+                padding-top: 8pt;
                 display: flex;
                 gap: 16pt;
-                margin-bottom: 8pt;
+                margin-bottom: 5pt;
             }
 
             .pv-footer-col {
@@ -2110,20 +2110,52 @@
             const cfgLogoY = parseFloat(localStorage.getItem('cfgLogoY')) || 0;
             const cfgTextY = parseFloat(localStorage.getItem('cfgTextY')) || 0;
 
-            // Explicit Pagination Logic
+            // Explicit Pagination Logic - Optimizada para no dejar huecos
             const chunkedPages = [];
             const itemsCopy = [...quoteItems];
-            const itemsLimitWithTotals = 5;
-            const itemsLimitWithoutTotals = 6;
 
+            const FIRST_PAGE_MAX_WITH_TOTALS = 10;
+            const FIRST_PAGE_MAX_NO_TOTALS = 15;
+            const MIDDLE_PAGE_MAX = 20;
+            const LAST_PAGE_MAX_WITH_TOTALS = 14;
+            const MIN_ITEMS_LAST_PAGE = 3;
+
+            let isFirst = true;
             while (itemsCopy.length > 0) {
-                let takeCount = itemsLimitWithoutTotals;
-                if (itemsCopy.length <= itemsLimitWithTotals) {
-                    takeCount = itemsCopy.length;
-                } else if (itemsCopy.length === itemsLimitWithoutTotals) {
-                    takeCount = itemsLimitWithoutTotals - 1;
+                let take;
+                let len = itemsCopy.length;
+
+                if (isFirst) {
+                    if (len <= FIRST_PAGE_MAX_WITH_TOTALS) {
+                        take = len;
+                    } else if (len <= FIRST_PAGE_MAX_NO_TOTALS) {
+                        take = len - MIN_ITEMS_LAST_PAGE;
+                        if (take < 1) take = 1;
+                    } else {
+                        let remain = len - FIRST_PAGE_MAX_NO_TOTALS;
+                        if (remain > 0 && remain < MIN_ITEMS_LAST_PAGE) {
+                            take = FIRST_PAGE_MAX_NO_TOTALS - (MIN_ITEMS_LAST_PAGE - remain);
+                        } else {
+                            take = FIRST_PAGE_MAX_NO_TOTALS;
+                        }
+                    }
+                    isFirst = false;
+                } else {
+                    if (len <= LAST_PAGE_MAX_WITH_TOTALS) {
+                        take = len;
+                    } else if (len <= MIDDLE_PAGE_MAX) {
+                        take = len - MIN_ITEMS_LAST_PAGE;
+                        if (take < 1) take = 1;
+                    } else {
+                        let remain = len - MIDDLE_PAGE_MAX;
+                        if (remain > 0 && remain < MIN_ITEMS_LAST_PAGE) {
+                            take = MIDDLE_PAGE_MAX - (MIN_ITEMS_LAST_PAGE - remain);
+                        } else {
+                            take = MIDDLE_PAGE_MAX;
+                        }
+                    }
                 }
-                chunkedPages.push(itemsCopy.splice(0, takeCount));
+                chunkedPages.push(itemsCopy.splice(0, take));
             }
             if (chunkedPages.length === 0) chunkedPages.push([]);
 
