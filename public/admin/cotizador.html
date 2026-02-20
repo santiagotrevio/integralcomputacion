@@ -1218,6 +1218,9 @@
                 <i class="fa-solid fa-address-book"></i> Contactos Guardados
             </a>
             <hr style="border:0; border-top:1px solid var(--border); margin: 16px 4px;">
+            <a href="#" class="sidebar-link" onclick="toggleDarkMode()">
+                <i class="fa-solid fa-moon"></i> Modo Oscuro
+            </a>
             <a href="home.html" class="sidebar-link">
                 <i class="fa-solid fa-arrow-left"></i> Volver a Home
             </a>
@@ -2126,6 +2129,12 @@
             } else if (target === 'contacts') {
                 showToast('Contactos en construcción 🚧');
             }
+        }
+
+        function toggleDarkMode() {
+            const isDark = document.body.classList.toggle('dark-mode');
+            localStorage.setItem('admin-theme', isDark ? 'dark' : 'light');
+            showToast(isDark ? '🌙 Modo Oscuro Activado' : '☀️ Modo Claro Activado');
         }
     </script>
 </body>
