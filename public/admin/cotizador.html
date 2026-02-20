@@ -322,10 +322,18 @@
             overflow: hidden;
         }
 
+        /* Fuerza que los inputs (especialmente type=date en iOS) respeten el grid */
         .row2 .inp {
-            width: 100%;
-            box-sizing: border-box;
+            width: 100% !important;
+            max-width: 100% !important;
+            box-sizing: border-box !important;
+            -webkit-appearance: none;
+            appearance: none;
+            font-size: 14px;
+            padding: 11px 10px;
         }
+
+
 
 
         /* ── BUTTONS ── */
@@ -1435,14 +1443,21 @@
 
                 <div class="row2">
                     <div class="field">
-                        <label class="lbl" for="fQuoteDate">Fecha de Cotización</label>
-                        <input class="inp" id="fQuoteDate" type="date" onchange="updateQuoteId()">
+                        <label class="lbl" for="fQuoteDateDisplay">Fecha de Cotización</label>
+                        <div style="position:relative;">
+                            <input class="inp" id="fQuoteDateDisplay" type="text" readonly style="cursor:pointer;"
+                                onclick="document.getElementById('fQuoteDate').showPicker ? document.getElementById('fQuoteDate').showPicker() : document.getElementById('fQuoteDate').click()">
+                            <input id="fQuoteDate" type="date"
+                                onchange="updateQuoteId();this.previousElementSibling.value=new Date(this.value+'T12:00:00').toLocaleDateString('es-MX',{day:'2-digit',month:'short',year:'numeric'})"
+                                style="position:absolute;top:0;left:0;width:100%;height:100%;opacity:0;pointer-events:none;">
+                        </div>
                     </div>
                     <div class="field">
                         <label class="lbl" for="fValidity">Vigencia (días)</label>
                         <input class="inp" id="fValidity" type="number" value="15" min="1">
                     </div>
                 </div>
+
                 <div class="field">
                     <label class="lbl" for="fQuoteNum">Número de Cotización</label>
                     <input class="inp" id="fQuoteNum" type="text" readonly
@@ -1852,6 +1867,9 @@
             // 1. Abrir el sheet INMEDIATAMENTE (no esperar el fetch del folio)
             const today = new Date().toISOString().split('T')[0];
             document.getElementById('fQuoteDate').value = today;
+            document.getElementById('fQuoteDateDisplay').value =
+                new Date(today + 'T12:00:00').toLocaleDateString('es-MX', { day: '2-digit', month: 'short', year: 'numeric' });
+
             loadClientCRM();
             document.getElementById('formalOverlay').classList.add('open');
 
