@@ -815,11 +815,9 @@
             /* Explicit Multi-Page A4 Structure */
             .pv-page {
                 width: 210mm;
-                /* A4 exact width */
-                min-height: 292mm;
-                /* A4 exact height minus some tolerance */
+                height: 296mm;
+                /* A4 height slightly reduced to prevent invisible overflow */
                 margin: 0 auto;
-                /* Force horizontal centering */
                 padding: 15mm 15mm 15mm 15mm;
                 box-sizing: border-box;
                 display: flex;
@@ -832,7 +830,6 @@
             .pv-page:last-child {
                 break-after: auto !important;
                 page-break-after: auto !important;
-                min-height: auto;
             }
 
             .pv-flex-spacer {
