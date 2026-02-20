@@ -1,0 +1,1159 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <title>Cotizador | Integral</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <style>
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --bg: #f5f5f7;
+            --surface: #ffffff;
+            --border: #e5e5ea;
+            --text: #1c1c1e;
+            --subtext: #8e8e93;
+            --accent: #0071e3;
+            --green: #34c759;
+            --red: #ff3b30;
+            --orange: #ff9500;
+            --radius: 16px;
+            --safe-bottom: env(safe-area-inset-bottom, 0px);
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100dvh;
+            max-width: 600px;
+            margin: 0 auto;
+            padding-bottom: calc(80px + var(--safe-bottom));
+        }
+
+        /* ── Header ── */
+        .topbar {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            padding: 14px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .topbar-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .topbar-back {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--accent);
+            font-size: 15px;
+            font-weight: 600;
+            padding: 4px 0;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .topbar h1 {
+            font-size: 17px;
+            font-weight: 700;
+            letter-spacing: -0.3px;
+        }
+
+        .topbar-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .icon-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--subtext);
+            font-size: 18px;
+            padding: 4px;
+            transition: color 0.2s;
+        }
+
+        .icon-btn:hover {
+            color: var(--text);
+        }
+
+        /* ── Steps indicator ── */
+        .steps {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 16px 20px 0;
+        }
+
+        .step-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--border);
+            transition: all 0.3s;
+        }
+
+        .step-dot.active {
+            background: var(--accent);
+            width: 24px;
+            border-radius: 4px;
+        }
+
+        .step-dot.done {
+            background: var(--green);
+        }
+
+        /* ── Sections ── */
+        .section {
+            display: none;
+            padding: 20px;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        /* ── Step 1: Input ── */
+        .paste-label {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--subtext);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 10px;
+        }
+
+        .paste-area {
+            width: 100%;
+            min-height: 220px;
+            padding: 16px;
+            border: 1.5px solid var(--border);
+            border-radius: var(--radius);
+            font-family: 'Inter', sans-serif;
+            font-size: 15px;
+            line-height: 1.6;
+            color: var(--text);
+            background: var(--surface);
+            resize: none;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .paste-area:focus {
+            border-color: var(--accent);
+        }
+
+        .paste-area::placeholder {
+            color: var(--subtext);
+        }
+
+        .hint-card {
+            background: rgba(0, 113, 227, 0.06);
+            border: 1px solid rgba(0, 113, 227, 0.15);
+            border-radius: 12px;
+            padding: 12px 14px;
+            margin-top: 14px;
+            font-size: 13px;
+            color: #0071e3;
+            line-height: 1.5;
+        }
+
+        .hint-card i {
+            margin-right: 6px;
+        }
+
+        .btn-primary {
+            width: 100%;
+            padding: 16px;
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: var(--radius);
+            font-family: 'Inter', sans-serif;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: 16px;
+            transition: opacity 0.2s, transform 0.1s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-primary:active {
+            transform: scale(0.98);
+            opacity: 0.9;
+        }
+
+        .btn-primary:disabled {
+            opacity: 0.5;
+            cursor: default;
+        }
+
+        .btn-secondary {
+            width: 100%;
+            padding: 14px;
+            background: var(--surface);
+            color: var(--text);
+            border: 1.5px solid var(--border);
+            border-radius: var(--radius);
+            font-family: 'Inter', sans-serif;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        /* ── Step 2: Review ── */
+        .section-title {
+            font-size: 20px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            margin-bottom: 6px;
+        }
+
+        .section-sub {
+            font-size: 14px;
+            color: var(--subtext);
+            margin-bottom: 20px;
+        }
+
+        .product-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .product-item {
+            background: var(--surface);
+            border: 1.5px solid var(--border);
+            border-radius: var(--radius);
+            padding: 14px 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            transition: border-color 0.2s;
+        }
+
+        .product-item.matched {
+            border-color: rgba(52, 199, 89, 0.3);
+        }
+
+        .product-item.unmatched {
+            border-color: rgba(255, 59, 48, 0.2);
+            background: rgba(255, 59, 48, 0.02);
+        }
+
+        .product-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .product-status {
+            flex-shrink: 0;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+        }
+
+        .product-status.ok {
+            background: rgba(52, 199, 89, 0.12);
+            color: var(--green);
+        }
+
+        .product-status.err {
+            background: rgba(255, 59, 48, 0.1);
+            color: var(--red);
+        }
+
+        .product-meta {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .product-code {
+            font-size: 12px;
+            font-weight: 700;
+            font-family: monospace;
+            color: var(--subtext);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 2px;
+        }
+
+        .product-name {
+            font-size: 14px;
+            font-weight: 600;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .product-brand {
+            font-size: 12px;
+            color: var(--subtext);
+            margin-top: 2px;
+        }
+
+        .product-remove {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--subtext);
+            padding: 4px;
+            font-size: 16px;
+            flex-shrink: 0;
+        }
+
+        .product-remove:hover {
+            color: var(--red);
+        }
+
+        .product-qty-price {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+        }
+
+        .field-wrap {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .field-label {
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--subtext);
+            text-transform: uppercase;
+        }
+
+        .field-input {
+            padding: 10px 12px;
+            border: 1.5px solid var(--border);
+            border-radius: 10px;
+            font-family: 'Inter', sans-serif;
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--text);
+            width: 100%;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .field-input:focus {
+            border-color: var(--accent);
+        }
+
+        .field-input.price {
+            color: var(--green);
+        }
+
+        .unmatched-note {
+            font-size: 12px;
+            color: var(--red);
+            margin-top: 2px;
+        }
+
+        /* ── Codes not found chips ── */
+        .not-found-section {
+            margin-top: 20px;
+            padding: 14px 16px;
+            background: rgba(255, 149, 0, 0.06);
+            border: 1px solid rgba(255, 149, 0, 0.2);
+            border-radius: var(--radius);
+        }
+
+        .not-found-label {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--orange);
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        .code-chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .code-chip {
+            font-size: 11px;
+            font-family: monospace;
+            font-weight: 700;
+            padding: 4px 9px;
+            border-radius: 8px;
+            background: rgba(255, 149, 0, 0.1);
+            color: var(--orange);
+            letter-spacing: 0.3px;
+        }
+
+        /* ── Step 3: Output ── */
+        .quote-card {
+            background: var(--surface);
+            border: 1.5px solid var(--border);
+            border-radius: var(--radius);
+            overflow: hidden;
+        }
+
+        .quote-header {
+            padding: 16px 18px;
+            background: linear-gradient(135deg, #0071e3 0%, #0051a8 100%);
+            color: white;
+        }
+
+        .quote-header .q-title {
+            font-size: 18px;
+            font-weight: 800;
+            margin-bottom: 2px;
+        }
+
+        .quote-header .q-date {
+            font-size: 12px;
+            opacity: 0.75;
+        }
+
+        .quote-body {
+            padding: 0;
+        }
+
+        .quote-row {
+            display: grid;
+            grid-template-columns: 1fr auto auto;
+            gap: 8px;
+            align-items: center;
+            padding: 12px 18px;
+            border-bottom: 1px solid var(--border);
+            font-size: 14px;
+        }
+
+        .quote-row:last-child {
+            border-bottom: none;
+        }
+
+        .quote-row-name {
+            font-weight: 600;
+        }
+
+        .quote-row-code {
+            font-size: 11px;
+            font-family: monospace;
+            color: var(--subtext);
+        }
+
+        .quote-row-qty {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--subtext);
+            text-align: right;
+        }
+
+        .quote-row-price {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--accent);
+            text-align: right;
+            white-space: nowrap;
+        }
+
+        .quote-total {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 18px;
+            background: var(--bg);
+            font-weight: 800;
+        }
+
+        .quote-total-label {
+            font-size: 14px;
+            color: var(--subtext);
+        }
+
+        .quote-total-amount {
+            font-size: 22px;
+            color: var(--text);
+            letter-spacing: -0.5px;
+        }
+
+        /* ── Bottom action bar ── */
+        .action-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            max-width: 600px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-top: 1px solid var(--border);
+            padding: 12px 20px calc(12px + var(--safe-bottom));
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn-wa {
+            flex: 1;
+            padding: 14px;
+            background: #25d366;
+            color: white;
+            border: none;
+            border-radius: 14px;
+            font-family: 'Inter', sans-serif;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: opacity 0.2s;
+        }
+
+        .btn-wa:active {
+            opacity: 0.85;
+        }
+
+        .btn-copy {
+            padding: 14px 18px;
+            background: var(--bg);
+            color: var(--text);
+            border: 1.5px solid var(--border);
+            border-radius: 14px;
+            font-family: 'Inter', sans-serif;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        /* ── Toast ── */
+        .toast {
+            position: fixed;
+            bottom: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.85);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 24px;
+            font-size: 13px;
+            font-weight: 600;
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+            white-space: nowrap;
+            z-index: 9999;
+        }
+
+        .toast.show {
+            opacity: 1;
+        }
+
+        /* ── Login overlay ── */
+        #loginOverlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(20px);
+            z-index: 9999;
+            justify-content: center;
+            align-items: flex-end;
+        }
+
+        .login-sheet {
+            background: white;
+            width: 100%;
+            max-width: 600px;
+            border-radius: 24px 24px 0 0;
+            padding: 32px 24px calc(32px + var(--safe-bottom));
+            text-align: center;
+        }
+
+        .login-sheet .handle {
+            width: 36px;
+            height: 4px;
+            background: var(--border);
+            border-radius: 2px;
+            margin: 0 auto 28px;
+        }
+
+        .login-sheet img {
+            height: 56px;
+            margin-bottom: 20px;
+        }
+
+        .login-sheet h2 {
+            font-size: 20px;
+            font-weight: 800;
+            margin-bottom: 8px;
+        }
+
+        .login-sheet p {
+            font-size: 14px;
+            color: var(--subtext);
+            margin-bottom: 24px;
+        }
+
+        .login-sheet input[type="password"] {
+            width: 100%;
+            padding: 14px;
+            border: 1.5px solid var(--border);
+            border-radius: 12px;
+            font-size: 16px;
+            text-align: center;
+            margin-bottom: 12px;
+            outline: none;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .login-sheet input:focus {
+            border-color: var(--accent);
+        }
+
+        #loginError {
+            color: var(--red);
+            font-size: 13px;
+            margin-bottom: 8px;
+            display: none;
+        }
+
+        /* Empty state */
+        .empty-state {
+            text-align: center;
+            padding: 48px 20px;
+            color: var(--subtext);
+        }
+
+        .empty-state i {
+            font-size: 40px;
+            opacity: 0.3;
+            margin-bottom: 12px;
+            display: block;
+        }
+
+        .empty-state p {
+            font-size: 14px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Top bar -->
+    <header class="topbar">
+        <div class="topbar-left">
+            <button class="topbar-back" onclick="goBack()">
+                <i class="fa-solid fa-chevron-left"></i> Admin
+            </button>
+        </div>
+        <h1>Cotizador</h1>
+        <div class="topbar-actions">
+            <button class="icon-btn" id="btnReset" onclick="resetAll()" title="Nueva cotización" style="display:none;">
+                <i class="fa-solid fa-arrow-rotate-left"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Step indicator -->
+    <div class="steps">
+        <div class="step-dot active" id="dot0"></div>
+        <div class="step-dot" id="dot1"></div>
+        <div class="step-dot" id="dot2"></div>
+    </div>
+
+    <!-- ── STEP 1: PASTE TEXT ── -->
+    <div class="section active" id="step1">
+        <br>
+        <div class="paste-label">Pega el texto aquí</div>
+        <textarea class="paste-area" id="pasteInput"
+            placeholder="Pega aquí una conversación de WhatsApp, email, lista de códigos o cualquier texto que contenga códigos de productos…"></textarea>
+
+        <div class="hint-card">
+            <i class="fa-solid fa-wand-magic-sparkles"></i>
+            El sistema detectará automáticamente los códigos de productos en el texto y los buscará en el catálogo.
+        </div>
+
+        <button class="btn-primary" id="btnAnalyze" onclick="analyzeText()">
+            <i class="fa-solid fa-magnifying-glass"></i> Analizar texto
+        </button>
+    </div>
+
+    <!-- ── STEP 2: REVIEW ── -->
+    <div class="section" id="step2">
+        <br>
+        <div class="section-title">Productos detectados</div>
+        <div class="section-sub" id="step2Sub">Revisa y ajusta cantidades y precios.</div>
+
+        <div class="product-list" id="productList"></div>
+
+        <div id="notFoundSection" class="not-found-section" style="display:none;">
+            <div class="not-found-label"><i class="fa-solid fa-triangle-exclamation"></i> Códigos no encontrados</div>
+            <div class="code-chips" id="notFoundChips"></div>
+        </div>
+
+        <button class="btn-primary" id="btnGenerate" onclick="generateQuote()">
+            <i class="fa-solid fa-file-invoice-dollar"></i> Generar cotización
+        </button>
+        <button class="btn-secondary" onclick="goToStep(1)">
+            <i class="fa-solid fa-chevron-left"></i> Volver a editar texto
+        </button>
+    </div>
+
+    <!-- ── STEP 3: QUOTE ── -->
+    <div class="section" id="step3">
+        <br>
+        <div class="section-title">Cotización lista</div>
+        <div class="section-sub">Lista para compartir por WhatsApp o copiar al portapapeles.</div>
+
+        <div class="quote-card" id="quoteCard">
+            <div class="quote-header">
+                <div class="q-title">Cotización — Integral Computación</div>
+                <div class="q-date" id="quoteDate"></div>
+            </div>
+            <div class="quote-body" id="quoteBody"></div>
+            <div class="quote-total">
+                <span class="quote-total-label">TOTAL ESTIMADO</span>
+                <span class="quote-total-amount" id="quoteTotal">—</span>
+            </div>
+        </div>
+
+        <button class="btn-secondary" onclick="goToStep(2)" style="margin-top: 16px;">
+            <i class="fa-solid fa-pencil"></i> Editar precios
+        </button>
+    </div>
+
+    <!-- Bottom action bar (step 3 only) -->
+    <div class="action-bar" id="actionBar" style="display:none;">
+        <button class="btn-wa" onclick="shareWhatsApp()">
+            <i class="fa-brands fa-whatsapp"></i> WhatsApp
+        </button>
+        <button class="btn-copy" onclick="copyQuote()" title="Copiar texto">
+            <i class="fa-solid fa-copy"></i>
+        </button>
+    </div>
+
+    <!-- Toast -->
+    <div class="toast" id="toast"></div>
+
+    <!-- Login Overlay (bottom sheet) -->
+    <div id="loginOverlay">
+        <div class="login-sheet">
+            <div class="handle"></div>
+            <img src="/assets/images/LOGO SIN TEXTO.png" alt="Logo"
+                onerror="this.src='/assets/logo.svg'; this.style.height='40px'">
+            <h2>Acceso Protegido</h2>
+            <p>Introduce la contraseña del panel de administración para continuar.</p>
+            <div id="loginError">Contraseña incorrecta.</div>
+            <input type="password" id="adminPwd" placeholder="Contraseña" onkeydown="if(event.key==='Enter') doLogin()">
+            <button class="btn-primary" onclick="doLogin()" style="margin-top:0;">
+                <i class="fa-solid fa-lock-open"></i> Desbloquear
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // ────────────────────────────────────────────────────────────────────────────
+        // CONFIG
+        // ────────────────────────────────────────────────────────────────────────────
+        const TOKEN_KEY = 'admin_token';
+        let products = [];       // fetched from API
+        let quoteItems = [];     // {code, name, brand, qty, price}
+        let notFound = [];       // unrecognized codes
+
+        // ────────────────────────────────────────────────────────────────────────────
+        // AUTH
+        // ────────────────────────────────────────────────────────────────────────────
+        function getToken() { return localStorage.getItem(TOKEN_KEY); }
+
+        async function apiFetch(url, opts = {}) {
+            const token = getToken();
+            opts.headers = { ...(opts.headers || {}), 'Authorization': `Bearer ${token}` };
+            return fetch(url, opts);
+        }
+
+        async function checkAuth() {
+            const token = getToken();
+            if (!token) { showLogin(); return false; }
+            try {
+                const r = await fetch('/api/brands', {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                if (r.status === 401) { showLogin(); return false; }
+            } catch (_) { /* offline */ }
+            return true;
+        }
+
+        function showLogin() {
+            document.getElementById('loginOverlay').style.display = 'flex';
+            setTimeout(() => document.getElementById('adminPwd').focus(), 300);
+        }
+
+        async function doLogin() {
+            const pwd = document.getElementById('adminPwd').value;
+            const err = document.getElementById('loginError');
+            err.style.display = 'none';
+            try {
+                const r = await fetch('/api/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ password: pwd })
+                });
+                const data = await r.json();
+                if (r.ok && data.token) {
+                    localStorage.setItem(TOKEN_KEY, data.token);
+                    document.getElementById('loginOverlay').style.display = 'none';
+                    loadProducts();
+                } else {
+                    err.style.display = 'block';
+                    document.getElementById('adminPwd').value = '';
+                }
+            } catch (e) {
+                err.textContent = 'Error de conexión.';
+                err.style.display = 'block';
+            }
+        }
+
+        // ────────────────────────────────────────────────────────────────────────────
+        // LOAD PRODUCTS
+        // ────────────────────────────────────────────────────────────────────────────
+        async function loadProducts() {
+            try {
+                const r = await apiFetch('/api/products');
+                if (r.status === 401) { showLogin(); return; }
+                const data = await r.json();
+                products = data.data || [];
+                console.log(`✅ ${products.length} productos cargados`);
+            } catch (e) {
+                showToast('⚠️ Sin conexión al servidor');
+            }
+        }
+
+        // ────────────────────────────────────────────────────────────────────────────
+        // TEXT PARSING
+        // ────────────────────────────────────────────────────────────────────────────
+        function extractCodes(text) {
+            // Match tokens that look like product SKUs:
+            // - Uppercase alphanumeric with optional dashes/dots, min 4 chars
+            // - e.g. TZ16MOU01-GAME, Q2612A, CF280A, HP85A, TK1175, etc.
+            const raw = text.toUpperCase();
+            const regex = /\b([A-Z0-9](?:[A-Z0-9\-\.]{2,}[A-Z0-9]))\b/g;
+            const candidates = [];
+            let m;
+            while ((m = regex.exec(raw)) !== null) {
+                const token = m[1];
+                // Filter common non-code words
+                const skip = new Set(['HOLA', 'BUENOS', 'DIAS', 'TARDES', 'NOCHES', 'GRACIAS',
+                    'FAVOR', 'PRECIO', 'PRECIOS', 'CUANTO', 'CUANTOS', 'NECESITO', 'TENGO',
+                    'QUIERO', 'COTIZAR', 'HACER', 'DAME', 'POR', 'PARA', 'CON', 'SIN', 'DEL',
+                    'LAS', 'LOS', 'UNA', 'UNO', 'QUE', 'ESA', 'ESE', 'ESTE', 'ESTA', 'INTEGRAL',
+                    'COSTO', 'COSTOS', 'TODOS', 'TIENE', 'TIENEN', 'DADO', 'COMO', 'CUANDO',
+                    'DONDE', 'SOBRE', 'ENTRE', 'STOCK', 'MARCA', 'MODELO', 'SERIE', 'CODIGO',
+                    'NÚMERO', 'NUMERO', 'UNIDAD', 'CANTIDAD', 'TOTAL', 'IVA', 'MXN', 'USD']);
+                if (!skip.has(token) && token.length >= 4) candidates.push(token);
+            }
+            // Deduplicate while preserving order
+            return [...new Set(candidates)];
+        }
+
+        function matchCode(code) {
+            // Exact match on product id (case-insensitive)
+            let p = products.find(pr => pr.id.toUpperCase() === code);
+            if (p) return p;
+            // Partial: product id contains the code or vice versa
+            p = products.find(pr =>
+                pr.id.toUpperCase().includes(code) || code.includes(pr.id.toUpperCase())
+            );
+            return p || null;
+        }
+
+        // ────────────────────────────────────────────────────────────────────────────
+        // STEP NAVIGATION
+        // ────────────────────────────────────────────────────────────────────────────
+        function goToStep(n) {
+            document.querySelectorAll('.section').forEach((s, i) => {
+                s.classList.toggle('active', i === n - 1);
+            });
+            // Dots
+            [0, 1, 2].forEach(i => {
+                const dot = document.getElementById(`dot${i}`);
+                dot.classList.remove('active', 'done');
+                if (i === n - 1) dot.classList.add('active');
+                else if (i < n - 1) dot.classList.add('done');
+            });
+            // Action bar
+            document.getElementById('actionBar').style.display = (n === 3) ? 'flex' : 'none';
+            document.getElementById('btnReset').style.display = (n > 1) ? 'block' : 'none';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // ────────────────────────────────────────────────────────────────────────────
+        // STEP 1 → ANALYZE
+        // ────────────────────────────────────────────────────────────────────────────
+        async function analyzeText() {
+            const text = document.getElementById('pasteInput').value.trim();
+            if (!text) { showToast('Pega primero un texto'); return; }
+            if (products.length === 0) { showToast('Cargando catálogo…'); await loadProducts(); }
+
+            const btn = document.getElementById('btnAnalyze');
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Analizando…';
+
+            const codes = extractCodes(text);
+            quoteItems = [];
+            notFound = [];
+
+            codes.forEach(code => {
+                const p = matchCode(code);
+                if (p) {
+                    // Avoid duplicates
+                    if (!quoteItems.find(qi => qi.id === p.id)) {
+                        quoteItems.push({ id: p.id, name: p.name, brand: p.brand, qty: 1, price: '' });
+                    }
+                } else {
+                    notFound.push(code);
+                }
+            });
+
+            btn.disabled = false;
+            btn.innerHTML = '<i class="fa-solid fa-magnifying-glass"></i> Analizar texto';
+
+            renderReview();
+            goToStep(2);
+        }
+
+        // ────────────────────────────────────────────────────────────────────────────
+        // STEP 2 → RENDER REVIEW
+        // ────────────────────────────────────────────────────────────────────────────
+        function renderReview() {
+            const list = document.getElementById('productList');
+            const sub = document.getElementById('step2Sub');
+
+            sub.textContent = quoteItems.length > 0
+                ? `${quoteItems.length} producto${quoteItems.length !== 1 ? 's' : ''} encontrado${quoteItems.length !== 1 ? 's' : ''}. Ajusta cantidades y precios.`
+                : 'No se encontraron códigos conocidos en el texto.';
+
+            if (quoteItems.length === 0) {
+                list.innerHTML = `
+            <div class="empty-state">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <p>Ningún código del catálogo fue identificado.<br>Intenta con otro texto o revisa los códigos.</p>
+            </div>`;
+            } else {
+                list.innerHTML = '';
+                quoteItems.forEach((item, idx) => {
+                    const div = document.createElement('div');
+                    div.className = 'product-item matched';
+                    div.id = `item-${idx}`;
+                    div.innerHTML = `
+                <div class="product-header">
+                    <div class="product-status ok"><i class="fa-solid fa-check"></i></div>
+                    <div class="product-meta">
+                        <div class="product-code">${item.id}</div>
+                        <div class="product-name">${item.name || '—'}</div>
+                        ${item.brand ? `<div class="product-brand">${item.brand}</div>` : ''}
+                    </div>
+                    <button class="product-remove" onclick="removeItem(${idx})" title="Quitar">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+                <div class="product-qty-price">
+                    <div class="field-wrap">
+                        <label class="field-label">Cantidad</label>
+                        <input class="field-input" type="number" min="1" value="${item.qty}"
+                            oninput="updateItem(${idx},'qty',this.value)" inputmode="numeric">
+                    </div>
+                    <div class="field-wrap">
+                        <label class="field-label">Precio Unit.</label>
+                        <input class="field-input price" type="number" min="0" step="0.01"
+                            placeholder="$ —"
+                            value="${item.price}"
+                            oninput="updateItem(${idx},'price',this.value)"
+                            inputmode="decimal">
+                    </div>
+                </div>`;
+                    list.appendChild(div);
+                });
+            }
+
+            // Not found codes
+            const nfSection = document.getElementById('notFoundSection');
+            const nfChips = document.getElementById('notFoundChips');
+            if (notFound.length > 0) {
+                nfSection.style.display = 'block';
+                nfChips.innerHTML = notFound.map(c => `<span class="code-chip">${c}</span>`).join('');
+            } else {
+                nfSection.style.display = 'none';
+            }
+
+            document.getElementById('btnGenerate').disabled = quoteItems.length === 0;
+        }
+
+        function removeItem(idx) {
+            quoteItems.splice(idx, 1);
+            renderReview();
+        }
+
+        function updateItem(idx, field, val) {
+            quoteItems[idx][field] = field === 'qty' ? parseInt(val) || 1 : val;
+        }
+
+        // ────────────────────────────────────────────────────────────────────────────
+        // STEP 3 → GENERATE QUOTE
+        // ────────────────────────────────────────────────────────────────────────────
+        function fmt(n) {
+            return Number(n).toLocaleString('es-MX', { style: 'currency', currency: 'MXN', minimumFractionDigits: 0 });
+        }
+
+        function generateQuote() {
+            // Sync current values from DOM inputs
+            document.querySelectorAll('#productList .product-item').forEach((div, idx) => {
+                const inputs = div.querySelectorAll('input');
+                if (inputs[0]) quoteItems[idx].qty = parseInt(inputs[0].value) || 1;
+                if (inputs[1]) quoteItems[idx].price = inputs[1].value;
+            });
+
+            const date = new Date().toLocaleDateString('es-MX', {
+                weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
+            });
+            document.getElementById('quoteDate').textContent = date.charAt(0).toUpperCase() + date.slice(1);
+
+            const body = document.getElementById('quoteBody');
+            body.innerHTML = '';
+            let total = 0;
+
+            quoteItems.forEach(item => {
+                const qty = item.qty || 1;
+                const p = parseFloat(item.price) || 0;
+                const sub = qty * p;
+                total += sub;
+
+                const row = document.createElement('div');
+                row.className = 'quote-row';
+                row.innerHTML = `
+            <div>
+                <div class="quote-row-name">${item.name || item.id}</div>
+                <div class="quote-row-code">${item.id}</div>
+            </div>
+            <div class="quote-row-qty">× ${qty}</div>
+            <div class="quote-row-price">${p > 0 ? fmt(sub) : '—'}</div>`;
+                body.appendChild(row);
+            });
+
+            document.getElementById('quoteTotal').textContent = total > 0 ? fmt(total) : '—';
+            goToStep(3);
+        }
+
+        // ────────────────────────────────────────────────────────────────────────────
+        // SHARE / COPY
+        // ────────────────────────────────────────────────────────────────────────────
+        function buildTextQuote() {
+            const date = new Date().toLocaleDateString('es-MX');
+            let lines = ['🧾 *Cotización — Integral Computación*', `📅 ${date}`, ''];
+            quoteItems.forEach(item => {
+                const qty = item.qty || 1;
+                const p = parseFloat(item.price) || 0;
+                const sub = qty * p;
+                lines.push(`▸ *${item.id}*`);
+                if (item.name) lines.push(`  ${item.name}`);
+                lines.push(`  Cant: ${qty}   Precio: ${p > 0 ? fmt(p) + ' c/u' : 'Por cotizar'}`);
+                if (p > 0 && qty > 1) lines.push(`  Subtotal: ${fmt(sub)}`);
+                lines.push('');
+            });
+            const total = quoteItems.reduce((s, i) => s + (parseFloat(i.price) || 0) * (i.qty || 1), 0);
+            if (total > 0) lines.push(`💰 *Total estimado: ${fmt(total)}*`);
+            lines.push('', '_Precios sujetos a disponibilidad y cambio sin previo aviso._');
+            return lines.join('\n');
+        }
+
+        function shareWhatsApp() {
+            const text = buildTextQuote();
+            const url = `https://wa.me/?text=${encodeURIComponent(text)}`;
+            window.open(url, '_blank');
+        }
+
+        async function copyQuote() {
+            const text = buildTextQuote();
+            try {
+                await navigator.clipboard.writeText(text);
+                showToast('✓ Copiado al portapapeles');
+            } catch (_) {
+                // Fallback
+                const ta = document.createElement('textarea');
+                ta.value = text; document.body.appendChild(ta);
+                ta.select(); document.execCommand('copy'); document.body.removeChild(ta);
+                showToast('✓ Copiado');
+            }
+        }
+
+        // ────────────────────────────────────────────────────────────────────────────
+        // UTILS
+        // ────────────────────────────────────────────────────────────────────────────
+        function showToast(msg) {
+            const t = document.getElementById('toast');
+            t.textContent = msg; t.classList.add('show');
+            setTimeout(() => t.classList.remove('show'), 2500);
+        }
+
+        function resetAll() {
+            document.getElementById('pasteInput').value = '';
+            quoteItems = []; notFound = [];
+            goToStep(1);
+        }
+
+        function goBack() {
+            window.location.href = '/public/admin/home.html';
+        }
+
+        // ────────────────────────────────────────────────────────────────────────────
+        // INIT
+        // ────────────────────────────────────────────────────────────────────────────
+        (async () => {
+            const ok = await checkAuth();
+            if (ok) loadProducts();
+        })();
+    </script>
+</body>
+
+</html>
