@@ -50,21 +50,6 @@ router.post('/login', (req, res) => {
 // A partir de aquí todas las rutas requieren autenticación
 router.use(authMiddleware);
 
-// Endpoint TEMPORAL para sincronizar DB inicial
-router.post('/upload-db', express.raw({ type: '*/*', limit: '10mb' }), async (req, res) => {
-    try {
-        const dbPath = process.env.DB_PATH || path.join(__dirname, '../inventario.db');
-        fs.writeFileSync(dbPath, req.body);
-        console.log('✅ Base de datos subida y sobreescrita en:', dbPath);
-        res.json({ success: true, message: 'DB actualizada. Reiniciando servidor...' });
-        // Reiniciar servidor para que SQLite recargue los archivos
-        setTimeout(() => process.exit(0), 1000);
-    } catch (e) {
-        res.status(500).json({ error: e.message });
-    }
-});
-
-
 // Upload Imagen Producto
 router.post('/upload', upload.single('image'), async (req, res) => {
     if (!req.file) return res.status(400).send('Error');
