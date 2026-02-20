@@ -1115,18 +1115,20 @@
                     </select>
                 </div>
 
-                <!-- Cotización -->
-                <div class="section-divider">Datos de la Cotización</div>
                 <div class="row2">
                     <div class="field">
-                        <label class="lbl" for="fQuoteNum">Número de Cotización</label>
-                        <input class="inp" id="fQuoteNum" type="text" readonly
-                            style="background:#f5f5f7; color:#8e8e93; font-weight:700;">
+                        <label class="lbl" for="fQuoteDate">Fecha de Cotización</label>
+                        <input class="inp" id="fQuoteDate" type="date">
                     </div>
                     <div class="field">
                         <label class="lbl" for="fValidity">Vigencia (días)</label>
                         <input class="inp" id="fValidity" type="number" value="15" min="1">
                     </div>
+                </div>
+                <div class="field">
+                    <label class="lbl" for="fQuoteNum">Número de Cotización</label>
+                    <input class="inp" id="fQuoteNum" type="text" readonly
+                        style="background:#f5f5f7; color:#8e8e93; font-weight:700;">
                 </div>
                 <div class="field">
                     <label class="lbl" for="fNotes">Notas adicionales</label>
@@ -1431,8 +1433,12 @@
         // ────────────────────────────────────────────────────────────────────────────
         // FORMAL PDF SHEET
         // ────────────────────────────────────────────────────────────────────────────
-        function openFormalSheet() {
-            updateQuoteId();
+        async function openFormalSheet() {
+            // Predeterminar fecha de hoy
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('fQuoteDate').value = today;
+
+            await updateQuoteId();
             document.getElementById('formalOverlay').classList.add('open');
         }
         function closeFormalSheet() {
@@ -1459,15 +1465,18 @@
             const userId = vendorSelect.value;
             const vendorName = vendorSelect.options[vendorSelect.selectedIndex].text.split(' (')[0];
 
-            const quoteNum = document.getElementById('fQuoteNum').value || 'COT-001';
+            const quoteNum = document.getElementById('fQuoteNum').value || `IC${userId}-${new Date().toLocaleDateString('es-MX', { day: '2-digit', month: '2-digit', year: '2-digit' }).replace(/\//g, '')}-01`;
             const validity = document.getElementById('fValidity').value || '15';
             const notes = document.getElementById('fNotes').value || '';
             const ivaRate = parseFloat(document.getElementById('fIvaRate').value) || 16;
             const discount = parseFloat(document.getElementById('fDiscount').value) || 0;
             const payments = getCheckedPayments();
 
-            const today = new Date().toLocaleDateString('es-MX', { year: 'numeric', month: 'long', day: 'numeric' });
-            const expiry = new Date(Date.now() + parseInt(validity) * 86400000)
+            // Usar la fecha seleccionada en el input
+            const selectedDate = new Date(document.getElementById('fQuoteDate').value + 'T00:00:00');
+            const dateStr = selectedDate.toLocaleDateString('es-MX', { year: 'numeric', month: 'long', day: 'numeric' });
+
+            const expiry = new Date(selectedDate.getTime() + parseInt(validity) * 86400000)
                 .toLocaleDateString('es-MX', { year: 'numeric', month: 'long', day: 'numeric' });
 
             // Calculate totals
@@ -1533,7 +1542,7 @@
                 <h4>Detalles de la Cotización</h4>
                 <p>
                     <strong>No. ${quoteNum}</strong><br>
-                    Fecha: ${today}<br>
+                    Fecha: ${dateStr}<br>
                     Vigente hasta: ${expiry}<br>
                     Agente: ${vendorName}
                 </p>
