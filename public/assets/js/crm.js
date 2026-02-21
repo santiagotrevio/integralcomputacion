@@ -768,34 +768,7 @@ async function archiveClient(id) {
     }
 }
 
-// Nominatim Geocoding API integration (Free & No Key Required)
-async function geocodeAddress() {
-    const address = document.getElementById('cAddress').value;
-    if (!address || address.length < 5) return alert('Por favor, ingresa una dirección más completa primero.');
-
-    const btn = event.currentTarget;
-    const ogHtml = btn.innerHTML;
-    btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Buscando...';
-
-    try {
-        const query = encodeURIComponent(address + ', Jalisco, Mexico'); // Assume regional scope to improve accuracy
-        const res = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${query}&limit=1`);
-        const data = await res.json();
-        if (data && data.length > 0) {
-            document.getElementById('cLat').value = data[0].lat;
-            document.getElementById('cLng').value = data[0].lon;
-            btn.innerHTML = '<i class="fa-solid fa-check text-success"></i> ¡Ubicado!';
-            setTimeout(() => btn.innerHTML = ogHtml, 2000);
-        } else {
-            alert("No se encontró la dirección exacta. Intenta ser más específico (Ej. 'Av Vallarta 1000, Guadalajara').");
-            btn.innerHTML = ogHtml;
-        }
-    } catch (err) {
-        console.error("Geocoding failed", err);
-        alert("Falla de conexión al servicio de mapas.");
-        btn.innerHTML = ogHtml;
-    }
-}
+// Nominatim geocode now handled by shared engine below...
 
 // ---- CONFIGURACIÓN Y SUCURSALES ----
 let crmBranches = [];
@@ -920,6 +893,61 @@ async function deleteBranch(id) {
     }
 }
 
+// --- GEOCODING ENGINE ---
+async function doGeocodeSearch(rawAddress) {
+    if (!rawAddress) return null;
+    let clean = rawAddress.trim().replace(/,\s*$/, '');
+
+    let q1 = clean;
+    if (!clean.toLowerCase().includes('mexico') && !clean.toLowerCase().includes('méxico')) {
+        q1 += ', Jalisco, Mexico';
+    }
+
+    let q2 = clean;
+    let q3 = clean.split(',')[0] + ', Jalisco, Mexico';
+
+    const queries = [q1, q2, q3];
+    // Remove duplicates
+    const uniqueQueries = [...new Set(queries)];
+
+    for (let q of uniqueQueries) {
+        try {
+            // Se le agrega un email ficticio para cumplir ToS de Nominatim y evitar bloqueos
+            const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(q)}&limit=1&email=admin@integralcomputacion.com.mx`;
+            const res = await fetch(url, { headers: { 'Accept-Language': 'es-MX' } });
+
+            if (!res.ok) continue; // Si tira 403 o 429
+
+            const data = await res.json();
+            if (data && data.length > 0) return data[0];
+        } catch (e) {
+            console.log("Intento fallido de geocodificación para:", q);
+        }
+    }
+    return null;
+}
+
+// Nominatim Geocoding API integration (Free & No Key Required)
+async function geocodeAddress() {
+    const address = document.getElementById('cAddress').value;
+    if (!address || address.length < 5) return alert('Por favor, ingresa una dirección más completa primero.');
+
+    const btn = event.currentTarget;
+    const ogHtml = btn.innerHTML;
+    btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Buscando...';
+
+    const result = await doGeocodeSearch(address);
+    if (result) {
+        document.getElementById('cLat').value = result.lat;
+        document.getElementById('cLng').value = result.lon;
+        btn.innerHTML = '<i class="fa-solid fa-check text-success"></i> ¡Ubicado!';
+        setTimeout(() => btn.innerHTML = ogHtml, 2000);
+    } else {
+        alert("No se encontró la dirección exacta. Intenta limpiar el texto o usar solo la calle y número (Ej. 'Av Vallarta 1000').");
+        btn.innerHTML = ogHtml;
+    }
+}
+
 async function geocodeBranch() {
     const desc = document.getElementById('bDesc').value;
     if (!desc || desc.length < 5) return alert('Por favor, ingresa una dirección de sucursal válida.');
@@ -928,21 +956,14 @@ async function geocodeBranch() {
     const ogHtml = btn.innerHTML;
     btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Buscando...';
 
-    try {
-        const query = encodeURIComponent(desc + ', Jalisco, Mexico');
-        const res = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${query}&limit=1`);
-        const data = await res.json();
-        if (data && data.length > 0) {
-            document.getElementById('bLat').value = data[0].lat;
-            document.getElementById('bLng').value = data[0].lon;
-            btn.innerHTML = '<i class="fa-solid fa-check text-success"></i> ¡Ubicado!';
-            setTimeout(() => btn.innerHTML = ogHtml, 2000);
-        } else {
-            alert("No se encontró la dirección.");
-            btn.innerHTML = ogHtml;
-        }
-    } catch (err) {
-        alert("Falla de conexión.");
+    const result = await doGeocodeSearch(desc);
+    if (result) {
+        document.getElementById('bLat').value = result.lat;
+        document.getElementById('bLng').value = result.lon;
+        btn.innerHTML = '<i class="fa-solid fa-check text-success"></i> ¡Ubicado!';
+        setTimeout(() => btn.innerHTML = ogHtml, 2000);
+    } else {
+        alert("No se encontró la dirección exacta. Intenta limpiar el texto.");
         btn.innerHTML = ogHtml;
     }
 }
