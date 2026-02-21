@@ -2264,11 +2264,11 @@
             const chunkedPages = [];
             const itemsCopy = [...quoteItems];
 
-            const FIRST_PAGE_MAX_WITH_TOTALS = 9;
-            const FIRST_PAGE_MAX_NO_TOTALS = 14;
-            const MIDDLE_PAGE_MAX = 20;
-            const LAST_PAGE_MAX_WITH_TOTALS = 14;
-            const MIN_ITEMS_LAST_PAGE = 3;
+            const FIRST_PAGE_MAX_WITH_TOTALS = 6;
+            const FIRST_PAGE_MAX_NO_TOTALS = 11;
+            const MIDDLE_PAGE_MAX = 15;
+            const LAST_PAGE_MAX_WITH_TOTALS = 10;
+            const MIN_ITEMS_LAST_PAGE = 2;
 
             let isFirst = true;
             while (itemsCopy.length > 0) {
@@ -2510,32 +2510,55 @@
                         await navigator.share({ files: [file], title: pdfName });
                     } catch (shareErr) {
                         console.error('[Share]', shareErr);
-                        // Si Safari nos bloquea por el delay del await (NotAllowedError), metemos un tap intermedio:
-                        if (shareErr.name === 'NotAllowedError') {
+                        // Cualquier error que NO sea cancelación del usuario, metemos un tap intermedio:
+                        if (shareErr.name !== 'AbortError') {
                             const btnOverlay = document.createElement('div');
-                            btnOverlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:9999;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:20px;';
+                            btnOverlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:9999;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:15px;';
                             btnOverlay.innerHTML = `
-                                <h3 style="color:#fff;margin:0;font-size:22px;">✅ PDF Listo</h3>
-                                <p style="color:#ccc;margin:0;text-align:center;max-width:80%;">Tu archivo <b>${pdfName}.pdf</b> ha sido generado exitosamente.</p>
-                                <button style="background:#0071e3;color:#fff;padding:18px 36px;font-size:18px;border-radius:14px;border:none;font-weight:700;box-shadow:0 8px 16px rgba(0,113,227,0.3); cursor:pointer;">
-                                    <i class="fa-solid fa-share-nodes"></i> Compartir ahora
+                                <h3 style="color:#fff;margin:0;font-size:22px;">✅ PDF Generado</h3>
+                                <p style="color:#ccc;margin:0;text-align:center;max-width:80%;font-size:14px;">Elige cómo continuar con tu archivo <b>${pdfName}.pdf</b></p>
+                                <button id="sh-btn" style="width:200px;background:#0071e3;color:#fff;padding:16px 20px;font-size:16px;border-radius:14px;border:none;font-weight:700;box-shadow:0 8px 16px rgba(0,113,227,0.3); cursor:pointer;">
+                                    <i class="fa-solid fa-share-nodes"></i> Compartir
                                 </button>
-                                <button class="cancel-btn" style="background:transparent;color:#fff;border:none;font-size:14px;margin-top:20px;padding:10px;">Cancelar</button>
+                                <button id="dl-btn" style="width:200px;background:#34c759;color:#fff;padding:16px 20px;font-size:16px;border-radius:14px;border:none;font-weight:700;box-shadow:0 8px 16px rgba(52,199,89,0.3); cursor:pointer;">
+                                    <i class="fa-solid fa-file-pdf"></i> Ver / Guardar
+                                </button>
+                                <button class="cancel-btn" style="background:transparent;color:#fff;border:none;font-size:14px;padding:10px;margin-top:10px;">Cerrar</button>
                             `;
-                            btnOverlay.querySelector('button').onclick = async () => {
-                                btnOverlay.remove();
-                                try { await navigator.share({ files: [file], title: pdfName }); }
-                                catch (e) {
-                                    // Último recurso: Auto-descarga clásica
-                                    const url = URL.createObjectURL(blob);
+
+                            const doAlternative = () => {
+                                const url = URL.createObjectURL(blob);
+                                if (isMobile && !isAndroid) {
+                                    // iOS prefiere abrirlo nativamente para verlo/compartirlo que forzar descarga directa
+                                    window.location.href = url; // Es más confiable en PWA que window.open
+                                } else {
                                     const a = document.createElement('a'); a.href = url; a.download = pdfName + '.pdf';
                                     document.body.appendChild(a); a.click(); a.remove();
+                                    setTimeout(() => URL.revokeObjectURL(url), 7000);
+                                    showToast('✅ Descargando PDF...');
                                 }
                             };
+
+                            btnOverlay.querySelector('#sh-btn').onclick = async () => {
+                                // IMPORTANTE: No remover el botón de la pantalla ANTES de navigator.share.
+                                // WebKit invalida la acción del usuario si el elemento clickeado desaparece del DOM instatáneamente.
+                                try {
+                                    await navigator.share({ files: [file], title: pdfName });
+                                    btnOverlay.remove();
+                                }
+                                catch (e) {
+                                    btnOverlay.remove();
+                                    if (e.name !== 'AbortError') doAlternative();
+                                }
+                            };
+
+                            btnOverlay.querySelector('#dl-btn').onclick = () => {
+                                btnOverlay.remove();
+                                doAlternative();
+                            };
+
                             btnOverlay.querySelector('.cancel-btn').onclick = () => btnOverlay.remove();
                             document.body.appendChild(btnOverlay);
-                        } else if (shareErr.name !== 'AbortError') {
-                            showToast('❌ Error al compartir');
                         }
                     }
                 } else {

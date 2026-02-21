@@ -1,6 +1,6 @@
 // ── Integral Computación — Service Worker ─────────────────────────────────────
 // Versión: incrementar al hacer cambios para invalidar caché
-const CACHE_VERSION = 'integral-v1';
+const CACHE_VERSION = 'integral-v2';
 
 // Recursos que siempre se cachean al instalar la PWA
 const PRECACHE = [
