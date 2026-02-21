@@ -799,8 +799,9 @@
             background: rgba(0, 0, 0, 0.6);
             backdrop-filter: blur(8px);
             z-index: 300;
-            align-items: flex-end;
+            align-items: center;
             justify-content: center;
+            padding: 20px;
         }
 
         .sheet-overlay.open {
@@ -811,10 +812,11 @@
             background: white;
             width: 100%;
             max-width: 600px;
-            border-radius: 24px 24px 0 0;
-            padding: 0 0 calc(20px + var(--safe-bottom));
-            max-height: 90dvh;
+            border-radius: 20px;
+            padding: 0 0 20px;
+            max-height: max(90dvh, 90vh);
             overflow-y: auto;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
         }
 
         .sheet-handle-area {
@@ -1612,8 +1614,8 @@
                     <input class="inp" id="fNotes" type="text" placeholder="Ej. Precio incluye instalación básica">
                 </div>
 
-                <!-- IVA -->
-                <div class="section-divider">Impuestos</div>
+                <!-- Impuestos y Envíos -->
+                <div class="section-divider">Cargos Adicionales</div>
                 <div class="row2">
                     <div class="field">
                         <label class="lbl" for="fIvaRate">IVA (%)</label>
@@ -1623,6 +1625,11 @@
                         <label class="lbl" for="fDiscount">Descuento (%)</label>
                         <input class="inp" id="fDiscount" type="number" value="0" min="0" max="100">
                     </div>
+                </div>
+                <div class="field">
+                    <label class="lbl" for="fShipping">Costo de Envío ($) <span
+                            style="font-weight:400;color:var(--subtext);">(opcional)</span></label>
+                    <input class="inp" id="fShipping" type="number" placeholder="Ej. 150.00" min="0" step="0.01">
                 </div>
 
                 <!-- Formas de pago -->
@@ -2251,6 +2258,7 @@
             const notes = document.getElementById('fNotes').value || '';
             const ivaRate = parseFloat(document.getElementById('fIvaRate').value) || 16;
             const discount = parseFloat(document.getElementById('fDiscount').value) || 0;
+            const shipping = parseFloat(document.getElementById('fShipping').value) || 0;
             const payments = getCheckedPayments();
 
             // Usar la fecha seleccionada en el input
@@ -2265,7 +2273,7 @@
             const disc = subtotal * discount / 100;
             const base = subtotal - disc;
             const iva = base * ivaRate / 100;
-            const total = base + iva;
+            const total = base + iva + shipping;
 
             // Guardar en DB antes de imprimir
             try {
@@ -2420,6 +2428,7 @@
                     <div class="pv-totals-row"><span>Subtotal</span><span>${fmt(subtotal)}</span></div>
                     ${discount > 0 ? `<div class="pv-totals-row"><span>Descuento (${discount}%)</span><span>-${fmt(disc)}</span></div>` : ''}
                     <div class="pv-totals-row"><span>IVA (${ivaRate}%)</span><span>${fmt(iva)}</span></div>
+                    ${shipping > 0 ? `<div class="pv-totals-row"><span>Envío</span><span>${fmt(shipping)}</span></div>` : ''}
                     <div class="pv-totals-row total"><span>TOTAL</span><span>${fmt(total)}</span></div>
                 </div>
             </div>
