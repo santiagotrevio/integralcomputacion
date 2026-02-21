@@ -441,6 +441,23 @@ router.put('/clients/:id', authMiddleware, (req, res) => {
         });
 });
 
+// Agregar cliente manualmente
+router.post('/clients', authMiddleware, (req, res) => {
+    const { name, company, email, phone } = req.body;
+    if (!name) return res.status(400).json({ error: 'Nombre requerido' });
+
+    db.run(`INSERT INTO clients (name, company, email, phone) VALUES (?, ?, ?, ?)
+            ON CONFLICT(name) DO UPDATE SET 
+            company = excluded.company,
+            email = excluded.email, 
+            phone = excluded.phone, 
+            last_quoted_at = CURRENT_TIMESTAMP`,
+        [name, company || '', email || '', phone || ''], function (err) {
+            if (err) return res.status(500).json({ error: err.message });
+            res.json({ success: true, id: this.lastID });
+        });
+});
+
 // Eliminar cliente (y sus cotizaciones si se desea)
 router.delete('/clients/:id', authMiddleware, (req, res) => {
     db.run('DELETE FROM clients WHERE id=?', [req.params.id], function (err) {
