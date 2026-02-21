@@ -11,9 +11,9 @@ router.get('/brands', (req, res) => {
     });
 });
 
-// Obtener todos los productos
+// Obtener todos los productos activos
 router.get('/products', (req, res) => {
-    db.all("SELECT * FROM products ORDER BY created_at DESC", [], (err, rows) => {
+    db.all("SELECT * FROM products WHERE archived = 0 OR archived IS NULL ORDER BY created_at DESC", [], (err, rows) => {
         if (err) return res.status(500).json({ error: err.message });
         res.json({ data: rows });
     });

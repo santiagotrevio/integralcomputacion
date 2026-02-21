@@ -177,6 +177,24 @@ router.post('/conflicts/:id/resolve', (req, res) => {
 });
 
 // Products CRUD
+router.get('/products/all', (req, res) => {
+    db.all("SELECT * FROM products ORDER BY created_at DESC", [], (err, rows) => {
+        if (err) return res.status(500).json({ error: err.message });
+        res.json({ data: rows });
+    });
+});
+
+router.patch('/products/:id/archive', (req, res) => {
+    const { archived } = req.body;
+    const isArchived = archived === true || archived === 1 ? 1 : 0;
+
+    // Archiving/Unarchiving also marks as pending publish
+    db.run("UPDATE products SET archived = ?, published = 0 WHERE id = ?", [isArchived, req.params.id], function (err) {
+        if (err) return res.status(400).json({ error: err.message });
+        res.json({ message: "Archived status updated", archived: isArchived });
+    });
+});
+
 router.post('/products', (req, res) => {
     const { id, name, category, brand, price, stock, compatibility, image, description } = req.body;
     if (!id || id.trim() === "") return res.status(400).json({ error: "ID/Modelo es requerido" });

@@ -17,7 +17,7 @@ const db = new sqlite3.Database(dbPath, sqlite3.OPEN_READONLY, (err) => {
 db.serialize(() => {
     console.log('Fetching products and brands...');
 
-    db.all(`SELECT * FROM products ORDER BY name ASC`, [], (err, prodRows) => {
+    db.all(`SELECT * FROM products WHERE archived = 0 OR archived IS NULL ORDER BY name ASC`, [], (err, prodRows) => {
         if (err) throw err;
 
         db.all(`SELECT * FROM brands`, [], (err, brandRows) => {

@@ -214,7 +214,7 @@ async function loadProducts() {
         };
 
         const [pData, bData] = await Promise.all([
-            fetchSafe('/api/products'),
+            fetchSafe('/api/products/all'),
             fetchSafe('/api/brands')
         ]);
 
@@ -308,7 +308,10 @@ function filterAndSort(keepPage = false) {
 
         const matchesPending = currentSort === 'pending' ? p.published === 0 : true;
 
-        return matchesSearch && matchesBrand && matchesPending;
+        // Hide archived products unless explicitly viewing archived
+        const matchesArchived = currentSort === 'archived' ? p.archived === 1 : (p.archived !== 1);
+
+        return matchesSearch && matchesBrand && matchesPending && matchesArchived;
     });
 
     if (currentSort === 'alpha') list.sort((a, b) => (a.brand || "").localeCompare(b.brand || "") || a.name.localeCompare(b.name));
@@ -587,6 +590,9 @@ function renderTable(list) {
                             <button class="secondary" style="padding:6px 12px; font-size: 14px; border-radius: 6px;" onclick='editProduct(${JSON.stringify(p)})'>
                                 <i class="fa-solid fa-pen-to-square"></i>
                             </button>
+                            <button class="secondary" style="padding:6px 12px; font-size: 14px; border-radius: 6px; color: #ff9f0a; border-color: rgba(255, 159, 10, 0.3);" onclick='archiveProduct(${JSON.stringify(p.id)}, ${p.archived === 1 ? 0 : 1})' title="${p.archived === 1 ? 'Desarchivar' : 'Archivar'}">
+                                <i class="fa-solid ${p.archived === 1 ? 'fa-box-open' : 'fa-box-archive'}"></i>
+                            </button>
                             <button class="danger" style="padding:6px 14px; font-size: 14px; border-radius: 6px; background: #ea4335; color: white; border: none;" onclick='deleteProduct(${JSON.stringify(p.id)})'>
                                 <i class="fa-solid fa-trash-can"></i>
                             </button>
@@ -645,6 +651,9 @@ function renderTable(list) {
                         <div class="card-actions">
                             <button class="secondary" style="flex:1; padding:6px; justify-content:center;" onclick='editProduct(${JSON.stringify(p)})'>
                                 <i class="fa-solid fa-pen"></i>
+                            </button>
+                            <button class="secondary" style="flex:1; padding:6px; justify-content:center; color: #ff9f0a; border-color: rgba(255, 159, 10, 0.3);" onclick='archiveProduct(${JSON.stringify(p.id)}, ${p.archived === 1 ? 0 : 1})' title="${p.archived === 1 ? 'Desarchivar' : 'Archivar'}">
+                                <i class="fa-solid ${p.archived === 1 ? 'fa-box-open' : 'fa-box-archive'}"></i>
                             </button>
                             <button class="danger" style="flex:1; padding:6px; background: #ea4335; color: white; border: none; justify-content:center;" onclick='deleteProduct(${JSON.stringify(p.id)})'>
                                 <i class="fa-solid fa-trash"></i>
@@ -1129,6 +1138,27 @@ async function importWizardImage() {
         }
     } catch (err) {
         statusText.innerText = `❌ Error: ${err.message}`;
+    }
+}
+
+async function archiveProduct(id, archivedState) {
+    const actionName = archivedState === 1 ? 'archivar' : 'desarchivar';
+    if (!confirm(`¿Estás seguro de que deseas ${actionName} el producto "${id}"?`)) return;
+    try {
+        const res = await apiFetch(`/api/products/${encodeURIComponent(id)}/archive`, {
+            method: 'PATCH',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ archived: archivedState })
+        });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.error || 'Error al archivar');
+
+        // Log action
+        const emoji = archivedState === 1 ? '📦' : '📤';
+        await logActivity(emoji, `Producto ${actionName}do: ${id}`);
+        loadProducts();
+    } catch (err) {
+        alert("Error al " + actionName + ": " + err.message);
     }
 }
 
