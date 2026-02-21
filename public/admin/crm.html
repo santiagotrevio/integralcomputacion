@@ -591,18 +591,22 @@
 
                         <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
                             <!-- Rendimiento Anual Línea -->
-                            <div class="card p-6">
+                            <div class="card p-6 flex flex-col">
                                 <h4 class="font-bold text-primary mb-4 flex items-center"><i
                                         class="fa-solid fa-chart-area text-accent mr-2"></i> Rendimiento Mensual</h4>
-                                <canvas id="chartMonthlySales" height="250"></canvas>
+                                <div class="relative w-full flex-1" style="min-height: 250px;">
+                                    <canvas id="chartMonthlySales"></canvas>
+                                </div>
                             </div>
                             <!-- Pareto Chart -->
-                            <div class="card p-6">
+                            <div class="card p-6 flex flex-col">
                                 <h4 class="font-bold text-primary mb-4 flex items-center"><i
                                         class="fa-solid fa-chart-bar text-accent mr-2"></i> Ley de Pareto (80/20)</h4>
                                 <p class="text-xs text-slate-400 mb-2">Acumulado de ingresos por principales clientes.
                                 </p>
-                                <canvas id="chartPareto" height="250"></canvas>
+                                <div class="relative w-full flex-1" style="min-height: 250px;">
+                                    <canvas id="chartPareto"></canvas>
+                                </div>
                             </div>
                         </div>
                     </div>
