@@ -299,7 +299,14 @@ router.post('/import-image-url', async (req, res) => {
     const outputPath = path.join(__dirname, '../assets/images/products/toner', fileName);
 
     try {
-        const response = await fetch(imageUrl);
+        const response = await fetch(imageUrl, {
+            headers: {
+                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+                'Accept': 'image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8',
+                'Accept-Language': 'es-MX,es;q=0.9,en-US;q=0.8,en;q=0.7',
+                'Referer': new URL(imageUrl).origin
+            }
+        });
         if (!response.ok) throw new Error(`Fallo al descargar: ${response.status}`);
         const arrayBuffer = await response.arrayBuffer();
         const buffer = Buffer.from(arrayBuffer);
@@ -316,7 +323,7 @@ router.post('/import-image-url', async (req, res) => {
         });
     } catch (err) {
         console.error('[WIZARD] Catch Error:', err);
-        res.status(500).json({ error: 'Fallo al procesar la imagen: ' + err.message });
+        res.status(400).json({ error: 'Fallo al procesar la imagen: ' + err.message });
     }
 });
 
@@ -328,7 +335,14 @@ router.post('/import-brand-logo', async (req, res) => {
     const outputPath = path.join(__dirname, '../assets/images/brands', fileName);
 
     try {
-        const response = await fetch(imageUrl);
+        const response = await fetch(imageUrl, {
+            headers: {
+                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+                'Accept': 'image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8',
+                'Accept-Language': 'es-MX,es;q=0.9,en-US;q=0.8,en;q=0.7',
+                'Referer': new URL(imageUrl).origin
+            }
+        });
         if (!response.ok) throw new Error(`Fallo al descargar: ${response.status}`);
         const arrayBuffer = await response.arrayBuffer();
         const buffer = Buffer.from(arrayBuffer);
@@ -341,7 +355,7 @@ router.post('/import-brand-logo', async (req, res) => {
         res.json({ success: true, url: `/assets/${fileName}` });
     } catch (err) {
         console.error('Brand Logo Import Error:', err);
-        res.status(500).json({ error: 'Fallo al descargar o procesar el logo.' });
+        res.status(400).json({ error: 'Fallo al descargar o procesar el logo: ' + err.message });
     }
 });
 
