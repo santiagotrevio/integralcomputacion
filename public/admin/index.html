@@ -17,6 +17,12 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.31/jspdf.plugin.autotable.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
+
+    <!-- Librerías CRM -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.0/Sortable.min.js"></script>
+    <link rel="stylesheet" href="/assets/css/crm.css">
+    <script src="/assets/js/crm.js" defer></script>
 </head>
 
 <body>
@@ -110,6 +116,10 @@
             </div>
             <div id="navSnapshots" class="nav-tab" onclick="switchView('snapshots')">
                 <i class="fa-solid fa-clock-rotate-left"></i> HISTORIAL DE PUBLICACIONES
+            </div>
+            <div id="navCRM" class="nav-tab" onclick="switchView('crm'); initCRM();"
+                style="background: rgba(0, 113, 227, 0.05); color: #0071e3; font-weight: 700; border-radius: 12px; margin-bottom: 8px;">
+                <i class="fa-solid fa-chart-line"></i> CRM & MARKETING DASHBOARD
             </div>
             <div id="navIntelligence" class="nav-tab" onclick="switchView('intelligence')">
                 <i class="fa-solid fa-magnifying-glass-chart"></i> INTELIGENCIA DE MERCADO
@@ -413,6 +423,62 @@
                 </div>
             </div>
         </div>
+
+        <!-- VIEW: CRM DASHBOARD -->
+        <div id="viewCRM" class="view-container" style="display:none;">
+            <div class="crm-header">
+                <div class="crm-title-group">
+                    <div class="crm-icon"><i class="fa-solid fa-chart-line"></i></div>
+                    <div>
+                        <h2>CRM & Ventas</h2>
+                        <p>Convierte prospectos locales en clientes fieles.</p>
+                    </div>
+                </div>
+                <div class="crm-actions">
+                    <button class="primary" onclick="openNewDealModal()"><i class="fa-solid fa-plus"></i> Nuevo
+                        Trato</button>
+                    <button class="secondary" onclick="initCRM()"><i class="fa-solid fa-rotate"></i> Actualizar</button>
+                </div>
+            </div>
+
+            <!-- Dashboard Metrics -->
+            <div class="crm-metrics-grid">
+                <div class="crm-metric-card blur-card">
+                    <div class="cm-icon" style="color:#34c759;"><i class="fa-solid fa-sack-dollar"></i></div>
+                    <div class="cm-info">
+                        <h3>Ventas Cerradas</h3>
+                        <div class="cm-val" id="crmWonVal">$0.00</div>
+                    </div>
+                </div>
+                <div class="crm-metric-card blur-card">
+                    <div class="cm-icon" style="color:var(--apple-blue);"><i class="fa-solid fa-handshake"></i></div>
+                    <div class="cm-info">
+                        <h3>Pipeline Activo</h3>
+                        <div class="cm-val" id="crmActiveDeals">0 Tratos</div>
+                    </div>
+                </div>
+                <div class="crm-metric-card blur-card">
+                    <div class="cm-icon" style="color:#ff9f0a;"><i class="fa-solid fa-bolt"></i></div>
+                    <div class="cm-info">
+                        <h3>Turnover de Estatus</h3>
+                        <div class="cm-val" id="crmConvRate">0%</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Visualization Area -->
+            <div class="crm-visual-grid">
+                <!-- Kanban Board -->
+                <div class="crm-kanban blur-card" style="overflow-x: auto;">
+                    <h3 style="margin-top:0; font-size:18px;"><i class="fa-solid fa-layer-group"></i> Flujo de Negocio
+                        Visual</h3>
+                    <div class="kanban-board" id="kanbanBoard">
+                        <!-- Creado por JS -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 
     <!-- Conflict Editor Modal -->

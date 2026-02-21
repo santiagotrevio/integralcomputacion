@@ -60,9 +60,11 @@ app.use(bodyParser.json({ limit: '10mb' })); // 50mb era excesivo
 // ── Importar Routers ────────────────────────────────────────────────────────────
 const publicRoutes = require('./routes/public');
 const adminRoutes = require('./routes/admin');
+const crmRoutes = require('./routes/crm');
 
 app.use('/api', publicRoutes);
 app.use('/api', adminRoutes);
+app.use('/api/crm', crmRoutes);
 
 // ── Archivos estáticos ──────────────────────────────────────────────────────────
 app.use(express.static('public'));
