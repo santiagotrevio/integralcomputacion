@@ -3,189 +3,81 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Dashboard Comercial | Integral Computación</title>
-    <!-- FontAwesome & Fonts -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRM Estratégico | Integral Computación</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <!-- Librerías CRM -->
+    <!-- Librerías Open Source Gratuitas -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.0/Sortable.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
-    <link rel="stylesheet" href="/assets/css/admin.css">
-    <link rel="stylesheet" href="/assets/css/crm.css">
-
+    <script>
+        tailwind.config = {
+            theme: {
+                fontFamily: { sans: ['Inter', 'sans-serif'] },
+                extend: {
+                    colors: {
+                        primary: '#0F172A',
+                        secondary: '#64748B',
+                        accent: '#0ea5e9',
+                        success: '#10B981',
+                        warning: '#F59E0B',
+                        danger: '#EF4444',
+                        background: '#F8FAFC',
+                        surface: '#FFFFFF',
+                        border: '#E2E8F0'
+                    }
+                }
+            }
+        }
+    </script>
     <style>
-        :root {
-            --bg: #f5f5f7;
-            --text: #1d1d1f;
-            --subtext: #8e8e93;
-            --accent: #0071e3;
-            --border: #e5e5ea;
-            --card-bg: #fff;
-        }
-
-        body.dark-mode {
-            --bg: #000;
-            --text: #f5f5f7;
-            --subtext: #98989d;
-            --border: #333336;
-            --card-bg: #1c1c1e;
-        }
-
-        *,
-        *::before,
-        *::after {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
         body {
-            font-family: 'Inter', sans-serif;
-            background: var(--bg);
-            color: var(--text);
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
+            background-color: #F8FAFC;
+            color: #0F172A;
         }
 
-        /* TOP BAR */
-        .topbar {
-            height: 60px;
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border-bottom: 1px solid var(--border);
-            display: flex;
-            align-items: center;
-            padding: 0 20px;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+        .card {
+            background: #FFFFFF;
+            border: 1px solid #E2E8F0;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.03);
         }
 
-        body.dark-mode .topbar {
-            background: rgba(28, 28, 30, 0.85);
+        .card-hover:hover {
+            border-color: #cbd5e1;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
         }
 
-        .topbar-back {
-            background: transparent;
-            border: none;
-            color: var(--accent);
-            font-size: 15px;
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(16px);
+        }
+
+        .nav-item {
+            transition: all 0.15s ease;
+        }
+
+        .nav-item:hover,
+        .nav-item.active {
+            background: #f1f5f9;
+            color: #0F172A;
             font-weight: 600;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            text-decoration: none;
         }
 
-        .topbar h1 {
-            font-size: 17px;
-            font-weight: 700;
-            margin-left: auto;
-            margin-right: auto;
-            transform: translateX(-20px);
+        .nav-item.active i {
+            color: #0ea5e9;
         }
 
-        .container {
-            max-width: 1400px;
-            margin: 20px auto 40px;
-            padding: 0 40px;
-            width: 100%;
-        }
-
-        .primary {
-            background-color: var(--accent);
-            color: white;
-            padding: 10px 16px;
-            border: none;
-            border-radius: 12px;
-            font-weight: 600;
-            font-size: 14px;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .primary:hover {
-            background-color: #005bb5;
-        }
-
-        .secondary {
-            background-color: transparent;
-            color: var(--text);
-            border: 1px solid var(--border);
-            padding: 10px 16px;
-            border-radius: 12px;
-            font-weight: 600;
-            font-size: 14px;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .secondary:hover {
-            background-color: rgba(0, 0, 0, 0.05);
-        }
-
-        body.dark-mode .secondary:hover {
-            background-color: rgba(255, 255, 255, 0.1);
-        }
-
-        /* SEGMENTED CONTROL / TABS */
-        .crm-tabs-nav {
-            display: flex;
-            background: rgba(0, 0, 0, 0.04);
-            padding: 6px;
-            border-radius: 14px;
-            margin-bottom: 24px;
-            gap: 4px;
-        }
-
-        body.dark-mode .crm-tabs-nav {
-            background: rgba(255, 255, 255, 0.05);
-        }
-
-        .crm-tab-btn {
-            flex: 1;
-            padding: 10px 16px;
-            border: none;
-            background: transparent;
-            border-radius: 10px;
-            font-weight: 600;
-            font-size: 14px;
-            color: var(--subtext);
-            cursor: pointer;
-            transition: all 0.2s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-        }
-
-        .crm-tab-btn:hover {
-            color: var(--text);
-            background: rgba(0, 0, 0, 0.02);
-        }
-
-        body.dark-mode .crm-tab-btn:hover {
-            background: rgba(255, 255, 255, 0.02);
-        }
-
-        .crm-tab-btn.active {
-            background: var(--card-bg);
-            color: var(--text);
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-        }
-
-        .crm-tab-pane {
+        .tab-pane {
             display: none;
         }
 
-        .crm-tab-pane.active {
+        .tab-pane.active {
             display: block;
             animation: fadeIn 0.3s ease;
         }
@@ -193,7 +85,7 @@
         @keyframes fadeIn {
             from {
                 opacity: 0;
-                transform: translateY(4px);
+                transform: translateY(5px);
             }
 
             to {
@@ -201,214 +93,367 @@
                 transform: translateY(0);
             }
         }
+
+        /* Kanban Customization */
+        .kanban-col {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            min-height: 400px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .k-card {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 10px;
+            cursor: grab;
+            transition: transform 0.1s;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+            border-left-width: 4px;
+        }
+
+        .k-card:active {
+            cursor: grabbing;
+            transform: scale(0.98);
+        }
+
+        .k-ghost {
+            opacity: 0.4;
+            background: #e2e8f0;
+        }
+
+        /* Map */
+        #map {
+            height: 500px;
+            border-radius: 16px;
+            z-index: 10;
+            border: 1px solid #e2e8f0;
+        }
+
+        /* Scrollbars */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 10px;
+        }
     </style>
 </head>
 
-<body>
+<body class="flex h-screen overflow-hidden antialiased text-sm">
 
-    <header class="topbar">
-        <a href="home.html" class="topbar-back"><i class="fa-solid fa-chevron-left"></i> Panel Principal</a>
-        <h1>Dashboard Comercial Estratégico</h1>
-    </header>
-
-    <div class="container">
-        <!-- HEADER & ACTIONS -->
-        <div class="crm-header">
-            <div class="crm-title-group">
-                <div class="crm-icon" style="background: linear-gradient(135deg, #ff9f0a, #ff3b30);"><i
-                        class="fa-solid fa-briefcase"></i></div>
-                <div>
-                    <h2>Ventas y CRM Territorial</h2>
-                    <p>Inteligencia operativa en tiempo real para negocios B2B.</p>
-                </div>
-            </div>
-            <div class="crm-actions">
-                <button class="primary" onclick="openNewDealModal()"><i class="fa-solid fa-plus"></i> Nuevo
-                    Prospecto</button>
-            </div>
-        </div>
-
-        <!-- 1. VISTA EJECUTIVA (TOP) -->
-        <div class="crm-metrics-grid" style="grid-template-columns: repeat(5, 1fr);">
-            <div class="crm-metric-card blur-card" style="padding: 16px;">
-                <div class="cm-info" style="width: 100%;">
-                    <h3>Ventas del Mes</h3>
-                    <div class="cm-val" id="metricVentasMes" style="font-size: 24px;">$0</div>
-                    <div style="font-size: 11px; color:#34c759; margin-top:6px; font-weight:700;"><i
-                            class="fa-solid fa-arrow-up"></i> Rentabilidad Activa</div>
-                </div>
-            </div>
-            <div class="crm-metric-card blur-card" style="padding: 16px;">
-                <div class="cm-info" style="width: 100%;">
-                    <h3>Forecast a 30 Días</h3>
-                    <div class="cm-val" id="metricForecast" style="font-size: 24px; color:#ff9f0a;">$0</div>
-                    <div style="font-size: 11px; opacity:0.6; margin-top:6px;">Basado en probabilidad</div>
-                </div>
-            </div>
-            <div class="crm-metric-card blur-card" style="padding: 16px;">
-                <div class="cm-info" style="width: 100%;">
-                    <h3>Valor del Pipeline</h3>
-                    <div class="cm-val" id="metricPipeline" style="font-size: 24px; color:var(--apple-blue);">$0</div>
-                    <div style="font-size: 11px; opacity:0.6; margin-top:6px;">Todos los prospectos activos</div>
-                </div>
-            </div>
-            <div class="crm-metric-card blur-card" style="padding: 16px;">
-                <div class="cm-info" style="width: 100%;">
-                    <h3>Conversión Media</h3>
-                    <div class="cm-val" id="metricConv" style="font-size: 24px;">0%</div>
-                    <div style="font-size: 11px; opacity:0.6; margin-top:6px;">Efectividad de cierre</div>
-                </div>
-            </div>
-            <div class="crm-metric-card blur-card" style="padding: 16px;">
-                <div class="cm-info" style="width: 100%;">
-                    <h3>Ticket Promedio</h3>
-                    <div class="cm-val" id="metricTicket" style="font-size: 24px;">$0</div>
-                    <div style="font-size: 11px; opacity:0.6; margin-top:6px;">Ventas ganadas / cierres</div>
-                </div>
-            </div>
-        </div>
-
-        <!-- TABS NAV -->
-        <div class="crm-tabs-nav">
-            <button class="crm-tab-btn active" onclick="switchCRMTab('kanban')"><i class="fa-solid fa-layer-group"></i>
-                Pipeline Kanban</button>
-            <button class="crm-tab-btn" onclick="switchCRMTab('tasks')"><i class="fa-solid fa-list-check"></i> Panel de
-                Seguimiento</button>
-            <button class="crm-tab-btn" onclick="switchCRMTab('map')"><i class="fa-solid fa-map-location-dot"></i> Vista
-                Geográfica</button>
-            <button class="crm-tab-btn" onclick="switchCRMTab('intel')"><i class="fa-solid fa-brain"></i> Inteligencia
-                Comercial</button>
-        </div>
-
-        <!-- TAB: KANBAN -->
-        <div id="tab-kanban" class="crm-tab-pane active">
-            <div class="crm-kanban blur-card" style="overflow-x: auto;">
-                <div class="kanban-board" id="kanbanBoard">
-                    <!-- JS Fills Board -->
-                    <div style="text-align: center; opacity: 0.5; padding: 40px; width: 100%;">Cargando tablero...</div>
-                </div>
-            </div>
-        </div>
-
-        <!-- TAB: TASKS -->
-        <div id="tab-tasks" class="crm-tab-pane">
-            <div class="crm-visual-grid" style="grid-template-columns: 1fr 1fr;">
-                <div class="blur-card">
-                    <h3 style="margin-top:0; font-size:18px;"><i class="fa-solid fa-calendar-day"></i> Tareas de Hoy &
-                        Atrasadas</h3>
-                    <div id="tasksList" style="margin-top:20px; display:flex; flex-direction:column; gap:12px;">
-                        <!-- JS Lists -->
-                        <div style="opacity: 0.5; text-align:center;">Al día. No hay pendientes atrasados.</div>
-                    </div>
-                </div>
-                <div class="blur-card">
-                    <h3 style="margin-top:0; font-size:18px;"><i class="fa-solid fa-clock"></i> Próximos Seguimientos
-                        Programados</h3>
-                    <div id="upcomingTasksList" style="margin-top:20px; display:flex; flex-direction:column; gap:12px;">
-                        <!-- JS Lists -->
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- TAB: MAPA -->
-        <div id="tab-map" class="crm-tab-pane">
-            <div class="blur-card"
-                style="padding: 0; overflow: hidden; height: 500px; display:flex; flex-direction: column;">
+    <!-- SIDEBAR -->
+    <aside class="w-64 border-r border-border bg-white flex flex-col justify-between hidden md:flex shrink-0 z-20">
+        <div>
+            <div class="h-16 flex items-center px-6 border-b border-border">
                 <div
-                    style="padding:20px 24px; border-bottom: 1px solid rgba(0,0,0,0.05); display:flex; justify-content:space-between; align-items:center;">
-                    <h3 style="margin:0; font-size:18px;"><i class="fa-solid fa-map-pin"></i> Clusters Territoriales
-                        (Guadalajara ZMG)</h3>
-                    <div>
-                        <select id="mapFilter" class="secondary" onchange="renderMapPins()"
-                            style="padding: 6px 12px; font-size:13px;">
-                            <option value="all">Todas las Etapas</option>
-                            <option value="prospect">Prospectos Nuevos</option>
-                            <option value="quote">Cotizados</option>
-                            <option value="negotiation">En Negociación</option>
-                        </select>
-                    </div>
-                </div>
-                <div id="mapContainer"
-                    style="flex:1; background: #e0e0e0; display:flex; align-items:center; justify-content:center; color:#555; position:relative;">
-                    <div style="text-align:center;">
-                        <i class="fa-solid fa-map" style="font-size: 40px; margin-bottom: 15px; opacity:0.5;"></i>
-                        <p>Simulador Estático de Zonas para Beta.<br>En producción aquí se clava el iframe de
-                            Mapbox/GoogleMaps API.</p>
-                    </div>
-                    <!-- ZONES MOCKUPS -->
-                    <div id="mapZonesArea" style="position:absolute; top:0; left:0; right:0; bottom:0;"></div>
+                    class="w-8 h-8 rounded-lg bg-primary text-white flex items-center justify-center font-bold mr-3 shadow-md">
+                    IC</div>
+                <div class="flex-1">
+                    <h2 class="font-bold text-primary truncate leading-tight">Integral Comp.</h2>
+                    <p class="text-[10px] text-secondary uppercase font-semibold">CRM Comercial</p>
                 </div>
             </div>
-        </div>
 
-        <!-- TAB: INTELIGENCIA -->
-        <div id="tab-intel" class="crm-tab-pane">
-            <div class="crm-visual-grid" style="grid-template-columns: 1fr 1fr;">
-                <div class="blur-card">
-                    <h3 style="margin-top:0; font-size:18px;"><i class="fa-solid fa-filter"></i> Origen de Conversión
-                    </h3>
-                    <p style="font-size:13px; opacity:0.6;">¿De dónde están saliendo tus prospectos rentables?</p>
-                    <div style="margin-top:24px; height: 250px;">
-                        <canvas id="chartOrigen"></canvas>
+            <nav class="p-4 space-y-1">
+                <p class="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-2 px-3">Estratégico</p>
+                <button onclick="switchTab('comando')"
+                    class="nav-item tab-btn active w-full flex items-center px-3 py-2.5 rounded-xl text-secondary text-left"
+                    data-target="comando">
+                    <i class="fa-solid fa-chart-pie w-6"></i> Centro de Comando
+                </button>
+                <button onclick="switchTab('kanban')"
+                    class="nav-item tab-btn w-full flex items-center px-3 py-2.5 rounded-xl text-secondary text-left"
+                    data-target="kanban">
+                    <i class="fa-solid fa-layer-group w-6"></i> Pipeline Kanban
+                </button>
+                <button onclick="switchTab('simulador')"
+                    class="nav-item tab-btn w-full flex items-center px-3 py-2.5 rounded-xl text-secondary text-left"
+                    data-target="simulador">
+                    <i class="fa-solid fa-calculator w-6"></i> Simulador de Cierre
+                </button>
+
+                <p class="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-2 mt-6 px-3">Operativo</p>
+                <button onclick="switchTab('mapa')"
+                    class="nav-item tab-btn w-full flex items-center px-3 py-2.5 rounded-xl text-secondary justify-between text-left"
+                    data-target="mapa">
+                    <div class="flex items-center"><i class="fa-solid fa-map-location-dot w-6"></i> Mapa Territorial
+                    </div>
+                </button>
+
+                <p class="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-2 mt-6 px-3">Retorno & Admin
+                </p>
+                <a href="/public/admin/home.html"
+                    class="nav-item flex items-center px-3 py-2.5 rounded-xl text-slate-500 hover:text-danger hover:bg-red-50 transition">
+                    <i class="fa-solid fa-arrow-left w-6"></i> Volver al Panel
+                </a>
+            </nav>
+        </div>
+    </aside>
+
+    <!-- MAIN APP -->
+    <main class="flex-1 flex flex-col h-full bg-slate-50 relative overflow-hidden">
+
+        <!-- HEADER -->
+        <header
+            class="h-16 glass-panel border-b border-border flex items-center justify-between px-8 z-10 sticky top-0 shrink-0">
+            <h1 class="text-xl font-bold tracking-tight text-primary" id="headerTitle">Centro de Comando</h1>
+            <div class="flex items-center gap-4">
+                <button onclick="openNewDealModal()"
+                    class="bg-primary hover:bg-slate-800 text-white font-semibold py-2 px-5 rounded-full shadow-md transition-transform active:scale-95 flex items-center gap-2">
+                    <i class="fa-solid fa-plus"></i> Nuevo Trato
+                </button>
+                <button onclick="initCRM()" class="text-slate-400 hover:text-primary transition" title="Refrescar">
+                    <i class="fa-solid fa-rotate-right"></i>
+                </button>
+            </div>
+        </header>
+
+        <!-- CONTENIDO DESPLAZABLE -->
+        <div class="flex-1 overflow-y-auto p-6 md:p-8">
+            <div class="max-w-7xl mx-auto">
+
+                <!-- TAB 1: CENTRO DE COMANDO (HUD + RADAR) -->
+                <div id="tab-comando" class="tab-pane active space-y-6">
+
+                    <!-- 1. MÉTRICAS EJECUTIVAS + HEALTH SCORE -->
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                        <div class="card p-5">
+                            <p class="text-xs text-secondary font-medium mb-1">Ventas del Mes</p>
+                            <h3 class="text-2xl font-bold text-primary mb-1" id="m_ventas">$0</h3>
+                            <div
+                                class="text-[10px] font-semibold text-success bg-green-50 px-2 py-0.5 rounded inline-block">
+                                <i class="fa-solid fa-arrow-up"></i> Ingreso Real</div>
+                        </div>
+                        <div class="card p-5 ring-1 ring-accent"
+                            style="background: linear-gradient(180deg, #F0F9FF 0%, #FFFFFF 100%);">
+                            <p class="text-xs text-accent font-bold mb-1">Forecast a 30 Días <i
+                                    class="fa-solid fa-wand-magic-sparkles opacity-50 ml-1"></i></p>
+                            <h3 class="text-2xl font-bold text-primary mb-1" id="m_forecast">$0</h3>
+                            <div class="text-[10px] text-slate-500">Basado en pipeline x probabilildad</div>
+                        </div>
+                        <div class="card p-5">
+                            <p class="text-xs text-secondary font-medium mb-1">Valor Total Pipeline</p>
+                            <h3 class="text-2xl font-bold text-primary mb-1" id="m_pipeline">$0</h3>
+                            <div class="text-[10px] text-slate-500"><span id="m_activos">0</span> tratos en juego</div>
+                        </div>
+                        <!-- HEALTH SCORE DESGLOSADO -->
+                        <div class="card p-5 border-l-4 border-success relative group cursor-help">
+                            <p class="text-xs text-secondary font-medium mb-1 flex justify-between">Health Score <i
+                                    class="fa-solid fa-circle-info text-slate-300"></i></p>
+                            <h3 class="text-2xl font-bold text-success mb-1" id="m_health">100/100</h3>
+                            <div class="w-full bg-slate-100 h-1.5 rounded-full mt-2">
+                                <div class="bg-success h-full rounded-full" style="width:100%" id="m_health_bar"></div>
+                            </div>
+                            <!-- Tooltip Desglose -->
+                            <div
+                                class="absolute right-0 top-full mt-2 w-64 bg-slate-800 text-white p-4 rounded-xl shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50">
+                                <h4 class="font-bold text-xs mb-2 border-b border-slate-600 pb-1">Desglose de Salud</h4>
+                                <ul class="text-[10px] space-y-2">
+                                    <li class="flex justify-between"><span>Tratos con seguimiento al día:</span> <span
+                                            class="text-green-400 font-bold" id="h_al_dia">100%</span></li>
+                                    <li class="flex justify-between"><span>Tratos estancados (+10d):</span> <span
+                                            class="text-red-400 font-bold" id="h_estancados">0%</span></li>
+                                    <li class="flex justify-between"><span>Pérdida por ghosting:</span> <span
+                                            class="text-amber-400 font-bold" id="h_perdida">0%</span></li>
+                                </ul>
+                                <p class="text-[9px] mt-3 text-slate-400 leading-tight">Consejo: Para subir el score,
+                                    contacta de inmediato a las alertas rojas del Radar Comercial.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 2. RADAR COMERCIAL (IMPACTO FINANCIERO & RECOMPRA) & MOMENTUM -->
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+                        <!-- Columna Radar -->
+                        <div class="lg:col-span-2 flex flex-col gap-6">
+                            <div class="card flex-1 flex flex-col overflow-hidden">
+                                <div
+                                    class="px-5 py-4 border-b border-border bg-slate-50 flex justify-between items-center">
+                                    <h3 class="font-bold text-primary flex items-center gap-2"><i
+                                            class="fa-solid fa-radar text-accent animate-pulse"></i> Radar Comercial
+                                        Inteligente</h3>
+                                    <span
+                                        class="bg-amber-100 text-amber-700 text-[10px] font-bold px-2 py-0.5 rounded-full"
+                                        id="radarCount">Alertas</span>
+                                </div>
+                                <div class="divide-y divide-border flex-1 overflow-y-auto max-h-96" id="radarList">
+                                    <!-- Dynamic Radar Items -->
+                                    <div class="p-8 text-center text-slate-400"><i
+                                            class="fa-solid fa-check-circle text-2xl mb-2 text-slate-300"></i><br>Radar
+                                        limpio. Cero amenazas, cero oportunidades pendientes.</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Columna Momentum & Meta -->
+                        <div class="flex flex-col gap-6">
+                            <!-- Momentum Comercial -->
+                            <div
+                                class="card p-5 bg-gradient-to-br from-slate-800 to-primary text-white border-none shadow-lg relative overflow-hidden">
+                                <i class="fa-solid fa-bolt absolute -right-4 -bottom-4 text-6xl opacity-10"></i>
+                                <h3 class="font-bold text-sm text-slate-300 mb-4 flex items-center gap-2"><i
+                                        class="fa-solid fa-fire text-orange-500"></i> Momentum Comercial</h3>
+                                <div class="space-y-4">
+                                    <div>
+                                        <p class="text-[10px] text-slate-400 uppercase tracking-wider mb-1">Seguimientos
+                                            7 días</p>
+                                        <p class="text-2xl font-bold" id="mo_segs">0</p>
+                                    </div>
+                                    <div class="flex gap-4">
+                                        <div class="flex-1">
+                                            <p class="text-[10px] text-slate-400 uppercase tracking-wider mb-1">Tratos
+                                                Movidos</p>
+                                            <p class="text-lg font-bold text-accent" id="mo_moved">0</p>
+                                        </div>
+                                        <div class="flex-1">
+                                            <p class="text-[10px] text-slate-400 uppercase tracking-wider mb-1">Avg
+                                                Respuesta</p>
+                                            <p class="text-lg font-bold text-success">&lt;24h</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Meta Mensual Simplificada -->
+                            <div class="card p-5 text-center flex-1 flex flex-col justify-center">
+                                <h3 class="font-bold text-primary mb-4 text-sm">Progreso de Meta Mensual</h3>
+                                <div class="relative w-32 h-32 mx-auto mb-2">
+                                    <canvas id="goalChart"></canvas>
+                                    <div class="absolute inset-0 flex flex-col items-center justify-center">
+                                        <span class="text-xl font-bold text-primary" id="goalPct">0%</span>
+                                    </div>
+                                </div>
+                                <p class="text-xs text-secondary">Objetivo: <strong id="goalTarget">$200,000</strong>
+                                </p>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
-                <div class="blur-card" style="border-left: 5px solid #ff3b30;">
-                    <h3 style="margin-top:0; font-size:18px; color:#ff3b30;"><i
-                            class="fa-solid fa-skull-crossbones"></i> Peligro: Inactivos (+45 días)</h3>
-                    <p style="font-size:13px; opacity:0.6;">Negocios que llevan un mes y medio sin que nadie les hable.
-                    </p>
-                    <div id="inactiveClientsBox"
-                        style="margin-top:20px; display:flex; flex-direction:column; gap:12px;">
-                        <!-- JS fills -->
+
+                <!-- TAB 2: PIPELINE KANBAN (INTELIGENTE) -->
+                <div id="tab-kanban" class="tab-pane h-[calc(100vh-140px)]">
+                    <div class="flex gap-4 h-full overflow-x-auto pb-4" id="kanbanBoard">
+                        <!-- JS renders here -->
                     </div>
                 </div>
+
+                <!-- TAB 3: SIMULADOR DE CIERRE -->
+                <div id="tab-simulador" class="tab-pane">
+                    <div class="max-w-4xl mx-auto">
+                        <div class="card p-0 overflow-hidden shadow-lg">
+                            <div class="bg-gradient-to-r from-accent to-blue-600 p-6 text-white text-center">
+                                <i class="fa-solid fa-calculator text-3xl mb-3 opacity-80"></i>
+                                <h2 class="text-xl font-bold">Simulador de Escenarios de Cierre</h2>
+                                <p class="text-sm text-blue-100 opacity-90 mt-1">Selecciona los prospectos que crees
+                                    poder cerrar este mes para ver el impacto económico en tu meta antes de que suceda.
+                                </p>
+                            </div>
+
+                            <div class="p-6 bg-slate-50 flex gap-6 border-b border-border">
+                                <div class="flex-1 text-center">
+                                    <p class="text-xs font-bold text-slate-500 uppercase tracking-widest mb-1">Ventas
+                                        Actuales</p>
+                                    <p class="text-2xl font-bold text-primary" id="sim_actual">$0</p>
+                                </div>
+                                <div class="flex items-center text-slate-300 justify-center"><i
+                                        class="fa-solid fa-plus text-xl"></i></div>
+                                <div class="flex-1 text-center">
+                                    <p class="text-xs font-bold text-slate-500 uppercase tracking-widest mb-1">Simulado
+                                        a Cerrar</p>
+                                    <p class="text-2xl font-bold text-green-500" id="sim_proyectado">+$0</p>
+                                </div>
+                                <div class="flex items-center text-slate-300 justify-center"><i
+                                        class="fa-solid fa-equals text-xl"></i></div>
+                                <div class="flex-1 text-center">
+                                    <p class="text-xs font-bold text-accent uppercase tracking-widest mb-1">Total
+                                        Resultante</p>
+                                    <p class="text-3xl font-bold text-accent" id="sim_total">$0</p>
+                                    <div class="text-[10px] font-bold text-slate-400 mt-1">Meta: $200k</div>
+                                </div>
+                            </div>
+
+                            <div class="p-6">
+                                <h3 class="font-bold text-primary mb-4 text-sm"><i
+                                        class="fa-solid fa-list-check opacity-50 mr-2"></i> Tratos en Negociación y
+                                    Cotizados</h3>
+                                <div class="space-y-2 max-h-96 overflow-y-auto" id="simBoxList">
+                                    <!-- JS check list -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TAB 4: MAPA TERRITORIAL (LEAFLET REAL) -->
+                <div id="tab-mapa" class="tab-pane">
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-6 h-[calc(100vh-140px)]">
+
+                        <div class="md:col-span-3 card p-0 overflow-hidden relative">
+                            <div id="map" class="w-full h-full border-none rounded-none"></div>
+                            <!-- Map Overlay Widget -->
+                            <div
+                                class="absolute top-4 left-1/2 transform -translate-x-1/2 bg-white/90 backdrop-blur shadow-lg px-4 py-2 rounded-full border border-slate-200 z-[1000] flex gap-4 text-xs font-bold">
+                                <label class="flex items-center gap-1 cursor-pointer hover:text-accent"><input
+                                        type="radio" name="mfilter" value="all" checked onchange="renderMap()">
+                                    Todos</label>
+                                <label class="flex items-center gap-1 cursor-pointer hover:text-success"><input
+                                        type="radio" name="mfilter" value="won" onchange="renderMap()"> Ganados</label>
+                                <label class="flex items-center gap-1 cursor-pointer hover:text-warning"><input
+                                        type="radio" name="mfilter" value="active" onchange="renderMap()"> En
+                                    Juego</label>
+                            </div>
+                        </div>
+
+                        <div class="card p-5 flex flex-col gap-4 overflow-y-auto">
+                            <h3 class="font-bold text-primary text-sm mb-2 border-b border-border pb-2"><i
+                                    class="fa-solid fa-chart-area mr-2 text-accent"></i> Resumen Territorial</h3>
+
+                            <div class="bg-slate-50 border border-border p-3 rounded-lg">
+                                <p class="text-[10px] text-slate-500 uppercase font-bold text-center">Zona Más Caliente
+                                </p>
+                                <p class="text-sm font-bold text-center text-primary mt-1" id="z_hot">Guadalajara Centro
+                                </p>
+                                <p class="text-xs text-center text-success font-semibold mt-1" id="z_hot_val">0 tratos
+                                </p>
+                            </div>
+
+                            <div class="bg-red-50 border border-red-100 p-3 rounded-lg">
+                                <p class="text-[10px] text-red-400 uppercase font-bold text-center">Zona con Pérdida</p>
+                                <p class="text-sm font-bold text-center text-danger mt-1" id="z_cold">Zapopan Norte</p>
+                                <p class="text-[10px] text-center text-red-500 mt-1" id="z_cold_val">Requiere atención
+                                    urgente</p>
+                            </div>
+
+                            <div class="mt-4 flex-1">
+                                <h4 class="text-xs font-bold text-slate-600 mb-3">Distribución de Cartera</h4>
+                                <canvas id="zoneChart" height="200"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
-    </div>
+    </main>
 
-    <!-- Script de inicialización y auth auth -->
+    <!-- App Logic Injection -->
     <script>
-        if (localStorage.getItem('admin-theme') === 'dark') document.body.classList.add('dark-mode');
-
         const TOKEN_KEY = 'admin_token';
         let adminToken = localStorage.getItem(TOKEN_KEY) || sessionStorage.getItem('admin-token');
-
-        async function apiFetch(url, options = {}) {
-            if (!options.headers) options.headers = {};
-            if (adminToken) {
-                options.headers['Authorization'] = `Bearer ${adminToken}`;
-            }
-            const res = await fetch(url, options);
-            if (res.status === 401) {
-                alert("Sesión expirada. Redirigiendo al inicio de sesión...");
-                window.location.href = 'home.html';
-                throw new Error("Sesión expirada o no autorizada");
-            }
-            return res;
-        }
-
-        function switchCRMTab(tabId) {
-            document.querySelectorAll('.crm-tab-pane').forEach(el => el.classList.remove('active'));
-            document.querySelectorAll('.crm-tab-btn').forEach(el => el.classList.remove('active'));
-            document.getElementById(`tab-${tabId}`).classList.add('active');
-            event.currentTarget.classList.add('active');
-
-            if (tabId === 'intel' && typeof renderIntelCharts === 'function') {
-                renderIntelCharts();
-            }
-            if (tabId === 'map' && typeof renderMapPins === 'function') {
-                renderMapPins();
-            }
-        }
-
-        document.addEventListener('DOMContentLoaded', () => {
-            if (typeof initCRM === 'function') initCRM();
-        });
+        const META_MENSUAL = 200000; // Parametrizable
     </script>
-
-    <!-- Lógica del CRM -->
     <script src="/assets/js/crm.js"></script>
+
 </body>
 
 </html>
