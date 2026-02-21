@@ -995,12 +995,16 @@ async function geocodeBranch() {
 
 // ==== VENTAS IMPORTADAS 2025 ====
 let crmImportedSales = [];
+let crmImportedItems = [];
 
 async function loadImportedSales() {
     try {
-        const res = await apiFetch('/api/crm/sales');
-        const result = await res.json();
-        crmImportedSales = result.data || [];
+        const [salesRes, itemsRes] = await Promise.all([
+            apiFetch('/api/crm/sales'),
+            apiFetch('/api/crm/sales/items')
+        ]);
+        crmImportedSales = (await salesRes.json()).data || [];
+        crmImportedItems = (await itemsRes.json()).data || [];
         renderImportedSales();
     } catch (err) {
         console.error("Error loaded imported sales", err);
@@ -1018,12 +1022,23 @@ function renderImportedSales() {
     if (!list) return;
     list.innerHTML = '';
 
-    if (crmImportedSales.length === 0) {
-        list.innerHTML = '<tr><td colspan="5" class="p-8 text-center text-slate-400">Comienza importando tu primer archivo CSV.</td></tr>';
+    const yearFilter = document.getElementById('yearFilter') ? document.getElementById('yearFilter').value : 'all';
+
+    let filteredSales = crmImportedSales;
+    if (yearFilter !== 'all') {
+        filteredSales = crmImportedSales.filter(s => s.sale_date && s.sale_date.startsWith(yearFilter));
+    }
+
+    if (filteredSales.length === 0) {
+        list.innerHTML = `<tr><td colspan="5" class="p-8 text-center text-slate-400">No hay ventas registradas para este periodo.</td></tr>`;
         document.getElementById('sv_total').innerText = '$0.00';
         document.getElementById('sv_ticket').innerText = '$0.00';
         document.getElementById('sv_count').innerText = '0';
         document.getElementById('sv_top_client').innerText = '-';
+        renderTopProducts(yearFilter);
+        // Clear charts
+        if (annualSalesChartInstance) annualSalesChartInstance.destroy();
+        if (paretoChartInstance) paretoChartInstance.destroy();
         return;
     }
 
@@ -1032,7 +1047,7 @@ function renderImportedSales() {
     const monthlyData = { '01': 0, '02': 0, '03': 0, '04': 0, '05': 0, '06': 0, '07': 0, '08': 0, '09': 0, '10': 0, '11': 0, '12': 0 };
 
     // Process Data
-    crmImportedSales.forEach(s => {
+    filteredSales.forEach(s => {
         const amt = (s.amount || 0);
         totalImportedAmount += amt;
         const cl = s.client_name_raw || 'Desconocido';
@@ -1074,15 +1089,72 @@ function renderImportedSales() {
         simSelect.innerHTML += `<option value="${sc[0]}">${sc[0]} (${formatCurrency(sc[1])})</option>`;
     });
 
-    const avgTicket = totalImportedAmount / crmImportedSales.length;
+    const avgTicket = totalImportedAmount / filteredSales.length;
 
     document.getElementById('sv_total').innerText = formatCurrency(totalImportedAmount);
     document.getElementById('sv_ticket').innerText = formatCurrency(avgTicket);
-    document.getElementById('sv_count').innerText = crmImportedSales.length;
+    document.getElementById('sv_count').innerText = filteredSales.length;
     document.getElementById('sv_top_client').innerText = topClient;
 
-    // --- Render Charts ---
+    // --- Render Charts & Top Products ---
     renderEjecutivaCharts(monthlyData, sortedClients);
+    renderTopProducts(yearFilter);
+}
+
+function renderTopProducts(yearFilter) {
+    const list = document.getElementById('topProductsList');
+    if (!list) return;
+
+    let filteredItems = crmImportedItems;
+    if (yearFilter !== 'all') {
+        filteredItems = crmImportedItems.filter(i => i.sale_date && i.sale_date.startsWith(yearFilter));
+    }
+
+    if (filteredItems.length === 0) {
+        list.innerHTML = '<p class="text-center text-slate-500 py-4">No hay productos en este periodo.</p>';
+        return;
+    }
+
+    // Group items by description mapping to stats
+    const productStats = {};
+    filteredItems.forEach(i => {
+        const desc = (i.description || 'GENERICO').toUpperCase().trim();
+        if (!productStats[desc]) {
+            productStats[desc] = { qty: 0, amount: 0 };
+        }
+        productStats[desc].qty += (i.qty || 1);
+        productStats[desc].amount += (i.amount || 0);
+    });
+
+    // Sort array by amount (revenue)
+    const sortedProducts = Object.entries(productStats).sort((a, b) => b[1].amount - a[1].amount);
+
+    let html = '';
+    const topLimit = Math.min(20, sortedProducts.length);
+    for (let k = 0; k < topLimit; k++) {
+        const prodName = sortedProducts[k][0];
+        const stat = sortedProducts[k][1];
+        // simple rank badge colors
+        const rankColor = k === 0 ? 'bg-yellow-100 text-yellow-600' : (k === 1 ? 'bg-slate-200 text-slate-600' : (k === 2 ? 'bg-amber-100 text-amber-700' : 'bg-blue-50 text-blue-500'));
+        html += `
+            <div class="flex items-center justify-between p-4 bg-slate-50 border border-slate-100 rounded-xl hover:bg-slate-100 transition-colors">
+                <div class="flex items-center gap-4">
+                    <div class="w-10 h-10 rounded-full flex items-center justify-center font-black ${rankColor}">
+                        #${k + 1}
+                    </div>
+                    <div>
+                        <h5 class="text-sm font-bold text-slate-700 max-w-sm sm:max-w-md truncate" title="${prodName}">${prodName}</h5>
+                        <p class="text-xs text-slate-500 mt-0.5"><i class="fa-solid fa-boxes-stacked mr-1"></i> ${stat.qty} Unidades vendidas</p>
+                    </div>
+                </div>
+                <div class="text-right">
+                    <p class="text-xs text-slate-400 font-bold uppercase tracking-wider mb-1">Ingresos</p>
+                    <p class="text-sm font-black text-success">${formatCurrency(stat.amount)}</p>
+                </div>
+            </div>
+        `;
+    }
+    list.innerHTML = html;
 }
 
 function renderEjecutivaCharts(monthlyData, sortedClients) {
@@ -1147,22 +1219,32 @@ function renderEjecutivaCharts(monthlyData, sortedClients) {
 
 function switchVentasTab(tabId) {
     // Hide all internal tabs
-    ['ejecutiva', 'clientes', 'simulador'].forEach(t => {
-        document.getElementById('v-tab-' + t).classList.add('hidden');
-        document.getElementById('v-tab-' + t).classList.remove('block');
+    ['ejecutiva', 'clientes', 'productos', 'simulador'].forEach(t => {
+        const pane = document.getElementById('v-tab-' + t);
+        if (pane) {
+            pane.classList.add('hidden');
+            pane.classList.remove('block');
+        }
 
         let btn = document.getElementById('btn-ventas-' + t);
-        btn.classList.remove('bg-primary', 'text-white');
-        btn.classList.add('text-secondary', 'hover:bg-slate-100');
+        if (btn) {
+            btn.classList.remove('bg-primary', 'text-white');
+            btn.classList.add('text-secondary', 'hover:bg-slate-100');
+        }
     });
 
     // Show target
-    document.getElementById('v-tab-' + tabId).classList.remove('hidden');
-    document.getElementById('v-tab-' + tabId).classList.add('block');
+    const targetPane = document.getElementById('v-tab-' + tabId);
+    if (targetPane) {
+        targetPane.classList.remove('hidden');
+        targetPane.classList.add('block');
+    }
 
     let btnOn = document.getElementById('btn-ventas-' + tabId);
-    btnOn.classList.remove('text-secondary', 'hover:bg-slate-100');
-    btnOn.classList.add('bg-primary', 'text-white');
+    if (btnOn) {
+        btnOn.classList.remove('text-secondary', 'hover:bg-slate-100');
+        btnOn.classList.add('bg-primary', 'text-white');
+    }
 }
 
 function filterSalesTable() {

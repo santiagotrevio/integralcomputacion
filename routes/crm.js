@@ -239,6 +239,20 @@ router.get('/sales', (req, res) => {
     });
 });
 
+router.get('/sales/items', (req, res) => {
+    const q = `
+        SELECT 
+            i.invoice_no, i.qty, i.description, i.amount, i.price,
+            s.sale_date, s.client_name_raw
+        FROM imported_sale_items i
+        JOIN imported_sales s ON s.invoice_no = i.invoice_no
+    `;
+    db.all(q, [], (err, rows) => {
+        if (err) return res.json({ data: [] });
+        res.json({ data: rows });
+    });
+});
+
 router.post('/sales/import', (req, res) => {
     const { sales } = req.body;
     if (!sales || !Array.isArray(sales)) return res.status(400).json({ error: 'Invalid payload' });

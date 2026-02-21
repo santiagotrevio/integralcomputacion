@@ -541,17 +541,34 @@
 
                 <!-- TAB 7: RENDIMIENTO ANUAL -->
                 <div id="tab-ventas" class="tab-pane">
-                    <div class="flex justify-between items-center mb-6">
+                    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
                         <div>
                             <h2 class="text-xl font-bold text-primary">Rendimiento Anual & Analítica</h2>
                             <p class="text-sm text-secondary">Dashboard analítico segmentado por vistas operativas.</p>
                         </div>
-                        <label
-                            class="bg-primary hover:bg-slate-800 text-white font-semibold py-2 px-5 rounded-full shadow-md transition-transform active:scale-95 flex items-center gap-2 cursor-pointer">
-                            <i class="fa-solid fa-file-csv"></i> Importar CSV...
-                            <input type="file" id="salesCsvInput" accept=".csv" class="hidden"
-                                onchange="handleFileUpload(event)">
-                        </label>
+                        <div class="flex items-center gap-3">
+                            <!-- Year Filter -->
+                            <div class="bg-slate-100 rounded-lg p-1.5 flex items-center border border-slate-200">
+                                <i class="fa-solid fa-calendar-days text-slate-400 ml-2 mr-1"></i>
+                                <select id="yearFilter" onchange="renderImportedSales()"
+                                    class="bg-transparent border-none text-sm font-bold text-slate-700 focus:ring-0 outline-none cursor-pointer">
+                                    <option value="all">Historico Total</option>
+                                    <option value="2025">Año 2025</option>
+                                    <option value="2024">Año 2024</option>
+                                    <option value="2023">Año 2023</option>
+                                    <option value="2022">Año 2022</option>
+                                    <option value="2021">Año 2021</option>
+                                    <option value="2020">Año 2020</option>
+                                </select>
+                            </div>
+                            <!-- Import -->
+                            <label
+                                class="bg-primary hover:bg-slate-800 text-white font-semibold py-2 px-5 rounded-full shadow-md transition-transform active:scale-95 flex items-center gap-2 cursor-pointer">
+                                <i class="fa-solid fa-file-csv"></i> Importar CSV...
+                                <input type="file" id="salesCsvInput" accept=".csv" class="hidden"
+                                    onchange="handleFileUpload(event)">
+                            </label>
+                        </div>
                     </div>
 
                     <!-- Píldoras de Navegación Interna -->
@@ -562,6 +579,9 @@
                         <button onclick="switchVentasTab('clientes')" id="btn-ventas-clientes"
                             class="px-4 py-2 font-bold text-sm rounded-lg text-secondary hover:bg-slate-100 transition-colors flex items-center whitespace-nowrap"><i
                                 class="fa-solid fa-users mr-2"></i> Vista Clientes</button>
+                        <button onclick="switchVentasTab('productos')" id="btn-ventas-productos"
+                            class="px-4 py-2 font-bold text-sm rounded-lg text-secondary hover:bg-slate-100 transition-colors flex items-center whitespace-nowrap"><i
+                                class="fa-solid fa-box-open mr-2"></i> Rank Productos</button>
                         <button onclick="switchVentasTab('simulador')" id="btn-ventas-simulador"
                             class="px-4 py-2 font-bold text-sm rounded-lg text-secondary hover:bg-slate-100 transition-colors flex items-center whitespace-nowrap"><i
                                 class="fa-solid fa-triangle-exclamation mr-2"></i> Simulador de Riesgo</button>
@@ -642,6 +662,26 @@
                                         </tr>
                                     </tbody>
                                 </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SUB-TAB 3: PRODUCTOS -->
+                    <div id="v-tab-productos" class="hidden">
+                        <div class="grid grid-cols-1 gap-6">
+                            <div class="card p-0 overflow-hidden">
+                                <div class="bg-slate-800 p-6 text-white text-center">
+                                    <h3 class="text-xl font-black uppercase tracking-widest text-slate-200">Top 10
+                                        Productos Más Vendidos</h3>
+                                    <p class="text-sm text-slate-400">Listado rankeado por impacto en ingresos de la
+                                        empresa.</p>
+                                </div>
+                                <div class="p-6">
+                                    <div class="space-y-4" id="topProductsList">
+                                        <p class="text-center text-slate-500 text-sm py-4">Procesando catálogo de
+                                            artículos históricos...</p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
