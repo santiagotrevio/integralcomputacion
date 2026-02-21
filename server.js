@@ -22,6 +22,11 @@ app.use(cors({
     origin: (origin, cb) => {
         // Permitir requests sin origin (curl, Postman, apps nativas)
         if (!origin || allowedOrigins.includes(origin)) return cb(null, true);
+
+        // Permitir conexiones desde otras computadoras en la misma red local (IPs privades o terminaciones .local)
+        const isLocalNetwork = /^http:\/\/(127\.0\.0\.1|192\.168\.\d+\.\d+|10\.\d+\.\d+\.\d+|172\.(1[6-9]|2[0-9]|3[0-1])\.\d+\.\d+|[a-zA-Z0-9.-]+\.local)(:\d+)?$/.test(origin);
+        if (isLocalNetwork) return cb(null, true);
+
         cb(new Error('CORS bloqueado: ' + origin));
     },
     credentials: true
