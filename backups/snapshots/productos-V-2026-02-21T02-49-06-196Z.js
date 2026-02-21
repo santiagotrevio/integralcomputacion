@@ -362,43 +362,43 @@ const productsDB = [
   },
   {
     "id": "NXNE-060A",
-    "category": "papeleria",
+    "category": "OTROS",
     "brand": "NEXTEP",
     "name": "BOLIGRAFO NEXTEP 1000 AZUL 1MM C/12",
     "description": "BOLIGRAFO NEXTEP 1000 AZUL 1MM C/12",
-    "image": "assets/images/products/toner/NXNE_060A.webp"
+    "image": ""
   },
   {
     "id": "NXNE-060N",
-    "category": "papeleria",
+    "category": "OTROS",
     "brand": "NEXTEP",
     "name": "BOLIGRAFO NEXTEP 1000 COLOR NEGRO 1MM C/12",
     "description": "BOLIGRAFO NEXTEP 1000 COLOR NEGRO 1MM C/12",
-    "image": "assets/images/products/toner/NXNE_060N.webp"
+    "image": ""
   },
   {
     "id": "NXNE-062A",
-    "category": "papeleria",
+    "category": "OTROS",
     "brand": "NEXTEP",
     "name": "BOLIGRAFO NEXTEP GEL MED AZUAL C/6",
     "description": "BOLIGRAFO NEXTEP GEL MED AZUAL C/6",
-    "image": "assets/images/products/toner/NXNE_062A.webp"
+    "image": ""
   },
   {
     "id": "NXNE-062N",
-    "category": "papeleria",
+    "category": "OTROS",
     "brand": "NEXTEP",
     "name": "BOLIGRAFO NEXTEP GEL MED NEGRO C/6",
     "description": "BOLIGRAFO NEXTEP GEL MED NEGRO C/6",
-    "image": "assets/images/products/toner/NXNE_062N.webp"
+    "image": ""
   },
   {
     "id": "NXNE-062R",
-    "category": "papeleria",
+    "category": "OTROS",
     "brand": "NEXTEP",
     "name": "BOLIGRAFO NEXTEP GEL MED ROJO C/6",
     "description": "BOLIGRAFO NEXTEP GEL MED ROJO C/6",
-    "image": "assets/images/products/toner/NXNE_062R.webp"
+    "image": ""
   },
   {
     "id": "EPT941120-AL",
@@ -950,27 +950,27 @@ const productsDB = [
   },
   {
     "id": "NXNE-032",
-    "category": "papeleria",
+    "category": "OTROS",
     "brand": "NEXTEP",
     "name": "BROCHE NEXTEP # 8 CM. C/50 PIEZAS",
     "description": "BROCHE NEXTEP # 8 CM. C/50 PIEZAS",
-    "image": "assets/images/products/toner/NXNE_032.webp"
+    "image": ""
   },
   {
     "id": "NXNE-051",
-    "category": "papeleria",
+    "category": "OTROS",
     "brand": "NEXTEP",
     "name": "Banderitas Nextep Mini Neon 5 Colores 100 Piezas c/10 Estuches",
     "description": "Banderitas Nextep Mini Neon 5 Colores 100 Piezas c/10 Estuches",
-    "image": "assets/images/products/toner/NXNE_051.webp"
+    "image": ""
   },
   {
     "id": "NXNE-052",
-    "category": "papeleria",
+    "category": "OTROS",
     "brand": "NEXTEP",
     "name": "Banderitas Nextep Neon 4 Colores 200 Piezas c/10 Estuches",
     "description": "Banderitas Nextep Neon 4 Colores 200 Piezas c/10 Estuches",
-    "image": "assets/images/products/toner/NXNE_052.webp"
+    "image": ""
   },
   {
     "id": "NXNE-240",
@@ -1030,59 +1030,59 @@ const productsDB = [
   },
   {
     "id": "NXNE-060R",
-    "category": "papeleria",
+    "category": "OTROS",
     "brand": "NEXTEP",
     "name": "Boligrafo Nextep 1000 Rojo 1mm c/12",
     "description": "Boligrafo Nextep 1000 Rojo 1mm c/12",
-    "image": "assets/images/products/toner/NXNE_060R.webp"
+    "image": ""
   },
   {
     "id": "NXNE-065A",
-    "category": "papeleria",
+    "category": "OTROS",
     "brand": "NEXTEP",
     "name": "Boligrafo Nextep Flicker 0.7mm Azul C/6",
     "description": "Boligrafo Nextep Flicker 0.7mm Azul C/6",
-    "image": "assets/images/products/toner/NXNE_065A.webp"
+    "image": ""
   },
   {
     "id": "NXNE-065N",
-    "category": "papeleria",
+    "category": "OTROS",
     "brand": "NEXTEP",
     "name": "Boligrafo Nextep Flicker 0.7mm Negro C/6",
     "description": "Boligrafo Nextep Flicker 0.7mm Negro C/6",
-    "image": "assets/images/products/toner/NXNE_065N.webp"
+    "image": ""
   },
   {
     "id": "NXNE-065R",
-    "category": "papeleria",
+    "category": "OTROS",
     "brand": "NEXTEP",
     "name": "Boligrafo Nextep Flicker 0.7mm Rojo C/6",
     "description": "Boligrafo Nextep Flicker 0.7mm Rojo C/6",
-    "image": "assets/images/products/toner/NXNE_065R.webp"
+    "image": ""
   },
   {
     "id": "NXNE-062AS",
-    "category": "papeleria",
+    "category": "OTROS",
     "brand": "NEXTEP",
     "name": "Boligrafo Nextep Gel Retractil Silencioso Fino 0.5mm Azul C/6",
     "description": "Boligrafo Nextep Gel Retractil Silencioso Fino 0.5mm Azul C/6",
-    "image": "assets/images/products/toner/NXNE_062AS.webp"
+    "image": ""
   },
   {
     "id": "NXNE-062NS",
-    "category": "papeleria",
+    "category": "OTROS",
     "brand": "NEXTEP",
     "name": "Boligrafo Nextep Gel Retractil Silencioso Fino 0.5mm Negro C/6",
     "description": "Boligrafo Nextep Gel Retractil Silencioso Fino 0.5mm Negro C/6",
-    "image": "assets/images/products/toner/NXNE_062NS.webp"
+    "image": ""
   },
   {
     "id": "NXNE-062RS",
-    "category": "papeleria",
+    "category": "OTROS",
     "brand": "NEXTEP",
     "name": "Boligrafo Nextep Gel Retractil Silencioso Fino 0.5mm Rojo C/6",
     "description": "Boligrafo Nextep Gel Retractil Silencioso Fino 0.5mm Rojo C/6",
-    "image": "assets/images/products/toner/NXNE_062RS.webp"
+    "image": ""
   },
   {
     "id": "BI923998",
@@ -1094,51 +1094,51 @@ const productsDB = [
   },
   {
     "id": "NXNE-061MA",
-    "category": "papeleria",
+    "category": "OTROS",
     "brand": "NEXTEP",
     "name": "Bolígrafo Nextep Pro-Dot Color Azul Medio 1mm c/12",
     "description": "Bolígrafo Nextep Pro-Dot Color Azul Medio 1mm c/12",
-    "image": "assets/images/products/toner/NXNE_061MA.webp"
+    "image": ""
   },
   {
     "id": "NXNE-061FN",
-    "category": "papeleria",
+    "category": "OTROS",
     "brand": "NEXTEP",
     "name": "Bolígrafo Nextep Pro-Dot Color Negro Fino 0.6mm c/12",
     "description": "Bolígrafo Nextep Pro-Dot Color Negro Fino 0.6mm c/12",
-    "image": "assets/images/products/toner/NXNE_061FN.webp"
+    "image": ""
   },
   {
     "id": "NXNE-063FA",
-    "category": "",
+    "category": "OTROS",
     "brand": "NEXTEP",
     "name": "Bolígrafo Nextep Pro-Tip Color Azul Fino 0.7mm c/12",
     "description": "Bolígrafo Nextep Pro-Tip Color Azul Fino 0.7mm c/12",
-    "image": "assets/images/products/toner/NXNE_063FA.webp"
+    "image": ""
   },
   {
     "id": "NXNE-063MA",
-    "category": "papeleria",
+    "category": "OTROS",
     "brand": "NEXTEP",
     "name": "Bolígrafo Nextep Pro-Tip Color Azul Medio 1mm c/12",
     "description": "Bolígrafo Nextep Pro-Tip Color Azul Medio 1mm c/12",
-    "image": "assets/images/products/toner/NXNE_063MA.webp"
+    "image": ""
   },
   {
     "id": "NXNE-063FN",
-    "category": "papeleria",
+    "category": "OTROS",
     "brand": "NEXTEP",
     "name": "Bolígrafo Nextep Pro-Tip Color Negro Fino 0.7mm c/12",
     "description": "Bolígrafo Nextep Pro-Tip Color Negro Fino 0.7mm c/12",
-    "image": "assets/images/products/toner/NXNE_063FN.webp"
+    "image": ""
   },
   {
     "id": "NXNE-063MN",
-    "category": "papeleria",
+    "category": "OTROS",
     "brand": "NEXTEP",
     "name": "Bolígrafo Nextep Pro-Tip Color Negro Medio 1mm c/12",
     "description": "Bolígrafo Nextep Pro-Tip Color Negro Medio 1mm c/12",
-    "image": "assets/images/products/toner/NXNE_063MN.webp"
+    "image": ""
   },
   {
     "id": "PM2129427",
@@ -1234,11 +1234,11 @@ const productsDB = [
   },
   {
     "id": "MH306126",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "MANHATTAN",
     "name": "CABLE HDMI 1.4 4K M-M 3.0M - Cable HDMI de alta velocidad",
     "description": "CABLE HDMI 1.4 4K M-M 3.0M - Cable HDMI de alta velocidad",
-    "image": "assets/images/products/toner/MH306126.webp"
+    "image": ""
   },
   {
     "id": "PC-101703",
@@ -1274,19 +1274,19 @@ const productsDB = [
   },
   {
     "id": "MH371315",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "MANHATTAN",
     "name": "CABLE VGA MANHATTAN D15 MACHO MACHO 1.8M",
     "description": "CABLE VGA MANHATTAN D15 MACHO MACHO 1.8M",
-    "image": "assets/images/products/toner/MH371315.webp"
+    "image": ""
   },
   {
     "id": "MH306133",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "MANHATTAN",
     "name": "CABLE VIDEO HDMI MANHATTAN 5MTS BOLSA",
     "description": "CABLE VIDEO HDMI MANHATTAN 5MTS BOLSA",
-    "image": "assets/images/products/toner/MH306133.webp"
+    "image": ""
   },
   {
     "id": "NXNE-514",
@@ -1362,11 +1362,11 @@ const productsDB = [
   },
   {
     "id": "NXNE-013C",
-    "category": "papeleria",
+    "category": "OTROS",
     "brand": "NEXTEP",
     "name": "CARPETA NEXTEP VINIL ARO \"D\" 4\" CARTA BLANCA",
     "description": "CARPETA NEXTEP VINIL ARO \"D\" 4\" CARTA BLANCA",
-    "image": "assets/images/products/toner/NXNE_013C.webp"
+    "image": ""
   },
   {
     "id": "CA121",
@@ -3473,11 +3473,11 @@ const productsDB = [
   },
   {
     "id": "NXNE-068C",
-    "category": "papeleria",
+    "category": "OTROS",
     "brand": "NEXTEP",
     "name": "CINTA CORRECTORA NEXTEP 8M X 4.2MM, C/6",
     "description": "CINTA CORRECTORA NEXTEP 8M X 4.2MM, C/6",
-    "image": "assets/images/products/toner/NXNE_068C.webp"
+    "image": ""
   },
   {
     "id": "DP082",
@@ -3681,43 +3681,43 @@ const productsDB = [
   },
   {
     "id": "NXNE-040A",
-    "category": "papeleria",
+    "category": "OTROS",
     "brand": "NEXTEP",
     "name": "CLIP ESTAND NEXTEP #1 32 MM. C/10 100 C/",
     "description": "CLIP ESTAND NEXTEP #1 32 MM. C/10 100 C/",
-    "image": "assets/images/products/toner/NXNE_040A.webp"
+    "image": ""
   },
   {
     "id": "NXNE-040B",
-    "category": "papeleria",
+    "category": "OTROS",
     "brand": "NEXTEP",
     "name": "CLIP ESTAND NEXTEP #2 28 MM. C/10 100",
     "description": "CLIP ESTAND NEXTEP #2 28 MM. C/10 100",
-    "image": "assets/images/products/toner/NXNE_040B.webp"
+    "image": ""
   },
   {
     "id": "NXNE-040C",
-    "category": "papeleria",
+    "category": "OTROS",
     "brand": "NEXTEP",
     "name": "CLIP JUMBO NIQUELADO NEXTEP 50 MM. 100",
     "description": "CLIP JUMBO NIQUELADO NEXTEP 50 MM. 100",
-    "image": "assets/images/products/toner/NXNE_040C.webp"
+    "image": ""
   },
   {
     "id": "NXNE-042A",
-    "category": "papeleria",
+    "category": "OTROS",
     "brand": "NEXTEP",
     "name": "CLIP MARIPOSA NEXTEP #1 60 MM. 12 CLIPS",
     "description": "CLIP MARIPOSA NEXTEP #1 60 MM. 12 CLIPS",
-    "image": "assets/images/products/toner/NXNE_042A.webp"
+    "image": ""
   },
   {
     "id": "NXNE-042B",
-    "category": "papeleria",
+    "category": "OTROS",
     "brand": "NEXTEP",
     "name": "CLIP MARIPOSA NEXTEP #2 40 MM.  50 CLIPS",
     "description": "CLIP MARIPOSA NEXTEP #2 40 MM.  50 CLIPS",
-    "image": "assets/images/products/toner/NXNE_042B.webp"
+    "image": ""
   },
   {
     "id": "PC-201281",
@@ -3753,19 +3753,19 @@ const productsDB = [
   },
   {
     "id": "NXNE-069",
-    "category": "papeleria",
+    "category": "OTROS",
     "brand": "NEXTEP",
     "name": "CORRECTOR LIQUIDO NEXTEP 20 ML. C/12",
     "description": "CORRECTOR LIQUIDO NEXTEP 20 ML. C/12",
-    "image": "assets/images/products/toner/NXNE_069.webp"
+    "image": ""
   },
   {
     "id": "NXNE-068",
-    "category": "papeleria",
+    "category": "OTROS",
     "brand": "NEXTEP",
     "name": "CORRECTOR NEXTEP PUNTA METALICA C/12",
     "description": "CORRECTOR NEXTEP PUNTA METALICA C/12",
-    "image": "assets/images/products/toner/NXNE_068.webp"
+    "image": ""
   },
   {
     "id": "PC-085027",
@@ -3817,11 +3817,11 @@ const productsDB = [
   },
   {
     "id": "MH355650",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "MANHATTAN",
     "name": "Cable Manhattan HDMI Plano Alta Velocidad con Ethernet 15m Color Negro",
     "description": "Cable Manhattan HDMI Plano Alta Velocidad con Ethernet 15m Color Negro",
-    "image": "assets/images/products/toner/MH355650.webp"
+    "image": ""
   },
   {
     "id": "STUSB2HAB5M",
@@ -3841,35 +3841,35 @@ const productsDB = [
   },
   {
     "id": "NXNE-058C",
-    "category": "papeleria",
+    "category": "OTROS",
     "brand": "NEXTEP",
     "name": "Caja Archivo Económica Nextep Carta C/12",
     "description": "Caja Archivo Económica Nextep Carta C/12",
-    "image": "assets/images/products/toner/NXNE_058C.webp"
+    "image": ""
   },
   {
     "id": "NXNE-058O",
-    "category": "papeleria",
+    "category": "OTROS",
     "brand": "NEXTEP",
     "name": "Caja Archivo Económica Nextep Oficio C/12",
     "description": "Caja Archivo Económica Nextep Oficio C/12",
-    "image": "assets/images/products/toner/NXNE_058O.webp"
+    "image": ""
   },
   {
     "id": "NXNE-059C",
-    "category": "papeleria",
+    "category": "OTROS",
     "brand": "NEXTEP",
     "name": "Caja Archivo Plastica Economica Nextep Carta C/12",
     "description": "Caja Archivo Plastica Economica Nextep Carta C/12",
-    "image": "assets/images/products/toner/NXNE_059C.webp"
+    "image": ""
   },
   {
     "id": "NXNE-059O",
-    "category": "papeleria",
+    "category": "OTROS",
     "brand": "NEXTEP",
     "name": "Caja Archivo Plastica Economica Nextep Oficio C/12",
     "description": "Caja Archivo Plastica Economica Nextep Oficio C/12",
-    "image": "assets/images/products/toner/NXNE_059O.webp"
+    "image": ""
   },
   {
     "id": "NXNE-161B",
@@ -3961,35 +3961,35 @@ const productsDB = [
   },
   {
     "id": "NXNE-013T",
-    "category": "papeleria",
+    "category": "OTROS",
     "brand": "NEXTEP",
     "name": "Carpeta Nextep Vinil Aro \"O\" 2.5\" Carta Blanca",
     "description": "Carpeta Nextep Vinil Aro \"O\" 2.5\" Carta Blanca",
-    "image": "assets/images/products/toner/NXNE_013T.webp"
+    "image": ""
   },
   {
     "id": "NXNE-013R",
-    "category": "papeleria",
+    "category": "OTROS",
     "brand": "NEXTEP",
     "name": "Carpeta Nextep Vinil Aro \"O\" 3\" Carta Blanca",
     "description": "Carpeta Nextep Vinil Aro \"O\" 3\" Carta Blanca",
-    "image": "assets/images/products/toner/NXNE_013R.webp"
+    "image": ""
   },
   {
     "id": "NXNE-013U",
-    "category": "papeleria",
+    "category": "OTROS",
     "brand": "NEXTEP",
     "name": "Carpeta Nextep Vinil O Lomo 1\" Carta Blanca",
     "description": "Carpeta Nextep Vinil O Lomo 1\" Carta Blanca",
-    "image": "assets/images/products/toner/NXNE_013U.webp"
+    "image": ""
   },
   {
     "id": "NXNE-013D",
-    "category": "papeleria",
+    "category": "OTROS",
     "brand": "NEXTEP",
     "name": "Carpeta Nextep Vinil O Lomo 2\" Carta Blanca",
     "description": "Carpeta Nextep Vinil O Lomo 2\" Carta Blanca",
-    "image": "assets/images/products/toner/NXNE_013D.webp"
+    "image": ""
   },
   {
     "id": "NXNE-172C",
@@ -4255,11 +4255,11 @@ const productsDB = [
   },
   {
     "id": "NXNE-012D",
-    "category": "papeleria",
+    "category": "OTROS",
     "brand": "NEXTEP",
     "name": "Cartulina Opalina Nextep Blanca c/100 225 gr",
     "description": "Cartulina Opalina Nextep Blanca c/100 225 gr",
-    "image": "assets/images/products/toner/NXNE_012D.webp"
+    "image": ""
   },
   {
     "id": "NXNE-204V",
@@ -4543,35 +4543,35 @@ const productsDB = [
   },
   {
     "id": "NXNE-007C",
-    "category": "papeleria",
+    "category": "OTROS",
     "brand": "NEXTEP",
     "name": "Cuaderno Nextep Profesional Cuadro C5 100 Hojas Espiral",
     "description": "Cuaderno Nextep Profesional Cuadro C5 100 Hojas Espiral",
-    "image": "assets/images/products/toner/NXNE_007C.webp"
+    "image": ""
   },
   {
     "id": "NXNE-008G",
-    "category": "papeleria",
+    "category": "OTROS",
     "brand": "NEXTEP",
     "name": "Cuaderno Nextep Profesional Cuadro C7 100 Hojas Cosido",
     "description": "Cuaderno Nextep Profesional Cuadro C7 100 Hojas Cosido",
-    "image": "assets/images/products/toner/NXNE_008G.webp"
+    "image": ""
   },
   {
     "id": "NXNE-008R",
-    "category": "papeleria",
+    "category": "OTROS",
     "brand": "NEXTEP",
     "name": "Cuaderno Nextep Profesional Raya 100 Hojas Cosido",
     "description": "Cuaderno Nextep Profesional Raya 100 Hojas Cosido",
-    "image": "assets/images/products/toner/NXNE_008R.webp"
+    "image": ""
   },
   {
     "id": "NXNE-007R",
-    "category": "papeleria",
+    "category": "OTROS",
     "brand": "NEXTEP",
     "name": "Cuaderno Nextep Profesional Raya 100 Hojas Espiral",
     "description": "Cuaderno Nextep Profesional Raya 100 Hojas Espiral",
-    "image": "assets/images/products/toner/NXNE_007R.webp"
+    "image": ""
   },
   {
     "id": "NXNE-179M",
@@ -4791,27 +4791,27 @@ const productsDB = [
   },
   {
     "id": "NXNE-019O",
-    "category": "papeleria",
+    "category": "OTROS",
     "brand": "NEXTEP",
     "name": "Dedal Nextep #11 Bolsa c/10",
     "description": "Dedal Nextep #11 Bolsa c/10",
-    "image": "assets/images/products/toner/NXNE_019O.webp"
+    "image": ""
   },
   {
     "id": "NXNE-019D",
-    "category": "papeleria",
+    "category": "OTROS",
     "brand": "NEXTEP",
     "name": "Dedal Nextep #12 Bolsa c/10",
     "description": "Dedal Nextep #12 Bolsa c/10",
-    "image": "assets/images/products/toner/NXNE_019D.webp"
+    "image": ""
   },
   {
     "id": "NXNE-019T",
-    "category": "papeleria",
+    "category": "OTROS",
     "brand": "NEXTEP",
     "name": "Dedal Nextep #13 Bolsa c/10",
     "description": "Dedal Nextep #13 Bolsa c/10",
-    "image": "assets/images/products/toner/NXNE_019T.webp"
+    "image": ""
   },
   {
     "id": "NXNE-618",
@@ -5288,11 +5288,11 @@ const productsDB = [
   },
   {
     "id": "NXNE-011",
-    "category": "papeleria",
+    "category": "OTROS",
     "brand": "NEXTEP",
     "name": "FOLDER ECONOMICO NEXTEP OFICIO MANILA",
     "description": "FOLDER ECONOMICO NEXTEP OFICIO MANILA",
-    "image": "assets/images/products/toner/NXNE_011.webp"
+    "image": ""
   },
   {
     "id": "X113R00663",
@@ -5360,27 +5360,27 @@ const productsDB = [
   },
   {
     "id": "NXNE-014C",
-    "category": "papeleria",
+    "category": "OTROS",
     "brand": "NEXTEP",
     "name": "Folder Colgante Economico Nextep Carta Color Verde Tradicional c/25",
     "description": "Folder Colgante Economico Nextep Carta Color Verde Tradicional c/25",
-    "image": "assets/images/products/toner/NXNE_014C.webp"
+    "image": ""
   },
   {
     "id": "NXNE-014O",
-    "category": "papeleria",
+    "category": "OTROS",
     "brand": "NEXTEP",
     "name": "Folder Colgante Economico Nextep Oficio Color Verde Tradicional c/25",
     "description": "Folder Colgante Economico Nextep Oficio Color Verde Tradicional c/25",
-    "image": "assets/images/products/toner/NXNE_014O.webp"
+    "image": ""
   },
   {
     "id": "NXNE-010A",
-    "category": "papeleria",
+    "category": "OTROS",
     "brand": "NEXTEP",
     "name": "Folder Económico Nextep Carta Azul c/100",
     "description": "Folder Económico Nextep Carta Azul c/100",
-    "image": "assets/images/products/toner/NXNE_010A.webp"
+    "image": ""
   },
   {
     "id": "NXNE-166",
@@ -5408,11 +5408,11 @@ const productsDB = [
   },
   {
     "id": "MSMAGA650GL",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "MSI",
     "name": "Fuente de Poder MSI MAG A650GL 650W 80 PLUS Oro, Modular 240VCA 63HZ",
     "description": "Fuente de Poder MSI MAG A650GL 650W 80 PLUS Oro, Modular 240VCA 63HZ",
-    "image": "assets/images/products/toner/MSMAGA650GL.webp"
+    "image": ""
   },
   {
     "id": "PC-084150",
@@ -5783,11 +5783,11 @@ const productsDB = [
   },
   {
     "id": "NXNE-078",
-    "category": "papeleria",
+    "category": "OTROS",
     "brand": "NEXTEP",
     "name": "JUEGO MARCADOR NEXTEP PARA PIZARRÓN BLANCO 4 COLORES PUNTA GRUESA CINCEL 4mm",
     "description": "JUEGO MARCADOR NEXTEP PARA PIZARRÓN BLANCO 4 COLORES PUNTA GRUESA CINCEL 4mm",
-    "image": "assets/images/products/toner/NXNE_078.webp"
+    "image": ""
   },
   {
     "id": "NXNE-078X",
@@ -6035,11 +6035,11 @@ const productsDB = [
   },
   {
     "id": "NXNE-018",
-    "category": "papeleria",
+    "category": "OTROS",
     "brand": "NEXTEP",
     "name": "LIGAS NEXTEP #18 (8CM) C/100GR",
     "description": "LIGAS NEXTEP #18 (8CM) C/100GR",
-    "image": "assets/images/products/toner/NXNE_018.webp"
+    "image": ""
   },
   {
     "id": "PC-034087",
@@ -6075,19 +6075,19 @@ const productsDB = [
   },
   {
     "id": "NXNE-022A",
-    "category": "papeleria",
+    "category": "OTROS",
     "brand": "NEXTEP",
     "name": "Lapiz Adhesivo Nextep 10 Gramos C/12",
     "description": "Lapiz Adhesivo Nextep 10 Gramos C/12",
-    "image": "assets/images/products/toner/NXNE_022A.webp"
+    "image": ""
   },
   {
     "id": "NXNE-022B",
-    "category": "papeleria",
+    "category": "OTROS",
     "brand": "NEXTEP",
     "name": "Lapiz Adhesivo Nextep 21 Gramos c/6",
     "description": "Lapiz Adhesivo Nextep 21 Gramos c/6",
-    "image": "assets/images/products/toner/NXNE_022B.webp"
+    "image": ""
   },
   {
     "id": "ASL1404FA-NK414W",
@@ -6199,35 +6199,35 @@ const productsDB = [
   },
   {
     "id": "NXNE-005N",
-    "category": "papeleria",
+    "category": "OTROS",
     "brand": "NEXTEP",
     "name": "Libro Nextep Actas 96 Hojas Frances",
     "description": "Libro Nextep Actas 96 Hojas Frances",
-    "image": "assets/images/products/toner/NXNE_005N.webp"
+    "image": ""
   },
   {
     "id": "NXNE-005B",
-    "category": "papeleria",
+    "category": "OTROS",
     "brand": "NEXTEP",
     "name": "Libro Nextep Bitacora de Obras 96 Hojas Frances",
     "description": "Libro Nextep Bitacora de Obras 96 Hojas Frances",
-    "image": "assets/images/products/toner/NXNE_005B.webp"
+    "image": ""
   },
   {
     "id": "NXNE-003C",
-    "category": "papeleria",
+    "category": "OTROS",
     "brand": "NEXTEP",
     "name": "Libro Nextep Raya 192 Hojas Frances",
     "description": "Libro Nextep Raya 192 Hojas Frances",
-    "image": "assets/images/products/toner/NXNE_003C.webp"
+    "image": ""
   },
   {
     "id": "NXNE-003N",
-    "category": "papeleria",
+    "category": "OTROS",
     "brand": "NEXTEP",
     "name": "Libro Nextep Raya 96 Hojas Frances",
     "description": "Libro Nextep Raya 96 Hojas Frances",
-    "image": "assets/images/products/toner/NXNE_003N.webp"
+    "image": ""
   },
   {
     "id": "LPS-CH-19X19.6",
@@ -6271,11 +6271,11 @@ const productsDB = [
   },
   {
     "id": "NXNE-022C",
-    "category": "papeleria",
+    "category": "OTROS",
     "brand": "NEXTEP",
     "name": "Lápiz Adhesivo Nextep 40 Gramos C/6",
     "description": "Lápiz Adhesivo Nextep 40 Gramos C/6",
-    "image": "assets/images/products/toner/NXNE_022C.webp"
+    "image": ""
   },
   {
     "id": "BI930254",
@@ -6287,11 +6287,11 @@ const productsDB = [
   },
   {
     "id": "NXNE-028",
-    "category": "papeleria",
+    "category": "OTROS",
     "brand": "NEXTEP",
     "name": "Lápiz Hexagonal de Madera Nextep #2 C/12",
     "description": "Lápiz Hexagonal de Madera Nextep #2 C/12",
-    "image": "assets/images/products/toner/NXNE_028.webp"
+    "image": ""
   },
   {
     "id": "PC-117223",
@@ -6399,11 +6399,11 @@ const productsDB = [
   },
   {
     "id": "NXNE-076",
-    "category": "papeleria",
+    "category": "OTROS",
     "brand": "NEXTEP",
     "name": "MARCADOR PERM NEXTEP PUNT.CINCEL AZUL 12",
     "description": "MARCADOR PERM NEXTEP PUNT.CINCEL AZUL 12",
-    "image": "assets/images/products/toner/NXNE_076.webp"
+    "image": ""
   },
   {
     "id": "NXNE-074",
@@ -6415,35 +6415,35 @@ const productsDB = [
   },
   {
     "id": "NXNE-075",
-    "category": "papeleria",
+    "category": "OTROS",
     "brand": "NEXTEP",
     "name": "MARCADOR PERM NEXTEP PUNT.CINCEL ROJO 12",
     "description": "MARCADOR PERM NEXTEP PUNT.CINCEL ROJO 12",
-    "image": "assets/images/products/toner/NXNE_075.webp"
+    "image": ""
   },
   {
     "id": "NXNE-072",
-    "category": "papeleria",
+    "category": "OTROS",
     "brand": "NEXTEP",
     "name": "MARCADOR PERMANENTE NEXTEP AZUL C/12",
     "description": "MARCADOR PERMANENTE NEXTEP AZUL C/12",
-    "image": "assets/images/products/toner/NXNE_072.webp"
+    "image": ""
   },
   {
     "id": "NXNE-070",
-    "category": "papeleria",
+    "category": "OTROS",
     "brand": "NEXTEP",
     "name": "MARCADOR PERMANENTE NEXTEP NEGRO C/12",
     "description": "MARCADOR PERMANENTE NEXTEP NEGRO C/12",
-    "image": "assets/images/products/toner/NXNE_070.webp"
+    "image": ""
   },
   {
     "id": "NXNE-071",
-    "category": "papeleria",
+    "category": "OTROS",
     "brand": "NEXTEP",
     "name": "MARCADOR PERMANENTE NEXTEP ROJO C/12",
     "description": "MARCADOR PERMANENTE NEXTEP ROJO C/12",
-    "image": "assets/images/products/toner/NXNE_071.webp"
+    "image": ""
   },
   {
     "id": "ADTAD4S320016G22-SGN",
@@ -7074,35 +7074,35 @@ const productsDB = [
   },
   {
     "id": "MH506731",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "MANHATTAN",
     "name": "Manhattan Adaptador de Red USB 506731, Alámbrico, 100 Mbit/s",
     "description": "Manhattan Adaptador de Red USB 506731, Alámbrico, 100 Mbit/s",
-    "image": "assets/images/products/toner/MH506731.webp"
+    "image": ""
   },
   {
     "id": "NXNE-070B",
-    "category": "papeleria",
+    "category": "OTROS",
     "brand": "NEXTEP",
     "name": "Marcador Nextep Permanente Punta Fina 2mm Blanco C/12",
     "description": "Marcador Nextep Permanente Punta Fina 2mm Blanco C/12",
-    "image": "assets/images/products/toner/NXNE_070B.webp"
+    "image": ""
   },
   {
     "id": "NXNE-070O",
-    "category": "papeleria",
+    "category": "OTROS",
     "brand": "NEXTEP",
     "name": "Marcador Nextep Permanente Punta Fina 2mm Oro C/12",
     "description": "Marcador Nextep Permanente Punta Fina 2mm Oro C/12",
-    "image": "assets/images/products/toner/NXNE_070O.webp"
+    "image": ""
   },
   {
     "id": "NXNE-070P",
-    "category": "papeleria",
+    "category": "OTROS",
     "brand": "NEXTEP",
     "name": "Marcador Nextep Permanente Punta Fina 2mm Plata C/12",
     "description": "Marcador Nextep Permanente Punta Fina 2mm Plata C/12",
-    "image": "assets/images/products/toner/NXNE_070P.webp"
+    "image": ""
   },
   {
     "id": "SANF30004",
@@ -7258,11 +7258,11 @@ const productsDB = [
   },
   {
     "id": "NXNE-020",
-    "category": "papeleria",
+    "category": "OTROS",
     "brand": "NEXTEP",
     "name": "Mica Nextep Económica Protector Hoja Carta Caja c/100 Pzas",
     "description": "Mica Nextep Económica Protector Hoja Carta Caja c/100 Pzas",
-    "image": "assets/images/products/toner/NXNE_020.webp"
+    "image": ""
   },
   {
     "id": "NXNE-106",
@@ -7678,19 +7678,19 @@ const productsDB = [
   },
   {
     "id": "NXNE-055",
-    "category": "papeleria",
+    "category": "OTROS",
     "brand": "NEXTEP",
     "name": "NOTAS ADHESIVAS NEXTEP 3X3 NEON 5 500 HJ",
     "description": "NOTAS ADHESIVAS NEXTEP 3X3 NEON 5 500 HJ",
-    "image": "assets/images/products/toner/NXNE_055.webp"
+    "image": ""
   },
   {
     "id": "NXNE-010",
-    "category": "papeleria",
+    "category": "OTROS",
     "brand": "NEXTEP",
     "name": "NXNE-010 FOLDER ECONOMICO NEXTEP CARTA MANILA",
     "description": "NXNE-010 FOLDER ECONOMICO NEXTEP CARTA MANILA",
-    "image": "assets/images/products/toner/NXNE_010.webp"
+    "image": ""
   },
   {
     "id": "NXNE-500",
@@ -7790,19 +7790,19 @@ const productsDB = [
   },
   {
     "id": "NXNE-056",
-    "category": "papeleria",
+    "category": "OTROS",
     "brand": "NEXTEP",
     "name": "Notas Adhesivas Nextep 2x2 Neon 5 Bloques 500 Hojas",
     "description": "Notas Adhesivas Nextep 2x2 Neon 5 Bloques 500 Hojas",
-    "image": "assets/images/products/toner/NXNE_056.webp"
+    "image": ""
   },
   {
     "id": "NXNE-055A",
-    "category": "papeleria",
+    "category": "OTROS",
     "brand": "NEXTEP",
     "name": "Notas Adhesivas Nextep 3x3 Amarillo 5 Bloques 500 Hojas",
     "description": "Notas Adhesivas Nextep 3x3 Amarillo 5 Bloques 500 Hojas",
-    "image": "assets/images/products/toner/NXNE_055A.webp"
+    "image": ""
   },
   {
     "id": "NXNE-174",
@@ -8067,11 +8067,11 @@ const productsDB = [
   },
   {
     "id": "NXNE-046",
-    "category": "papeleria",
+    "category": "OTROS",
     "brand": "NEXTEP",
     "name": "PORTACLIPS MAGNE NEXTEP GRANDE 10.5CM",
     "description": "PORTACLIPS MAGNE NEXTEP GRANDE 10.5CM",
-    "image": "assets/images/products/toner/NXNE_046.webp"
+    "image": ""
   },
   {
     "id": "PC-084037",
@@ -8163,11 +8163,11 @@ const productsDB = [
   },
   {
     "id": "NXNE-012C",
-    "category": "papeleria",
+    "category": "OTROS",
     "brand": "NEXTEP",
     "name": "Papel Opalina Nextep Blanca c/100 125 gr",
     "description": "Papel Opalina Nextep Blanca c/100 125 gr",
-    "image": "assets/images/products/toner/NXNE_012C.webp"
+    "image": ""
   },
   {
     "id": "PX3R75121",
@@ -8356,11 +8356,11 @@ const productsDB = [
   },
   {
     "id": "NXNE-038H",
-    "category": "papeleria",
+    "category": "OTROS",
     "brand": "NEXTEP",
     "name": "Poliza Cheque Nextep 1/2 Oficio 25 Juegos Duplicado 3 Blocks",
     "description": "Poliza Cheque Nextep 1/2 Oficio 25 Juegos Duplicado 3 Blocks",
-    "image": "assets/images/products/toner/NXNE_038H.webp"
+    "image": ""
   },
   {
     "id": "POL8X228A6",
@@ -8460,11 +8460,11 @@ const productsDB = [
   },
   {
     "id": "NXNE-050",
-    "category": "papeleria",
+    "category": "OTROS",
     "brand": "NEXTEP",
     "name": "REGISTRADOR NEXTEP CARTA BROCHE METALICO",
     "description": "REGISTRADOR NEXTEP CARTA BROCHE METALICO",
-    "image": "assets/images/products/toner/NXNE_050.webp"
+    "image": ""
   },
   {
     "id": "SMSBAVR1200S",
@@ -8589,19 +8589,19 @@ const productsDB = [
   },
   {
     "id": "NXNE-050O",
-    "category": "papeleria",
+    "category": "OTROS",
     "brand": "NEXTEP",
     "name": "Registrador Nextep Oficio Marmoleado Broche Metalico",
     "description": "Registrador Nextep Oficio Marmoleado Broche Metalico",
-    "image": "assets/images/products/toner/NXNE_050O.webp"
+    "image": ""
   },
   {
     "id": "NXNE-023",
-    "category": "papeleria",
+    "category": "OTROS",
     "brand": "NEXTEP",
     "name": "Regla Metálica de Aluminio Nextep 30 cm c/6 Pzas",
     "description": "Regla Metálica de Aluminio Nextep 30 cm c/6 Pzas",
-    "image": "assets/images/products/toner/NXNE_023.webp"
+    "image": ""
   },
   {
     "id": "FOFVR-901M",
@@ -8725,11 +8725,11 @@ const productsDB = [
   },
   {
     "id": "MAESHAV",
-    "category": "papeleria",
+    "category": "OTROS",
     "brand": "MAE",
     "name": "SOBRE MAE HILO CARTA VERTICAL SURTIDO C/12",
     "description": "SOBRE MAE HILO CARTA VERTICAL SURTIDO C/12",
-    "image": "assets/images/products/toner/MAESHAV.webp"
+    "image": ""
   },
   {
     "id": "V49976",
@@ -8813,11 +8813,11 @@ const productsDB = [
   },
   {
     "id": "NXNE-025T",
-    "category": "papeleria",
+    "category": "OTROS",
     "brand": "NEXTEP",
     "name": "Sacapuntas Nextep Metalico Triangular c/24",
     "description": "Sacapuntas Nextep Metalico Triangular c/24",
-    "image": "assets/images/products/toner/NXNE_025T.webp"
+    "image": ""
   },
   {
     "id": "XD70N",
@@ -8837,11 +8837,11 @@ const productsDB = [
   },
   {
     "id": "NXNE-035Q",
-    "category": "papeleria",
+    "category": "OTROS",
     "brand": "NEXTEP",
     "name": "Separador Nextep Economico 15 Divisiones sin Numero",
     "description": "Separador Nextep Economico 15 Divisiones sin Numero",
-    "image": "assets/images/products/toner/NXNE_035Q.webp"
+    "image": ""
   },
   {
     "id": "EL11900",
@@ -8909,27 +8909,27 @@ const productsDB = [
   },
   {
     "id": "NXNE-015G",
-    "category": "papeleria",
+    "category": "OTROS",
     "brand": "NEXTEP",
     "name": "Sobre Bolsa Economico Nextep, Tamaño Coin 5 Solapa Engomada, Paquete c/100",
     "description": "Sobre Bolsa Economico Nextep, Tamaño Coin 5 Solapa Engomada, Paquete c/100",
-    "image": "assets/images/products/toner/NXNE_015G.webp"
+    "image": ""
   },
   {
     "id": "NXNE-016C",
-    "category": "papeleria",
+    "category": "OTROS",
     "brand": "NEXTEP",
     "name": "Sobre Bolsa Económico Nextep Tamaño Carta Solapa Engomada Paquete c/50",
     "description": "Sobre Bolsa Económico Nextep Tamaño Carta Solapa Engomada Paquete c/50",
-    "image": "assets/images/products/toner/NXNE_016C.webp"
+    "image": ""
   },
   {
     "id": "NXNE-016O",
-    "category": "papeleria",
+    "category": "OTROS",
     "brand": "NEXTEP",
     "name": "Sobre Bolsa Económico Nextep Tamaño Oficio Solapa Engomada Paquete c/50",
     "description": "Sobre Bolsa Económico Nextep Tamaño Oficio Solapa Engomada Paquete c/50",
-    "image": "assets/images/products/toner/NXNE_016O.webp"
+    "image": ""
   },
   {
     "id": "SO1000038897",
@@ -10134,11 +10134,11 @@ const productsDB = [
   },
   {
     "id": "MI1T0C0Y0US0",
-    "category": "toner",
+    "category": "OTROS",
     "brand": "MITA",
     "name": "TONER KYOCERA TK-3402",
     "description": "TONER KYOCERA TK-3402",
-    "image": "assets/images/products/toner/MI1T0C0Y0US0.webp"
+    "image": ""
   },
   {
     "id": "LX52D4H00",
@@ -10350,27 +10350,27 @@ const productsDB = [
   },
   {
     "id": "MI0T2MLOU1",
-    "category": "toner",
+    "category": "OTROS",
     "brand": "MITA",
     "name": "TONER MITA TK1147 NEGRO",
     "description": "TONER MITA TK1147 NEGRO",
-    "image": "assets/images/products/toner/MI0T2MLOU1.webp"
+    "image": ""
   },
   {
     "id": "MI1T02RV0US0",
-    "category": "toner",
+    "category": "OTROS",
     "brand": "MITA",
     "name": "TONER MITA TK1152 NEGRO",
     "description": "TONER MITA TK1152 NEGRO",
-    "image": "assets/images/products/toner/MI1T02RV0US0.webp"
+    "image": ""
   },
   {
     "id": "MI1T02S50US1",
-    "category": "toner",
+    "category": "OTROS",
     "brand": "MITA",
     "name": "TONER MITA TK1175 NEGRO",
     "description": "TONER MITA TK1175 NEGRO",
-    "image": "assets/images/products/toner/MI1T02S50US1.webp"
+    "image": ""
   },
   {
     "id": "CA045Y",
@@ -12244,11 +12244,11 @@ const productsDB = [
   },
   {
     "id": "MSMAGB850",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "MSI",
     "name": "Tarjeta Madre MSI MAG B850 TOMAHAWK MAX WIFI, ATX, Socket AM5, AMD B850, 256GB DDR5, HDMI para AMD",
     "description": "Tarjeta Madre MSI MAG B850 TOMAHAWK MAX WIFI, ATX, Socket AM5, AMD B850, 256GB DDR5, HDMI para AMD",
-    "image": "assets/images/products/toner/MSMAGB850.webp"
+    "image": ""
   },
   {
     "id": "AS90YV0J43-MVAA00",
@@ -12737,11 +12737,11 @@ const productsDB = [
   },
   {
     "id": "MI1T02T90USV001",
-    "category": "toner",
+    "category": "OTROS",
     "brand": "MITA",
     "name": "Toner Kyocera TK-3162 Negro",
     "description": "Toner Kyocera TK-3162 Negro",
-    "image": "assets/images/products/toner/MI1T02T90USV001.webp"
+    "image": ""
   },
   {
     "id": "HTCB542A",
@@ -13447,19 +13447,19 @@ const productsDB = [
   },
   {
     "id": "MI1T02R9BUSV",
-    "category": "toner",
+    "category": "OTROS",
     "brand": "MITA",
     "name": "Tóner Kyocera TK-5232 Magenta",
     "description": "Tóner Kyocera TK-5232 Magenta",
-    "image": "assets/images/products/toner/MI1T02R9BUSV.webp"
+    "image": ""
   },
   {
     "id": "MI1T02R90US0",
-    "category": "toner",
+    "category": "OTROS",
     "brand": "MITA",
     "name": "Tóner Kyocera TK-5232K Negro",
     "description": "Tóner Kyocera TK-5232K Negro",
-    "image": "assets/images/products/toner/MI1T02R90US0.webp"
+    "image": ""
   },
   {
     "id": "LX20N40C0",
@@ -13559,11 +13559,11 @@ const productsDB = [
   },
   {
     "id": "MI1T02Y80UX0",
-    "category": "toner",
+    "category": "OTROS",
     "brand": "MITA",
     "name": "Tóner Mita TK-1242 1.5K Páginas Compatible PA2000W/MA2000/MA2000W Color Negro",
     "description": "Tóner Mita TK-1242 1.5K Páginas Compatible PA2000W/MA2000/MA2000W Color Negro",
-    "image": "assets/images/products/toner/MI1T02Y80UX0.webp"
+    "image": ""
   },
   {
     "id": "PARK-219",
@@ -13799,11 +13799,11 @@ const productsDB = [
   },
   {
     "id": "NXNE-038C",
-    "category": "papeleria",
+    "category": "OTROS",
     "brand": "NEXTEP",
     "name": "Vale Provisional De Caja Nextep 1/4 3 Blocks C/50 CU",
     "description": "Vale Provisional De Caja Nextep 1/4 3 Blocks C/50 CU",
-    "image": "assets/images/products/toner/NXNE_038C.webp"
+    "image": ""
   },
   {
     "id": "V98938",

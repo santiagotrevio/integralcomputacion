@@ -1274,7 +1274,7 @@ const productsDB = [
   },
   {
     "id": "MH371315",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "MANHATTAN",
     "name": "CABLE VGA MANHATTAN D15 MACHO MACHO 1.8M",
     "description": "CABLE VGA MANHATTAN D15 MACHO MACHO 1.8M",
@@ -1362,7 +1362,7 @@ const productsDB = [
   },
   {
     "id": "NXNE-013C",
-    "category": "papeleria",
+    "category": "OTROS",
     "brand": "NEXTEP",
     "name": "CARPETA NEXTEP VINIL ARO \"D\" 4\" CARTA BLANCA",
     "description": "CARPETA NEXTEP VINIL ARO \"D\" 4\" CARTA BLANCA",
@@ -3817,7 +3817,7 @@ const productsDB = [
   },
   {
     "id": "MH355650",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "MANHATTAN",
     "name": "Cable Manhattan HDMI Plano Alta Velocidad con Ethernet 15m Color Negro",
     "description": "Cable Manhattan HDMI Plano Alta Velocidad con Ethernet 15m Color Negro",
@@ -3961,7 +3961,7 @@ const productsDB = [
   },
   {
     "id": "NXNE-013T",
-    "category": "papeleria",
+    "category": "OTROS",
     "brand": "NEXTEP",
     "name": "Carpeta Nextep Vinil Aro \"O\" 2.5\" Carta Blanca",
     "description": "Carpeta Nextep Vinil Aro \"O\" 2.5\" Carta Blanca",
@@ -3969,7 +3969,7 @@ const productsDB = [
   },
   {
     "id": "NXNE-013R",
-    "category": "papeleria",
+    "category": "OTROS",
     "brand": "NEXTEP",
     "name": "Carpeta Nextep Vinil Aro \"O\" 3\" Carta Blanca",
     "description": "Carpeta Nextep Vinil Aro \"O\" 3\" Carta Blanca",
@@ -3977,7 +3977,7 @@ const productsDB = [
   },
   {
     "id": "NXNE-013U",
-    "category": "papeleria",
+    "category": "OTROS",
     "brand": "NEXTEP",
     "name": "Carpeta Nextep Vinil O Lomo 1\" Carta Blanca",
     "description": "Carpeta Nextep Vinil O Lomo 1\" Carta Blanca",
@@ -3985,7 +3985,7 @@ const productsDB = [
   },
   {
     "id": "NXNE-013D",
-    "category": "papeleria",
+    "category": "OTROS",
     "brand": "NEXTEP",
     "name": "Carpeta Nextep Vinil O Lomo 2\" Carta Blanca",
     "description": "Carpeta Nextep Vinil O Lomo 2\" Carta Blanca",
@@ -4255,7 +4255,7 @@ const productsDB = [
   },
   {
     "id": "NXNE-012D",
-    "category": "papeleria",
+    "category": "OTROS",
     "brand": "NEXTEP",
     "name": "Cartulina Opalina Nextep Blanca c/100 225 gr",
     "description": "Cartulina Opalina Nextep Blanca c/100 225 gr",
@@ -4543,7 +4543,7 @@ const productsDB = [
   },
   {
     "id": "NXNE-007C",
-    "category": "papeleria",
+    "category": "OTROS",
     "brand": "NEXTEP",
     "name": "Cuaderno Nextep Profesional Cuadro C5 100 Hojas Espiral",
     "description": "Cuaderno Nextep Profesional Cuadro C5 100 Hojas Espiral",
@@ -4551,7 +4551,7 @@ const productsDB = [
   },
   {
     "id": "NXNE-008G",
-    "category": "papeleria",
+    "category": "OTROS",
     "brand": "NEXTEP",
     "name": "Cuaderno Nextep Profesional Cuadro C7 100 Hojas Cosido",
     "description": "Cuaderno Nextep Profesional Cuadro C7 100 Hojas Cosido",
@@ -4559,7 +4559,7 @@ const productsDB = [
   },
   {
     "id": "NXNE-008R",
-    "category": "papeleria",
+    "category": "OTROS",
     "brand": "NEXTEP",
     "name": "Cuaderno Nextep Profesional Raya 100 Hojas Cosido",
     "description": "Cuaderno Nextep Profesional Raya 100 Hojas Cosido",
@@ -4567,7 +4567,7 @@ const productsDB = [
   },
   {
     "id": "NXNE-007R",
-    "category": "papeleria",
+    "category": "OTROS",
     "brand": "NEXTEP",
     "name": "Cuaderno Nextep Profesional Raya 100 Hojas Espiral",
     "description": "Cuaderno Nextep Profesional Raya 100 Hojas Espiral",
@@ -4791,7 +4791,7 @@ const productsDB = [
   },
   {
     "id": "NXNE-019O",
-    "category": "papeleria",
+    "category": "OTROS",
     "brand": "NEXTEP",
     "name": "Dedal Nextep #11 Bolsa c/10",
     "description": "Dedal Nextep #11 Bolsa c/10",
@@ -4799,7 +4799,7 @@ const productsDB = [
   },
   {
     "id": "NXNE-019D",
-    "category": "papeleria",
+    "category": "OTROS",
     "brand": "NEXTEP",
     "name": "Dedal Nextep #12 Bolsa c/10",
     "description": "Dedal Nextep #12 Bolsa c/10",
@@ -4807,7 +4807,7 @@ const productsDB = [
   },
   {
     "id": "NXNE-019T",
-    "category": "papeleria",
+    "category": "OTROS",
     "brand": "NEXTEP",
     "name": "Dedal Nextep #13 Bolsa c/10",
     "description": "Dedal Nextep #13 Bolsa c/10",
@@ -5288,7 +5288,7 @@ const productsDB = [
   },
   {
     "id": "NXNE-011",
-    "category": "papeleria",
+    "category": "OTROS",
     "brand": "NEXTEP",
     "name": "FOLDER ECONOMICO NEXTEP OFICIO MANILA",
     "description": "FOLDER ECONOMICO NEXTEP OFICIO MANILA",
@@ -5360,7 +5360,7 @@ const productsDB = [
   },
   {
     "id": "NXNE-014C",
-    "category": "papeleria",
+    "category": "OTROS",
     "brand": "NEXTEP",
     "name": "Folder Colgante Economico Nextep Carta Color Verde Tradicional c/25",
     "description": "Folder Colgante Economico Nextep Carta Color Verde Tradicional c/25",
@@ -5368,7 +5368,7 @@ const productsDB = [
   },
   {
     "id": "NXNE-014O",
-    "category": "papeleria",
+    "category": "OTROS",
     "brand": "NEXTEP",
     "name": "Folder Colgante Economico Nextep Oficio Color Verde Tradicional c/25",
     "description": "Folder Colgante Economico Nextep Oficio Color Verde Tradicional c/25",
@@ -5376,7 +5376,7 @@ const productsDB = [
   },
   {
     "id": "NXNE-010A",
-    "category": "papeleria",
+    "category": "OTROS",
     "brand": "NEXTEP",
     "name": "Folder Económico Nextep Carta Azul c/100",
     "description": "Folder Económico Nextep Carta Azul c/100",
@@ -5408,7 +5408,7 @@ const productsDB = [
   },
   {
     "id": "MSMAGA650GL",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "MSI",
     "name": "Fuente de Poder MSI MAG A650GL 650W 80 PLUS Oro, Modular 240VCA 63HZ",
     "description": "Fuente de Poder MSI MAG A650GL 650W 80 PLUS Oro, Modular 240VCA 63HZ",
@@ -6035,7 +6035,7 @@ const productsDB = [
   },
   {
     "id": "NXNE-018",
-    "category": "papeleria",
+    "category": "OTROS",
     "brand": "NEXTEP",
     "name": "LIGAS NEXTEP #18 (8CM) C/100GR",
     "description": "LIGAS NEXTEP #18 (8CM) C/100GR",
@@ -6075,7 +6075,7 @@ const productsDB = [
   },
   {
     "id": "NXNE-022A",
-    "category": "papeleria",
+    "category": "OTROS",
     "brand": "NEXTEP",
     "name": "Lapiz Adhesivo Nextep 10 Gramos C/12",
     "description": "Lapiz Adhesivo Nextep 10 Gramos C/12",
@@ -6083,7 +6083,7 @@ const productsDB = [
   },
   {
     "id": "NXNE-022B",
-    "category": "papeleria",
+    "category": "OTROS",
     "brand": "NEXTEP",
     "name": "Lapiz Adhesivo Nextep 21 Gramos c/6",
     "description": "Lapiz Adhesivo Nextep 21 Gramos c/6",
@@ -6199,7 +6199,7 @@ const productsDB = [
   },
   {
     "id": "NXNE-005N",
-    "category": "papeleria",
+    "category": "OTROS",
     "brand": "NEXTEP",
     "name": "Libro Nextep Actas 96 Hojas Frances",
     "description": "Libro Nextep Actas 96 Hojas Frances",
@@ -6207,7 +6207,7 @@ const productsDB = [
   },
   {
     "id": "NXNE-005B",
-    "category": "papeleria",
+    "category": "OTROS",
     "brand": "NEXTEP",
     "name": "Libro Nextep Bitacora de Obras 96 Hojas Frances",
     "description": "Libro Nextep Bitacora de Obras 96 Hojas Frances",
@@ -6215,7 +6215,7 @@ const productsDB = [
   },
   {
     "id": "NXNE-003C",
-    "category": "papeleria",
+    "category": "OTROS",
     "brand": "NEXTEP",
     "name": "Libro Nextep Raya 192 Hojas Frances",
     "description": "Libro Nextep Raya 192 Hojas Frances",
@@ -6223,7 +6223,7 @@ const productsDB = [
   },
   {
     "id": "NXNE-003N",
-    "category": "papeleria",
+    "category": "OTROS",
     "brand": "NEXTEP",
     "name": "Libro Nextep Raya 96 Hojas Frances",
     "description": "Libro Nextep Raya 96 Hojas Frances",
@@ -6271,7 +6271,7 @@ const productsDB = [
   },
   {
     "id": "NXNE-022C",
-    "category": "papeleria",
+    "category": "OTROS",
     "brand": "NEXTEP",
     "name": "Lápiz Adhesivo Nextep 40 Gramos C/6",
     "description": "Lápiz Adhesivo Nextep 40 Gramos C/6",
@@ -6287,7 +6287,7 @@ const productsDB = [
   },
   {
     "id": "NXNE-028",
-    "category": "papeleria",
+    "category": "OTROS",
     "brand": "NEXTEP",
     "name": "Lápiz Hexagonal de Madera Nextep #2 C/12",
     "description": "Lápiz Hexagonal de Madera Nextep #2 C/12",
@@ -7258,7 +7258,7 @@ const productsDB = [
   },
   {
     "id": "NXNE-020",
-    "category": "papeleria",
+    "category": "OTROS",
     "brand": "NEXTEP",
     "name": "Mica Nextep Económica Protector Hoja Carta Caja c/100 Pzas",
     "description": "Mica Nextep Económica Protector Hoja Carta Caja c/100 Pzas",
@@ -7686,7 +7686,7 @@ const productsDB = [
   },
   {
     "id": "NXNE-010",
-    "category": "papeleria",
+    "category": "OTROS",
     "brand": "NEXTEP",
     "name": "NXNE-010 FOLDER ECONOMICO NEXTEP CARTA MANILA",
     "description": "NXNE-010 FOLDER ECONOMICO NEXTEP CARTA MANILA",
@@ -8163,7 +8163,7 @@ const productsDB = [
   },
   {
     "id": "NXNE-012C",
-    "category": "papeleria",
+    "category": "OTROS",
     "brand": "NEXTEP",
     "name": "Papel Opalina Nextep Blanca c/100 125 gr",
     "description": "Papel Opalina Nextep Blanca c/100 125 gr",
@@ -8597,7 +8597,7 @@ const productsDB = [
   },
   {
     "id": "NXNE-023",
-    "category": "papeleria",
+    "category": "OTROS",
     "brand": "NEXTEP",
     "name": "Regla Metálica de Aluminio Nextep 30 cm c/6 Pzas",
     "description": "Regla Metálica de Aluminio Nextep 30 cm c/6 Pzas",
@@ -8813,7 +8813,7 @@ const productsDB = [
   },
   {
     "id": "NXNE-025T",
-    "category": "papeleria",
+    "category": "OTROS",
     "brand": "NEXTEP",
     "name": "Sacapuntas Nextep Metalico Triangular c/24",
     "description": "Sacapuntas Nextep Metalico Triangular c/24",
@@ -8909,7 +8909,7 @@ const productsDB = [
   },
   {
     "id": "NXNE-015G",
-    "category": "papeleria",
+    "category": "OTROS",
     "brand": "NEXTEP",
     "name": "Sobre Bolsa Economico Nextep, Tamaño Coin 5 Solapa Engomada, Paquete c/100",
     "description": "Sobre Bolsa Economico Nextep, Tamaño Coin 5 Solapa Engomada, Paquete c/100",
@@ -8917,7 +8917,7 @@ const productsDB = [
   },
   {
     "id": "NXNE-016C",
-    "category": "papeleria",
+    "category": "OTROS",
     "brand": "NEXTEP",
     "name": "Sobre Bolsa Económico Nextep Tamaño Carta Solapa Engomada Paquete c/50",
     "description": "Sobre Bolsa Económico Nextep Tamaño Carta Solapa Engomada Paquete c/50",
@@ -8925,7 +8925,7 @@ const productsDB = [
   },
   {
     "id": "NXNE-016O",
-    "category": "papeleria",
+    "category": "OTROS",
     "brand": "NEXTEP",
     "name": "Sobre Bolsa Económico Nextep Tamaño Oficio Solapa Engomada Paquete c/50",
     "description": "Sobre Bolsa Económico Nextep Tamaño Oficio Solapa Engomada Paquete c/50",
@@ -10134,7 +10134,7 @@ const productsDB = [
   },
   {
     "id": "MI1T0C0Y0US0",
-    "category": "toner",
+    "category": "OTROS",
     "brand": "MITA",
     "name": "TONER KYOCERA TK-3402",
     "description": "TONER KYOCERA TK-3402",
@@ -10350,7 +10350,7 @@ const productsDB = [
   },
   {
     "id": "MI0T2MLOU1",
-    "category": "toner",
+    "category": "OTROS",
     "brand": "MITA",
     "name": "TONER MITA TK1147 NEGRO",
     "description": "TONER MITA TK1147 NEGRO",
@@ -10358,7 +10358,7 @@ const productsDB = [
   },
   {
     "id": "MI1T02RV0US0",
-    "category": "toner",
+    "category": "OTROS",
     "brand": "MITA",
     "name": "TONER MITA TK1152 NEGRO",
     "description": "TONER MITA TK1152 NEGRO",
@@ -10366,7 +10366,7 @@ const productsDB = [
   },
   {
     "id": "MI1T02S50US1",
-    "category": "toner",
+    "category": "OTROS",
     "brand": "MITA",
     "name": "TONER MITA TK1175 NEGRO",
     "description": "TONER MITA TK1175 NEGRO",
@@ -12244,7 +12244,7 @@ const productsDB = [
   },
   {
     "id": "MSMAGB850",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "MSI",
     "name": "Tarjeta Madre MSI MAG B850 TOMAHAWK MAX WIFI, ATX, Socket AM5, AMD B850, 256GB DDR5, HDMI para AMD",
     "description": "Tarjeta Madre MSI MAG B850 TOMAHAWK MAX WIFI, ATX, Socket AM5, AMD B850, 256GB DDR5, HDMI para AMD",
@@ -12737,7 +12737,7 @@ const productsDB = [
   },
   {
     "id": "MI1T02T90USV001",
-    "category": "toner",
+    "category": "OTROS",
     "brand": "MITA",
     "name": "Toner Kyocera TK-3162 Negro",
     "description": "Toner Kyocera TK-3162 Negro",
@@ -13447,7 +13447,7 @@ const productsDB = [
   },
   {
     "id": "MI1T02R9BUSV",
-    "category": "toner",
+    "category": "OTROS",
     "brand": "MITA",
     "name": "Tóner Kyocera TK-5232 Magenta",
     "description": "Tóner Kyocera TK-5232 Magenta",
@@ -13455,7 +13455,7 @@ const productsDB = [
   },
   {
     "id": "MI1T02R90US0",
-    "category": "toner",
+    "category": "OTROS",
     "brand": "MITA",
     "name": "Tóner Kyocera TK-5232K Negro",
     "description": "Tóner Kyocera TK-5232K Negro",
@@ -13559,7 +13559,7 @@ const productsDB = [
   },
   {
     "id": "MI1T02Y80UX0",
-    "category": "toner",
+    "category": "OTROS",
     "brand": "MITA",
     "name": "Tóner Mita TK-1242 1.5K Páginas Compatible PA2000W/MA2000/MA2000W Color Negro",
     "description": "Tóner Mita TK-1242 1.5K Páginas Compatible PA2000W/MA2000/MA2000W Color Negro",
@@ -13799,7 +13799,7 @@ const productsDB = [
   },
   {
     "id": "NXNE-038C",
-    "category": "papeleria",
+    "category": "OTROS",
     "brand": "NEXTEP",
     "name": "Vale Provisional De Caja Nextep 1/4 3 Blocks C/50 CU",
     "description": "Vale Provisional De Caja Nextep 1/4 3 Blocks C/50 CU",
