@@ -193,6 +193,12 @@
                     <div class="flex items-center"><i class="fa-solid fa-address-book w-6"></i> Directorio Clientes
                     </div>
                 </button>
+                <button onclick="switchTab('ventas')"
+                    class="nav-item tab-btn w-full flex items-center px-3 py-2.5 rounded-xl text-secondary justify-between text-left"
+                    data-target="ventas">
+                    <div class="flex items-center"><i class="fa-solid fa-chart-line w-6"></i> Ventas Importadas
+                    </div>
+                </button>
 
                 <p class="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-2 mt-6 px-3">Retorno & Admin
                 </p>
@@ -529,6 +535,62 @@
                         </div>
                         <div id="branchesList" class="space-y-3">
                             <!-- JS Injection -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TAB 7: VENTAS IMPORTADAS -->
+                <div id="tab-ventas" class="tab-pane">
+                    <div class="flex justify-between items-center mb-6">
+                        <div>
+                            <h2 class="text-xl font-bold text-primary">Ventas Importadas (Histórico)</h2>
+                            <p class="text-sm text-secondary">Visualiza y analiza el historial de ventas o sube nuevos
+                                cortes desde CSV.</p>
+                        </div>
+                        <label
+                            class="bg-primary hover:bg-slate-800 text-white font-semibold py-2 px-5 rounded-full shadow-md transition-transform active:scale-95 flex items-center gap-2 cursor-pointer">
+                            <i class="fa-solid fa-file-csv"></i> Importar CSV
+                            <input type="file" id="salesCsvInput" accept=".csv" class="hidden"
+                                onchange="handleFileUpload(event)">
+                        </label>
+                    </div>
+
+                    <!-- Métricas Rápidas de Ventas -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                        <div class="card p-5">
+                            <p class="text-xs text-secondary font-medium mb-1">Total Facturado</p>
+                            <h3 class="text-2xl font-bold text-success mb-1" id="sv_total">$0.00</h3>
+                        </div>
+                        <div class="card p-5">
+                            <p class="text-xs text-secondary font-medium mb-1">Total de Ventas</p>
+                            <h3 class="text-2xl font-bold text-primary mb-1" id="sv_count">0</h3>
+                        </div>
+                        <div class="card p-5">
+                            <p class="text-xs text-secondary font-medium mb-1">Cliente Principal</p>
+                            <h3 class="text-xl font-bold text-primary mb-1 truncate" id="sv_top_client">-</h3>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-2xl shadow-sm border border-border overflow-hidden">
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-left border-collapse">
+                                <thead>
+                                    <tr
+                                        class="bg-slate-50 border-b border-border text-xs uppercase tracking-wider text-slate-500 font-bold">
+                                        <th class="p-4">Factura</th>
+                                        <th class="p-4">Fecha</th>
+                                        <th class="p-4">Cliente</th>
+                                        <th class="p-4 text-right">Monto Pagado</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="importedSalesList" class="divide-y divide-border text-sm">
+                                    <!-- Injection via JS -->
+                                    <tr>
+                                        <td colspan="4" class="p-8 text-center text-slate-400">Cargando base de
+                                            ventas...</td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>

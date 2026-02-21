@@ -58,7 +58,7 @@ async function apiFetch(url, options = {}) {
 
 async function initCRM() {
     console.log("Inicializando SDK Comercial MVC...");
-    await Promise.all([loadCRMMetrics(), loadDeals(), loadTasks(), loadClients(), loadBranches()]);
+    await Promise.all([loadCRMMetrics(), loadDeals(), loadTasks(), loadClients(), loadBranches(), loadImportedSales()]);
     // Default Tab is Comando
     switchTab('comando');
 }
@@ -991,6 +991,154 @@ async function geocodeBranch() {
         alert("No se encontró la dirección exacta. Intenta limpiar el texto.");
         btn.innerHTML = ogHtml;
     }
+}
+
+// ==== VENTAS IMPORTADAS 2025 ====
+let crmImportedSales = [];
+
+async function loadImportedSales() {
+    try {
+        const res = await apiFetch('/api/crm/sales');
+        const result = await res.json();
+        crmImportedSales = result.data || [];
+        renderImportedSales();
+    } catch (err) {
+        console.error("Error loaded imported sales", err);
+    }
+}
+
+function renderImportedSales() {
+    const list = document.getElementById('importedSalesList');
+    if (!list) return;
+    list.innerHTML = '';
+
+    if (crmImportedSales.length === 0) {
+        list.innerHTML = '<tr><td colspan="4" class="p-8 text-center text-slate-400">Comienza importando tu primer archivo CSV.</td></tr>';
+        document.getElementById('sv_total').innerText = '$0.00';
+        document.getElementById('sv_count').innerText = '0';
+        document.getElementById('sv_top_client').innerText = '-';
+        return;
+    }
+
+    let total = 0;
+    const clientFreq = {};
+
+    crmImportedSales.forEach(s => {
+        total += (s.amount || 0);
+        const cl = s.client_name_raw || 'Desconocido';
+        clientFreq[cl] = (clientFreq[cl] || 0) + (s.amount || 0);
+
+        list.innerHTML += `
+            <tr class="hover:bg-slate-50 transition-colors">
+                <td class="p-4 font-mono font-bold text-slate-700">${s.invoice_no}</td>
+                <td class="p-4 text-slate-500">${s.sale_date}</td>
+                <td class="p-4 text-primary font-medium truncate max-w-[200px]" title="${cl}">${cl}</td>
+                <td class="p-4 text-right font-bold text-success">${formatCurrency(s.amount)}</td>
+            </tr>
+        `;
+    });
+
+    let topClient = '-';
+    let topAmount = 0;
+    for (const c in clientFreq) {
+        if (clientFreq[c] > topAmount) {
+            topAmount = clientFreq[c];
+            topClient = c;
+        }
+    }
+
+    document.getElementById('sv_total').innerText = formatCurrency(total);
+    document.getElementById('sv_count').innerText = crmImportedSales.length;
+    document.getElementById('sv_top_client').innerText = topClient;
+}
+
+function handleFileUpload(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    if (!file.name.toLowerCase().endsWith('.csv')) {
+        return alert("Por favor suba un archivo en formato CSV válido.");
+    }
+
+    const reader = new FileReader();
+    reader.onload = async function (e) {
+        const text = e.target.result;
+        const lines = text.split('\\n');
+
+        const sales = [];
+
+        for (const line of lines) {
+            if (!line.trim()) continue;
+
+            // Intento de limpiar el CSV sabiendo formato básico de comas
+            const cols = line.split(',');
+            if (cols.length >= 4) {
+                const fac = cols[0].trim().replace(/['"]/g, '');
+                const fec = cols[1].trim().replace(/['"]/g, '');
+                const cli = cols.slice(2, cols.length - 1).join(', ').trim().replace(/['"]/g, ''); // Para casos con comas en nombres
+                let pagRow = cols[cols.length - 1].trim().replace(/['"]/g, '');
+
+                // Limpieza de texto de pago
+                const pag = parseFloat(pagRow);
+
+                // Si la factura es un número y tiene monto válido (Ignoramos headers)
+                if (!isNaN(pag) && /^\d+$/.test(fac)) {
+
+                    let f_date = fec;
+                    let f_parts = fec.split('/');
+                    if (f_parts.length === 3) {
+                        let y = f_parts[2].length === 2 ? '20' + f_parts[2] : f_parts[2];
+                        f_date = `${y}-${f_parts[1].padStart(2, '0')}-${f_parts[0].padStart(2, '0')}`;
+                    } else if (fec.includes('-')) {
+                        let alt_parts = fec.split('-');
+                        if (alt_parts.length === 3) {
+                            if (alt_parts[0].length === 4) { f_date = fec; } // Ya es yyyy-mm-dd
+                            else {
+                                let y = alt_parts[2].length === 2 ? '20' + alt_parts[2] : alt_parts[2];
+                                f_date = `${y}-${alt_parts[1].padStart(2, '0')}-${alt_parts[0].padStart(2, '0')}`;
+                            }
+                        }
+                    }
+
+                    sales.push({
+                        invoice_no: fac,
+                        sale_date: f_date,
+                        client_name_raw: cli,
+                        amount: pag
+                    });
+                }
+            }
+        }
+
+        if (sales.length === 0) {
+            event.target.value = '';
+            return alert("No se encontraron registros válidos de ventas. Asegúrese de que el formato sea FACTURA,FECHA,CLIENTE,PAGADO.");
+        }
+
+        event.target.value = ''; // Reset input
+
+        if (!confirm(`Se encontraron ${sales.length} ventas.\nSe importarán a la base de datos y se extraerán inteligentemente los clientes nuevos.\n\n¿Deseas continuar?`)) return;
+
+        try {
+            const res = await apiFetch('/api/crm/sales/import', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ sales })
+            });
+            const data = await res.json();
+            if (data.success) {
+                alert(`¡Éxito! Se procesaron ${data.processed} ventas y sus respectivos clientes agregados al directorio.`);
+                await loadImportedSales();
+                await loadClients(); // Reload clients to show new ones!
+            } else {
+                alert("Ocurrió un error. \\n" + data.error);
+            }
+        } catch (err) {
+            alert("Error conectando con el servidor durante la importación.");
+            console.error(err);
+        }
+    };
+    reader.readAsText(file);
 }
 
 // Shared Formatting

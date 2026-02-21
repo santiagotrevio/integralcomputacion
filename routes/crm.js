@@ -230,5 +230,38 @@ router.delete('/branches/:id', (req, res) => {
     });
 });
 
+// --- DATOS IMPORTADOS (VENTAS HISTÓRICAS) ---
+router.get('/sales', (req, res) => {
+    db.all(`SELECT * FROM imported_sales ORDER BY sale_date DESC, id DESC`, [], (err, rows) => {
+        // Ignoramos error si no existe la tabla aun para fallbacks
+        if (err) return res.json({ data: [] });
+        res.json({ data: rows });
+    });
+});
+
+router.post('/sales/import', (req, res) => {
+    const { sales } = req.body;
+    if (!sales || !Array.isArray(sales)) return res.status(400).json({ error: 'Invalid payload' });
+
+    db.serialize(() => {
+        const stmtClient = db.prepare(`INSERT OR IGNORE INTO clients (name, company) VALUES (?, ?)`);
+        const stmtSale = db.prepare(`INSERT OR REPLACE INTO imported_sales (invoice_no, sale_date, client_name_raw, amount) VALUES (?, ?, ?, ?)`);
+
+        sales.forEach(s => {
+            if (s.client_name_raw) {
+                // Inteligencia de unificación: Agregamos al cliente si no existe por nombre
+                stmtClient.run(s.client_name_raw, s.client_name_raw);
+            }
+            stmtSale.run(s.invoice_no, s.sale_date, s.client_name_raw, s.amount);
+        });
+
+        stmtClient.finalize();
+        stmtSale.finalize((err) => {
+            if (err) return res.status(500).json({ error: 'Fallo al importar las ventas.' });
+            res.json({ success: true, processed: sales.length });
+        });
+    });
+});
+
 module.exports = router;
 
