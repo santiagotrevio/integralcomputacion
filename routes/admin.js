@@ -440,7 +440,6 @@ router.put('/clients/:id', authMiddleware, (req, res) => {
             res.json({ success: true });
         });
 });
-
 // Agregar cliente manualmente
 router.post('/clients', authMiddleware, (req, res) => {
     const { name, company, email, phone } = req.body;
@@ -456,6 +455,33 @@ router.post('/clients', authMiddleware, (req, res) => {
             if (err) return res.status(500).json({ error: err.message });
             res.json({ success: true, id: this.lastID });
         });
+});
+
+// Sync bulk contacts from localStorage to shared CRM
+router.post('/clients/sync', authMiddleware, (req, res) => {
+    const { clients } = req.body;
+    if (!clients || !Array.isArray(clients)) return res.json({ success: true });
+
+    const stmt = db.prepare(`
+        INSERT INTO clients (name, email, phone) VALUES (?, ?, ?)
+        ON CONFLICT(name) DO UPDATE SET 
+        email = COALESCE(NULLIF(excluded.email, ''), email),
+        phone = COALESCE(NULLIF(excluded.phone, ''), phone)
+    `);
+
+    db.serialize(() => {
+        db.run("BEGIN TRANSACTION");
+        for (const c of clients) {
+            if (c.name && c.name.trim() !== 'Cliente') {
+                stmt.run(c.name.trim(), c.email || '', c.phone || '');
+            }
+        }
+        stmt.finalize();
+        db.run("COMMIT", (err) => {
+            if (err) return res.status(500).json({ error: err.message });
+            res.json({ success: true, synced: clients.length });
+        });
+    });
 });
 
 // Eliminar cliente (y sus cotizaciones si se desea)

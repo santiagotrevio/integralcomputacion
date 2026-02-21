@@ -1766,6 +1766,25 @@
         async function loadInitialData() {
             loadProducts();
             loadClients();
+
+            // Sincronizar contactos locales de cada dispositivo hacia el backend
+            // de modo que todos los vendedores puedan ver y autocompletar la cartera compartida
+            if (!localStorage.getItem('_crmSynced')) {
+                const local = JSON.parse(localStorage.getItem('crmClients') || '[]');
+                if (local.length > 0) {
+                    try {
+                        const r = await apiFetch('/api/clients/sync', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ clients: local })
+                        });
+                        if (r.ok) {
+                            localStorage.setItem('_crmSynced', 'true');
+                            setTimeout(loadClientCRM, 1000); // Reload the datalist with the newly merged data
+                        }
+                    } catch (e) { }
+                }
+            }
         }
 
         async function loadProducts() {
@@ -2095,6 +2114,15 @@
             // Keep max 200 contacts
             saved = saved.slice(0, 200);
             localStorage.setItem('crmClients', JSON.stringify(saved));
+
+            // Sincronizar inmediatamente al servidor para que el resto del equipo lo vea
+            try {
+                apiFetch('/api/clients', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ name, email, phone })
+                });
+            } catch (e) { }
         }
 
         // --- FORMAL SHEET ---
