@@ -1103,8 +1103,8 @@
 
             .pv-logo {
                 width: auto;
-                height: 55pt;
-                /* Fijamos la altura para alinear perfecto y no muy gigantesco */
+                height: 100%;
+                max-height: 90pt;
                 object-fit: contain;
                 object-position: left center;
                 display: block;
@@ -2500,9 +2500,12 @@
                 const blob = await response.blob();
                 const file = new File([blob], pdfName + '.pdf', { type: 'application/pdf' });
 
-                // iOS PWA + Safari: usar Share Sheet nativo (funciona en todo contexto)
+                // iOS PWA + Safari: usar Share Sheet nativo. 
+                // Android PWA: La Web Share API tiene un bug silencioso con WhatsApp al enviar archivos (Blobs). Forzamos descarga.
                 const isMobile = /iPad|iPhone|iPod|Android/.test(navigator.userAgent);
-                if (isMobile && navigator.canShare && navigator.canShare({ files: [file] })) {
+                const isAndroid = /Android/i.test(navigator.userAgent);
+
+                if (isMobile && !isAndroid && navigator.canShare && navigator.canShare({ files: [file] })) {
                     try {
                         await navigator.share({ files: [file], title: pdfName });
                     } catch (shareErr) {
@@ -2532,12 +2535,11 @@
                             btnOverlay.querySelector('.cancel-btn').onclick = () => btnOverlay.remove();
                             document.body.appendChild(btnOverlay);
                         } else if (shareErr.name !== 'AbortError') {
-                            // Mostrar mensaje solo si fue un error real y no que el usuario canceló
                             showToast('❌ Error al compartir');
                         }
                     }
                 } else {
-                    // Desktop: descarga directa
+                    // Android o Desktop: descarga directa nativa (100% confiable)
                     const url = URL.createObjectURL(blob);
                     const a = document.createElement('a');
                     a.href = url;
@@ -2545,8 +2547,8 @@
                     document.body.appendChild(a);
                     a.click();
                     a.remove();
-                    setTimeout(() => URL.revokeObjectURL(url), 5000);
-                    showToast('✅ PDF descargado');
+                    setTimeout(() => URL.revokeObjectURL(url), 7000);
+                    showToast(isAndroid ? '✅ PDF descargado en tu celular' : '✅ PDF descargado');
                 }
 
             } catch (err) {
