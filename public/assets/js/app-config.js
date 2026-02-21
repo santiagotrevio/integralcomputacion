@@ -1,7 +1,10 @@
 // Archivo de Configuración Global de la Aplicación
-// Aquí se definen variables y constantes que pueden ser accedidas por cualquier módulo.
 
 const AppConfig = {
+    // Para Geocodificación Exacta e Inteligente (Google Maps)
+    // Instrucciones: Pega tu "API Key" de Google Cloud Console aquí adentro de las comillas.
+    googleMapsApiKey: '',
+
     // Sucursales Propias (Para mostrar en Mapas, Cotizaciones, etc)
     branches: [
         {

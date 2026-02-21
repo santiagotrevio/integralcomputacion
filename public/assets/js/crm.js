@@ -896,6 +896,30 @@ async function deleteBranch(id) {
 // --- GEOCODING ENGINE ---
 async function doGeocodeSearch(rawAddress) {
     if (!rawAddress) return null;
+
+    // 1. EL "JEFE": Usar Google Maps Geocoding si se configuró la llave
+    if (typeof AppConfig !== 'undefined' && AppConfig.googleMapsApiKey) {
+        try {
+            const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(rawAddress)}&key=${AppConfig.googleMapsApiKey}`;
+            const res = await fetch(url);
+            const data = await res.json();
+
+            if (data.status === 'OK' && data.results.length > 0) {
+                return {
+                    lat: data.results[0].geometry.location.lat,
+                    lon: data.results[0].geometry.location.lng
+                };
+            } else if (data.status === 'REQUEST_DENIED') {
+                console.warn("Google Maps rechazó tu API Key. Revisa que sea correcta y tenga permitida la api: 'Geocoding API'. Nos pasamos a OpenStreetMap de respaldo por ahora.");
+            } else {
+                console.warn("Google Maps no encontró resultado preciso. Response status:", data.status);
+            }
+        } catch (e) {
+            console.error("Fallo grave en conector de Google Maps", e);
+        }
+    }
+
+    // 2. EL "SOLDADO": OpenStreetMap Público (Se usa como Fallback si Google Maps no está configurado o falla)
     let clean = rawAddress.trim().replace(/,\s*$/, '');
 
     let q1 = clean;
@@ -907,23 +931,24 @@ async function doGeocodeSearch(rawAddress) {
     let q3 = clean.split(',')[0] + ', Jalisco, Mexico';
 
     const queries = [q1, q2, q3];
-    // Remove duplicates
+    // Eliminar repetidos
     const uniqueQueries = [...new Set(queries)];
 
     for (let q of uniqueQueries) {
         try {
-            // Se le agrega un email ficticio para cumplir ToS de Nominatim y evitar bloqueos
+            // El correo ayuda a no ser bloqueado por OpenStreetMap
             const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(q)}&limit=1&email=admin@integralcomputacion.com.mx`;
             const res = await fetch(url, { headers: { 'Accept-Language': 'es-MX' } });
 
-            if (!res.ok) continue; // Si tira 403 o 429
+            if (!res.ok) continue;
 
             const data = await res.json();
-            if (data && data.length > 0) return data[0];
+            if (data && data.length > 0) return { lat: data[0].lat, lon: data[0].lon };
         } catch (e) {
-            console.log("Intento fallido de geocodificación para:", q);
+            console.log("Intento fallido de geocodificación gratuita para:", q);
         }
     }
+
     return null;
 }
 
