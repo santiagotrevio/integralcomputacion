@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>CRM & Ventas | Integral Computación</title>
+    <title>Dashboard Comercial | Integral Computación</title>
     <!-- FontAwesome & Fonts -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -54,7 +54,9 @@
         /* TOP BAR */
         .topbar {
             height: 60px;
-            background: var(--card-bg);
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             border-bottom: 1px solid var(--border);
             display: flex;
             align-items: center;
@@ -65,11 +67,15 @@
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
         }
 
+        body.dark-mode .topbar {
+            background: rgba(28, 28, 30, 0.85);
+        }
+
         .topbar-back {
             background: transparent;
             border: none;
             color: var(--accent);
-            font-size: 16px;
+            font-size: 15px;
             font-weight: 600;
             cursor: pointer;
             display: flex;
@@ -88,12 +94,11 @@
 
         .container {
             max-width: 1400px;
-            margin: 40px auto;
+            margin: 20px auto 40px;
             padding: 0 40px;
             width: 100%;
         }
 
-        /* Botones primarios */
         .primary {
             background-color: var(--accent);
             color: white;
@@ -129,6 +134,73 @@
         body.dark-mode .secondary:hover {
             background-color: rgba(255, 255, 255, 0.1);
         }
+
+        /* SEGMENTED CONTROL / TABS */
+        .crm-tabs-nav {
+            display: flex;
+            background: rgba(0, 0, 0, 0.04);
+            padding: 6px;
+            border-radius: 14px;
+            margin-bottom: 24px;
+            gap: 4px;
+        }
+
+        body.dark-mode .crm-tabs-nav {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .crm-tab-btn {
+            flex: 1;
+            padding: 10px 16px;
+            border: none;
+            background: transparent;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 14px;
+            color: var(--subtext);
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .crm-tab-btn:hover {
+            color: var(--text);
+            background: rgba(0, 0, 0, 0.02);
+        }
+
+        body.dark-mode .crm-tab-btn:hover {
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .crm-tab-btn.active {
+            background: var(--card-bg);
+            color: var(--text);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+
+        .crm-tab-pane {
+            display: none;
+        }
+
+        .crm-tab-pane.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(4px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
     </style>
 </head>
 
@@ -136,60 +208,159 @@
 
     <header class="topbar">
         <a href="home.html" class="topbar-back"><i class="fa-solid fa-chevron-left"></i> Panel Principal</a>
-        <h1>Marketing & Ventas B2B</h1>
+        <h1>Dashboard Comercial Estratégico</h1>
     </header>
 
     <div class="container">
-        <!-- VIEW: CRM DASHBOARD -->
-        <div id="viewCRM" class="view-container active">
-            <div class="crm-header">
-                <div class="crm-title-group">
-                    <div class="crm-icon"><i class="fa-solid fa-chart-line"></i></div>
+        <!-- HEADER & ACTIONS -->
+        <div class="crm-header">
+            <div class="crm-title-group">
+                <div class="crm-icon" style="background: linear-gradient(135deg, #ff9f0a, #ff3b30);"><i
+                        class="fa-solid fa-briefcase"></i></div>
+                <div>
+                    <h2>Ventas y CRM Territorial</h2>
+                    <p>Inteligencia operativa en tiempo real para negocios B2B.</p>
+                </div>
+            </div>
+            <div class="crm-actions">
+                <button class="primary" onclick="openNewDealModal()"><i class="fa-solid fa-plus"></i> Nuevo
+                    Prospecto</button>
+            </div>
+        </div>
+
+        <!-- 1. VISTA EJECUTIVA (TOP) -->
+        <div class="crm-metrics-grid" style="grid-template-columns: repeat(5, 1fr);">
+            <div class="crm-metric-card blur-card" style="padding: 16px;">
+                <div class="cm-info" style="width: 100%;">
+                    <h3>Ventas del Mes</h3>
+                    <div class="cm-val" id="metricVentasMes" style="font-size: 24px;">$0</div>
+                    <div style="font-size: 11px; color:#34c759; margin-top:6px; font-weight:700;"><i
+                            class="fa-solid fa-arrow-up"></i> Rentabilidad Activa</div>
+                </div>
+            </div>
+            <div class="crm-metric-card blur-card" style="padding: 16px;">
+                <div class="cm-info" style="width: 100%;">
+                    <h3>Forecast a 30 Días</h3>
+                    <div class="cm-val" id="metricForecast" style="font-size: 24px; color:#ff9f0a;">$0</div>
+                    <div style="font-size: 11px; opacity:0.6; margin-top:6px;">Basado en probabilidad</div>
+                </div>
+            </div>
+            <div class="crm-metric-card blur-card" style="padding: 16px;">
+                <div class="cm-info" style="width: 100%;">
+                    <h3>Valor del Pipeline</h3>
+                    <div class="cm-val" id="metricPipeline" style="font-size: 24px; color:var(--apple-blue);">$0</div>
+                    <div style="font-size: 11px; opacity:0.6; margin-top:6px;">Todos los prospectos activos</div>
+                </div>
+            </div>
+            <div class="crm-metric-card blur-card" style="padding: 16px;">
+                <div class="cm-info" style="width: 100%;">
+                    <h3>Conversión Media</h3>
+                    <div class="cm-val" id="metricConv" style="font-size: 24px;">0%</div>
+                    <div style="font-size: 11px; opacity:0.6; margin-top:6px;">Efectividad de cierre</div>
+                </div>
+            </div>
+            <div class="crm-metric-card blur-card" style="padding: 16px;">
+                <div class="cm-info" style="width: 100%;">
+                    <h3>Ticket Promedio</h3>
+                    <div class="cm-val" id="metricTicket" style="font-size: 24px;">$0</div>
+                    <div style="font-size: 11px; opacity:0.6; margin-top:6px;">Ventas ganadas / cierres</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TABS NAV -->
+        <div class="crm-tabs-nav">
+            <button class="crm-tab-btn active" onclick="switchCRMTab('kanban')"><i class="fa-solid fa-layer-group"></i>
+                Pipeline Kanban</button>
+            <button class="crm-tab-btn" onclick="switchCRMTab('tasks')"><i class="fa-solid fa-list-check"></i> Panel de
+                Seguimiento</button>
+            <button class="crm-tab-btn" onclick="switchCRMTab('map')"><i class="fa-solid fa-map-location-dot"></i> Vista
+                Geográfica</button>
+            <button class="crm-tab-btn" onclick="switchCRMTab('intel')"><i class="fa-solid fa-brain"></i> Inteligencia
+                Comercial</button>
+        </div>
+
+        <!-- TAB: KANBAN -->
+        <div id="tab-kanban" class="crm-tab-pane active">
+            <div class="crm-kanban blur-card" style="overflow-x: auto;">
+                <div class="kanban-board" id="kanbanBoard">
+                    <!-- JS Fills Board -->
+                    <div style="text-align: center; opacity: 0.5; padding: 40px; width: 100%;">Cargando tablero...</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB: TASKS -->
+        <div id="tab-tasks" class="crm-tab-pane">
+            <div class="crm-visual-grid" style="grid-template-columns: 1fr 1fr;">
+                <div class="blur-card">
+                    <h3 style="margin-top:0; font-size:18px;"><i class="fa-solid fa-calendar-day"></i> Tareas de Hoy &
+                        Atrasadas</h3>
+                    <div id="tasksList" style="margin-top:20px; display:flex; flex-direction:column; gap:12px;">
+                        <!-- JS Lists -->
+                        <div style="opacity: 0.5; text-align:center;">Al día. No hay pendientes atrasados.</div>
+                    </div>
+                </div>
+                <div class="blur-card">
+                    <h3 style="margin-top:0; font-size:18px;"><i class="fa-solid fa-clock"></i> Próximos Seguimientos
+                        Programados</h3>
+                    <div id="upcomingTasksList" style="margin-top:20px; display:flex; flex-direction:column; gap:12px;">
+                        <!-- JS Lists -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB: MAPA -->
+        <div id="tab-map" class="crm-tab-pane">
+            <div class="blur-card"
+                style="padding: 0; overflow: hidden; height: 500px; display:flex; flex-direction: column;">
+                <div
+                    style="padding:20px 24px; border-bottom: 1px solid rgba(0,0,0,0.05); display:flex; justify-content:space-between; align-items:center;">
+                    <h3 style="margin:0; font-size:18px;"><i class="fa-solid fa-map-pin"></i> Clusters Territoriales
+                        (Guadalajara ZMG)</h3>
                     <div>
-                        <h2>CRM & Ventas</h2>
-                        <p>Convierte prospectos locales en clientes fieles.</p>
+                        <select id="mapFilter" class="secondary" onchange="renderMapPins()"
+                            style="padding: 6px 12px; font-size:13px;">
+                            <option value="all">Todas las Etapas</option>
+                            <option value="prospect">Prospectos Nuevos</option>
+                            <option value="quote">Cotizados</option>
+                            <option value="negotiation">En Negociación</option>
+                        </select>
                     </div>
                 </div>
-                <div class="crm-actions">
-                    <button class="primary" onclick="openNewDealModal()"><i class="fa-solid fa-plus"></i> Nuevo
-                        Trato</button>
-                    <button class="secondary" onclick="initCRM()"><i class="fa-solid fa-rotate"></i> Actualizar</button>
+                <div id="mapContainer"
+                    style="flex:1; background: #e0e0e0; display:flex; align-items:center; justify-content:center; color:#555; position:relative;">
+                    <div style="text-align:center;">
+                        <i class="fa-solid fa-map" style="font-size: 40px; margin-bottom: 15px; opacity:0.5;"></i>
+                        <p>Simulador Estático de Zonas para Beta.<br>En producción aquí se clava el iframe de
+                            Mapbox/GoogleMaps API.</p>
+                    </div>
+                    <!-- ZONES MOCKUPS -->
+                    <div id="mapZonesArea" style="position:absolute; top:0; left:0; right:0; bottom:0;"></div>
                 </div>
             </div>
+        </div>
 
-            <!-- Dashboard Metrics -->
-            <div class="crm-metrics-grid">
-                <div class="crm-metric-card blur-card">
-                    <div class="cm-icon" style="color:#34c759;"><i class="fa-solid fa-sack-dollar"></i></div>
-                    <div class="cm-info">
-                        <h3>Ventas Cerradas</h3>
-                        <div class="cm-val" id="crmWonVal">$0.00</div>
+        <!-- TAB: INTELIGENCIA -->
+        <div id="tab-intel" class="crm-tab-pane">
+            <div class="crm-visual-grid" style="grid-template-columns: 1fr 1fr;">
+                <div class="blur-card">
+                    <h3 style="margin-top:0; font-size:18px;"><i class="fa-solid fa-filter"></i> Origen de Conversión
+                    </h3>
+                    <p style="font-size:13px; opacity:0.6;">¿De dónde están saliendo tus prospectos rentables?</p>
+                    <div style="margin-top:24px; height: 250px;">
+                        <canvas id="chartOrigen"></canvas>
                     </div>
                 </div>
-                <div class="crm-metric-card blur-card">
-                    <div class="cm-icon" style="color:var(--apple-blue);"><i class="fa-solid fa-handshake"></i></div>
-                    <div class="cm-info">
-                        <h3>Pipeline Activo</h3>
-                        <div class="cm-val" id="crmActiveDeals">0 Tratos</div>
-                    </div>
-                </div>
-                <div class="crm-metric-card blur-card">
-                    <div class="cm-icon" style="color:#ff9f0a;"><i class="fa-solid fa-bolt"></i></div>
-                    <div class="cm-info">
-                        <h3>Turnover de Estatus</h3>
-                        <div class="cm-val" id="crmConvRate">0%</div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Visualization Area -->
-            <div class="crm-visual-grid">
-                <!-- Kanban Board -->
-                <div class="crm-kanban blur-card" style="overflow-x: auto;">
-                    <h3 style="margin-top:0; font-size:18px;"><i class="fa-solid fa-layer-group"></i> Flujo de Negocio
-                        Visual</h3>
-                    <div class="kanban-board" id="kanbanBoard">
-                        <!-- Creado por JS -->
+                <div class="blur-card" style="border-left: 5px solid #ff3b30;">
+                    <h3 style="margin-top:0; font-size:18px; color:#ff3b30;"><i
+                            class="fa-solid fa-skull-crossbones"></i> Peligro: Inactivos (+45 días)</h3>
+                    <p style="font-size:13px; opacity:0.6;">Negocios que llevan un mes y medio sin que nadie les hable.
+                    </p>
+                    <div id="inactiveClientsBox"
+                        style="margin-top:20px; display:flex; flex-direction:column; gap:12px;">
+                        <!-- JS fills -->
                     </div>
                 </div>
             </div>
@@ -200,18 +371,15 @@
     <script>
         if (localStorage.getItem('admin-theme') === 'dark') document.body.classList.add('dark-mode');
 
-        // Provide API Fetch para el CRM
         const TOKEN_KEY = 'admin_token';
-        let adminToken = localStorage.getItem(TOKEN_KEY) || sessionStorage.getItem('admin-token'); // Check both for compatibility
+        let adminToken = localStorage.getItem(TOKEN_KEY) || sessionStorage.getItem('admin-token');
 
         async function apiFetch(url, options = {}) {
             if (!options.headers) options.headers = {};
             if (adminToken) {
                 options.headers['Authorization'] = `Bearer ${adminToken}`;
             }
-
             const res = await fetch(url, options);
-
             if (res.status === 401) {
                 alert("Sesión expirada. Redirigiendo al inicio de sesión...");
                 window.location.href = 'home.html';
@@ -220,15 +388,26 @@
             return res;
         }
 
-        // Initialize CRM Automatically
-        document.addEventListener('DOMContentLoaded', () => {
-            if (typeof initCRM === 'function') {
-                initCRM();
+        function switchCRMTab(tabId) {
+            document.querySelectorAll('.crm-tab-pane').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.crm-tab-btn').forEach(el => el.classList.remove('active'));
+            document.getElementById(`tab-${tabId}`).classList.add('active');
+            event.currentTarget.classList.add('active');
+
+            if (tabId === 'intel' && typeof renderIntelCharts === 'function') {
+                renderIntelCharts();
             }
+            if (tabId === 'map' && typeof renderMapPins === 'function') {
+                renderMapPins();
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            if (typeof initCRM === 'function') initCRM();
         });
     </script>
 
-    <!-- Cargar la lógica estricta del CRM -->
+    <!-- Lógica del CRM -->
     <script src="/assets/js/crm.js"></script>
 </body>
 
