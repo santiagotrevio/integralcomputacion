@@ -495,29 +495,15 @@ function renderMap() {
 
     const mode = document.querySelector('input[name="mfilter"]:checked').value;
 
-    let toDraw = [];
-    if (mode === 'all') toDraw = crmDeals.filter(d => d.lat);
-    else if (mode === 'won') toDraw = crmDeals.filter(d => d.lat && d.status === 'won');
-    else if (mode === 'active') toDraw = crmDeals.filter(d => d.lat && !['won', 'lost'].includes(d.status));
-
-    // Si no hay coords reales, inyectamos unas MOCK alrededor de GDL para el Demo PoC SaaS
-    if (toDraw.length === 0 && crmDeals.length > 0) {
-        crmDeals.forEach((d, i) => {
-            // Mock random GDL locations
-            d.lat = 20.659698 + (Math.random() - 0.5) * 0.1;
-            d.lng = -103.349609 + (Math.random() - 0.5) * 0.1;
-            toDraw.push(d);
-        });
-    }
+    let toDrawDeals = [];
+    if (mode === 'won') toDrawDeals = crmDeals.filter(d => d.lat && d.status === 'won');
+    else if (mode === 'active') toDrawDeals = crmDeals.filter(d => d.lat && !['won', 'lost'].includes(d.status));
 
     let minLat = 90, maxLat = -90, minLng = 180, maxLng = -180;
 
-    toDraw.forEach(d => {
-        let color = '#3b82f6';
-        if (d.status === 'won') color = '#10b981';
-        if (d.status === 'quote' || d.status === 'negotiation') color = '#f59e0b';
-
-        const markerHtmlStyles = `
+    function addPointToMap(lat, lng, color, title, desc, customHtml = null) {
+        if (!lat || !lng) return;
+        const markerHtmlStyles = customHtml || `
             background-color: ${color};
             width: 1.5rem; height: 1.5rem;
             display: block; left: -0.75rem; top: -0.75rem;
@@ -528,20 +514,54 @@ function renderMap() {
         `;
         const icon = L.divIcon({ className: "custom-pin", iconAnchor: [0, 24], popupAnchor: [0, -36], html: `<span style="${markerHtmlStyles}" />` });
 
-        L.marker([d.lat, d.lng], { icon }).addTo(markersLayer)
-            .bindPopup(`<b>${d.client_company || d.title}</b><br>${formatCurrency(d.value)}`);
+        L.marker([lat, lng], { icon }).addTo(markersLayer)
+            .bindPopup(`<b>${title}</b><br>${desc}`);
 
-        if (d.lat < minLat) minLat = d.lat; if (d.lat > maxLat) maxLat = d.lat;
-        if (d.lng < minLng) minLng = d.lng; if (d.lng > maxLng) maxLng = d.lng;
-    });
-
-    if (toDraw.length > 0) {
-        lmap.fitBounds([[minLat, minLng], [maxLat, maxLng]], { padding: [50, 50] });
+        if (lat < minLat) minLat = lat; if (lat > maxLat) maxLat = lat;
+        if (lng < minLng) minLng = lng; if (lng > maxLng) maxLng = lng;
     }
 
-    // Actualizar Resumen Inteligente Territorial
-    document.getElementById('z_hot').innerText = "Zonas GDL (Mock)";
-    document.getElementById('z_hot_val').innerText = `${toDraw.filter(d => ['won', 'negotiation'].includes(d.status)).length} tratos valiosos.`;
+    // 1. Plot Branches (Sucursales) - Always show
+    const branchStyle = `
+        background-color: #0F172A;
+        width: 1.8rem; height: 1.8rem;
+        display: flex; align-items: center; justify-content: center;
+        position: relative; left: -0.9rem; top: -0.9rem;
+        border-radius: 0.5rem;
+        border: 2px solid #FFFFFF;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+        color: white; font-size: 12px;
+    `;
+    const branchIconHtml = `<div style="${branchStyle}"><i class="fa-solid fa-building"></i></div>`;
+    addPointToMap(20.673868, -103.356345, '#0F172A', 'Integral Computación (Matriz)', 'Sucursal Principal', branchIconHtml);
+    addPointToMap(20.612345, -103.415678, '#0F172A', 'Integral Computación (Sur)', 'Sucursal Operativa', branchIconHtml);
+
+    // 2. Plot Clients if 'Todos' is selected
+    if (mode === 'all') {
+        const clientsWithCoords = crmClients.filter(c => c.lat && c.lng);
+        clientsWithCoords.forEach(c => {
+            const numDeals = crmDeals.filter(d => d.client_id === c.id).length;
+            addPointToMap(c.lat, c.lng, '#94a3b8', c.company || c.name, `${numDeals} tratos asociados<br>${c.address || ''}`);
+        });
+    }
+
+    // 3. Plot Deals
+    toDrawDeals.forEach(d => {
+        let color = '#3b82f6';
+        if (d.status === 'won') color = '#10b981';
+        if (d.status === 'quote' || d.status === 'negotiation') color = '#f59e0b';
+        addPointToMap(d.lat, d.lng, color, d.client_company || d.title, formatCurrency(d.value));
+    });
+
+    if (minLat !== 90) { // Elements were added
+        lmap.fitBounds([[minLat, minLng], [maxLat, maxLng]], { padding: [50, 50] });
+    } else {
+        lmap.setView([20.659698, -103.349609], 12);
+    }
+
+    // Actualizar Resumen
+    document.getElementById('z_hot').innerText = "Área Metropolitana";
+    document.getElementById('z_hot_val').innerText = `${toDrawDeals.filter(d => ['won', 'negotiation'].includes(d.status)).length} tratos valiosos y ${crmClients.filter(c => c.lat).length} clientes ubicados.`;
 }
 
 // ---- DIRECTORIO DE CLIENTES ----
@@ -635,6 +655,8 @@ function openClientModal(id = null) {
     document.getElementById('cOtherPhones').value = '';
     document.getElementById('cAddress').value = '';
     document.getElementById('cBilling').value = '';
+    document.getElementById('cLat').value = '';
+    document.getElementById('cLng').value = '';
 
     document.getElementById('clientModalTitle').innerHTML = '<i class="fa-solid fa-address-book text-accent"></i> Nuevo Cliente';
 
@@ -658,6 +680,8 @@ function openClientModal(id = null) {
 
             document.getElementById('cAddress').value = client.address || '';
             document.getElementById('cBilling').value = client.billing_info || '';
+            document.getElementById('cLat').value = client.lat || '';
+            document.getElementById('cLng').value = client.lng || '';
         }
     }
 
@@ -699,6 +723,8 @@ async function saveClient() {
         phone: document.getElementById('cPhone').value,
         address: document.getElementById('cAddress').value,
         billing_info: document.getElementById('cBilling').value,
+        lat: document.getElementById('cLat').value || null,
+        lng: document.getElementById('cLng').value || null,
         secondary_emails: JSON.stringify(secondaryEmails),
         secondary_phones: JSON.stringify(secondaryPhones)
     };
@@ -733,6 +759,35 @@ async function archiveClient(id) {
         await loadClients();
     } catch (err) {
         console.error("Archive error", err);
+    }
+}
+
+// Nominatim Geocoding API integration (Free & No Key Required)
+async function geocodeAddress() {
+    const address = document.getElementById('cAddress').value;
+    if (!address || address.length < 5) return alert('Por favor, ingresa una dirección más completa primero.');
+
+    const btn = event.currentTarget;
+    const ogHtml = btn.innerHTML;
+    btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Buscando...';
+
+    try {
+        const query = encodeURIComponent(address + ', Jalisco, Mexico'); // Assume regional scope to improve accuracy
+        const res = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${query}&limit=1`);
+        const data = await res.json();
+        if (data && data.length > 0) {
+            document.getElementById('cLat').value = data[0].lat;
+            document.getElementById('cLng').value = data[0].lon;
+            btn.innerHTML = '<i class="fa-solid fa-check text-success"></i> ¡Ubicado!';
+            setTimeout(() => btn.innerHTML = ogHtml, 2000);
+        } else {
+            alert("No se encontró la dirección exacta. Intenta ser más específico (Ej. 'Av Vallarta 1000, Guadalajara').");
+            btn.innerHTML = ogHtml;
+        }
+    } catch (err) {
+        console.error("Geocoding failed", err);
+        alert("Falla de conexión al servicio de mapas.");
+        btn.innerHTML = ogHtml;
     }
 }
 

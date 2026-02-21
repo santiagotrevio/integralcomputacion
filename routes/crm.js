@@ -136,9 +136,9 @@ router.get('/clients', (req, res) => {
 });
 
 router.post('/clients', (req, res) => {
-    const { name, company, email, phone, address, billing_info, secondary_emails, secondary_phones } = req.body;
-    const sql = `INSERT INTO clients (name, company, email, phone, address, billing_info, secondary_emails, secondary_phones) 
-                 VALUES (?, ?, ?, ?, ?, ?, ?, ?)`;
+    const { name, company, email, phone, address, billing_info, secondary_emails, secondary_phones, lat, lng } = req.body;
+    const sql = `INSERT INTO clients (name, company, email, phone, address, billing_info, secondary_emails, secondary_phones, lat, lng) 
+                 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
 
     db.run(sql, [
         name,
@@ -148,7 +148,9 @@ router.post('/clients', (req, res) => {
         address || '',
         billing_info || '',
         secondary_emails || '[]',
-        secondary_phones || '[]'
+        secondary_phones || '[]',
+        lat || null,
+        lng || null
     ], function (err) {
         if (err) return res.status(400).json({ error: err.message });
         res.json({ success: true, id: this.lastID });
@@ -156,10 +158,11 @@ router.post('/clients', (req, res) => {
 });
 
 router.put('/clients/:id', (req, res) => {
-    const { name, company, email, phone, address, billing_info, secondary_emails, secondary_phones } = req.body;
+    const { name, company, email, phone, address, billing_info, secondary_emails, secondary_phones, lat, lng } = req.body;
     const sql = `UPDATE clients SET 
                     name = ?, company = ?, email = ?, phone = ?, 
-                    address = ?, billing_info = ?, secondary_emails = ?, secondary_phones = ? 
+                    address = ?, billing_info = ?, secondary_emails = ?, secondary_phones = ?,
+                    lat = ?, lng = ?
                  WHERE id = ?`;
 
     db.run(sql, [
@@ -171,6 +174,8 @@ router.put('/clients/:id', (req, res) => {
         billing_info || '',
         secondary_emails || '[]',
         secondary_phones || '[]',
+        lat || null,
+        lng || null,
         req.params.id
     ], function (err) {
         if (err) return res.status(400).json({ error: err.message });
