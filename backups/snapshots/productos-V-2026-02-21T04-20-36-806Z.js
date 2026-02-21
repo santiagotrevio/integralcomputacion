@@ -162,19 +162,19 @@ const productsDB = [
   },
   {
     "id": "LT981-000612",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "LOGITECH",
     "name": "AURICULARES LOGITECH H111 NEGRO",
     "description": "AURICULARES LOGITECH H111 NEGRO",
-    "image": "assets/images/products/toner/LT981_000612.webp"
+    "image": ""
   },
   {
     "id": "LT981-000060",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "LOGITECH",
     "name": "AURICULARES LOGITECH H390 NEGRO",
     "description": "AURICULARES LOGITECH H390 NEGRO",
-    "image": "assets/images/products/toner/LT981_000060.webp"
+    "image": ""
   },
   {
     "id": "ACNH.QPEAL.008",
@@ -218,11 +218,11 @@ const productsDB = [
   },
   {
     "id": "LT981-001285",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "LOGITECH",
     "name": "Audífonos Logitech USB H390 para Computadora con Audio Dígital Mejorado Control en Cable Color Blanco Crudo",
     "description": "Audífonos Logitech USB H390 para Computadora con Audio Dígital Mejorado Control en Cable Color Blanco Crudo",
-    "image": "assets/images/products/toner/LT981_001285.webp"
+    "image": ""
   },
   {
     "id": "PC-114024",
@@ -941,11 +941,11 @@ const productsDB = [
   },
   {
     "id": "HI1VV22AL",
-    "category": "toner",
+    "category": "OTROS",
     "brand": "HP",
     "name": "BOTELLA TINTA HP ORIGINAL NEGRA GT53",
     "description": "BOTELLA TINTA HP ORIGINAL NEGRA GT53",
-    "image": "assets/images/products/toner/HI1VV22AL.webp",
+    "image": "",
     "compatibility": "HP Equipos"
   },
   {
@@ -1226,11 +1226,11 @@ const productsDB = [
   },
   {
     "id": "MH306119",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "MANHATTAN",
     "name": "CABLE HDMI 1.4 4K M-M 1.8M - Manhattan Cable HDMI de alta velocidad",
     "description": "CABLE HDMI 1.4 4K M-M 1.8M - Manhattan Cable HDMI de alta velocidad",
-    "image": "assets/images/products/toner/MH306119.webp"
+    "image": ""
   },
   {
     "id": "MH306126",
@@ -1266,11 +1266,11 @@ const productsDB = [
   },
   {
     "id": "MH333382",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "MANHATTAN",
     "name": "CABLE USB MANHATTAN V2.0 A-B 3.0M, NEGRO",
     "description": "CABLE USB MANHATTAN V2.0 A-B 3.0M, NEGRO",
-    "image": "assets/images/products/toner/MH333382.webp"
+    "image": ""
   },
   {
     "id": "MH371315",
@@ -1330,11 +1330,11 @@ const productsDB = [
   },
   {
     "id": "LT960-000694",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "LOGITECH",
     "name": "CAMARA WEB LOGITECH C270 HD NEGRO",
     "description": "CAMARA WEB LOGITECH C270 HD NEGRO",
-    "image": "assets/images/products/toner/LT960_000694.webp"
+    "image": ""
   },
   {
     "id": "PC-241034",
@@ -4184,20 +4184,20 @@ const productsDB = [
   },
   {
     "id": "HTW2121X",
-    "category": "toner",
+    "category": "OTROS",
     "brand": "HP",
     "name": "Cartucho de tóner HP 212X Alto Rendimiento Láser - Azul ciánico",
     "description": "Cartucho de tóner HP 212X Alto Rendimiento Láser - Azul ciánico",
-    "image": "assets/images/products/toner/HTW2121X.webp",
+    "image": "",
     "compatibility": "HP Consumible"
   },
   {
     "id": "HTW2123X",
-    "category": "toner",
+    "category": "OTROS",
     "brand": "HP",
     "name": "Cartucho de tóner HP 212X Alto Rendimiento Láser - Magenta",
     "description": "Cartucho de tóner HP 212X Alto Rendimiento Láser - Magenta",
-    "image": "assets/images/products/toner/HTW2123X.webp",
+    "image": "",
     "compatibility": "HP Consumible"
   },
   {
@@ -4211,29 +4211,29 @@ const productsDB = [
   },
   {
     "id": "HTW2220X",
-    "category": "toner",
+    "category": "OTROS",
     "brand": "HP",
     "name": "Cartucho de tóner HP 222X Alto Rendimiento Láser - Negro - Original",
     "description": "Cartucho de tóner HP 222X Alto Rendimiento Láser - Negro - Original",
-    "image": "assets/images/products/toner/HTW2220X.webp",
+    "image": "",
     "compatibility": "HP Consumible"
   },
   {
     "id": "HTW2301A",
-    "category": "toner",
+    "category": "OTROS",
     "brand": "HP",
     "name": "Cartucho de tóner HP 230A Láser - Azul ciánico - Original",
     "description": "Cartucho de tóner HP 230A Láser - Azul ciánico - Original",
-    "image": "assets/images/products/toner/HTW2301A.webp",
+    "image": "",
     "compatibility": "HP Consumible"
   },
   {
     "id": "HTW2300A",
-    "category": "toner",
+    "category": "OTROS",
     "brand": "HP",
     "name": "Cartucho de tóner HP 230A Láser - Negro - Original",
     "description": "Cartucho de tóner HP 230A Láser - Negro - Original",
-    "image": "assets/images/products/toner/HTW2300A.webp",
+    "image": "",
     "compatibility": "HP Consumible"
   },
   {
@@ -4663,11 +4663,11 @@ const productsDB = [
   },
   {
     "id": "LT981-000587",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "LOGITECH",
     "name": "DIADEMA LOGITECH H151 C/MICROFONO 3.5MM",
     "description": "DIADEMA LOGITECH H151 C/MICROFONO 3.5MM",
-    "image": "assets/images/products/toner/LT981_000587.webp"
+    "image": ""
   },
   {
     "id": "NXNE-425",
@@ -5215,11 +5215,11 @@ const productsDB = [
   },
   {
     "id": "HE20G05A",
-    "category": "toner",
+    "category": "OTROS",
     "brand": "HP",
     "name": "Escáner HP de cama plana y ADF, ScanJet Pro 2600 f1",
     "description": "Escáner HP de cama plana y ADF, ScanJet Pro 2600 f1",
-    "image": "assets/images/products/toner/HE20G05A.webp",
+    "image": "",
     "compatibility": "HP Equipos"
   },
   {
@@ -5464,46 +5464,46 @@ const productsDB = [
   },
   {
     "id": "GAC-LENOVO-GRIS",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "LENOVO",
     "name": "Generico Cargador para Laptop AC-LENOVO-GRIS, 90W, para Lenovo",
     "description": "Generico Cargador para Laptop AC-LENOVO-GRIS, 90W, para Lenovo",
-    "image": "assets/images/products/toner/GAC_LENOVO_GRIS.webp"
+    "image": ""
   },
   {
     "id": "HTW2130A",
-    "category": "toner",
+    "category": "OTROS",
     "brand": "HP",
     "name": "HP 213A BLK ORIGINAL LASERJET TONER CRTG",
     "description": "HP 213A BLK ORIGINAL LASERJET TONER CRTG",
-    "image": "assets/images/products/toner/HTW2130A.webp",
+    "image": "",
     "compatibility": "HP Consumible"
   },
   {
     "id": "HTW2131A",
-    "category": "toner",
+    "category": "OTROS",
     "brand": "HP",
     "name": "HP 213A CYN ORIGINAL LASERJET TONER CRTG",
     "description": "HP 213A CYN ORIGINAL LASERJET TONER CRTG",
-    "image": "assets/images/products/toner/HTW2131A.webp",
+    "image": "",
     "compatibility": "HP Consumible"
   },
   {
     "id": "HTW2133A",
-    "category": "toner",
+    "category": "OTROS",
     "brand": "HP",
     "name": "HP 213A MGN ORIGINAL LASERJET TONER CRTG",
     "description": "HP 213A MGN ORIGINAL LASERJET TONER CRTG",
-    "image": "assets/images/products/toner/HTW2133A.webp",
+    "image": "",
     "compatibility": "HP Consumible"
   },
   {
     "id": "HTW2132A",
-    "category": "toner",
+    "category": "OTROS",
     "brand": "HP",
     "name": "HP 213A YLW ORIGINAL LASERJET TONER CRTG",
     "description": "HP 213A YLW ORIGINAL LASERJET TONER CRTG",
-    "image": "assets/images/products/toner/HTW2132A.webp",
+    "image": "",
     "compatibility": "HP Consumible"
   },
   {
@@ -5544,29 +5544,29 @@ const productsDB = [
   },
   {
     "id": "HPDHS-2111",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "HP",
     "name": "HP Bocinas DHS-2111, Alámbrico, 2.0, 6W RMS, Negro/Plata",
     "description": "HP Bocinas DHS-2111, Alámbrico, 2.0, 6W RMS, Negro/Plata",
-    "image": "assets/images/products/toner/HPDHS_2111.webp",
+    "image": "",
     "compatibility": "HP Equipos"
   },
   {
     "id": "HP5HB07D",
-    "category": "toner",
+    "category": "OTROS",
     "brand": "HP",
     "name": "HP DesignJet T230 24-in Printer",
     "description": "HP DesignJet T230 24-in Printer",
-    "image": "assets/images/products/toner/HP5HB07D.webp",
+    "image": "",
     "compatibility": "HP Equipos"
   },
   {
     "id": "HP5TW13AA",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "HP",
     "name": "HP Docking Station 5TW13AA USB 3.1, 4x USB 3.2, 2x USB 3.2 C, 1x HDMI, 2x DisplayPort, 1x RJ-45, Negro",
     "description": "HP Docking Station 5TW13AA USB 3.1, 4x USB 3.2, 2x USB 3.2 C, 1x HDMI, 2x DisplayPort, 1x RJ-45, Negro",
-    "image": "assets/images/products/toner/HP5TW13AA.webp",
+    "image": "",
     "compatibility": "HP Equipos"
   },
   {
@@ -5580,11 +5580,11 @@ const productsDB = [
   },
   {
     "id": "HP50H55AA",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "HP",
     "name": "HP Hub Multipuerto Universal USB-C, 7 Puertos, HDMI, USB Tipo A, Display Port, USB-C, Ethernet",
     "description": "HP Hub Multipuerto Universal USB-C, 7 Puertos, HDMI, USB Tipo A, Display Port, USB-C, Ethernet",
-    "image": "assets/images/products/toner/HP50H55AA.webp",
+    "image": "",
     "compatibility": "HP Equipos"
   },
   {
@@ -5598,38 +5598,38 @@ const productsDB = [
   },
   {
     "id": "HP2Z610A#BGJ",
-    "category": "toner",
+    "category": "OTROS",
     "brand": "HP",
     "name": "HP INC MFC LASERJET PRO 4003DW 42PPM USB B/N",
     "description": "HP INC MFC LASERJET PRO 4003DW 42PPM USB B/N",
-    "image": "assets/images/products/toner/HP2Z610A_BGJ.webp",
+    "image": "",
     "compatibility": "HP Equipos"
   },
   {
     "id": "HPB7KF7AT",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "HP",
     "name": "HP ProBook 440 14 inch G10 Notebook PC,14\" FHD LED UWVA 250N Anti-Glare (1920 x 1080, 1.78 (16:9)),Intel Core i5-1334U (3.40 GHz, up to 4.60 GHz, 10 cores - 13th Generation) with Intel® UHD Graphics,5",
     "description": "HP ProBook 440 14 inch G10 Notebook PC,14\" FHD LED UWVA 250N Anti-Glare (1920 x 1080, 1.78 (16:9)),Intel Core i5-1334U (3.40 GHz, up to 4.60 GHz, 10 cores - 13th Generation) with Intel® UHD Graphics,5",
-    "image": "assets/images/products/toner/HPB7KF7AT.webp",
+    "image": "",
     "compatibility": "HP Equipos"
   },
   {
     "id": "HP9P7K5LA",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "HP",
     "name": "HP ProOne 245 G10 All-in-One 23.8\", AMD Ryzen 3 7320U 2.40GHz, 8GB, 256GB SSD, Windows 11 Home 64-bit, Negro",
     "description": "HP ProOne 245 G10 All-in-One 23.8\", AMD Ryzen 3 7320U 2.40GHz, 8GB, 256GB SSD, Windows 11 Home 64-bit, Negro",
-    "image": "assets/images/products/toner/HP9P7K5LA.webp",
+    "image": "",
     "compatibility": "HP Equipos"
   },
   {
     "id": "HPA09F4LA-V2",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "HP",
     "name": "HP ProOne 245 G10 All-in-One 23.8\", AMD Ryzen 7 PRO 7730U, 16GB, 512GB SSD, Windows 11 Home",
     "description": "HP ProOne 245 G10 All-in-One 23.8\", AMD Ryzen 7 PRO 7730U, 16GB, 512GB SSD, Windows 11 Home",
-    "image": "assets/images/products/toner/HPA09F4LA_V2.webp",
+    "image": "",
     "compatibility": "HP Equipos"
   },
   {
@@ -5714,29 +5714,29 @@ const productsDB = [
   },
   {
     "id": "HE1PV87A",
-    "category": "toner",
+    "category": "OTROS",
     "brand": "HP",
     "name": "IMPRESORA HP ENTERPRISE M507DN LASER",
     "description": "IMPRESORA HP ENTERPRISE M507DN LASER",
-    "image": "assets/images/products/toner/HE1PV87A.webp",
+    "image": "",
     "compatibility": "HP Equipos"
   },
   {
     "id": "HE7ZU78A",
-    "category": "toner",
+    "category": "OTROS",
     "brand": "HP",
     "name": "IMPRESORA HP ENTERPRISE M555DN LASER",
     "description": "IMPRESORA HP ENTERPRISE M555DN LASER",
-    "image": "assets/images/products/toner/HE7ZU78A.webp",
+    "image": "",
     "compatibility": "HP Equipos"
   },
   {
     "id": "HE7MD68A",
-    "category": "toner",
+    "category": "OTROS",
     "brand": "HP",
     "name": "IMPRESORA HP LASERJET M111W",
     "description": "IMPRESORA HP LASERJET M111W",
-    "image": "assets/images/products/toner/HE7MD68A.webp",
+    "image": "",
     "compatibility": "HP Equipos"
   },
   {
@@ -5757,20 +5757,20 @@ const productsDB = [
   },
   {
     "id": "HP1F3W3A",
-    "category": "toner",
+    "category": "OTROS",
     "brand": "HP",
     "name": "Impresora HP de tinta continua Smart Tank 525",
     "description": "Impresora HP de tinta continua Smart Tank 525",
-    "image": "assets/images/products/toner/HP1F3W3A.webp",
+    "image": "",
     "compatibility": "HP Equipos"
   },
   {
     "id": "HP2Z611A",
-    "category": "toner",
+    "category": "OTROS",
     "brand": "HP",
     "name": "Impresora Láser HP LaserJet Pro 4003n, Blanco y Negro",
     "description": "Impresora Láser HP LaserJet Pro 4003n, Blanco y Negro",
-    "image": "assets/images/products/toner/HP2Z611A.webp",
+    "image": "",
     "compatibility": "HP Equipos"
   },
   {
@@ -5840,19 +5840,19 @@ const productsDB = [
   },
   {
     "id": "LT920-007901",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "LOGITECH",
     "name": "KIT LOGITECH TECLADO MOUSE MK235 NEGRO",
     "description": "KIT LOGITECH TECLADO MOUSE MK235 NEGRO",
-    "image": "assets/images/products/toner/LT920_007901.webp"
+    "image": ""
   },
   {
     "id": "LT920-007820",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "LOGITECH",
     "name": "KIT LOGITECH TECLADO MOUSE MK345 NEGRO",
     "description": "KIT LOGITECH TECLADO MOUSE MK345 NEGRO",
-    "image": "assets/images/products/toner/LT920_007820.webp"
+    "image": ""
   },
   {
     "id": "PC-201717",
@@ -5896,43 +5896,43 @@ const productsDB = [
   },
   {
     "id": "LT920-004430",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "LOGITECH",
     "name": "KIT TECLADO/MOUSE  LOGITECH MK220",
     "description": "KIT TECLADO/MOUSE  LOGITECH MK220",
-    "image": "assets/images/products/toner/LT920_004430.webp"
+    "image": ""
   },
   {
     "id": "LT920-004432",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "LOGITECH",
     "name": "KIT TECLADO/MOUSE IN. LOGITECH MK270",
     "description": "KIT TECLADO/MOUSE IN. LOGITECH MK270",
-    "image": "assets/images/products/toner/LT920_004432.webp"
+    "image": ""
   },
   {
     "id": "LT920-002716",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "LOGITECH",
     "name": "KIT TECLADO/MOUSE LOGITECH MK200",
     "description": "KIT TECLADO/MOUSE LOGITECH MK200",
-    "image": "assets/images/products/toner/LT920_002716.webp"
+    "image": ""
   },
   {
     "id": "LT920-004428",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "LOGITECH",
     "name": "KIT TECLADO/MOUSE LOGITECH USB MK120",
     "description": "KIT TECLADO/MOUSE LOGITECH USB MK120",
-    "image": "assets/images/products/toner/LT920_004428.webp"
+    "image": ""
   },
   {
     "id": "KLD93004N",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "KOBLENZ",
     "name": "KOBLENZ NO BREAK 7516",
     "description": "KOBLENZ NO BREAK 7516",
-    "image": "assets/images/products/toner/KLD93004N.webp"
+    "image": ""
   },
   {
     "id": "CAG06925",
@@ -5960,11 +5960,11 @@ const productsDB = [
   },
   {
     "id": "LT920-009266",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "LOGITECH",
     "name": "Kit Teclado y Mouse Logitech MK470 RF Inalámbrico USB Negro/Grafito (Español)",
     "description": "Kit Teclado y Mouse Logitech MK470 RF Inalámbrico USB Negro/Grafito (Español)",
-    "image": "assets/images/products/toner/LT920_009266.webp"
+    "image": ""
   },
   {
     "id": "HTW1540A",
@@ -5985,20 +5985,20 @@ const productsDB = [
   },
   {
     "id": "HPAL2Q6LT-V2",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "HP",
     "name": "LAPTOP HP 240 G10, INTEL CORE I7-1355U16GB SSD DE 512GB WIN 11 HOME 14\"",
     "description": "LAPTOP HP 240 G10, INTEL CORE I7-1355U16GB SSD DE 512GB WIN 11 HOME 14\"",
-    "image": "assets/images/products/toner/HPAL2Q6LT_V2.webp",
+    "image": "",
     "compatibility": "HP Equipos"
   },
   {
     "id": "HP979L2UA",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "HP",
     "name": "LAPTOP HP SPECTRE ultra 7 155H 16gb ram OLED 2.8K",
     "description": "LAPTOP HP SPECTRE ultra 7 155H 16gb ram OLED 2.8K",
-    "image": "assets/images/products/toner/HP979L2UA.webp",
+    "image": "",
     "compatibility": "HP Equipos"
   },
   {
@@ -6107,71 +6107,71 @@ const productsDB = [
   },
   {
     "id": "LN83JC009CUS",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "LENOVO",
     "name": "Laptop Gamer Lenovo LOQ 15ARP9 15.6\" 1920x1080 Full HD, AMD Ryzen 7 7435HS, NVIDIA GeForce RTX 4070, 16GB, 512GB SSD, Windows 11 Home, Inglés",
     "description": "Laptop Gamer Lenovo LOQ 15ARP9 15.6\" 1920x1080 Full HD, AMD Ryzen 7 7435HS, NVIDIA GeForce RTX 4070, 16GB, 512GB SSD, Windows 11 Home, Inglés",
-    "image": "assets/images/products/toner/LN83JC009CUS.webp"
+    "image": ""
   },
   {
     "id": "HPB0ZP6AT",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "HP",
     "name": "Laptop HP 240R G9 14\" 1366x768 HD, Intel Core i3-1315U, 8GB, 256GB SSD, Windows 11 Home, Español",
     "description": "Laptop HP 240R G9 14\" 1366x768 HD, Intel Core i3-1315U, 8GB, 256GB SSD, Windows 11 Home, Español",
-    "image": "assets/images/products/toner/HPB0ZP6AT.webp",
+    "image": "",
     "compatibility": "HP Equipos"
   },
   {
     "id": "HPAL2Q1LT",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "HP",
     "name": "Laptop HP 245 G10 14\" 1920x1080 Full HD, AMD Ryzen 3 7330U, 8GB, 512GB SSD, Windows 11 Home, Español",
     "description": "Laptop HP 245 G10 14\" 1920x1080 Full HD, AMD Ryzen 3 7330U, 8GB, 512GB SSD, Windows 11 Home, Español",
-    "image": "assets/images/products/toner/HPAL2Q1LT.webp",
+    "image": "",
     "compatibility": "HP Equipos"
   },
   {
     "id": "HPAN0Y3AT",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "HP",
     "name": "Laptop HP 255 G10, AMD Ryzen 3 7330U.",
     "description": "Laptop HP 255 G10, AMD Ryzen 3 7330U.",
-    "image": "assets/images/products/toner/HPAN0Y3AT.webp",
+    "image": "",
     "compatibility": "HP Equipos"
   },
   {
     "id": "HPA41YVLT",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "HP",
     "name": "Laptop HP ProBook 440 G11 14\" 1920x1200 WUXGA, Intel Core Ultra 7 155U, 8GB, 512GB SSD, Windows 11 Pro, Español",
     "description": "Laptop HP ProBook 440 G11 14\" 1920x1200 WUXGA, Intel Core Ultra 7 155U, 8GB, 512GB SSD, Windows 11 Pro, Español",
-    "image": "assets/images/products/toner/HPA41YVLT.webp",
+    "image": "",
     "compatibility": "HP Equipos"
   },
   {
     "id": "LN83ER004NLM",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "LENOVO",
     "name": "Laptop Lenovo IdeaPad Slim 3 15IAH8 15.6\" 1920x1080 Full HD, Intel Core i5-12450H, 8GB, 512GB SSD, Windows 11 Home, Español",
     "description": "Laptop Lenovo IdeaPad Slim 3 15IAH8 15.6\" 1920x1080 Full HD, Intel Core i5-12450H, 8GB, 512GB SSD, Windows 11 Home, Español",
-    "image": "assets/images/products/toner/LN83ER004NLM.webp"
+    "image": ""
   },
   {
     "id": "LN82TS00PLLM",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "LENOVO",
     "name": "Laptop Lenovo V14 G3 14\" 1920x1080 Full HD, Intel Core i3-1215U, 8GB, 512GB SSD, Windows 11 Home, Español",
     "description": "Laptop Lenovo V14 G3 14\" 1920x1080 Full HD, Intel Core i3-1215U, 8GB, 512GB SSD, Windows 11 Home, Español",
-    "image": "assets/images/products/toner/LN82TS00PLLM.webp"
+    "image": ""
   },
   {
     "id": "LN82YT00Q9LM",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "LENOVO",
     "name": "Laptop Lenovo V14 G4 AMN 14\" 1920x1080 Full HD, AMD Ryzen 3 7320U, 8GB, 256GB SSD, Windows 11 Home, Español",
     "description": "Laptop Lenovo V14 G4 AMN 14\" 1920x1080 Full HD, AMD Ryzen 3 7320U, 8GB, 256GB SSD, Windows 11 Home, Español",
-    "image": "assets/images/products/toner/LN82YT00Q9LM.webp"
+    "image": ""
   },
   {
     "id": "LX56F4000",
@@ -6231,43 +6231,43 @@ const productsDB = [
   },
   {
     "id": "LPS-CH-19X19.6",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "LINKEDPRO",
     "name": "LinkedPRO Charola para Rack, 19\", 3U, hasta 39Kg, Negro",
     "description": "LinkedPRO Charola para Rack, 19\", 3U, hasta 39Kg, Negro",
-    "image": "assets/images/products/toner/LPS_CH_19X19_6.webp"
+    "image": ""
   },
   {
     "id": "LT981-001073",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "LOGITECH",
     "name": "Logitech Audífonos Gamer G435 para PC/PS4/PS5, Inalámbrico, USB-A, Blanco/Lila",
     "description": "Logitech Audífonos Gamer G435 para PC/PS4/PS5, Inalámbrico, USB-A, Blanco/Lila",
-    "image": "assets/images/products/toner/LT981_001073.webp"
+    "image": ""
   },
   {
     "id": "LT914-000070",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "LOGITECH",
     "name": "Logitech Crayon Lápiz Digital para iPad, Plata",
     "description": "Logitech Crayon Lápiz Digital para iPad, Plata",
-    "image": "assets/images/products/toner/LT914_000070.webp"
+    "image": ""
   },
   {
     "id": "LT981-000570",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "LOGITECH",
     "name": "Logitech H570e Audífonos con Micrófono, Alámbrico, USB, 981-000570",
     "description": "Logitech H570e Audífonos con Micrófono, Alámbrico, USB, 981-000570",
-    "image": "assets/images/products/toner/LT981_000570.webp"
+    "image": ""
   },
   {
     "id": "LT960-001336",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "LOGITECH",
     "name": "Logitech Sistema de Videoconferencia Rally Bar Mini 960, Con Micrófono, Ultra HD, 1x RJ-45, 4x HDMI, 3x USB A, Grafito",
     "description": "Logitech Sistema de Videoconferencia Rally Bar Mini 960, Con Micrófono, Ultra HD, 1x RJ-45, 4x HDMI, 3x USB A, Grafito",
-    "image": "assets/images/products/toner/LT960_001336.webp"
+    "image": ""
   },
   {
     "id": "NXNE-022C",
@@ -6503,11 +6503,11 @@ const productsDB = [
   },
   {
     "id": "HP9E8G7LS",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "HP",
     "name": "MINI COMPUTADORA HP PRO 400 G9 CI3-13100T 8GB 512GB SSD 1TB W11 PRO",
     "description": "MINI COMPUTADORA HP PRO 400 G9 CI3-13100T 8GB 512GB SSD 1TB W11 PRO",
-    "image": "assets/images/products/toner/HP9E8G7LS.webp",
+    "image": "",
     "compatibility": "HP Equipos"
   },
   {
@@ -6728,11 +6728,11 @@ const productsDB = [
   },
   {
     "id": "LT910-001601",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "LOGITECH",
     "name": "MOUSE ALAMBRICO LOGITECH M100 NEGRO",
     "description": "MOUSE ALAMBRICO LOGITECH M100 NEGRO",
-    "image": "assets/images/products/toner/LT910_001601.webp"
+    "image": ""
   },
   {
     "id": "PC-995135",
@@ -6824,75 +6824,75 @@ const productsDB = [
   },
   {
     "id": "LT910-004053",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "LOGITECH",
     "name": "MOUSE LOGITECH ALAMBRICO M90 NEGRO",
     "description": "MOUSE LOGITECH ALAMBRICO M90 NEGRO",
-    "image": "assets/images/products/toner/LT910_004053.webp"
+    "image": ""
   },
   {
     "id": "LT910-004940",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "LOGITECH",
     "name": "MOUSE LOGITECH INALAMBRICO M170 NEGRO",
     "description": "MOUSE LOGITECH INALAMBRICO M170 NEGRO",
-    "image": "assets/images/products/toner/LT910_004940.webp"
+    "image": ""
   },
   {
     "id": "LT910-004284",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "LOGITECH",
     "name": "MOUSE LOGITECH INALAMBRICO M280 NEGRO",
     "description": "MOUSE LOGITECH INALAMBRICO M280 NEGRO",
-    "image": "assets/images/products/toner/LT910_004284.webp"
+    "image": ""
   },
   {
     "id": "LT910-004286",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "LOGITECH",
     "name": "MOUSE LOGITECH INALAMBRICO M280 ROJO",
     "description": "MOUSE LOGITECH INALAMBRICO M280 ROJO",
-    "image": "assets/images/products/toner/LT910_004286.webp"
+    "image": ""
   },
   {
     "id": "LT910-005902",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "LOGITECH",
     "name": "MOUSE LOGITECH M190 INALAMBRICO NEGRO",
     "description": "MOUSE LOGITECH M190 INALAMBRICO NEGRO",
-    "image": "assets/images/products/toner/LT910_005902.webp"
+    "image": ""
   },
   {
     "id": "LT910-005447",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "LOGITECH",
     "name": "MOUSE LOGITECH MX VERTICAL",
     "description": "MOUSE LOGITECH MX VERTICAL",
-    "image": "assets/images/products/toner/LT910_005447.webp"
+    "image": ""
   },
   {
     "id": "LT910-004800",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "LOGITECH",
     "name": "MOUSE LOGITECH WIRELESS M170 AZUL",
     "description": "MOUSE LOGITECH WIRELESS M170 AZUL",
-    "image": "assets/images/products/toner/LT910_004800.webp"
+    "image": ""
   },
   {
     "id": "LT910-004941",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "LOGITECH",
     "name": "MOUSE LOGITECH WIRELESS M170 ROJO",
     "description": "MOUSE LOGITECH WIRELESS M170 ROJO",
-    "image": "assets/images/products/toner/LT910_004941.webp"
+    "image": ""
   },
   {
     "id": "LT910-002225",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "LOGITECH",
     "name": "MOUSE LOGITECH WIRELESS M185 GRIS",
     "description": "MOUSE LOGITECH WIRELESS M185 GRIS",
-    "image": "assets/images/products/toner/LT910_002225.webp"
+    "image": ""
   },
   {
     "id": "NXNE-410E",
@@ -7032,20 +7032,20 @@ const productsDB = [
   },
   {
     "id": "HE7WQ03A",
-    "category": "toner",
+    "category": "OTROS",
     "brand": "HP",
     "name": "MULTIFUNCIONAL HP ADVANTAGE 2374 INYEC",
     "description": "MULTIFUNCIONAL HP ADVANTAGE 2374 INYEC",
-    "image": "assets/images/products/toner/HE7WQ03A.webp",
+    "image": "",
     "compatibility": "HP Equipos"
   },
   {
     "id": "HE7MD74A",
-    "category": "toner",
+    "category": "OTROS",
     "brand": "HP",
     "name": "MULTIFUNCIONAL HP LASERJET M141W",
     "description": "MULTIFUNCIONAL HP LASERJET M141W",
-    "image": "assets/images/products/toner/HE7MD74A.webp",
+    "image": "",
     "compatibility": "HP Equipos"
   },
   {
@@ -7146,19 +7146,19 @@ const productsDB = [
   },
   {
     "id": "KISDCS3/256GB",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "KINGSTON",
     "name": "Memoria Flash Kingston Canvas Select Plus Gen3, 256GB MicroSD UHS-I Clase 10, con Adaptador",
     "description": "Memoria Flash Kingston Canvas Select Plus Gen3, 256GB MicroSD UHS-I Clase 10, con Adaptador",
-    "image": "assets/images/products/toner/KISDCS3_256GB.webp"
+    "image": ""
   },
   {
     "id": "KISDCS3/64GB",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "KINGSTON",
     "name": "Memoria Flash Kingston SDCS3/64GB, 64GB MicroSDXC UHS-I Clase 10, con Adaptador",
     "description": "Memoria Flash Kingston SDCS3/64GB, 64GB MicroSDXC UHS-I Clase 10, con Adaptador",
-    "image": "assets/images/products/toner/KISDCS3_64GB.webp"
+    "image": ""
   },
   {
     "id": "SANSDSQXAV-512G-GN6MA",
@@ -7178,19 +7178,19 @@ const productsDB = [
   },
   {
     "id": "KIKTL-TS426E/16G",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "KINGSTON",
     "name": "Memoria RAM Kingston DDR4, 2666MHz, 16GB, ECC, CL19",
     "description": "Memoria RAM Kingston DDR4, 2666MHz, 16GB, ECC, CL19",
-    "image": "assets/images/products/toner/KIKTL_TS426E_16G.webp"
+    "image": ""
   },
   {
     "id": "KIKVR32N22S8L",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "KINGSTON",
     "name": "Memoria RAM Kingston KVR32N22S8L/8 DDR4, 3200MHz, 8GB, CL22, Verde",
     "description": "Memoria RAM Kingston KVR32N22S8L/8 DDR4, 3200MHz, 8GB, CL22, Verde",
-    "image": "assets/images/products/toner/KIKVR32N22S8L.webp"
+    "image": ""
   },
   {
     "id": "XPAX5S5600C4616G-SBHT",
@@ -7202,51 +7202,51 @@ const productsDB = [
   },
   {
     "id": "KIKC-U2L64-7LP",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "KINGSTON",
     "name": "Memoria USB Kingston DataTraveler Exodia M 64GB USB 3.2 Gen 1 Color Morado",
     "description": "Memoria USB Kingston DataTraveler Exodia M 64GB USB 3.2 Gen 1 Color Morado",
-    "image": "assets/images/products/toner/KIKC_U2L64_7LP.webp"
+    "image": ""
   },
   {
     "id": "KIKC-U2L64-7LN",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "KINGSTON",
     "name": "Memoria USB Kingston DataTraveler Exodia M 64GB USB 3.2 Gen 1 Color Rosa",
     "description": "Memoria USB Kingston DataTraveler Exodia M 64GB USB 3.2 Gen 1 Color Rosa",
-    "image": "assets/images/products/toner/KIKC_U2L64_7LN.webp"
+    "image": ""
   },
   {
     "id": "KIKC-U2L64-7LB",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "KINGSTON",
     "name": "Memoria USB Kingston DataTraveler Exodia M 64GB USB 3.2 Gen 1 Color Turquesa",
     "description": "Memoria USB Kingston DataTraveler Exodia M 64GB USB 3.2 Gen 1 Color Turquesa",
-    "image": "assets/images/products/toner/KIKC_U2L64_7LB.webp"
+    "image": ""
   },
   {
     "id": "KIKC-U2L64-7LG",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "KINGSTON",
     "name": "Memoria USB Kingston DataTraveler Exodia M 64GB USB 3.2 Gen 1 Color Verde",
     "description": "Memoria USB Kingston DataTraveler Exodia M 64GB USB 3.2 Gen 1 Color Verde",
-    "image": "assets/images/products/toner/KIKC_U2L64_7LG.webp"
+    "image": ""
   },
   {
     "id": "KIDTKN/256GB",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "KINGSTON",
     "name": "Memoria USB Kingston DataTraveler Kyson, 256GB, USB-A 3.0, Lectura 200MB/s, Escritura 60MB/s, Plata",
     "description": "Memoria USB Kingston DataTraveler Kyson, 256GB, USB-A 3.0, Lectura 200MB/s, Escritura 60MB/s, Plata",
-    "image": "assets/images/products/toner/KIDTKN_256GB.webp"
+    "image": ""
   },
   {
     "id": "KIDTSE9G3/512GB",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "KINGSTON",
     "name": "Memoria USB Kingston DataTraveler SE9 G3, 512GB, USB 3.2, Lectura 220MB/s, Dorado",
     "description": "Memoria USB Kingston DataTraveler SE9 G3, 512GB, USB 3.2, Lectura 220MB/s, Dorado",
-    "image": "assets/images/products/toner/KIDTSE9G3_512GB.webp"
+    "image": ""
   },
   {
     "id": "SYTSTMUSB6B",
@@ -7274,11 +7274,11 @@ const productsDB = [
   },
   {
     "id": "LA41946",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "LANIX",
     "name": "Mini PC Lanix 41946, AMD Ryzen 5 3500U, 8GB, 512GB SSD, Windows 11 Pro",
     "description": "Mini PC Lanix 41946, AMD Ryzen 5 3500U, 8GB, 512GB SSD, Windows 11 Pro",
-    "image": "assets/images/products/toner/LA41946.webp"
+    "image": ""
   },
   {
     "id": "PC-084242",
@@ -7386,11 +7386,11 @@ const productsDB = [
   },
   {
     "id": "HP9U5C1AA",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "HP",
     "name": "Monitor HP Serie 3 Pro LCD 23.8\", 1920x1080 Full HD, 100Hz, HDMI, Negro",
     "description": "Monitor HP Serie 3 Pro LCD 23.8\", 1920x1080 Full HD, 100Hz, HDMI, Negro",
-    "image": "assets/images/products/toner/HP9U5C1AA.webp",
+    "image": "",
     "compatibility": "HP Equipos"
   },
   {
@@ -7435,11 +7435,11 @@ const productsDB = [
   },
   {
     "id": "LT910-006561",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "LOGITECH",
     "name": "Mouse Ergonómico Logitech Óptico MX Master 3s, Inalámbrico, Bluetooth, 8000DPI, Grafito",
     "description": "Mouse Ergonómico Logitech Óptico MX Master 3s, Inalámbrico, Bluetooth, 8000DPI, Grafito",
-    "image": "assets/images/products/toner/LT910_006561.webp"
+    "image": ""
   },
   {
     "id": "PC-045021",
@@ -7451,19 +7451,19 @@ const productsDB = [
   },
   {
     "id": "LN4Y51D20850",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "LENOVO",
     "name": "Mouse Lenovo Óptico Thinkpad Essential, Inalámbrico, USB-C, 2400DPI, Negro",
     "description": "Mouse Lenovo Óptico Thinkpad Essential, Inalámbrico, USB-C, 2400DPI, Negro",
-    "image": "assets/images/products/toner/LN4Y51D20850.webp"
+    "image": ""
   },
   {
     "id": "LT910-006231",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "LOGITECH",
     "name": "Mouse Logitech Óptico SIGNATURE M650 Grande, Inalámbrico, USB, Grafito",
     "description": "Mouse Logitech Óptico SIGNATURE M650 Grande, Inalámbrico, USB, Grafito",
-    "image": "assets/images/products/toner/LT910_006231.webp"
+    "image": ""
   },
   {
     "id": "NXNE-414",
@@ -7523,11 +7523,11 @@ const productsDB = [
   },
   {
     "id": "LT910-006469",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "LOGITECH",
     "name": "Mouse Vertical Ergonómico Logitech Óptico Lift, Inalámbrico, USB-A, 1000DPI, Blanco",
     "description": "Mouse Vertical Ergonómico Logitech Óptico Lift, Inalámbrico, USB-A, 1000DPI, Blanco",
-    "image": "assets/images/products/toner/LT910_006469.webp"
+    "image": ""
   },
   {
     "id": "ST905-160",
@@ -7603,29 +7603,29 @@ const productsDB = [
   },
   {
     "id": "HP499M8A",
-    "category": "toner",
+    "category": "OTROS",
     "brand": "HP",
     "name": "Multifuncional HP LaserJet Pro MFP 3303fdw, Color, Láser, Print/Scan/Copy/Fax",
     "description": "Multifuncional HP LaserJet Pro MFP 3303fdw, Color, Láser, Print/Scan/Copy/Fax",
-    "image": "assets/images/products/toner/HP499M8A.webp",
+    "image": "",
     "compatibility": "HP Equipos"
   },
   {
     "id": "HE3G632A",
-    "category": "toner",
+    "category": "OTROS",
     "brand": "HP",
     "name": "Multifuncional HP Láser monocromático, LaserJet Pro 3103fdw",
     "description": "Multifuncional HP Láser monocromático, LaserJet Pro 3103fdw",
-    "image": "assets/images/products/toner/HE3G632A.webp",
+    "image": "",
     "compatibility": "HP Equipos"
   },
   {
     "id": "HP1F3Y4A",
-    "category": "toner",
+    "category": "OTROS",
     "brand": "HP",
     "name": "Multifuncional HP Smart Tank 585, Color, 12PPM/5PPM,Inyección, Tanque de Tinta, Inalámbrico, Print/Scan/Copy",
     "description": "Multifuncional HP Smart Tank 585, Color, 12PPM/5PPM,Inyección, Tanque de Tinta, Inalámbrico, Print/Scan/Copy",
-    "image": "assets/images/products/toner/HP1F3Y4A.webp",
+    "image": "",
     "compatibility": "HP Equipos"
   },
   {
@@ -7670,11 +7670,11 @@ const productsDB = [
   },
   {
     "id": "KL004241006",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "KOBLENZ",
     "name": "NOBREAK KOBLENZ 5216R 520VA/240W",
     "description": "NOBREAK KOBLENZ 5216R 520VA/240W",
-    "image": "assets/images/products/toner/KL004241006.webp"
+    "image": ""
   },
   {
     "id": "NXNE-055",
@@ -7750,19 +7750,19 @@ const productsDB = [
   },
   {
     "id": "KL0042069",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "KOBLENZ",
     "name": "No Break Koblenz 7016-USB/R, 700VA, Entrada 90-145V",
     "description": "No Break Koblenz 7016-USB/R, 700VA, Entrada 90-145V",
-    "image": "assets/images/products/toner/KL0042069.webp"
+    "image": ""
   },
   {
     "id": "KL004258000",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "KOBLENZ",
     "name": "No Break Koblenz 9022 USB, 450W, 900VA, 10 Contactos",
     "description": "No Break Koblenz 9022 USB, 450W, 900VA, 10 Contactos",
-    "image": "assets/images/products/toner/KL004258000.webp"
+    "image": ""
   },
   {
     "id": "RLSMART1500LCD",
@@ -7782,11 +7782,11 @@ const productsDB = [
   },
   {
     "id": "JA6560304704",
-    "category": "papeleria",
+    "category": "OTROS",
     "brand": "JANEL",
     "name": "Notas Adhesivas Janel Memo Tip 3X4\" Color Amarillo C/6 Blocks de 100 Hojas C/U",
     "description": "Notas Adhesivas Janel Memo Tip 3X4\" Color Amarillo C/6 Blocks de 100 Hojas C/U",
-    "image": "assets/images/products/toner/JA6560304704.webp"
+    "image": ""
   },
   {
     "id": "NXNE-056",
@@ -7904,29 +7904,29 @@ const productsDB = [
   },
   {
     "id": "HVC1860A",
-    "category": "papeleria",
+    "category": "OTROS",
     "brand": "HP",
     "name": "PAPEL HP BLANCO INTENSO 24\"x150",
     "description": "PAPEL HP BLANCO INTENSO 24\"x150",
-    "image": "assets/images/products/toner/HVC1860A.webp",
+    "image": "",
     "compatibility": "HP Papel"
   },
   {
     "id": "HVCQ7853A",
-    "category": "papeleria",
+    "category": "OTROS",
     "brand": "HP",
     "name": "PAPEL HP PHOTO ADVANCE GLOSSY CARTA 50HJ",
     "description": "PAPEL HP PHOTO ADVANCE GLOSSY CARTA 50HJ",
-    "image": "assets/images/products/toner/HVCQ7853A.webp",
+    "image": "",
     "compatibility": "HP Papel"
   },
   {
     "id": "HVQ8723A",
-    "category": "papeleria",
+    "category": "OTROS",
     "brand": "HP",
     "name": "PAPEL HP PHOTO SEMISATINADO CARTA 50 HJ",
     "description": "PAPEL HP PHOTO SEMISATINADO CARTA 50 HJ",
-    "image": "assets/images/products/toner/HVQ8723A.webp",
+    "image": "",
     "compatibility": "HP Papel"
   },
   {
@@ -8339,11 +8339,11 @@ const productsDB = [
   },
   {
     "id": "HP5HB06A",
-    "category": "toner",
+    "category": "OTROS",
     "brand": "HP",
     "name": "Plotter impresora HP de inyeccion de tinta, DesignJet T250 de 24\"",
     "description": "Plotter impresora HP de inyeccion de tinta, DesignJet T250 de 24\"",
-    "image": "assets/images/products/toner/HP5HB06A.webp",
+    "image": "",
     "compatibility": "HP Equipos"
   },
   {
@@ -8420,11 +8420,11 @@ const productsDB = [
   },
   {
     "id": "INBX8071512700",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "INTEL",
     "name": "Procesador Intel Core i7-12700 con Intel UHD Graphics 770, LGA 1700, 4.90GHz, 12 Núcleos, 25MB Caché, Incluye Disipador - 12va. Generación Alder Lake",
     "description": "Procesador Intel Core i7-12700 con Intel UHD Graphics 770, LGA 1700, 4.90GHz, 12 Núcleos, 25MB Caché, Incluye Disipador - 12va. Generación Alder Lake",
-    "image": "assets/images/products/toner/INBX8071512700.webp"
+    "image": ""
   },
   {
     "id": "ASSDRW-08D2S-U",
@@ -8532,27 +8532,27 @@ const productsDB = [
   },
   {
     "id": "KRBP-400",
-    "category": "papeleria",
+    "category": "OTROS",
     "brand": "KRONALINE",
     "name": "ROLLO P/PLOTTER KRONALINE  91X50 N2  36",
     "description": "ROLLO P/PLOTTER KRONALINE  91X50 N2  36",
-    "image": "assets/images/products/toner/KRBP_400.webp"
+    "image": ""
   },
   {
     "id": "KRBP-406",
-    "category": "papeleria",
+    "category": "OTROS",
     "brand": "KRONALINE",
     "name": "ROLLO P/PLOTTER KRONALINE 61X50 N2  24",
     "description": "ROLLO P/PLOTTER KRONALINE 61X50 N2  24",
-    "image": "assets/images/products/toner/KRBP_406.webp"
+    "image": ""
   },
   {
     "id": "HVCQ1397A",
-    "category": "papeleria",
+    "category": "OTROS",
     "brand": "HP",
     "name": "ROLLO PAPEL HP BOND UNIVERSAL 36 X150",
     "description": "ROLLO PAPEL HP BOND UNIVERSAL 36 X150",
-    "image": "assets/images/products/toner/HVCQ1397A.webp",
+    "image": "",
     "compatibility": "HP Papel"
   },
   {
@@ -8773,11 +8773,11 @@ const productsDB = [
   },
   {
     "id": "KISNV3S/1000G",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "KINGSTON",
     "name": "SSD Kingston SNV3S NVMe, 1TB, M.2, 4000 MB/s Escritura, 6000 MB/s Lectura, PCI Express 4.0",
     "description": "SSD Kingston SNV3S NVMe, 1TB, M.2, 4000 MB/s Escritura, 6000 MB/s Lectura, PCI Express 4.0",
-    "image": "assets/images/products/toner/KISNV3S_1000G.webp"
+    "image": ""
   },
   {
     "id": "TAAMM01TBUS",
@@ -9184,11 +9184,12 @@ const productsDB = [
   },
   {
     "id": "SASV135A",
-    "category": "toner",
+    "category": "OTROS",
     "brand": "HP",
     "name": "TAMBOR S-PRINT ORIGINAL R116",
     "description": "TAMBOR S-PRINT ORIGINAL R116",
-    "image": "assets/images/products/toner/SASV135A.webp"
+    "image": "",
+    "compatibility": "HP Consumible"
   },
   {
     "id": "X101R00664",
@@ -9304,11 +9305,11 @@ const productsDB = [
   },
   {
     "id": "LT920-004422",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "LOGITECH",
     "name": "TECLADO LOGITECH USB ALAMBRICO K120",
     "description": "TECLADO LOGITECH USB ALAMBRICO K120",
-    "image": "assets/images/products/toner/LT920_004422.webp"
+    "image": ""
   },
   {
     "id": "PC-201106",
@@ -9532,11 +9533,11 @@ const productsDB = [
   },
   {
     "id": "SASU019A",
-    "category": "toner",
+    "category": "OTROS",
     "brand": "HP",
     "name": "TONER  S-PRINT ORIGINAL C503L CYAN",
     "description": "TONER  S-PRINT ORIGINAL C503L CYAN",
-    "image": "assets/images/products/toner/SASU019A.webp",
+    "image": "",
     "compatibility": "HP Consumible"
   },
   {
@@ -10269,11 +10270,11 @@ const productsDB = [
   },
   {
     "id": "LXC234HY0",
-    "category": "toner",
+    "category": "OTROS",
     "brand": "Lexmark",
     "name": "TONER LEXMARK C234YCO AMARILLO",
     "description": "TONER LEXMARK C234YCO AMARILLO",
-    "image": "assets/images/products/toner/LXC234HY0.webp"
+    "image": ""
   },
   {
     "id": "LXC3240C0",
@@ -11142,11 +11143,11 @@ const productsDB = [
   },
   {
     "id": "HTW2122A",
-    "category": "toner",
+    "category": "OTROS",
     "brand": "HP",
     "name": "TONER ORIGINAL HP LASERJET 212A AMARILLO",
     "description": "TONER ORIGINAL HP LASERJET 212A AMARILLO",
-    "image": "assets/images/products/toner/HTW2122A.webp",
+    "image": "",
     "compatibility": "HP Consumible"
   },
   {
@@ -11160,11 +11161,11 @@ const productsDB = [
   },
   {
     "id": "HTW2123A",
-    "category": "toner",
+    "category": "OTROS",
     "brand": "HP",
     "name": "TONER ORIGINAL HP LASERJET 212A MAGENTA",
     "description": "TONER ORIGINAL HP LASERJET 212A MAGENTA",
-    "image": "assets/images/products/toner/HTW2123A.webp",
+    "image": "",
     "compatibility": "HP Consumible"
   },
   {
@@ -11178,137 +11179,137 @@ const productsDB = [
   },
   {
     "id": "HTW2312A",
-    "category": "toner",
+    "category": "OTROS",
     "brand": "HP",
     "name": "TONER ORIGINAL HP LASERJET 215A AMARILLO",
     "description": "TONER ORIGINAL HP LASERJET 215A AMARILLO",
-    "image": "assets/images/products/toner/HTW2312A.webp",
+    "image": "",
     "compatibility": "HP Consumible"
   },
   {
     "id": "HTW2311A",
-    "category": "toner",
+    "category": "OTROS",
     "brand": "HP",
     "name": "TONER ORIGINAL HP LASERJET 215A CYAN",
     "description": "TONER ORIGINAL HP LASERJET 215A CYAN",
-    "image": "assets/images/products/toner/HTW2311A.webp",
+    "image": "",
     "compatibility": "HP Consumible"
   },
   {
     "id": "HTW2313A",
-    "category": "toner",
+    "category": "OTROS",
     "brand": "HP",
     "name": "TONER ORIGINAL HP LASERJET 215A MAGENTA",
     "description": "TONER ORIGINAL HP LASERJET 215A MAGENTA",
-    "image": "assets/images/products/toner/HTW2313A.webp",
+    "image": "",
     "compatibility": "HP Consumible"
   },
   {
     "id": "HTW2310A",
-    "category": "toner",
+    "category": "OTROS",
     "brand": "HP",
     "name": "TONER ORIGINAL HP LASERJET 215A NEGRO",
     "description": "TONER ORIGINAL HP LASERJET 215A NEGRO",
-    "image": "assets/images/products/toner/HTW2310A.webp",
+    "image": "",
     "compatibility": "HP Consumible"
   },
   {
     "id": "HTW2222A",
-    "category": "toner",
+    "category": "OTROS",
     "brand": "HP",
     "name": "TONER ORIGINAL HP LASERJET 222A  AMARILLO",
     "description": "TONER ORIGINAL HP LASERJET 222A  AMARILLO",
-    "image": "assets/images/products/toner/HTW2222A.webp",
+    "image": "",
     "compatibility": "HP Consumible"
   },
   {
     "id": "HTW2221A",
-    "category": "toner",
+    "category": "OTROS",
     "brand": "HP",
     "name": "TONER ORIGINAL HP LASERJET 222A CIAN",
     "description": "TONER ORIGINAL HP LASERJET 222A CIAN",
-    "image": "assets/images/products/toner/HTW2221A.webp",
+    "image": "",
     "compatibility": "HP Consumible"
   },
   {
     "id": "HTW2223A",
-    "category": "toner",
+    "category": "OTROS",
     "brand": "HP",
     "name": "TONER ORIGINAL HP LASERJET 222A MAGENTA",
     "description": "TONER ORIGINAL HP LASERJET 222A MAGENTA",
-    "image": "assets/images/products/toner/HTW2223A.webp",
+    "image": "",
     "compatibility": "HP Consumible"
   },
   {
     "id": "HTW2222X",
-    "category": "toner",
+    "category": "OTROS",
     "brand": "HP",
     "name": "TONER ORIGINAL HP LASERJET 222X AMARILLO",
     "description": "TONER ORIGINAL HP LASERJET 222X AMARILLO",
-    "image": "assets/images/products/toner/HTW2222X.webp",
+    "image": "",
     "compatibility": "HP Consumible"
   },
   {
     "id": "HTW2221X",
-    "category": "toner",
+    "category": "OTROS",
     "brand": "HP",
     "name": "TONER ORIGINAL HP LASERJET 222X CYAN",
     "description": "TONER ORIGINAL HP LASERJET 222X CYAN",
-    "image": "assets/images/products/toner/HTW2221X.webp",
+    "image": "",
     "compatibility": "HP Consumible"
   },
   {
     "id": "HTW2223X",
-    "category": "toner",
+    "category": "OTROS",
     "brand": "HP",
     "name": "TONER ORIGINAL HP LASERJET 222X MAGENTA",
     "description": "TONER ORIGINAL HP LASERJET 222X MAGENTA",
-    "image": "assets/images/products/toner/HTW2223X.webp",
+    "image": "",
     "compatibility": "HP Consumible"
   },
   {
     "id": "HTW2302A",
-    "category": "toner",
+    "category": "OTROS",
     "brand": "HP",
     "name": "TONER ORIGINAL HP LASERJET 230A AMARILLO",
     "description": "TONER ORIGINAL HP LASERJET 230A AMARILLO",
-    "image": "assets/images/products/toner/HTW2302A.webp",
+    "image": "",
     "compatibility": "HP Consumible"
   },
   {
     "id": "HTW2302X",
-    "category": "toner",
+    "category": "OTROS",
     "brand": "HP",
     "name": "TONER ORIGINAL HP LASERJET 230X AMARILLO",
     "description": "TONER ORIGINAL HP LASERJET 230X AMARILLO",
-    "image": "assets/images/products/toner/HTW2302X.webp",
+    "image": "",
     "compatibility": "HP Consumible"
   },
   {
     "id": "HTW2301X",
-    "category": "toner",
+    "category": "OTROS",
     "brand": "HP",
     "name": "TONER ORIGINAL HP LASERJET 230X CYAN 5,500PAGS",
     "description": "TONER ORIGINAL HP LASERJET 230X CYAN 5,500PAGS",
-    "image": "assets/images/products/toner/HTW2301X.webp",
+    "image": "",
     "compatibility": "HP Consumible"
   },
   {
     "id": "HTW2303X",
-    "category": "toner",
+    "category": "OTROS",
     "brand": "HP",
     "name": "TONER ORIGINAL HP LASERJET 230X MAGENTA  5,500PAGS",
     "description": "TONER ORIGINAL HP LASERJET 230X MAGENTA  5,500PAGS",
-    "image": "assets/images/products/toner/HTW2303X.webp",
+    "image": "",
     "compatibility": "HP Consumible"
   },
   {
     "id": "HTW2300X",
-    "category": "toner",
+    "category": "OTROS",
     "brand": "HP",
     "name": "TONER ORIGINAL HP LASERJET 230X NEGRO 7,500 PAGS",
     "description": "TONER ORIGINAL HP LASERJET 230X NEGRO 7,500 PAGS",
-    "image": "assets/images/products/toner/HTW2300X.webp",
+    "image": "",
     "compatibility": "HP Consumible"
   },
   {
@@ -11799,11 +11800,11 @@ const productsDB = [
   },
   {
     "id": "HTW2303A",
-    "category": "toner",
+    "category": "OTROS",
     "brand": "HP",
     "name": "TONER ORIGINAL HP LASERJT 230A MAGENTA",
     "description": "TONER ORIGINAL HP LASERJT 230A MAGENTA",
-    "image": "assets/images/products/toner/HTW2303A.webp",
+    "image": "",
     "compatibility": "HP Consumible"
   },
   {
@@ -11816,173 +11817,173 @@ const productsDB = [
   },
   {
     "id": "SASS562A",
-    "category": "toner",
+    "category": "OTROS",
     "brand": "HP",
     "name": "TONER S-PRINT A3 CLT-C808S CIAN",
     "description": "TONER S-PRINT A3 CLT-C808S CIAN",
-    "image": "assets/images/products/toner/SASS562A.webp",
+    "image": "",
     "compatibility": "HP Consumible"
   },
   {
     "id": "SASS602A",
-    "category": "toner",
+    "category": "OTROS",
     "brand": "HP",
     "name": "TONER S-PRINT A3 CLT-K808S NEGRO",
     "description": "TONER S-PRINT A3 CLT-K808S NEGRO",
-    "image": "assets/images/products/toner/SASS602A.webp",
+    "image": "",
     "compatibility": "HP Consumible"
   },
   {
     "id": "SASS644A",
-    "category": "toner",
+    "category": "OTROS",
     "brand": "HP",
     "name": "TONER S-PRINT A3 CLT-M808S MAGENTA",
     "description": "TONER S-PRINT A3 CLT-M808S MAGENTA",
-    "image": "assets/images/products/toner/SASS644A.webp",
+    "image": "",
     "compatibility": "HP Consumible"
   },
   {
     "id": "SASS737A",
-    "category": "toner",
+    "category": "OTROS",
     "brand": "HP",
     "name": "TONER S-PRINT A3 CLT-Y808S AMARILLO",
     "description": "TONER S-PRINT A3 CLT-Y808S AMARILLO",
-    "image": "assets/images/products/toner/SASS737A.webp",
+    "image": "",
     "compatibility": "HP Consumible"
   },
   {
     "id": "SASU701A",
-    "category": "toner",
+    "category": "OTROS",
     "brand": "HP",
     "name": "TONER S-PRINT ORIGINAL 101S NEGRO",
     "description": "TONER S-PRINT ORIGINAL 101S NEGRO",
-    "image": "assets/images/products/toner/SASU701A.webp",
+    "image": "",
     "compatibility": "HP Consumible"
   },
   {
     "id": "SASU751A",
-    "category": "toner",
+    "category": "OTROS",
     "brand": "HP",
     "name": "TONER S-PRINT ORIGINAL 104S NEGRO",
     "description": "TONER S-PRINT ORIGINAL 104S NEGRO",
-    "image": "assets/images/products/toner/SASU751A.webp",
+    "image": "",
     "compatibility": "HP Consumible"
   },
   {
     "id": "SASU803A",
-    "category": "toner",
+    "category": "OTROS",
     "brand": "HP",
     "name": "TONER S-PRINT ORIGINAL 111L NEGRO",
     "description": "TONER S-PRINT ORIGINAL 111L NEGRO",
-    "image": "assets/images/products/toner/SASU803A.webp",
+    "image": "",
     "compatibility": "HP Consumible"
   },
   {
     "id": "SASU815A",
-    "category": "toner",
+    "category": "OTROS",
     "brand": "HP",
     "name": "TONER S-PRINT ORIGINAL 111S NEGRO",
     "description": "TONER S-PRINT ORIGINAL 111S NEGRO",
-    "image": "assets/images/products/toner/SASU815A.webp",
+    "image": "",
     "compatibility": "HP Consumible"
   },
   {
     "id": "SASU833A",
-    "category": "toner",
+    "category": "OTROS",
     "brand": "HP",
     "name": "TONER S-PRINT ORIGINAL 116L NEGRO",
     "description": "TONER S-PRINT ORIGINAL 116L NEGRO",
-    "image": "assets/images/products/toner/SASU833A.webp",
+    "image": "",
     "compatibility": "HP Consumible"
   },
   {
     "id": "SASU873A",
-    "category": "toner",
+    "category": "OTROS",
     "brand": "HP",
     "name": "TONER S-PRINT ORIGINAL 201L NEGRO",
     "description": "TONER S-PRINT ORIGINAL 201L NEGRO",
-    "image": "assets/images/products/toner/SASU873A.webp",
+    "image": "",
     "compatibility": "HP Consumible"
   },
   {
     "id": "SASU920A",
-    "category": "toner",
+    "category": "OTROS",
     "brand": "HP",
     "name": "TONER S-PRINT ORIGINAL 203U NEGRO",
     "description": "TONER S-PRINT ORIGINAL 203U NEGRO",
-    "image": "assets/images/products/toner/SASU920A.webp",
+    "image": "",
     "compatibility": "HP Consumible"
   },
   {
     "id": "SAST972A",
-    "category": "toner",
+    "category": "OTROS",
     "brand": "HP",
     "name": "TONER S-PRINT ORIGINAL C404S CYAN",
     "description": "TONER S-PRINT ORIGINAL C404S CYAN",
-    "image": "assets/images/products/toner/SAST972A.webp",
+    "image": "",
     "compatibility": "HP Consumible"
   },
   {
     "id": "SASU152A",
-    "category": "toner",
+    "category": "OTROS",
     "brand": "HP",
     "name": "TONER S-PRINT ORIGINAL K503L NEGRO",
     "description": "TONER S-PRINT ORIGINAL K503L NEGRO",
-    "image": "assets/images/products/toner/SASU152A.webp",
+    "image": "",
     "compatibility": "HP Consumible"
   },
   {
     "id": "SASU240A",
-    "category": "toner",
+    "category": "OTROS",
     "brand": "HP",
     "name": "TONER S-PRINT ORIGINAL M404S MAGENTA",
     "description": "TONER S-PRINT ORIGINAL M404S MAGENTA",
-    "image": "assets/images/products/toner/SASU240A.webp",
+    "image": "",
     "compatibility": "HP Consumible"
   },
   {
     "id": "SASU286A",
-    "category": "toner",
+    "category": "OTROS",
     "brand": "HP",
     "name": "TONER S-PRINT ORIGINAL M503L MAGENTA",
     "description": "TONER S-PRINT ORIGINAL M503L MAGENTA",
-    "image": "assets/images/products/toner/SASU286A.webp",
+    "image": "",
     "compatibility": "HP Consumible"
   },
   {
     "id": "SASU450A",
-    "category": "toner",
+    "category": "OTROS",
     "brand": "HP",
     "name": "TONER S-PRINT ORIGINAL Y404S AMARILLO",
     "description": "TONER S-PRINT ORIGINAL Y404S AMARILLO",
-    "image": "assets/images/products/toner/SASU450A.webp",
+    "image": "",
     "compatibility": "HP Consumible"
   },
   {
     "id": "SASU496A",
-    "category": "toner",
+    "category": "OTROS",
     "brand": "HP",
     "name": "TONER S-PRINT ORIGINAL Y503L AMARILLO",
     "description": "TONER S-PRINT ORIGINAL Y503L AMARILLO",
-    "image": "assets/images/products/toner/SASU496A.webp",
+    "image": "",
     "compatibility": "HP Consumible"
   },
   {
     "id": "SACLPY300A",
-    "category": "toner",
+    "category": "OTROS",
     "brand": "HP",
     "name": "TONER SAMSUNG ORIGINAL CLP300 AMARILLO",
     "description": "TONER SAMSUNG ORIGINAL CLP300 AMARILLO",
-    "image": "assets/images/products/toner/SACLPY300A.webp",
+    "image": "",
     "compatibility": "HP Consumible"
   },
   {
     "id": "SASU106A",
-    "category": "toner",
+    "category": "OTROS",
     "brand": "HP",
     "name": "TONER SPRINT ORIGINAL K404S NEGRO",
     "description": "TONER SPRINT ORIGINAL K404S NEGRO",
-    "image": "assets/images/products/toner/SASU106A.webp",
+    "image": "",
     "compatibility": "HP Consumible"
   },
   {
@@ -12259,19 +12260,19 @@ const productsDB = [
   },
   {
     "id": "LT920-008902",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "LOGITECH",
     "name": "Teclado Gamer Logitech G915 RGB, Teclado Mecánico, Switch GL Táctil, Inalámbrico, Negro (Inglés)",
     "description": "Teclado Gamer Logitech G915 RGB, Teclado Mecánico, Switch GL Táctil, Inalámbrico, Negro (Inglés)",
-    "image": "assets/images/products/toner/LT920_008902.webp"
+    "image": ""
   },
   {
     "id": "LT920-012279",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "LOGITECH",
     "name": "Teclado Logitech Wave Keys, Inalámbrico, Bluetooth, Blanco (Español)",
     "description": "Teclado Logitech Wave Keys, Inalámbrico, Bluetooth, Blanco (Español)",
-    "image": "assets/images/products/toner/LT920_012279.webp"
+    "image": ""
   },
   {
     "id": "NXNE-415M",
@@ -13296,11 +13297,11 @@ const productsDB = [
   },
   {
     "id": "HTW2220A",
-    "category": "toner",
+    "category": "OTROS",
     "brand": "HP",
     "name": "TÓNER ORIGINAL HP LASERJET 222A NEGRO",
     "description": "TÓNER ORIGINAL HP LASERJET 222A NEGRO",
-    "image": "assets/images/products/toner/HTW2220A.webp",
+    "image": "",
     "compatibility": "HP Consumible"
   },
   {
@@ -13670,11 +13671,11 @@ const productsDB = [
   },
   {
     "id": "KISA400S37480GB",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "KINGSTON",
     "name": "UNIDAD SSD KINGSTON 480GB",
     "description": "UNIDAD SSD KINGSTON 480GB",
-    "image": "assets/images/products/toner/KISA400S37480GB.webp"
+    "image": ""
   },
   {
     "id": "ADTAUV210-32G-RGD",
@@ -13734,35 +13735,35 @@ const productsDB = [
   },
   {
     "id": "KIDTKN/128GB",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "KINGSTON",
     "name": "USB KINGSTON 128GB 3.2 GEN 1",
     "description": "USB KINGSTON 128GB 3.2 GEN 1",
-    "image": "assets/images/products/toner/KIDTKN_128GB.webp"
+    "image": ""
   },
   {
     "id": "KIDTXM/256GB",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "KINGSTON",
     "name": "USB KINGSTON 256GB 3.2 GEN 1 EXODIA",
     "description": "USB KINGSTON 256GB 3.2 GEN 1 EXODIA",
-    "image": "assets/images/products/toner/KIDTXM_256GB.webp"
+    "image": ""
   },
   {
     "id": "KIDTKN/64GB",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "KINGSTON",
     "name": "USB KINGSTON 64GB 3.2 GEN 1",
     "description": "USB KINGSTON 64GB 3.2 GEN 1",
-    "image": "assets/images/products/toner/KIDTKN_64GB.webp"
+    "image": ""
   },
   {
     "id": "KIDTX/64GB",
-    "category": "accesorios",
+    "category": "OTROS",
     "brand": "KINGSTON",
     "name": "USB KINGSTON 64GB 3.2 GEN 1",
     "description": "USB KINGSTON 64GB 3.2 GEN 1",
-    "image": "assets/images/products/toner/KIDTX_64GB.webp"
+    "image": ""
   },
   {
     "id": "ADTAROY-UR340-32GBK",
