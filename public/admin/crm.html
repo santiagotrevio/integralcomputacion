@@ -196,6 +196,11 @@
 
                 <p class="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-2 mt-6 px-3">Retorno & Admin
                 </p>
+                <button onclick="switchTab('config')"
+                    class="nav-item tab-btn w-full flex items-center px-3 py-2.5 rounded-xl text-secondary justify-between text-left"
+                    data-target="config">
+                    <div class="flex items-center"><i class="fa-solid fa-gear w-6"></i> Configuración</div>
+                </button>
                 <a href="/public/admin/home.html"
                     class="nav-item flex items-center px-3 py-2.5 rounded-xl text-slate-500 hover:text-danger hover:bg-red-50 transition">
                     <i class="fa-solid fa-arrow-left w-6"></i> Volver al Panel
@@ -503,6 +508,31 @@
                     </div>
                 </div>
 
+                <!-- TAB 6: CONFIGURACIÓN -->
+                <div id="tab-config" class="tab-pane">
+                    <div class="flex justify-between items-center mb-6">
+                        <div>
+                            <h2 class="text-xl font-bold text-primary">Configuración del CRM</h2>
+                            <p class="text-sm text-secondary">Administra parámetros globales como tus sucursales y
+                                ubicaciones.</p>
+                        </div>
+                    </div>
+
+                    <div class="card p-6 mb-6">
+                        <div class="flex justify-between items-center mb-4 border-b border-border pb-3">
+                            <h3 class="font-bold text-primary"><i class="fa-solid fa-building text-accent mr-2"></i>
+                                Sucursales Propias</h3>
+                            <button onclick="openBranchModal()"
+                                class="text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold py-1.5 px-3 rounded-lg flex items-center gap-2 transition-colors">
+                                <i class="fa-solid fa-plus"></i> Añadir Sucursal
+                            </button>
+                        </div>
+                        <div id="branchesList" class="space-y-3">
+                            <!-- JS Injection -->
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </main>
@@ -606,6 +636,57 @@
                 <button onclick="saveClient()"
                     class="px-6 py-2.5 text-sm font-bold text-white bg-primary hover:bg-slate-800 rounded-xl shadow-md transition-transform active:scale-95 flex items-center gap-2">
                     <i class="fa-solid fa-save"></i> Guardar Cliente
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Formulario Sucursal -->
+    <div id="branchModal"
+        class="fixed inset-0 bg-primary/40 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl shadow-2xl w-full max-w-md flex flex-col overflow-hidden transform transition-all scale-95 opacity-0"
+            id="branchModalContent">
+            <div class="px-6 py-4 border-b border-border flex justify-between items-center bg-slate-50/50">
+                <h3 class="text-lg font-bold text-primary flex items-center gap-2" id="branchModalTitle">Nueva Sucursal
+                </h3>
+                <button onclick="closeBranchModal()" class="text-slate-400 hover:text-danger p-2"><i
+                        class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="p-6 overflow-y-auto space-y-4 bg-white">
+                <input type="hidden" id="bId">
+                <div>
+                    <label class="block text-xs font-bold text-slate-500 uppercase mb-1">Nombre Mostrar</label>
+                    <input type="text" id="bName" placeholder="Ej. Matriz GDL"
+                        class="w-full border border-border rounded-xl px-4 py-2 text-sm focus:border-accent outline-none bg-slate-50 focus:bg-white text-primary">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-500 uppercase mb-1">Dirección / Referencia</label>
+                    <input type="text" id="bDesc" placeholder="Calle, Número, Ref"
+                        class="w-full border border-border rounded-xl px-4 py-2 text-sm focus:border-accent outline-none bg-slate-50 focus:bg-white text-primary">
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-500 uppercase mb-1">Latitud</label>
+                        <input type="number" step="any" id="bLat"
+                            class="w-full border border-border rounded-xl px-4 py-2 text-sm focus:border-accent outline-none bg-white text-primary">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-500 uppercase mb-1">Longitud</label>
+                        <input type="number" step="any" id="bLng"
+                            class="w-full border border-border rounded-xl px-4 py-2 text-sm focus:border-accent outline-none bg-white text-primary">
+                    </div>
+                </div>
+                <button type="button" onclick="geocodeBranch()"
+                    class="w-full bg-slate-200 hover:bg-slate-300 text-slate-700 font-semibold px-4 py-2.5 rounded-xl text-xs transition-colors flex items-center justify-center gap-2 mt-2">
+                    <i class="fa-solid fa-location-crosshairs"></i> Ubicarlos en el Mapa (Automático)
+                </button>
+            </div>
+            <div class="px-6 py-4 border-t border-border bg-slate-50/50 flex justify-end gap-3 z-10 shrink-0">
+                <button onclick="closeBranchModal()"
+                    class="px-4 py-2 text-sm font-bold text-slate-400 hover:text-primary transition-colors">Cancelar</button>
+                <button onclick="saveBranch()"
+                    class="px-5 py-2.5 text-sm font-bold text-white bg-primary hover:bg-slate-800 rounded-xl shadow-md transition-transform active:scale-95 flex items-center gap-2">
+                    <i class="fa-solid fa-save"></i> Guardar
                 </button>
             </div>
         </div>

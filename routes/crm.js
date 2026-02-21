@@ -197,5 +197,38 @@ router.delete('/clients/:id', (req, res) => {
     });
 });
 
+// --- BRANCHES CRUD ---
+router.get('/branches', (req, res) => {
+    db.all(`SELECT * FROM branches ORDER BY id ASC`, [], (err, rows) => {
+        if (err) return res.status(500).json({ error: err.message });
+        res.json({ data: rows });
+    });
+});
+
+router.post('/branches', (req, res) => {
+    const { name, description, lat, lng } = req.body;
+    db.run(`INSERT INTO branches (name, description, lat, lng) VALUES (?, ?, ?, ?)`,
+        [name, description || '', lat || null, lng || null], function (err) {
+            if (err) return res.status(400).json({ error: err.message });
+            res.json({ success: true, id: this.lastID });
+        });
+});
+
+router.put('/branches/:id', (req, res) => {
+    const { name, description, lat, lng } = req.body;
+    db.run(`UPDATE branches SET name = ?, description = ?, lat = ?, lng = ? WHERE id = ?`,
+        [name, description || '', lat || null, lng || null, req.params.id], function (err) {
+            if (err) return res.status(400).json({ error: err.message });
+            res.json({ success: true });
+        });
+});
+
+router.delete('/branches/:id', (req, res) => {
+    db.run(`DELETE FROM branches WHERE id = ?`, [req.params.id], function (err) {
+        if (err) return res.status(400).json({ error: err.message });
+        res.json({ success: true });
+    });
+});
+
 module.exports = router;
 

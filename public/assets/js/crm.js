@@ -58,7 +58,7 @@ async function apiFetch(url, options = {}) {
 
 async function initCRM() {
     console.log("Inicializando SDK Comercial MVC...");
-    await Promise.all([loadCRMMetrics(), loadDeals(), loadTasks(), loadClients()]);
+    await Promise.all([loadCRMMetrics(), loadDeals(), loadTasks(), loadClients(), loadBranches()]);
     // Default Tab is Comando
     switchTab('comando');
 }
@@ -793,6 +793,156 @@ async function geocodeAddress() {
     } catch (err) {
         console.error("Geocoding failed", err);
         alert("Falla de conexión al servicio de mapas.");
+        btn.innerHTML = ogHtml;
+    }
+}
+
+// ---- CONFIGURACIÓN Y SUCURSALES ----
+let crmBranches = [];
+
+async function loadBranches() {
+    try {
+        const res = await apiFetch('/api/crm/branches');
+        const result = await res.json();
+        crmBranches = result.data || [];
+        renderBranchesList();
+    } catch (err) {
+        console.error("Error loading branches", err);
+    }
+}
+
+function renderBranchesList() {
+    const list = document.getElementById('branchesList');
+    if (!list) return;
+    list.innerHTML = '';
+    if (crmBranches.length === 0) {
+        list.innerHTML = '<div class="text-sm text-slate-400 text-center py-4">No hay sucursales registradas.</div>';
+        return;
+    }
+    crmBranches.forEach(b => {
+        list.innerHTML += `
+            <div class="flex items-center justify-between p-4 bg-slate-50 border border-border rounded-xl">
+                <div>
+                    <h4 class="font-bold text-sm text-primary flex items-center gap-2"><i class="fa-solid fa-building text-accent opacity-50"></i> ${b.name}</h4>
+                    <p class="text-xs text-slate-500 mt-1">${b.description || 'Sin dirección'}</p>
+                    <p class="text-[10px] text-slate-400 font-mono mt-1 bg-white inline-block px-1.5 py-0.5 rounded border border-slate-200">Lat: ${b.lat || 'N/A'}, Lng: ${b.lng || 'N/A'}</p>
+                </div>
+                <div class="flex gap-2">
+                    <button onclick="openBranchModal(${b.id})" class="text-slate-400 hover:text-accent p-2 bg-white rounded-lg shadow-sm border border-slate-100 hover:border-accent/30 transition-colors"><i class="fa-solid fa-pen"></i></button>
+                    <button onclick="deleteBranch(${b.id})" class="text-slate-400 hover:text-danger p-2 bg-white rounded-lg shadow-sm border border-slate-100 hover:border-danger/30 transition-colors"><i class="fa-solid fa-trash"></i></button>
+                </div>
+            </div>
+        `;
+    });
+}
+
+function openBranchModal(id = null) {
+    document.getElementById('bId').value = '';
+    document.getElementById('bName').value = '';
+    document.getElementById('bDesc').value = '';
+    document.getElementById('bLat').value = '';
+    document.getElementById('bLng').value = '';
+    document.getElementById('branchModalTitle').innerHTML = '<i class="fa-solid fa-building text-accent"></i> Nueva Sucursal';
+
+    if (id) {
+        const branch = crmBranches.find(b => b.id === id);
+        if (branch) {
+            document.getElementById('branchModalTitle').innerHTML = '<i class="fa-solid fa-pen text-accent"></i> Editar Sucursal';
+            document.getElementById('bId').value = branch.id;
+            document.getElementById('bName').value = branch.name || '';
+            document.getElementById('bDesc').value = branch.description || '';
+            document.getElementById('bLat').value = branch.lat || '';
+            document.getElementById('bLng').value = branch.lng || '';
+        }
+    }
+
+    const modal = document.getElementById('branchModal');
+    const content = document.getElementById('branchModalContent');
+    modal.classList.remove('hidden');
+    setTimeout(() => {
+        content.classList.remove('scale-95', 'opacity-0');
+        content.classList.add('scale-100', 'opacity-100');
+    }, 10);
+}
+
+function closeBranchModal() {
+    const modal = document.getElementById('branchModal');
+    const content = document.getElementById('branchModalContent');
+    content.classList.remove('scale-100', 'opacity-100');
+    content.classList.add('scale-95', 'opacity-0');
+    setTimeout(() => modal.classList.add('hidden'), 200);
+}
+
+async function saveBranch() {
+    const id = document.getElementById('bId').value;
+    const name = document.getElementById('bName').value;
+    if (!name) return alert("El nombre es requerido.");
+
+    const payload = {
+        name: name,
+        description: document.getElementById('bDesc').value,
+        lat: document.getElementById('bLat').value || null,
+        lng: document.getElementById('bLng').value || null
+    };
+
+    const url = id ? `/api/crm/branches/${id}` : '/api/crm/branches';
+    const method = id ? 'PUT' : 'POST';
+
+    const btn = document.querySelector('#branchModalContent button.bg-primary');
+    const prevText = btn.innerHTML;
+    btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i>...';
+
+    try {
+        await apiFetch(url, {
+            method: method,
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+        });
+        closeBranchModal();
+        await loadBranches();
+        if (lmap) renderMap(); // Update pin on map immediately
+    } catch (err) {
+        console.error("Error saving branch:", err);
+        alert("Ocurrió un error.");
+    } finally {
+        btn.innerHTML = prevText;
+    }
+}
+
+async function deleteBranch(id) {
+    if (!confirm('¿Eliminar esta sucursal del sistema de forma permanente?')) return;
+    try {
+        await apiFetch(`/api/crm/branches/${id}`, { method: 'DELETE' });
+        await loadBranches();
+        if (lmap) renderMap(); // Update pin on map immediately
+    } catch (err) {
+        alert("Error al eliminar sucursal");
+    }
+}
+
+async function geocodeBranch() {
+    const desc = document.getElementById('bDesc').value;
+    if (!desc || desc.length < 5) return alert('Por favor, ingresa una dirección de sucursal válida.');
+
+    const btn = event.currentTarget;
+    const ogHtml = btn.innerHTML;
+    btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Buscando...';
+
+    try {
+        const query = encodeURIComponent(desc + ', Jalisco, Mexico');
+        const res = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${query}&limit=1`);
+        const data = await res.json();
+        if (data && data.length > 0) {
+            document.getElementById('bLat').value = data[0].lat;
+            document.getElementById('bLng').value = data[0].lon;
+            btn.innerHTML = '<i class="fa-solid fa-check text-success"></i> ¡Ubicado!';
+            setTimeout(() => btn.innerHTML = ogHtml, 2000);
+        } else {
+            alert("No se encontró la dirección.");
+            btn.innerHTML = ogHtml;
+        }
+    } catch (err) {
+        alert("Falla de conexión.");
         btn.innerHTML = ogHtml;
     }
 }
