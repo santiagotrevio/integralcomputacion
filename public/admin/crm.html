@@ -196,7 +196,7 @@
                 <button onclick="switchTab('ventas')"
                     class="nav-item tab-btn w-full flex items-center px-3 py-2.5 rounded-xl text-secondary justify-between text-left"
                     data-target="ventas">
-                    <div class="flex items-center"><i class="fa-solid fa-chart-line w-6"></i> Ventas Importadas
+                    <div class="flex items-center"><i class="fa-solid fa-chart-line w-6"></i> Rendimiento Anual
                     </div>
                 </button>
 
@@ -539,60 +539,149 @@
                     </div>
                 </div>
 
-                <!-- TAB 7: VENTAS IMPORTADAS -->
+                <!-- TAB 7: RENDIMIENTO ANUAL -->
                 <div id="tab-ventas" class="tab-pane">
                     <div class="flex justify-between items-center mb-6">
                         <div>
-                            <h2 class="text-xl font-bold text-primary">Ventas Importadas (Histórico)</h2>
-                            <p class="text-sm text-secondary">Visualiza y analiza el historial de ventas o sube nuevos
-                                cortes desde CSV.</p>
+                            <h2 class="text-xl font-bold text-primary">Rendimiento Anual & Analítica</h2>
+                            <p class="text-sm text-secondary">Dashboard analítico segmentado por vistas operativas.</p>
                         </div>
                         <label
                             class="bg-primary hover:bg-slate-800 text-white font-semibold py-2 px-5 rounded-full shadow-md transition-transform active:scale-95 flex items-center gap-2 cursor-pointer">
-                            <i class="fa-solid fa-file-csv"></i> Importar CSV
+                            <i class="fa-solid fa-file-csv"></i> Importar CSV...
                             <input type="file" id="salesCsvInput" accept=".csv" class="hidden"
                                 onchange="handleFileUpload(event)">
                         </label>
                     </div>
 
-                    <!-- Métricas Rápidas de Ventas -->
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-                        <div class="card p-5">
-                            <p class="text-xs text-secondary font-medium mb-1">Total Facturado</p>
-                            <h3 class="text-2xl font-bold text-success mb-1" id="sv_total">$0.00</h3>
+                    <!-- Píldoras de Navegación Interna -->
+                    <div class="flex gap-2 mb-6 border-b border-border pb-2 overflow-x-auto">
+                        <button onclick="switchVentasTab('ejecutiva')" id="btn-ventas-ejecutiva"
+                            class="px-4 py-2 font-bold text-sm rounded-lg bg-primary text-white transition-colors flex items-center whitespace-nowrap"><i
+                                class="fa-solid fa-chart-line mr-2"></i> Ejecutiva (Macro)</button>
+                        <button onclick="switchVentasTab('clientes')" id="btn-ventas-clientes"
+                            class="px-4 py-2 font-bold text-sm rounded-lg text-secondary hover:bg-slate-100 transition-colors flex items-center whitespace-nowrap"><i
+                                class="fa-solid fa-users mr-2"></i> Vista Clientes</button>
+                        <button onclick="switchVentasTab('simulador')" id="btn-ventas-simulador"
+                            class="px-4 py-2 font-bold text-sm rounded-lg text-secondary hover:bg-slate-100 transition-colors flex items-center whitespace-nowrap"><i
+                                class="fa-solid fa-triangle-exclamation mr-2"></i> Simulador de Riesgo</button>
+                    </div>
+
+                    <!-- SUB-TAB 1: EJECUTIVA -->
+                    <div id="v-tab-ejecutiva" class="block">
+                        <!-- Métricas Rápidas -->
+                        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+                            <div class="card p-5">
+                                <p class="text-xs text-secondary font-medium mb-1">Total Facturado</p>
+                                <h3 class="text-2xl font-bold text-success mb-1" id="sv_total">$0.00</h3>
+                            </div>
+                            <div class="card p-5">
+                                <p class="text-xs text-secondary font-medium mb-1">Ticket Promedio</p>
+                                <h3 class="text-2xl font-bold text-accent mb-1" id="sv_ticket">$0.00</h3>
+                            </div>
+                            <div class="card p-5">
+                                <p class="text-xs text-secondary font-medium mb-1">Total de Ventas</p>
+                                <h3 class="text-2xl font-bold text-primary mb-1" id="sv_count">0</h3>
+                            </div>
+                            <div class="card p-5">
+                                <p class="text-xs text-secondary font-medium mb-1">Cliente Principal</p>
+                                <h3 class="text-lg font-bold text-primary mb-1 truncate" id="sv_top_client">-</h3>
+                            </div>
                         </div>
-                        <div class="card p-5">
-                            <p class="text-xs text-secondary font-medium mb-1">Total de Ventas</p>
-                            <h3 class="text-2xl font-bold text-primary mb-1" id="sv_count">0</h3>
-                        </div>
-                        <div class="card p-5">
-                            <p class="text-xs text-secondary font-medium mb-1">Cliente Principal</p>
-                            <h3 class="text-xl font-bold text-primary mb-1 truncate" id="sv_top_client">-</h3>
+
+                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                            <!-- Rendimiento Anual Línea -->
+                            <div class="card p-6">
+                                <h4 class="font-bold text-primary mb-4 flex items-center"><i
+                                        class="fa-solid fa-chart-area text-accent mr-2"></i> Rendimiento Mensual</h4>
+                                <canvas id="chartMonthlySales" height="250"></canvas>
+                            </div>
+                            <!-- Pareto Chart -->
+                            <div class="card p-6">
+                                <h4 class="font-bold text-primary mb-4 flex items-center"><i
+                                        class="fa-solid fa-chart-bar text-accent mr-2"></i> Ley de Pareto (80/20)</h4>
+                                <p class="text-xs text-slate-400 mb-2">Acumulado de ingresos por principales clientes.
+                                </p>
+                                <canvas id="chartPareto" height="250"></canvas>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="bg-white rounded-2xl shadow-sm border border-border overflow-hidden">
-                        <div class="overflow-x-auto">
-                            <table class="w-full text-left border-collapse">
-                                <thead>
-                                    <tr
-                                        class="bg-slate-50 border-b border-border text-xs uppercase tracking-wider text-slate-500 font-bold">
-                                        <th class="p-4">Factura</th>
-                                        <th class="p-4">Fecha</th>
-                                        <th class="p-4">Cliente</th>
-                                        <th class="p-4 text-right">Monto Pagado</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="importedSalesList" class="divide-y divide-border text-sm">
-                                    <!-- Injection via JS -->
-                                    <tr>
-                                        <td colspan="4" class="p-8 text-center text-slate-400">Cargando base de
-                                            ventas...</td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                    <!-- SUB-TAB 2: CLIENTES -->
+                    <div id="v-tab-clientes" class="hidden">
+                        <div class="flex justify-between items-center mb-4">
+                            <div class="relative w-full max-w-md">
+                                <i
+                                    class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400"></i>
+                                <input type="text" id="salesSearchInput" onkeyup="filterSalesTable()"
+                                    placeholder="Buscar por cliente o factura..."
+                                    class="w-full pl-10 pr-4 py-2 bg-white border border-border rounded-xl text-sm focus:ring-2 focus:ring-accent outline-none shadow-sm transition-all text-primary">
+                            </div>
+                        </div>
+                        <div class="bg-white rounded-2xl shadow-sm border border-border overflow-hidden">
+                            <div class="overflow-x-auto">
+                                <table class="w-full text-left border-collapse" id="salesTableObj">
+                                    <thead>
+                                        <tr
+                                            class="bg-slate-50 border-b border-border text-xs uppercase tracking-wider text-slate-500 font-bold">
+                                            <th class="p-4">Factura</th>
+                                            <th class="p-4">Fecha</th>
+                                            <th class="p-4">Cliente</th>
+                                            <th class="p-4 text-right">Monto Pagado</th>
+                                            <th class="p-4 text-center">Acción</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="importedSalesList" class="divide-y divide-border text-sm">
+                                        <tr>
+                                            <td colspan="5" class="p-8 text-center text-slate-400">Cargando base de
+                                                ventas...</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
+
+                    <!-- SUB-TAB 3: SIMULADOR DE RIESGO -->
+                    <div id="v-tab-simulador" class="hidden">
+                        <div class="card p-8 bg-slate-900 border-none shadow-2xl relative overflow-hidden">
+                            <!-- Background accent -->
+                            <div
+                                class="absolute -top-10 -right-10 w-64 h-64 bg-danger/20 rounded-full blur-3xl point-events-none">
+                            </div>
+
+                            <h3 class="text-2xl font-bold mb-2 flex items-center gap-2 text-white">
+                                <i class="fa-solid fa-triangle-exclamation text-red-500"></i> Análisis de Riesgo
+                                Operativo
+                            </h3>
+                            <p class="text-slate-400 text-sm mb-8 max-w-2xl leading-relaxed">¿Qué pasaría si pierdes a
+                                un cliente clave mañana? Selecciona a un cliente de tu portafolio para comprender el
+                                impacto en tus ingresos totales y prepararte con anticipación.</p>
+
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center relative z-10">
+                                <div class="space-y-4">
+                                    <label
+                                        class="block text-xs font-bold text-slate-400 uppercase tracking-widest flex items-center gap-2"><i
+                                            class="fa-solid fa-user-minus"></i> Desconectar Cliente Específico</label>
+                                    <select id="simRiesgoClient" onchange="calcRiskSimulator()"
+                                        class="w-full bg-slate-800 border-2 border-slate-700 rounded-xl px-4 py-3.5 text-sm focus:border-red-500 outline-none text-white transition-all shadow-inner font-semibold cursor-pointer">
+                                        <option value="">-- Selecciona un cliente del histórico --</option>
+                                    </select>
+                                </div>
+
+                                <div
+                                    class="bg-black/40 backdrop-blur-md p-8 rounded-2xl border border-slate-700/50 flex flex-col items-center justify-center text-center shadow-inner">
+                                    <p class="text-xs text-slate-400 uppercase font-black tracking-widest mb-2">Impacto
+                                        Financiero Anual</p>
+                                    <div class="text-6xl font-black text-white mb-2 tracking-tighter"
+                                        id="simRiskPercent">0%</div>
+                                    <p class="text-red-400 text-sm font-semibold flex items-center gap-1"
+                                        id="simRiskLoss"><i class="fa-solid fa-arrow-trend-down"></i> Caída de $0.00</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
 
             </div>

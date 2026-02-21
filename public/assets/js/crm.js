@@ -1007,49 +1007,198 @@ async function loadImportedSales() {
     }
 }
 
+let annualSalesChartInstance = null;
+let paretoChartInstance = null;
+let clientFrequencyData = {};
+let totalImportedAmount = 0;
+
 function renderImportedSales() {
     const list = document.getElementById('importedSalesList');
+    const simSelect = document.getElementById('simRiesgoClient');
     if (!list) return;
     list.innerHTML = '';
 
     if (crmImportedSales.length === 0) {
-        list.innerHTML = '<tr><td colspan="4" class="p-8 text-center text-slate-400">Comienza importando tu primer archivo CSV.</td></tr>';
+        list.innerHTML = '<tr><td colspan="5" class="p-8 text-center text-slate-400">Comienza importando tu primer archivo CSV.</td></tr>';
         document.getElementById('sv_total').innerText = '$0.00';
+        document.getElementById('sv_ticket').innerText = '$0.00';
         document.getElementById('sv_count').innerText = '0';
         document.getElementById('sv_top_client').innerText = '-';
         return;
     }
 
-    let total = 0;
-    const clientFreq = {};
+    totalImportedAmount = 0;
+    clientFrequencyData = {};
+    const monthlyData = { '01': 0, '02': 0, '03': 0, '04': 0, '05': 0, '06': 0, '07': 0, '08': 0, '09': 0, '10': 0, '11': 0, '12': 0 };
 
+    // Process Data
     crmImportedSales.forEach(s => {
-        total += (s.amount || 0);
+        const amt = (s.amount || 0);
+        totalImportedAmount += amt;
         const cl = s.client_name_raw || 'Desconocido';
-        clientFreq[cl] = (clientFreq[cl] || 0) + (s.amount || 0);
+        clientFrequencyData[cl] = (clientFrequencyData[cl] || 0) + amt;
+
+        // Group by month
+        if (s.sale_date && s.sale_date.length >= 7) {
+            const m = s.sale_date.split('-')[1]; // YYYY-MM-DD
+            if (monthlyData[m] !== undefined) monthlyData[m] += amt;
+        }
 
         list.innerHTML += `
-            <tr class="hover:bg-slate-50 transition-colors">
-                <td class="p-4 font-mono font-bold text-slate-700">${s.invoice_no}</td>
+            <tr class="hover:bg-slate-50 transition-colors sales-row">
+                <td class="p-4 font-mono font-bold text-slate-700 invoice-cell">${s.invoice_no}</td>
                 <td class="p-4 text-slate-500">${s.sale_date}</td>
-                <td class="p-4 text-primary font-medium truncate max-w-[200px]" title="${cl}">${cl}</td>
-                <td class="p-4 text-right font-bold text-success">${formatCurrency(s.amount)}</td>
+                <td class="p-4 text-primary font-medium truncate max-w-[200px] client-cell" title="${cl}">${cl}</td>
+                <td class="p-4 text-right font-bold text-success">${formatCurrency(amt)}</td>
+                <td class="p-4 text-center">
+                    <button class="text-xs bg-slate-100 hover:bg-slate-200 text-slate-600 px-2 py-1 rounded" onclick="alert('Funcionalidad en desarrollo para ver detalle de factura.')"><i class="fa-solid fa-eye"></i></button>
+                </td>
             </tr>
         `;
     });
 
+    // Top Client & Ticket
     let topClient = '-';
     let topAmount = 0;
-    for (const c in clientFreq) {
-        if (clientFreq[c] > topAmount) {
-            topAmount = clientFreq[c];
-            topClient = c;
-        }
-    }
+    simSelect.innerHTML = '<option value="">-- Selecciona un cliente del histórico --</option>';
 
-    document.getElementById('sv_total').innerText = formatCurrency(total);
+    // Sort clients for pareto and simulator
+    const sortedClients = Object.entries(clientFrequencyData).sort((a, b) => b[1] - a[1]);
+
+    sortedClients.forEach(sc => {
+        if (sc[1] > topAmount) {
+            topAmount = sc[1];
+            topClient = sc[0];
+        }
+        // Inject to simulator
+        simSelect.innerHTML += `<option value="${sc[0]}">${sc[0]} (${formatCurrency(sc[1])})</option>`;
+    });
+
+    const avgTicket = totalImportedAmount / crmImportedSales.length;
+
+    document.getElementById('sv_total').innerText = formatCurrency(totalImportedAmount);
+    document.getElementById('sv_ticket').innerText = formatCurrency(avgTicket);
     document.getElementById('sv_count').innerText = crmImportedSales.length;
     document.getElementById('sv_top_client').innerText = topClient;
+
+    // --- Render Charts ---
+    renderEjecutivaCharts(monthlyData, sortedClients);
+}
+
+function renderEjecutivaCharts(monthlyData, sortedClients) {
+    if (typeof Chart === 'undefined') return; // Wait for library if not loaded yet
+
+    // 1. Monthly Chart
+    const ctxMonthly = document.getElementById('chartMonthlySales');
+    if (annualSalesChartInstance) annualSalesChartInstance.destroy();
+
+    annualSalesChartInstance = new Chart(ctxMonthly, {
+        type: 'line',
+        data: {
+            labels: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+            datasets: [{
+                label: 'Ingresos Históricos',
+                data: Object.values(monthlyData),
+                borderColor: '#3b82f6',
+                backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                borderWidth: 2,
+                fill: true,
+                tension: 0.4
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { legend: { display: false } },
+            scales: { y: { beginAtZero: true, ticks: { callback: function (v) { return '$' + v.toLocaleString(); } } } }
+        }
+    });
+
+    // 2. Pareto Chart (Top 10 max)
+    const ctxPareto = document.getElementById('chartPareto');
+    if (paretoChartInstance) paretoChartInstance.destroy();
+
+    const topN = sortedClients.slice(0, 10);
+    const paretoLabels = topN.map(c => c[0].substring(0, 15) + '...');
+    const paretoData = topN.map(c => c[1]);
+
+    paretoChartInstance = new Chart(ctxPareto, {
+        type: 'bar',
+        data: {
+            labels: paretoLabels,
+            datasets: [{
+                label: 'Ingreso Acumulado',
+                data: paretoData,
+                backgroundColor: '#10b981',
+                borderRadius: 4
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { legend: { display: false } },
+            scales: {
+                x: { ticks: { font: { size: 10 } } },
+                y: { beginAtZero: true, ticks: { callback: function (v) { return '$' + (v / 1000).toFixed(0) + 'k'; } } }
+            }
+        }
+    });
+}
+
+function switchVentasTab(tabId) {
+    // Hide all internal tabs
+    ['ejecutiva', 'clientes', 'simulador'].forEach(t => {
+        document.getElementById('v-tab-' + t).classList.add('hidden');
+        document.getElementById('v-tab-' + t).classList.remove('block');
+
+        let btn = document.getElementById('btn-ventas-' + t);
+        btn.classList.remove('bg-primary', 'text-white');
+        btn.classList.add('text-secondary', 'hover:bg-slate-100');
+    });
+
+    // Show target
+    document.getElementById('v-tab-' + tabId).classList.remove('hidden');
+    document.getElementById('v-tab-' + tabId).classList.add('block');
+
+    let btnOn = document.getElementById('btn-ventas-' + tabId);
+    btnOn.classList.remove('text-secondary', 'hover:bg-slate-100');
+    btnOn.classList.add('bg-primary', 'text-white');
+}
+
+function filterSalesTable() {
+    let input = document.getElementById('salesSearchInput').value.toLowerCase();
+    let rows = document.querySelectorAll('#salesTableObj tbody tr.sales-row');
+    rows.forEach(row => {
+        let client = row.querySelector('.client-cell').innerText.toLowerCase();
+        let invoice = row.querySelector('.invoice-cell').innerText.toLowerCase();
+        if (client.includes(input) || invoice.includes(input)) {
+            row.style.display = '';
+        } else {
+            row.style.display = 'none';
+        }
+    });
+}
+
+function calcRiskSimulator() {
+    const cl = document.getElementById('simRiesgoClient').value;
+    const lblPercent = document.getElementById('simRiskPercent');
+    const lblLoss = document.getElementById('simRiskLoss');
+
+    if (!cl || !clientFrequencyData[cl] || totalImportedAmount === 0) {
+        lblPercent.innerText = '0%';
+        lblLoss.innerHTML = '<i class="fa-solid fa-arrow-trend-down"></i> Caída de $0.00';
+        return;
+    }
+
+    const loss = clientFrequencyData[cl];
+    const dropPercent = (loss / totalImportedAmount) * 100;
+
+    lblPercent.innerText = `-${dropPercent.toFixed(1)}%`;
+    lblLoss.innerHTML = `<i class="fa-solid fa-arrow-trend-down"></i> Caída de ${formatCurrency(loss)}`;
+
+    // Add brief animation
+    lblPercent.classList.add('scale-110', 'text-red-400');
+    setTimeout(() => lblPercent.classList.remove('scale-110', 'text-red-400'), 300);
 }
 
 function handleFileUpload(event) {
