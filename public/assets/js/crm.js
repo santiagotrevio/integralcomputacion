@@ -533,8 +533,14 @@ function renderMap() {
         color: white; font-size: 12px;
     `;
     const branchIconHtml = `<div style="${branchStyle}"><i class="fa-solid fa-building"></i></div>`;
-    addPointToMap(20.673868, -103.356345, '#0F172A', 'Integral Computación (Matriz)', 'Sucursal Principal', branchIconHtml);
-    addPointToMap(20.612345, -103.415678, '#0F172A', 'Integral Computación (Sur)', 'Sucursal Operativa', branchIconHtml);
+
+    if (typeof AppConfig !== 'undefined' && AppConfig.branches) {
+        AppConfig.branches.forEach(b => {
+            addPointToMap(b.lat, b.lng, '#0F172A', b.name, b.description || 'Sucursal IC', branchIconHtml);
+        });
+    } else {
+        addPointToMap(20.673868, -103.356345, '#0F172A', 'Integral Computación', 'Matriz', branchIconHtml);
+    }
 
     // 2. Plot Clients if 'Todos' is selected
     if (mode === 'all') {
