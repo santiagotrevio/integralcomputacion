@@ -1063,7 +1063,7 @@ function handleFileUpload(event) {
     const reader = new FileReader();
     reader.onload = async function (e) {
         const text = e.target.result;
-        const lines = text.split('\\n');
+        const lines = text.split(/\r?\n/);
 
         const sales = [];
 
