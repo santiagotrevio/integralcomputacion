@@ -58,7 +58,7 @@ async function apiFetch(url, options = {}) {
 
 async function initCRM() {
     console.log("Inicializando SDK Comercial MVC...");
-    await Promise.all([loadCRMMetrics(), loadDeals(), loadTasks()]);
+    await Promise.all([loadCRMMetrics(), loadDeals(), loadTasks(), loadClients()]);
     // Default Tab is Comando
     switchTab('comando');
 }
@@ -118,6 +118,11 @@ function updateGoalChart(actual, meta) {
 
     if (goalChartInstance) goalChartInstance.destroy();
 
+    const remaining = meta - actual;
+    const remainingText = remaining > 0 ? `Faltan <strong>${formatCurrency(remaining)}</strong> para meta.` : '<strong class="text-success">¡Meta superada!</strong>';
+    const remainingEl = document.getElementById('goalRemaining');
+    if (remainingEl) remainingEl.innerHTML = `<i class="fa-regular fa-calendar"></i> ${remainingText}`;
+
     goalChartInstance = new Chart(ctx.getContext('2d'), {
         type: 'doughnut',
         data: {
@@ -132,6 +137,66 @@ function updateGoalChart(actual, meta) {
     });
 }
 
+function buildSnapshot() {
+    const snap = document.getElementById('pipelineSnapshot');
+    if (!snap) return;
+    snap.innerHTML = '';
+
+    // Solo mostrar las etapas importantes (Calificado, Cotizado, Negociación)
+    const stages = [
+        { id: 'qualified', title: 'CALIFICADO', colorClass: 'bg-blue-400', borderClass: 'border-border text-primary' },
+        { id: 'quote', title: 'COTIZADO', colorClass: 'bg-amber-400', borderClass: 'border-warning ring-1 ring-warning/20 text-primary' },
+        { id: 'negotiation', title: 'NEGOCIACIÓN', colorClass: 'bg-purple-400', borderClass: 'border-border text-primary' }
+    ];
+
+    stages.forEach(stage => {
+        const deals = crmDeals.filter(d => d.status === stage.id).slice(0, 3); // top 3
+        const totalCount = crmDeals.filter(d => d.status === stage.id).length;
+
+        let htmlDeals = deals.map(d => {
+            const daysSince = Math.floor((new Date() - new Date(d.last_contact_date)) / (1000 * 3600 * 24));
+            let alertHtml = '';
+
+            if (d.status === 'quote' && daysSince > 5) {
+                alertHtml = `<div class="absolute top-0 right-0 w-8 h-8 flex justify-end p-2 items-start bg-orange-50 rounded-bl-xl text-warning">
+                                <i class="fa-solid fa-triangle-exclamation text-[10px]"></i>
+                            </div>`;
+            }
+
+            return `
+                <div class="bg-white border ${stage.borderClass} p-3 rounded-xl shadow-sm relative overflow-hidden">
+                    ${alertHtml}
+                    <h5 class="text-sm font-bold text-primary mb-1">${d.title}</h5>
+                    <p class="text-xs text-secondary mb-3"><i class="fa-regular fa-building"></i> ${d.client_company || 'Cliente'}</p>
+                    <div class="flex justify-between items-end">
+                        <span class="text-sm font-bold text-slate-800">${formatCurrency(d.value)}</span>
+                        ${daysSince > 5 ? `<span class="text-[10px] text-danger font-bold">Sin contacto en ${daysSince}d</span>` : `<span class="text-[10px] text-slate-400 font-medium">Hace ${daysSince}d</span>`}
+                    </div>
+                </div>
+            `;
+        }).join('');
+
+        if (deals.length === 0) {
+            htmlDeals = `<div class="text-[10px] text-slate-400 text-center italic mt-4">Sin tratos en esta etapa</div>`;
+        }
+
+        snap.innerHTML += `
+            <div class="flex-1 p-5 bg-slate-50/30">
+                <div class="flex justify-between items-center mb-4">
+                    <h4 class="text-xs font-bold text-slate-500 flex items-center gap-2">
+                        <div class="w-2 h-2 rounded-full ${stage.colorClass}"></div> ${stage.title}
+                    </h4>
+                    <span class="bg-slate-200 text-slate-600 text-[10px] font-bold px-2 py-0.5 rounded-full">${totalCount}</span>
+                </div>
+                <div class="space-y-3 cursor-pointer" onclick="switchTab('kanban')">
+                    ${htmlDeals}
+                </div>
+            </div>
+        `;
+    });
+}
+
+
 // ---- DEALS & RADAR ----
 async function loadDeals() {
     try {
@@ -144,6 +209,9 @@ async function loadDeals() {
 
         // 2. Render Radar (Inteligencia predictiva)
         buildRadar();
+
+        // 3. Render Snapshot
+        buildSnapshot();
 
     } catch (err) { console.error("Error deals", err); }
 }
@@ -474,6 +542,198 @@ function renderMap() {
     // Actualizar Resumen Inteligente Territorial
     document.getElementById('z_hot').innerText = "Zonas GDL (Mock)";
     document.getElementById('z_hot_val').innerText = `${toDraw.filter(d => ['won', 'negotiation'].includes(d.status)).length} tratos valiosos.`;
+}
+
+// ---- DIRECTORIO DE CLIENTES ----
+let crmClients = [];
+
+async function loadClients() {
+    try {
+        const res = await apiFetch('/api/crm/clients');
+        const result = await res.json();
+        crmClients = result.data || [];
+        renderDirectory();
+    } catch (err) {
+        console.error("Error loading clients", err);
+    }
+}
+
+function renderDirectory(filterText = '') {
+    const grid = document.getElementById('clientsGrid');
+    if (!grid) return;
+    grid.innerHTML = '';
+
+    let toDraw = crmClients;
+    if (filterText) {
+        const ft = filterText.toLowerCase();
+        toDraw = crmClients.filter(c =>
+            (c.name && c.name.toLowerCase().includes(ft)) ||
+            (c.company && c.company.toLowerCase().includes(ft)) ||
+            (c.email && c.email.toLowerCase().includes(ft)) ||
+            (c.phone && c.phone.toLowerCase().includes(ft))
+        );
+    }
+
+    if (toDraw.length === 0) {
+        grid.innerHTML = `<div class="p-8 text-center w-full col-span-full text-slate-400">No se encontraron clientes.</div>`;
+        return;
+    }
+
+    toDraw.forEach(c => {
+        let phoneHtml = '';
+        if (c.phone) phoneHtml = `<button onclick="window.open('https://wa.me/${c.phone.replace(/[^0-9]/g, '')}', '_blank')" class="text-success hover:bg-green-50 p-1.5 rounded-full transition flex items-center justify-center w-8 h-8 shrink-0" title="WhatsApp Principal"><i class="fa-brands fa-whatsapp"></i></button>`;
+
+        let emailHtml = '';
+        if (c.email) emailHtml = `<a href="mailto:${c.email}" class="text-accent hover:bg-blue-50 p-1.5 rounded-full transition flex items-center justify-center w-8 h-8 shrink-0" title="Enviar Correo Principal"><i class="fa-regular fa-envelope"></i></a>`;
+
+        grid.innerHTML += `
+            <div class="bg-white border border-border rounded-xl shadow-sm hover:shadow-md transition-shadow p-5 flex flex-col group relative overflow-hidden h-full">
+                <!-- Dropdown Actions -->
+                <div class="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity">
+                    <button onclick="openClientModal(${c.id})" class="text-slate-400 hover:text-primary p-1.5 bg-slate-50 hover:bg-slate-100 rounded-lg mr-1" title="Editar"><i class="fa-solid fa-pen text-xs"></i></button>
+                    <button onclick="archiveClient(${c.id})" class="text-slate-400 hover:text-danger p-1.5 bg-slate-50 hover:bg-red-50 rounded-lg" title="Archivar/Eliminar"><i class="fa-solid fa-trash text-xs"></i></button>
+                </div>
+
+                <div class="flex items-center gap-4 mb-4 pr-16">
+                    <div class="w-12 h-12 rounded-full bg-gradient-to-br from-slate-100 to-slate-200 text-slate-500 flex items-center justify-center text-xl font-bold shadow-inner shrink-0 border border-slate-300">
+                        ${(c.company ? c.company : c.name || '?').charAt(0).toUpperCase()}
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-primary leading-tight text-sm">${c.company || c.name || 'Empresa S/N'}</h4>
+                        ${c.company && c.name ? `<p class="text-[10px] uppercase font-bold text-slate-400 mt-0.5"><i class="fa-solid fa-user text-[9px]"></i> ${c.name}</p>` : ''}
+                    </div>
+                </div>
+
+                <div class="space-y-2 mt-auto text-xs text-secondary mb-4">
+                    ${c.email ? `<p class="flex items-center gap-2 truncate" title="${c.email}"><i class="fa-regular fa-envelope text-slate-300 w-4"></i> ${c.email}</p>` : ''}
+                    ${c.phone ? `<p class="flex items-center gap-2"><i class="fa-brands fa-whatsapp text-slate-300 w-4"></i> ${c.phone}</p>` : ''}
+                    ${c.address ? `<p class="flex items-start gap-2 max-h-12 overflow-hidden" title="${c.address}"><i class="fa-solid fa-location-dot text-slate-300 w-4 mt-0.5"></i> <span class="line-clamp-2 leading-tight">${c.address}</span></p>` : ''}
+                </div>
+
+                <!-- Footer Quick Actions -->
+                <div class="flex items-center gap-2 border-t border-slate-100 pt-3 mt-auto">
+                    ${phoneHtml}
+                    ${emailHtml}
+                </div>
+            </div>
+        `;
+    });
+}
+
+function filterDirectory() {
+    const val = document.getElementById('dirSearchInput').value;
+    renderDirectory(val);
+}
+
+function openClientModal(id = null) {
+    document.getElementById('cId').value = '';
+    document.getElementById('cCompany').value = '';
+    document.getElementById('cName').value = '';
+    document.getElementById('cEmail').value = '';
+    document.getElementById('cOtherEmails').value = '';
+    document.getElementById('cPhone').value = '';
+    document.getElementById('cOtherPhones').value = '';
+    document.getElementById('cAddress').value = '';
+    document.getElementById('cBilling').value = '';
+
+    document.getElementById('clientModalTitle').innerHTML = '<i class="fa-solid fa-address-book text-accent"></i> Nuevo Cliente';
+
+    if (id) {
+        const client = crmClients.find(c => c.id === id);
+        if (client) {
+            document.getElementById('clientModalTitle').innerHTML = '<i class="fa-solid fa-pen text-accent"></i> Editar Cliente';
+            document.getElementById('cId').value = client.id;
+            document.getElementById('cCompany').value = client.company || '';
+            document.getElementById('cName').value = client.name || '';
+
+            document.getElementById('cEmail').value = client.email || '';
+            let secondaryEmails = '';
+            try { secondaryEmails = JSON.parse(client.secondary_emails).join('\n'); } catch (e) { secondaryEmails = client.secondary_emails || ''; }
+            document.getElementById('cOtherEmails').value = secondaryEmails;
+
+            document.getElementById('cPhone').value = client.phone || '';
+            let secondaryPhones = '';
+            try { secondaryPhones = JSON.parse(client.secondary_phones).join('\n'); } catch (e) { secondaryPhones = client.secondary_phones || ''; }
+            document.getElementById('cOtherPhones').value = secondaryPhones;
+
+            document.getElementById('cAddress').value = client.address || '';
+            document.getElementById('cBilling').value = client.billing_info || '';
+        }
+    }
+
+    const modal = document.getElementById('clientModal');
+    const content = document.getElementById('clientModalContent');
+
+    modal.classList.remove('hidden');
+    // peqeño timeout para animación
+    setTimeout(() => {
+        content.classList.remove('scale-95', 'opacity-0');
+        content.classList.add('scale-100', 'opacity-100');
+    }, 10);
+}
+
+function closeClientModal() {
+    const modal = document.getElementById('clientModal');
+    const content = document.getElementById('clientModalContent');
+
+    content.classList.remove('scale-100', 'opacity-100');
+    content.classList.add('scale-95', 'opacity-0');
+
+    setTimeout(() => modal.classList.add('hidden'), 200);
+}
+
+async function saveClient() {
+    const id = document.getElementById('cId').value;
+
+    const company = document.getElementById('cCompany').value;
+    const name = document.getElementById('cName').value;
+    if (!company) return alert("La Empresa o Razón Social es requerida.");
+
+    let secondaryEmails = document.getElementById('cOtherEmails').value.split('\n').map(s => s.trim()).filter(s => s);
+    let secondaryPhones = document.getElementById('cOtherPhones').value.split('\n').map(s => s.trim()).filter(s => s);
+
+    const payload = {
+        company: company,
+        name: name,
+        email: document.getElementById('cEmail').value,
+        phone: document.getElementById('cPhone').value,
+        address: document.getElementById('cAddress').value,
+        billing_info: document.getElementById('cBilling').value,
+        secondary_emails: JSON.stringify(secondaryEmails),
+        secondary_phones: JSON.stringify(secondaryPhones)
+    };
+
+    const url = id ? `/api/crm/clients/${id}` : '/api/crm/clients';
+    const method = id ? 'PUT' : 'POST';
+
+    const btn = document.querySelector('#clientModalContent button.bg-primary');
+    const prevText = btn.innerHTML;
+    btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Guardando...';
+
+    try {
+        await apiFetch(url, {
+            method: method,
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+        });
+        closeClientModal();
+        await loadClients();
+    } catch (err) {
+        console.error("Error saving client:", err);
+        alert("Ocurrió un error al guardar.");
+    } finally {
+        btn.innerHTML = prevText;
+    }
+}
+
+async function archiveClient(id) {
+    if (!confirm('¿Estás seguro de que deseas archivar a este cliente? Se ocultará del directorio principal.')) return;
+    try {
+        await apiFetch(`/api/crm/clients/${id}/archive`, { method: 'PATCH' });
+        await loadClients();
+    } catch (err) {
+        console.error("Archive error", err);
+    }
 }
 
 // Shared Formatting

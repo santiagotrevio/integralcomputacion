@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Territorial CRM - Centro de Comando</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                fontFamily: { sans: ['Inter', 'sans-serif'] },
+                extend: {
+                    colors: {
+                        primary: '#0F172A', /* Sleek dark blue/black */
+                        secondary: '#64748B', /* Slate 500 */
+                        accent: '#0ea5e9', /* Modern sky blue */
+                        success: '#10B981',
+                        warning: '#F59E0B',
+                        danger: '#EF4444',
+                        background: '#F8FAFC', /* Very light cool gray */
+                        surface: '#FFFFFF',
+                        border: '#E2E8F0'
+                    },
+                    boxShadow: {
+                        'soft': '0 4px 20px -2px rgba(0, 0, 0, 0.03)',
+                        'inner-soft': 'inset 0 2px 4px 0 rgba(0, 0, 0, 0.02)'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #F8FAFC;
+            color: #0F172A;
+        }
+
+        .card {
+            background: #FFFFFF;
+            border: 1px solid #E2E8F0;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.03);
+            transition: all 0.2s ease;
+        }
+
+        .card:hover {
+            border-color: #cbd5e1;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+        }
+
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+        }
+
+        .progress-bar-bg {
+            background: #E2E8F0;
+            border-radius: 9999px;
+            height: 8px;
+            overflow: hidden;
+        }
+
+        .progress-bar-fill {
+            background: linear-gradient(90deg, #0ea5e9, #3b82f6);
+            height: 100%;
+            border-radius: 9999px;
+            transition: width 1s ease-out;
+        }
+
+        .nav-item {
+            transition: all 0.15s ease;
+        }
+
+        .nav-item:hover,
+        .nav-item.active {
+            background: #f1f5f9;
+            color: #0F172A;
+        }
+
+        .nav-item.active {
+            font-weight: 600;
+        }
+
+        .nav-item.active i {
+            color: #0ea5e9;
+        }
+
+        .badge {
+            padding: 4px 10px;
+            border-radius: 999px;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .badge-warning {
+            background: #FFFBEB;
+            color: #D97706;
+            border: 1px solid #FEF3C7;
+        }
+
+        .badge-danger {
+            background: #FEF2F2;
+            color: #DC2626;
+            border: 1px solid #FEE2E2;
+        }
+
+        .badge-success {
+            background: #ECFDF5;
+            color: #059669;
+            border: 1px solid #D1FAE5;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+    </style>
+</head>
+
+<body class="flex h-screen overflow-hidden antialiased">
+
+    <!-- SIDEBAR -->
+    <aside class="w-64 glass-panel border-r border-border flex flex-col justify-between hidden md:flex shrink-0 z-20">
+        <div>
+            <!-- Workspace Selector -->
+            <div class="h-16 flex items-center px-6 border-b border-border cursor-pointer hover:bg-slate-50 transition">
+                <div
+                    class="w-8 h-8 rounded-lg bg-primary text-white flex items-center justify-center font-bold text-sm mr-3">
+                    IC
+                </div>
+                <div class="flex-1">
+                    <h2 class="text-sm font-semibold truncate">Integral Computación</h2>
+                    <p class="text-xs text-secondary">Free Plan</p>
+                </div>
+                <i class="fa-solid fa-chevron-down text-xs text-secondary"></i>
+            </div>
+
+            <!-- Navigation -->
+            <nav class="p-4 space-y-1">
+                <p class="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-2 px-3">Estratégico</p>
+                <a href="#" class="nav-item active flex items-center px-3 py-2.5 rounded-xl text-sm text-secondary">
+                    <i class="fa-solid fa-chart-pie w-6"></i> Centro de Comando
+                </a>
+                <a href="#" class="nav-item flex items-center px-3 py-2.5 rounded-xl text-sm text-secondary">
+                    <i class="fa-solid fa-layer-group w-6"></i> Pipeline Kanban
+                </a>
+
+                <p class="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-2 mt-6 px-3">Operativo</p>
+                <a href="#"
+                    class="nav-item flex items-center px-3 py-2.5 rounded-xl text-sm text-secondary justify-between">
+                    <div class="flex items-center"><i class="fa-solid fa-map-location-dot w-6"></i> Mapa Territorial
+                    </div>
+                </a>
+                <a href="#"
+                    class="nav-item flex items-center px-3 py-2.5 rounded-xl text-sm text-secondary justify-between">
+                    <div class="flex items-center"><i class="fa-solid fa-bolt w-6"></i> Tracking / Tareas</div>
+                    <span class="bg-danger text-white text-[10px] font-bold px-2 py-0.5 rounded-full">3</span>
+                </a>
+
+                <p class="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-2 mt-6 px-3">Predictivo</p>
+                <a href="#" class="nav-item flex items-center px-3 py-2.5 rounded-xl text-sm text-secondary">
+                    <i class="fa-solid fa-rotate-left w-6"></i> Frecuencia Recompra
+                </a>
+            </nav>
+        </div>
+
+        <!-- User bottom -->
+        <div class="p-4 border-t border-border">
+            <a href="#" class="nav-item flex items-center px-3 py-2.5 rounded-xl text-sm text-secondary">
+                <img src="https://ui-avatars.com/api/?name=Santiago+T&background=0284c7&color=fff"
+                    class="w-7 h-7 rounded-full mr-3">
+                <span class="flex-1 truncate">Santiago T.</span>
+                <i class="fa-solid fa-gear"></i>
+            </a>
+        </div>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="flex-1 flex flex-col h-full overflow-hidden relative">
+
+        <!-- HEADER -->
+        <header
+            class="h-16 glass-panel border-b border-border flex items-center justify-between px-8 z-10 sticky top-0">
+            <h1 class="text-xl font-bold tracking-tight text-primary">Centro de Comando</h1>
+
+            <div class="flex items-center gap-4">
+                <div class="relative">
+                    <i
+                        class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 text-sm"></i>
+                    <input type="text" placeholder="Buscar prospectos, clientes..."
+                        class="pl-9 pr-4 py-2 bg-slate-100 border-none rounded-full text-sm focus:ring-2 focus:ring-accent outline-none w-64 transition-all">
+                    <span
+                        class="absolute right-3 top-1/2 transform -translate-y-1/2 text-[10px] font-bold text-slate-400 border border-slate-300 rounded px-1.5 py-0.5">⌘K</span>
+                </div>
+                <button
+                    class="bg-primary hover:bg-slate-800 text-white text-sm font-semibold py-2 px-5 rounded-full shadow-md transition-transform active:scale-95 flex items-center gap-2">
+                    <i class="fa-solid fa-plus"></i> Nuevo Trato
+                </button>
+            </div>
+        </header>
+
+        <!-- DASHBOARD SCROLL AREA -->
+        <div class="flex-1 overflow-y-auto p-8">
+            <div class="max-w-7xl mx-auto space-y-8">
+
+                <!-- ROW 1: HUD Ejecutivo -->
+                <div>
+                    <div class="flex justify-between items-end mb-4">
+                        <h2 class="text-sm font-bold text-slate-500 uppercase tracking-wider">Métricas Clave del Mes
+                        </h2>
+                        <span class="text-xs text-slate-400 font-medium"><i
+                                class="fa-solid fa-circle-check text-success"></i> Sincronizado hace 2 min</span>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-5">
+                        <!-- Card 1 -->
+                        <div class="card p-6">
+                            <p class="text-sm text-secondary font-medium mb-1">Ventas Cerradas (MTD)</p>
+                            <h3 class="text-3xl font-bold tracking-tight mb-2">$145,200</h3>
+                            <div class="flex items-center text-xs">
+                                <span
+                                    class="text-success font-semibold flex items-center gap-1 bg-green-50 px-2 py-0.5 rounded-md"><i
+                                        class="fa-solid fa-arrow-trend-up"></i> +12.5%</span>
+                                <span class="text-slate-400 ml-2">vs mes anterior</span>
+                            </div>
+                        </div>
+                        <!-- Card 2 -->
+                        <div class="card p-6 border-transparent ring-1 ring-accent ring-inset"
+                            style="background: linear-gradient(180deg, #F0F9FF 0%, #FFFFFF 100%);">
+                            <div class="flex justify-between items-start">
+                                <p class="text-sm text-accent font-bold mb-1">Forecast a 30 Días</p>
+                                <i class="fa-solid fa-wand-magic-sparkles text-accent opacity-50"></i>
+                            </div>
+                            <h3 class="text-3xl font-bold tracking-tight text-slate-800 mb-2">$84,500</h3>
+                            <div class="flex items-center text-xs">
+                                <span class="text-slate-500">Basado en pipeline ponderado</span>
+                            </div>
+                        </div>
+                        <!-- Card 3 -->
+                        <div class="card p-6">
+                            <p class="text-sm text-secondary font-medium mb-1">Valor Total Pipeline</p>
+                            <h3 class="text-3xl font-bold tracking-tight mb-2">$312,000</h3>
+                            <div class="flex items-center text-xs">
+                                <span class="text-primary font-semibold">24 Tratos activos</span>
+                            </div>
+                        </div>
+                        <!-- Card 4 -->
+                        <div class="card p-6">
+                            <p class="text-sm text-secondary font-medium mb-1">Health Score</p>
+                            <h3 class="text-3xl font-bold tracking-tight mb-2 text-success">85/100</h3>
+                            <div class="progress-bar-bg mt-2 mb-1">
+                                <div class="progress-bar-fill bg-success" style="width: 85%;"></div>
+                            </div>
+                            <p class="text-xs text-slate-400 text-right mt-1">Óptimo</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ROW 2: Progreso & Analítica -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+                    <!-- Objetivo Mensual -->
+                    <div class="card p-6 md:col-span-1 flex flex-col justify-center">
+                        <div class="flex justify-between items-center mb-6">
+                            <h3 class="font-bold text-primary">Objetivo de Venta</h3>
+                            <i class="fa-solid fa-bullseye text-slate-300 text-xl"></i>
+                        </div>
+
+                        <div class="relative w-40 h-40 mx-auto mb-4">
+                            <!-- Chart.js Canvas -->
+                            <canvas id="goalChart"></canvas>
+                            <div class="absolute inset-0 flex flex-col items-center justify-center">
+                                <span class="text-2xl font-bold text-primary">72%</span>
+                                <span
+                                    class="text-[10px] text-slate-400 uppercase tracking-widest font-semibold mt-1">Alcanzado</span>
+                            </div>
+                        </div>
+
+                        <div class="text-center mt-2">
+                            <p class="text-secondary text-sm">Faltan <strong class="text-primary">$54,800</strong> para
+                                la meta mensual de $200k.</p>
+                            <p class="text-xs text-slate-400 mt-2"><i class="fa-regular fa-calendar"></i> 9 días
+                                restantes en el mes</p>
+                        </div>
+                    </div>
+
+                    <!-- Radar Predictivo (Alertas Actionables) -->
+                    <div class="card p-0 md:col-span-2 overflow-hidden flex flex-col">
+                        <div class="px-6 py-5 border-b border-border bg-slate-50/50 flex justify-between items-center">
+                            <h3 class="font-bold text-primary flex items-center gap-2"><i
+                                    class="fa-solid fa-radar text-accent"></i> Radar Comercial (Acciones Sugeridas)</h3>
+                            <span class="badge badge-warning">4 Alertas</span>
+                        </div>
+
+                        <div class="divide-y divide-border flex-1 overflow-y-auto">
+                            <!-- Item 1 (Recompra) -->
+                            <div
+                                class="px-6 py-4 flex items-start gap-4 hover:bg-slate-50 transition cursor-pointer group">
+                                <div
+                                    class="w-10 h-10 rounded-full bg-blue-50 text-accent flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
+                                    <i class="fa-solid fa-rotate-left"></i>
+                                </div>
+                                <div class="flex-1">
+                                    <div class="flex justify-between items-start">
+                                        <h4 class="text-sm font-semibold text-primary">Posible Recompra: Corporativo Z
+                                        </h4>
+                                        <span class="text-xs text-slate-400">Hace 2 horas</span>
+                                    </div>
+                                    <p class="text-sm text-secondary mt-1">Normalmente piden Tóners HP cada 30 días. Hoy
+                                        es el día 28.</p>
+                                    <div class="mt-3 flex gap-2">
+                                        <button
+                                            class="text-xs font-semibold bg-white border border-border px-3 py-1.5 rounded-md hover:border-accent hover:text-accent shadow-sm transition flex items-center gap-1.5"><i
+                                                class="fa-brands fa-whatsapp text-green-500"></i> Enviar WA
+                                            preventivo</button>
+                                        <button
+                                            class="text-xs font-medium text-slate-400 px-3 py-1.5 hover:text-primary transition">Ignorar</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Item 2 (Inactivo) -->
+                            <div
+                                class="px-6 py-4 flex items-start gap-4 hover:bg-slate-50 transition cursor-pointer group">
+                                <div
+                                    class="w-10 h-10 rounded-full bg-red-50 text-danger flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
+                                    <i class="fa-solid fa-ghost"></i>
+                                </div>
+                                <div class="flex-1">
+                                    <div class="flex justify-between items-start">
+                                        <h4 class="text-sm font-semibold text-primary">Cliente en Riesgo: Despacho
+                                            Abogados</h4>
+                                        <span class="badge badge-danger">Crítico</span>
+                                    </div>
+                                    <p class="text-sm text-secondary mt-1">Cotización de $12k atorada en "Negociación"
+                                        hace 14 días sin tocar.</p>
+                                    <div class="mt-3 flex gap-2">
+                                        <button
+                                            class="text-xs font-semibold bg-white border border-border px-3 py-1.5 rounded-md hover:border-slate-800 shadow-sm transition">Ver
+                                            detalle del trato</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Item 3 (Ruta Geográfica) -->
+                            <div
+                                class="px-6 py-4 flex items-start gap-4 hover:bg-slate-50 transition cursor-pointer group">
+                                <div
+                                    class="w-10 h-10 rounded-full bg-amber-50 text-warning flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
+                                    <i class="fa-solid fa-map-location-dot"></i>
+                                </div>
+                                <div class="flex-1">
+                                    <div class="flex justify-between items-start">
+                                        <h4 class="text-sm font-semibold text-primary">Sugerencia de Ruta: Zona
+                                            Industrial</h4>
+                                    </div>
+                                    <p class="text-sm text-secondary mt-1">Tienes junta con "Metalmecánica SA" hoy. Hay
+                                        2 prospectos a 5km sin visitar.</p>
+                                    <div class="mt-3 flex gap-2">
+                                        <button
+                                            class="text-xs font-semibold bg-white border border-border px-3 py-1.5 rounded-md hover:border-slate-800 shadow-sm transition"><i
+                                                class="fa-solid fa-route"></i> Abrir en Mapa Territorial</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ROW 3: Pipeline Snapshot -->
+                <div>
+                    <div class="flex justify-between items-center mb-4">
+                        <h2 class="text-sm font-bold text-slate-500 uppercase tracking-wider">Flujo Activo (Snapshot)
+                        </h2>
+                        <a href="#"
+                            class="text-sm font-semibold text-accent hover:underline flex items-center gap-1">Ver
+                            Tablero Completo <i class="fa-solid fa-arrow-right text-[10px]"></i></a>
+                    </div>
+
+                    <div class="card p-0 overflow-hidden flex divide-x divide-border">
+                        <!-- Pipeline Stage Mockup -->
+                        <div class="flex-1 p-5 bg-slate-50/30">
+                            <div class="flex justify-between items-center mb-4">
+                                <h4 class="text-xs font-bold text-slate-500 flex items-center gap-2">
+                                    <div class="w-2 h-2 rounded-full bg-blue-400"></div> CALIFICADO
+                                </h4>
+                                <span
+                                    class="bg-slate-200 text-slate-600 text-[10px] font-bold px-2 py-0.5 rounded-full">3</span>
+                            </div>
+                            <div class="space-y-3">
+                                <div class="bg-white border border-border p-3 rounded-xl shadow-sm">
+                                    <h5 class="text-sm font-bold text-primary mb-1">Renovación Servidores</h5>
+                                    <p class="text-xs text-secondary mb-3"><i class="fa-regular fa-building"></i>
+                                        Consultora HR</p>
+                                    <div class="flex justify-between items-end">
+                                        <span class="text-sm font-bold">$45,000</span>
+                                        <span class="text-[10px] text-slate-400 font-medium">Hace 2d</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="flex-1 p-5 bg-slate-50/30">
+                            <div class="flex justify-between items-center mb-4">
+                                <h4 class="text-xs font-bold text-slate-500 flex items-center gap-2">
+                                    <div class="w-2 h-2 rounded-full bg-amber-400"></div> COTIZADO
+                                </h4>
+                                <span
+                                    class="bg-slate-200 text-slate-600 text-[10px] font-bold px-2 py-0.5 rounded-full">5</span>
+                            </div>
+                            <div class="space-y-3">
+                                <div
+                                    class="bg-white border border-warning p-3 rounded-xl shadow-sm ring-1 ring-warning/20 relative overflow-hidden">
+                                    <div
+                                        class="absolute top-0 right-0 w-8 h-8 flex justify-end p-2 items-start bg-orange-50 rounded-bl-xl text-warning">
+                                        <i class="fa-solid fa-triangle-exclamation text-[10px]"></i>
+                                    </div>
+                                    <h5 class="text-sm font-bold text-primary mb-1">Lote 20 Laptops</h5>
+                                    <p class="text-xs text-secondary mb-3"><i class="fa-regular fa-building"></i>
+                                        Agencia de MKT</p>
+                                    <div class="flex justify-between items-end">
+                                        <span class="text-sm font-bold">$120,000</span>
+                                        <span class="text-[10px] text-danger font-bold">Sin contacto en 7d</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="flex-1 p-5 bg-slate-50/30">
+                            <div class="flex justify-between items-center mb-4">
+                                <h4 class="text-xs font-bold text-slate-500 flex items-center gap-2">
+                                    <div class="w-2 h-2 rounded-full bg-purple-400"></div> NEGOCIACIÓN
+                                </h4>
+                                <span
+                                    class="bg-slate-200 text-slate-600 text-[10px] font-bold px-2 py-0.5 rounded-full">2</span>
+                            </div>
+                            <div class="space-y-3">
+                                <div class="bg-white border border-border p-3 rounded-xl shadow-sm">
+                                    <h5 class="text-sm font-bold text-primary mb-1">Consumibles Trim.</h5>
+                                    <p class="text-xs text-secondary mb-3"><i class="fa-regular fa-building"></i>
+                                        Constructora Sur</p>
+                                    <div class="flex justify-between items-end">
+                                        <span class="text-sm font-bold">$38,000</span>
+                                        <span class="text-[10px] text-slate-400 font-medium">Prob: 80%</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Spacer -->
+                <div class="h-10"></div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Chart.js render para el Goal
+        document.addEventListener('DOMContentLoaded', function () {
+            const ctx = document.getElementById('goalChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    datasets: [{
+                        data: [72, 28], // 72% done, 28% remaining
+                        backgroundColor: [
+                            '#0ea5e9', // Accent Blue
+                            '#f1f5f9'  // Slate 100
+                        ],
+                        borderWidth: 0,
+                        circumference: 180, // Medio círculo
+                        rotation: 270,      // Iniciar desde la izquierda
+                        cutout: '80%',      // Grosor del anillo
+                        borderRadius: 10
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { tooltip: { enabled: false }, legend: { display: false } },
+                    animation: { animateScale: true, animateRotate: true, duration: 1500, easing: 'easeOutQuart' }
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

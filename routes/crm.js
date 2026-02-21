@@ -120,4 +120,77 @@ router.post('/activities', (req, res) => {
         });
 });
 
+// --- CLIENTS DIRECTORY CRUD ---
+router.get('/clients', (req, res) => {
+    db.all(`SELECT * FROM clients WHERE archived = 0 ORDER BY updated_at DESC, id DESC`, [], (err, rows) => {
+        if (err) {
+            // Fallback for older schema if updated_at is missing initially
+            db.all(`SELECT * FROM clients WHERE archived = 0 ORDER BY id DESC`, [], (err2, rows2) => {
+                if (err2) return res.status(500).json({ error: err2.message });
+                res.json({ data: rows2 });
+            });
+        } else {
+            res.json({ data: rows });
+        }
+    });
+});
+
+router.post('/clients', (req, res) => {
+    const { name, company, email, phone, address, billing_info, secondary_emails, secondary_phones } = req.body;
+    const sql = `INSERT INTO clients (name, company, email, phone, address, billing_info, secondary_emails, secondary_phones) 
+                 VALUES (?, ?, ?, ?, ?, ?, ?, ?)`;
+
+    db.run(sql, [
+        name,
+        company || '',
+        email || '',
+        phone || '',
+        address || '',
+        billing_info || '',
+        secondary_emails || '[]',
+        secondary_phones || '[]'
+    ], function (err) {
+        if (err) return res.status(400).json({ error: err.message });
+        res.json({ success: true, id: this.lastID });
+    });
+});
+
+router.put('/clients/:id', (req, res) => {
+    const { name, company, email, phone, address, billing_info, secondary_emails, secondary_phones } = req.body;
+    const sql = `UPDATE clients SET 
+                    name = ?, company = ?, email = ?, phone = ?, 
+                    address = ?, billing_info = ?, secondary_emails = ?, secondary_phones = ? 
+                 WHERE id = ?`;
+
+    db.run(sql, [
+        name,
+        company || '',
+        email || '',
+        phone || '',
+        address || '',
+        billing_info || '',
+        secondary_emails || '[]',
+        secondary_phones || '[]',
+        req.params.id
+    ], function (err) {
+        if (err) return res.status(400).json({ error: err.message });
+        res.json({ success: true });
+    });
+});
+
+router.patch('/clients/:id/archive', (req, res) => {
+    db.run(`UPDATE clients SET archived = 1 WHERE id = ?`, [req.params.id], function (err) {
+        if (err) return res.status(400).json({ error: err.message });
+        res.json({ success: true });
+    });
+});
+
+router.delete('/clients/:id', (req, res) => {
+    db.run(`DELETE FROM clients WHERE id = ?`, [req.params.id], function (err) {
+        if (err) return res.status(400).json({ error: err.message });
+        res.json({ success: true });
+    });
+});
+
 module.exports = router;
+
